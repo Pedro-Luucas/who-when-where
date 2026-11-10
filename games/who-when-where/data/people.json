@@ -1,0 +1,2752 @@
+[
+  {
+    "id": "charles-darwin",
+    "qid": "Q1035",
+    "name": {
+      "en": "Charles Darwin",
+      "pt": "Charles Darwin"
+    },
+    "description": {
+      "en": "English naturalist and biologist",
+      "pt": "biólogo e naturalista inglês"
+    },
+    "extract": {
+      "en": "Charles Robert Darwin was an English naturalist, geologist, and biologist, widely known for his contributions to evolutionary biology. His proposition that all species have descended from a common ancestor is now accepted and considered a fundamental scientific concept. In a joint presentation with Alfred Russel Wallace, he proposed that this branching pattern of evolution resulted from a process he called natural selection, in which the struggle for existence has a similar effect to the artificial selection involved in selective breeding. Darwin has been described as one of the most influential figures in human history and was honoured by burial in Westminster Abbey.",
+      "pt": "Charles Robert Darwin FRS FGRS FLS FLZ foi um naturalista, geólogo e biólogo britânico, célebre por seus avanços sobre evolução nas ciências biológicas. Juntamente com Alfred Wallace, Darwin estabeleceu a ideia que todos os seres vivos descendem de um ancestral em comum, argumento agora amplamente aceito e considerado um conceito fundamental no meio científico, e propôs a teoria de que os ramos evolutivos são resultados de seleção natural e sexual, onde a luta pela sobrevivência resulta em consequências similares às da seleção artificial."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Charles_Darwin",
+      "pt": "https://pt.wikipedia.org/wiki/Charles_Darwin"
+    },
+    "image": {
+      "src": "/people/charles-darwin.jpg",
+      "width": 500,
+      "height": 658
+    },
+    "birth": {
+      "year": 1809,
+      "place": {
+        "name": {
+          "en": "Shrewsbury",
+          "pt": "Shrewsbury"
+        },
+        "country": {
+          "en": "United Kingdom",
+          "pt": "Reino Unido"
+        },
+        "lat": 52.7128,
+        "lon": -2.7633
+      }
+    },
+    "death": {
+      "year": 1882,
+      "place": {
+        "name": {
+          "en": "Downe, Kent",
+          "pt": "Downe, Kent"
+        },
+        "country": {
+          "en": "United Kingdom",
+          "pt": "Reino Unido"
+        },
+        "lat": 51.3314,
+        "lon": 0.0533
+      }
+    }
+  },
+  {
+    "id": "albert-einstein",
+    "qid": "Q937",
+    "name": {
+      "en": "Albert Einstein",
+      "pt": "Albert Einstein"
+    },
+    "description": {
+      "en": "German-born theoretical physicist",
+      "pt": "físico teórico alemão"
+    },
+    "extract": {
+      "en": "Albert Einstein was a German-born theoretical physicist best known for developing the theory of relativity. Einstein also made important contributions to quantum theory. His mass–energy equivalence formula E = mc2, which arises from special relativity, has been called \"the world's most famous equation\". He received the 1921 Nobel Prize in Physics for \"his services to theoretical physics, and especially for his discovery of the law of the photoelectric effect\".",
+      "pt": "Albert Einstein foi um físico teórico alemão que desenvolveu a teoria da relatividade geral, um dos pilares da física moderna ao lado da mecânica quântica. Embora mais conhecido por sua fórmula de equivalência massa–energia, E = mc² — que foi chamada de \"a equação mais famosa do mundo\" —, foi laureado com o Prêmio Nobel de Física de 1921 \"por suas contribuições à física teórica\" e, especialmente, por sua descoberta da lei do efeito fotoelétrico, que foi fundamental no estabelecimento da teoria quântica."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Albert_Einstein",
+      "pt": "https://pt.wikipedia.org/wiki/Albert_Einstein"
+    },
+    "image": {
+      "src": "/people/albert-einstein.jpg",
+      "width": 500,
+      "height": 618
+    },
+    "birth": {
+      "year": 1879,
+      "place": {
+        "name": {
+          "en": "Ulm",
+          "pt": "Ulm"
+        },
+        "country": {
+          "en": "Germany",
+          "pt": "Alemanha"
+        },
+        "lat": 48.3986,
+        "lon": 9.9911
+      }
+    },
+    "death": {
+      "year": 1955,
+      "place": {
+        "name": {
+          "en": "Princeton",
+          "pt": "Princeton"
+        },
+        "country": {
+          "en": "United States",
+          "pt": "Estados Unidos"
+        },
+        "lat": 40.3522,
+        "lon": -74.6569
+      }
+    }
+  },
+  {
+    "id": "isaac-newton",
+    "qid": "Q935",
+    "name": {
+      "en": "Isaac Newton",
+      "pt": "Isaac Newton"
+    },
+    "description": {
+      "en": "English polymath",
+      "pt": "matemático e físico inglês"
+    },
+    "extract": {
+      "en": "Sir Isaac Newton was an English polymath who was a mathematician, physicist, astronomer, alchemist, theologian, historian and inventor. He was a key figure in the Scientific Revolution and the Enlightenment that followed. His book Philosophiæ Naturalis Principia Mathematica, first published in 1687, achieved the first great unification in physics and established classical mechanics. Newton also made seminal contributions to optics, and shares credit with the German mathematician Gottfried Wilhelm Leibniz for formulating infinitesimal calculus, although he developed calculus years before Leibniz. Newton contributed to and refined the scientific method, and his work is considered the most influential in bringing forth modern science.",
+      "pt": "Sir Isaac Newton PRS foi um matemático, físico, astrônomo, alquimista, teólogo e escritor britânico amplamente reconhecido como um dos cientistas mais influentes de todos os tempos e como uma figura-chave na Revolução Científica. Seu livro Philosophiæ Naturalis Principia Mathematica, publicado pela primeira vez em 1687, lançou as bases da mecânica clássica. Newton também fez contribuições seminais à óptica e compartilha crédito com Gottfried Wilhelm Leibniz pelo desenvolvimento do cálculo infinitesimal."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Isaac_Newton",
+      "pt": "https://pt.wikipedia.org/wiki/Isaac_Newton"
+    },
+    "image": {
+      "src": "/people/isaac-newton.jpg",
+      "width": 500,
+      "height": 602
+    },
+    "birth": {
+      "year": 1642,
+      "place": {
+        "name": {
+          "en": "Woolsthorpe-by-Colsterworth",
+          "pt": "Woolsthorpe-by-Colsterworth"
+        },
+        "country": {
+          "en": "United Kingdom",
+          "pt": "Reino Unido"
+        },
+        "lat": 52.8092,
+        "lon": -0.6306
+      }
+    },
+    "death": {
+      "year": 1727,
+      "place": {
+        "name": {
+          "en": "Kensington, London",
+          "pt": "Kensington, Londres"
+        },
+        "country": {
+          "en": "United Kingdom",
+          "pt": "Reino Unido"
+        },
+        "lat": 51.5004,
+        "lon": -0.1909
+      }
+    }
+  },
+  {
+    "id": "marie-curie",
+    "qid": "Q7186",
+    "name": {
+      "en": "Marie Curie",
+      "pt": "Marie Curie"
+    },
+    "description": {
+      "en": "Polish-French physicist and chemist",
+      "pt": "física e química polonesa naturalizada francesa"
+    },
+    "extract": {
+      "en": "Maria Salomea Skłodowska Curie, better known as Marie Curie, was a Polish and naturalised-French physicist and chemist. She shared the 1903 Nobel Prize in Physics with her husband, Pierre Curie, \"for their joint researches on the radioactivity phenomena discovered by Professor Henri Becquerel\". She won the 1911 Nobel Prize in Chemistry \"[for] the discovery of the elements radium and polonium, by the isolation of radium and the study of the nature and compounds of this remarkable element\".",
+      "pt": "Marie Skłodowska-Curie, nascida Maria Salomea Skłodowska, foi uma física e química polonesa naturalizada francesa, que conduziu pesquisas pioneiras sobre radioatividade. Foi a primeira mulher a ganhar o Prêmio Nobel, sendo também a primeira pessoa e a única mulher a ganhá-lo duas vezes, além de ser a única pessoa a ter ganhado o Prêmio Nobel em dois campos científicos diferentes. Teve papel fundamental no legado da família Curie, de cinco prêmios Nobel. Também foi a primeira mulher a se tornar professora na Universidade de Paris e, em 1995, se tornou a primeira mulher a ser sepultada por seus próprios méritos no Panteão de Paris."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Marie_Curie",
+      "pt": "https://pt.wikipedia.org/wiki/Marie_Curie"
+    },
+    "image": {
+      "src": "/people/marie-curie.jpg",
+      "width": 500,
+      "height": 679
+    },
+    "birth": {
+      "year": 1867,
+      "place": {
+        "name": {
+          "en": "Warsaw",
+          "pt": "Varsóvia"
+        },
+        "country": {
+          "en": "Poland",
+          "pt": "Polônia"
+        },
+        "lat": 52.23,
+        "lon": 21.0111
+      }
+    },
+    "death": {
+      "year": 1934,
+      "place": {
+        "name": {
+          "en": "Passy, Haute-Savoie",
+          "pt": "Passy, Haute-Savoie"
+        },
+        "country": {
+          "en": "France",
+          "pt": "França"
+        },
+        "lat": 45.9392,
+        "lon": 6.7152
+      }
+    }
+  },
+  {
+    "id": "galileo-galilei",
+    "qid": "Q307",
+    "name": {
+      "en": "Galileo Galilei",
+      "pt": "Galileu Galilei"
+    },
+    "description": {
+      "en": "Italian physicist and astronomer",
+      "pt": "físico e astrônomo italiano"
+    },
+    "extract": {
+      "en": "Galileo di Vincenzo Bonaiuti de' Galilei, commonly referred to as Galileo Galilei or mononymously as Galileo, was an Italian astronomer, physicist, engineer and polymath. He was born in Pisa, then part of the Duchy of Florence. Galileo has been called the father of observational astronomy, classical physics, the scientific method, and modern science.",
+      "pt": "Galileo di Vincenzo Bonaulti de Galilei, mais conhecido como Galileu Galilei, foi um astrônomo, físico e engenheiro florentino, às vezes descrito como polímata. Frequentemente é referenciado como \"pai da astronomia observacional\", \"pai da física moderna\", \"pai do método científico\" e \"pai da ciência moderna\"."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Galileo_Galilei",
+      "pt": "https://pt.wikipedia.org/wiki/Galileu_Galilei"
+    },
+    "image": {
+      "src": "/people/galileo-galilei.jpg",
+      "width": 500,
+      "height": 635
+    },
+    "birth": {
+      "year": 1564,
+      "place": {
+        "name": {
+          "en": "Pisa",
+          "pt": "Pisa"
+        },
+        "country": {
+          "en": "Italy",
+          "pt": "Itália"
+        },
+        "lat": 43.7167,
+        "lon": 10.4
+      }
+    },
+    "death": {
+      "year": 1642,
+      "place": {
+        "name": {
+          "en": "Arcetri, Florence",
+          "pt": "Arcetri, Florença"
+        },
+        "country": {
+          "en": "Italy",
+          "pt": "Itália"
+        },
+        "lat": 43.7548,
+        "lon": 11.2518
+      }
+    }
+  },
+  {
+    "id": "nikola-tesla",
+    "qid": "Q9036",
+    "name": {
+      "en": "Nikola Tesla",
+      "pt": "Nikola Tesla"
+    },
+    "description": {
+      "en": "Serbian-American engineer and inventor",
+      "pt": "inventor e engenheiro sérvio-americano"
+    },
+    "extract": {
+      "en": "Nikola Tesla was a Serbian-American engineer, futurist, and inventor. He is known for his contributions to the design of the modern alternating current (AC) electricity supply system.",
+      "pt": "Nikola Tesla foi um inventor, físico experimental, engenheiro eletricista e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada (CA)."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Nikola_Tesla",
+      "pt": "https://pt.wikipedia.org/wiki/Nikola_Tesla"
+    },
+    "image": {
+      "src": "/people/nikola-tesla.jpg",
+      "width": 500,
+      "height": 670
+    },
+    "birth": {
+      "year": 1856,
+      "place": {
+        "name": {
+          "en": "Smiljan",
+          "pt": "Smiljan"
+        },
+        "country": {
+          "en": "Croatia",
+          "pt": "Croácia"
+        },
+        "lat": 44.5604,
+        "lon": 15.3082
+      }
+    },
+    "death": {
+      "year": 1943,
+      "place": {
+        "name": {
+          "en": "New York City",
+          "pt": "Nova York"
+        },
+        "country": {
+          "en": "United States",
+          "pt": "Estados Unidos"
+        },
+        "lat": 40.7528,
+        "lon": -73.9936
+      }
+    }
+  },
+  {
+    "id": "alan-turing",
+    "qid": "Q7251",
+    "name": {
+      "en": "Alan Turing",
+      "pt": "Alan Turing"
+    },
+    "description": {
+      "en": "English computer scientist",
+      "pt": "matemático, cientista da computação, lógico e criptoanalista britânico"
+    },
+    "extract": {
+      "en": "Alan Mathison Turing was an English mathematician and logician widely regarded as the father of theoretical computer science. He formalised the concepts of algorithm and computation with the Turing machine, a model of a general-purpose computer, and his contributions to cryptanalysis helped the Allies of World War II decipher messages encrypted by the German Enigma machine. He also contributed the Turing test to philosophy of artificial intelligence and the Turing pattern concept to mathematical and theoretical biology.",
+      "pt": "Alan Mathison Turing foi um matemático, cientista da computação, lógico, criptoanalista, filósofo e biólogo teórico britânico. Turing foi altamente influente no desenvolvimento da moderna ciência da computação teórica, proporcionando uma formalização dos conceitos de algoritmo e computação com a máquina de Turing, que pode ser considerada um modelo de um computador de uso geral. Ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificial. Apesar dessas realizações ele nunca foi totalmente reconhecido em seu país de origem durante sua vida por ser homossexual e porque grande parte de seu trabalho foi coberto pela Lei de Segredos Oficiais."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Alan_Turing",
+      "pt": "https://pt.wikipedia.org/wiki/Alan_Turing"
+    },
+    "image": {
+      "src": "/people/alan-turing.jpg",
+      "width": 500,
+      "height": 667
+    },
+    "birth": {
+      "year": 1912,
+      "place": {
+        "name": {
+          "en": "Maida Vale, London",
+          "pt": "Maida Vale, Londres"
+        },
+        "country": {
+          "en": "United Kingdom",
+          "pt": "Reino Unido"
+        },
+        "lat": 51.5274,
+        "lon": -0.1899
+      }
+    },
+    "death": {
+      "year": 1954,
+      "place": {
+        "name": {
+          "en": "Wilmslow",
+          "pt": "Wilmslow"
+        },
+        "country": {
+          "en": "United Kingdom",
+          "pt": "Reino Unido"
+        },
+        "lat": 53.325,
+        "lon": -2.239
+      }
+    }
+  },
+  {
+    "id": "ada-lovelace",
+    "qid": "Q7259",
+    "name": {
+      "en": "Ada Lovelace",
+      "pt": "Ada Lovelace"
+    },
+    "description": {
+      "en": "English mathematician",
+      "pt": "matemática britânica"
+    },
+    "extract": {
+      "en": "Augusta Ada King, Countess of Lovelace, also known as Ada Lovelace, was an English mathematician and writer chiefly known for work on Charles Babbage's proposed mechanical general-purpose computer, the analytical engine. She was the first to recognise the machine had applications beyond pure calculation. Lovelace is often considered the first computer programmer.",
+      "pt": "Augusta Ada Byron King, Condessa de Lovelace, atualmente conhecida como Ada Lovelace, foi uma matemática e escritora inglesa. Hoje é reconhecida principalmente por ter escrito o primeiro algoritmo para ser processado por uma máquina, a máquina analítica de Charles Babbage. Durante o período em que esteve envolvida com o projeto de Babbage, ela desenvolveu os algoritmos que permitiriam à máquina computar os valores de funções matemáticas, além de publicar uma coleção de notas sobre a máquina analítica. Por esse trabalho é considerada a primeira programadora de toda a história."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Ada_Lovelace",
+      "pt": "https://pt.wikipedia.org/wiki/Ada_Lovelace"
+    },
+    "image": {
+      "src": "/people/ada-lovelace.png",
+      "width": 500,
+      "height": 647
+    },
+    "birth": {
+      "year": 1815,
+      "place": {
+        "name": {
+          "en": "London",
+          "pt": "Londres"
+        },
+        "country": {
+          "en": "United Kingdom",
+          "pt": "Reino Unido"
+        },
+        "lat": 51.5072,
+        "lon": -0.1275
+      }
+    },
+    "death": {
+      "year": 1852,
+      "place": {
+        "name": {
+          "en": "Marylebone, London",
+          "pt": "Marylebone, Londres"
+        },
+        "country": {
+          "en": "United Kingdom",
+          "pt": "Reino Unido"
+        },
+        "lat": 51.5177,
+        "lon": -0.147
+      }
+    }
+  },
+  {
+    "id": "stephen-hawking",
+    "qid": "Q17714",
+    "name": {
+      "en": "Stephen Hawking",
+      "pt": "Stephen Hawking"
+    },
+    "description": {
+      "en": "English theoretical physicist",
+      "pt": "físico teórico, cosmólogo e autor inglês"
+    },
+    "extract": {
+      "en": "Stephen William Hawking was an English theoretical astrophysicist, cosmologist, and author who was director of research at the Centre for Theoretical Cosmology at the University of Cambridge. Between 1979 and 2009, he was the Lucasian Professor of Mathematics at Cambridge, widely viewed as one of the most prestigious academic posts in the world.",
+      "pt": "Stephen William Hawking foi um físico teórico, cosmólogo e autor britânico, reconhecido por sua contribuição à ciência, sendo um dos mais renomados cientistas do século XX. Doutor em cosmologia, foi professor lucasiano emérito na Universidade de Cambridge, um posto que foi ocupado por Isaac Newton, Paul Dirac e Charles Babbage. Foi, pouco antes de morrer, diretor de pesquisa do Departamento de Matemática Aplicada e Física Teórica (DAMTP) e fundador do Centro de Cosmologia Teórica (CTC) da Universidade de Cambridge."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Stephen_Hawking",
+      "pt": "https://pt.wikipedia.org/wiki/Stephen_Hawking"
+    },
+    "image": {
+      "src": "/people/stephen-hawking.jpg",
+      "width": 500,
+      "height": 718
+    },
+    "birth": {
+      "year": 1942,
+      "place": {
+        "name": {
+          "en": "Oxford",
+          "pt": "Oxford"
+        },
+        "country": {
+          "en": "United Kingdom",
+          "pt": "Reino Unido"
+        },
+        "lat": 51.7519,
+        "lon": -1.2578
+      }
+    },
+    "death": {
+      "year": 2018,
+      "place": {
+        "name": {
+          "en": "Cambridge",
+          "pt": "Cambridge"
+        },
+        "country": {
+          "en": "United Kingdom",
+          "pt": "Reino Unido"
+        },
+        "lat": 52.2081,
+        "lon": 0.1225
+      }
+    }
+  },
+  {
+    "id": "richard-feynman",
+    "qid": "Q39246",
+    "name": {
+      "en": "Richard Feynman",
+      "pt": "Richard Feynman"
+    },
+    "description": {
+      "en": "American theoretical physicist",
+      "pt": "físico teórico americano"
+    },
+    "extract": {
+      "en": "Richard Phillips Feynman was an American theoretical physicist. He shared the 1965 Nobel Prize in Physics with Julian Schwinger and Shin'ichirō Tomonaga \"for their fundamental work in quantum electrodynamics (QED), with deep-ploughing consequences for the physics of elementary particles\".\nHe is also known for his work in the path integral formulation of quantum mechanics, the theory of the physics of the superfluidity of supercooled liquid helium, and the parton model. Feynman developed a pictorial representation scheme for the mathematical expressions describing the behavior of subatomic particles, which later became known as Feynman diagrams and remains widely used.",
+      "pt": "Richard Phillips Feynman foi um físico teórico norte-americano do século XX, foi um dos pioneiros da eletrodinâmica quântica e ficou conhecido pelos seus trabalhos no ramo da formulação integral da mecânica quântica. Pelas suas contribuições para o desenvolvimento da eletrodinâmica quântica, Feynman recebeu o Nobel de Física em 1965 junto ao Julian Schwinger e Shin'ichiro Tomonaga. É irmão mais velho da astrofísica Joan Feynman."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Richard_Feynman",
+      "pt": "https://pt.wikipedia.org/wiki/Richard_Feynman"
+    },
+    "image": {
+      "src": "/people/richard-feynman.jpg",
+      "width": 500,
+      "height": 708
+    },
+    "birth": {
+      "year": 1918,
+      "place": {
+        "name": {
+          "en": "Queens, New York City",
+          "pt": "Queens, Nova York"
+        },
+        "country": {
+          "en": "United States",
+          "pt": "Estados Unidos"
+        },
+        "lat": 40.6009,
+        "lon": -73.757
+      }
+    },
+    "death": {
+      "year": 1988,
+      "place": {
+        "name": {
+          "en": "Los Angeles",
+          "pt": "Los Angeles"
+        },
+        "country": {
+          "en": "United States",
+          "pt": "Estados Unidos"
+        },
+        "lat": 34.0664,
+        "lon": -118.446
+      }
+    }
+  },
+  {
+    "id": "niels-bohr",
+    "qid": "Q7085",
+    "name": {
+      "en": "Niels Bohr",
+      "pt": "Niels Bohr"
+    },
+    "description": {
+      "en": "Danish physicist",
+      "pt": "físico dinamarquês"
+    },
+    "extract": {
+      "en": "Niels Henrik David Bohr was a Danish theoretical physicist who made foundational contributions to understanding atomic structure and quantum theory, for which he received the Nobel Prize in Physics in 1922. He was also a philosopher and a promoter of scientific research.",
+      "pt": "Niels Henrik David Bohr foi um físico e filósofo dinamarquês que fez contribuições fundamentais para a compreensão da estrutura atômica e da mecânica quântica, pela qual recebeu o Prêmio Nobel de Física em 1922."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Niels_Bohr",
+      "pt": "https://pt.wikipedia.org/wiki/Niels_Bohr"
+    },
+    "image": {
+      "src": "/people/niels-bohr.jpg",
+      "width": 500,
+      "height": 703
+    },
+    "birth": {
+      "year": 1885,
+      "place": {
+        "name": {
+          "en": "Copenhagen",
+          "pt": "Copenhague"
+        },
+        "country": {
+          "en": "Denmark",
+          "pt": "Dinamarca"
+        },
+        "lat": 55.6761,
+        "lon": 12.5689
+      }
+    },
+    "death": {
+      "year": 1962,
+      "place": {
+        "name": {
+          "en": "Copenhagen",
+          "pt": "Copenhague"
+        },
+        "country": {
+          "en": "Denmark",
+          "pt": "Dinamarca"
+        },
+        "lat": 55.6761,
+        "lon": 12.5689
+      }
+    }
+  },
+  {
+    "id": "johannes-kepler",
+    "qid": "Q8963",
+    "name": {
+      "en": "Johannes Kepler",
+      "pt": "Johannes Kepler"
+    },
+    "description": {
+      "en": "German astronomer and mathematician",
+      "pt": "matemático, astrônomo e astrólogo alemão"
+    },
+    "extract": {
+      "en": "Johannes Kepler was a German polymath who was an astronomer, mathematician, astrologer, natural philosopher and music theorist. He is a key figure in the 17th-century Scientific Revolution, best known for his laws of planetary motion, and his books Astronomia nova, Harmonice Mundi, and Epitome Astronomiae Copernicanae. The variety and impact of his work made Kepler one of the founders and fathers of modern astronomy, the scientific method, natural science, and modern science. He has been described as the \"father of science fiction\" for his novel Somnium.",
+      "pt": "Johannes Kepler foi um astrônomo, astrólogo e matemático alemão. Considerado figura-chave da revolução científica do século XVII, é todavia célebre por ter formulado as três leis fundamentais da mecânica celeste, denominadas Leis de Kepler, tendo estas sido codificadas por astrônomos posteriores com base nas suas obras Astronomia Nova, Harmonices Mundi e Epítome da Astronomia de Copérnico. Essas obras também forneceram uma das bases para a teoria da gravitação universal de Isaac Newton."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Johannes_Kepler",
+      "pt": "https://pt.wikipedia.org/wiki/Johannes_Kepler"
+    },
+    "image": {
+      "src": "/people/johannes-kepler.jpg",
+      "width": 500,
+      "height": 718
+    },
+    "birth": {
+      "year": 1571,
+      "place": {
+        "name": {
+          "en": "Weil der Stadt",
+          "pt": "Weil der Stadt"
+        },
+        "country": {
+          "en": "Germany",
+          "pt": "Alemanha"
+        },
+        "lat": 48.7508,
+        "lon": 8.8706
+      }
+    },
+    "death": {
+      "year": 1630,
+      "place": {
+        "name": {
+          "en": "Regensburg",
+          "pt": "Ratisbona"
+        },
+        "country": {
+          "en": "Germany",
+          "pt": "Alemanha"
+        },
+        "lat": 49.0167,
+        "lon": 12.0833
+      }
+    }
+  },
+  {
+    "id": "nicolaus-copernicus",
+    "qid": "Q619",
+    "name": {
+      "en": "Nicolaus Copernicus",
+      "pt": "Nicolau Copérnico"
+    },
+    "description": {
+      "en": "Renaissance mathematician and astronomer",
+      "pt": "matemático e astrônomo polonês"
+    },
+    "extract": {
+      "en": "Nicolaus Copernicus was a Renaissance polymath who formulated a model of the universe that placed the Sun rather than Earth at its center. The publication of Copernicus's model in his book De revolutionibus orbium coelestium, just before his death in 1543, was a major event in the history of science, triggering the Copernican Revolution and making a pioneering contribution to the Scientific Revolution. Though a similar heliocentric model had been developed eighteen centuries earlier by Aristarchus of Samos, an ancient Greek astronomer, Copernicus likely arrived at his model independently.",
+      "pt": "Nicolau Copérnico foi um polímata do Renascimento que formulou um modelo matemático do Universo no qual o Sol ficava próximo ao centro, posição que deixava de ser atribuída à Terra. A publicação de De revolutionibus orbium coelestium, pouco antes de sua morte em 1543, desencadeou a revolução copernicana e integrou a revolução científica. Aristarco de Samos havia proposto um modelo heliocêntrico cerca de dezoito séculos antes, mas Copérnico provavelmente chegou ao seu de modo independente."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Nicolaus_Copernicus",
+      "pt": "https://pt.wikipedia.org/wiki/Nicolau_Cop%C3%A9rnico"
+    },
+    "image": {
+      "src": "/people/nicolaus-copernicus.jpg",
+      "width": 500,
+      "height": 624
+    },
+    "birth": {
+      "year": 1473,
+      "place": {
+        "name": {
+          "en": "Toruń",
+          "pt": "Toruń"
+        },
+        "country": {
+          "en": "Poland",
+          "pt": "Polônia"
+        },
+        "lat": 53.0167,
+        "lon": 18.6167
+      }
+    },
+    "death": {
+      "year": 1543,
+      "place": {
+        "name": {
+          "en": "Frombork",
+          "pt": "Frombork"
+        },
+        "country": {
+          "en": "Poland",
+          "pt": "Polônia"
+        },
+        "lat": 54.3583,
+        "lon": 19.6833
+      }
+    }
+  },
+  {
+    "id": "louis-pasteur",
+    "qid": "Q529",
+    "name": {
+      "en": "Louis Pasteur",
+      "pt": "Louis Pasteur"
+    },
+    "description": {
+      "en": "French chemist, pharmacist and microbiologist",
+      "pt": "químico francês"
+    },
+    "extract": {
+      "en": "Louis Pasteur was a French chemist, pharmacist, and microbiologist renowned for his discoveries of the principles of vaccination, microbial fermentation, and pasteurization, the last of which was named after him. His research in chemistry led to remarkable breakthroughs in the understanding of the causes and prevention of diseases, which laid down the foundations of hygiene, public health and much of modern medicine. Pasteur's works are credited with saving millions of lives through the development of vaccines for rabies and anthrax. He is regarded as one of the founders of modern bacteriology and has been honored as the \"father of bacteriology\" and the \"father of microbiology\".",
+      "pt": "Este artigo é sobre o cientista Louis Pasteur. Para o processo de conservação de alimentos que leva seu nome, veja pasteurização."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Louis_Pasteur",
+      "pt": "https://pt.wikipedia.org/wiki/Louis_Pasteur"
+    },
+    "image": {
+      "src": "/people/louis-pasteur.jpg",
+      "width": 500,
+      "height": 689
+    },
+    "birth": {
+      "year": 1822,
+      "place": {
+        "name": {
+          "en": "Dole",
+          "pt": "Dole"
+        },
+        "country": {
+          "en": "France",
+          "pt": "França"
+        },
+        "lat": 47.0922,
+        "lon": 5.4897
+      }
+    },
+    "death": {
+      "year": 1895,
+      "place": {
+        "name": {
+          "en": "Marnes-la-Coquette",
+          "pt": "Marnes-la-Coquette"
+        },
+        "country": {
+          "en": "France",
+          "pt": "França"
+        },
+        "lat": 48.835,
+        "lon": 2.1785
+      }
+    }
+  },
+  {
+    "id": "dmitri-mendeleev",
+    "qid": "Q9106",
+    "name": {
+      "en": "Dmitri Mendeleev",
+      "pt": "Dmitri Mendeleiev"
+    },
+    "description": {
+      "en": "Russian chemist",
+      "pt": "químico e físico russo"
+    },
+    "extract": {
+      "en": "Dmitri Ivanovich Mendeleev was a Russian chemist known for formulating the periodic law and creating a version of the periodic table of elements. He used the periodic law not only to correct the then-accepted properties of some known elements, such as the valence and atomic weight of uranium, but also to predict the properties of three elements that were yet to be discovered. The synthetic element mendelevium is named in his honor. He was one of the founders of the Russian Chemical Society in 1868, and worked on the theory and practice of protectionist trade and on agriculture.",
+      "pt": "Dmitri Ivanovich Mendeleiev foi um químico russo que ajudou a pôr ordem entre os elementos químicos, os componentes básicos das substâncias. Em 1869, publicou uma tabela periódica que os reunia conforme suas semelhanças e a massa de seus átomos. Percebeu que certas propriedades reapareciam ao longo da sequência, regularidade que chamou de lei periódica."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Dmitri_Mendeleev",
+      "pt": "https://pt.wikipedia.org/wiki/Dmitri_Mendeleiev"
+    },
+    "image": {
+      "src": "/people/dmitri-mendeleev.jpg",
+      "width": 500,
+      "height": 688
+    },
+    "birth": {
+      "year": 1834,
+      "place": {
+        "name": {
+          "en": "Tobolsk",
+          "pt": "Tobolsk"
+        },
+        "country": {
+          "en": "Russia",
+          "pt": "Rússia"
+        },
+        "lat": 58.1953,
+        "lon": 68.2581
+      }
+    },
+    "death": {
+      "year": 1907,
+      "place": {
+        "name": {
+          "en": "Saint Petersburg",
+          "pt": "São Petersburgo"
+        },
+        "country": {
+          "en": "Russia",
+          "pt": "Rússia"
+        },
+        "lat": 59.95,
+        "lon": 30.3167
+      }
+    }
+  },
+  {
+    "id": "alexander-von-humboldt",
+    "qid": "Q6694",
+    "name": {
+      "en": "Alexander von Humboldt",
+      "pt": "Alexander von Humboldt"
+    },
+    "description": {
+      "en": "German polymath",
+      "pt": "naturalista alemão"
+    },
+    "extract": {
+      "en": "Friedrich Wilhelm Heinrich Alexander von Humboldt was a German polymath, geographer, naturalist, explorer, and proponent of Romantic philosophy and science. He was the younger brother of the Prussian minister, philosopher, and linguist Wilhelm von Humboldt (1767–1835). Humboldt's quantitative work on botanical geography laid the foundation for the field of biogeography, while his advocacy of long-term systematic geophysical measurement pioneered modern geomagnetic and meteorological monitoring. Humboldt and Carl Ritter are both regarded as the founders of modern geography as they established it as an independent scientific discipline.",
+      "pt": "Friedrich Wilhelm Heinrich Alexander von Humboldt, o barão de Humboldt, mais conhecido como Alexander von Humboldt, foi um geógrafo, polímata, naturalista, explorador e proponente da filosofia romântica prussiano."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Alexander_von_Humboldt",
+      "pt": "https://pt.wikipedia.org/wiki/Alexander_von_Humboldt"
+    },
+    "image": {
+      "src": "/people/alexander-von-humboldt.jpg",
+      "width": 500,
+      "height": 617
+    },
+    "birth": {
+      "year": 1769,
+      "place": {
+        "name": {
+          "en": "Berlin",
+          "pt": "Berlim"
+        },
+        "country": {
+          "en": "Germany",
+          "pt": "Alemanha"
+        },
+        "lat": 52.5167,
+        "lon": 13.3833
+      }
+    },
+    "death": {
+      "year": 1859,
+      "place": {
+        "name": {
+          "en": "Berlin",
+          "pt": "Berlim"
+        },
+        "country": {
+          "en": "Germany",
+          "pt": "Alemanha"
+        },
+        "lat": 52.5167,
+        "lon": 13.3833
+      }
+    }
+  },
+  {
+    "id": "carl-sagan",
+    "qid": "Q410",
+    "name": {
+      "en": "Carl Sagan",
+      "pt": "Carl Sagan"
+    },
+    "description": {
+      "en": "American scientist and science communicator",
+      "pt": "astrônomo e divulgador científico americano"
+    },
+    "extract": {
+      "en": "Carl Edward Sagan was an American astronomer, planetary scientist and science communicator. Initially an assistant professor at Harvard, Sagan later moved to Cornell, where he was the David Duncan Professor of Astronomy and Space Sciences and directed the Laboratory for Planetary Studies. He played an active role in the Mariner, Viking and Voyager programs. He published more than 600 scientific papers and articles and several popular science books, starting with The Cosmic Connection. He won the Pulitzer Prize for General Nonfiction for The Dragons of Eden.",
+      "pt": "Carl Edward Sagan foi um cientista planetário, astrônomo, astrobiólogo, astrofísico, escritor, divulgador científico e ativista norte-americano. Sagan é autor de mais de 600 publicações científicas e também de mais de vinte livros de ciência e ficção científica"
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Carl_Sagan",
+      "pt": "https://pt.wikipedia.org/wiki/Carl_Sagan"
+    },
+    "image": {
+      "src": "/people/carl-sagan.jpg",
+      "width": 500,
+      "height": 683
+    },
+    "birth": {
+      "year": 1934,
+      "place": {
+        "name": {
+          "en": "Brooklyn, New York City",
+          "pt": "Brooklyn, Nova York"
+        },
+        "country": {
+          "en": "United States",
+          "pt": "Estados Unidos"
+        },
+        "lat": 40.6508,
+        "lon": -73.9497
+      }
+    },
+    "death": {
+      "year": 1996,
+      "place": {
+        "name": {
+          "en": "Seattle",
+          "pt": "Seattle"
+        },
+        "country": {
+          "en": "United States",
+          "pt": "Estados Unidos"
+        },
+        "lat": 47.605,
+        "lon": -122.33
+      }
+    }
+  },
+  {
+    "id": "rosalind-franklin",
+    "qid": "Q7474",
+    "name": {
+      "en": "Rosalind Franklin",
+      "pt": "Rosalind Franklin"
+    },
+    "description": {
+      "en": "British X-ray crystallographer",
+      "pt": "química britânica"
+    },
+    "extract": {
+      "en": "Rosalind Elsie Franklin was an English chemist and X-ray crystallographer. Her work was central to the understanding of the molecular structures of DNA, RNA, viruses, coal, and graphite. Although her works on coal and viruses were appreciated in her lifetime, Franklin's contributions to the discovery of the structure of DNA were largely unrecognised during her life, for which Franklin has been variously referred to as the \"wronged heroine\", the \"dark lady of DNA\", the \"forgotten heroine\", a \"feminist icon\", and the \"Sylvia Plath of molecular biology\". James Watson believed that, had she not died, ideally, Franklin would have been awarded a Nobel Prize in Chemistry.",
+      "pt": "Rosalind Elsie Franklin foi uma química britânica que contribuiu para o entendimento das estruturas moleculares do DNA, RNA, vírus, carvão mineral e grafite. Embora seus trabalhos sobre o carvão e o vírus tenham sido apreciadas em sua vida, suas contribuições para a descoberta da estrutura do DNA tiveram amplo reconhecimento póstumo."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Rosalind_Franklin",
+      "pt": "https://pt.wikipedia.org/wiki/Rosalind_Franklin"
+    },
+    "image": {
+      "src": "/people/rosalind-franklin.jpg",
+      "width": 500,
+      "height": 606
+    },
+    "birth": {
+      "year": 1920,
+      "place": {
+        "name": {
+          "en": "Notting Hill, London",
+          "pt": "Notting Hill, Londres"
+        },
+        "country": {
+          "en": "United Kingdom",
+          "pt": "Reino Unido"
+        },
+        "lat": 51.5096,
+        "lon": -0.2043
+      }
+    },
+    "death": {
+      "year": 1958,
+      "place": {
+        "name": {
+          "en": "Chelsea, London",
+          "pt": "Chelsea, Londres"
+        },
+        "country": {
+          "en": "United Kingdom",
+          "pt": "Reino Unido"
+        },
+        "lat": 51.4913,
+        "lon": -0.1726
+      }
+    }
+  },
+  {
+    "id": "leonhard-euler",
+    "qid": "Q7604",
+    "name": {
+      "en": "Leonhard Euler",
+      "pt": "Leonhard Euler"
+    },
+    "description": {
+      "en": "Swiss mathematician",
+      "pt": "matemático e físico suíço"
+    },
+    "extract": {
+      "en": "Leonhard Euler was a Swiss polymath who was active as a mathematician, physicist, astronomer, logician, geographer, music theorist and engineer. He founded the studies of graph theory and topology and made influential discoveries in many other branches of mathematics, such as analytic number theory, complex analysis, and infinitesimal calculus. He also introduced much of modern mathematical terminology and notation, including the notion of a mathematical function. He is known for his work in mechanics, fluid dynamics, optics, astronomy, and music theory. Euler has been called a \"universal genius\" who \"was fully equipped with almost unlimited powers of imagination, intellectual gifts and extraordinary memory\". He spent most of his adult life in Saint Petersburg, Russia, and in Berlin, then the capital of Prussia.",
+      "pt": "Leonhard Euler, 15 de abril de 1707 – 18 de setembro de 1783) foi um polímata suíço que trabalhou como matemático, físico, astrônomo, lógico, geógrafo, teórico musical e engenheiro. Seu trabalho sobre as pontes de Königsberg está na origem da teoria dos grafos e é considerado precursor da topologia. Fez descobertas em outros ramos da matemática, entre eles a teoria analítica dos números, a análise complexa e o cálculo infinitesimal. Sistematizou o estudo das funções e difundiu parte da terminologia e da notação matemática modernas. Trabalhou também em mecânica, Dinâmica dos fluidos, óptica, astronomia e teoria musical. Lokenath Debnath o chamou de \"gênio universal\", dotado de imaginação, capacidade intelectual e memória extraordinárias. Passou a maior parte da vida adulta em São Petersburgo e em Berlim, então capital da Prússia."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Leonhard_Euler",
+      "pt": "https://pt.wikipedia.org/wiki/Leonhard_Euler"
+    },
+    "image": {
+      "src": "/people/leonhard-euler.jpg",
+      "width": 500,
+      "height": 647
+    },
+    "birth": {
+      "year": 1707,
+      "place": {
+        "name": {
+          "en": "Basel",
+          "pt": "Basileia"
+        },
+        "country": {
+          "en": "Switzerland",
+          "pt": "Suíça"
+        },
+        "lat": 47.5581,
+        "lon": 7.5878
+      }
+    },
+    "death": {
+      "year": 1783,
+      "place": {
+        "name": {
+          "en": "Saint Petersburg",
+          "pt": "São Petersburgo"
+        },
+        "country": {
+          "en": "Russia",
+          "pt": "Rússia"
+        },
+        "lat": 59.95,
+        "lon": 30.3167
+      }
+    }
+  },
+  {
+    "id": "carl-friedrich-gauss",
+    "qid": "Q6722",
+    "name": {
+      "en": "Carl Friedrich Gauss",
+      "pt": "Carl Friedrich Gauss"
+    },
+    "description": {
+      "en": "German polymath and scholar",
+      "pt": "matemático e físico alemão"
+    },
+    "extract": {
+      "en": "Johann Carl Friedrich Gauss was a German polymath active as a mathematician, astronomer, geodesist, and physicist, who contributed to many fields in mathematics and science. His mathematical contributions spanned the branches of number theory, algebra, analysis, geometry, statistics, and probability. Gauss was director of the Göttingen Observatory in Germany and professor of astronomy from 1807 until his death in 1855.",
+      "pt": "Johann Carl Friedrich Gauss foi um matemático, astrônomo e físico alemão que contribuiu muito em diversas áreas da ciência, dentre elas a teoria dos números, estatística, análise matemática, geometria diferencial, geodésia, geofísica, eletroestática, astronomia e óptica."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss",
+      "pt": "https://pt.wikipedia.org/wiki/Carl_Friedrich_Gauss"
+    },
+    "image": {
+      "src": "/people/carl-friedrich-gauss.jpg",
+      "width": 500,
+      "height": 636
+    },
+    "birth": {
+      "year": 1777,
+      "place": {
+        "name": {
+          "en": "Brunswick",
+          "pt": "Braunschweig"
+        },
+        "country": {
+          "en": "Germany",
+          "pt": "Alemanha"
+        },
+        "lat": 52.2692,
+        "lon": 10.5211
+      }
+    },
+    "death": {
+      "year": 1855,
+      "place": {
+        "name": {
+          "en": "Göttingen",
+          "pt": "Göttingen"
+        },
+        "country": {
+          "en": "Germany",
+          "pt": "Alemanha"
+        },
+        "lat": 51.5339,
+        "lon": 9.9356
+      }
+    }
+  },
+  {
+    "id": "srinivasa-ramanujan",
+    "qid": "Q83163",
+    "name": {
+      "en": "Srinivasa Ramanujan",
+      "pt": "Srinivasa Ramanujan"
+    },
+    "description": {
+      "en": "Indian mathematician",
+      "pt": "matemático indiano"
+    },
+    "extract": {
+      "en": "Srinivasa Ramanujan Iyengar was an Indian mathematician who worked during the early 20th century. He made substantial contributions to mathematical analysis, number theory, infinite series, and continued fractions, including solutions to mathematical problems then considered unsolvable.",
+      "pt": "Srinivāsa Aiyangār Rāmānujan foi um matemático indiano. Sem qualquer formação acadêmica, deu contributos importantes para as áreas da análise matemática, teoria dos números, séries infinitas, frações continuadas, entre outros ramos da matemática, incluindo problemas considerados insolúveis."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Srinivasa_Ramanujan",
+      "pt": "https://pt.wikipedia.org/wiki/Sriniv%C4%81sa_R%C4%81m%C4%81nujan"
+    },
+    "image": {
+      "src": "/people/srinivasa-ramanujan.jpg",
+      "width": 500,
+      "height": 667
+    },
+    "birth": {
+      "year": 1887,
+      "place": {
+        "name": {
+          "en": "Erode",
+          "pt": "Erode"
+        },
+        "country": {
+          "en": "India",
+          "pt": "Índia"
+        },
+        "lat": 11.3408,
+        "lon": 77.7172
+      }
+    },
+    "death": {
+      "year": 1920,
+      "place": {
+        "name": {
+          "en": "Kumbakonam",
+          "pt": "Kumbakonam"
+        },
+        "country": {
+          "en": "India",
+          "pt": "Índia"
+        },
+        "lat": 10.9667,
+        "lon": 79.3833
+      }
+    }
+  },
+  {
+    "id": "emmy-noether",
+    "qid": "Q7099",
+    "name": {
+      "en": "Emmy Noether",
+      "pt": "Emmy Noether"
+    },
+    "description": {
+      "en": "German mathematician",
+      "pt": "matemática alemã"
+    },
+    "extract": {
+      "en": "Amalie Emmy Noether was a German mathematician who made many important contributions to abstract algebra and mathematical physics. As one of the leading mathematicians of her time, she developed theories of rings, fields, and algebras. She also proved Noether's first and second theorems, which play a fundamental role in mathematical physics, by explaining the connection between symmetry and conservation laws.",
+      "pt": "Amalie Emmy Noether foi uma matemática alemã, conhecida pelas suas contribuições de fundamental importância aos campos de física teórica e álgebra abstrata. Considerada por David Hilbert, Albert Einstein, Hermann Weyl e outros como a mulher mais importante na história da matemática, ela revolucionou as teorias sobre anéis, corpos e álgebra. Em física, o teorema de Noether explica a conexão fundamental entre a simetria na física e as leis de conservação."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Emmy_Noether",
+      "pt": "https://pt.wikipedia.org/wiki/Emmy_Noether"
+    },
+    "image": {
+      "src": "/people/emmy-noether.jpg",
+      "width": 500,
+      "height": 670
+    },
+    "birth": {
+      "year": 1882,
+      "place": {
+        "name": {
+          "en": "Erlangen",
+          "pt": "Erlangen"
+        },
+        "country": {
+          "en": "Germany",
+          "pt": "Alemanha"
+        },
+        "lat": 49.5925,
+        "lon": 11.005
+      }
+    },
+    "death": {
+      "year": 1935,
+      "place": {
+        "name": {
+          "en": "Bryn Mawr",
+          "pt": "Bryn Mawr"
+        },
+        "country": {
+          "en": "United States",
+          "pt": "Estados Unidos"
+        },
+        "lat": 40.0211,
+        "lon": -75.3169
+      }
+    }
+  },
+  {
+    "id": "leonardo-da-vinci",
+    "qid": "Q762",
+    "name": {
+      "en": "Leonardo da Vinci",
+      "pt": "Leonardo da Vinci"
+    },
+    "description": {
+      "en": "Italian polymath",
+      "pt": "artista, inventor e cientista do Renascimento italiano"
+    },
+    "extract": {
+      "en": "Leonardo di ser Piero da Vinci, better known as Leonardo da Vinci, was an Italian polymath of the High Renaissance who was active as a painter, draughtsman, engineer, scientist, theorist, sculptor, and architect. While his fame initially rested on his achievements as a painter, he has also become known for his notebooks, in which he made drawings and notes on a variety of subjects, including anatomy, astronomy, botany, cartography, painting, and palaeontology. Leonardo is widely regarded as a genius who epitomised the Renaissance humanist ideal, and his collective works contributed to the development of European art to an extent rivalled only by that of his younger contemporary Michelangelo.",
+      "pt": "Leonardo di Ser Piero da Vinci, ou simplesmente Leonardo da Vinci, foi um polímata nascido na atual Itália, uma das figuras mais importantes do Alto Renascimento, que se destacou como cientista, matemático, engenheiro, inventor, anatomista, pintor, escultor, arquiteto, botânico, poeta e músico. É ainda conhecido como o precursor da aviação e da balística. Leonardo frequentemente foi descrito como o arquétipo do homem do Renascimento, alguém cuja curiosidade insaciável era igualada apenas pela sua capacidade de invenção. É considerado um dos maiores pintores de todos os tempos e, possivelmente, a pessoa dotada de talentos mais diversos a ter vivido. Segundo Helen Gardner, historiadora de arte, a profundidade e o alcance de seus interesses não tiveram precedentes e \"sua mente e personalidade parecem sobre-humanos para nós, e o homem em si [nos parece] misterioso e distante\"."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Leonardo_da_Vinci",
+      "pt": "https://pt.wikipedia.org/wiki/Leonardo_da_Vinci"
+    },
+    "image": {
+      "src": "/people/leonardo-da-vinci.png",
+      "width": 500,
+      "height": 717
+    },
+    "birth": {
+      "year": 1452,
+      "place": {
+        "name": {
+          "en": "Anchiano, Vinci",
+          "pt": "Anchiano, Vinci"
+        },
+        "country": {
+          "en": "Italy",
+          "pt": "Itália"
+        },
+        "lat": 43.7992,
+        "lon": 10.9381
+      }
+    },
+    "death": {
+      "year": 1519,
+      "place": {
+        "name": {
+          "en": "Amboise",
+          "pt": "Amboise"
+        },
+        "country": {
+          "en": "France",
+          "pt": "França"
+        },
+        "lat": 47.4102,
+        "lon": 0.992
+      }
+    }
+  },
+  {
+    "id": "blaise-pascal",
+    "qid": "Q1290",
+    "name": {
+      "en": "Blaise Pascal",
+      "pt": "Blaise Pascal"
+    },
+    "description": {
+      "en": "French polymath",
+      "pt": "matemático, escritor, físico, inventor, filósofo e teólogo francês"
+    },
+    "extract": {
+      "en": "Blaise Pascal was a French mathematician, physicist, inventor, philosopher, and Catholic writer.",
+      "pt": "Blaise Pascal foi um matemático, escritor, físico, inventor, filósofo e teólogo francês. Prodígio, Pascal foi educado por seu pai. Os primeiros trabalhos de Pascal dizem respeito às ciências naturais e ciências aplicadas. Contribuiu significativamente para o estudo dos fluidos. Ele esclareceu os conceitos de pressão atmosférica e vácuo, estendendo o trabalho de Evangelista Torricelli. Pascal escreveu textos importantes sobre o método científico."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Blaise_Pascal",
+      "pt": "https://pt.wikipedia.org/wiki/Blaise_Pascal"
+    },
+    "image": {
+      "src": "/people/blaise-pascal.jpg",
+      "width": 500,
+      "height": 595
+    },
+    "birth": {
+      "year": 1623,
+      "place": {
+        "name": {
+          "en": "Clermont-Ferrand",
+          "pt": "Clermont-Ferrand"
+        },
+        "country": {
+          "en": "France",
+          "pt": "França"
+        },
+        "lat": 45.7784,
+        "lon": 3.0853
+      }
+    },
+    "death": {
+      "year": 1662,
+      "place": {
+        "name": {
+          "en": "Paris",
+          "pt": "Paris"
+        },
+        "country": {
+          "en": "France",
+          "pt": "França"
+        },
+        "lat": 48.8567,
+        "lon": 2.3522
+      }
+    }
+  },
+  {
+    "id": "immanuel-kant",
+    "qid": "Q9312",
+    "name": {
+      "en": "Immanuel Kant",
+      "pt": "Immanuel Kant"
+    },
+    "description": {
+      "en": "German philosopher",
+      "pt": "filósofo alemão"
+    },
+    "extract": {
+      "en": "Immanuel Kant was a German philosopher. Born in Königsberg in the Kingdom of Prussia, he is considered one of the central thinkers of the Enlightenment. His comprehensive and systematic works in epistemology, metaphysics, logic, ethics, aesthetics, political theory, and philosophy of religion have made him one of the most influential and highly discussed figures in modern Western philosophy.",
+      "pt": "Immanuel Kant foi um filósofo alemão do Iluminismo. Escreveu sobre epistemologia, metafísica, lógica, ética, estética, filosofia política e filosofia da religião."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Immanuel_Kant",
+      "pt": "https://pt.wikipedia.org/wiki/Immanuel_Kant"
+    },
+    "image": {
+      "src": "/people/immanuel-kant.jpg",
+      "width": 500,
+      "height": 653
+    },
+    "birth": {
+      "year": 1724,
+      "place": {
+        "name": {
+          "en": "Königsberg (now Kaliningrad)",
+          "pt": "Königsberg (atual Kaliningrado)"
+        },
+        "country": {
+          "en": "Russia",
+          "pt": "Rússia"
+        },
+        "lat": 54.7115,
+        "lon": 20.5093
+      }
+    },
+    "death": {
+      "year": 1804,
+      "place": {
+        "name": {
+          "en": "Königsberg (now Kaliningrad)",
+          "pt": "Königsberg (atual Kaliningrado)"
+        },
+        "country": {
+          "en": "Russia",
+          "pt": "Rússia"
+        },
+        "lat": 54.7115,
+        "lon": 20.5093
+      }
+    }
+  },
+  {
+    "id": "rene-descartes",
+    "qid": "Q9191",
+    "name": {
+      "en": "René Descartes",
+      "pt": "René Descartes"
+    },
+    "description": {
+      "en": "French philosopher and mathematician",
+      "pt": "filósofo, matemático e cientista francês"
+    },
+    "extract": {
+      "en": "René Descartes was a French philosopher, mathematician, and scientist whose work was foundational to mathematics and modern philosophy, and influenced the development of early modern science. He connected the previously separate fields of geometry and algebra into analytic geometry, introduced a systematic method of inquiry that became influential in early modern philosophy, and made major contributions to epistemology and philosophy of mind as well as metaphysics.",
+      "pt": "René Descartes em francês, ; La Haye en Touraine, 31 de março de 1596 – Estocolmo, 11 de fevereiro de 1650) foi um filósofo, matemático e cientista francês. Reuniu a geometria e a álgebra no desenvolvimento da geometria analítica e propôs um método sistemático de investigação que teve ampla repercussão na filosofia moderna. Seus trabalhos também trataram de epistemologia, metafísica, filosofia da mente e ciências naturais."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Ren%C3%A9_Descartes",
+      "pt": "https://pt.wikipedia.org/wiki/Ren%C3%A9_Descartes"
+    },
+    "image": {
+      "src": "/people/rene-descartes.jpg",
+      "width": 500,
+      "height": 612
+    },
+    "birth": {
+      "year": 1596,
+      "place": {
+        "name": {
+          "en": "La Haye en Touraine (now Descartes)",
+          "pt": "La Haye en Touraine (atual Descartes)"
+        },
+        "country": {
+          "en": "France",
+          "pt": "França"
+        },
+        "lat": 46.9736,
+        "lon": 0.6978
+      }
+    },
+    "death": {
+      "year": 1650,
+      "place": {
+        "name": {
+          "en": "Stockholm",
+          "pt": "Estocolmo"
+        },
+        "country": {
+          "en": "Sweden",
+          "pt": "Suécia"
+        },
+        "lat": 59.3294,
+        "lon": 18.0686
+      }
+    }
+  },
+  {
+    "id": "voltaire",
+    "qid": "Q9068",
+    "name": {
+      "en": "Voltaire",
+      "pt": "Voltaire"
+    },
+    "description": {
+      "en": "French writer and philosopher",
+      "pt": "escritor, historiador e filósofo francês"
+    },
+    "extract": {
+      "en": "François-Marie Arouet, known by his pen name Voltaire, was a French Enlightenment writer, philosopher (philosophe), satirist, and historian. Famous for his wit and his Criticisms of the Catholic Church and slavery, Voltaire was an advocate of freedom of speech, freedom of religion, and separation of church and state.",
+      "pt": "Voltaire, pseudônimo de François-Marie Arouet, nasceu em Paris em 21 de novembro de 1694 e morreu na mesma cidade em 30 de maio de 1778. Foi um escritor e filósofo francês de ideias liberais. Alcançou fama internacional ainda em vida e tornou-se uma figura central do Iluminismo. Interessado em artes e ciências, amigo e colaborador dos autores da Encyclopédie, escreveu em gêneros muito diferentes e se envolveu em disputas políticas. Sua obra circulou entre os leitores instruídos nas décadas anteriores à Revolução Francesa e ao longo do século XIX, sobretudo nos meios burgueses anticlericais. Crítico das religiões reveladas, deísta ou teísta, atacou o fanatismo religioso no Dicionário filosófico e interveio em favor de pessoas atingidas pela intolerância ou pelo arbítrio, como nas causas de Jean Calas, da família Sirven, do cavaleiro de La Barre e do conde de Lally-Tollendal."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Voltaire",
+      "pt": "https://pt.wikipedia.org/wiki/Voltaire"
+    },
+    "image": {
+      "src": "/people/voltaire.jpg",
+      "width": 500,
+      "height": 667
+    },
+    "birth": {
+      "year": 1694,
+      "place": {
+        "name": {
+          "en": "Paris",
+          "pt": "Paris"
+        },
+        "country": {
+          "en": "France",
+          "pt": "França"
+        },
+        "lat": 48.8567,
+        "lon": 2.3522
+      }
+    },
+    "death": {
+      "year": 1778,
+      "place": {
+        "name": {
+          "en": "Paris",
+          "pt": "Paris"
+        },
+        "country": {
+          "en": "France",
+          "pt": "França"
+        },
+        "lat": 48.8567,
+        "lon": 2.3522
+      }
+    }
+  },
+  {
+    "id": "jean-jacques-rousseau",
+    "qid": "Q6527",
+    "name": {
+      "en": "Jean-Jacques Rousseau",
+      "pt": "Jean-Jacques Rousseau"
+    },
+    "description": {
+      "en": "Philosopher, writer and composer",
+      "pt": "filósofo, escritor e compositor"
+    },
+    "extract": {
+      "en": "Jean-Jacques Rousseau was a Genevan philosophe, writer, and composer. His political philosophy was influential during the Age of Enlightenment, as well as during the French Revolution.",
+      "pt": "Jean-Jacques Rousseau foi escritor, filósofo e músico. Sua mãe morreu poucos dias depois de seu nascimento, e ele cresceu entre a casa do pai relojoeiro e a de parentes, antes de sair de Genebra ainda adolescente. Os livros lhe deram projeção por toda a Europa, mas também o puseram em conflito com autoridades religiosas e civis na França e em Genebra. As mudanças frequentes de residência vieram acompanhadas de uma desconfiança cada vez mais intensa em relação às pessoas à sua volta."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Jean-Jacques_Rousseau",
+      "pt": "https://pt.wikipedia.org/wiki/Jean-Jacques_Rousseau"
+    },
+    "image": {
+      "src": "/people/jean-jacques-rousseau.jpg",
+      "width": 500,
+      "height": 633
+    },
+    "birth": {
+      "year": 1712,
+      "place": {
+        "name": {
+          "en": "Geneva",
+          "pt": "Genebra"
+        },
+        "country": {
+          "en": "Switzerland",
+          "pt": "Suíça"
+        },
+        "lat": 46.2,
+        "lon": 6.15
+      }
+    },
+    "death": {
+      "year": 1778,
+      "place": {
+        "name": {
+          "en": "Ermenonville",
+          "pt": "Ermenonville"
+        },
+        "country": {
+          "en": "France",
+          "pt": "França"
+        },
+        "lat": 49.1261,
+        "lon": 2.6958
+      }
+    }
+  },
+  {
+    "id": "karl-marx",
+    "qid": "Q9061",
+    "name": {
+      "en": "Karl Marx",
+      "pt": "Karl Marx"
+    },
+    "description": {
+      "en": "German philosopher and socialist",
+      "pt": "filósofo alemão"
+    },
+    "extract": {
+      "en": "Karl Marx was a German philosopher, social and political theorist, journalist, and revolutionary socialist. He developed the theory of historical materialism, analysing societal structure and change, particularly class struggle under capitalism, and predicting the system's ultimate replacement by communism. Marx co-authored The Communist Manifesto (1848) with Friedrich Engels, and undertook a critique of classical political economy in his magnum opus, Das Kapital (1867–1894). His ideas and their later development, collectively known as Marxism, have had enormous influence on intellectual, political, and social history, and have inspired revolutionary movements in many countries.",
+      "pt": "Karl Marx RSA foi um advogado, filósofo, economista, historiador, sociólogo, teórico político, jornalista e revolucionário socialista alemão. Nascido em Tréveris, Prússia, Marx estudou direito e filosofia nas universidades de Bona e Berlim. Casou-se com a crítica de teatro e ativista política alemã Jenny von Westphalen em 1843. Devido às suas publicações políticas, Marx tornou-se apátrida e viveu no exílio com a sua mulher e filhos em Londres durante décadas, onde continuou a desenvolver o seu pensamento em colaboração com o pensador alemão Friedrich Engels e a publicar os seus escritos, pesquisando na Sala de Leitura do Museu Britânico. Os seus títulos mais conhecidos são o panfleto Manifesto Comunista de 1848 e o triplo volume O Capital (1867–1883). O pensamento político e filosófico de Marx teve uma enorme influência na história intelectual, económica e política subsequente. O seu nome tem sido usado como adjetivo, substantivo e escola de teoria social."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Karl_Marx",
+      "pt": "https://pt.wikipedia.org/wiki/Karl_Marx"
+    },
+    "image": {
+      "src": "/people/karl-marx.png",
+      "width": 500,
+      "height": 739
+    },
+    "birth": {
+      "year": 1818,
+      "place": {
+        "name": {
+          "en": "Trier",
+          "pt": "Tréveris"
+        },
+        "country": {
+          "en": "Germany",
+          "pt": "Alemanha"
+        },
+        "lat": 49.7557,
+        "lon": 6.6394
+      }
+    },
+    "death": {
+      "year": 1883,
+      "place": {
+        "name": {
+          "en": "London",
+          "pt": "Londres"
+        },
+        "country": {
+          "en": "United Kingdom",
+          "pt": "Reino Unido"
+        },
+        "lat": 51.5072,
+        "lon": -0.1275
+      }
+    }
+  },
+  {
+    "id": "friedrich-nietzsche",
+    "qid": "Q9358",
+    "name": {
+      "en": "Friedrich Nietzsche",
+      "pt": "Friedrich Nietzsche"
+    },
+    "description": {
+      "en": "German philosopher",
+      "pt": "filósofo alemão"
+    },
+    "extract": {
+      "en": "Friedrich Wilhelm Nietzsche was a German philosopher and writer who started his career as a classical philologist and turned to philosophy early in his academic career. In 1869, at age 24, he was appointed Professor of Classical Philology at the University of Basel. Plagued by health problems for most of his life, he resigned from the university in 1879. He afterward lived as an independent writer, spending much of his life in relative solitude and financial insecurity while moving between Switzerland, Italy, and southern France in search of climates that might alleviate his condition, and in the following decade, he completed much of his core writing. In 1889, aged 44, he suffered a neurological collapse, and thereafter a complete loss of his mental faculties, with paralysis and vascular dementia; he lived out his remaining 11 years, first under the care of his mother, and later his sister, until his death. His works and his philosophy have fostered not only extensive scholarship but also much popular interest.",
+      "pt": "Friedrich Wilhelm Nietzsche foi um filósofo e escritor alemão. Começou a carreira como filólogo clássico e logo se voltou para a filosofia. Em 1869, aos 24 anos, assumiu uma cátedra de filologia clássica na Universidade de Basileia. Problemas de saúde o acompanharam durante quase toda a vida e o levaram a deixar a universidade em 1879. Passou a viver como escritor independente, em relativa solidão e com dificuldades financeiras. Mudava-se com frequência entre a Suíça, a Itália e o sul da França à procura de climas que aliviassem seus sintomas. Escreveu grande parte de sua obra na década seguinte. Em 1889, aos 44 anos, sofreu um colapso mental, seguido de declínio cognitivo e paralisia; a causa de sua doença permanece em debate. Ficou sob os cuidados da mãe e, depois, da irmã até morrer onze anos mais tarde. Seus escritos despertaram ampla atenção de pesquisadores e leitores."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Friedrich_Nietzsche",
+      "pt": "https://pt.wikipedia.org/wiki/Friedrich_Nietzsche"
+    },
+    "image": {
+      "src": "/people/friedrich-nietzsche.jpg",
+      "width": 500,
+      "height": 679
+    },
+    "birth": {
+      "year": 1844,
+      "place": {
+        "name": {
+          "en": "Röcken",
+          "pt": "Röcken"
+        },
+        "country": {
+          "en": "Germany",
+          "pt": "Alemanha"
+        },
+        "lat": 51.2408,
+        "lon": 12.1161
+      }
+    },
+    "death": {
+      "year": 1900,
+      "place": {
+        "name": {
+          "en": "Weimar",
+          "pt": "Weimar"
+        },
+        "country": {
+          "en": "Germany",
+          "pt": "Alemanha"
+        },
+        "lat": 50.9811,
+        "lon": 11.3294
+      }
+    }
+  },
+  {
+    "id": "sigmund-freud",
+    "qid": "Q9215",
+    "name": {
+      "en": "Sigmund Freud",
+      "pt": "Sigmund Freud"
+    },
+    "description": {
+      "en": "Austrian neurologist and founder of psychoanalysis",
+      "pt": "neurologista austríaco e fundador da psicanálise"
+    },
+    "extract": {
+      "en": "Sigmund Freud was an Austrian neurologist and the founder of psychoanalysis, a clinical method for evaluating and treating pathologies arising from conflicts in the psyche through dialogue between patient and psychoanalyst, and the distinctive theory of mind and human agency it posits.",
+      "pt": "Sigmund Freud foi um médico neurologista e importante psicanalista austríaco. Reconhecido como o fundador da psicanálise, tornou-se a figura mais influente da história da psicologia. A influência de Freud pode ser observada ainda em diversos outros campos do conhecimento e até mesmo na cultura popular, inclusive no uso cotidiano de palavras que se tornaram recorrentes, mas que surgiram a partir de suas teorias. Expressões como \"neurose\", \"repressões\", \"projeções\" popularizaram-se a partir de seus escritos."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Sigmund_Freud",
+      "pt": "https://pt.wikipedia.org/wiki/Sigmund_Freud"
+    },
+    "image": {
+      "src": "/people/sigmund-freud.jpg",
+      "width": 500,
+      "height": 680
+    },
+    "birth": {
+      "year": 1856,
+      "place": {
+        "name": {
+          "en": "Příbor",
+          "pt": "Příbor"
+        },
+        "country": {
+          "en": "Czech Republic",
+          "pt": "Tchéquia"
+        },
+        "lat": 49.6409,
+        "lon": 18.145
+      }
+    },
+    "death": {
+      "year": 1939,
+      "place": {
+        "name": {
+          "en": "London",
+          "pt": "Londres"
+        },
+        "country": {
+          "en": "United Kingdom",
+          "pt": "Reino Unido"
+        },
+        "lat": 51.5072,
+        "lon": -0.1275
+      }
+    }
+  },
+  {
+    "id": "gottfried-wilhelm-leibniz",
+    "qid": "Q9047",
+    "name": {
+      "en": "Gottfried Wilhelm Leibniz",
+      "pt": "Gottfried Leibniz"
+    },
+    "description": {
+      "en": "German polymath",
+      "pt": "filósofo e matemático alemão"
+    },
+    "extract": {
+      "en": "Gottfried Wilhelm Leibniz was a German polymath active as a mathematician, philosopher, scientist, engineer, inventor, historian and diplomat. Alongside Isaac Newton, he is widely credited with the invention of calculus. He is also credited with making foundational contributions to other areas of mathematics, such as binary arithmetic and statistics.",
+      "pt": "Gottfried Wilhelm Leibniz foi um polímata alemão que atuou como matemático, filósofo, cientista e diplomata. Ao lado de Isaac Newton, é amplamente reconhecido pela invenção do cálculo infinitesimal. Também fez contribuições fundamentais a outros campos da matemática, entre eles a aritmética binária e a estatística."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Gottfried_Wilhelm_Leibniz",
+      "pt": "https://pt.wikipedia.org/wiki/Gottfried_Leibniz"
+    },
+    "image": {
+      "src": "/people/gottfried-wilhelm-leibniz.jpg",
+      "width": 500,
+      "height": 617
+    },
+    "birth": {
+      "year": 1646,
+      "place": {
+        "name": {
+          "en": "Leipzig",
+          "pt": "Leipzig"
+        },
+        "country": {
+          "en": "Germany",
+          "pt": "Alemanha"
+        },
+        "lat": 51.3406,
+        "lon": 12.3747
+      }
+    },
+    "death": {
+      "year": 1716,
+      "place": {
+        "name": {
+          "en": "Hanover",
+          "pt": "Hanôver"
+        },
+        "country": {
+          "en": "Germany",
+          "pt": "Alemanha"
+        },
+        "lat": 52.3744,
+        "lon": 9.7386
+      }
+    }
+  },
+  {
+    "id": "baruch-spinoza",
+    "qid": "Q35802",
+    "name": {
+      "en": "Baruch Spinoza",
+      "pt": "Baruch Espinoza"
+    },
+    "description": {
+      "en": "Dutch philosopher of Portuguese-Jewish origin",
+      "pt": "filósofo holandês de origem judaico-portuguesa"
+    },
+    "extract": {
+      "en": "Baruch (de) Spinoza, also known under his Latinized pen name Benedictus de Spinoza, was a philosopher of Portuguese-Jewish origin who was born and lived in the Dutch Republic. A forerunner of the Enlightenment, Spinoza significantly influenced modern biblical criticism, 17th-century rationalism, and Dutch intellectual culture, establishing himself as one of the most important and radical philosophers of the early modern period. Influenced by Stoicism, Thomas Hobbes, René Descartes, and heterodox Christians, Spinoza was a leading philosopher of the Dutch Golden Age.",
+      "pt": "Baruch (de) Espinoza foi um filósofo de origem judaico-portuguesa (sefardita), nascido nos Países Baixos, filho de uma família perseguida pela inquisição portuguesa, refugiados na Sinagoga Portuguesa de Amsterdão. Baruch Espinoza é famoso pela identificação de Deus como Natureza; Deus na concepção spinozista é entendido como a totalidade da realidade, também chamado de \"substância única\", por ter infinitos atributos; \"Deus, sive Natura\"."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Baruch_Spinoza",
+      "pt": "https://pt.wikipedia.org/wiki/Baruch_Espinoza"
+    },
+    "image": {
+      "src": "/people/baruch-spinoza.jpg",
+      "width": 500,
+      "height": 580
+    },
+    "birth": {
+      "year": 1632,
+      "place": {
+        "name": {
+          "en": "Amsterdam",
+          "pt": "Amsterdã"
+        },
+        "country": {
+          "en": "Netherlands",
+          "pt": "Países Baixos"
+        },
+        "lat": 52.3667,
+        "lon": 4.8833
+      }
+    },
+    "death": {
+      "year": 1677,
+      "place": {
+        "name": {
+          "en": "The Hague",
+          "pt": "Haia"
+        },
+        "country": {
+          "en": "Netherlands",
+          "pt": "Países Baixos"
+        },
+        "lat": 52.08,
+        "lon": 4.31
+      }
+    }
+  },
+  {
+    "id": "adam-smith",
+    "qid": "Q9381",
+    "name": {
+      "en": "Adam Smith",
+      "pt": "Adam Smith"
+    },
+    "description": {
+      "en": "Scottish economist and philosopher",
+      "pt": "filósofo e economista escocês"
+    },
+    "extract": {
+      "en": "Adam Smith was a Scottish economist and philosopher who was a pioneer in the field of political economy and key figure during the Scottish Enlightenment. Seen by many as the \"father of economics\", or the \"father of capitalism\", he is primarily known for two classic works: The Theory of Moral Sentiments (1759) and An Inquiry into the Nature and Causes of the Wealth of Nations (1776). The latter, often abbreviated as The Wealth of Nations, is regarded as his magnum opus, marking the inception of modern economic scholarship as a comprehensive system and an academic discipline. Smith refuses to explain the distribution of wealth and power in terms of divine will and instead appeals to natural, political, social, economic, legal, environmental and technological factors, as well as the interactions among them. The work is notable for its contribution to economic theory, particularly in its exposition of the concept of absolute advantage.",
+      "pt": "Adam Smith foi um economista e filósofo escocês ligado ao Iluminismo escocês e à formação da economia política. Frequentemente chamado de \"pai da economia\" ou do \"capitalismo\", escreveu Teoria dos Sentimentos Morais (1759) e Uma Investigação sobre a Natureza e as Causas da Riqueza das Nações (1776). Nesta última obra, examinou a produção e a distribuição da riqueza, o comércio e as instituições que moldam a vida econômica. Sua análise do comércio internacional foi posteriormente associada à vantagem absoluta, mas essa interpretação de sua teoria é debatida pelos historiadores da economia."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Adam_Smith",
+      "pt": "https://pt.wikipedia.org/wiki/Adam_Smith"
+    },
+    "image": {
+      "src": "/people/adam-smith.jpg",
+      "width": 500,
+      "height": 609
+    },
+    "birth": {
+      "year": 1723,
+      "place": {
+        "name": {
+          "en": "Kirkcaldy",
+          "pt": "Kirkcaldy"
+        },
+        "country": {
+          "en": "United Kingdom",
+          "pt": "Reino Unido"
+        },
+        "lat": 56.1107,
+        "lon": -3.1674
+      }
+    },
+    "death": {
+      "year": 1790,
+      "place": {
+        "name": {
+          "en": "Edinburgh",
+          "pt": "Edimburgo"
+        },
+        "country": {
+          "en": "United Kingdom",
+          "pt": "Reino Unido"
+        },
+        "lat": 55.9533,
+        "lon": -3.1892
+      }
+    }
+  },
+  {
+    "id": "simone-de-beauvoir",
+    "qid": "Q7197",
+    "name": {
+      "en": "Simone de Beauvoir",
+      "pt": "Simone de Beauvoir"
+    },
+    "description": {
+      "en": "French philosopher, social theorist and activist",
+      "pt": "filósofa, teórica social e ativista francesa"
+    },
+    "extract": {
+      "en": "Simone Lucie Ernestine Marie Bertrand de Beauvoir was a French existentialist philosopher, writer, social theorist, and feminist activist. Though she did not consider herself a philosopher, nor was she considered one at the time of her death, she had a significant influence on both feminist existentialism and feminist theory.",
+      "pt": "Simone Lucie Ernestine Marie Bertrand de Beauvoir, mais conhecida como Simone de Beauvoir, foi uma escritora, intelectual, filósofa existencialista, ativista política, feminista e teórica social francesa. Embora não se considerasse uma filósofa, De Beauvoir teve uma influência significativa tanto no existencialismo feminista quanto na teoria feminista."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Simone_de_Beauvoir",
+      "pt": "https://pt.wikipedia.org/wiki/Simone_de_Beauvoir"
+    },
+    "image": {
+      "src": "/people/simone-de-beauvoir.jpg",
+      "width": 500,
+      "height": 668
+    },
+    "birth": {
+      "year": 1908,
+      "place": {
+        "name": {
+          "en": "Paris",
+          "pt": "Paris"
+        },
+        "country": {
+          "en": "France",
+          "pt": "França"
+        },
+        "lat": 48.8505,
+        "lon": 2.3322
+      }
+    },
+    "death": {
+      "year": 1986,
+      "place": {
+        "name": {
+          "en": "Paris",
+          "pt": "Paris"
+        },
+        "country": {
+          "en": "France",
+          "pt": "França"
+        },
+        "lat": 48.833,
+        "lon": 2.3269
+      }
+    }
+  },
+  {
+    "id": "hannah-arendt",
+    "qid": "Q60025",
+    "name": {
+      "en": "Hannah Arendt",
+      "pt": "Hannah Arendt"
+    },
+    "description": {
+      "en": "German-American historian and philosopher",
+      "pt": "filósofa e teórica política alemã-americana"
+    },
+    "extract": {
+      "en": "Hannah Arendt was a German and American philosopher, political theorist, and public historian. She was one of the most influential political theorists of the twentieth century.",
+      "pt": "Hannah Arendt foi uma filósofa política alemã de origem judaica, uma das mais influentes do século XX. Notabilizou-se por suas reflexões sobre o totalitarismo e pela criação do conceito de banalidade do mal."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Hannah_Arendt",
+      "pt": "https://pt.wikipedia.org/wiki/Hannah_Arendt"
+    },
+    "image": {
+      "src": "/people/hannah-arendt.jpg",
+      "width": 500,
+      "height": 658
+    },
+    "birth": {
+      "year": 1906,
+      "place": {
+        "name": {
+          "en": "Linden, Hanover",
+          "pt": "Linden, Hanôver"
+        },
+        "country": {
+          "en": "Germany",
+          "pt": "Alemanha"
+        },
+        "lat": 52.3668,
+        "lon": 9.7149
+      }
+    },
+    "death": {
+      "year": 1975,
+      "place": {
+        "name": {
+          "en": "New York City",
+          "pt": "Nova York"
+        },
+        "country": {
+          "en": "United States",
+          "pt": "Estados Unidos"
+        },
+        "lat": 40.787,
+        "lon": -73.9754
+      }
+    }
+  },
+  {
+    "id": "ludwig-wittgenstein",
+    "qid": "Q9391",
+    "name": {
+      "en": "Ludwig Wittgenstein",
+      "pt": "Ludwig Wittgenstein"
+    },
+    "description": {
+      "en": "Austrian philosopher and logician",
+      "pt": "filósofo austríaco"
+    },
+    "extract": {
+      "en": "Ludwig Josef Johann Wittgenstein was an Austro-British philosopher who worked in logic, philosophy of mathematics, philosophy of mind, and philosophy of language.",
+      "pt": "Ludwig Josef Johann Wittgenstein foi um filósofo austríaco, naturalizado britânico em 1939. Estudou engenharia, lecionou em escolas primárias e participou do projeto da Casa Wittgenstein. Dedicou-se à lógica, aos fundamentos da matemática, à filosofia da linguagem e à filosofia da mente."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Ludwig_Wittgenstein",
+      "pt": "https://pt.wikipedia.org/wiki/Ludwig_Wittgenstein"
+    },
+    "image": {
+      "src": "/people/ludwig-wittgenstein.jpg",
+      "width": 500,
+      "height": 677
+    },
+    "birth": {
+      "year": 1889,
+      "place": {
+        "name": {
+          "en": "Vienna",
+          "pt": "Viena"
+        },
+        "country": {
+          "en": "Austria",
+          "pt": "Áustria"
+        },
+        "lat": 48.2378,
+        "lon": 16.2861
+      }
+    },
+    "death": {
+      "year": 1951,
+      "place": {
+        "name": {
+          "en": "Cambridge",
+          "pt": "Cambridge"
+        },
+        "country": {
+          "en": "United Kingdom",
+          "pt": "Reino Unido"
+        },
+        "lat": 52.2081,
+        "lon": 0.1225
+      }
+    }
+  },
+  {
+    "id": "bertrand-russell",
+    "qid": "Q33760",
+    "name": {
+      "en": "Bertrand Russell",
+      "pt": "Bertrand Russell"
+    },
+    "description": {
+      "en": "English philosopher and logician",
+      "pt": "matemático, filósofo, ensaísta e historiador britânico"
+    },
+    "extract": {
+      "en": "Bertrand Arthur William Russell, 3rd Earl Russell, was an English mathematician, philosopher, and social critic.",
+      "pt": "Bertrand Arthur William Russell, 3.º Conde Russell OM FRS foi um dos mais influentes matemáticos, filósofos, ensaístas, historiadores e lógicos do século XX. Em diversos momentos, considerou-se liberal, socialista e pacifista, embora tenha admitido que jamais pertenceu a essas correntes num sentido profundo. Como divulgador da filosofia, Russell foi respeitado por muitos como um porta-voz da vida racional e da criatividade, embora as suas posturas em vários temas tenham sido controversas. Russell nasceu em 1872, no auge do poderio económico e político do Reino Unido, e faleceu em 1970, vítima de uma gripe, numa época em que o império já se havia desmoronado e o seu poder fora exaurido por duas guerras vitoriosas, mas debilitantes."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Bertrand_Russell",
+      "pt": "https://pt.wikipedia.org/wiki/Bertrand_Russell"
+    },
+    "image": {
+      "src": "/people/bertrand-russell.jpg",
+      "width": 500,
+      "height": 626
+    },
+    "birth": {
+      "year": 1872,
+      "place": {
+        "name": {
+          "en": "Trellech, Wales",
+          "pt": "Trellech, País de Gales"
+        },
+        "country": {
+          "en": "United Kingdom",
+          "pt": "Reino Unido"
+        },
+        "lat": 51.7451,
+        "lon": -2.7256
+      }
+    },
+    "death": {
+      "year": 1970,
+      "place": {
+        "name": {
+          "en": "Penrhyndeudraeth, Wales",
+          "pt": "Penrhyndeudraeth, País de Gales"
+        },
+        "country": {
+          "en": "United Kingdom",
+          "pt": "Reino Unido"
+        },
+        "lat": 52.9298,
+        "lon": -4.0663
+      }
+    }
+  },
+  {
+    "id": "avicenna",
+    "qid": "Q8011",
+    "name": {
+      "en": "Avicenna",
+      "pt": "Avicena"
+    },
+    "description": {
+      "en": "Persian polymath, physician and philosopher",
+      "pt": "filósofo, matemático e médico persa"
+    },
+    "extract": {
+      "en": "Ibn Sina, commonly known in the West as Avicenna, was a preeminent philosopher and physician of the Muslim world. He was a seminal figure of the Islamic Golden Age, serving in the courts of various Iranian rulers, and was influential to medieval European medical and Scholastic thought. Avicenna is considered one of the greatest thinkers and medical scholars in history.",
+      "pt": "Ibn Sina, conhecido no Ocidente como Avicena, foi um filósofo e médico persa do mundo islâmico. Viveu durante a Idade de Ouro Islâmica e trabalhou nas cortes de governantes iranianos. Seus escritos influenciaram a medicina europeia medieval e o pensamento escolástico."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Avicenna",
+      "pt": "https://pt.wikipedia.org/wiki/Avicena"
+    },
+    "image": {
+      "src": "/people/avicenna.jpg",
+      "width": 500,
+      "height": 644
+    },
+    "birth": {
+      "year": 980,
+      "place": {
+        "name": {
+          "en": "Afshona, near Bukhara",
+          "pt": "Afshona, perto de Bucara"
+        },
+        "country": {
+          "en": "Uzbekistan",
+          "pt": "Uzbequistão"
+        },
+        "lat": 39.9944,
+        "lon": 64.3792
+      }
+    },
+    "death": {
+      "year": 1037,
+      "place": {
+        "name": {
+          "en": "Hamadan",
+          "pt": "Hamadã"
+        },
+        "country": {
+          "en": "Iran",
+          "pt": "Irã"
+        },
+        "lat": 34.8,
+        "lon": 48.5167
+      }
+    }
+  },
+  {
+    "id": "ibn-khaldun",
+    "qid": "Q9294",
+    "name": {
+      "en": "Ibn Khaldun",
+      "pt": "Ibn Khaldun"
+    },
+    "description": {
+      "en": "Arab Islamic scholar, historian and philosopher",
+      "pt": "historiador e filósofo árabe"
+    },
+    "extract": {
+      "en": "Ibn Khaldūn was an Arab Tunisian scholar, historian, philosopher, and sociologist. He is widely acknowledged to be one of the greatest social scientists of the Middle Ages, and is considered by a number of scholars to be a major forerunner of historiography, sociology, economics, and demography studies.",
+      "pt": "Abu Zaíde Abederramão ibne Maomé ibne Caldune Alhadrami, melhor conhecido somente como ibne Caldune foi um polímata árabe — astrônomo, economista, historiador, jurista islâmico, advogado islâmico, erudito islâmico, teólogo islâmico, hafiz, matemático, estrategista militar, nutricionista, filósofo, cientista social e estadista."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Ibn_Khaldun",
+      "pt": "https://pt.wikipedia.org/wiki/Ibne_Caldune"
+    },
+    "image": {
+      "src": "/people/ibn-khaldun.jpg",
+      "width": 500,
+      "height": 767
+    },
+    "birth": {
+      "year": 1332,
+      "place": {
+        "name": {
+          "en": "Tunis",
+          "pt": "Túnis"
+        },
+        "country": {
+          "en": "Tunisia",
+          "pt": "Tunísia"
+        },
+        "lat": 36.8008,
+        "lon": 10.18
+      }
+    },
+    "death": {
+      "year": 1406,
+      "place": {
+        "name": {
+          "en": "Cairo",
+          "pt": "Cairo"
+        },
+        "country": {
+          "en": "Egypt",
+          "pt": "Egito"
+        },
+        "lat": 30.0444,
+        "lon": 31.2358
+      }
+    }
+  },
+  {
+    "id": "paulo-freire",
+    "qid": "Q164797",
+    "name": {
+      "en": "Paulo Freire",
+      "pt": "Paulo Freire"
+    },
+    "description": {
+      "en": "Brazilian educator",
+      "pt": "filósofo e educador brasileiro"
+    },
+    "extract": {
+      "en": "Paulo Reglus Neves Freire was a Brazilian educator and Marxist philosopher whose work has affected global thought on education. He is best known for Pedagogy of the Oppressed, in which he reimagines teaching as a political act of liberation rather than critical cultural transmission of values. A founder of critical pedagogy, Freire’s influence spans literacy movements, liberation theology, postcolonial education, Marxism, and contemporary theories of social justice and learning. He is widely regarded as one of the most important educational theorists of the twentieth century, alongside figures such as John Dewey and Maria Montessori.",
+      "pt": "Paulo Reglus Neves Freire OMC foi um educador e filósofo brasileiro. É considerado um dos pensadores mais notáveis na história da pedagogia mundial, tendo influenciado o movimento chamado pedagogia crítica. É também o Patrono da Educação Brasileira."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Paulo_Freire",
+      "pt": "https://pt.wikipedia.org/wiki/Paulo_Freire"
+    },
+    "image": {
+      "src": "/people/paulo-freire.jpg",
+      "width": 500,
+      "height": 730
+    },
+    "birth": {
+      "year": 1921,
+      "place": {
+        "name": {
+          "en": "Recife",
+          "pt": "Recife"
+        },
+        "country": {
+          "en": "Brazil",
+          "pt": "Brasil"
+        },
+        "lat": -8.0539,
+        "lon": -34.8808
+      }
+    },
+    "death": {
+      "year": 1997,
+      "place": {
+        "name": {
+          "en": "São Paulo",
+          "pt": "São Paulo"
+        },
+        "country": {
+          "en": "Brazil",
+          "pt": "Brasil"
+        },
+        "lat": -23.5504,
+        "lon": -46.6339
+      }
+    }
+  },
+  {
+    "id": "virginia-woolf",
+    "qid": "Q40909",
+    "name": {
+      "en": "Virginia Woolf",
+      "pt": "Virginia Woolf"
+    },
+    "description": {
+      "en": "English modernist writer",
+      "pt": "escritora inglesa"
+    },
+    "extract": {
+      "en": "Adeline Virginia Woolf was an English writer and one of the most influential 20th-century modernist authors. She helped to pioneer the use of stream of consciousness narration as a literary device.",
+      "pt": "Adeline Virginia Woolf, nascida Adeline Virginia Stephen, foi uma escritora, ensaísta e editora britânica. É considerada uma das principais escritoras do século XX, consagrada por seus romances feministas e pelo uso do fluxo de consciência."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Virginia_Woolf",
+      "pt": "https://pt.wikipedia.org/wiki/Virginia_Woolf"
+    },
+    "image": {
+      "src": "/people/virginia-woolf.jpg",
+      "width": 500,
+      "height": 683
+    },
+    "birth": {
+      "year": 1882,
+      "place": {
+        "name": {
+          "en": "London",
+          "pt": "Londres"
+        },
+        "country": {
+          "en": "United Kingdom",
+          "pt": "Reino Unido"
+        },
+        "lat": 51.5072,
+        "lon": -0.1275
+      }
+    },
+    "death": {
+      "year": 1941,
+      "place": {
+        "name": {
+          "en": "Lewes",
+          "pt": "Lewes"
+        },
+        "country": {
+          "en": "United Kingdom",
+          "pt": "Reino Unido"
+        },
+        "lat": 50.8747,
+        "lon": 0.0117
+      }
+    }
+  },
+  {
+    "id": "fyodor-dostoevsky",
+    "qid": "Q991",
+    "name": {
+      "en": "Fyodor Dostoevsky",
+      "pt": "Fiódor Dostoiévski"
+    },
+    "description": {
+      "en": "Russian novelist and philosopher",
+      "pt": "romancista e filósofo russo"
+    },
+    "extract": {
+      "en": "Fyodor Mikhailovich Dostoevsky was a Russian philosopher, novelist, short-story writer, essayist, and journalist. He is regarded as one of the greatest novelists in both Russian and world literature, and many of his works are considered highly influential masterpieces. Dostoevsky's literary works explore the human condition in the troubled political, social and spiritual atmospheres of 19th-century Russia, and engage with a variety of philosophical and religious themes. His most acclaimed novels include Crime and Punishment (1866), The Idiot (1869), Demons (1872), The Adolescent (1875) and The Brothers Karamazov (1880). His Notes from Underground, a novella published in 1864, is considered one of the first works of existentialist literature.",
+      "pt": "Fiódor Mikhailovitch Dostoiévski foi um escritor, filósofo e jornalista russo. É considerado por muitos um dos maiores romancistas e pensadores da história, bem como um dos maiores psicólogos que já existiu, ao considerar a designação e etimologia mais ampla do termo, como investigador da psique."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Fyodor_Dostoevsky",
+      "pt": "https://pt.wikipedia.org/wiki/Fi%C3%B3dor_Dostoi%C3%A9vski"
+    },
+    "image": {
+      "src": "/people/fyodor-dostoevsky.jpg",
+      "width": 500,
+      "height": 626
+    },
+    "birth": {
+      "year": 1821,
+      "place": {
+        "name": {
+          "en": "Moscow",
+          "pt": "Moscou"
+        },
+        "country": {
+          "en": "Russia",
+          "pt": "Rússia"
+        },
+        "lat": 55.7836,
+        "lon": 37.6119
+      }
+    },
+    "death": {
+      "year": 1881,
+      "place": {
+        "name": {
+          "en": "Saint Petersburg",
+          "pt": "São Petersburgo"
+        },
+        "country": {
+          "en": "Russia",
+          "pt": "Rússia"
+        },
+        "lat": 59.95,
+        "lon": 30.3167
+      }
+    }
+  },
+  {
+    "id": "leo-tolstoy",
+    "qid": "Q7243",
+    "name": {
+      "en": "Leo Tolstoy",
+      "pt": "Liev Tolstói"
+    },
+    "description": {
+      "en": "Russian writer",
+      "pt": "escritor russo"
+    },
+    "extract": {
+      "en": "Count Lev Nikolayevich Tolstoy, usually referred to in English as Leo Tolstoy, was a Russian writer. He is regarded as one of the greatest and most influential authors of all time.",
+      "pt": "Lev Nikoláievitch Tolstói, também conhecido em português como Liev, Leão, Leo ou Leon Tolstói ; Iasnaia Poliana, Governorado de Tula, 9 de setembro de 1828 – Astapovo, 20 de novembro de 1910) foi um escritor russo, amplamente reconhecido como um dos maiores e mais influentes autores de todos os tempos."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Leo_Tolstoy",
+      "pt": "https://pt.wikipedia.org/wiki/Liev_Tolst%C3%B3i"
+    },
+    "image": {
+      "src": "/people/leo-tolstoy.jpg",
+      "width": 500,
+      "height": 662
+    },
+    "birth": {
+      "year": 1828,
+      "place": {
+        "name": {
+          "en": "Yasnaya Polyana",
+          "pt": "Yasnaya Polyana"
+        },
+        "country": {
+          "en": "Russia",
+          "pt": "Rússia"
+        },
+        "lat": 54.0751,
+        "lon": 37.5264
+      }
+    },
+    "death": {
+      "year": 1910,
+      "place": {
+        "name": {
+          "en": "Astapovo",
+          "pt": "Astapovo"
+        },
+        "country": {
+          "en": "Russia",
+          "pt": "Rússia"
+        },
+        "lat": 53.2075,
+        "lon": 39.5375
+      }
+    }
+  },
+  {
+    "id": "franz-kafka",
+    "qid": "Q905",
+    "name": {
+      "en": "Franz Kafka",
+      "pt": "Franz Kafka"
+    },
+    "description": {
+      "en": "German-language novelist and writer",
+      "pt": "escritor de língua alemã"
+    },
+    "extract": {
+      "en": "Franz Kafka was a German-language Jewish writer from Prague. Widely regarded as a major figure of 20th-century literature, his works fuse elements of realism and the fantastique, and typically feature isolated protagonists facing bizarre or surreal predicaments and incomprehensible bureaucratic powers. The term Kafkaesque has entered the lexicon to describe situations like those depicted in his writings. His best-known works include the novella The Metamorphosis (1915) and the novels The Trial (1925) and The Castle (1926). He is also celebrated for his brief fables and aphorisms, which frequently incorporated comedic elements alongside the darker themes of his longer works. His work has widely influenced artists, philosophers, composers, filmmakers, literary historians, religious scholars, and cultural theorists.",
+      "pt": "František \"Franz\" Kafka foi um escritor boêmio de língua alemã, autor de romances e contos, considerado pelos críticos como um dos escritores mais influentes do século XX. A maior parte de sua obra, como A Metamorfose, O Processo e O Castelo, está repleta de temas e arquétipos de alienação e brutalidade física e psicológica, conflito entre pais e filhos, personagens com missões aterrorizantes, labirintos burocráticos e transformações místicas."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Franz_Kafka",
+      "pt": "https://pt.wikipedia.org/wiki/Franz_Kafka"
+    },
+    "image": {
+      "src": "/people/franz-kafka.jpg",
+      "width": 500,
+      "height": 667
+    },
+    "birth": {
+      "year": 1883,
+      "place": {
+        "name": {
+          "en": "Prague",
+          "pt": "Praga"
+        },
+        "country": {
+          "en": "Czech Republic",
+          "pt": "Tchéquia"
+        },
+        "lat": 50.0875,
+        "lon": 14.4214
+      }
+    },
+    "death": {
+      "year": 1924,
+      "place": {
+        "name": {
+          "en": "Kierling, Klosterneuburg",
+          "pt": "Kierling, Klosterneuburg"
+        },
+        "country": {
+          "en": "Austria",
+          "pt": "Áustria"
+        },
+        "lat": 48.3086,
+        "lon": 16.2692
+      }
+    }
+  },
+  {
+    "id": "jorge-luis-borges",
+    "qid": "Q909",
+    "name": {
+      "en": "Jorge Luis Borges",
+      "pt": "Jorge Luis Borges"
+    },
+    "description": {
+      "en": "Argentine writer",
+      "pt": "escritor argentino"
+    },
+    "extract": {
+      "en": "Jorge Francisco Isidoro Luis Borges was an Argentine short-story writer, essayist, poet and translator regarded as a key figure in Spanish-language and international literature. His best-known works, Ficciones (transl. Fictions) and El Aleph, published in the 1940s, are collections of short stories exploring motifs such as dreams, labyrinths, chance, infinity, archives, mirrors, fictional writers, and mythology. Borges's works have contributed to philosophical literature and the fantasy genre, and have had a major influence on the magical realist movement in 20th century Latin American literature.",
+      "pt": "Jorge Francisco Isidoro Luis Borges Acevedo ; Buenos Aires, 24 de agosto de 1899 – Genebra, 14 de junho de 1986) foi um escritor, poeta, tradutor, crítico literário e ensaísta argentino, considerado um dos maiores escritores do século XX. Sua obra, que dialogava com o surrealismo e a literatura fantástica, exerceu grande influência sobre o boom latino-americano e a literatura contemporânea em geral."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Jorge_Luis_Borges",
+      "pt": "https://pt.wikipedia.org/wiki/Jorge_Luis_Borges"
+    },
+    "image": {
+      "src": "/people/jorge-luis-borges.jpg",
+      "width": 500,
+      "height": 671
+    },
+    "birth": {
+      "year": 1899,
+      "place": {
+        "name": {
+          "en": "Buenos Aires",
+          "pt": "Buenos Aires"
+        },
+        "country": {
+          "en": "Argentina",
+          "pt": "Argentina"
+        },
+        "lat": -34.5997,
+        "lon": -58.3819
+      }
+    },
+    "death": {
+      "year": 1986,
+      "place": {
+        "name": {
+          "en": "Geneva",
+          "pt": "Genebra"
+        },
+        "country": {
+          "en": "Switzerland",
+          "pt": "Suíça"
+        },
+        "lat": 46.2,
+        "lon": 6.15
+      }
+    }
+  },
+  {
+    "id": "machado-de-assis",
+    "qid": "Q311145",
+    "name": {
+      "en": "Machado de Assis",
+      "pt": "Machado de Assis"
+    },
+    "description": {
+      "en": "Brazilian writer",
+      "pt": "escritor brasileiro"
+    },
+    "extract": {
+      "en": "Joaquim Maria Machado de Assis, sometimes called Bruxo do Cosme Velho, was a pioneer Brazilian novelist, poet, playwright and short story writer, widely regarded as the greatest writer of Brazilian literature. In 1897, he founded and became the first President of the Brazilian Academy of Letters. He was multilingual, having taught himself French, English, German and Greek later in life.",
+      "pt": "Joaquim Maria Machado de Assis foi um escritor brasileiro, amplamente reconhecido por críticos, estudiosos, escritores e leitores como o maior expoente da literatura brasileira. Sua produção literária abrangeu praticamente todos os gêneros, incluindo poesia, romance, crônica, dramaturgia, conto, folhetim, jornalismo e crítica literária. Machado de Assis testemunhou a Abolição da Escravatura e a transição política do Brasil, com o golpe da proclamação da República em substituição ao Império, além de diversos eventos significativos no final do século XIX e início do século XX, sendo um notável comentador e relator dos acontecimentos político-sociais de sua época."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Machado_de_Assis",
+      "pt": "https://pt.wikipedia.org/wiki/Machado_de_Assis"
+    },
+    "image": {
+      "src": "/people/machado-de-assis.jpg",
+      "width": 500,
+      "height": 674
+    },
+    "birth": {
+      "year": 1839,
+      "place": {
+        "name": {
+          "en": "Rio de Janeiro",
+          "pt": "Rio de Janeiro"
+        },
+        "country": {
+          "en": "Brazil",
+          "pt": "Brasil"
+        },
+        "lat": -22.9111,
+        "lon": -43.2056
+      }
+    },
+    "death": {
+      "year": 1908,
+      "place": {
+        "name": {
+          "en": "Rio de Janeiro",
+          "pt": "Rio de Janeiro"
+        },
+        "country": {
+          "en": "Brazil",
+          "pt": "Brasil"
+        },
+        "lat": -22.9111,
+        "lon": -43.2056
+      }
+    }
+  },
+  {
+    "id": "fernando-pessoa",
+    "qid": "Q173481",
+    "name": {
+      "en": "Fernando Pessoa",
+      "pt": "Fernando Pessoa"
+    },
+    "description": {
+      "en": "Portuguese poet, writer, and philosopher",
+      "pt": "poeta português"
+    },
+    "extract": {
+      "en": "Fernando António Nogueira de Seabra Pessoa was a Portuguese poet, writer, literary critic, translator, and publisher. He has been described as one of the most significant literary figures of the 20th century and one of the greatest poets in the Portuguese literature. He also wrote in and translated from English and French.",
+      "pt": "Fernando António Nogueira Pessoa foi um poeta português identificado com o modernismo, amplamente reconhecido como um dos principais autores da língua portuguesa e o maior poeta lusófono do século XX. Atuou também como dramaturgo, ensaísta, tradutor, publicitário, astrólogo, inventor, empresário, correspondente comercial, crítico literário e comentador político."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Fernando_Pessoa",
+      "pt": "https://pt.wikipedia.org/wiki/Fernando_Pessoa"
+    },
+    "image": {
+      "src": "/people/fernando-pessoa.jpg",
+      "width": 500,
+      "height": 698
+    },
+    "birth": {
+      "year": 1888,
+      "place": {
+        "name": {
+          "en": "Lisbon",
+          "pt": "Lisboa"
+        },
+        "country": {
+          "en": "Portugal",
+          "pt": "Portugal"
+        },
+        "lat": 38.708,
+        "lon": -9.139
+      }
+    },
+    "death": {
+      "year": 1935,
+      "place": {
+        "name": {
+          "en": "Lisbon",
+          "pt": "Lisboa"
+        },
+        "country": {
+          "en": "Portugal",
+          "pt": "Portugal"
+        },
+        "lat": 38.708,
+        "lon": -9.139
+      }
+    }
+  },
+  {
+    "id": "gabriel-garcia-marquez",
+    "qid": "Q5878",
+    "name": {
+      "en": "Gabriel García Márquez",
+      "pt": "Gabriel García Márquez"
+    },
+    "description": {
+      "en": "Colombian writer and Nobel laureate",
+      "pt": "escritor colombiano e ganhador do Prêmio Nobel"
+    },
+    "extract": {
+      "en": "Gabriel José García Márquez was a Colombian writer and journalist, known affectionately as Gabo or Gabito throughout Latin America. Considered one of the most significant authors of the 20th century, particularly in the Spanish language, he was awarded the 1972 Neustadt International Prize for Literature and the 1982 Nobel Prize in Literature. He pursued a self-directed education that resulted in leaving law school for a career in journalism. From early on he showed no inhibitions in his criticism of Colombian and foreign politics. In 1958, he married Mercedes Barcha Pardo; they had two sons, Rodrigo and Gonzalo.",
+      "pt": "Gabriel José García Márquez foi um escritor, jornalista, editor, ativista e político colombiano. Considerado um dos autores mais importantes do século XX, foi um dos escritores mais admirados e traduzidos no mundo, com mais de 40 milhões de livros vendidos em 36 idiomas."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Gabriel_Garc%C3%ADa_M%C3%A1rquez",
+      "pt": "https://pt.wikipedia.org/wiki/Gabriel_Garc%C3%ADa_M%C3%A1rquez"
+    },
+    "image": {
+      "src": "/people/gabriel-garcia-marquez.jpg",
+      "width": 500,
+      "height": 750
+    },
+    "birth": {
+      "year": 1927,
+      "place": {
+        "name": {
+          "en": "Aracataca",
+          "pt": "Aracataca"
+        },
+        "country": {
+          "en": "Colombia",
+          "pt": "Colômbia"
+        },
+        "lat": 10.5911,
+        "lon": -74.185
+      }
+    },
+    "death": {
+      "year": 2014,
+      "place": {
+        "name": {
+          "en": "Mexico City",
+          "pt": "Cidade do México"
+        },
+        "country": {
+          "en": "Mexico",
+          "pt": "México"
+        },
+        "lat": 19.3538,
+        "lon": -99.1359
+      }
+    }
+  },
+  {
+    "id": "rabindranath-tagore",
+    "qid": "Q7241",
+    "name": {
+      "en": "Rabindranath Tagore",
+      "pt": "Rabindranath Tagore"
+    },
+    "description": {
+      "en": "Indian polymath",
+      "pt": "poeta e filósofo bengali"
+    },
+    "extract": {
+      "en": "Rabindranath Tagore was a Bengali polymath - who worked as a poet, author, playwright, musician, composer, philosopher, social reformer, painter, and was one of the foremost figures of the Bengal Renaissance. In 1913, Tagore became the first Indian and non-European to win a Nobel Prize in any category, and also the first lyricist to win the Nobel Prize in Literature. A significant moulder of culture within Bengal and the Indian subcontinent, he wrote and composed the national anthems of India and Bangladesh.",
+      "pt": "Rabindranath Tagore, alcunha Gurudev, foi um polímata bengali. Como poeta, romancista, músico e dramaturgo, reformulou a literatura e a música bengali no final do século XIX e início do século XX. Como autor de Gitânjali, que em português se chamou \"Oferenda Lírica\" e seus \"versos profundamente sensíveis, frescos e belos\", sendo o primeiro não-europeu a conquistar, em 1913, o Nobel de Literatura. As canções poéticas de Tagore eram vistas como espirituais e mercuriais; no entanto, sua \"prosa elegante e poesia mágica\" permanecem amplamente desconhecidas fora de Bengala. Ele é às vezes referido como \"o Bardo de Bengala\". Tagore foi talvez a figura literária mais importante da literatura bengali. Foi um destacado representante da cultura hindu, cuja influência e popularidade internacional talvez só poderia ser comparada com a de Gandhi, a quem Tagore chamou 'Mahatma' devido a sua profunda admiração por ele."
+    },
+    "wiki": {
+      "en": "https://en.wikipedia.org/wiki/Rabindranath_Tagore",
+      "pt": "https://pt.wikipedia.org/wiki/Rabindranath_Tagore"
+    },
+    "image": {
+      "src": "/people/rabindranath-tagore.jpg",
+      "width": 500,
+      "height": 653
+    },
+    "birth": {
+      "year": 1861,
+      "place": {
+        "name": {
+          "en": "Kolkata",
+          "pt": "Calcutá"
+        },
+        "country": {
+          "en": "India",
+          "pt": "Índia"
+        },
+        "lat": 22.5675,
+        "lon": 88.37
+      }
+    },
+    "death": {
+      "year": 1941,
+      "place": {
+        "name": {
+          "en": "Kolkata",
+          "pt": "Calcutá"
+        },
+        "country": {
+          "en": "India",
+          "pt": "Índia"
+        },
+        "lat": 22.5675,
+        "lon": 88.37
+      }
+    }
+  }
+]
