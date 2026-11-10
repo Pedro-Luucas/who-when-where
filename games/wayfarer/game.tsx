@@ -20,9 +20,9 @@ import {
   MAX_GUESSES,
   MODE_CLUE_AT,
   NAMES_CLUE_AT,
-  REVEAL,
   hintFor,
   isSolved,
+  revealAt,
   type Guess,
 } from "./rules";
 import { shareText } from "./share";
@@ -38,41 +38,89 @@ const fold = (text: string) => text.normalize("NFD").replace(/\p{M}/gu, "").toLo
 
 function Play({ day }: { day: number }) {
   const [save, setSave] = useSave();
-  const { locale, t } = useGameT();
+  const { t } = useGameT();
   const siteT = useSiteT();
-  const mapLabels = useMapLabels();
-  const [query, setQuery] = useState("");
-  const [choice, setChoice] = useState<string | null>(null);
 
   // A saved record names its journey, so a roster change can't reassign it.
   const stored = save.days[day];
   const record = stored && journeyById(stored.journeyId) ? stored : undefined;
   const journey = (record && journeyById(record.journeyId)) ?? journeyForDay(day);
   const guesses = record?.guesses ?? [];
-  const used = guesses.length;
-  const solved = isSolved(journey.id, guesses);
-  const over = solved || used >= MAX_GUESSES;
+  const stats = computeStats(save, day);
 
-  function submit(guess: Guess) {
-    if (over) return;
+  function guess(next: Guess) {
     setSave((previous) => ({
       ...previous,
       days: {
         ...previous.days,
         [day]: {
           journeyId: journey.id,
-          guesses: [...(previous.days[day]?.guesses ?? []), guess],
+          guesses: [...(previous.days[day]?.guesses ?? []), next],
         },
       },
     }));
+  }
+
+  return (
+    <>
+      <WayfarerBoard
+        journey={journey}
+        guesses={guesses}
+        onGuess={guess}
+        label={`${siteT("puzzleNo", { n: day })} — ${t("kicker")}`}
+      >
+        <ResultActions path="/wayfarer" shareText={(url) => shareText(day, journey.id, guesses, url)} />
+      </WayfarerBoard>
+      <GamePanels
+        help={[t("help1"), t("help2"), t("help3"), t("help4"), t("help5")]}
+        seenHelp={save.seenHelp}
+        onSeenHelp={() => setSave((previous) => ({ ...previous, seenHelp: true }))}
+        played={stats.played}
+        tiles={[
+          { label: siteT("statPlayed"), value: stats.played },
+          { label: t("statSolved"), value: `${stats.solvedRate}%` },
+          { label: t("statAverage"), value: stats.averageTries },
+          { label: siteT("statStreak"), value: stats.streak },
+          { label: siteT("statLongest"), value: stats.longestStreak },
+        ]}
+      />
+    </>
+  );
+}
+
+type BoardProps = {
+  journey: Journey;
+  guesses: Guess[];
+  onGuess: (guess: Guess) => void;
+  maxGuesses?: number;
+  /** The line above the title: "No. 12 — Today's journey", "Stage 3 of 8 — Wayfarer". */
+  label: string;
+  /** What follows the result once the puzzle is over: sharing, or the way onwards. */
+  children?: React.ReactNode;
+};
+
+/** One Wayfarer puzzle. The guesses live with whoever renders it. */
+export function WayfarerBoard({ journey, guesses, onGuess, maxGuesses = MAX_GUESSES, label, children }: BoardProps) {
+  const { locale, t } = useGameT();
+  const mapLabels = useMapLabels();
+  const [query, setQuery] = useState("");
+  const [choice, setChoice] = useState<string | null>(null);
+
+  const used = guesses.length;
+  const solved = isSolved(journey.id, guesses);
+  const over = solved || used >= maxGuesses;
+
+  function submit(guess: Guess) {
+    if (over) return;
+    onGuess(guess);
     setQuery("");
     setChoice(null);
   }
 
   // How much of the route is on the map, and how much of that is new since
   // the last guess (the new stretch is drawn with a flourish).
-  const shown = over ? 1 : REVEAL[used];
-  const before = used === 0 ? 0 : REVEAL[used - 1];
+  const shown = over ? 1 : revealAt(used, maxGuesses);
+  const before = used === 0 ? 0 : revealAt(used - 1, maxGuesses);
   const { stops } = journey;
   const routes: MapRoute[] = [];
   if (before > 0) routes.push({ points: routeSlice(stops, 0, before), kind: "route" });
@@ -115,7 +163,6 @@ function Play({ day }: { day: number }) {
       ? formatYear(journey.start, locale)
       : `${formatYear(journey.start, locale)}–${formatYear(journey.end, locale)}`;
   const mode = t(`mode_${journey.mode}` as MessageKey);
-  const stats = computeStats(save, day);
 
   const clues = [
     { label: t("clueMode"), value: mode, at: MODE_CLUE_AT },
@@ -127,9 +174,7 @@ function Play({ day }: { day: number }) {
     <main className="game" data-game="wayfarer" data-summary={over ? "" : undefined}>
       <aside className="dossier dossier-plain">
         <div className="dossier-text">
-          <p className="eyebrow">
-            {siteT("puzzleNo", { n: day })} <span aria-hidden="true">—</span> {t("kicker")}
-          </p>
+          <p className="eyebrow">{label}</p>
           <h1 className="dossier-name">{over ? journey.name[locale] : t("question")}</h1>
           <p className="dossier-description">
             {over ? mode : t("lead")}
@@ -142,14 +187,14 @@ function Play({ day }: { day: number }) {
             {clues.map((clue) => (
               <li key={clue.label} data-locked={used < clue.at ? "" : undefined}>
                 <span>{clue.label}</span>
-                <b>{used < clue.at ? t("unlockAt", { n: clue.at }) : clue.value}</b>
+                <b>{used >= clue.at ? clue.value : clue.at < maxGuesses ? t("unlockAt", { n: clue.at }) : "—"}</b>
               </li>
             ))}
           </ul>
         )}
 
-        <ol className="meter" aria-label={`${used}/${MAX_GUESSES}`}>
-          {Array.from({ length: MAX_GUESSES }, (_, i) => (
+        <ol className="meter" aria-label={`${used}/${maxGuesses}`}>
+          {Array.from({ length: maxGuesses }, (_, i) => (
             <li key={i} data-state={meterState(guesses[i], journey.id, i === used && !over)} />
           ))}
         </ol>
@@ -160,7 +205,7 @@ function Play({ day }: { day: number }) {
           <div className="result-head" role="status">
             <div className="stamp" data-lost={solved ? undefined : ""}>
               <strong>
-                {solved ? used : "×"}/{MAX_GUESSES}
+                {solved ? used : "×"}/{maxGuesses}
               </strong>
               <span>{t("tries")}</span>
             </div>
@@ -185,10 +230,7 @@ function Play({ day }: { day: number }) {
 
         {over ? (
           <div className="summary">
-            <ResultActions
-              path="/wayfarer"
-              shareText={(url) => shareText(day, journey.id, guesses, url)}
-            />
+            {children}
             <ReadMore
               text={journey.extract[locale] ?? journey.extract.en}
               href={journey.wiki[locale] ?? journey.wiki.en}
@@ -243,20 +285,6 @@ function Play({ day }: { day: number }) {
 
         <Tries guesses={guesses} journey={journey} />
       </section>
-
-      <GamePanels
-        help={[t("help1"), t("help2"), t("help3"), t("help4"), t("help5")]}
-        seenHelp={save.seenHelp}
-        onSeenHelp={() => setSave((previous) => ({ ...previous, seenHelp: true }))}
-        played={stats.played}
-        tiles={[
-          { label: siteT("statPlayed"), value: stats.played },
-          { label: t("statSolved"), value: `${stats.solvedRate}%` },
-          { label: t("statAverage"), value: stats.averageTries },
-          { label: siteT("statStreak"), value: stats.streak },
-          { label: siteT("statLongest"), value: stats.longestStreak },
-        ]}
-      />
     </main>
   );
 }

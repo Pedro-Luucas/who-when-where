@@ -3,6 +3,17 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { SiteText } from "@/components/site-text";
 import { GAMES } from "@/games/registry";
+import { DailyPanel } from "@/social/daily-panel";
+import { SocialText } from "@/social/messages";
+import Link from "next/link";
+
+// Ways to play with other people, shown under the daily games.
+const TOGETHER = [
+  { href: "/expedition", name: "expedition", theme: "cardExpeditionTheme", blurb: "cardExpeditionBlurb", foot: "cardExpeditionFoot" },
+  { href: "/party", name: "party", theme: "cardPartyTheme", blurb: "cardPartyBlurb", foot: "cardPartyFoot" },
+  { href: "/leaderboard", name: "leaderboard", theme: "cardLeaderboardTheme", blurb: "cardLeaderboardBlurb", foot: "cardLeaderboardFoot" },
+  { href: "/community", name: "community", theme: "cardCommunityTheme", blurb: "cardCommunityBlurb", foot: "cardCommunityFoot" },
+] as const;
 
 export default function Home() {
   return (
@@ -38,6 +49,8 @@ export default function Home() {
           </p>
         </section>
 
+        <DailyPanel />
+
         <section aria-labelledby="games-heading">
           <h2 id="games-heading" className="eyebrow games-heading">
             <SiteText k="todaysGames" />
@@ -56,6 +69,36 @@ export default function Home() {
                 <SiteText k="comingSoonBody" />
               </p>
             </div>
+          </div>
+        </section>
+
+        <section className="together" aria-labelledby="together-heading">
+          <h2 id="together-heading" className="eyebrow games-heading">
+            <SocialText k="playTogether" />
+          </h2>
+          <div className="games">
+            {TOGETHER.map((card, index) => (
+              <Link key={card.href} href={card.href} className="game-card">
+                <span className="game-card-theme">
+                  <i>{String.fromCharCode(65 + index)}</i>
+                  <SocialText k={card.theme} />
+                </span>
+                <h3>
+                  <SocialText k={card.name} />
+                </h3>
+                <p>
+                  <SocialText k={card.blurb} />
+                </p>
+                <div className="game-card-foot">
+                  <span>
+                    <SocialText k={card.foot} />
+                  </span>
+                  <strong>
+                    <SocialText k="open" /> →
+                  </strong>
+                </div>
+              </Link>
+            ))}
           </div>
         </section>
       </main>

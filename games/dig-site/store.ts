@@ -3,7 +3,8 @@
 import { streaks } from "@/lib/stats";
 import type { SyncedSave } from "@/lib/saves";
 import { usePersistent } from "@/lib/storage";
-import { isFound, isOver, type Dig } from "./rules";
+import type { Score } from "@/lib/points";
+import { isFound, isOver, scoreOf, type Dig } from "./rules";
 
 export type DayRecord = { siteId: string; digs: Dig[] };
 
@@ -21,6 +22,12 @@ const EMPTY: Save = { days: {}, seenHelp: false };
 
 export function useSave() {
   return usePersistent<Save>(KEY, EMPTY);
+}
+
+/** A finished day's score, or null while it is still being played. */
+export function resultOf(record: DayRecord): Score | null {
+  const score = scoreOf(record.digs);
+  return score.over ? score : null;
 }
 
 export type Stats = {

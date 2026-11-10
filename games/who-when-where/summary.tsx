@@ -1,15 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ReadMore, ResultActions } from "@/components/result-footer";
+import { ReadMore } from "@/components/result-footer";
 import { WorldMap, useMapLabels, type MapArc, type MapMarker } from "@/components/world-map";
 import { formatNumber } from "@/lib/i18n";
 import { useGameT } from "./messages";
 import { placeLabel, type Person } from "./people";
 import { ROUND_MAX, ROUNDS, TOTAL_MAX, rankOf, totalScore, type Guess } from "./rules";
-import { shareText } from "./share";
 
-type Props = { person: Person; day: number; guesses: Guess[] };
+type Props = {
+  person: Person;
+  guesses: Guess[];
+  /** What follows the score: sharing, or the way onwards. */
+  children?: React.ReactNode;
+};
 
 function useCountUp(target: number, duration = 1200): number {
   const [value, setValue] = useState(0);
@@ -29,7 +33,7 @@ function useCountUp(target: number, duration = 1200): number {
   return value;
 }
 
-export function Summary({ person, day, guesses }: Props) {
+export function Summary({ person, guesses, children }: Props) {
   const { locale, t } = useGameT();
   const mapLabels = useMapLabels();
   const total = totalScore(guesses);
@@ -110,11 +114,7 @@ export function Summary({ person, day, guesses }: Props) {
         })}
       </ol>
 
-      <ResultActions
-        path="/who-when-where"
-        shareText={(url) => shareText(day, guesses, locale, url)}
-        nextLabel={t("nextIn")}
-      />
+      {children}
 
       <figure className="life">
         <figcaption>

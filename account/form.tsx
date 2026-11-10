@@ -18,6 +18,26 @@ export function Field({
   );
 }
 
+/** The public handle: letters, digits and underscores. */
+export function UsernameField({ defaultValue, optional }: { defaultValue?: string; optional?: boolean }) {
+  const t = useAccountT();
+  return (
+    <Field
+      label={t("username")}
+      name="username"
+      defaultValue={defaultValue}
+      autoComplete="username"
+      autoCapitalize="none"
+      spellCheck={false}
+      required={!optional}
+      minLength={3}
+      maxLength={20}
+      pattern="[A-Za-z0-9_]{3,20}"
+      hint={t("usernameHint")}
+    />
+  );
+}
+
 type Props = {
   /** Receives the form's fields by name. Reject with an ApiError to show its message. */
   action: (values: Record<string, string>) => Promise<void>;

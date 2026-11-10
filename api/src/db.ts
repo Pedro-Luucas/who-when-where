@@ -37,6 +37,105 @@ const MIGRATIONS: string[] = [
     PRIMARY KEY (user_id, game, day)
   ) STRICT, WITHOUT ROWID;
   `,
+
+  // The community: public handles, scores, friends, chat and parties.
+  `
+  ALTER TABLE users ADD COLUMN username TEXT;                     -- a-z, 0-9 and _; null until chosen
+  ALTER TABLE users ADD COLUMN avatar INTEGER NOT NULL DEFAULT 0; -- index of the avatar colour
+  ALTER TABLE users ADD COLUMN last_seen INTEGER NOT NULL DEFAULT 0;
+  CREATE UNIQUE INDEX users_username ON users(username) WHERE username IS NOT NULL;
+
+  -- A finished daily puzzle's score, 0-1000 whatever the game. The first
+  -- score sent for a day stands.
+  CREATE TABLE results (
+    user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    game       TEXT NOT NULL,
+    day        INTEGER NOT NULL,
+    points     INTEGER NOT NULL,
+    detail     TEXT NOT NULL DEFAULT '',  -- the short result as shown to players, e.g. "3/6"
+    created_at INTEGER NOT NULL,
+    PRIMARY KEY (user_id, game, day)
+  ) STRICT, WITHOUT ROWID;
+  CREATE INDEX results_day ON results(day, game);
+
+  -- One row per pair of players, ids in order (low < high).
+  CREATE TABLE friendships (
+    low        TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    high       TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    requester  TEXT NOT NULL,             -- who asked: low or high
+    status     TEXT NOT NULL,             -- 'pending' | 'accepted'
+    created_at INTEGER NOT NULL,
+    PRIMARY KEY (low, high)
+  ) STRICT, WITHOUT ROWID;
+  CREATE INDEX friendships_high ON friendships(high);
+
+  -- Chat. A channel is 'global', 'dm:<low>:<high>' or 'party:<party id>'.
+  CREATE TABLE messages (
+    id         INTEGER PRIMARY KEY AUTOINCREMENT,
+    channel    TEXT NOT NULL,
+    user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    to_id      TEXT REFERENCES users(id) ON DELETE CASCADE,  -- the other player, in a direct message
+    body       TEXT NOT NULL,
+    created_at INTEGER NOT NULL
+  ) STRICT;
+  CREATE INDEX messages_channel ON messages(channel, id);
+  CREATE INDEX messages_to ON messages(to_id, id) WHERE to_id IS NOT NULL;
+
+  -- How far a player has read each direct conversation.
+  CREATE TABLE chat_reads (
+    user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    channel TEXT NOT NULL,
+    last_id INTEGER NOT NULL,
+    PRIMARY KEY (user_id, channel)
+  ) STRICT, WITHOUT ROWID;
+
+  -- A party: a room where a group plays the same expedition. Each start is a
+  -- new "run" with a new seed; clients deal the puzzles from the seed.
+  CREATE TABLE parties (
+    id         TEXT PRIMARY KEY,
+    code       TEXT NOT NULL UNIQUE,      -- what players type to join
+    host_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    name       TEXT NOT NULL DEFAULT '',
+    visibility TEXT NOT NULL,             -- 'public' (listed) | 'private' (code or invitation)
+    settings   TEXT NOT NULL,             -- JSON, see readPartySettings
+    status     TEXT NOT NULL,             -- 'lobby' | 'playing'
+    run        INTEGER NOT NULL DEFAULT 0,
+    seed       TEXT NOT NULL DEFAULT '',
+    started_at INTEGER NOT NULL DEFAULT 0,
+    released   INTEGER NOT NULL DEFAULT -1, -- last stage the host stopped waiting on
+    created_at INTEGER NOT NULL,
+    updated_at INTEGER NOT NULL
+  ) STRICT;
+
+  CREATE TABLE party_members (
+    party_id  TEXT NOT NULL REFERENCES parties(id) ON DELETE CASCADE,
+    user_id   TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    joined_at INTEGER NOT NULL,
+    last_seen INTEGER NOT NULL,
+    PRIMARY KEY (party_id, user_id)
+  ) STRICT, WITHOUT ROWID;
+  CREATE INDEX party_members_user ON party_members(user_id);
+
+  CREATE TABLE party_results (
+    party_id   TEXT NOT NULL REFERENCES parties(id) ON DELETE CASCADE,
+    run        INTEGER NOT NULL,
+    user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    stage      INTEGER NOT NULL,
+    points     INTEGER NOT NULL,
+    detail     TEXT NOT NULL DEFAULT '',
+    created_at INTEGER NOT NULL,
+    PRIMARY KEY (party_id, run, user_id, stage)
+  ) STRICT, WITHOUT ROWID;
+
+  CREATE TABLE party_invites (
+    party_id   TEXT NOT NULL REFERENCES parties(id) ON DELETE CASCADE,
+    user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,  -- who is invited
+    from_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    created_at INTEGER NOT NULL,
+    PRIMARY KEY (party_id, user_id)
+  ) STRICT, WITHOUT ROWID;
+  CREATE INDEX party_invites_user ON party_invites(user_id);
+  `,
 ];
 
 export function openDatabase(path: string): DatabaseSync {

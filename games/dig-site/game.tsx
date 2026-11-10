@@ -10,9 +10,9 @@ import { WorldMap, useMapLabels, type MapMarker, type MapRing } from "@/componen
 import { formatCoordinates, type LatLon } from "@/lib/geo";
 import { formatNumber, useSiteT } from "@/lib/i18n";
 import { useGameT, type MessageKey } from "./messages";
-import { FOUND_KM, MAX_DIGS, closestKm, gradeDig, heatOf, isFound, isOver } from "./rules";
+import { FOUND_KM, MAX_DIGS, closestKm, gradeDig, heatOf, isFound, isOver, type Dig } from "./rules";
 import { shareText } from "./share";
-import { siteById, siteForDay, siteLabel } from "./sites";
+import { siteById, siteForDay, siteLabel, type Site } from "./sites";
 import { computeStats, useSave } from "./store";
 
 const NUMERALS = ["I", "II", "III", "IV", "V", "VI"];
@@ -24,23 +24,17 @@ export function DigSite() {
 
 function Play({ day }: { day: number }) {
   const [save, setSave] = useSave();
-  const { locale, t } = useGameT();
+  const { t } = useGameT();
   const siteT = useSiteT();
-  const mapLabels = useMapLabels();
-  const [pin, setPin] = useState<LatLon | null>(null);
 
   // A saved record names its site, so a roster change can't reassign it.
   const stored = save.days[day];
   const record = stored && siteById(stored.siteId) ? stored : undefined;
   const site = (record && siteById(record.siteId)) ?? siteForDay(day);
   const digs = record?.digs ?? [];
-  const found = isFound(digs);
-  const over = isOver(digs);
-  const last = digs.at(-1);
+  const stats = computeStats(save, day);
 
-  function dig() {
-    if (!pin || over) return;
-    const graded = gradeDig(site, pin);
+  function dig(graded: Dig) {
     setSave((previous) => ({
       ...previous,
       days: {
@@ -48,6 +42,55 @@ function Play({ day }: { day: number }) {
         [day]: { siteId: site.id, digs: [...(previous.days[day]?.digs ?? []), graded] },
       },
     }));
+  }
+
+  return (
+    <>
+      <DigSiteBoard site={site} digs={digs} onDig={dig} label={`${siteT("puzzleNo", { n: day })} — ${t("kicker")}`}>
+        <ResultActions path="/dig-site" shareText={(url) => shareText(day, digs, url)} />
+      </DigSiteBoard>
+      <GamePanels
+        help={[t("help1"), t("help2"), t("help3"), t("help4"), t("help5")]}
+        seenHelp={save.seenHelp}
+        onSeenHelp={() => setSave((previous) => ({ ...previous, seenHelp: true }))}
+        played={stats.played}
+        tiles={[
+          { label: siteT("statPlayed"), value: stats.played },
+          { label: t("statFound"), value: `${stats.foundRate}%` },
+          { label: t("statAverage"), value: stats.averageDigs },
+          { label: siteT("statStreak"), value: stats.streak },
+          { label: siteT("statLongest"), value: stats.longestStreak },
+        ]}
+      />
+    </>
+  );
+}
+
+type BoardProps = {
+  site: Site;
+  digs: Dig[];
+  onDig: (dig: Dig) => void;
+  maxDigs?: number;
+  /** The line above the title: "No. 12 — Today's dig", "Stage 3 of 8 — Dig Site". */
+  label: string;
+  /** What follows the result once the puzzle is over: sharing, or the way onwards. */
+  children?: React.ReactNode;
+};
+
+/** One Dig Site puzzle. The digs live with whoever renders it. */
+export function DigSiteBoard({ site, digs, onDig, maxDigs = MAX_DIGS, label, children }: BoardProps) {
+  const { locale, t } = useGameT();
+  const siteT = useSiteT();
+  const mapLabels = useMapLabels();
+  const [pin, setPin] = useState<LatLon | null>(null);
+
+  const found = isFound(digs);
+  const over = isOver(digs, maxDigs);
+  const last = digs.at(-1);
+
+  function dig() {
+    if (!pin || over) return;
+    onDig(gradeDig(site, pin));
     setPin(null);
   }
 
@@ -70,7 +113,6 @@ function Play({ day }: { day: number }) {
     .map((entry) => ({ ...entry, tone: tone(entry.km) }));
 
   const nearest = digs.find((entry) => entry.km === closestKm(digs));
-  const stats = computeStats(save, day);
 
   return (
     <main className="game" data-summary={over ? "" : undefined}>
@@ -87,9 +129,7 @@ function Play({ day }: { day: number }) {
         </div>
 
         <div className="dossier-text">
-          <p className="eyebrow">
-            {siteT("puzzleNo", { n: day })} <span aria-hidden="true">—</span> {t("kicker")}
-          </p>
+          <p className="eyebrow">{label}</p>
           <h1 className="dossier-name">{over ? site.name[locale] : t("mystery")}</h1>
           <p className="dossier-description">
             {site.clue[locale]}
@@ -97,8 +137,8 @@ function Play({ day }: { day: number }) {
           </p>
         </div>
 
-        <ol className="progress" style={{ "--steps": MAX_DIGS } as React.CSSProperties}>
-          {Array.from({ length: MAX_DIGS }, (_, i) => {
+        <ol className="progress" style={{ "--steps": maxDigs } as React.CSSProperties}>
+          {Array.from({ length: maxDigs }, (_, i) => {
             const entry = digs[i];
             const state = entry ? "done" : i === digs.length && !over ? "current" : "todo";
             return (
@@ -126,7 +166,7 @@ function Play({ day }: { day: number }) {
           <div className="result-head" role="status">
             <div className="stamp" data-lost={found ? undefined : ""}>
               <strong>
-                {found ? digs.length : "×"}/{MAX_DIGS}
+                {found ? digs.length : "×"}/{maxDigs}
               </strong>
               <span>{t("digs")}</span>
             </div>
@@ -167,7 +207,7 @@ function Play({ day }: { day: number }) {
 
         {over ? (
           <div className="summary">
-            <ResultActions path="/dig-site" shareText={(url) => shareText(day, digs, url)} />
+            {children}
             <ReadMore
               text={site.extract[locale] ?? site.extract.en}
               href={site.wiki[locale] ?? site.wiki.en}
@@ -183,7 +223,7 @@ function Play({ day }: { day: number }) {
                   {t("kmAway", { km: formatNumber(last.km, locale) })}
                 </p>
               )}
-              <p className="hint">{last ? t("ringHint") : t("firstHint", { n: MAX_DIGS })}</p>
+              <p className="hint">{last ? t("ringHint") : t("firstHint", { n: maxDigs })}</p>
             </div>
             <button type="button" className="button" disabled={!pin} onClick={dig}>
               {t("digHere")}
@@ -191,20 +231,6 @@ function Play({ day }: { day: number }) {
           </div>
         )}
       </section>
-
-      <GamePanels
-        help={[t("help1"), t("help2"), t("help3"), t("help4"), t("help5")]}
-        seenHelp={save.seenHelp}
-        onSeenHelp={() => setSave((previous) => ({ ...previous, seenHelp: true }))}
-        played={stats.played}
-        tiles={[
-          { label: siteT("statPlayed"), value: stats.played },
-          { label: t("statFound"), value: `${stats.foundRate}%` },
-          { label: t("statAverage"), value: stats.averageDigs },
-          { label: siteT("statStreak"), value: stats.streak },
-          { label: siteT("statLongest"), value: stats.longestStreak },
-        ]}
-      />
     </main>
   );
 }

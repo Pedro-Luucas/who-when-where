@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import "./social.css";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",

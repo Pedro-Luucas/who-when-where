@@ -1,7 +1,9 @@
 import { serve } from "@hono/node-server";
 import { createApp } from "./app.ts";
+import { deleteOldMessages } from "./chat.ts";
 import { loadConfig } from "./config.ts";
 import { openDatabase } from "./db.ts";
+import { deleteStaleParties } from "./parties.ts";
 import { RateLimiter } from "./rate-limit.ts";
 import { deleteExpiredSessions } from "./sessions.ts";
 
@@ -16,6 +18,8 @@ const server = serve({ fetch: app.fetch, hostname: config.host, port: config.por
 
 function tidy(): void {
   deleteExpiredSessions(db);
+  deleteStaleParties(db);
+  deleteOldMessages(db);
   limiter.sweep();
 }
 tidy();

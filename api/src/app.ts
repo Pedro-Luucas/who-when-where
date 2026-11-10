@@ -1,11 +1,14 @@
-import { randomUUID } from "node:crypto";
+import { randomInt, randomUUID } from "node:crypto";
 import type { DatabaseSync } from "node:sqlite";
 import { getConnInfo } from "@hono/node-server/conninfo";
 import { Hono, type Context } from "hono";
 import { bodyLimit } from "hono/body-limit";
 import { deleteCookie, getCookie, setCookie } from "hono/cookie";
 import { HTTPException } from "hono/http-exception";
+import { registerChat } from "./chat.ts";
 import type { Config } from "./config.ts";
+import { Failure, isUniqueViolation, type Deps, type Env } from "./http.ts";
+import { registerParties } from "./parties.ts";
 import { BusyError, hashPassword, verifyDecoy, verifyPassword } from "./passwords.ts";
 import { LIMITS, RateLimiter, type Limit } from "./rate-limit.ts";
 import {
@@ -18,37 +21,30 @@ import {
   toUser,
   type UserRow,
 } from "./sessions.ts";
+import { registerPublicSocial, registerSocial } from "./social.ts";
 import {
+  AVATARS,
   Invalid,
   asObject,
+  readAvatar,
   readDisplayName,
   readEmail,
   readLocale,
   readNewPassword,
   readPassword,
   readSaves,
+  readUsername,
 } from "./validate.ts";
 
 /** Most puzzles one account may keep: decades of daily play across many games. */
 const MAX_SAVES_PER_USER = 20_000;
 
-type Env = { Variables: { user: UserRow; token: string } };
+/** How often an account's "last seen" is refreshed while it keeps calling. */
+const SEEN_EVERY_MS = 20_000;
 
-/** An error the client is expected to handle; `code` is part of the API. */
-class Failure extends Error {
-  status: 400 | 401 | 403 | 409 | 413 | 429;
-  code: string;
-  retryAfter?: number;
-  constructor(status: Failure["status"], code: string, retryAfter?: number) {
-    super(code);
-    this.status = status;
-    this.code = code;
-    this.retryAfter = retryAfter;
-  }
-}
-
-const isUniqueViolation = (error: unknown) =>
-  error instanceof Error && error.message.includes("UNIQUE constraint failed");
+/** Which unique column a failed insert or update collided on. */
+const takenCode = (error: unknown) =>
+  error instanceof Error && error.message.includes("username") ? "username_taken" : "email_taken";
 
 export function createApp(db: DatabaseSync, config: Config, limiter = new RateLimiter()) {
   const app = new Hono<Env>();
@@ -90,6 +86,14 @@ export function createApp(db: DatabaseSync, config: Config, limiter = new RateLi
   async function body(c: Context): Promise<Record<string, unknown>> {
     return asObject(await c.req.json().catch(() => undefined));
   }
+
+  /** The signed-in account, when the request carries a valid session. */
+  function viewer(c: Context): UserRow | null {
+    const token = getCookie(c, SESSION_COOKIE);
+    return (token && readSession(db, token)?.user) || null;
+  }
+
+  const deps: Deps = { db, limit, body, viewer };
 
   /** Re-checks the password before a sensitive change. */
   async function confirmPassword(user: UserRow, value: unknown, field = "password"): Promise<void> {
@@ -147,8 +151,12 @@ export function createApp(db: DatabaseSync, config: Config, limiter = new RateLi
     const password = readNewPassword(input.password);
     const displayName = input.displayName === undefined ? "" : readDisplayName(input.displayName);
     const locale = input.locale === undefined ? "en" : readLocale(input.locale);
+    const username = input.username === undefined ? null : readUsername(input.username);
 
     if (db.prepare("SELECT 1 FROM users WHERE email = ?").get(email)) throw new Failure(409, "email_taken");
+    if (username && db.prepare("SELECT 1 FROM users WHERE username = ?").get(username)) {
+      throw new Failure(409, "username_taken");
+    }
     const passwordHash = await hashPassword(password);
 
     const now = Date.now();
@@ -159,14 +167,29 @@ export function createApp(db: DatabaseSync, config: Config, limiter = new RateLi
       display_name: displayName,
       locale,
       created_at: now,
+      username,
+      avatar: randomInt(AVATARS),
+      last_seen: now,
     };
     try {
       db.prepare(
-        `INSERT INTO users (id, email, password_hash, display_name, locale, created_at, updated_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      ).run(row.id, row.email, row.password_hash, row.display_name, row.locale, now, now);
+        `INSERT INTO users
+           (id, email, password_hash, display_name, locale, username, avatar, last_seen, created_at, updated_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      ).run(
+        row.id,
+        row.email,
+        row.password_hash,
+        row.display_name,
+        row.locale,
+        row.username,
+        row.avatar,
+        now,
+        now,
+        now,
+      );
     } catch (error) {
-      if (isUniqueViolation(error)) throw new Failure(409, "email_taken");
+      if (isUniqueViolation(error)) throw new Failure(409, takenCode(error));
       throw error;
     }
     startSession(c, row.id);
@@ -198,6 +221,9 @@ export function createApp(db: DatabaseSync, config: Config, limiter = new RateLi
     return c.body(null, 204);
   });
 
+  // Leaderboards and profiles are open to everyone.
+  registerPublicSocial(app, deps);
+
   // ── Everything below needs a session ────────────────────────────────────
 
   const account = new Hono<Env>();
@@ -207,6 +233,10 @@ export function createApp(db: DatabaseSync, config: Config, limiter = new RateLi
     const session = token ? readSession(db, token) : null;
     if (!token || !session) throw new Failure(401, "unauthenticated");
     if (session.renewed) sendSessionCookie(c, token);
+    const now = Date.now();
+    if (now - session.user.last_seen > SEEN_EVERY_MS) {
+      db.prepare("UPDATE users SET last_seen = ? WHERE id = ?").run(now, session.user.id);
+    }
     c.set("user", session.user);
     c.set("token", token);
     await next();
@@ -220,20 +250,18 @@ export function createApp(db: DatabaseSync, config: Config, limiter = new RateLi
     const next: UserRow = { ...user };
     if (input.displayName !== undefined) next.display_name = readDisplayName(input.displayName);
     if (input.locale !== undefined) next.locale = readLocale(input.locale);
+    if (input.username !== undefined) next.username = readUsername(input.username);
+    if (input.avatar !== undefined) next.avatar = readAvatar(input.avatar);
     if (input.email !== undefined) {
       next.email = readEmail(input.email);
       if (next.email !== user.email) await confirmPassword(user, input.currentPassword, "currentPassword");
     }
     try {
-      db.prepare("UPDATE users SET email = ?, display_name = ?, locale = ?, updated_at = ? WHERE id = ?").run(
-        next.email,
-        next.display_name,
-        next.locale,
-        Date.now(),
-        user.id,
-      );
+      db.prepare(
+        "UPDATE users SET email = ?, display_name = ?, locale = ?, username = ?, avatar = ?, updated_at = ? WHERE id = ?",
+      ).run(next.email, next.display_name, next.locale, next.username, next.avatar, Date.now(), user.id);
     } catch (error) {
-      if (isUniqueViolation(error)) throw new Failure(409, "email_taken");
+      if (isUniqueViolation(error)) throw new Failure(409, takenCode(error));
       throw error;
     }
     return c.json({ user: toUser(next) });
@@ -305,6 +333,10 @@ export function createApp(db: DatabaseSync, config: Config, limiter = new RateLi
     }
     return c.body(null, 204);
   });
+
+  registerSocial(account, deps);
+  registerChat(account, deps);
+  registerParties(account, deps);
 
   app.route("/", account);
   return app;

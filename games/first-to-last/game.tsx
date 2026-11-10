@@ -8,7 +8,7 @@ import { WorldMap, useMapLabels, type MapMarker, type MapRoute } from "@/compone
 import { formatYear, useSiteT } from "@/lib/i18n";
 import { chronological, type HistoryEvent } from "./events";
 import { useGameT } from "./messages";
-import { MAX_ATTEMPTS, inPlace, isOver, isSolved, truthOf } from "./rules";
+import { MAX_ATTEMPTS, inPlace, isOver, isSolved, truthOf, type Attempt } from "./rules";
 import { shareText } from "./share";
 import { computeStats, puzzleOf, useSave } from "./store";
 
@@ -21,14 +21,82 @@ export function FirstToLast() {
 
 function Play({ day }: { day: number }) {
   const [save, setSave] = useSave();
-  const { locale, t } = useGameT();
+  const { t } = useGameT();
   const siteT = useSiteT();
-  const mapLabels = useMapLabels();
 
   const { events, attempts } = puzzleOf(save, day);
+  const stats = computeStats(save, day);
+
+  function attempt(order: Attempt) {
+    setSave((previous) => ({
+      ...previous,
+      days: {
+        ...previous.days,
+        [day]: {
+          ids: events.map((event) => event.id),
+          attempts: [...(previous.days[day]?.attempts ?? []), order],
+        },
+      },
+    }));
+  }
+
+  return (
+    <>
+      <FirstToLastBoard
+        events={events}
+        attempts={attempts}
+        onAttempt={attempt}
+        label={`${siteT("puzzleNo", { n: day })} — ${t("kicker")}`}
+      >
+        <ResultActions
+          path="/first-to-last"
+          shareText={(url) => shareText(day, attempts, truthOf(events), url)}
+        />
+      </FirstToLastBoard>
+      <GamePanels
+        help={[t("help1"), t("help2"), t("help3"), t("help4"), t("help5")]}
+        seenHelp={save.seenHelp}
+        onSeenHelp={() => setSave((previous) => ({ ...previous, seenHelp: true }))}
+        played={stats.played}
+        tiles={[
+          { label: siteT("statPlayed"), value: stats.played },
+          { label: t("statSolved"), value: `${stats.solvedRate}%` },
+          { label: t("statFlawless"), value: stats.flawless },
+          { label: siteT("statStreak"), value: stats.streak },
+          { label: siteT("statLongest"), value: stats.longestStreak },
+        ]}
+      />
+    </>
+  );
+}
+
+type BoardProps = {
+  /** The puzzle's events, in the order they are lettered. */
+  events: HistoryEvent[];
+  attempts: Attempt[];
+  onAttempt: (order: Attempt) => void;
+  maxAttempts?: number;
+  /** The line above the title: "No. 12 — Today's line-up", "Stage 3 of 8 — First to Last". */
+  label: string;
+  /** What follows the result once the puzzle is over: sharing, or the way onwards. */
+  children?: React.ReactNode;
+};
+
+/** One First to Last puzzle. The attempts live with whoever renders it. */
+export function FirstToLastBoard({
+  events,
+  attempts,
+  onAttempt,
+  maxAttempts = MAX_ATTEMPTS,
+  label,
+  children,
+}: BoardProps) {
+  const { locale, t } = useGameT();
+  const mapLabels = useMapLabels();
+
   const truth = truthOf(events);
   const solved = isSolved(attempts, truth);
-  const over = isOver(attempts, truth);
+  const over = isOver(attempts, truth, maxAttempts);
   const last = attempts.at(-1);
 
   // Positions the last attempt got right keep their event; the player fills
@@ -54,16 +122,7 @@ function Play({ day }: { day: number }) {
 
   function check() {
     if (!full || over) return;
-    setSave((previous) => ({
-      ...previous,
-      days: {
-        ...previous.days,
-        [day]: {
-          ids: events.map((event) => event.id),
-          attempts: [...(previous.days[day]?.attempts ?? []), order as string[]],
-        },
-      },
-    }));
+    onAttempt(order as string[]);
     setPicks(truth.map(() => null));
   }
 
@@ -98,17 +157,14 @@ function Play({ day }: { day: number }) {
     }
   }
 
-  const triesLeft = MAX_ATTEMPTS - attempts.length;
+  const triesLeft = maxAttempts - attempts.length;
   const right = last ? inPlace(last, truth) : 0;
-  const stats = computeStats(save, day);
 
   return (
     <main className="game" data-game="first-to-last" data-summary={over ? "" : undefined}>
       <aside className="dossier dossier-plain">
         <div className="dossier-text">
-          <p className="eyebrow">
-            {siteT("puzzleNo", { n: day })} <span aria-hidden="true">—</span> {t("kicker")}
-          </p>
+          <p className="eyebrow">{label}</p>
           <h1 className="dossier-name">
             {t("question")
               .split("*")
@@ -117,8 +173,8 @@ function Play({ day }: { day: number }) {
           <p className="dossier-description">{t("lead")}</p>
         </div>
 
-        <ol className="meter" aria-label={`${attempts.length}/${MAX_ATTEMPTS}`}>
-          {Array.from({ length: MAX_ATTEMPTS }, (_, i) => {
+        <ol className="meter" aria-label={`${attempts.length}/${maxAttempts}`}>
+          {Array.from({ length: maxAttempts }, (_, i) => {
             const attempt = attempts[i];
             const state = !attempt
               ? i === attempts.length && !over
@@ -137,7 +193,7 @@ function Play({ day }: { day: number }) {
           <div className="result-head" role="status">
             <div className="stamp" data-lost={solved ? undefined : ""}>
               <strong>
-                {solved ? attempts.length : "×"}/{MAX_ATTEMPTS}
+                {solved ? attempts.length : "×"}/{maxAttempts}
               </strong>
               <span>{t("tries")}</span>
             </div>
@@ -178,12 +234,7 @@ function Play({ day }: { day: number }) {
                 </li>
               ))}
             </ol>
-            <div className="summary">
-              <ResultActions
-                path="/first-to-last"
-                shareText={(url) => shareText(day, attempts, truth, url)}
-              />
-            </div>
+            <div className="summary">{children}</div>
           </>
         ) : (
           <>
@@ -254,20 +305,6 @@ function Play({ day }: { day: number }) {
           </>
         )}
       </section>
-
-      <GamePanels
-        help={[t("help1"), t("help2"), t("help3"), t("help4"), t("help5")]}
-        seenHelp={save.seenHelp}
-        onSeenHelp={() => setSave((previous) => ({ ...previous, seenHelp: true }))}
-        played={stats.played}
-        tiles={[
-          { label: siteT("statPlayed"), value: stats.played },
-          { label: t("statSolved"), value: `${stats.solvedRate}%` },
-          { label: t("statFlawless"), value: stats.flawless },
-          { label: siteT("statStreak"), value: stats.streak },
-          { label: siteT("statLongest"), value: stats.longestStreak },
-        ]}
-      />
     </main>
   );
 }

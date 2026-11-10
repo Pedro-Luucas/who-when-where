@@ -4,7 +4,8 @@ import { streaks } from "@/lib/stats";
 import type { SyncedSave } from "@/lib/saves";
 import { usePersistent } from "@/lib/storage";
 import { PUZZLE_SIZE, eventById, eventsForDay, type HistoryEvent } from "./events";
-import { isOver, isSolved, truthOf, type Attempt } from "./rules";
+import type { Score } from "@/lib/points";
+import { isOver, isSolved, scoreOf, truthOf, type Attempt } from "./rules";
 
 /** `ids` are the day's events in lettered order, so a pool change can't reshuffle a saved day. */
 export type DayRecord = { ids: string[]; attempts: Attempt[] };
@@ -35,6 +36,14 @@ export function puzzleOf(save: Save, day: number): { events: HistoryEvent[]; att
     }
   }
   return { events: eventsForDay(day), attempts: [] };
+}
+
+/** A finished day's score, or null while it is still being played (or its events are gone). */
+export function resultOf(record: DayRecord): Score | null {
+  const events = record.ids.map(eventById);
+  if (events.length !== PUZZLE_SIZE || events.some((event) => event === undefined)) return null;
+  const score = scoreOf(events as HistoryEvent[], record.attempts);
+  return score.over ? score : null;
 }
 
 export type Stats = {

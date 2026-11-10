@@ -1,4 +1,5 @@
 import { distanceKm, type LatLon } from "@/lib/geo";
+import { triesPoints, type Score } from "@/lib/points";
 import type { Site } from "./sites";
 
 /** Digs per puzzle. */
@@ -30,6 +31,23 @@ export function gradeDig(site: Site, pin: LatLon): Dig {
 
 export const isFound = (digs: Dig[]): boolean => digs.some((dig) => dig.km <= FOUND_KM);
 
-export const isOver = (digs: Dig[]): boolean => isFound(digs) || digs.length >= MAX_DIGS;
+export const isOver = (digs: Dig[], max = MAX_DIGS): boolean => isFound(digs) || digs.length >= max;
 
 export const closestKm = (digs: Dig[]): number => Math.min(...digs.map((dig) => dig.km));
+
+// A site left buried still earns a little for getting close.
+const NEAR_MISS_POINTS = 150;
+const NEAR_MISS_FALLOFF_KM = 1500;
+
+/** How a puzzle stands, on the scale every game shares. */
+export function scoreOf(digs: Dig[], max = MAX_DIGS): Score {
+  const found = isFound(digs);
+  const consolation = digs.length
+    ? Math.round(NEAR_MISS_POINTS * Math.exp(-closestKm(digs) / NEAR_MISS_FALLOFF_KM))
+    : 0;
+  return {
+    over: isOver(digs, max),
+    points: found ? triesPoints(digs.length, max) : consolation,
+    detail: `${found ? digs.length : "X"}/${max}`,
+  };
+}

@@ -3,6 +3,7 @@
 import { useSyncExternalStore } from "react";
 import { getLocale, setLocale, type Locale } from "@/lib/i18n";
 import { readStore, subscribeToStore, writeStore } from "@/lib/storage";
+import { forgetResults, pushResults } from "@/social/results";
 import { ApiError, api } from "./api";
 import { forgetGames, pushGames, syncGames } from "./sync";
 
@@ -13,8 +14,12 @@ import { forgetGames, pushGames, syncGames } from "./sync";
 export type Account = {
   id: string;
   email: string;
+  /** The public handle other players add and see; null until the player picks one. */
+  username: string | null;
   /** May be empty. */
   displayName: string;
+  /** Which avatar colour the player picked. */
+  avatar: number;
   locale: Locale;
   createdAt: number;
 };
@@ -83,7 +88,9 @@ function enter(account: Account): void {
   if (getLocale() !== account.locale) setLocale(account.locale);
   setState({ status: "user", account });
   writeStore(SIGNED_IN_KEY, true);
-  syncGames(account.id).catch(endIfSignedOut);
+  syncGames(account.id)
+    .then(() => pushResults(account.id))
+    .catch(endIfSignedOut);
 }
 
 function leave(): void {
@@ -118,16 +125,21 @@ function onStoreChange(): void {
 
   clearTimeout(pushTimer);
   pushTimer = setTimeout(() => {
-    if (state.status === "user") pushGames().catch(endIfSignedOut);
+    if (state.status !== "user") return;
+    const { id } = state.account;
+    pushGames()
+      .then(() => pushResults(id))
+      .catch(endIfSignedOut);
   }, PUSH_DELAY_MS);
 }
 
 // ── Actions. Each rejects with an ApiError when the server refuses. ─────────
 
-export async function signUp(email: string, password: string): Promise<void> {
+export async function signUp(email: string, password: string, username: string): Promise<void> {
   const { user } = await api<{ user: Account }>("POST", "/auth/signup", {
     email,
     password,
+    username,
     locale: getLocale(),
   });
   enter(user);
@@ -145,9 +157,12 @@ export async function signOut(): Promise<void> {
   await api("POST", "/auth/logout");
   leave();
   forgetGames();
+  forgetResults();
 }
 
 export async function updateAccount(changes: {
+  username?: string;
+  avatar?: number;
   displayName?: string;
   email?: string;
   /** Needed to change the e-mail. */
@@ -167,4 +182,5 @@ export async function deleteAccount(password: string): Promise<void> {
   await api("DELETE", "/me", { password });
   leave();
   forgetGames();
+  forgetResults();
 }

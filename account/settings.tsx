@@ -1,7 +1,8 @@
 "use client";
 
 import { LocaleToggle } from "@/components/locale-toggle";
-import { ActionForm, Field } from "./form";
+import { Avatar, AVATAR_COUNT } from "@/social/avatar";
+import { ActionForm, Field, UsernameField } from "./form";
 import { useAccountT } from "./messages";
 import { changePassword, deleteAccount, signOut, updateAccount, type Account } from "./state";
 
@@ -17,11 +18,25 @@ export function Settings({ account }: { account: Account }) {
 
       <section className="account-section">
         <h2>{t("profile")}</h2>
+        <div className="avatar-picker" role="group" aria-label={t("avatar")}>
+          {Array.from({ length: AVATAR_COUNT }, (_, color) => (
+            <button
+              key={color}
+              type="button"
+              aria-pressed={account.avatar === color}
+              aria-label={`${t("avatar")} ${color + 1}`}
+              onClick={() => void updateAccount({ avatar: color }).catch(() => {})}
+            >
+              <Avatar name={account.displayName || account.username || account.email} color={color} />
+            </button>
+          ))}
+        </div>
         <ActionForm
-          action={({ displayName }) => updateAccount({ displayName })}
+          action={({ username, displayName }) => updateAccount({ ...(username ? { username } : {}), displayName })}
           submitLabel={t("save")}
           doneLabel={t("saved")}
         >
+          <UsernameField key={account.username} defaultValue={account.username ?? ""} optional={!account.username} />
           <Field
             key={account.displayName}
             label={t("displayName")}

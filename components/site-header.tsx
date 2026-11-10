@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AccountButton } from "@/account/account-button";
+import { CommunityButton } from "@/social/tabs";
 import { LocaleToggle } from "./locale-toggle";
 
 /** Shared top bar. `children` are page-specific actions (e.g. a game's help button). */
@@ -15,6 +16,7 @@ export function SiteHeader({ children }: { children?: React.ReactNode }) {
       </Link>
       <nav className="site-actions">
         {children}
+        <CommunityButton />
         <AccountButton />
         <LocaleToggle />
       </nav>

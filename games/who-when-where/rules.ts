@@ -1,4 +1,5 @@
 import { distanceKm, type LatLon } from "@/lib/geo";
+import type { Score } from "@/lib/points";
 import type { Person } from "./people";
 
 // The rounds of one puzzle, in play order. To add a round, add it here and
@@ -54,6 +55,12 @@ export function gradeYear(person: Person, round: Round, year: number): YearGuess
 
 export const totalScore = (guesses: Guess[]) =>
   guesses.reduce((sum, guess) => sum + guess.score, 0);
+
+/** How a puzzle stands, on the scale every game shares (it is this game's own). */
+export function scoreOf(guesses: Guess[]): Score {
+  const total = totalScore(guesses);
+  return { over: guesses.length >= ROUNDS.length, points: total, detail: String(total) };
+}
 
 /** 0–4, used for rank titles. */
 export function rankOf(total: number): 0 | 1 | 2 | 3 | 4 {

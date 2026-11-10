@@ -18,6 +18,18 @@ export const LIMITS = {
   confirmPerUser: { max: 10, windowMs: 15 * MINUTE },
   /** Save uploads per account. */
   savesPerUser: { max: 120, windowMs: MINUTE },
+  /** Finished-puzzle scores sent for the leaderboards, per account. */
+  resultsPerUser: { max: 120, windowMs: MINUTE },
+  /** Chat messages per account, in every room together. */
+  chatPerUser: { max: 30, windowMs: MINUTE },
+  /** Friend requests per account. */
+  friendsPerUser: { max: 40, windowMs: 60 * MINUTE },
+  /** Player searches per account. */
+  searchPerUser: { max: 90, windowMs: MINUTE },
+  /** Parties opened per account. */
+  partiesPerUser: { max: 20, windowMs: 60 * MINUTE },
+  /** Party invitations sent per account. */
+  invitesPerUser: { max: 60, windowMs: 60 * MINUTE },
 } satisfies Record<string, Limit>;
 
 export class RateLimiter {

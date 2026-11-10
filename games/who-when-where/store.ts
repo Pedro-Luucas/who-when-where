@@ -3,7 +3,8 @@
 import { streaks } from "@/lib/stats";
 import type { SyncedSave } from "@/lib/saves";
 import { usePersistent } from "@/lib/storage";
-import { ROUNDS, totalScore, type Guess } from "./rules";
+import type { Score } from "@/lib/points";
+import { ROUNDS, scoreOf, totalScore, type Guess } from "./rules";
 
 export type DayRecord = { personId: string; guesses: Guess[] };
 
@@ -25,6 +26,12 @@ export function useSave() {
 
 export const isComplete = (record: DayRecord | undefined): boolean =>
   !!record && record.guesses.length >= ROUNDS.length;
+
+/** A finished day's score, or null while it is still being played. */
+export function resultOf(record: DayRecord): Score | null {
+  const score = scoreOf(record.guesses);
+  return score.over ? score : null;
+}
 
 export type Stats = {
   played: number;

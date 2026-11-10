@@ -244,6 +244,22 @@ export function eventsForDay(day: number): HistoryEvent[] {
   return puzzles[position % puzzles.length];
 }
 
+/**
+ * `count` puzzles dealt from a shuffle of their own, for games played outside
+ * the daily calendar. The same seed always deals the same puzzles.
+ */
+export function eventsForSeed(seed: string, count: number): HistoryEvent[][] {
+  const open: HistoryEvent[][] = [];
+  for (const event of seededShuffle(EVENTS, seed)) {
+    const fit = open.find(
+      (group) => group.length < PUZZLE_SIZE && group.every((other) => compatible(other, event)),
+    );
+    if (fit) fit.push(event);
+    else open.push([event]);
+  }
+  return open.filter((group) => group.length === PUZZLE_SIZE).slice(0, count);
+}
+
 /** The same events, earliest first. */
 export const chronological = (events: HistoryEvent[]): HistoryEvent[] =>
   [...events].sort((a, b) => a.year - b.year);

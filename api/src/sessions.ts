@@ -12,7 +12,11 @@ const hashToken = (token: string) => createHash("sha256").update(token).digest("
 export type User = {
   id: string;
   email: string;
+  /** The public handle other players add and see; null until chosen. */
+  username: string | null;
   displayName: string;
+  /** Which of the avatar colours the player picked. */
+  avatar: number;
   locale: string;
   createdAt: number;
 };
@@ -24,12 +28,17 @@ export type UserRow = {
   display_name: string;
   locale: string;
   created_at: number;
+  username: string | null;
+  avatar: number;
+  last_seen: number;
 };
 
 export const toUser = (row: UserRow): User => ({
   id: row.id,
   email: row.email,
+  username: row.username,
   displayName: row.display_name,
+  avatar: row.avatar,
   locale: row.locale,
   createdAt: row.created_at,
 });
@@ -58,7 +67,8 @@ export function readSession(
   const tokenHash = hashToken(token);
   const row = db
     .prepare(
-      `SELECT u.id, u.email, u.password_hash, u.display_name, u.locale, u.created_at, s.expires_at
+      `SELECT u.id, u.email, u.password_hash, u.display_name, u.locale, u.created_at,
+              u.username, u.avatar, u.last_seen, s.expires_at
          FROM sessions s JOIN users u ON u.id = s.user_id
         WHERE s.token_hash = ? AND s.expires_at > ?`,
     )

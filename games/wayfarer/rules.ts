@@ -1,9 +1,20 @@
+import { triesPoints, type Score } from "@/lib/points";
 import type { Journey } from "./journeys";
 
 export const MAX_GUESSES = 6;
 
 /** Share of the route on the map before each guess (first, second, …). */
 export const REVEAL = [0.15, 0.3, 0.48, 0.66, 0.84, 1];
+
+/**
+ * Share of the route on the map once `used` guesses are spent, out of `max`.
+ * With fewer guesses the route unrolls in bigger steps, and is whole for the last.
+ */
+export function revealAt(used: number, max = MAX_GUESSES): number {
+  if (max <= 1) return REVEAL[0];
+  const step = Math.round((Math.min(used, max - 1) * (REVEAL.length - 1)) / (max - 1));
+  return REVEAL[step];
+}
 
 // Extra clues unlock once this many guesses have been used.
 export const MODE_CLUE_AT = 2;
@@ -16,8 +27,18 @@ export type Guess = string | null;
 export const isSolved = (journeyId: string, guesses: Guess[]): boolean =>
   guesses[guesses.length - 1] === journeyId;
 
-export const isOver = (journeyId: string, guesses: Guess[]): boolean =>
-  isSolved(journeyId, guesses) || guesses.length >= MAX_GUESSES;
+export const isOver = (journeyId: string, guesses: Guess[], max = MAX_GUESSES): boolean =>
+  isSolved(journeyId, guesses) || guesses.length >= max;
+
+/** How a puzzle stands, on the scale every game shares. */
+export function scoreOf(journeyId: string, guesses: Guess[], max = MAX_GUESSES): Score {
+  const solved = isSolved(journeyId, guesses);
+  return {
+    over: isOver(journeyId, guesses, max),
+    points: solved ? triesPoints(guesses.length, max) : 0,
+    detail: `${solved ? guesses.length : "X"}/${max}`,
+  };
+}
 
 /**
  * What a wrong guess tells the player: whether the mystery journey set out

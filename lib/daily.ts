@@ -13,6 +13,11 @@ export function yearOfDay(day: number): number {
   return new Date(LAUNCH_UTC + (day - 1) * DAY_MS).getUTCFullYear();
 }
 
+/** The calendar date of a puzzle number, at midnight UTC: read it with the getUTC… methods. */
+export function dateOfDay(day: number): Date {
+  return new Date(LAUNCH_UTC + (day - 1) * DAY_MS);
+}
+
 export function msUntilTomorrow(now: Date): number {
   const next = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
   return next.getTime() - now.getTime();
