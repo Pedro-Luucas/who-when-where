@@ -1,6 +1,6 @@
 "use client";
 
-import { geoGraticule10, geoInterpolate, geoNaturalEarth1, geoPath } from "d3-geo";
+import { geoCircle, geoGraticule10, geoInterpolate, geoNaturalEarth1, geoPath } from "d3-geo";
 import { select } from "d3-selection";
 import "d3-transition";
 import { zoom, zoomIdentity, type ZoomBehavior, type ZoomTransform } from "d3-zoom";
@@ -9,15 +9,40 @@ import { memo, useEffect, useMemo, useRef, useState } from "react";
 import { feature } from "topojson-client";
 import type { GeometryCollection, Topology } from "topojson-specification";
 import type { LatLon } from "@/lib/geo";
+import { useSiteT } from "@/lib/i18n";
 
 export type MapMarker = LatLon & {
-  kind: "guess" | "answer" | "ghost";
+  /**
+   * guess: the player's mark · answer: the truth · ghost: a muted reference
+   * · stop: a small waypoint · pin: a larger badge that can be tapped.
+   */
+  kind: "guess" | "answer" | "ghost" | "stop" | "pin";
   label?: string;
   /** Put the label under the dot (default: above, unless near the top edge). */
   labelBelow?: boolean;
+  /** One or two characters drawn inside the dot. */
+  badge?: string;
+  /** Styling hook, exposed as data-tone on the marker. */
+  tone?: string;
+  /** Makes the marker a button. */
+  onSelect?: () => void;
+  /** Accessible name for a selectable marker. */
+  title?: string;
 };
 
 export type MapArc = { from: LatLon; to: LatLon; kind: "miss" | "life" };
+
+/** A line through several points, e.g. a voyage. */
+export type MapRoute = {
+  points: LatLon[];
+  kind: "route" | "thread";
+  /** Animate the line being drawn; change `id` to replay it. */
+  draw?: boolean;
+  id?: string;
+};
+
+/** A circle of constant distance around a point. */
+export type MapRing = LatLon & { km: number; tone?: string };
 
 type Labels = {
   loading: string;
@@ -30,6 +55,8 @@ type Labels = {
 type Props = {
   markers: MapMarker[];
   arcs?: MapArc[];
+  routes?: MapRoute[];
+  rings?: MapRing[];
   /** Makes the map clickable: called with the clicked location. */
   onPick?: (point: LatLon) => void;
   /** The view animates to frame these points whenever they change. */
@@ -44,6 +71,22 @@ type Size = { width: number; height: number };
 
 const MAX_ZOOM = 80;
 const FRAME_INSET = 6;
+const EARTH_RADIUS_KM = 6371;
+const MARKER_RADIUS = { guess: 7, answer: 7, ghost: 4.5, stop: 3.2, pin: 11 } as const;
+/** Width of one character of a marker label (11px monospace), for layout. */
+const LABEL_CHAR_WIDTH = 6.9;
+
+/** The map's own interface strings, in the player's language. */
+export function useMapLabels(): Labels {
+  const t = useSiteT();
+  return {
+    loading: t("mapLoading"),
+    error: t("mapError"),
+    zoomIn: t("zoomIn"),
+    zoomOut: t("zoomOut"),
+    zoomReset: t("zoomReset"),
+  };
+}
 
 let worldRequest: Promise<FeatureCollection> | null = null;
 
@@ -85,7 +128,17 @@ const BaseMap = memo(function BaseMap({
   );
 });
 
-export function WorldMap({ markers, arcs = [], onPick, focus, labels, ariaLabel, children }: Props) {
+export function WorldMap({
+  markers,
+  arcs = [],
+  routes = [],
+  rings = [],
+  onPick,
+  focus,
+  labels,
+  ariaLabel,
+  children,
+}: Props) {
   const frameRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const zoomRef = useRef<ZoomBehavior<SVGSVGElement, unknown> | null>(null);
@@ -146,6 +199,23 @@ export function WorldMap({ markers, arcs = [], onPick, focus, labels, ariaLabel,
       bounds: path.bounds({ type: "Sphere" }),
     };
   }, [projection, world]);
+
+  // Rings are drawn in map space, inside the zoomed group. As lines, not
+  // polygons, so a ring cut by the edge of the map isn't closed along it.
+  const ringKey = rings.map((r) => `${r.lat},${r.lon},${r.km},${r.tone ?? ""}`).join(";");
+  const ringPaths = useMemo(() => {
+    if (!projection || !ringKey) return [];
+    const path = geoPath(projection);
+    return ringKey.split(";").map((entry) => {
+      const [lat, lon, km, tone] = entry.split(",");
+      const circle = geoCircle()
+        .center([Number(lon), Number(lat)])
+        .radius((Number(km) / EARTH_RADIUS_KM) * (180 / Math.PI))
+        .precision(1.5)();
+      const d = path({ type: "LineString", coordinates: circle.coordinates[0] }) ?? "";
+      return { d, tone };
+    });
+  }, [projection, ringKey]);
 
   // Pan and zoom. Rebuilt (and the view reset) whenever the frame resizes.
   useEffect(() => {
@@ -268,6 +338,72 @@ export function WorldMap({ markers, arcs = [], onPick, focus, labels, ariaLabel,
     return d;
   };
 
+  // A line through waypoints, straight in longitude/latitude between them
+  // (taking the short way round), broken at the edge of the map like arcs.
+  const routePath = (points: LatLon[]): string => {
+    if (!size) return "";
+    const jump = (size.width * view.k) / 2;
+    let d = "";
+    let previous: [number, number] | null = null;
+    const add = (lat: number, lon: number) => {
+      const point = toScreen({ lat, lon });
+      if (!point) return;
+      const broken = !previous || Math.abs(point[0] - previous[0]) > jump;
+      d += `${broken ? "M" : "L"}${point[0].toFixed(1)},${point[1].toFixed(1)}`;
+      previous = point;
+    };
+    points.forEach((to, i) => {
+      if (i === 0) return add(to.lat, to.lon);
+      const from = points[i - 1];
+      const dLon = ((((to.lon - from.lon) % 360) + 540) % 360) - 180;
+      const dLat = to.lat - from.lat;
+      const span = Math.max(Math.abs(dLon), Math.abs(dLat));
+      const steps = Math.min(Math.max(Math.ceil(span / 3), 1), 40);
+      for (let s = 1; s <= steps; s++) {
+        add(from.lat + (dLat * s) / steps, from.lon + (dLon * s) / steps);
+      }
+    });
+    return d;
+  };
+
+  // Lay out the markers. Each label goes above or below its dot, wherever it
+  // doesn't run into another marker or an earlier label; one with no room is
+  // left out until the player zooms in and the dots move apart.
+  type Box = { x1: number; y1: number; x2: number; y2: number; owner: number };
+  const touching = (a: Box, b: Box) =>
+    a.owner !== b.owner && a.x1 < b.x2 && b.x1 < a.x2 && a.y1 < b.y2 && b.y1 < a.y2;
+  const dots = markers.map((marker) => ({
+    marker,
+    point: toScreen(marker),
+    radius: marker.badge && marker.kind !== "pin" ? 9 : MARKER_RADIUS[marker.kind],
+  }));
+  const taken: Box[] = dots.flatMap(({ point, radius }, owner) =>
+    point
+      ? [{ x1: point[0] - radius, y1: point[1] - radius, x2: point[0] + radius, y2: point[1] + radius, owner }]
+      : [],
+  );
+  const placed = dots.map((dot, owner) => {
+    const { marker, point, radius } = dot;
+    if (!point || !marker.label) return { ...dot, labelY: null };
+    const halfWidth = (marker.label.length * LABEL_CHAR_WIDTH) / 2 + 2;
+    const below = marker.labelBelow ?? point[1] < 44;
+    for (const side of [below, !below]) {
+      const labelY = side ? radius + 17 : -radius - 7;
+      const box: Box = {
+        x1: point[0] - halfWidth,
+        x2: point[0] + halfWidth,
+        y1: point[1] + labelY - 10,
+        y2: point[1] + labelY + 3,
+        owner,
+      };
+      if (!taken.some((other) => touching(other, box))) {
+        taken.push(box);
+        return { ...dot, labelY };
+      }
+    }
+    return { ...dot, labelY: null };
+  });
+
   return (
     <div ref={frameRef} className="map-frame" data-pickable={onPick ? "" : undefined}>
       {size && base && (
@@ -282,7 +418,20 @@ export function WorldMap({ markers, arcs = [], onPick, focus, labels, ariaLabel,
         >
           <g transform={view.toString()}>
             <BaseMap sphere={base.sphere} graticule={base.graticule} land={base.land} />
+            {ringPaths.map((ring, i) => (
+              <path key={i} d={ring.d} className="map-ring" data-tone={ring.tone || undefined} />
+            ))}
           </g>
+
+          {routes.map((route, i) => (
+            <path
+              key={route.id ?? i}
+              d={routePath(route.points)}
+              pathLength={route.draw ? 1 : undefined}
+              className={`map-route map-route-${route.kind}`}
+              data-draw={route.draw ? "" : undefined}
+            />
+          ))}
 
           {arcs.map((arc, i) => (
             <path
@@ -293,21 +442,45 @@ export function WorldMap({ markers, arcs = [], onPick, focus, labels, ariaLabel,
             />
           ))}
 
-          {markers.map((marker, i) => {
-            const point = toScreen(marker);
+          {placed.map(({ marker, point, radius, labelY }, i) => {
             if (!point) return null;
-            const labelBelow = marker.labelBelow ?? point[1] < 44;
+            const select = marker.onSelect;
             return (
               <g
                 key={`${marker.kind}:${i}`}
                 transform={`translate(${point[0].toFixed(1)},${point[1].toFixed(1)})`}
                 className={`map-marker map-marker-${marker.kind}`}
+                data-tone={marker.tone}
+                {...(select && {
+                  role: "button",
+                  tabIndex: 0,
+                  "aria-label": marker.title,
+                  onClick: (event: React.MouseEvent) => {
+                    event.stopPropagation();
+                    select();
+                  },
+                  onKeyDown: (event: React.KeyboardEvent) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      select();
+                    }
+                  },
+                })}
               >
+                {select && <circle r={radius + 7} className="map-marker-hit" />}
                 {marker.kind === "answer" && <circle r={7} className="map-marker-pulse" />}
-                <circle r={marker.kind === "ghost" ? 4.5 : 7} className="map-marker-dot" />
-                {marker.kind !== "ghost" && <circle r={2} className="map-marker-core" />}
-                {marker.label && (
-                  <text y={labelBelow ? 24 : -14} textAnchor="middle" className="map-marker-label">
+                <circle r={radius} className="map-marker-dot" />
+                {marker.badge ? (
+                  <text y={3.6} textAnchor="middle" className="map-marker-badge">
+                    {marker.badge}
+                  </text>
+                ) : (
+                  (marker.kind === "guess" || marker.kind === "answer") && (
+                    <circle r={2} className="map-marker-core" />
+                  )
+                )}
+                {labelY !== null && (
+                  <text y={labelY} textAnchor="middle" className="map-marker-label">
                     {marker.label}
                   </text>
                 )}

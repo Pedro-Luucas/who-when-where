@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s · Who When Where",
   },
   description:
-    "Daily guessing games about people, places and time. One famous mind a day: where and when were they born, where and when did they die?",
+    "Daily guessing games about people, places and time: famous lives, great journeys, lost cities and the order of history — all played on the map.",
 };
 
 export const viewport: Viewport = {

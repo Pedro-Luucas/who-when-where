@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { WorldMap, type MapArc, type MapMarker } from "@/components/world-map";
+import { WorldMap, useMapLabels, type MapArc, type MapMarker } from "@/components/world-map";
 import { formatCoordinates, type LatLon } from "@/lib/geo";
 import { formatNumber } from "@/lib/i18n";
 import { useGameT } from "./messages";
@@ -18,17 +18,6 @@ type Props = {
   onNext: () => void;
   nextLabel: string;
 };
-
-export function useMapLabels() {
-  const { t } = useGameT();
-  return {
-    loading: t("mapLoading"),
-    error: t("mapError"),
-    zoomIn: t("zoomIn"),
-    zoomOut: t("zoomOut"),
-    zoomReset: t("zoomReset"),
-  };
-}
 
 export function PlaceRound({ person, round, locked, onLock, onNext, nextLabel }: Props) {
   const { locale, t } = useGameT();

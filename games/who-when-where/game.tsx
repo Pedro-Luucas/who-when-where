@@ -1,8 +1,7 @@
 "use client";
 
-import { Suspense, use, useState } from "react";
-import { browser } from "react-dom";
-import { useDayNumber } from "@/lib/clock";
+import { useState } from "react";
+import { Daily } from "@/components/daily";
 import { yearOfDay } from "@/lib/daily";
 import { useGameT } from "./messages";
 import { Panels } from "./panels";
@@ -15,18 +14,8 @@ import { Summary } from "./summary";
 import { YearRound } from "./year-round";
 
 export function WhoWhenWhere() {
-  return (
-    <Suspense fallback={<GameSkeleton />}>
-      <Today />
-    </Suspense>
-  );
-}
-
-function Today() {
-  use(browser("The daily puzzle depends on the player's local date and saved progress."));
-  const day = useDayNumber();
   // Keyed by day: at midnight the next puzzle starts from a clean slate.
-  return <Play key={day} day={day} />;
+  return <Daily>{(day) => <Play key={day} day={day} />}</Daily>;
 }
 
 function Play({ day }: { day: number }) {
@@ -102,19 +91,6 @@ function Play({ day }: { day: number }) {
       </section>
 
       <Panels day={day} />
-    </main>
-  );
-}
-
-function GameSkeleton() {
-  return (
-    <main className="game game-skeleton" aria-busy="true">
-      <div className="dossier">
-        <div className="portrait skeleton-block" />
-      </div>
-      <section className="stage">
-        <div className="map-frame skeleton-block" />
-      </section>
     </main>
   );
 }

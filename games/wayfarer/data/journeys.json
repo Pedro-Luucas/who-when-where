@@ -1,0 +1,6106 @@
+[
+ {
+  "id": "magellan",
+  "name": {
+   "en": "Magellan–Elcano circumnavigation",
+   "pt": "Circum-navegação de Magalhães e Elcano"
+  },
+  "start": 1519,
+  "end": 1522,
+  "mode": "sea",
+  "stops": [
+   {
+    "lat": 36.78,
+    "lon": -6.35,
+    "name": {
+     "en": "Sanlúcar de Barrameda",
+     "pt": "Sanlúcar de Barrameda"
+    }
+   },
+   {
+    "lat": 28.3,
+    "lon": -16.5
+   },
+   {
+    "lat": 15,
+    "lon": -22
+   },
+   {
+    "lat": 8,
+    "lon": -17
+   },
+   {
+    "lat": 0,
+    "lon": -25
+   },
+   {
+    "lat": -8.3,
+    "lon": -34.5
+   },
+   {
+    "lat": -18,
+    "lon": -38.3
+   },
+   {
+    "lat": -23.3,
+    "lon": -41.5
+   },
+   {
+    "lat": -22.9,
+    "lon": -43.1,
+    "name": {
+     "en": "Rio de Janeiro",
+     "pt": "Rio de Janeiro"
+    }
+   },
+   {
+    "lat": -27,
+    "lon": -47
+   },
+   {
+    "lat": -34.5,
+    "lon": -52.5
+   },
+   {
+    "lat": -36.3,
+    "lon": -55.3
+   },
+   {
+    "lat": -39,
+    "lon": -56.5
+   },
+   {
+    "lat": -47,
+    "lon": -64.5
+   },
+   {
+    "lat": -49.3,
+    "lon": -67.6
+   },
+   {
+    "lat": -52.4,
+    "lon": -68.3
+   },
+   {
+    "lat": -53.9,
+    "lon": -71,
+    "name": {
+     "en": "Strait of Magellan",
+     "pt": "Estreito de Magalhães"
+    }
+   },
+   {
+    "lat": -52.7,
+    "lon": -74.9
+   },
+   {
+    "lat": -45,
+    "lon": -78
+   },
+   {
+    "lat": -33,
+    "lon": -80
+   },
+   {
+    "lat": -20,
+    "lon": -95
+   },
+   {
+    "lat": -10,
+    "lon": -120
+   },
+   {
+    "lat": -2,
+    "lon": -145
+   },
+   {
+    "lat": 5,
+    "lon": -170
+   },
+   {
+    "lat": 10,
+    "lon": 170
+   },
+   {
+    "lat": 13,
+    "lon": 155
+   },
+   {
+    "lat": 13.4,
+    "lon": 144.7,
+    "name": {
+     "en": "Guam",
+     "pt": "Guam"
+    }
+   },
+   {
+    "lat": 11,
+    "lon": 128
+   },
+   {
+    "lat": 10.7,
+    "lon": 125.8
+   },
+   {
+    "lat": 9.9,
+    "lon": 125.1
+   },
+   {
+    "lat": 10.3,
+    "lon": 124.05,
+    "name": {
+     "en": "Mactan (Cebu)",
+     "pt": "Mactan (Cebu)"
+    }
+   },
+   {
+    "lat": 9,
+    "lon": 123.3
+   },
+   {
+    "lat": 8.6,
+    "lon": 121
+   },
+   {
+    "lat": 7.8,
+    "lon": 117.2
+   },
+   {
+    "lat": 5,
+    "lon": 115
+   },
+   {
+    "lat": 7.6,
+    "lon": 117
+   },
+   {
+    "lat": 6.5,
+    "lon": 120
+   },
+   {
+    "lat": 6.7,
+    "lon": 122
+   },
+   {
+    "lat": 5.3,
+    "lon": 125.4
+   },
+   {
+    "lat": 3,
+    "lon": 126.5
+   },
+   {
+    "lat": 0.67,
+    "lon": 127.4,
+    "name": {
+     "en": "Tidore (Moluccas)",
+     "pt": "Tidore (Molucas)"
+    }
+   },
+   {
+    "lat": -3.8,
+    "lon": 127.3
+   },
+   {
+    "lat": -6.5,
+    "lon": 126.5
+   },
+   {
+    "lat": -8.3,
+    "lon": 125.8
+   },
+   {
+    "lat": -8.6,
+    "lon": 124.4
+   },
+   {
+    "lat": -10.5,
+    "lon": 122.3
+   },
+   {
+    "lat": -14,
+    "lon": 112
+   },
+   {
+    "lat": -25,
+    "lon": 90
+   },
+   {
+    "lat": -36,
+    "lon": 60
+   },
+   {
+    "lat": -40,
+    "lon": 40
+   },
+   {
+    "lat": -38,
+    "lon": 22
+   },
+   {
+    "lat": -35.5,
+    "lon": 17
+   },
+   {
+    "lat": -25,
+    "lon": 8
+   },
+   {
+    "lat": -5,
+    "lon": -8
+   },
+   {
+    "lat": 8,
+    "lon": -20
+   },
+   {
+    "lat": 15,
+    "lon": -23.6,
+    "name": {
+     "en": "Cape Verde",
+     "pt": "Cabo Verde"
+    }
+   },
+   {
+    "lat": 28,
+    "lon": -33
+   },
+   {
+    "lat": 38,
+    "lon": -30
+   },
+   {
+    "lat": 37.5,
+    "lon": -12
+   },
+   {
+    "lat": 36.78,
+    "lon": -6.35
+   }
+  ],
+  "extract": {
+   "en": "The Magellan–Elcano expedition was a 16th-century Spanish expedition planned and initially led by Portuguese explorer Ferdinand Magellan and completed by the Spanish navigator Juan Sebastián Elcano which resulted in the first circumnavigation of the Earth. Its purpose was to secure a maritime trade route with the Moluccas, or Spice Islands, in present-day Indonesia. The expedition departed Spain in 1519 and returned there in 1522 under the command of Elcano, who continued the voyage after Magellan's death in the Philippines. One of the most significant voyages in the Age of Discovery, the nearly three-year expedition totaled 60,440 km (37,560 mi) and was the first to sail around the earth. It also marked the first crossing of the Pacific by a European expedition, revealing the vast scale of that ocean, and proved that ships could sail around the world on a western sea route.",
+   "pt": "A expedição de Magalhães foi a primeira viagem ao redor do mundo registrada na história. Foi uma expedição espanhola do século XVI, planejada e liderada pelo explorador português Fernão de Magalhães às Molucas, que partiu da Espanha em 1519, e foi concluída em 1522 pelo navegador espanhol Juan Sebastián Elcano, após cruzar os oceanos Atlântico, Pacífico e Índico, culminando na primeira circum-navegação do mundo."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Magellan_expedition",
+   "pt": "https://pt.wikipedia.org/wiki/Expedi%C3%A7%C3%A3o_de_Magalh%C3%A3es"
+  }
+ },
+ {
+  "id": "columbus",
+  "name": {
+   "en": "Columbus's first voyage",
+   "pt": "Primeira viagem de Colombo"
+  },
+  "start": 1492,
+  "end": 1493,
+  "mode": "sea",
+  "stops": [
+   {
+    "lat": 37.2,
+    "lon": -6.9,
+    "name": {
+     "en": "Palos de la Frontera",
+     "pt": "Palos de la Frontera"
+    }
+   },
+   {
+    "lat": 36.5,
+    "lon": -8.5
+   },
+   {
+    "lat": 28.1,
+    "lon": -17.1,
+    "name": {
+     "en": "La Gomera (Canary Islands)",
+     "pt": "La Gomera (Canárias)"
+    }
+   },
+   {
+    "lat": 27,
+    "lon": -30
+   },
+   {
+    "lat": 26,
+    "lon": -50
+   },
+   {
+    "lat": 25,
+    "lon": -65
+   },
+   {
+    "lat": 24.06,
+    "lon": -74.53,
+    "name": {
+     "en": "San Salvador (Bahamas)",
+     "pt": "San Salvador (Bahamas)"
+    }
+   },
+   {
+    "lat": 22.6,
+    "lon": -75
+   },
+   {
+    "lat": 21.3,
+    "lon": -76,
+    "name": {
+     "en": "Cuba",
+     "pt": "Cuba"
+    }
+   },
+   {
+    "lat": 20.5,
+    "lon": -74
+   },
+   {
+    "lat": 19.9,
+    "lon": -72.1,
+    "name": {
+     "en": "La Navidad (Hispaniola)",
+     "pt": "La Navidad (Hispaniola)"
+    }
+   },
+   {
+    "lat": 20.2,
+    "lon": -69.5
+   },
+   {
+    "lat": 28,
+    "lon": -62
+   },
+   {
+    "lat": 36,
+    "lon": -45
+   },
+   {
+    "lat": 36.97,
+    "lon": -25.1,
+    "name": {
+     "en": "Azores",
+     "pt": "Açores"
+    }
+   },
+   {
+    "lat": 38.6,
+    "lon": -9.6,
+    "name": {
+     "en": "Lisbon",
+     "pt": "Lisboa"
+    }
+   },
+   {
+    "lat": 36.8,
+    "lon": -9.2
+   },
+   {
+    "lat": 36.6,
+    "lon": -8
+   },
+   {
+    "lat": 37.2,
+    "lon": -6.9
+   }
+  ],
+  "extract": {
+   "en": "Between 1492 and 1504, the Italian explorer and navigator Christopher Columbus led four transatlantic maritime expeditions to the Americas in the name of the Catholic Monarchs of Spain. These voyages led to Europeans learning about the New World and were an early breakthrough in the period known in Europe as the Age of Exploration, which saw the colonization of the Americas, a related biological exchange, and the beginning of trans-Atlantic trade. These events, the effects and consequences of which persist to the present, are often cited as the beginning of the modern era.",
+   "pt": null
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Voyages_of_Christopher_Columbus",
+   "pt": null
+  }
+ },
+ {
+  "id": "gama",
+  "name": {
+   "en": "Vasco da Gama's first voyage to India",
+   "pt": "Primeira viagem de Vasco da Gama à Índia"
+  },
+  "start": 1497,
+  "end": 1499,
+  "mode": "sea",
+  "stops": [
+   {
+    "lat": 38.69,
+    "lon": -9.25,
+    "name": {
+     "en": "Lisbon",
+     "pt": "Lisboa"
+    }
+   },
+   {
+    "lat": 33,
+    "lon": -13
+   },
+   {
+    "lat": 28,
+    "lon": -15.8
+   },
+   {
+    "lat": 15,
+    "lon": -23.6,
+    "name": {
+     "en": "Cape Verde",
+     "pt": "Cabo Verde"
+    }
+   },
+   {
+    "lat": 5,
+    "lon": -22
+   },
+   {
+    "lat": -8,
+    "lon": -27
+   },
+   {
+    "lat": -22,
+    "lon": -28
+   },
+   {
+    "lat": -31,
+    "lon": -18
+   },
+   {
+    "lat": -33,
+    "lon": 2
+   },
+   {
+    "lat": -32.7,
+    "lon": 17.8,
+    "name": {
+     "en": "St Helena Bay",
+     "pt": "Baía de Santa Helena"
+    }
+   },
+   {
+    "lat": -34.7,
+    "lon": 18
+   },
+   {
+    "lat": -35.3,
+    "lon": 20
+   },
+   {
+    "lat": -34.4,
+    "lon": 22.3,
+    "name": {
+     "en": "Mossel Bay",
+     "pt": "Mossel Bay"
+    }
+   },
+   {
+    "lat": -34.8,
+    "lon": 25
+   },
+   {
+    "lat": -33.5,
+    "lon": 28.2
+   },
+   {
+    "lat": -30.5,
+    "lon": 31.2
+   },
+   {
+    "lat": -26,
+    "lon": 34
+   },
+   {
+    "lat": -24.5,
+    "lon": 36.2
+   },
+   {
+    "lat": -18.3,
+    "lon": 37.4
+   },
+   {
+    "lat": -17.2,
+    "lon": 39.4
+   },
+   {
+    "lat": -15.03,
+    "lon": 40.85,
+    "name": {
+     "en": "Mozambique Island",
+     "pt": "Ilha de Moçambique"
+    }
+   },
+   {
+    "lat": -10,
+    "lon": 41
+   },
+   {
+    "lat": -4.05,
+    "lon": 39.8,
+    "name": {
+     "en": "Mombasa",
+     "pt": "Mombaça"
+    }
+   },
+   {
+    "lat": -3.2,
+    "lon": 40.25,
+    "name": {
+     "en": "Malindi",
+     "pt": "Melinde"
+    }
+   },
+   {
+    "lat": 3,
+    "lon": 52
+   },
+   {
+    "lat": 9,
+    "lon": 66
+   },
+   {
+    "lat": 11.25,
+    "lon": 75.7,
+    "name": {
+     "en": "Calicut",
+     "pt": "Calecute"
+    }
+   }
+  ],
+  "extract": {
+   "en": "The Portuguese discovery of the sea route to India was the first recorded trip directly from Europe to the Indian subcontinent, via the Cape of Good Hope. Under the command of the Portuguese explorer Vasco da Gama, it was undertaken during the reign of King Manuel in 1497–1499. It is one of the most important events of the Age of Discovery and the Portuguese Empire, and it initiated the Portuguese maritime trade on the Malabar Coast and other parts of the Indian Ocean, the military presence and settlements of the Portuguese in Goa and Bombay.",
+   "pt": "A descoberta do caminho marítimo para a Índia é a designação comum para a primeira viagem realizada da Europa à Índia pelo Oceano Atlântico, feita sob o comando do navegador português Vasco da Gama durante o reinado do rei D. Manuel I, entre 1497 e 1498. Considerada uma das mais notáveis viagens da Era dos Descobrimentos, consolidou a presença marítima e o domínio das rotas comerciais pelos portugueses."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Portuguese_discovery_of_the_sea_route_to_India",
+   "pt": "https://pt.wikipedia.org/wiki/Descoberta_do_caminho_mar%C3%ADtimo_para_a_%C3%8Dndia"
+  }
+ },
+ {
+  "id": "cabral",
+  "name": {
+   "en": "Cabral's voyage to Brazil and India",
+   "pt": "Viagem de Cabral ao Brasil e à Índia"
+  },
+  "start": 1500,
+  "end": 1501,
+  "mode": "sea",
+  "stops": [
+   {
+    "lat": 38.69,
+    "lon": -9.25,
+    "name": {
+     "en": "Lisbon",
+     "pt": "Lisboa"
+    }
+   },
+   {
+    "lat": 30,
+    "lon": -15
+   },
+   {
+    "lat": 16.5,
+    "lon": -24.5
+   },
+   {
+    "lat": 5,
+    "lon": -28
+   },
+   {
+    "lat": -8,
+    "lon": -33
+   },
+   {
+    "lat": -16.4,
+    "lon": -38.9,
+    "name": {
+     "en": "Porto Seguro",
+     "pt": "Porto Seguro"
+    }
+   },
+   {
+    "lat": -25,
+    "lon": -32
+   },
+   {
+    "lat": -35,
+    "lon": -10
+   },
+   {
+    "lat": -37,
+    "lon": 15
+   },
+   {
+    "lat": -36,
+    "lon": 23
+   },
+   {
+    "lat": -30.5,
+    "lon": 32.5
+   },
+   {
+    "lat": -25,
+    "lon": 36.5
+   },
+   {
+    "lat": -20.5,
+    "lon": 36.5
+   },
+   {
+    "lat": -17.2,
+    "lon": 39.5
+   },
+   {
+    "lat": -15.03,
+    "lon": 40.85,
+    "name": {
+     "en": "Mozambique Island",
+     "pt": "Ilha de Moçambique"
+    }
+   },
+   {
+    "lat": -8.95,
+    "lon": 39.7,
+    "name": {
+     "en": "Kilwa",
+     "pt": "Quíloa"
+    }
+   },
+   {
+    "lat": -3.2,
+    "lon": 40.25,
+    "name": {
+     "en": "Malindi",
+     "pt": "Melinde"
+    }
+   },
+   {
+    "lat": 5,
+    "lon": 55
+   },
+   {
+    "lat": 11,
+    "lon": 68
+   },
+   {
+    "lat": 11.25,
+    "lon": 75.7,
+    "name": {
+     "en": "Calicut",
+     "pt": "Calecute"
+    }
+   },
+   {
+    "lat": 9.95,
+    "lon": 76.15,
+    "name": {
+     "en": "Cochin",
+     "pt": "Cochim"
+    }
+   }
+  ],
+  "extract": {
+   "en": "The Second Portuguese India Armada was assembled in 1500 on the order of King Manuel I of Portugal and placed under the command of Pedro Álvares Cabral. Cabral's armada famously discovered Brazil for the Portuguese crown along the way. By and large, the Second Armada's diplomatic mission to India failed, and provoked the opening of hostilities between the Kingdom of Portugal and the feudal city-state of Calicut. Nonetheless, it managed to establish a factory in the nearby Kingdom of Cochin, the first Portuguese factory in Asia.",
+   "pt": null
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/2nd_Portuguese_India_Armada_(Cabral%2C_1500)",
+   "pt": null
+  }
+ },
+ {
+  "id": "beagle",
+  "name": {
+   "en": "Darwin's voyage on the Beagle",
+   "pt": "Viagem de Darwin no Beagle"
+  },
+  "start": 1831,
+  "end": 1836,
+  "mode": "sea",
+  "stops": [
+   {
+    "lat": 50.3,
+    "lon": -4.15,
+    "name": {
+     "en": "Plymouth",
+     "pt": "Plymouth"
+    }
+   },
+   {
+    "lat": 44,
+    "lon": -10
+   },
+   {
+    "lat": 28.5,
+    "lon": -16
+   },
+   {
+    "lat": 14.9,
+    "lon": -23.4,
+    "name": {
+     "en": "Cape Verde",
+     "pt": "Cabo Verde"
+    }
+   },
+   {
+    "lat": 1,
+    "lon": -29.3
+   },
+   {
+    "lat": -3.85,
+    "lon": -32.4
+   },
+   {
+    "lat": -8,
+    "lon": -34.2
+   },
+   {
+    "lat": -12.97,
+    "lon": -38.4,
+    "name": {
+     "en": "Salvador",
+     "pt": "Salvador"
+    }
+   },
+   {
+    "lat": -18,
+    "lon": -38
+   },
+   {
+    "lat": -23.3,
+    "lon": -41.5
+   },
+   {
+    "lat": -22.9,
+    "lon": -43.1
+   },
+   {
+    "lat": -27,
+    "lon": -47
+   },
+   {
+    "lat": -34.5,
+    "lon": -53
+   },
+   {
+    "lat": -34.95,
+    "lon": -56.2
+   },
+   {
+    "lat": -39.5,
+    "lon": -57
+   },
+   {
+    "lat": -47,
+    "lon": -64
+   },
+   {
+    "lat": -54.8,
+    "lon": -64.8
+   },
+   {
+    "lat": -56,
+    "lon": -67.3,
+    "name": {
+     "en": "Tierra del Fuego",
+     "pt": "Terra do Fogo"
+    }
+   },
+   {
+    "lat": -56.5,
+    "lon": -71
+   },
+   {
+    "lat": -53,
+    "lon": -76.5
+   },
+   {
+    "lat": -46,
+    "lon": -77
+   },
+   {
+    "lat": -41.5,
+    "lon": -75
+   },
+   {
+    "lat": -33.05,
+    "lon": -71.8
+   },
+   {
+    "lat": -24,
+    "lon": -71.6
+   },
+   {
+    "lat": -12.05,
+    "lon": -77.3
+   },
+   {
+    "lat": -6,
+    "lon": -82.5
+   },
+   {
+    "lat": -0.9,
+    "lon": -90.3,
+    "name": {
+     "en": "Galápagos",
+     "pt": "Galápagos"
+    }
+   },
+   {
+    "lat": -8,
+    "lon": -115
+   },
+   {
+    "lat": -14,
+    "lon": -140
+   },
+   {
+    "lat": -17.6,
+    "lon": -149.5,
+    "name": {
+     "en": "Tahiti",
+     "pt": "Taiti"
+    }
+   },
+   {
+    "lat": -28,
+    "lon": -170
+   },
+   {
+    "lat": -33,
+    "lon": 178
+   },
+   {
+    "lat": -35,
+    "lon": 174.4
+   },
+   {
+    "lat": -34.2,
+    "lon": 165
+   },
+   {
+    "lat": -33.86,
+    "lon": 151.4,
+    "name": {
+     "en": "Sydney",
+     "pt": "Sydney"
+    }
+   },
+   {
+    "lat": -39.5,
+    "lon": 150
+   },
+   {
+    "lat": -43.8,
+    "lon": 147.8
+   },
+   {
+    "lat": -45,
+    "lon": 140
+   },
+   {
+    "lat": -36,
+    "lon": 119
+   },
+   {
+    "lat": -35.6,
+    "lon": 114.4
+   },
+   {
+    "lat": -25,
+    "lon": 105
+   },
+   {
+    "lat": -12.1,
+    "lon": 96.9
+   },
+   {
+    "lat": -17,
+    "lon": 75
+   },
+   {
+    "lat": -20.2,
+    "lon": 57.4,
+    "name": {
+     "en": "Mauritius",
+     "pt": "Maurício"
+    }
+   },
+   {
+    "lat": -27,
+    "lon": 48.5
+   },
+   {
+    "lat": -33.5,
+    "lon": 32
+   },
+   {
+    "lat": -35.6,
+    "lon": 20
+   },
+   {
+    "lat": -34,
+    "lon": 18.2,
+    "name": {
+     "en": "Cape Town",
+     "pt": "Cidade do Cabo"
+    }
+   },
+   {
+    "lat": -25,
+    "lon": 8
+   },
+   {
+    "lat": -15.95,
+    "lon": -5.7
+   },
+   {
+    "lat": -7.95,
+    "lon": -14.4
+   },
+   {
+    "lat": -10,
+    "lon": -30
+   },
+   {
+    "lat": -12.97,
+    "lon": -38.4
+   },
+   {
+    "lat": -8,
+    "lon": -34.2
+   },
+   {
+    "lat": 5,
+    "lon": -30
+   },
+   {
+    "lat": 15,
+    "lon": -24
+   },
+   {
+    "lat": 38.5,
+    "lon": -27.5
+   },
+   {
+    "lat": 46,
+    "lon": -12
+   },
+   {
+    "lat": 50.1,
+    "lon": -5
+   }
+  ],
+  "extract": {
+   "en": "The second survey expedition of HMS Beagle took place from 27 December 1831 to 2 October 1836. Robert FitzRoy, the newest commander of Beagle, had thought of the advantages of having someone onboard who could investigate geology, and sought a naturalist to accompany them as a supernumerary. At the age of 22, the graduate Charles Darwin hoped to see the tropics before becoming a parson, and accepted the opportunity. He was greatly influenced by reading Charles Lyell's Principles of Geology during the voyage. By the end of the expedition, Darwin had made his name as a geologist, and fossil collector, and the publication of his journal gave him wide renown as a writer.",
+   "pt": null
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Second_voyage_of_HMS_Beagle",
+   "pt": null
+  }
+ },
+ {
+  "id": "cook",
+  "name": {
+   "en": "James Cook's first voyage",
+   "pt": "Primeira viagem de James Cook"
+  },
+  "start": 1768,
+  "end": 1771,
+  "mode": "sea",
+  "stops": [
+   {
+    "lat": 50.3,
+    "lon": -4.15,
+    "name": {
+     "en": "Plymouth",
+     "pt": "Plymouth"
+    }
+   },
+   {
+    "lat": 44,
+    "lon": -11
+   },
+   {
+    "lat": 32.6,
+    "lon": -17
+   },
+   {
+    "lat": 10,
+    "lon": -25
+   },
+   {
+    "lat": -8,
+    "lon": -33.5
+   },
+   {
+    "lat": -18,
+    "lon": -38
+   },
+   {
+    "lat": -23.3,
+    "lon": -41.5
+   },
+   {
+    "lat": -22.9,
+    "lon": -43.1,
+    "name": {
+     "en": "Rio de Janeiro",
+     "pt": "Rio de Janeiro"
+    }
+   },
+   {
+    "lat": -35,
+    "lon": -52
+   },
+   {
+    "lat": -48,
+    "lon": -63
+   },
+   {
+    "lat": -54.9,
+    "lon": -64.9
+   },
+   {
+    "lat": -56.5,
+    "lon": -67.5,
+    "name": {
+     "en": "Cape Horn",
+     "pt": "Cabo Horn"
+    }
+   },
+   {
+    "lat": -58,
+    "lon": -76
+   },
+   {
+    "lat": -40,
+    "lon": -110
+   },
+   {
+    "lat": -25,
+    "lon": -135
+   },
+   {
+    "lat": -17.5,
+    "lon": -149.5,
+    "name": {
+     "en": "Tahiti",
+     "pt": "Taiti"
+    }
+   },
+   {
+    "lat": -25,
+    "lon": -152
+   },
+   {
+    "lat": -39.5,
+    "lon": -162
+   },
+   {
+    "lat": -39.5,
+    "lon": -178
+   },
+   {
+    "lat": -38.7,
+    "lon": 178.3,
+    "name": {
+     "en": "New Zealand",
+     "pt": "Nova Zelândia"
+    }
+   },
+   {
+    "lat": -36.5,
+    "lon": 176.3
+   },
+   {
+    "lat": -34.1,
+    "lon": 173
+   },
+   {
+    "lat": -37.5,
+    "lon": 173.8
+   },
+   {
+    "lat": -40.4,
+    "lon": 173.8
+   },
+   {
+    "lat": -41.4,
+    "lon": 174.7
+   },
+   {
+    "lat": -44,
+    "lon": 173.6
+   },
+   {
+    "lat": -47.7,
+    "lon": 167.8
+   },
+   {
+    "lat": -46.3,
+    "lon": 165.7
+   },
+   {
+    "lat": -44,
+    "lon": 167.3
+   },
+   {
+    "lat": -40.3,
+    "lon": 172.3
+   },
+   {
+    "lat": -38,
+    "lon": 150.5
+   },
+   {
+    "lat": -34,
+    "lon": 151.4,
+    "name": {
+     "en": "Botany Bay",
+     "pt": "Botany Bay"
+    }
+   },
+   {
+    "lat": -25,
+    "lon": 154
+   },
+   {
+    "lat": -17,
+    "lon": 146.7
+   },
+   {
+    "lat": -15.4,
+    "lon": 145.5,
+    "name": {
+     "en": "Endeavour River",
+     "pt": "Rio Endeavour"
+    }
+   },
+   {
+    "lat": -11.5,
+    "lon": 143.6
+   },
+   {
+    "lat": -10.4,
+    "lon": 142.2
+   },
+   {
+    "lat": -10,
+    "lon": 137
+   },
+   {
+    "lat": -9.5,
+    "lon": 130
+   },
+   {
+    "lat": -10.8,
+    "lon": 122
+   },
+   {
+    "lat": -9.2,
+    "lon": 112
+   },
+   {
+    "lat": -6.8,
+    "lon": 105.1
+   },
+   {
+    "lat": -5.9,
+    "lon": 106.8,
+    "name": {
+     "en": "Batavia (Jakarta)",
+     "pt": "Batávia (Jacarta)"
+    }
+   },
+   {
+    "lat": -6.8,
+    "lon": 105.1
+   },
+   {
+    "lat": -15,
+    "lon": 90
+   },
+   {
+    "lat": -27,
+    "lon": 60
+   },
+   {
+    "lat": -34,
+    "lon": 31
+   },
+   {
+    "lat": -35.6,
+    "lon": 20
+   },
+   {
+    "lat": -34,
+    "lon": 18.2,
+    "name": {
+     "en": "Cape Town",
+     "pt": "Cidade do Cabo"
+    }
+   },
+   {
+    "lat": -16,
+    "lon": -5.7
+   },
+   {
+    "lat": 0,
+    "lon": -22
+   },
+   {
+    "lat": 25,
+    "lon": -35
+   },
+   {
+    "lat": 42,
+    "lon": -25
+   },
+   {
+    "lat": 49.5,
+    "lon": -6
+   },
+   {
+    "lat": 50.2,
+    "lon": -1
+   },
+   {
+    "lat": 51.1,
+    "lon": 1.5
+   }
+  ],
+  "extract": {
+   "en": "The first voyage of James Cook was a combined Royal Navy and Royal Society expedition to the south Pacific Ocean aboard HMS Endeavour, from 1768 to 1771. The aims were to observe the 1769 transit of Venus from Tahiti and to seek evidence of the postulated Terra Australis Incognita or \"undiscovered southern land\". It was the first of three voyages of which Cook was the commander.",
+   "pt": "A primeira viagem de James Cook foi uma expedição combinada da Royal Navy e da Royal Society ao sul do Oceano Pacífico a bordo do HMS Endeavour, de 1768 a 1771. Foi a primeira de três viagens ao Pacífico das quais James Cook foi o comandante. Os objetivos desta primeira expedição eram observar o trânsito de Vênus em 1769 pelo Sol e buscar evidências da postulada Terra Australis Incognita ou \"terra do sul não descoberta\"."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/First_voyage_of_James_Cook",
+   "pt": "https://pt.wikipedia.org/wiki/Primeira_viagem_de_James_Cook"
+  }
+ },
+ {
+  "id": "drake",
+  "name": {
+   "en": "Francis Drake's circumnavigation",
+   "pt": "Circum-navegação de Francis Drake"
+  },
+  "start": 1577,
+  "end": 1580,
+  "mode": "sea",
+  "stops": [
+   {
+    "lat": 50.3,
+    "lon": -4.15,
+    "name": {
+     "en": "Plymouth",
+     "pt": "Plymouth"
+    }
+   },
+   {
+    "lat": 44,
+    "lon": -10
+   },
+   {
+    "lat": 31.5,
+    "lon": -10.5
+   },
+   {
+    "lat": 15,
+    "lon": -24
+   },
+   {
+    "lat": -5,
+    "lon": -30
+   },
+   {
+    "lat": -25,
+    "lon": -44
+   },
+   {
+    "lat": -34,
+    "lon": -52
+   },
+   {
+    "lat": -36.3,
+    "lon": -55.3
+   },
+   {
+    "lat": -39,
+    "lon": -56.5
+   },
+   {
+    "lat": -47,
+    "lon": -64.5
+   },
+   {
+    "lat": -49.3,
+    "lon": -67.6
+   },
+   {
+    "lat": -52.4,
+    "lon": -68.3
+   },
+   {
+    "lat": -53.9,
+    "lon": -71,
+    "name": {
+     "en": "Strait of Magellan",
+     "pt": "Estreito de Magalhães"
+    }
+   },
+   {
+    "lat": -52.7,
+    "lon": -74.9
+   },
+   {
+    "lat": -57,
+    "lon": -73
+   },
+   {
+    "lat": -45,
+    "lon": -78
+   },
+   {
+    "lat": -33.05,
+    "lon": -71.9,
+    "name": {
+     "en": "Valparaíso",
+     "pt": "Valparaíso"
+    }
+   },
+   {
+    "lat": -24,
+    "lon": -71.6
+   },
+   {
+    "lat": -12.05,
+    "lon": -77.4
+   },
+   {
+    "lat": -6,
+    "lon": -82.5
+   },
+   {
+    "lat": 2,
+    "lon": -81.5
+   },
+   {
+    "lat": 6,
+    "lon": -84.5
+   },
+   {
+    "lat": 10,
+    "lon": -88
+   },
+   {
+    "lat": 14,
+    "lon": -94.5
+   },
+   {
+    "lat": 15.6,
+    "lon": -96.2,
+    "name": {
+     "en": "Huatulco",
+     "pt": "Huatulco"
+    }
+   },
+   {
+    "lat": 18,
+    "lon": -106
+   },
+   {
+    "lat": 22,
+    "lon": -112.5
+   },
+   {
+    "lat": 30,
+    "lon": -119
+   },
+   {
+    "lat": 36,
+    "lon": -124
+   },
+   {
+    "lat": 38,
+    "lon": -123.1,
+    "name": {
+     "en": "Nova Albion (California)",
+     "pt": "Nova Albion (Califórnia)"
+    }
+   },
+   {
+    "lat": 30,
+    "lon": -150
+   },
+   {
+    "lat": 15,
+    "lon": -180
+   },
+   {
+    "lat": 9,
+    "lon": 150
+   },
+   {
+    "lat": 7.3,
+    "lon": 134.5
+   },
+   {
+    "lat": 5.5,
+    "lon": 127
+   },
+   {
+    "lat": 0.8,
+    "lon": 127.2,
+    "name": {
+     "en": "Ternate (Moluccas)",
+     "pt": "Ternate (Molucas)"
+    }
+   },
+   {
+    "lat": -2.5,
+    "lon": 125
+   },
+   {
+    "lat": -6.5,
+    "lon": 122
+   },
+   {
+    "lat": -9.3,
+    "lon": 116
+   },
+   {
+    "lat": -8,
+    "lon": 109,
+    "name": {
+     "en": "Java",
+     "pt": "Java"
+    }
+   },
+   {
+    "lat": -15,
+    "lon": 95
+   },
+   {
+    "lat": -30,
+    "lon": 60
+   },
+   {
+    "lat": -36.5,
+    "lon": 25
+   },
+   {
+    "lat": -35.5,
+    "lon": 17.5,
+    "name": {
+     "en": "Cape of Good Hope",
+     "pt": "Cabo da Boa Esperança"
+    }
+   },
+   {
+    "lat": -10,
+    "lon": -5
+   },
+   {
+    "lat": 8.3,
+    "lon": -13.8,
+    "name": {
+     "en": "Sierra Leone",
+     "pt": "Serra Leoa"
+    }
+   },
+   {
+    "lat": 15,
+    "lon": -22
+   },
+   {
+    "lat": 35,
+    "lon": -25
+   },
+   {
+    "lat": 48,
+    "lon": -9
+   },
+   {
+    "lat": 50.3,
+    "lon": -4.15
+   }
+  ],
+  "extract": {
+   "en": "The English explorer Francis Drake circumnavigated the Earth between 13 December 1577 and 26 September 1580. The expedition was authorised by Queen Elizabeth I and consisted of five ships. Termed a 'voyage of discovery', it was in effect an ambitious covert raiding voyage and the start of England's challenge to the global domination of Spain and Portugal.",
+   "pt": "A circum-navegação de Francis Drake, também conhecida como Expedição de Saque de Drake, foi um importante evento marítimo histórico que ocorreu entre 15 de dezembro de 1577 e 26 de setembro de 1580. A expedição foi autorizada pela rainha Isabel I e consistia em cinco navios liderados por Francis Drake. Denominada uma 'viagem de descobrimento', era na verdade uma ambiciosa viagem secreta de saque e o início do desafio da Inglaterra ao domínio global da Espanha e de Portugal."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Francis_Drake's_circumnavigation",
+   "pt": "https://pt.wikipedia.org/wiki/A_circum-navega%C3%A7%C3%A3o_de_Francis_Drake"
+  }
+ },
+ {
+  "id": "zheng-he",
+  "name": {
+   "en": "Zheng He's treasure voyages",
+   "pt": "Viagens do tesouro de Zheng He"
+  },
+  "start": 1405,
+  "end": 1433,
+  "mode": "sea",
+  "stops": [
+   {
+    "lat": 32.06,
+    "lon": 118.8,
+    "name": {
+     "en": "Nanjing",
+     "pt": "Nanquim"
+    }
+   },
+   {
+    "lat": 31.4,
+    "lon": 122.2
+   },
+   {
+    "lat": 26,
+    "lon": 120.6
+   },
+   {
+    "lat": 22,
+    "lon": 118
+   },
+   {
+    "lat": 15,
+    "lon": 111
+   },
+   {
+    "lat": 13.8,
+    "lon": 109.5,
+    "name": {
+     "en": "Champa",
+     "pt": "Champa"
+    }
+   },
+   {
+    "lat": 8,
+    "lon": 107.5
+   },
+   {
+    "lat": 2,
+    "lon": 105.5
+   },
+   {
+    "lat": -5,
+    "lon": 108.5
+   },
+   {
+    "lat": -6.7,
+    "lon": 112.7,
+    "name": {
+     "en": "Java",
+     "pt": "Java"
+    }
+   },
+   {
+    "lat": -5.3,
+    "lon": 108.5
+   },
+   {
+    "lat": -2.3,
+    "lon": 105.6,
+    "name": {
+     "en": "Palembang",
+     "pt": "Palembang"
+    }
+   },
+   {
+    "lat": 0.2,
+    "lon": 105
+   },
+   {
+    "lat": 1.15,
+    "lon": 103.9
+   },
+   {
+    "lat": 2.2,
+    "lon": 102.2,
+    "name": {
+     "en": "Malacca",
+     "pt": "Malaca"
+    }
+   },
+   {
+    "lat": 5.6,
+    "lon": 98
+   },
+   {
+    "lat": 6,
+    "lon": 94
+   },
+   {
+    "lat": 5.6,
+    "lon": 81
+   },
+   {
+    "lat": 6,
+    "lon": 80.1,
+    "name": {
+     "en": "Ceylon",
+     "pt": "Ceilão"
+    }
+   },
+   {
+    "lat": 7.5,
+    "lon": 77
+   },
+   {
+    "lat": 11.25,
+    "lon": 75.7,
+    "name": {
+     "en": "Calicut",
+     "pt": "Calecute"
+    }
+   },
+   {
+    "lat": 16,
+    "lon": 68
+   },
+   {
+    "lat": 23,
+    "lon": 61
+   },
+   {
+    "lat": 25.5,
+    "lon": 57.2
+   },
+   {
+    "lat": 27,
+    "lon": 56.3,
+    "name": {
+     "en": "Hormuz",
+     "pt": "Ormuz"
+    }
+   },
+   {
+    "lat": 25.5,
+    "lon": 57.2
+   },
+   {
+    "lat": 23,
+    "lon": 60.8
+   },
+   {
+    "lat": 21,
+    "lon": 60
+   },
+   {
+    "lat": 17.5,
+    "lon": 57.5
+   },
+   {
+    "lat": 14.5,
+    "lon": 52
+   },
+   {
+    "lat": 12.7,
+    "lon": 45,
+    "name": {
+     "en": "Aden",
+     "pt": "Áden"
+    }
+   },
+   {
+    "lat": 12.4,
+    "lon": 50
+   },
+   {
+    "lat": 11.6,
+    "lon": 52
+   },
+   {
+    "lat": 5,
+    "lon": 49.6
+   },
+   {
+    "lat": 2,
+    "lon": 45.5,
+    "name": {
+     "en": "Mogadishu",
+     "pt": "Mogadíscio"
+    }
+   },
+   {
+    "lat": -3.2,
+    "lon": 40.3,
+    "name": {
+     "en": "Malindi",
+     "pt": "Melinde"
+    }
+   }
+  ],
+  "extract": {
+   "en": "Ming China's treasure fleet undertook maritime expeditions between 1405 and 1433. The Yongle Emperor ordered the construction of the fleet in 1403. The grand project resulted in seven far-reaching ocean voyages to the coastal territories and islands of the South China Sea and Indian Ocean. Admiral Zheng He was commissioned to command the fleet for the expeditions. Six of the voyages occurred during the Yongle Emperor's reign and the seventh voyage occurred during the Xuande Emperor's reign. The first three voyages reached up to Calicut on India's Malabar Coast, while the fourth voyage went as far as Hormuz in the Persian Gulf. In the last three voyages, the fleet traveled up to the Arabian Peninsula and East Africa.",
+   "pt": "As viagens dos tesouros Ming foram expedições marítimas empreendidas pela frota dos tesouros da China da dinastia Ming entre 1405 e 1433. O imperador Yongle ordenou a construção da frota em 1403. O grandioso projeto resultou em sete viagens oceânicas de longo alcance para os territórios costeiros e ilhas do Mar da China Meridional e do Oceano Índico. O almirante Zheng He foi encarregado de comandar a frota nas expedições. Seis das viagens ocorreram durante o reinado do imperador Yongle e a sétima viagem ocorreu durante o reinado do imperador Xuande (r. 1425–1435). As três primeiras viagens chegaram até Calecute, na Costa do Malabar da Índia, enquanto a quarta viagem foi até Ormuz no Golfo Pérsico. Nas últimas três viagens, a frota viajou até a Península Arábica e a África Oriental."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Ming_treasure_voyages",
+   "pt": "https://pt.wikipedia.org/wiki/Viagens_do_tesouro_Ming"
+  }
+ },
+ {
+  "id": "marco-polo",
+  "name": {
+   "en": "Travels of Marco Polo",
+   "pt": "Viagens de Marco Polo"
+  },
+  "start": 1271,
+  "end": 1295,
+  "mode": "mixed",
+  "stops": [
+   {
+    "lat": 45.44,
+    "lon": 12.33,
+    "name": {
+     "en": "Venice",
+     "pt": "Veneza"
+    }
+   },
+   {
+    "lat": 43.5,
+    "lon": 14.8
+   },
+   {
+    "lat": 41.5,
+    "lon": 17.8
+   },
+   {
+    "lat": 39.4,
+    "lon": 19
+   },
+   {
+    "lat": 37,
+    "lon": 21
+   },
+   {
+    "lat": 36.1,
+    "lon": 22.8
+   },
+   {
+    "lat": 35,
+    "lon": 28
+   },
+   {
+    "lat": 32.93,
+    "lon": 35.07,
+    "name": {
+     "en": "Acre",
+     "pt": "Acre"
+    }
+   },
+   {
+    "lat": 36.8,
+    "lon": 35.8
+   },
+   {
+    "lat": 39.75,
+    "lon": 39.5
+   },
+   {
+    "lat": 38.08,
+    "lon": 46.3
+   },
+   {
+    "lat": 31.9,
+    "lon": 54.4
+   },
+   {
+    "lat": 30.3,
+    "lon": 57.1
+   },
+   {
+    "lat": 27.2,
+    "lon": 56.3,
+    "name": {
+     "en": "Hormuz",
+     "pt": "Ormuz"
+    }
+   },
+   {
+    "lat": 30.3,
+    "lon": 57.1
+   },
+   {
+    "lat": 33.6,
+    "lon": 56.9
+   },
+   {
+    "lat": 36.76,
+    "lon": 66.9,
+    "name": {
+     "en": "Balkh",
+     "pt": "Balkh"
+    }
+   },
+   {
+    "lat": 37.1,
+    "lon": 70.6
+   },
+   {
+    "lat": 37,
+    "lon": 73.5
+   },
+   {
+    "lat": 39.47,
+    "lon": 75.99,
+    "name": {
+     "en": "Kashgar",
+     "pt": "Kashgar"
+    }
+   },
+   {
+    "lat": 38.4,
+    "lon": 77.25
+   },
+   {
+    "lat": 37.1,
+    "lon": 79.9
+   },
+   {
+    "lat": 38.1,
+    "lon": 85.5
+   },
+   {
+    "lat": 39,
+    "lon": 88.2
+   },
+   {
+    "lat": 40.1,
+    "lon": 94.7,
+    "name": {
+     "en": "Dunhuang",
+     "pt": "Dunhuang"
+    }
+   },
+   {
+    "lat": 38.9,
+    "lon": 100.45
+   },
+   {
+    "lat": 38.5,
+    "lon": 106.3
+   },
+   {
+    "lat": 42.36,
+    "lon": 116.18,
+    "name": {
+     "en": "Shangdu (Xanadu)",
+     "pt": "Shangdu (Xanadu)"
+    }
+   },
+   {
+    "lat": 39.9,
+    "lon": 116.4,
+    "name": {
+     "en": "Khanbaliq (Beijing)",
+     "pt": "Cambaluc (Pequim)"
+    }
+   },
+   {
+    "lat": 30.25,
+    "lon": 120.2
+   },
+   {
+    "lat": 24.9,
+    "lon": 118.7,
+    "name": {
+     "en": "Quanzhou",
+     "pt": "Quanzhou"
+    }
+   },
+   {
+    "lat": 15,
+    "lon": 111
+   },
+   {
+    "lat": 8,
+    "lon": 107.5
+   },
+   {
+    "lat": 2,
+    "lon": 104.9
+   },
+   {
+    "lat": 1.15,
+    "lon": 103.8
+   },
+   {
+    "lat": 2.8,
+    "lon": 101
+   },
+   {
+    "lat": 5.5,
+    "lon": 97.6,
+    "name": {
+     "en": "Sumatra",
+     "pt": "Sumatra"
+    }
+   },
+   {
+    "lat": 6,
+    "lon": 90
+   },
+   {
+    "lat": 5.6,
+    "lon": 80.5
+   },
+   {
+    "lat": 8,
+    "lon": 76.3
+   },
+   {
+    "lat": 15,
+    "lon": 72.5
+   },
+   {
+    "lat": 21,
+    "lon": 65
+   },
+   {
+    "lat": 25.3,
+    "lon": 57.5
+   },
+   {
+    "lat": 27,
+    "lon": 56.3
+   },
+   {
+    "lat": 30.3,
+    "lon": 57.1
+   },
+   {
+    "lat": 38.08,
+    "lon": 46.3
+   },
+   {
+    "lat": 41,
+    "lon": 39.72,
+    "name": {
+     "en": "Trebizond",
+     "pt": "Trebizonda"
+    }
+   },
+   {
+    "lat": 42.5,
+    "lon": 35
+   },
+   {
+    "lat": 41.1,
+    "lon": 29,
+    "name": {
+     "en": "Constantinople",
+     "pt": "Constantinopla"
+    }
+   },
+   {
+    "lat": 40.1,
+    "lon": 26.1
+   },
+   {
+    "lat": 38.6,
+    "lon": 25
+   },
+   {
+    "lat": 36.2,
+    "lon": 23
+   },
+   {
+    "lat": 36.6,
+    "lon": 21.5
+   },
+   {
+    "lat": 39.4,
+    "lon": 19
+   },
+   {
+    "lat": 41.5,
+    "lon": 17.8
+   },
+   {
+    "lat": 43.5,
+    "lon": 14.8
+   },
+   {
+    "lat": 45.44,
+    "lon": 12.33
+   }
+  ],
+  "extract": {
+   "en": "Marco Polo was a Venetian merchant, explorer, and writer who travelled through Asia along the Silk Road between 1271 and 1295. His travels are recorded in The Travels of Marco Polo, a book that described the then-mysterious culture and inner workings of the Eastern world, including the wealth and great size of the Mongol Empire and China under the Yuan dynasty, giving Europeans their first comprehensive look into China, Persia, India, Japan, and other Asian societies.",
+   "pt": "Marco Polo foi um mercador, embaixador e explorador veneziano cujas aventuras estão registradas em As Viagens de Marco Polo, um livro que descreve para os europeus as maravilhas da China, de sua capital Pequim e de outras cidades e países da Ásia."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Marco_Polo",
+   "pt": "https://pt.wikipedia.org/wiki/Marco_Polo"
+  }
+ },
+ {
+  "id": "ibn-battuta",
+  "name": {
+   "en": "Travels of Ibn Battuta",
+   "pt": "Viagens de Ibn Battuta"
+  },
+  "start": 1325,
+  "end": 1354,
+  "mode": "mixed",
+  "stops": [
+   {
+    "lat": 35.78,
+    "lon": -5.81,
+    "name": {
+     "en": "Tangier",
+     "pt": "Tânger"
+    }
+   },
+   {
+    "lat": 36.8,
+    "lon": 10.18
+   },
+   {
+    "lat": 32.9,
+    "lon": 13.2
+   },
+   {
+    "lat": 31.2,
+    "lon": 29.9
+   },
+   {
+    "lat": 30.04,
+    "lon": 31.24,
+    "name": {
+     "en": "Cairo",
+     "pt": "Cairo"
+    }
+   },
+   {
+    "lat": 33.5,
+    "lon": 36.3
+   },
+   {
+    "lat": 24.47,
+    "lon": 39.6
+   },
+   {
+    "lat": 21.42,
+    "lon": 39.83,
+    "name": {
+     "en": "Mecca",
+     "pt": "Meca"
+    }
+   },
+   {
+    "lat": 33.3,
+    "lon": 44.4,
+    "name": {
+     "en": "Baghdad",
+     "pt": "Bagdá"
+    }
+   },
+   {
+    "lat": 38.08,
+    "lon": 46.3
+   },
+   {
+    "lat": 33.3,
+    "lon": 44.4
+   },
+   {
+    "lat": 21.42,
+    "lon": 39.83
+   },
+   {
+    "lat": 21.5,
+    "lon": 39
+   },
+   {
+    "lat": 16,
+    "lon": 41.3
+   },
+   {
+    "lat": 12.6,
+    "lon": 43.4
+   },
+   {
+    "lat": 12.7,
+    "lon": 45
+   },
+   {
+    "lat": 12.4,
+    "lon": 50
+   },
+   {
+    "lat": 11.6,
+    "lon": 52
+   },
+   {
+    "lat": 5,
+    "lon": 49.6
+   },
+   {
+    "lat": 2,
+    "lon": 45.5
+   },
+   {
+    "lat": -4.05,
+    "lon": 39.8
+   },
+   {
+    "lat": -8.95,
+    "lon": 39.7,
+    "name": {
+     "en": "Kilwa",
+     "pt": "Quíloa"
+    }
+   },
+   {
+    "lat": 5,
+    "lon": 49.8
+   },
+   {
+    "lat": 11.6,
+    "lon": 52.2
+   },
+   {
+    "lat": 16.8,
+    "lon": 54.5
+   },
+   {
+    "lat": 21,
+    "lon": 60
+   },
+   {
+    "lat": 23,
+    "lon": 60.8
+   },
+   {
+    "lat": 25.5,
+    "lon": 57.2
+   },
+   {
+    "lat": 27,
+    "lon": 56.3,
+    "name": {
+     "en": "Hormuz",
+     "pt": "Ormuz"
+    }
+   },
+   {
+    "lat": 21.42,
+    "lon": 39.83
+   },
+   {
+    "lat": 30.04,
+    "lon": 31.24
+   },
+   {
+    "lat": 35.5,
+    "lon": 35.8
+   },
+   {
+    "lat": 36.55,
+    "lon": 32
+   },
+   {
+    "lat": 37.87,
+    "lon": 32.5
+   },
+   {
+    "lat": 42.03,
+    "lon": 35.15
+   },
+   {
+    "lat": 45.03,
+    "lon": 35.38
+   },
+   {
+    "lat": 48.6,
+    "lon": 45.7,
+    "name": {
+     "en": "Sarai (Golden Horde)",
+     "pt": "Sarai (Horda Dourada)"
+    }
+   },
+   {
+    "lat": 41.1,
+    "lon": 29,
+    "name": {
+     "en": "Constantinople",
+     "pt": "Constantinopla"
+    }
+   },
+   {
+    "lat": 48.6,
+    "lon": 45.7
+   },
+   {
+    "lat": 42.3,
+    "lon": 59.15
+   },
+   {
+    "lat": 39.77,
+    "lon": 64.42
+   },
+   {
+    "lat": 39.65,
+    "lon": 66.96,
+    "name": {
+     "en": "Samarkand",
+     "pt": "Samarcanda"
+    }
+   },
+   {
+    "lat": 36.76,
+    "lon": 66.9
+   },
+   {
+    "lat": 34.5,
+    "lon": 69.2
+   },
+   {
+    "lat": 30.2,
+    "lon": 71.5
+   },
+   {
+    "lat": 28.65,
+    "lon": 77.2,
+    "name": {
+     "en": "Delhi",
+     "pt": "Déli"
+    }
+   },
+   {
+    "lat": 22.3,
+    "lon": 72.6
+   },
+   {
+    "lat": 15,
+    "lon": 73
+   },
+   {
+    "lat": 11.25,
+    "lon": 75.7
+   },
+   {
+    "lat": 4.17,
+    "lon": 73.5,
+    "name": {
+     "en": "Maldives",
+     "pt": "Maldivas"
+    }
+   },
+   {
+    "lat": 6.5,
+    "lon": 79.7
+   },
+   {
+    "lat": 5.6,
+    "lon": 80.8
+   },
+   {
+    "lat": 9,
+    "lon": 82.5
+   },
+   {
+    "lat": 22.2,
+    "lon": 91.7
+   },
+   {
+    "lat": 15,
+    "lon": 94
+   },
+   {
+    "lat": 5.6,
+    "lon": 97.6
+   },
+   {
+    "lat": 2.8,
+    "lon": 101
+   },
+   {
+    "lat": 1.15,
+    "lon": 103.9
+   },
+   {
+    "lat": 10,
+    "lon": 109.7
+   },
+   {
+    "lat": 24.9,
+    "lon": 118.7,
+    "name": {
+     "en": "Quanzhou",
+     "pt": "Quanzhou"
+    }
+   }
+  ],
+  "extract": {
+   "en": "Ibn Battuta was a Maghrebi Muslim traveller, explorer, and scholar from Tangier, Morocco. Over a 30-year period (1325–1354) he visited much of Africa, Asia, and the Iberian Peninsula. Near the end of his life, Ibn Battuta dictated an account of his journeys, titled A Gift to Those Who Contemplate the Wonders of Cities and the Marvels of Travelling, commonly known as The Rihla.",
+   "pt": "Ibne Batuta, nascido em Tânger, no Marrocos, em 24 de fevereiro de 1304, e morto em 1368 ou 1369, foi um viajante muçulmano marroquino com formação jurídica. Estudou o direito maliquita, deixou sua cidade aos 21 anos e passou quase três décadas em viagem. Entre 1325 e 1354, atravessou grande parte da África e da Ásia, além da Península Ibérica, num itinerário tradicionalmente calculado em cerca de 120.000 quilômetros."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Ibn_Battuta",
+   "pt": "https://pt.wikipedia.org/wiki/Ibne_Batuta"
+  }
+ },
+ {
+  "id": "lewis-clark",
+  "name": {
+   "en": "Lewis and Clark Expedition",
+   "pt": "Expedição de Lewis e Clark"
+  },
+  "start": 1804,
+  "end": 1806,
+  "mode": "river",
+  "stops": [
+   {
+    "lat": 38.63,
+    "lon": -90.2,
+    "name": {
+     "en": "St. Louis",
+     "pt": "St. Louis"
+    }
+   },
+   {
+    "lat": 39.1,
+    "lon": -94.6
+   },
+   {
+    "lat": 41.3,
+    "lon": -95.9
+   },
+   {
+    "lat": 42.5,
+    "lon": -96.4
+   },
+   {
+    "lat": 44.37,
+    "lon": -100.35
+   },
+   {
+    "lat": 47.3,
+    "lon": -101.1,
+    "name": {
+     "en": "Fort Mandan",
+     "pt": "Fort Mandan"
+    }
+   },
+   {
+    "lat": 48,
+    "lon": -104
+   },
+   {
+    "lat": 47.5,
+    "lon": -111.3,
+    "name": {
+     "en": "Great Falls",
+     "pt": "Great Falls"
+    }
+   },
+   {
+    "lat": 45.9,
+    "lon": -111.5
+   },
+   {
+    "lat": 44.97,
+    "lon": -113.45
+   },
+   {
+    "lat": 46.63,
+    "lon": -114.58,
+    "name": {
+     "en": "Lolo Pass",
+     "pt": "Lolo Pass"
+    }
+   },
+   {
+    "lat": 46.42,
+    "lon": -117
+   },
+   {
+    "lat": 46.2,
+    "lon": -119
+   },
+   {
+    "lat": 45.6,
+    "lon": -121.2
+   },
+   {
+    "lat": 46.13,
+    "lon": -123.88,
+    "name": {
+     "en": "Fort Clatsop (Pacific)",
+     "pt": "Fort Clatsop (Pacífico)"
+    }
+   }
+  ],
+  "extract": {
+   "en": "The Lewis and Clark Expedition, also known as the Corps of Discovery Expedition, was the United States expedition to cross the newly acquired western portion of the country after the Louisiana Purchase. The Corps of Discovery was a select group of U.S. Army and civilian volunteers under the command of Captain Meriwether Lewis and his close friend Second Lieutenant William Clark. Clark, along with 30 others, set out from Camp Dubois, Illinois, on May 14, 1804, met Lewis and ten other members of the group in St. Charles, Missouri, then went up the Missouri River. The expedition crossed the Continental Divide of the Americas near the Lemhi Pass, eventually coming to the Columbia River, and the Pacific Ocean in 1805. The return voyage began on March 23, 1806, at Fort Clatsop, Oregon, ending six months later on September 23.",
+   "pt": "Meriwether Lewis e William Clark formaram uma dupla de exploradores que lideraram a primeira grande expedição exploratória do continente norte-americano, partindo do Leste e indo em direção ao Oeste até a costa do Oceano Pacífico, com posterior retorno."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Lewis_and_Clark_Expedition",
+   "pt": "https://pt.wikipedia.org/wiki/Expedi%C3%A7%C3%A3o_de_Lewis_e_Clark"
+  }
+ },
+ {
+  "id": "amundsen",
+  "name": {
+   "en": "Amundsen's South Pole expedition",
+   "pt": "Expedição de Amundsen ao Polo Sul"
+  },
+  "start": 1910,
+  "end": 1912,
+  "mode": "sea",
+  "stops": [
+   {
+    "lat": 58,
+    "lon": 8,
+    "name": {
+     "en": "Kristiansand",
+     "pt": "Kristiansand"
+    }
+   },
+   {
+    "lat": 54,
+    "lon": 4
+   },
+   {
+    "lat": 51.1,
+    "lon": 1.6
+   },
+   {
+    "lat": 49.5,
+    "lon": -5
+   },
+   {
+    "lat": 44,
+    "lon": -11
+   },
+   {
+    "lat": 32.65,
+    "lon": -17,
+    "name": {
+     "en": "Madeira",
+     "pt": "Madeira"
+    }
+   },
+   {
+    "lat": 10,
+    "lon": -25
+   },
+   {
+    "lat": -20,
+    "lon": -25
+   },
+   {
+    "lat": -40,
+    "lon": -5
+   },
+   {
+    "lat": -48,
+    "lon": 30
+   },
+   {
+    "lat": -50,
+    "lon": 70
+   },
+   {
+    "lat": -52,
+    "lon": 110
+   },
+   {
+    "lat": -60,
+    "lon": 150
+   },
+   {
+    "lat": -68,
+    "lon": 178
+   },
+   {
+    "lat": -75,
+    "lon": -172
+   },
+   {
+    "lat": -78.5,
+    "lon": -164,
+    "name": {
+     "en": "Bay of Whales (Framheim)",
+     "pt": "Baía das Baleias (Framheim)"
+    }
+   },
+   {
+    "lat": -85.5,
+    "lon": -164
+   },
+   {
+    "lat": -89.9,
+    "lon": -164,
+    "name": {
+     "en": "South Pole",
+     "pt": "Polo Sul"
+    }
+   },
+   {
+    "lat": -85.5,
+    "lon": -164
+   },
+   {
+    "lat": -78.5,
+    "lon": -164
+   },
+   {
+    "lat": -72,
+    "lon": -178
+   },
+   {
+    "lat": -62,
+    "lon": 165
+   },
+   {
+    "lat": -45,
+    "lon": 149.5
+   },
+   {
+    "lat": -43,
+    "lon": 147.5,
+    "name": {
+     "en": "Hobart",
+     "pt": "Hobart"
+    }
+   }
+  ],
+  "extract": {
+   "en": "The first expedition to reach the Geographic South Pole was led by the Norwegian explorer Roald Amundsen. He and four other crew members made it to the geographical South Pole on 14 December 1911, which was to be five weeks ahead of the British party led by Robert Falcon Scott as part of the Terra Nova Expedition. Amundsen and his team returned safely to their base, and about a year later heard that Scott and his four companions had perished on their return journey.",
+   "pt": "A primeira expedição a atingir o Polo Sul foi liderada pelo explorador norueguês Roald Amundsen. Ele, e mais quatro membros da expedição, chegaram ao Polo a 14 de Dezembro de 1911, cinco semanas antes do grupo liderado pelo inglês Robert Falcon Scott, da Expedição Terra Nova. Amundsen e a sua equipa regressaram sãos e salvos à sua base, sendo informados, mais tarde, que Scott, e mais quatro companheiros, tinham morrido na viagem de regresso."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Amundsen's_South_Pole_expedition",
+   "pt": "https://pt.wikipedia.org/wiki/Expedi%C3%A7%C3%A3o_de_Amundsen_ao_Polo_Sul"
+  }
+ },
+ {
+  "id": "shackleton",
+  "name": {
+   "en": "Shackleton's Endurance expedition",
+   "pt": "Expedição Endurance de Shackleton"
+  },
+  "start": 1914,
+  "end": 1917,
+  "mode": "sea",
+  "stops": [
+   {
+    "lat": 50.3,
+    "lon": -4.15,
+    "name": {
+     "en": "Plymouth",
+     "pt": "Plymouth"
+    }
+   },
+   {
+    "lat": 44,
+    "lon": -11
+   },
+   {
+    "lat": 32.7,
+    "lon": -17
+   },
+   {
+    "lat": 5,
+    "lon": -27
+   },
+   {
+    "lat": -20,
+    "lon": -37
+   },
+   {
+    "lat": -35.3,
+    "lon": -55
+   },
+   {
+    "lat": -34.6,
+    "lon": -58.3,
+    "name": {
+     "en": "Buenos Aires",
+     "pt": "Buenos Aires"
+    }
+   },
+   {
+    "lat": -36,
+    "lon": -55
+   },
+   {
+    "lat": -54.28,
+    "lon": -36.4
+   },
+   {
+    "lat": -59,
+    "lon": -26
+   },
+   {
+    "lat": -70,
+    "lon": -15
+   },
+   {
+    "lat": -75,
+    "lon": -25
+   },
+   {
+    "lat": -76.5,
+    "lon": -35,
+    "name": {
+     "en": "Endurance trapped in the ice",
+     "pt": "Endurance presa no gelo"
+    }
+   },
+   {
+    "lat": -74,
+    "lon": -45
+   },
+   {
+    "lat": -69,
+    "lon": -51.5
+   },
+   {
+    "lat": -63,
+    "lon": -54
+   },
+   {
+    "lat": -61.1,
+    "lon": -55.1,
+    "name": {
+     "en": "Elephant Island",
+     "pt": "Ilha Elefante"
+    }
+   },
+   {
+    "lat": -58,
+    "lon": -46
+   },
+   {
+    "lat": -54.2,
+    "lon": -37.4,
+    "name": {
+     "en": "South Georgia",
+     "pt": "Geórgia do Sul"
+    }
+   }
+  ],
+  "extract": {
+   "en": "The Imperial Trans-Antarctic Expedition of 1914–1917 is considered to be the last major expedition of the Heroic Age of Antarctic Exploration. Conceived by Sir Ernest Shackleton, the expedition was an attempt to make the first land crossing of the Antarctic continent. After Roald Amundsen's South Pole expedition in 1911, this crossing remained, in Shackleton's words, the \"one great main object of Antarctic journeyings\". Shackleton's expedition failed to accomplish this objective but became recognised instead as an epic feat of endurance.",
+   "pt": "A Expedição Transantártica Imperial (1914–17), também conhecida como Expedição Endurance, é considerada como a última grande expedição da Idade Heroica da Exploração da Antártida. Concebida por sir Ernest Henry Shackleton, o objectivo da expedição era efectuar a primeira travessia terrestre do continente Antártico. Depois da conquista do Polo Sul por Roald Amundsen em 1911, restava esta travessia entre mares que, nas palavras de Shackleton, era o \"principal objectivo das explorações da Antártida\". A expedição não conseguiu alcançar o objectivo proposto, tendo ficado conhecida pela história de resistência dos seus membros."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Imperial_Trans-Antarctic_Expedition",
+   "pt": "https://pt.wikipedia.org/wiki/Expedi%C3%A7%C3%A3o_Transant%C3%A1rtica_Imperial"
+  }
+ },
+ {
+  "id": "alexander",
+  "name": {
+   "en": "Campaigns of Alexander the Great",
+   "pt": "Campanhas de Alexandre, o Grande"
+  },
+  "start": -334,
+  "end": -323,
+  "mode": "land",
+  "stops": [
+   {
+    "lat": 40.76,
+    "lon": 22.52,
+    "name": {
+     "en": "Pella",
+     "pt": "Pela"
+    }
+   },
+   {
+    "lat": 40.28,
+    "lon": 26.4
+   },
+   {
+    "lat": 40.3,
+    "lon": 27.3
+   },
+   {
+    "lat": 38.49,
+    "lon": 28.04
+   },
+   {
+    "lat": 37.94,
+    "lon": 27.34
+   },
+   {
+    "lat": 37.04,
+    "lon": 27.42
+   },
+   {
+    "lat": 36.96,
+    "lon": 30.85
+   },
+   {
+    "lat": 39.65,
+    "lon": 31.99
+   },
+   {
+    "lat": 37.3,
+    "lon": 34.8
+   },
+   {
+    "lat": 36.84,
+    "lon": 36.2,
+    "name": {
+     "en": "Issus",
+     "pt": "Isso"
+    }
+   },
+   {
+    "lat": 33.27,
+    "lon": 35.2
+   },
+   {
+    "lat": 31.5,
+    "lon": 34.47
+   },
+   {
+    "lat": 31.04,
+    "lon": 32.55
+   },
+   {
+    "lat": 29.85,
+    "lon": 31.25
+   },
+   {
+    "lat": 31.2,
+    "lon": 29.92,
+    "name": {
+     "en": "Alexandria",
+     "pt": "Alexandria"
+    }
+   },
+   {
+    "lat": 29.2,
+    "lon": 25.52,
+    "name": {
+     "en": "Siwa",
+     "pt": "Siuá"
+    }
+   },
+   {
+    "lat": 29.85,
+    "lon": 31.25
+   },
+   {
+    "lat": 33.27,
+    "lon": 35.2
+   },
+   {
+    "lat": 35.9,
+    "lon": 39
+   },
+   {
+    "lat": 37.07,
+    "lon": 41.2
+   },
+   {
+    "lat": 36.36,
+    "lon": 43.25,
+    "name": {
+     "en": "Gaugamela",
+     "pt": "Gaugamela"
+    }
+   },
+   {
+    "lat": 32.54,
+    "lon": 44.42,
+    "name": {
+     "en": "Babylon",
+     "pt": "Babilônia"
+    }
+   },
+   {
+    "lat": 32.19,
+    "lon": 48.26
+   },
+   {
+    "lat": 29.93,
+    "lon": 52.89,
+    "name": {
+     "en": "Persepolis",
+     "pt": "Persépolis"
+    }
+   },
+   {
+    "lat": 34.8,
+    "lon": 48.52
+   },
+   {
+    "lat": 35.6,
+    "lon": 51.4
+   },
+   {
+    "lat": 36,
+    "lon": 54.1
+   },
+   {
+    "lat": 34.34,
+    "lon": 62.2
+   },
+   {
+    "lat": 32.37,
+    "lon": 62.1
+   },
+   {
+    "lat": 31.62,
+    "lon": 65.72
+   },
+   {
+    "lat": 34.53,
+    "lon": 69.17
+   },
+   {
+    "lat": 36.76,
+    "lon": 66.9
+   },
+   {
+    "lat": 39.65,
+    "lon": 66.96,
+    "name": {
+     "en": "Maracanda (Samarkand)",
+     "pt": "Maracanda (Samarcanda)"
+    }
+   },
+   {
+    "lat": 40.28,
+    "lon": 69.63
+   },
+   {
+    "lat": 36.76,
+    "lon": 66.9
+   },
+   {
+    "lat": 34.53,
+    "lon": 69.17
+   },
+   {
+    "lat": 33.75,
+    "lon": 72.8
+   },
+   {
+    "lat": 32.83,
+    "lon": 73.64,
+    "name": {
+     "en": "Hydaspes",
+     "pt": "Hidaspes"
+    }
+   },
+   {
+    "lat": 31.6,
+    "lon": 75
+   },
+   {
+    "lat": 30.2,
+    "lon": 71.47
+   },
+   {
+    "lat": 25.4,
+    "lon": 68.4
+   },
+   {
+    "lat": 25.6,
+    "lon": 64
+   },
+   {
+    "lat": 27.2,
+    "lon": 60.7
+   },
+   {
+    "lat": 28.5,
+    "lon": 57.8
+   },
+   {
+    "lat": 29.93,
+    "lon": 52.89
+   },
+   {
+    "lat": 32.19,
+    "lon": 48.26
+   },
+   {
+    "lat": 32.54,
+    "lon": 44.42
+   }
+  ],
+  "extract": {
+   "en": "Alexander the Great of Macedon carried out a series of conquests and military campaigns from 336 to 323 BC. They began with his conquest of the Achaemenid Empire, which was ruled by Darius III. After a series of victories over the Persians and the defeat of Darius, he began a campaign against local chieftains and warlords that stretched from Greece to as far as the Indus Valley. At the time of his death, Alexander ruled over most regions of Greece and the conquered Achaemenid Empire, including much of Achaemenid Egypt.",
+   "pt": "As Guerras de Alexandre, o Grande foram uma série de conflitos militares lançados por Alexandre III da Macedônia, primeiramente contra o Império Aquemênida, governado por Dario III, e depois contra chefes tribais, reis e senhores de terras nas regiões mais a leste da Ásia, até Panjabe, na Índia. A campanha imortalizou Alexandre como um dos grandes comandantes militares de todos os tempos. Ele terminou sua carreira sem perder uma batalha. Quando ele morreu, ele havia conquistado quase todo o mundo conhecido pelos gregos antigos. Apesar do seu sucesso como comandante, ele não conseguiu dar uma alternativa estável ao Império Aquemênida. Assim, após sua morte, seu império não sobreviveu e foi dividido após vários conflitos internos."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Wars_of_Alexander_the_Great",
+   "pt": "https://pt.wikipedia.org/wiki/Guerras_de_Alexandre%2C_o_Grande"
+  }
+ },
+ {
+  "id": "hannibal",
+  "name": {
+   "en": "Hannibal's crossing of the Alps",
+   "pt": "Travessia dos Alpes por Aníbal"
+  },
+  "start": -218,
+  "end": -218,
+  "mode": "land",
+  "stops": [
+   {
+    "lat": 37.6,
+    "lon": -0.98,
+    "name": {
+     "en": "New Carthage (Cartagena)",
+     "pt": "Nova Cartago (Cartagena)"
+    }
+   },
+   {
+    "lat": 39.68,
+    "lon": -0.28
+   },
+   {
+    "lat": 40.8,
+    "lon": 0.5
+   },
+   {
+    "lat": 42.13,
+    "lon": 3.05
+   },
+   {
+    "lat": 42.47,
+    "lon": 2.87
+   },
+   {
+    "lat": 43.18,
+    "lon": 3
+   },
+   {
+    "lat": 43.84,
+    "lon": 4.36
+   },
+   {
+    "lat": 44.14,
+    "lon": 4.8,
+    "name": {
+     "en": "Rhône crossing",
+     "pt": "Travessia do Ródano"
+    }
+   },
+   {
+    "lat": 44.93,
+    "lon": 4.9
+   },
+   {
+    "lat": 45.19,
+    "lon": 5.72
+   },
+   {
+    "lat": 45.15,
+    "lon": 6.95,
+    "name": {
+     "en": "Alpine pass",
+     "pt": "Passo alpino"
+    }
+   },
+   {
+    "lat": 45.07,
+    "lon": 7.69,
+    "name": {
+     "en": "Turin",
+     "pt": "Turim"
+    }
+   },
+   {
+    "lat": 45.2,
+    "lon": 8.9
+   },
+   {
+    "lat": 45.05,
+    "lon": 9.6,
+    "name": {
+     "en": "Trebia",
+     "pt": "Trébia"
+    }
+   }
+  ],
+  "extract": {
+   "en": "Hannibal's crossing of the Alps in 218 BC was one of the major events of the Second Punic War and one of the most celebrated achievements of any military force in ancient warfare.",
+   "pt": "A Travessia dos Alpes por Aníbal foi um dos primeiros eventos da Segunda Guerra Púnica, um período de quase duas décadas de hostilidades entre a República Romana e Cartago, especialmente o seu principal general, Aníbal. Depois do desastre em Sagunto, uma missão romana enviada para negociar com os cartagineses retorna ciente da hostilidade da Hispânia, da neutralidade dos gauleses e do apoio de Massília. Quando os dois novos cônsules foram escolhidos, Públio Cornélio Cipião foi incumbido da Hispânia como sua \"província\", e que desenvolvesse uma nova frota, pois o sítio e a pilhagem de Sagunto não poderia ser tolerado, sob a pena de abalar sua reputação entre gauleses e iberos."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Hannibal's_crossing_of_the_Alps",
+   "pt": "https://pt.wikipedia.org/wiki/Travessia_dos_Alpes_por_An%C3%ADbal"
+  }
+ },
+ {
+  "id": "xuanzang",
+  "name": {
+   "en": "Xuanzang's pilgrimage to India",
+   "pt": "Peregrinação de Xuanzang à Índia"
+  },
+  "start": 629,
+  "end": 645,
+  "mode": "land",
+  "stops": [
+   {
+    "lat": 34.27,
+    "lon": 108.9,
+    "name": {
+     "en": "Chang'an (Xi'an)",
+     "pt": "Chang'an (Xi'an)"
+    }
+   },
+   {
+    "lat": 36.06,
+    "lon": 103.8
+   },
+   {
+    "lat": 37.93,
+    "lon": 102.64
+   },
+   {
+    "lat": 40.52,
+    "lon": 95.78
+   },
+   {
+    "lat": 42.83,
+    "lon": 93.5
+   },
+   {
+    "lat": 42.95,
+    "lon": 89.18,
+    "name": {
+     "en": "Turfan",
+     "pt": "Turfã"
+    }
+   },
+   {
+    "lat": 42.06,
+    "lon": 86.57
+   },
+   {
+    "lat": 41.72,
+    "lon": 82.96
+   },
+   {
+    "lat": 41.17,
+    "lon": 80.26
+   },
+   {
+    "lat": 41.4,
+    "lon": 78.4
+   },
+   {
+    "lat": 42.2,
+    "lon": 77.5
+   },
+   {
+    "lat": 42.8,
+    "lon": 75.3
+   },
+   {
+    "lat": 42.9,
+    "lon": 71.4
+   },
+   {
+    "lat": 41.3,
+    "lon": 69.25
+   },
+   {
+    "lat": 39.65,
+    "lon": 66.96,
+    "name": {
+     "en": "Samarkand",
+     "pt": "Samarcanda"
+    }
+   },
+   {
+    "lat": 37.22,
+    "lon": 67.28
+   },
+   {
+    "lat": 36.76,
+    "lon": 66.9
+   },
+   {
+    "lat": 34.82,
+    "lon": 67.83,
+    "name": {
+     "en": "Bamiyan",
+     "pt": "Bamiã"
+    }
+   },
+   {
+    "lat": 34.98,
+    "lon": 69.3
+   },
+   {
+    "lat": 34.43,
+    "lon": 70.45
+   },
+   {
+    "lat": 34.01,
+    "lon": 71.58
+   },
+   {
+    "lat": 33.75,
+    "lon": 72.8
+   },
+   {
+    "lat": 34.08,
+    "lon": 74.8,
+    "name": {
+     "en": "Kashmir",
+     "pt": "Caxemira"
+    }
+   },
+   {
+    "lat": 31.33,
+    "lon": 75.58
+   },
+   {
+    "lat": 27.49,
+    "lon": 77.67
+   },
+   {
+    "lat": 27.06,
+    "lon": 79.92
+   },
+   {
+    "lat": 25.43,
+    "lon": 81.85
+   },
+   {
+    "lat": 25.32,
+    "lon": 83
+   },
+   {
+    "lat": 24.7,
+    "lon": 84.99
+   },
+   {
+    "lat": 25.14,
+    "lon": 85.44,
+    "name": {
+     "en": "Nalanda",
+     "pt": "Nalanda"
+    }
+   },
+   {
+    "lat": 27.06,
+    "lon": 79.92
+   },
+   {
+    "lat": 33.75,
+    "lon": 72.8
+   },
+   {
+    "lat": 36.73,
+    "lon": 68.87
+   },
+   {
+    "lat": 37,
+    "lon": 73.5
+   },
+   {
+    "lat": 37.77,
+    "lon": 75.23
+   },
+   {
+    "lat": 39.47,
+    "lon": 75.99
+   },
+   {
+    "lat": 37.1,
+    "lon": 79.93,
+    "name": {
+     "en": "Khotan",
+     "pt": "Khotan"
+    }
+   },
+   {
+    "lat": 37.06,
+    "lon": 82.7
+   },
+   {
+    "lat": 40.5,
+    "lon": 89.9
+   },
+   {
+    "lat": 40.14,
+    "lon": 94.66
+   },
+   {
+    "lat": 34.27,
+    "lon": 108.9
+   }
+  ],
+  "extract": {
+   "en": "Xuanzang, born Chen Hui or Chen Yi, also known by his Sanskrit Dharma name Mokṣadeva, was a 7th-century Chinese Buddhist monk, scholar, traveller, and translator. He is known for the epoch-making contributions to Chinese Buddhism, the travelogue of his journey to the Indian subcontinent in 629–645, his efforts to bring at least 657 Indian texts to China, and his translations of some of these texts. He was only able to translate 75 distinct sections of a total of 1,335 chapters, but his translations included some of the most important Mahayana scriptures.",
+   "pt": "Xuanzang nascido Chen Hui ou Chen Yi, também conhecido pelo seu nome sânscrito Dharma Mokṣadeva, foi um monge budista chinês do século VII, estudioso, viajante e tradutor. Ele é conhecido pelas contribuições marcantes para o budismo chinês, o relato de viagem de sua jornada ao subcontinente indiano em 629-645, seus esforços para trazer pelo menos 657 textos indianos para a China e suas traduções de alguns desses textos. Ele só conseguiu traduzir 75 seções distintas de um total de 1335 capítulos, mas suas traduções incluíram algumas das escrituras Mahayana mais importantes."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Xuanzang",
+   "pt": "https://pt.wikipedia.org/wiki/Xuanzang"
+  }
+ },
+ {
+  "id": "lindbergh",
+  "name": {
+   "en": "Lindbergh's transatlantic flight",
+   "pt": "Voo transatlântico de Lindbergh"
+  },
+  "start": 1927,
+  "end": 1927,
+  "mode": "air",
+  "stops": [
+   {
+    "lat": 40.74,
+    "lon": -73.61,
+    "name": {
+     "en": "New York (Roosevelt Field)",
+     "pt": "Nova York (Roosevelt Field)"
+    }
+   },
+   {
+    "lat": 41.9,
+    "lon": -70
+   },
+   {
+    "lat": 44.6,
+    "lon": -63.6
+   },
+   {
+    "lat": 46,
+    "lon": -59.5
+   },
+   {
+    "lat": 47.56,
+    "lon": -52.7,
+    "name": {
+     "en": "St. John's (Newfoundland)",
+     "pt": "St. John's (Terra Nova)"
+    }
+   },
+   {
+    "lat": 50.5,
+    "lon": -40
+   },
+   {
+    "lat": 52.3,
+    "lon": -30
+   },
+   {
+    "lat": 52.6,
+    "lon": -20
+   },
+   {
+    "lat": 52.1,
+    "lon": -10.3,
+    "name": {
+     "en": "Dingle Bay (Ireland)",
+     "pt": "Baía de Dingle (Irlanda)"
+    }
+   },
+   {
+    "lat": 50.3,
+    "lon": -5
+   },
+   {
+    "lat": 49.65,
+    "lon": -1.6
+   },
+   {
+    "lat": 48.95,
+    "lon": 2.44,
+    "name": {
+     "en": "Paris (Le Bourget)",
+     "pt": "Paris (Le Bourget)"
+    }
+   }
+  ],
+  "extract": {
+   "en": "The Spirit of St. Louis is the custom-built, single-engine, single-seat, high-wing monoplane that Charles Lindbergh flew on May 20–21, 1927, on the first solo nonstop transatlantic flight from Long Island, New York, to Paris, France, for which Lindbergh won the $25,000 Orteig Prize.",
+   "pt": "O Spirit of St. Louis é um monomotor customizado e de único assento que foi pilotado por Charles Lindbergh entre 20 e 21 de maio de 1927 em sua missão bem-sucedida de travessia do oceano atlântico em voo solo sem escalas de Long Island, EUA, até Paris, França, feito pelo qual foi contemplado com o Prêmio Orteig de US$ 25 mil, que estava sendo oferecido desde 1919 para quem o realizasse."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Spirit_of_St._Louis",
+   "pt": "https://pt.wikipedia.org/wiki/Spirit_of_St._Louis"
+  }
+ },
+ {
+  "id": "earhart",
+  "name": {
+   "en": "Amelia Earhart's last flight",
+   "pt": "Último voo de Amelia Earhart"
+  },
+  "start": 1937,
+  "end": 1937,
+  "mode": "air",
+  "stops": [
+   {
+    "lat": 37.72,
+    "lon": -122.22,
+    "name": {
+     "en": "Oakland",
+     "pt": "Oakland"
+    }
+   },
+   {
+    "lat": 34.2,
+    "lon": -118.36
+   },
+   {
+    "lat": 32.12,
+    "lon": -110.94
+   },
+   {
+    "lat": 29.99,
+    "lon": -90.26
+   },
+   {
+    "lat": 25.79,
+    "lon": -80.29,
+    "name": {
+     "en": "Miami",
+     "pt": "Miami"
+    }
+   },
+   {
+    "lat": 18.44,
+    "lon": -66
+   },
+   {
+    "lat": 10.11,
+    "lon": -63.1
+   },
+   {
+    "lat": 5.45,
+    "lon": -55.19
+   },
+   {
+    "lat": -3.78,
+    "lon": -38.53
+   },
+   {
+    "lat": -5.91,
+    "lon": -35.25,
+    "name": {
+     "en": "Natal",
+     "pt": "Natal"
+    }
+   },
+   {
+    "lat": 16.05,
+    "lon": -16.46
+   },
+   {
+    "lat": 14.74,
+    "lon": -17.49,
+    "name": {
+     "en": "Dakar",
+     "pt": "Dakar"
+    }
+   },
+   {
+    "lat": 16.25,
+    "lon": -0.01
+   },
+   {
+    "lat": 12.13,
+    "lon": 15.03
+   },
+   {
+    "lat": 13.62,
+    "lon": 25.32
+   },
+   {
+    "lat": 15.59,
+    "lon": 32.55,
+    "name": {
+     "en": "Khartoum",
+     "pt": "Cartum"
+    }
+   },
+   {
+    "lat": 15.67,
+    "lon": 39.37
+   },
+   {
+    "lat": 13.07,
+    "lon": 42.64
+   },
+   {
+    "lat": 24.9,
+    "lon": 67.17,
+    "name": {
+     "en": "Karachi",
+     "pt": "Karachi"
+    }
+   },
+   {
+    "lat": 22.65,
+    "lon": 88.45
+   },
+   {
+    "lat": 20.13,
+    "lon": 92.87
+   },
+   {
+    "lat": 16.9,
+    "lon": 96.13
+   },
+   {
+    "lat": 13.91,
+    "lon": 100.6
+   },
+   {
+    "lat": 1.36,
+    "lon": 103.91,
+    "name": {
+     "en": "Singapore",
+     "pt": "Singapura"
+    }
+   },
+   {
+    "lat": -6.9,
+    "lon": 107.58
+   },
+   {
+    "lat": -7.38,
+    "lon": 112.79
+   },
+   {
+    "lat": -10.17,
+    "lon": 123.67
+   },
+   {
+    "lat": -12.41,
+    "lon": 130.88,
+    "name": {
+     "en": "Darwin",
+     "pt": "Darwin"
+    }
+   },
+   {
+    "lat": -6.73,
+    "lon": 147,
+    "name": {
+     "en": "Lae",
+     "pt": "Lae"
+    }
+   },
+   {
+    "lat": 0.81,
+    "lon": -176.62,
+    "name": {
+     "en": "Howland Island (never reached)",
+     "pt": "Ilha Howland (nunca alcançada)"
+    }
+   }
+  ],
+  "extract": {
+   "en": "Amelia Mary Earhart was an American aviator who became one of the most celebrated aviation pioneers.",
+   "pt": "Amelia Mary Earhart foi pioneira da aviação dos Estados Unidos, autora e defensora dos direitos das mulheres. Earhart foi a primeira mulher a receber a \"The Distinguished Flying Cross\", condecoração dada por ter sido a primeira mulher a voar sozinha sobre o Oceano Atlântico. Estabeleceu diversos outros recordes, escreveu livros sobre suas experiências de voo, e foi essencial na formação de organizações para mulheres que desejavam pilotar."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Amelia_Earhart",
+   "pt": "https://pt.wikipedia.org/wiki/Amelia_Earhart"
+  }
+ },
+ {
+  "id": "titanic",
+  "name": {
+   "en": "Maiden voyage of the Titanic",
+   "pt": "Viagem inaugural do Titanic"
+  },
+  "start": 1912,
+  "end": 1912,
+  "mode": "sea",
+  "stops": [
+   {
+    "lat": 50.9,
+    "lon": -1.4,
+    "name": {
+     "en": "Southampton",
+     "pt": "Southampton"
+    }
+   },
+   {
+    "lat": 50.65,
+    "lon": -0.95
+   },
+   {
+    "lat": 49.68,
+    "lon": -1.62,
+    "name": {
+     "en": "Cherbourg",
+     "pt": "Cherbourg"
+    }
+   },
+   {
+    "lat": 49.95,
+    "lon": -3.5
+   },
+   {
+    "lat": 49.8,
+    "lon": -6.5
+   },
+   {
+    "lat": 51.8,
+    "lon": -8.25,
+    "name": {
+     "en": "Queenstown (Cobh)",
+     "pt": "Queenstown (Cobh)"
+    }
+   },
+   {
+    "lat": 51.2,
+    "lon": -9.8
+   },
+   {
+    "lat": 49,
+    "lon": -25
+   },
+   {
+    "lat": 45,
+    "lon": -40
+   },
+   {
+    "lat": 42,
+    "lon": -47
+   },
+   {
+    "lat": 41.73,
+    "lon": -49.95,
+    "name": {
+     "en": "Sank here",
+     "pt": "Naufragou aqui"
+    }
+   }
+  ],
+  "extract": {
+   "en": "RMS Titanic was a British ocean liner that sank in the early hours of 15 April 1912 after striking an iceberg on her maiden voyage from Southampton, England, to New York City. Of the 2,208 passengers and crew aboard, approximately 1,500 died, making the incident one of the deadliest peacetime sinkings of a single ship.",
+   "pt": "RMS Titanic foi um navio de passageiros britânico operado pela White Star Line e construído pelos estaleiros da Harland and Wolff, em Belfast. Segunda embarcação da Classe Olympic de transatlânticos, depois do RMS Olympic e seguido pelo HMHS Britannic, foi projetado pelos engenheiros navais Alexander Carlisle e Thomas Andrews. Sua construção começou em março de 1909 e seu lançamento ao mar ocorreu em maio de 1911. O Titanic foi pensado para ser o navio mais luxuoso e mais seguro de sua época, gerando lendas que era supostamente \"inafundável\"."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Titanic",
+   "pt": "https://pt.wikipedia.org/wiki/RMS_Titanic"
+  }
+ },
+ {
+  "id": "burke-wills",
+  "name": {
+   "en": "Burke and Wills expedition",
+   "pt": "Expedição de Burke e Wills"
+  },
+  "start": 1860,
+  "end": 1861,
+  "mode": "land",
+  "stops": [
+   {
+    "lat": -37.81,
+    "lon": 144.96,
+    "name": {
+     "en": "Melbourne",
+     "pt": "Melbourne"
+    }
+   },
+   {
+    "lat": -35.34,
+    "lon": 143.55
+   },
+   {
+    "lat": -34.64,
+    "lon": 143.56
+   },
+   {
+    "lat": -32.39,
+    "lon": 142.42,
+    "name": {
+     "en": "Menindee",
+     "pt": "Menindee"
+    }
+   },
+   {
+    "lat": -30.2,
+    "lon": 142.3
+   },
+   {
+    "lat": -27.62,
+    "lon": 140.87,
+    "name": {
+     "en": "Cooper Creek",
+     "pt": "Cooper Creek"
+    }
+   },
+   {
+    "lat": -25.9,
+    "lon": 139.35
+   },
+   {
+    "lat": -22.9,
+    "lon": 139.9
+   },
+   {
+    "lat": -20.7,
+    "lon": 140.5
+   },
+   {
+    "lat": -17.85,
+    "lon": 140.83,
+    "name": {
+     "en": "Gulf of Carpentaria",
+     "pt": "Golfo de Carpentária"
+    }
+   },
+   {
+    "lat": -20.7,
+    "lon": 140.6
+   },
+   {
+    "lat": -22.9,
+    "lon": 140
+   },
+   {
+    "lat": -25.9,
+    "lon": 139.45
+   },
+   {
+    "lat": -27.62,
+    "lon": 140.87
+   }
+  ],
+  "extract": {
+   "en": "The Burke and Wills expedition, originally called the Victorian Exploring Expedition, was an exploration expedition organised by the Royal Society of Victoria (RSV) in Australia in 1860–61.",
+   "pt": null
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Burke_and_Wills_expedition",
+   "pt": null
+  }
+ },
+ {
+  "id": "livingstone",
+  "name": {
+   "en": "Livingstone's crossing of Africa",
+   "pt": "Travessia da África por Livingstone"
+  },
+  "start": 1853,
+  "end": 1856,
+  "mode": "land",
+  "stops": [
+   {
+    "lat": -18.07,
+    "lon": 24,
+    "name": {
+     "en": "Linyanti",
+     "pt": "Linyanti"
+    }
+   },
+   {
+    "lat": -17.47,
+    "lon": 24.3
+   },
+   {
+    "lat": -15.2,
+    "lon": 23.1
+   },
+   {
+    "lat": -11.5,
+    "lon": 22
+   },
+   {
+    "lat": -9.58,
+    "lon": 17.87
+   },
+   {
+    "lat": -8.84,
+    "lon": 13.23,
+    "name": {
+     "en": "Luanda",
+     "pt": "Luanda"
+    }
+   },
+   {
+    "lat": -9.58,
+    "lon": 17.87
+   },
+   {
+    "lat": -11.5,
+    "lon": 22
+   },
+   {
+    "lat": -15.2,
+    "lon": 23.1
+   },
+   {
+    "lat": -17.47,
+    "lon": 24.3
+   },
+   {
+    "lat": -17.92,
+    "lon": 25.86,
+    "name": {
+     "en": "Victoria Falls",
+     "pt": "Cataratas Vitória"
+    }
+   },
+   {
+    "lat": -15.6,
+    "lon": 30.4
+   },
+   {
+    "lat": -16.16,
+    "lon": 33.59,
+    "name": {
+     "en": "Tete",
+     "pt": "Tete"
+    }
+   },
+   {
+    "lat": -17.44,
+    "lon": 35.03
+   },
+   {
+    "lat": -17.88,
+    "lon": 36.89,
+    "name": {
+     "en": "Quelimane",
+     "pt": "Quelimane"
+    }
+   }
+  ],
+  "extract": {
+   "en": " David Livingstone was a Scottish doctor, Congregationalist, pioneer Christian missionary with the London Missionary Society, and an explorer in Africa. Livingstone was married to Mary Moffat Livingstone, from the prominent 18th-century Moffat missionary family. Livingstone came to have a mythic status as a Protestant missionary martyr, working-class \"rags-to-riches\" inspirational story, scientific investigator and explorer, imperial reformer, anti-slavery crusader, and advocate of British commercial and colonial expansion. As a result, he became one of the most popular British heroes of the late 19th-century Victorian era.",
+   "pt": "David Livingstone foi um missionário e explorador britânico que se tornou famoso por ter sido um dos primeiros europeus a terem explorado o interior da África. Ao longo de sua vida, David Livingstone empreendeu diversas expedições missionárias pelo interior do continente africano, sendo que em muitas delas, Livingstone foi o primeiro homem branco a ter visitado determinadas regiões da África."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/David_Livingstone",
+   "pt": "https://pt.wikipedia.org/wiki/David_Livingstone"
+  }
+ },
+ {
+  "id": "stanley",
+  "name": {
+   "en": "Stanley's descent of the Congo",
+   "pt": "Descida do Congo por Stanley"
+  },
+  "start": 1874,
+  "end": 1877,
+  "mode": "mixed",
+  "stops": [
+   {
+    "lat": -6.16,
+    "lon": 39.19,
+    "name": {
+     "en": "Zanzibar",
+     "pt": "Zanzibar"
+    }
+   },
+   {
+    "lat": -6.43,
+    "lon": 38.9
+   },
+   {
+    "lat": -6.35,
+    "lon": 36.48
+   },
+   {
+    "lat": -2.5,
+    "lon": 33.2
+   },
+   {
+    "lat": -1,
+    "lon": 34
+   },
+   {
+    "lat": 0.2,
+    "lon": 33.9
+   },
+   {
+    "lat": 0.3,
+    "lon": 32.55,
+    "name": {
+     "en": "Buganda (Lake Victoria)",
+     "pt": "Buganda (Lago Vitória)"
+    }
+   },
+   {
+    "lat": -1.2,
+    "lon": 31.8
+   },
+   {
+    "lat": -2.5,
+    "lon": 33.2
+   },
+   {
+    "lat": -4.91,
+    "lon": 29.67,
+    "name": {
+     "en": "Ujiji (Lake Tanganyika)",
+     "pt": "Ujiji (Lago Tanganica)"
+    }
+   },
+   {
+    "lat": -4.22,
+    "lon": 26.18,
+    "name": {
+     "en": "Nyangwe",
+     "pt": "Nyangwe"
+    }
+   },
+   {
+    "lat": -2.95,
+    "lon": 25.92
+   },
+   {
+    "lat": 0.52,
+    "lon": 25.2,
+    "name": {
+     "en": "Stanley Falls",
+     "pt": "Cataratas de Stanley"
+    }
+   },
+   {
+    "lat": 1.2,
+    "lon": 23.5
+   },
+   {
+    "lat": 2.15,
+    "lon": 21.5
+   },
+   {
+    "lat": 0.05,
+    "lon": 18.26
+   },
+   {
+    "lat": -2.16,
+    "lon": 16.23
+   },
+   {
+    "lat": -4.32,
+    "lon": 15.31,
+    "name": {
+     "en": "Stanley Pool",
+     "pt": "Stanley Pool"
+    }
+   },
+   {
+    "lat": -5.83,
+    "lon": 13.45
+   },
+   {
+    "lat": -5.85,
+    "lon": 13.05,
+    "name": {
+     "en": "Boma",
+     "pt": "Boma"
+    }
+   }
+  ],
+  "extract": {
+   "en": "Sir Henry Morton Stanley was a Welsh-American explorer, journalist, soldier, colonial administrator, author, and politician famous for his exploration of Central Africa and search for missionary and explorer David Livingstone. Besides his discovery of Livingstone, he is mainly known for his search for the sources of the Nile and Congo rivers, the work he undertook as an agent of King Leopold II of the Belgians that enabled the occupation of the Congo Basin region, and his command of the Emin Pasha Relief Expedition. He was knighted in 1897, and served in Parliament as a Liberal Unionist member for Lambeth North from 1895 to 1900.",
+   "pt": "Henry Morton Stanley foi um jornalista que se tornou famoso pela sua viagem através da África em busca do explorador britânico David Livingstone e pelo seu papel na criação do Estado Livre do Congo."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Henry_Morton_Stanley",
+   "pt": "https://pt.wikipedia.org/wiki/Henry_Morton_Stanley"
+  }
+ },
+ {
+  "id": "napoleon-russia",
+  "name": {
+   "en": "Napoleon's invasion of Russia",
+   "pt": "Invasão da Rússia por Napoleão"
+  },
+  "start": 1812,
+  "end": 1812,
+  "mode": "land",
+  "stops": [
+   {
+    "lat": 54.9,
+    "lon": 23.9,
+    "name": {
+     "en": "Kaunas (Niemen crossing)",
+     "pt": "Kaunas (travessia do Niemen)"
+    }
+   },
+   {
+    "lat": 54.69,
+    "lon": 25.28,
+    "name": {
+     "en": "Vilnius",
+     "pt": "Vilnius"
+    }
+   },
+   {
+    "lat": 55.19,
+    "lon": 30.2
+   },
+   {
+    "lat": 54.78,
+    "lon": 32.05,
+    "name": {
+     "en": "Smolensk",
+     "pt": "Smolensk"
+    }
+   },
+   {
+    "lat": 55.21,
+    "lon": 34.3
+   },
+   {
+    "lat": 55.52,
+    "lon": 35.82,
+    "name": {
+     "en": "Borodino",
+     "pt": "Borodino"
+    }
+   },
+   {
+    "lat": 55.75,
+    "lon": 37.62,
+    "name": {
+     "en": "Moscow",
+     "pt": "Moscou"
+    }
+   },
+   {
+    "lat": 55.01,
+    "lon": 36.46
+   },
+   {
+    "lat": 55.15,
+    "lon": 34.3
+   },
+   {
+    "lat": 54.72,
+    "lon": 32.05
+   },
+   {
+    "lat": 54.56,
+    "lon": 31.43
+   },
+   {
+    "lat": 54.51,
+    "lon": 30.42
+   },
+   {
+    "lat": 54.33,
+    "lon": 28.35,
+    "name": {
+     "en": "Berezina River",
+     "pt": "Rio Berezina"
+    }
+   },
+   {
+    "lat": 54.48,
+    "lon": 26.4
+   },
+   {
+    "lat": 54.63,
+    "lon": 25.28
+   },
+   {
+    "lat": 54.85,
+    "lon": 23.9
+   }
+  ],
+  "extract": {
+   "en": "The French invasion of Russia, also known as the Russian campaign, the Second Polish War, and in Russia as the Patriotic War of 1812, was initiated by Napoleon with the aim of forcing the Russian Empire to comply with the continental blockade of the United Kingdom. Widely studied, Napoleon's incursion into Russia remains a focal point in military history, recognized as among the most devastating military endeavors to ever unfold. In the span of less than six months, the campaign claimed the lives of around a million soldiers and civilians.",
+   "pt": "A Invasão francesa da Rússia em 1812, também conhecida como a Campanha Russa em França e Guerra Patriótica de 1812 na Rússia, foi um ponto de virada durante as Guerras Napoleónicas. Reduziu a dimensão das forças francesas e forças aliadas para uma pequena fracção de sua força inicial, e provocou uma grande mudança na política europeia uma vez que enfraqueceu dramaticamente a hegemonia francesa na Europa. A reputação de Napoleão como um génio militar invencível foi severamente abalada, enquanto antigos aliados do Império Francês, primeiro o Reino da Prússia e depois o Império Austríaco, romperam a sua aliança com a França, e trocaram de lado, desencadeando a guerra da Sexta Coligação."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/French_invasion_of_Russia",
+   "pt": "https://pt.wikipedia.org/wiki/Invas%C3%A3o_francesa_da_R%C3%BAssia"
+  }
+ },
+ {
+  "id": "long-march",
+  "name": {
+   "en": "The Long March",
+   "pt": "A Longa Marcha"
+  },
+  "start": 1934,
+  "end": 1935,
+  "mode": "land",
+  "stops": [
+   {
+    "lat": 25.88,
+    "lon": 116.03,
+    "name": {
+     "en": "Ruijin",
+     "pt": "Ruijin"
+    }
+   },
+   {
+    "lat": 25.4,
+    "lon": 113.5
+   },
+   {
+    "lat": 25.6,
+    "lon": 111
+   },
+   {
+    "lat": 26.23,
+    "lon": 109.14
+   },
+   {
+    "lat": 27.73,
+    "lon": 106.93,
+    "name": {
+     "en": "Zunyi",
+     "pt": "Zunyi"
+    }
+   },
+   {
+    "lat": 28,
+    "lon": 105.7
+   },
+   {
+    "lat": 26.4,
+    "lon": 106.7
+   },
+   {
+    "lat": 25.4,
+    "lon": 103.3
+   },
+   {
+    "lat": 26.3,
+    "lon": 102.4
+   },
+   {
+    "lat": 26.66,
+    "lon": 102.25
+   },
+   {
+    "lat": 29.25,
+    "lon": 102.3
+   },
+   {
+    "lat": 29.91,
+    "lon": 102.23,
+    "name": {
+     "en": "Luding Bridge",
+     "pt": "Ponte de Luding"
+    }
+   },
+   {
+    "lat": 30.6,
+    "lon": 102.7
+   },
+   {
+    "lat": 31,
+    "lon": 102.36
+   },
+   {
+    "lat": 33.58,
+    "lon": 102.96,
+    "name": {
+     "en": "Zoigê grasslands",
+     "pt": "Pântanos de Zoigê"
+    }
+   },
+   {
+    "lat": 34.15,
+    "lon": 103.9
+   },
+   {
+    "lat": 34.23,
+    "lon": 104.2
+   },
+   {
+    "lat": 35.67,
+    "lon": 106.2
+   },
+   {
+    "lat": 36.93,
+    "lon": 108.18,
+    "name": {
+     "en": "Wuqi (Shaanxi)",
+     "pt": "Wuqi (Shaanxi)"
+    }
+   }
+  ],
+  "extract": {
+   "en": "The Long March was a military retreat by the Chinese Communist Party (CCP) and Chinese Red Army from advancing Kuomintang (KMT) National Revolutionary Army during the Chinese Civil War, occurring between October 1934 and October 1935. About 100,000 troops retreated from the Jiangxi Soviet and other bases to a new headquarters in Yan'an, Shaanxi, travelling approximately 10,000 kilometres. About 8,000 troops ultimately survived the Long March.",
+   "pt": "A Grande Marcha foi uma retirada militar do Partido Comunista da China (PCC) e do Exército Vermelho Chinês diante do avanço do Kuomintang (KMT) e de seu Exército Nacional Revolucionário Chinês durante a Guerra Civil Chinesa, ocorrida entre outubro de 1934 e outubro de 1935. Cerca de 100 000 soldados recuaram do Soviete de Jiangxi e de outras bases para um novo quartel-general em Yan'an, Shaanxi, percorrendo aproximadamente 10 000 km. Cerca de 8 000 soldados sobreviveram à Grande Marcha."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Long_March",
+   "pt": "https://pt.wikipedia.org/wiki/Grande_Marcha"
+  }
+ },
+ {
+  "id": "kon-tiki",
+  "name": {
+   "en": "Kon-Tiki expedition",
+   "pt": "Expedição Kon-Tiki"
+  },
+  "start": 1947,
+  "end": 1947,
+  "mode": "sea",
+  "stops": [
+   {
+    "lat": -12.05,
+    "lon": -77.2,
+    "name": {
+     "en": "Callao",
+     "pt": "Callao"
+    }
+   },
+   {
+    "lat": -10,
+    "lon": -85
+   },
+   {
+    "lat": -7,
+    "lon": -100
+   },
+   {
+    "lat": -6,
+    "lon": -115
+   },
+   {
+    "lat": -8,
+    "lon": -128
+   },
+   {
+    "lat": -13,
+    "lon": -138
+   },
+   {
+    "lat": -16.05,
+    "lon": -142.4,
+    "name": {
+     "en": "Raroia (Tuamotus)",
+     "pt": "Raroia (Tuamotus)"
+    }
+   }
+  ],
+  "extract": {
+   "en": "The Kon-Tiki expedition was a 1947 journey by raft across the Pacific Ocean from South America to the Polynesian islands, led by Norwegian explorer and ethnographer Thor Heyerdahl. The raft was named Kon-Tiki after the Inca god Viracocha, for whom \"Kon-Tiki\" was said to be an old name. Heyerdahl's book on the expedition was entitled The Kon-Tiki Expedition: By Raft Across the South Seas. A 1950 documentary film won the Academy Award for Best Documentary Feature. A 2012 dramatized feature film was nominated for the Academy Award for Best Foreign Language Film.",
+   "pt": "Kon-Tiki foi o barco utilizado pelo explorador norueguês Thor Heyerdahl (1914-2002), em sua expedição pelo Oceano Pacífico, partindo da América do Sul para a Polinésia, em 1947, com o intuito de demonstrar a possibilidade de que a colonização da Polinésia tinha sido realizada por via marítima por indígenas da América do Sul. O nome do barco foi homenagem ao deus do sol inca, Viracocha, o qual era também chamado de \"Kon-Tiki\" pelos habitantes da Polinésia. A palavra \"tiki\" significa um deus, portanto, o deus Kon. Kon-Tiki é também o nome do livro que Heyerdahl escreveu sobre sua expedição."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Kon-Tiki_expedition",
+   "pt": "https://pt.wikipedia.org/wiki/Expedi%C3%A7%C3%A3o_Kon-Tiki"
+  }
+ },
+ {
+  "id": "leif-erikson",
+  "name": {
+   "en": "Leif Erikson's voyage to Vinland",
+   "pt": "Viagem de Leif Erikson a Vinlândia"
+  },
+  "start": 1000,
+  "end": 1000,
+  "mode": "sea",
+  "stops": [
+   {
+    "lat": 61.15,
+    "lon": -45.5,
+    "name": {
+     "en": "Brattahlíð (Greenland)",
+     "pt": "Brattahlíð (Groenlândia)"
+    }
+   },
+   {
+    "lat": 60.3,
+    "lon": -47.5
+   },
+   {
+    "lat": 63.5,
+    "lon": -53
+   },
+   {
+    "lat": 66.5,
+    "lon": -56
+   },
+   {
+    "lat": 66.6,
+    "lon": -61.5,
+    "name": {
+     "en": "Helluland (Baffin Island)",
+     "pt": "Helluland (Ilha de Baffin)"
+    }
+   },
+   {
+    "lat": 61,
+    "lon": -62.5
+   },
+   {
+    "lat": 58,
+    "lon": -61.3
+   },
+   {
+    "lat": 54.5,
+    "lon": -56.3,
+    "name": {
+     "en": "Markland (Labrador)",
+     "pt": "Markland (Labrador)"
+    }
+   },
+   {
+    "lat": 52.2,
+    "lon": -55
+   },
+   {
+    "lat": 51.6,
+    "lon": -55.5,
+    "name": {
+     "en": "Vinland (L'Anse aux Meadows)",
+     "pt": "Vinlândia (L'Anse aux Meadows)"
+    }
+   }
+  ],
+  "extract": {
+   "en": "Leif Erikson, also known as Leif the Lucky, was a Norse explorer who is thought to have been the first European to set foot on continental America, approximately half a millennium before Christopher Columbus. According to the sagas of Icelanders, he established a Norse settlement at Vinland, which is usually interpreted as being coastal North America. There is ongoing speculation that the settlement made by Leif and his crew corresponds to the remains of a Norse settlement found in Newfoundland, Canada, called L'Anse aux Meadows, which was occupied approximately 1,000 years ago.",
+   "pt": "Leif Eriksson, Leivo[carece de fontes]? ou Leifo[carece de fontes]? ou Leivo, filho de Érico,[carece de fontes]? foi um explorador marítimo islandês nórdico católico, reconhecido como o primeiro europeu a chegar ao continente americano, mais especificamente, à região que se tornaria Terra Nova e Labrador no atual Canadá. \nEra filho de Érico, o Vermelho, um fora-da-lei que, após ter sido expulso da Noruega e da Islândia, desembarcou na Groenlândia (descobriu-a) e lá fundou duas colônias nórdicas, a Colônia do Oeste (Vestribyggð) e a Colônia do Leste (Eystribyggð)."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Leif_Erikson",
+   "pt": "https://pt.wikipedia.org/wiki/Leif_Eriksson"
+  }
+ },
+ {
+  "id": "bering",
+  "name": {
+   "en": "Bering's Great Northern Expedition",
+   "pt": "Grande Expedição do Norte de Bering"
+  },
+  "start": 1733,
+  "end": 1741,
+  "mode": "mixed",
+  "stops": [
+   {
+    "lat": 59.94,
+    "lon": 30.31,
+    "name": {
+     "en": "St Petersburg",
+     "pt": "São Petersburgo"
+    }
+   },
+   {
+    "lat": 58.2,
+    "lon": 68.25
+   },
+   {
+    "lat": 58.45,
+    "lon": 92.17
+   },
+   {
+    "lat": 56.8,
+    "lon": 105.7
+   },
+   {
+    "lat": 62.03,
+    "lon": 129.73,
+    "name": {
+     "en": "Yakutsk",
+     "pt": "Yakutsk"
+    }
+   },
+   {
+    "lat": 59.36,
+    "lon": 143.2
+   },
+   {
+    "lat": 56,
+    "lon": 148
+   },
+   {
+    "lat": 50.5,
+    "lon": 156.3
+   },
+   {
+    "lat": 51.5,
+    "lon": 158.6
+   },
+   {
+    "lat": 52.95,
+    "lon": 158.75,
+    "name": {
+     "en": "Petropavlovsk (Kamchatka)",
+     "pt": "Petropavlovsk (Kamchatka)"
+    }
+   },
+   {
+    "lat": 47,
+    "lon": 170
+   },
+   {
+    "lat": 48,
+    "lon": -170
+   },
+   {
+    "lat": 55,
+    "lon": -150
+   },
+   {
+    "lat": 59.9,
+    "lon": -144.4,
+    "name": {
+     "en": "Kayak Island (Alaska)",
+     "pt": "Ilha Kayak (Alasca)"
+    }
+   },
+   {
+    "lat": 56.5,
+    "lon": -152
+   },
+   {
+    "lat": 54.7,
+    "lon": -160
+   },
+   {
+    "lat": 52,
+    "lon": -172
+   },
+   {
+    "lat": 53,
+    "lon": 175
+   },
+   {
+    "lat": 55,
+    "lon": 166.2,
+    "name": {
+     "en": "Bering Island",
+     "pt": "Ilha de Bering"
+    }
+   }
+  ],
+  "extract": {
+   "en": "The Great Northern Expedition or Second Kamchatka Expedition was a major Russian Arctic expedition between roughly 1733 and 1743, which mapped most of the Arctic coast of Siberia and much of the Arctic coast of North America, greatly reducing \"white areas\" on maps. It was conceived by Russian emperor Peter the Great, and took place under empresses Anna and Elizabeth. Peter hoped for the 18th-century Russian Navy to map a Northern Sea Route from Europe to the Pacific. The endeavour was sponsored by the Admiralty College in Saint Petersburg. The main organiser and leader of the expedition was Vitus Bering, who had been commissioned by Peter to lead the earlier First Kamchatka Expedition. With over 3,000 people directly or indirectly involved, it was one of the largest expeditions in history.",
+   "pt": "A Grande Expedição do Norte foi uma das maiores expedições exploratórias da história, mapeando grande parte da costa ártica da Sibéria e trechos da costa noroeste da América do Norte. O empreendimento se desenrolou principalmente entre 1733 e 1743. Também conhecida como Segunda Expedição de Kamchatka, não constituiu uma viagem única, mas um programa coordenado de levantamentos marítimos e terrestres que se estendeu do mar Branco ao estreito de Bering, às ilhas Curilas, ao arquipélago japonês e às costas do atual Alasca. Sete destacamentos navais e hidrográficos receberam setores geográficos próprios, aos quais se associou um grupo subordinado à Academia de Ciências de São Petersburgo, incumbido de estudar a história, os povos, as línguas, a flora, a fauna, o clima e os recursos naturais da Sibéria. O capitão-comandante Vitus Bering detinha a direção geral da maior parte do programa, embora os dois destacamentos ocidentais respondessem diretamente ao Colégio do Almirantado. O plano inicial previa 977 integrantes nos sete destacamentos de exploração, sem contar o grupo acadêmico, e o conjunto da operação envolveu mais de três mil pessoas entre oficiais, marinheiros, soldados, construtores, geodesistas, intérpretes, estudantes, trabalhadores e pessoal de apoio. A esses números somou-se um contingente não quantificado de habitantes da Sibéria obrigado ou contratado para fornecer transportes, alimentos, embarcações, animais de tração e conhecimento das rotas."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Great_Northern_Expedition",
+   "pt": "https://pt.wikipedia.org/wiki/Grande_Expedi%C3%A7%C3%A3o_do_Norte"
+  }
+ },
+ {
+  "id": "orellana",
+  "name": {
+   "en": "Orellana's descent of the Amazon",
+   "pt": "Descida do Amazonas por Orellana"
+  },
+  "start": 1541,
+  "end": 1542,
+  "mode": "river",
+  "stops": [
+   {
+    "lat": -0.22,
+    "lon": -78.51,
+    "name": {
+     "en": "Quito",
+     "pt": "Quito"
+    }
+   },
+   {
+    "lat": -0.47,
+    "lon": -76.98
+   },
+   {
+    "lat": -0.96,
+    "lon": -75.2
+   },
+   {
+    "lat": -3.45,
+    "lon": -72.7,
+    "name": {
+     "en": "Mouth of the Napo",
+     "pt": "Foz do Napo"
+    }
+   },
+   {
+    "lat": -3.35,
+    "lon": -64.7
+   },
+   {
+    "lat": -3.13,
+    "lon": -59.98,
+    "name": {
+     "en": "Rio Negro",
+     "pt": "Rio Negro"
+    }
+   },
+   {
+    "lat": -2.63,
+    "lon": -56.74
+   },
+   {
+    "lat": -2.44,
+    "lon": -54.7
+   },
+   {
+    "lat": -1.4,
+    "lon": -51.65
+   },
+   {
+    "lat": 0.2,
+    "lon": -49.7,
+    "name": {
+     "en": "Mouth of the Amazon",
+     "pt": "Foz do Amazonas"
+    }
+   },
+   {
+    "lat": 5,
+    "lon": -50.5
+   },
+   {
+    "lat": 8,
+    "lon": -57
+   },
+   {
+    "lat": 11.5,
+    "lon": -61.3
+   },
+   {
+    "lat": 10.85,
+    "lon": -64.2,
+    "name": {
+     "en": "Cubagua",
+     "pt": "Cubagua"
+    }
+   }
+  ],
+  "extract": {
+   "en": "Francisco de Orellana was a Spanish explorer and conquistador significant to the Spanish exploration and conquests in South America. In one of the most improbably successful voyages in known history, Orellana managed to sail the length of the Amazon, arriving at the river's mouth on 24 August 1542. He and his party sailed along the Atlantic coast until reaching Cubagua Island, near the coast of Venezuela.",
+   "pt": "Francisco de Orellana foi um explorador, conquistador e corregedor espanhol na época da colonização hispânica na América. Participou da conquista do Império Inca e, posteriormente, da descoberta do Rio Amazonas. Foi nomeado governador em várias cidades, também foi considerado um dos mais ricos conquistadores de sua época. Em 1535, participou da pacificação e fundação de Portoviejo, onde ocupou os cargos de terceiro tenente, prefeito comum e vice-governador. Em 1537 refundou a cidade de Guayaquil, realojada por diferentes colonos espanhóis. No ano seguinte, recebeu o título de vice-governador de Guayaquil. Depois de terminar a reconstrução da cidade, partiu para Quito e, juntamente com Gonzalo Pizarro, organizou uma expedição que terminaria com a descoberta do grande rio. Depois de sobreviver à viagem pelo rio, partiu de volta à Espanha onde foi acusado de traição por acusações de Pizarro. Após ser absolvido organizou outra expedição, mas não obteve sucessos. Por esta razão, se dedicou à pirataria e voltou para o rio Amazonas, onde juntamente com a maioria de sua tripulação, morreu sem uma localização específica ao longo da foz do rio."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Francisco_de_Orellana",
+   "pt": "https://pt.wikipedia.org/wiki/Francisco_de_Orellana"
+  }
+ },
+ {
+  "id": "cortes",
+  "name": {
+   "en": "Cortés's march on Tenochtitlan",
+   "pt": "Marcha de Cortés até Tenochtitlán"
+  },
+  "start": 1519,
+  "end": 1519,
+  "mode": "mixed",
+  "stops": [
+   {
+    "lat": 19.95,
+    "lon": -75.85,
+    "name": {
+     "en": "Santiago de Cuba",
+     "pt": "Santiago de Cuba"
+    }
+   },
+   {
+    "lat": 19.5,
+    "lon": -78
+   },
+   {
+    "lat": 21.2,
+    "lon": -84
+   },
+   {
+    "lat": 21.7,
+    "lon": -85.3
+   },
+   {
+    "lat": 20.45,
+    "lon": -86.85,
+    "name": {
+     "en": "Cozumel",
+     "pt": "Cozumel"
+    }
+   },
+   {
+    "lat": 21.8,
+    "lon": -86.9
+   },
+   {
+    "lat": 21.9,
+    "lon": -90.5
+   },
+   {
+    "lat": 19.9,
+    "lon": -91
+   },
+   {
+    "lat": 18.7,
+    "lon": -92.65,
+    "name": {
+     "en": "Potonchán (Tabasco)",
+     "pt": "Potonchán (Tabasco)"
+    }
+   },
+   {
+    "lat": 18.9,
+    "lon": -94.5
+   },
+   {
+    "lat": 19.2,
+    "lon": -96.1,
+    "name": {
+     "en": "Veracruz",
+     "pt": "Veracruz"
+    }
+   },
+   {
+    "lat": 19.45,
+    "lon": -96.4
+   },
+   {
+    "lat": 19.54,
+    "lon": -96.92
+   },
+   {
+    "lat": 19.32,
+    "lon": -98.24,
+    "name": {
+     "en": "Tlaxcala",
+     "pt": "Tlaxcala"
+    }
+   },
+   {
+    "lat": 19.06,
+    "lon": -98.3
+   },
+   {
+    "lat": 19.09,
+    "lon": -98.65
+   },
+   {
+    "lat": 19.43,
+    "lon": -99.13,
+    "name": {
+     "en": "Tenochtitlan",
+     "pt": "Tenochtitlán"
+    }
+   }
+  ],
+  "extract": {
+   "en": "The Spanish conquest of the Aztec Empire, also known as the Conquest of Mexico-Tenochtitlan, was a pivotal event that took place during the Spanish colonization of the Americas, marked by the collision of the Aztec Triple Alliance and the Spanish Empire with a coalition of Native Indigenous allies. Between 1519 and 1521, Spanish conquistador Hernán Cortés, his small army of European soldiers and the large allied army of Indian auxiliaries, overthrew the most powerful pre-Columbian empire to exist in Mesoamerica.",
+   "pt": "A Conquista espanhola do Império Asteca foi um evento pivotal na história das Américas, marcado pelo choque entre a Tríplice Aliança Asteca e o Império Espanhol e seus aliados indígenas. Ocorrida entre 1519 e 1521, este evento testemunhou o conquistador espanhol Hernán Cortés e seu pequeno exército de soldados europeus e numerosos aliados indígenas derrubarem um dos impérios mais poderosos da Mesoamérica."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Spanish_conquest_of_the_Aztec_Empire",
+   "pt": "https://pt.wikipedia.org/wiki/Conquista_do_Imp%C3%A9rio_Asteca"
+  }
+ },
+ {
+  "id": "bounty",
+  "name": {
+   "en": "Voyage of the Bounty",
+   "pt": "Viagem do Bounty"
+  },
+  "start": 1787,
+  "end": 1789,
+  "mode": "sea",
+  "stops": [
+   {
+    "lat": 50.75,
+    "lon": -1.1,
+    "name": {
+     "en": "Spithead (Portsmouth)",
+     "pt": "Spithead (Portsmouth)"
+    }
+   },
+   {
+    "lat": 48,
+    "lon": -8
+   },
+   {
+    "lat": 28.5,
+    "lon": -16,
+    "name": {
+     "en": "Tenerife",
+     "pt": "Tenerife"
+    }
+   },
+   {
+    "lat": 5,
+    "lon": -25
+   },
+   {
+    "lat": -25,
+    "lon": -38
+   },
+   {
+    "lat": -45,
+    "lon": -58
+   },
+   {
+    "lat": -57.5,
+    "lon": -68,
+    "name": {
+     "en": "Cape Horn (turned back)",
+     "pt": "Cabo Horn (deu meia-volta)"
+    }
+   },
+   {
+    "lat": -50,
+    "lon": -40
+   },
+   {
+    "lat": -40,
+    "lon": 0
+   },
+   {
+    "lat": -34.4,
+    "lon": 18.5,
+    "name": {
+     "en": "Cape Town",
+     "pt": "Cidade do Cabo"
+    }
+   },
+   {
+    "lat": -40,
+    "lon": 40
+   },
+   {
+    "lat": -42,
+    "lon": 90
+   },
+   {
+    "lat": -44.5,
+    "lon": 135
+   },
+   {
+    "lat": -43.8,
+    "lon": 146.8
+   },
+   {
+    "lat": -43.35,
+    "lon": 147.45,
+    "name": {
+     "en": "Tasmania",
+     "pt": "Tasmânia"
+    }
+   },
+   {
+    "lat": -48,
+    "lon": 165
+   },
+   {
+    "lat": -45,
+    "lon": -170
+   },
+   {
+    "lat": -30,
+    "lon": -150
+   },
+   {
+    "lat": -17.5,
+    "lon": -149.5,
+    "name": {
+     "en": "Tahiti",
+     "pt": "Taiti"
+    }
+   },
+   {
+    "lat": -19,
+    "lon": -165
+   },
+   {
+    "lat": -19.75,
+    "lon": -175.07,
+    "name": {
+     "en": "Tofua (the mutiny)",
+     "pt": "Tofua (o motim)"
+    }
+   },
+   {
+    "lat": -17,
+    "lon": 178
+   },
+   {
+    "lat": -14.5,
+    "lon": 167
+   },
+   {
+    "lat": -12.5,
+    "lon": 155
+   },
+   {
+    "lat": -12.9,
+    "lon": 143.7
+   },
+   {
+    "lat": -10.5,
+    "lon": 142.4
+   },
+   {
+    "lat": -10.3,
+    "lon": 135
+   },
+   {
+    "lat": -10.2,
+    "lon": 123.5,
+    "name": {
+     "en": "Kupang (Timor)",
+     "pt": "Kupang (Timor)"
+    }
+   }
+  ],
+  "extract": {
+   "en": "The Mutiny on the Bounty occurred in the Pacific Ocean on 28 April 1789. Disaffected crewmen, led by acting-Lieutenant Fletcher Christian, seized control of the Royal Navy merchant ship HMS Bounty from its captain, Lieutenant William Bligh, and set him and 18 loyalists adrift in the ship's open launch. The reasons behind the mutiny are still debated.",
+   "pt": "O motim do HMS Bounty ocorreu a bordo do navio HMS Bounty da Marinha Real Britânica em 28 de abril de 1789 no meio do Oceano Pacífico. Tripulantes insatisfeitos liderados pelo mestre assistente Fletcher Christian tomaram o controle da embarcação das mãos de seu comandante, o tenente William Bligh, deixando-o à deriva abordo de um bote com poucos suprimentos junto com outros dezoito marinheiros. Os amotinados se estabeleceram no Taiti ou nas Ilhas Pitcairn; enquanto isso Bligh conseguiu realizar uma viagem de mais de 6 500 quilômetros no bote até encontrar terra, começando então um processo para levar os amotinados para a justiça."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Mutiny_on_the_Bounty",
+   "pt": "https://pt.wikipedia.org/wiki/Motim_do_HMS_Bounty"
+  }
+ },
+ {
+  "id": "prestes",
+  "name": {
+   "en": "The Prestes Column",
+   "pt": "Coluna Prestes"
+  },
+  "start": 1925,
+  "end": 1927,
+  "mode": "land",
+  "stops": [
+   {
+    "lat": -28.3,
+    "lon": -54.27,
+    "name": {
+     "en": "Santo Ângelo",
+     "pt": "Santo Ângelo"
+    }
+   },
+   {
+    "lat": -25.55,
+    "lon": -54.58,
+    "name": {
+     "en": "Foz do Iguaçu",
+     "pt": "Foz do Iguaçu"
+    }
+   },
+   {
+    "lat": -22.53,
+    "lon": -55.72
+   },
+   {
+    "lat": -20.45,
+    "lon": -54.6
+   },
+   {
+    "lat": -17.57,
+    "lon": -52.55
+   },
+   {
+    "lat": -15.93,
+    "lon": -50.14
+   },
+   {
+    "lat": -10.7,
+    "lon": -48.42,
+    "name": {
+     "en": "Porto Nacional",
+     "pt": "Porto Nacional"
+    }
+   },
+   {
+    "lat": -7.33,
+    "lon": -47.47
+   },
+   {
+    "lat": -5.09,
+    "lon": -42.8,
+    "name": {
+     "en": "Teresina",
+     "pt": "Teresina"
+    }
+   },
+   {
+    "lat": -5.18,
+    "lon": -40.67
+   },
+   {
+    "lat": -7.2,
+    "lon": -37.93,
+    "name": {
+     "en": "Piancó",
+     "pt": "Piancó"
+    }
+   },
+   {
+    "lat": -8.07,
+    "lon": -39.12
+   },
+   {
+    "lat": -12.56,
+    "lon": -41.39
+   },
+   {
+    "lat": -15.5,
+    "lon": -42.5
+   },
+   {
+    "lat": -12.1,
+    "lon": -45
+   },
+   {
+    "lat": -13.5,
+    "lon": -48.2
+   },
+   {
+    "lat": -15.6,
+    "lon": -56.1
+   },
+   {
+    "lat": -16.07,
+    "lon": -57.68
+   },
+   {
+    "lat": -16.36,
+    "lon": -58.4,
+    "name": {
+     "en": "San Matías (Bolivia)",
+     "pt": "San Matías (Bolívia)"
+    }
+   }
+  ],
+  "extract": {
+   "en": "The Coluna Prestes, also known as the Coluna Miguel Costa-Prestes or, formally, the 1st Revolutionary Division, was a Brazilian political-military movement associated with Tenentism that operated between 1924 and 1927. It emerged from dissatisfaction with the government of Artur Bernardes and with the oligarchic order of the First Brazilian Republic, especially the political arrangements commonly associated with the café com leite system. Its demands included the secret ballot, the defense of public education, and broader criticism of poverty and social injustice in Brazil. Although the Column was organized as an armed march, several authors have noted that its composition was not limited to professional officers. Many of its rank-and-file participants were rural workers, including illiterate or semi-literate men, and about fifty women accompanied the march, several of whom took part in combat. Over roughly two and a half years, the Column, usually estimated at about 1,500 combatants, marched approximately 25,000 kilometres through thirteen Brazilian states while avoiding destruction by government forces. Its survival helped weaken the prestige of the oligarchic government and kept tenentist opposition active until the political crisis that culminated in the Revolution of 1930.",
+   "pt": "A Coluna Prestes ou Coluna Miguel Costa-Prestes, formalmente designada 1.ª Divisão Revolucionária, foi um movimento político-militar brasileiro de teor tenentista ocorrido entre 1924 e 1927. O principal motivo para a criação do movimento foi a insatisfação com o governo de Artur Bernardes e o regime oligárquico, característico da República Velha, conhecido como política do café com leite. Suas reivindicações foram a implementação do voto secreto, a defesa do ensino público e a obrigatoriedade do ensino secundário para toda a população, além de acabar com a miséria e a injustiça social no Brasil. Em seus dois anos e meio de duração, a Coluna, composta de 1,5 mil homens, percorreu cerca de 25 mil quilômetros, através de treze estados do Brasil."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Coluna_Prestes",
+   "pt": "https://pt.wikipedia.org/wiki/Coluna_Prestes"
+  }
+ },
+ {
+  "id": "motorcycle-diaries",
+  "name": {
+   "en": "Che Guevara's motorcycle journey",
+   "pt": "Viagem de motocicleta de Che Guevara"
+  },
+  "start": 1952,
+  "end": 1952,
+  "mode": "land",
+  "stops": [
+   {
+    "lat": -34.6,
+    "lon": -58.38,
+    "name": {
+     "en": "Buenos Aires",
+     "pt": "Buenos Aires"
+    }
+   },
+   {
+    "lat": -38.27,
+    "lon": -57.84
+   },
+   {
+    "lat": -38.72,
+    "lon": -62.27
+   },
+   {
+    "lat": -41.13,
+    "lon": -71.3,
+    "name": {
+     "en": "Bariloche",
+     "pt": "Bariloche"
+    }
+   },
+   {
+    "lat": -40.57,
+    "lon": -73.13
+   },
+   {
+    "lat": -38.74,
+    "lon": -72.6
+   },
+   {
+    "lat": -33.45,
+    "lon": -70.67,
+    "name": {
+     "en": "Santiago",
+     "pt": "Santiago"
+    }
+   },
+   {
+    "lat": -33.05,
+    "lon": -71.62
+   },
+   {
+    "lat": -23.65,
+    "lon": -70.4
+   },
+   {
+    "lat": -22.3,
+    "lon": -68.9,
+    "name": {
+     "en": "Chuquicamata",
+     "pt": "Chuquicamata"
+    }
+   },
+   {
+    "lat": -18.48,
+    "lon": -70.3
+   },
+   {
+    "lat": -15.84,
+    "lon": -70.02
+   },
+   {
+    "lat": -13.53,
+    "lon": -71.97,
+    "name": {
+     "en": "Cusco",
+     "pt": "Cusco"
+    }
+   },
+   {
+    "lat": -13.16,
+    "lon": -72.55
+   },
+   {
+    "lat": -13.63,
+    "lon": -72.88
+   },
+   {
+    "lat": -12.05,
+    "lon": -77.04,
+    "name": {
+     "en": "Lima",
+     "pt": "Lima"
+    }
+   },
+   {
+    "lat": -8.38,
+    "lon": -74.55
+   },
+   {
+    "lat": -3.75,
+    "lon": -73.25
+   },
+   {
+    "lat": -4.02,
+    "lon": -71.1,
+    "name": {
+     "en": "San Pablo leper colony",
+     "pt": "Leprosário de San Pablo"
+    }
+   },
+   {
+    "lat": -4.2,
+    "lon": -69.94
+   },
+   {
+    "lat": 4.71,
+    "lon": -74.07,
+    "name": {
+     "en": "Bogotá",
+     "pt": "Bogotá"
+    }
+   },
+   {
+    "lat": 7.89,
+    "lon": -72.5
+   },
+   {
+    "lat": 10.49,
+    "lon": -66.88,
+    "name": {
+     "en": "Caracas",
+     "pt": "Caracas"
+    }
+   }
+  ],
+  "extract": {
+   "en": "The Motorcycle Diaries is a posthumously published memoir of the Argentine Marxist revolutionary Ernesto \"Che\" Guevara. It traces his early travels as a 23-year-old medical student with his friend Alberto Granado, a 29-year-old biochemist. Leaving Buenos Aires, Argentina in January 1952 on the back of a sputtering single cylinder 1939 Norton 500cc dubbed La Poderosa, they desired to explore the South America they only knew from books. During the formative odyssey, Guevara is transformed by witnessing the social injustices of exploited mine workers, persecuted communists, ostracized lepers, and the tattered descendants of a once-great Inca civilization. By journey's end, they had travelled for a \"symbolic nine months\" by motorcycle, steamship, raft, horse, bus, and hitchhiking, covering more than 8,000 kilometres across places such as the Andes, the Atacama Desert, and the Amazon River Basin.",
+   "pt": null
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/The_Motorcycle_Diaries_(book)",
+   "pt": null
+  }
+ },
+ {
+  "id": "mansa-musa",
+  "name": {
+   "en": "Mansa Musa's pilgrimage to Mecca",
+   "pt": "Peregrinação de Mansa Musa a Meca"
+  },
+  "start": 1324,
+  "end": 1325,
+  "mode": "land",
+  "stops": [
+   {
+    "lat": 11.38,
+    "lon": -8.38,
+    "name": {
+     "en": "Niani (Mali)",
+     "pt": "Niani (Mali)"
+    }
+   },
+   {
+    "lat": 17.3,
+    "lon": -7.03,
+    "name": {
+     "en": "Walata",
+     "pt": "Ualata"
+    }
+   },
+   {
+    "lat": 23.6,
+    "lon": -5,
+    "name": {
+     "en": "Taghaza",
+     "pt": "Taghaza"
+    }
+   },
+   {
+    "lat": 27.87,
+    "lon": -0.29,
+    "name": {
+     "en": "Tuat",
+     "pt": "Tuat"
+    }
+   },
+   {
+    "lat": 30.13,
+    "lon": 9.5
+   },
+   {
+    "lat": 30.04,
+    "lon": 31.24,
+    "name": {
+     "en": "Cairo",
+     "pt": "Cairo"
+    }
+   },
+   {
+    "lat": 29.53,
+    "lon": 35
+   },
+   {
+    "lat": 24.47,
+    "lon": 39.61
+   },
+   {
+    "lat": 21.42,
+    "lon": 39.83,
+    "name": {
+     "en": "Mecca",
+     "pt": "Meca"
+    }
+   }
+  ],
+  "extract": {
+   "en": "Mansa Musa was the ninth Mansa of the Mali Empire, which reached its territorial peak during his reign. Musa's reign is often regarded as the zenith of Mali's power and prestige, although he features less in Mandinka oral traditions than his predecessors.",
+   "pt": "Muça I, comumente referido como Mansa Muça, foi o nono mansa, que se traduz como \"rei dos reis\" ou \"imperador\", do Império do Mali, além de ser reconhecido como o homem mais rico da história nos últimos mil anos, conforme estudo publicado em 2012 e que procedeu à atualização monetária dos valores, onde Muça teria uma fortuna estimada, naquele ano, de quatrocentos bilhões de dólares. No momento da ascensão de Muça ao trono, o Império do Mali consistia nos territórios anteriormente pertencentes ao Império do Gana e Mali; e áreas circundantes. Muça obteve muitos títulos, incluindo Emir do Mali; Senhor das Minas dos Uangaras; e conquistador de Ganata, Futa Jalom e pelo menos outra dúzia de estados."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Mansa_Musa",
+   "pt": "https://pt.wikipedia.org/wiki/Mansa_Mu%C3%A7a"
+  }
+ },
+ {
+  "id": "first-crusade",
+  "name": {
+   "en": "The First Crusade",
+   "pt": "Primeira Cruzada"
+  },
+  "start": 1096,
+  "end": 1099,
+  "mode": "land",
+  "stops": [
+   {
+    "lat": 45.78,
+    "lon": 3.08,
+    "name": {
+     "en": "Clermont",
+     "pt": "Clermont"
+    }
+   },
+   {
+    "lat": 49.02,
+    "lon": 12.1
+   },
+   {
+    "lat": 48.2,
+    "lon": 16.37
+   },
+   {
+    "lat": 44.8,
+    "lon": 20.46,
+    "name": {
+     "en": "Belgrade",
+     "pt": "Belgrado"
+    }
+   },
+   {
+    "lat": 43.32,
+    "lon": 21.9
+   },
+   {
+    "lat": 42.7,
+    "lon": 23.32
+   },
+   {
+    "lat": 41.68,
+    "lon": 26.56
+   },
+   {
+    "lat": 41.01,
+    "lon": 28.98,
+    "name": {
+     "en": "Constantinople",
+     "pt": "Constantinopla"
+    }
+   },
+   {
+    "lat": 40.43,
+    "lon": 29.72,
+    "name": {
+     "en": "Nicaea",
+     "pt": "Niceia"
+    }
+   },
+   {
+    "lat": 39.78,
+    "lon": 30.52
+   },
+   {
+    "lat": 37.87,
+    "lon": 32.48
+   },
+   {
+    "lat": 37.5,
+    "lon": 34.05
+   },
+   {
+    "lat": 38.72,
+    "lon": 35.48
+   },
+   {
+    "lat": 37.58,
+    "lon": 36.93
+   },
+   {
+    "lat": 36.2,
+    "lon": 36.16,
+    "name": {
+     "en": "Antioch",
+     "pt": "Antioquia"
+    }
+   },
+   {
+    "lat": 35.64,
+    "lon": 36.67
+   },
+   {
+    "lat": 34.44,
+    "lon": 35.85
+   },
+   {
+    "lat": 33.89,
+    "lon": 35.5
+   },
+   {
+    "lat": 32.93,
+    "lon": 35.07
+   },
+   {
+    "lat": 31.93,
+    "lon": 34.87
+   },
+   {
+    "lat": 31.78,
+    "lon": 35.23,
+    "name": {
+     "en": "Jerusalem",
+     "pt": "Jerusalém"
+    }
+   }
+  ],
+  "extract": {
+   "en": "The First Crusade (1096–1099) was the first of a series of religious wars, or Crusades, which were initiated, supported and at times directed by the Latin Church in the Middle Ages. Their aim was to return the Holy Land to Christian rule after its conquest by the Rashidun Caliphate in the 7th century. By the 11th century, although Jerusalem had then been ruled by Muslims for hundreds of years, the practices of the Seljuk rulers in the region began to threaten local Christian populations, pilgrimages from the West, and the Byzantine Empire itself. The earliest impetus for the First Crusade came in 1095 when Byzantine emperor Alexios I Komnenos sent ambassadors to the Council of Piacenza to request military support in the empire's conflict with the Seljuk-led Turks. This was followed later in the year by the Council of Clermont, at which Pope Urban II gave a speech supporting the Byzantine request and urging faithful Christians to undertake an armed pilgrimage to Jerusalem.",
+   "pt": "A Primeira Cruzada (1096–1099) foi a primeira de uma série de guerras religiosas, ou Cruzadas, iniciadas, apoiadas e às vezes dirigidas pela Igreja Católica no período medieval. O objetivo era recuperar a Terra Santa do domínio islâmico. Embora Jerusalém tenha estado sob domínio muçulmano por centenas de anos, no século XI, a conquista da região pelos seljúcidas ameaçou as populações cristãs locais, as peregrinações do Ocidente e o próprio Império Bizantino. A primeira iniciativa da Primeira Cruzada começou em 1095, quando o imperador bizantino Aleixo I Comneno solicitou apoio militar do Concílio de Placência no conflito do império com os turcos liderados pelos seljúcidas. Isso foi seguido no final do ano pelo Concílio de Clermont, durante o qual o papa Urbano II apoiou o pedido bizantino de ajuda militar e também exortou os cristãos fiéis a empreender uma peregrinação armada a Jerusalém."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/First_Crusade",
+   "pt": "https://pt.wikipedia.org/wiki/Primeira_Cruzada"
+  }
+ },
+ {
+  "id": "graf-zeppelin",
+  "name": {
+   "en": "World flight of the Graf Zeppelin",
+   "pt": "Volta ao mundo do Graf Zeppelin"
+  },
+  "start": 1929,
+  "end": 1929,
+  "mode": "air",
+  "stops": [
+   {
+    "lat": 40.03,
+    "lon": -74.35,
+    "name": {
+     "en": "Lakehurst (New Jersey)",
+     "pt": "Lakehurst (Nova Jersey)"
+    }
+   },
+   {
+    "lat": 45,
+    "lon": -55
+   },
+   {
+    "lat": 48,
+    "lon": -30
+   },
+   {
+    "lat": 47.5,
+    "lon": -5
+   },
+   {
+    "lat": 47.65,
+    "lon": 9.48,
+    "name": {
+     "en": "Friedrichshafen",
+     "pt": "Friedrichshafen"
+    }
+   },
+   {
+    "lat": 52.5,
+    "lon": 13.4
+   },
+   {
+    "lat": 54.7,
+    "lon": 20.5
+   },
+   {
+    "lat": 59.2,
+    "lon": 39.9
+   },
+   {
+    "lat": 58,
+    "lon": 56.3
+   },
+   {
+    "lat": 62,
+    "lon": 90
+   },
+   {
+    "lat": 62,
+    "lon": 129.7
+   },
+   {
+    "lat": 53.1,
+    "lon": 140.7
+   },
+   {
+    "lat": 45,
+    "lon": 141.5
+   },
+   {
+    "lat": 36.03,
+    "lon": 140.2,
+    "name": {
+     "en": "Tokyo (Kasumigaura)",
+     "pt": "Tóquio (Kasumigaura)"
+    }
+   },
+   {
+    "lat": 40,
+    "lon": 165
+   },
+   {
+    "lat": 45,
+    "lon": -170
+   },
+   {
+    "lat": 43,
+    "lon": -140
+   },
+   {
+    "lat": 37.8,
+    "lon": -122.5
+   },
+   {
+    "lat": 33.94,
+    "lon": -118.4,
+    "name": {
+     "en": "Los Angeles",
+     "pt": "Los Angeles"
+    }
+   },
+   {
+    "lat": 31.8,
+    "lon": -106.4
+   },
+   {
+    "lat": 39.1,
+    "lon": -94.6
+   },
+   {
+    "lat": 41.88,
+    "lon": -87.63
+   },
+   {
+    "lat": 41.5,
+    "lon": -81.7
+   },
+   {
+    "lat": 40.03,
+    "lon": -74.35
+   }
+  ],
+  "extract": {
+   "en": "LZ 127 Graf Zeppelin was a German passenger-carrying hydrogen-filled rigid airship that flew from 1928 to 1937. It offered the first commercial transatlantic passenger flight service. The ship was named after the German airship pioneer Ferdinand von Zeppelin, a count in the German nobility. It was conceived and operated by Hugo Eckener, the chairman of Luftschiffbau Zeppelin.",
+   "pt": "O Graf Zeppelin foi um dirigível fabricado pela empresa Luftschiffbau-Zeppelin GmbH, na Alemanha."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/LZ_127_Graf_Zeppelin",
+   "pt": "https://pt.wikipedia.org/wiki/LZ_127_Graf_Zeppelin"
+  }
+ },
+ {
+  "id": "roosevelt-rondon",
+  "name": {
+   "en": "Roosevelt–Rondon expedition",
+   "pt": "Expedição Roosevelt–Rondon"
+  },
+  "start": 1913,
+  "end": 1914,
+  "mode": "river",
+  "stops": [
+   {
+    "lat": -19,
+    "lon": -57.65,
+    "name": {
+     "en": "Corumbá",
+     "pt": "Corumbá"
+    }
+   },
+   {
+    "lat": -16.07,
+    "lon": -57.68,
+    "name": {
+     "en": "Cáceres",
+     "pt": "Cáceres"
+    }
+   },
+   {
+    "lat": -14.85,
+    "lon": -57.77
+   },
+   {
+    "lat": -13.03,
+    "lon": -58.28
+   },
+   {
+    "lat": -12.74,
+    "lon": -60.14
+   },
+   {
+    "lat": -12.1,
+    "lon": -60.25,
+    "name": {
+     "en": "River of Doubt",
+     "pt": "Rio da Dúvida"
+    }
+   },
+   {
+    "lat": -10.5,
+    "lon": -60.6
+   },
+   {
+    "lat": -8.9,
+    "lon": -60.9
+   },
+   {
+    "lat": -7.57,
+    "lon": -60.67
+   },
+   {
+    "lat": -5.13,
+    "lon": -60.38
+   },
+   {
+    "lat": -3.38,
+    "lon": -58.78
+   },
+   {
+    "lat": -3.13,
+    "lon": -59.98,
+    "name": {
+     "en": "Manaus",
+     "pt": "Manaus"
+    }
+   },
+   {
+    "lat": -3.3,
+    "lon": -58.8
+   },
+   {
+    "lat": -2.44,
+    "lon": -54.7
+   },
+   {
+    "lat": -1.5,
+    "lon": -52.2
+   },
+   {
+    "lat": -1.75,
+    "lon": -50.5
+   },
+   {
+    "lat": -1.45,
+    "lon": -48.5,
+    "name": {
+     "en": "Belém",
+     "pt": "Belém"
+    }
+   }
+  ],
+  "extract": {
+   "en": "The Roosevelt–Rondon Scientific Expedition was a survey expedition in 1913–14 to follow the path of the Rio da Dúvida in the Amazon basin. The expedition was jointly led by Theodore Roosevelt, the former president of the United States, and Colonel Cândido Rondon, a Brazilian explorer who had discovered its headwaters in 1909. Sponsored in part by the American Museum of Natural History, they also collected many new animal and insect specimens. The river was eventually named \"Rio Roosevelt\" after the former president. He nearly died during the voyage and his health was permanently damaged.",
+   "pt": "A Expedição Científica Rondon-Roosevelt ocorreu entre 1913 e 1914, visando seguir o curso do rio da Dúvida, a fim de determinar se ele era ou não afluente do Amazonas, e teve como líderes o Marechal Cândido Rondon e Theodore Roosevelt. Rondon encontraria o rio numa expedição anterior para a construção de uma linha telegráfica, porém a Expedição Científica Rondon-Roosevelt foi o primeiro grupo não-indígena conhecido a explorar o longo curso do rio, localizado em áreas remotas da Bacia Amazônica, na Amazônia, Brasil. Parte patrocinada pelo Museu Americano de História Natural, durante a expedição também foram coletadas várias espécies de animais e insetos."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Roosevelt%E2%80%93Rondon_Scientific_Expedition",
+   "pt": "https://pt.wikipedia.org/wiki/Expedi%C3%A7%C3%A3o_Cient%C3%ADfica_Rondon-Roosevelt"
+  }
+ },
+ {
+  "id": "south-atlantic-flight",
+  "name": {
+   "en": "First aerial crossing of the South Atlantic",
+   "pt": "Primeira travessia aérea do Atlântico Sul"
+  },
+  "start": 1922,
+  "end": 1922,
+  "mode": "air",
+  "stops": [
+   {
+    "lat": 38.69,
+    "lon": -9.21,
+    "name": {
+     "en": "Lisbon",
+     "pt": "Lisboa"
+    }
+   },
+   {
+    "lat": 28.1,
+    "lon": -15.42,
+    "name": {
+     "en": "Las Palmas",
+     "pt": "Las Palmas"
+    }
+   },
+   {
+    "lat": 16.88,
+    "lon": -25
+   },
+   {
+    "lat": 14.92,
+    "lon": -23.5,
+    "name": {
+     "en": "Praia (Cape Verde)",
+     "pt": "Praia (Cabo Verde)"
+    }
+   },
+   {
+    "lat": 0.92,
+    "lon": -29.35,
+    "name": {
+     "en": "St Peter and St Paul Rocks",
+     "pt": "Penedos de São Pedro e São Paulo"
+    }
+   },
+   {
+    "lat": -3.85,
+    "lon": -32.42,
+    "name": {
+     "en": "Fernando de Noronha",
+     "pt": "Fernando de Noronha"
+    }
+   },
+   {
+    "lat": -8.05,
+    "lon": -34.87,
+    "name": {
+     "en": "Recife",
+     "pt": "Recife"
+    }
+   },
+   {
+    "lat": -12.97,
+    "lon": -38.48
+   },
+   {
+    "lat": -16.44,
+    "lon": -39.06
+   },
+   {
+    "lat": -20.32,
+    "lon": -40.3
+   },
+   {
+    "lat": -22.9,
+    "lon": -43.17,
+    "name": {
+     "en": "Rio de Janeiro",
+     "pt": "Rio de Janeiro"
+    }
+   }
+  ],
+  "extract": {
+   "en": "The first aerial crossing of the South Atlantic was made by the Portuguese naval aviators Gago Coutinho and Sacadura Cabral in 1922, to mark the centennial of Brazil's independence. Coutinho and Cabral flew in stages from Lisbon, Portugal, to Rio de Janeiro, Brazil, using three different Fairey III biplanes, and covered a distance of 8,383 kilometres (5,209 mi) between 30 March and 17 June. Although the North Atlantic had already been traversed in a non-stop flight by John Alcock and Arthur Brown in 1919, Coutinho and Cabral's flight remains notable as a milestone in transatlantic aviation, and for its use of new technologies such as the artificial horizon.",
+   "pt": "A primeira travessia aérea do Atlântico Sul foi concluída com sucesso pelos aeronautas portugueses Gago Coutinho e Sacadura Cabral, em 1922, no contexto das comemorações do Primeiro Centenário da Independência do Brasil."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/First_aerial_crossing_of_the_South_Atlantic",
+   "pt": "https://pt.wikipedia.org/wiki/Primeira_travessia_a%C3%A9rea_do_Atl%C3%A2ntico_Sul"
+  }
+ },
+ {
+  "id": "nellie-bly",
+  "name": {
+   "en": "Nellie Bly's trip around the world",
+   "pt": "Volta ao mundo de Nellie Bly"
+  },
+  "start": 1889,
+  "end": 1890,
+  "mode": "mixed",
+  "stops": [
+   {
+    "lat": 40.7,
+    "lon": -74,
+    "name": {
+     "en": "New York",
+     "pt": "Nova York"
+    }
+   },
+   {
+    "lat": 41,
+    "lon": -60
+   },
+   {
+    "lat": 48,
+    "lon": -25
+   },
+   {
+    "lat": 49.8,
+    "lon": -5
+   },
+   {
+    "lat": 50.9,
+    "lon": -1.4
+   },
+   {
+    "lat": 51.5,
+    "lon": -0.12
+   },
+   {
+    "lat": 50.95,
+    "lon": 1.85
+   },
+   {
+    "lat": 49.9,
+    "lon": 2.3,
+    "name": {
+     "en": "Amiens (visit to Jules Verne)",
+     "pt": "Amiens (visita a Júlio Verne)"
+    }
+   },
+   {
+    "lat": 47.5,
+    "lon": 7.6
+   },
+   {
+    "lat": 45.07,
+    "lon": 7.69
+   },
+   {
+    "lat": 44.5,
+    "lon": 11.34
+   },
+   {
+    "lat": 40.63,
+    "lon": 17.94
+   },
+   {
+    "lat": 35,
+    "lon": 23
+   },
+   {
+    "lat": 31.26,
+    "lon": 32.3,
+    "name": {
+     "en": "Port Said",
+     "pt": "Port Said"
+    }
+   },
+   {
+    "lat": 29.97,
+    "lon": 32.55
+   },
+   {
+    "lat": 20,
+    "lon": 38.5
+   },
+   {
+    "lat": 12.6,
+    "lon": 43.4
+   },
+   {
+    "lat": 12.5,
+    "lon": 45
+   },
+   {
+    "lat": 11,
+    "lon": 60
+   },
+   {
+    "lat": 6.93,
+    "lon": 79.8,
+    "name": {
+     "en": "Colombo",
+     "pt": "Colombo"
+    }
+   },
+   {
+    "lat": 5.6,
+    "lon": 80.5
+   },
+   {
+    "lat": 6,
+    "lon": 94
+   },
+   {
+    "lat": 5.4,
+    "lon": 100.2
+   },
+   {
+    "lat": 2.8,
+    "lon": 101
+   },
+   {
+    "lat": 1.2,
+    "lon": 103.85,
+    "name": {
+     "en": "Singapore",
+     "pt": "Singapura"
+    }
+   },
+   {
+    "lat": 8,
+    "lon": 108.5
+   },
+   {
+    "lat": 22.2,
+    "lon": 114.2,
+    "name": {
+     "en": "Hong Kong",
+     "pt": "Hong Kong"
+    }
+   },
+   {
+    "lat": 27,
+    "lon": 123
+   },
+   {
+    "lat": 31,
+    "lon": 131.5
+   },
+   {
+    "lat": 34.5,
+    "lon": 139
+   },
+   {
+    "lat": 35.4,
+    "lon": 139.7,
+    "name": {
+     "en": "Yokohama",
+     "pt": "Yokohama"
+    }
+   },
+   {
+    "lat": 42,
+    "lon": 165
+   },
+   {
+    "lat": 45,
+    "lon": -170
+   },
+   {
+    "lat": 42,
+    "lon": -140
+   },
+   {
+    "lat": 37.8,
+    "lon": -122.5,
+    "name": {
+     "en": "San Francisco",
+     "pt": "San Francisco"
+    }
+   },
+   {
+    "lat": 35.08,
+    "lon": -106.65
+   },
+   {
+    "lat": 39.1,
+    "lon": -94.6
+   },
+   {
+    "lat": 41.88,
+    "lon": -87.63,
+    "name": {
+     "en": "Chicago",
+     "pt": "Chicago"
+    }
+   },
+   {
+    "lat": 40.44,
+    "lon": -80
+   },
+   {
+    "lat": 40.72,
+    "lon": -74.05
+   }
+  ],
+  "extract": {
+   "en": "Around the World in Seventy-Two Days is an 1890 book by journalist Elizabeth Jane Cochrane, writing under her pseudonym, Nellie Bly. The chronicle details her 72-day trip around the world, which was inspired by the 1873 book Around the World in Eighty Days by Jules Verne. She carried out the journey for Joseph Pulitzer's tabloid newspaper, the New York World.",
+   "pt": "A volta ao Mundo em 72 Dias é um livro de 1890 da jornalista Elizabeth Jane Cochrane, escrito sob seu pseudônimo, Nellie Bly. A crônica detalha sua viagem de 72 dias ao redor do mundo, que foi inspirada no livro de 1873 A Volta ao Mundo em 80 Dias, de Júlio Verne. Ela realizou a jornada para o tabloide de Joseph Pulitzer, o New York World."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Around_the_World_in_Seventy-Two_Days",
+   "pt": "https://pt.wikipedia.org/wiki/A_Volta_ao_Mundo_em_72_Dias"
+  }
+ },
+ {
+  "id": "humboldt",
+  "name": {
+   "en": "Humboldt's American expedition",
+   "pt": "Expedição de Humboldt às Américas"
+  },
+  "start": 1799,
+  "end": 1804,
+  "mode": "mixed",
+  "stops": [
+   {
+    "lat": 43.37,
+    "lon": -8.4,
+    "name": {
+     "en": "A Coruña",
+     "pt": "Corunha"
+    }
+   },
+   {
+    "lat": 28.5,
+    "lon": -16,
+    "name": {
+     "en": "Tenerife",
+     "pt": "Tenerife"
+    }
+   },
+   {
+    "lat": 18,
+    "lon": -40
+   },
+   {
+    "lat": 12,
+    "lon": -58
+   },
+   {
+    "lat": 10.46,
+    "lon": -64.18,
+    "name": {
+     "en": "Cumaná",
+     "pt": "Cumaná"
+    }
+   },
+   {
+    "lat": 10.5,
+    "lon": -66.9
+   },
+   {
+    "lat": 8.92,
+    "lon": -67.43
+   },
+   {
+    "lat": 7.89,
+    "lon": -67.47
+   },
+   {
+    "lat": 5.66,
+    "lon": -67.6
+   },
+   {
+    "lat": 4.05,
+    "lon": -67.7
+   },
+   {
+    "lat": 1.92,
+    "lon": -67.06,
+    "name": {
+     "en": "Casiquiare (Río Negro)",
+     "pt": "Casiquiare (Rio Negro)"
+    }
+   },
+   {
+    "lat": 3.17,
+    "lon": -65.55
+   },
+   {
+    "lat": 4.05,
+    "lon": -67.7
+   },
+   {
+    "lat": 7.6,
+    "lon": -66.2
+   },
+   {
+    "lat": 8.12,
+    "lon": -63.55
+   },
+   {
+    "lat": 10.13,
+    "lon": -64.7
+   },
+   {
+    "lat": 13,
+    "lon": -68
+   },
+   {
+    "lat": 16.5,
+    "lon": -74
+   },
+   {
+    "lat": 18.5,
+    "lon": -78
+   },
+   {
+    "lat": 21.2,
+    "lon": -84
+   },
+   {
+    "lat": 21.7,
+    "lon": -85.3
+   },
+   {
+    "lat": 23.2,
+    "lon": -82.4,
+    "name": {
+     "en": "Havana",
+     "pt": "Havana"
+    }
+   },
+   {
+    "lat": 21.7,
+    "lon": -85.3
+   },
+   {
+    "lat": 17,
+    "lon": -80
+   },
+   {
+    "lat": 10.5,
+    "lon": -75.6
+   },
+   {
+    "lat": 5.2,
+    "lon": -74.74
+   },
+   {
+    "lat": 4.71,
+    "lon": -74.07,
+    "name": {
+     "en": "Bogotá",
+     "pt": "Bogotá"
+    }
+   },
+   {
+    "lat": 2.44,
+    "lon": -76.6
+   },
+   {
+    "lat": -0.22,
+    "lon": -78.5,
+    "name": {
+     "en": "Quito",
+     "pt": "Quito"
+    }
+   },
+   {
+    "lat": -2.9,
+    "lon": -79
+   },
+   {
+    "lat": -7.16,
+    "lon": -78.5
+   },
+   {
+    "lat": -8.1,
+    "lon": -79.03
+   },
+   {
+    "lat": -12.05,
+    "lon": -77.04,
+    "name": {
+     "en": "Lima",
+     "pt": "Lima"
+    }
+   },
+   {
+    "lat": -6,
+    "lon": -82.5
+   },
+   {
+    "lat": -2.5,
+    "lon": -81.5
+   },
+   {
+    "lat": 5,
+    "lon": -88
+   },
+   {
+    "lat": 16.8,
+    "lon": -99.9
+   },
+   {
+    "lat": 19.43,
+    "lon": -99.13,
+    "name": {
+     "en": "Mexico City",
+     "pt": "Cidade do México"
+    }
+   },
+   {
+    "lat": 19.2,
+    "lon": -96.1
+   },
+   {
+    "lat": 23.2,
+    "lon": -82.4
+   },
+   {
+    "lat": 26,
+    "lon": -79.6
+   },
+   {
+    "lat": 33,
+    "lon": -76
+   },
+   {
+    "lat": 38.8,
+    "lon": -74.8
+   },
+   {
+    "lat": 39.95,
+    "lon": -75.15,
+    "name": {
+     "en": "Philadelphia",
+     "pt": "Filadélfia"
+    }
+   },
+   {
+    "lat": 38.8,
+    "lon": -74.8
+   },
+   {
+    "lat": 40,
+    "lon": -50
+   },
+   {
+    "lat": 45,
+    "lon": -20
+   },
+   {
+    "lat": 44.84,
+    "lon": -0.58,
+    "name": {
+     "en": "Bordeaux",
+     "pt": "Bordéus"
+    }
+   }
+  ],
+  "extract": {
+   "en": "Friedrich Wilhelm Heinrich Alexander von Humboldt was a German polymath, geographer, naturalist, explorer, and proponent of Romantic philosophy and science. He was the younger brother of the Prussian minister, philosopher, and linguist Wilhelm von Humboldt (1767–1835). Humboldt's quantitative work on botanical geography laid the foundation for the field of biogeography, while his advocacy of long-term systematic geophysical measurement pioneered modern geomagnetic and meteorological monitoring. Humboldt and Carl Ritter are both regarded as the founders of modern geography as they established it as an independent scientific discipline.",
+   "pt": "Friedrich Wilhelm Heinrich Alexander von Humboldt, o barão de Humboldt, mais conhecido como Alexander von Humboldt, foi um geógrafo, polímata, naturalista, explorador e proponente da filosofia romântica prussiano."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Alexander_von_Humboldt",
+   "pt": "https://pt.wikipedia.org/wiki/Alexander_von_Humboldt"
+  }
+ },
+ {
+  "id": "portuguese-court",
+  "name": {
+   "en": "Transfer of the Portuguese court to Brazil",
+   "pt": "Vinda da corte portuguesa para o Brasil"
+  },
+  "start": 1807,
+  "end": 1808,
+  "mode": "sea",
+  "stops": [
+   {
+    "lat": 38.69,
+    "lon": -9.25,
+    "name": {
+     "en": "Lisbon",
+     "pt": "Lisboa"
+    }
+   },
+   {
+    "lat": 33,
+    "lon": -17.5
+   },
+   {
+    "lat": 15,
+    "lon": -27
+   },
+   {
+    "lat": 0,
+    "lon": -30
+   },
+   {
+    "lat": -10,
+    "lon": -34.5
+   },
+   {
+    "lat": -12.97,
+    "lon": -38.4,
+    "name": {
+     "en": "Salvador",
+     "pt": "Salvador"
+    }
+   },
+   {
+    "lat": -18,
+    "lon": -38
+   },
+   {
+    "lat": -23.3,
+    "lon": -41.5
+   },
+   {
+    "lat": -22.9,
+    "lon": -43.15,
+    "name": {
+     "en": "Rio de Janeiro",
+     "pt": "Rio de Janeiro"
+    }
+   }
+  ],
+  "extract": {
+   "en": "The Portuguese royal court transferred from Lisbon to the Portuguese colony of Brazil in a strategic retreat of Queen Maria I, Prince Regent John, the Braganza royal family, its court, and senior officials, totaling nearly 10,000 people, on 27 November 1807. The embarkment took place on 27 November, but due to weather conditions, the ships were only able to depart on 29 November. The Braganza royal family departed for Brazil just days before Napoleonic forces invaded Portugal on 1 December 1807. The Portuguese crown remained in Brazil from 1808 until the Liberal Revolution of 1820 led to the return of John VI of Portugal on 26 April 1821.",
+   "pt": "A transferência da corte portuguesa para o Brasil foi o deslocamento da sede da monarquia portuguesa de Lisboa para o Rio de Janeiro, realizado entre o final de 1807 e o início de 1808, no contexto das Guerras Napoleônicas e da invasão francesa de Portugal. A operação envolveu a família real, membros da corte, funcionários régios, militares e outros agentes ligados ao funcionamento da monarquia. A partida de Lisboa ocorreu em 29 de novembro de 1807, e a comitiva régia chegou ao Rio de Janeiro em março de 1808."
+  },
+  "wiki": {
+   "en": "https://en.wikipedia.org/wiki/Transfer_of_the_Portuguese_court_to_Brazil",
+   "pt": "https://pt.wikipedia.org/wiki/Transfer%C3%AAncia_da_corte_portuguesa_para_o_Brasil"
+  }
+ }
+]

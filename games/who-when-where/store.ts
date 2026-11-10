@@ -1,5 +1,6 @@
 "use client";
 
+import { streaks } from "@/lib/stats";
 import { usePersistent } from "@/lib/storage";
 import { ROUNDS, totalScore, type Guess } from "./rules";
 
@@ -34,16 +35,10 @@ export function computeStats(save: Save, today: number): Stats {
     .map(([day, record]) => ({ day: Number(day), score: totalScore(record.guesses) }))
     .sort((a, b) => a.day - b.day);
 
-  let longestStreak = 0;
-  let run = 0;
-  let previous = Number.NaN;
-  for (const { day } of finished) {
-    run = day === previous + 1 ? run + 1 : 1;
-    longestStreak = Math.max(longestStreak, run);
-    previous = day;
-  }
-  // The streak survives until a whole day is missed.
-  const streak = previous === today || previous === today - 1 ? run : 0;
+  const { streak, longest: longestStreak } = streaks(
+    finished.map((entry) => entry.day),
+    today,
+  );
 
   const scores = finished.map((entry) => entry.score);
   return {

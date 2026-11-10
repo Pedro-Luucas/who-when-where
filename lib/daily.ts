@@ -38,6 +38,22 @@ function mulberry32(seed: number): () => number {
   };
 }
 
+/** A repeatable random number generator (0 ≤ n < 1) for a text seed. */
+export function seededRandom(seed: string): () => number {
+  return mulberry32(hashString(seed));
+}
+
+/** A shuffled copy of `items`, always the same for the same seed. */
+export function seededShuffle<T>(items: readonly T[], seed: string): T[] {
+  const random = seededRandom(seed);
+  const order = [...items];
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  return order;
+}
+
 /**
  * Index of the item to play on `day`, out of `count` items.
  *

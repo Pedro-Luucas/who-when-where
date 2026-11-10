@@ -1,14 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { WorldMap, type MapArc, type MapMarker } from "@/components/world-map";
-import { useSecondsUntilTomorrow } from "@/lib/clock";
+import { ReadMore, ResultActions } from "@/components/result-footer";
+import { WorldMap, useMapLabels, type MapArc, type MapMarker } from "@/components/world-map";
 import { formatNumber } from "@/lib/i18n";
 import { useGameT } from "./messages";
 import { placeLabel, type Person } from "./people";
-import { useMapLabels } from "./place-round";
 import { ROUND_MAX, ROUNDS, TOTAL_MAX, rankOf, totalScore, type Guess } from "./rules";
-import { copyText, shareText } from "./share";
+import { shareText } from "./share";
 
 type Props = { person: Person; day: number; guesses: Guess[] };
 
@@ -30,18 +29,11 @@ function useCountUp(target: number, duration = 1200): number {
   return value;
 }
 
-const clock = (seconds: number) =>
-  [Math.floor(seconds / 3600), Math.floor(seconds / 60) % 60, seconds % 60]
-    .map((part) => String(part).padStart(2, "0"))
-    .join(":");
-
 export function Summary({ person, day, guesses }: Props) {
   const { locale, t } = useGameT();
   const mapLabels = useMapLabels();
   const total = totalScore(guesses);
   const shown = useCountUp(total);
-  const secondsLeft = useSecondsUntilTomorrow();
-  const [copied, setCopied] = useState(false);
 
   const { birth, death } = person;
   const samePlace = birth.place.lat === death.place.lat && birth.place.lon === death.place.lon;
@@ -76,14 +68,6 @@ export function Summary({ person, day, guesses }: Props) {
       label: `${death.place.name[locale]} ${death.year}`,
       labelBelow: false,
     });
-  }
-
-  async function share() {
-    const url = `${window.location.origin}/who-when-where`;
-    if (await copyText(shareText(day, guesses, locale, url))) {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2400);
-    }
   }
 
   const extract = person.extract[locale] ?? person.extract.en;
@@ -126,15 +110,11 @@ export function Summary({ person, day, guesses }: Props) {
         })}
       </ol>
 
-      <div className="summary-actions">
-        <button type="button" className="button" onClick={share}>
-          {copied ? t("copied") : t("share")}
-        </button>
-        <p className="countdown">
-          <span>{t("nextIn")}</span>
-          <time>{clock(secondsLeft)}</time>
-        </p>
-      </div>
+      <ResultActions
+        path="/who-when-where"
+        shareText={(url) => shareText(day, guesses, locale, url)}
+        nextLabel={t("nextIn")}
+      />
 
       <figure className="life">
         <figcaption>
@@ -150,15 +130,7 @@ export function Summary({ person, day, guesses }: Props) {
         />
       </figure>
 
-      <article className="bio">
-        <p>{extract}</p>
-        <p className="bio-links">
-          <a href={article} target="_blank" rel="noreferrer">
-            {t("readMore")} →
-          </a>
-          <span>{t("portraitCredit")}</span>
-        </p>
-      </article>
+      <ReadMore text={extract} href={article} credit={t("portraitCredit")} />
     </div>
   );
 }

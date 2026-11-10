@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useSiteT } from "@/lib/i18n";
 import { useGameT } from "./messages";
 import type { Person } from "./people";
 import { ROUNDS, type Guess } from "./rules";
@@ -20,6 +21,7 @@ const NUMERALS = ["I", "II", "III", "IV", "V", "VI"];
 /** The "specimen card": who today's person is, and how far along the player is. */
 export function Dossier({ person, day, guesses, current, revealAll }: Props) {
   const { locale, t } = useGameT();
+  const site = useSiteT();
 
   return (
     <aside className="dossier">
@@ -38,7 +40,7 @@ export function Dossier({ person, day, guesses, current, revealAll }: Props) {
 
       <div className="dossier-text">
         <p className="eyebrow">
-          {t("puzzleNo", { n: day })} <span aria-hidden="true">—</span> {t("todaysMind")}
+          {site("puzzleNo", { n: day })} <span aria-hidden="true">—</span> {t("todaysMind")}
         </p>
         <h1 className="dossier-name">{person.name[locale]}</h1>
         <p className="dossier-description">

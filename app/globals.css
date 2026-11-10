@@ -1474,3 +1474,775 @@ a.game-card:hover {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ═════════════════════════ More games ═════════════════════════
+   Pieces shared by Wayfarer, Dig Site and First to Last. */
+
+/* How warm a dig is: from the verdigris of a find, through vermilion, to
+   cold slate. Any element with data-tone="heat-N" gets --tone. */
+:root {
+  --heat-0: var(--answer);
+  --heat-1: #c8412b;
+  --heat-2: #cf6d24;
+  --heat-3: #a98a1f;
+  --heat-4: #5f8fb8;
+  --heat-5: #5257a6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --heat-1: #ff6f52;
+    --heat-2: #ff9a4a;
+    --heat-3: #e2c04e;
+    --heat-4: #7fb2e0;
+    --heat-5: #9a9cf0;
+  }
+}
+
+[data-tone="heat-0"] {
+  --tone: var(--heat-0);
+}
+[data-tone="heat-1"] {
+  --tone: var(--heat-1);
+}
+[data-tone="heat-2"] {
+  --tone: var(--heat-2);
+}
+[data-tone="heat-3"] {
+  --tone: var(--heat-3);
+}
+[data-tone="heat-4"] {
+  --tone: var(--heat-4);
+}
+[data-tone="heat-5"] {
+  --tone: var(--heat-5);
+}
+
+/* ───────────────────────── Hub card ───────────────────────── */
+
+.game-card-theme {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.game-card-theme i {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--guess);
+}
+
+/* ───────────────────────── Brief (the left column) ───────────────────────── */
+
+.dossier-plain {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.dossier-name em {
+  color: var(--guess);
+}
+
+.dossier:has(.plate) {
+  grid-template-columns: 104px minmax(0, 1fr);
+  align-items: start;
+}
+
+/* A photograph mounted on the page. Printed in sepia while the place is
+   still unknown; the colour comes back when it is found. */
+.plate {
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1.5px solid var(--ink);
+  background: var(--paper-2);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.plate img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) sepia(0.32) contrast(1.05);
+  transition: filter 1.4s ease-out;
+}
+
+.plate[data-revealed] img {
+  filter: none;
+}
+
+.progress {
+  grid-template-columns: repeat(var(--steps, 4), minmax(0, 1fr));
+}
+
+.progress li[data-tone] .progress-label {
+  color: var(--tone);
+  font-weight: 600;
+}
+
+.progress-score small {
+  display: none;
+  font-size: inherit;
+}
+
+.clues {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid var(--rule);
+}
+
+.clues li {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 7px 9px 8px;
+  border-left: 1px solid var(--rule);
+}
+
+.clues li:first-child {
+  border-left: 0;
+}
+
+.clues span {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.clues b {
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--answer);
+  animation: fade 0.6s both;
+}
+
+.clues li[data-locked] b {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--ink-3);
+  animation: none;
+}
+
+/* One box per attempt. */
+.meter {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 6px;
+}
+
+.meter li {
+  flex: 1;
+  height: 9px;
+  border: 1px solid var(--ink-3);
+  transition:
+    background 0.3s,
+    border-color 0.3s;
+}
+
+.meter li[data-state="current"] {
+  border-color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+
+.meter li[data-state="miss"] {
+  border-color: var(--guess);
+  background: var(--guess);
+}
+
+.meter li[data-state="skip"] {
+  border-color: var(--ink-3);
+  background: var(--ink-3);
+}
+
+.meter li[data-state="hit"] {
+  border-color: var(--answer);
+  background: var(--answer);
+}
+
+/* ───────────────────────── Map: routes, rings, pins ───────────────────────── */
+
+.map-route {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.map-route-route {
+  stroke: var(--answer);
+  stroke-width: 2.3;
+}
+
+.map-route-route[data-draw] {
+  stroke-dasharray: 1;
+  animation: draw 1.5s 0.15s cubic-bezier(0.5, 0, 0.2, 1) both;
+}
+
+.map-route-thread {
+  stroke: var(--guess);
+  stroke-width: 1.8;
+  stroke-dasharray: 1 5;
+  animation: fade 0.3s both;
+}
+
+.map-ring {
+  fill: none;
+  stroke: var(--tone, var(--guess));
+  stroke-width: 1.7;
+  stroke-dasharray: 7 4;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+  animation: fade 0.7s both;
+}
+
+.map-marker[role="button"] {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.map-marker[role="button"]:focus,
+.map-marker[role="button"]:focus-visible {
+  outline: none;
+}
+
+.map-marker[role="button"]:focus-visible .map-marker-dot {
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+
+.map-marker-hit {
+  fill: transparent;
+}
+
+.map-marker-badge {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  fill: var(--card);
+  pointer-events: none;
+}
+
+.map-marker-guess[data-tone] .map-marker-dot {
+  fill: var(--tone);
+}
+
+.map-marker-stop .map-marker-dot {
+  fill: var(--card);
+  stroke: var(--answer);
+  stroke-width: 1.6;
+}
+
+.map-marker-stop .map-marker-label {
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.map-marker-pin .map-marker-dot {
+  fill: var(--card);
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  transition: fill 0.2s;
+}
+
+.map-marker-pin .map-marker-badge {
+  fill: var(--ink);
+  font-size: 11.5px;
+}
+
+.map-marker-pin[data-tone="placed"] .map-marker-dot {
+  fill: var(--guess);
+  stroke: var(--card);
+}
+
+.map-marker-pin[data-tone="locked"] .map-marker-dot {
+  fill: var(--answer);
+  stroke: var(--card);
+}
+
+.map-marker-pin[data-tone] .map-marker-badge {
+  fill: var(--card);
+}
+
+/* ───────────────────────── Verdicts ───────────────────────── */
+
+.feedback {
+  margin-bottom: 4px;
+  font-size: 1.3rem;
+  font-style: italic;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  animation: rise 0.3s both;
+}
+
+.feedback b {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--tone, var(--guess));
+}
+
+.result-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px 16px;
+  align-items: center;
+  min-height: 90px;
+  animation: rise 0.35s both;
+}
+
+.stamp[data-lost] {
+  border-color: var(--ink-2);
+  outline-color: var(--ink-2);
+  color: var(--ink-2);
+}
+
+/* ───────────────────────── Wayfarer: the logbook ───────────────────────── */
+
+.picker {
+  display: grid;
+  gap: 10px;
+}
+
+.picker-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--ink);
+  border-radius: 0;
+  background: var(--card);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+.picker-input::placeholder {
+  color: var(--ink-3);
+  font-style: italic;
+}
+
+.picker-input:focus {
+  outline: 2px solid var(--guess);
+  outline-offset: 2px;
+}
+
+.picker-list {
+  max-height: 206px;
+  overflow-y: auto;
+  border: 1px solid var(--rule);
+  background: var(--card);
+  overscroll-behavior: contain;
+}
+
+.picker-list button {
+  display: block;
+  width: 100%;
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 1rem;
+  line-height: 1.25;
+  text-align: left;
+}
+
+.picker-list li:last-child button {
+  border-bottom: 0;
+}
+
+.picker-list button:hover:not(:disabled) {
+  background: var(--paper-2);
+}
+
+.picker-list button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.picker-list button:disabled {
+  color: var(--ink-3);
+  text-decoration: line-through;
+  cursor: default;
+}
+
+.picker-empty {
+  padding: 12px 14px;
+  font-style: italic;
+  color: var(--ink-2);
+}
+
+.picker-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.button-quiet {
+  padding: 12.5px 18px;
+  border: 1.5px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  box-shadow: none;
+}
+
+.button-quiet:hover:not(:disabled) {
+  transform: none;
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: none;
+}
+
+.button-quiet:active:not(:disabled) {
+  transform: translate(1px, 1px);
+  box-shadow: none;
+}
+
+.tries {
+  border-top: 1.5px solid var(--ink);
+}
+
+.tries li {
+  display: grid;
+  grid-template-columns: 1.7em minmax(0, 1fr);
+  gap: 2px 6px;
+  align-items: baseline;
+  padding: 9px 0 8px;
+  border-bottom: 1px solid var(--rule);
+  animation: rise 0.35s both;
+}
+
+.tries-n {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--ink-3);
+}
+
+.tries-name {
+  font-size: 1.1rem;
+  line-height: 1.2;
+}
+
+.tries li[data-state="miss"] .tries-name {
+  text-decoration: line-through;
+  text-decoration-color: var(--guess);
+  text-decoration-thickness: 1.5px;
+}
+
+.tries li[data-state="skip"] .tries-name {
+  font-style: italic;
+  color: var(--ink-2);
+}
+
+.tries li[data-state="hit"] .tries-name {
+  font-weight: 600;
+  color: var(--answer);
+}
+
+.tries-hint {
+  grid-column: 2;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  line-height: 1.4;
+  color: var(--guess);
+}
+
+.tries-hint i {
+  font-style: normal;
+}
+
+/* ───────────────────────── First to Last: the line-up ───────────────────────── */
+
+.slots-frame {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.slots-frame .eyebrow:last-child {
+  grid-row: 1;
+  grid-column: 2;
+  text-align: right;
+}
+
+.slots {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.slots li {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 50px;
+  border: 1.5px dashed var(--ink-3);
+  color: var(--ink-3);
+  transition:
+    background 0.25s,
+    border-color 0.25s,
+    color 0.25s;
+}
+
+.slots small {
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  opacity: 0.8;
+}
+
+.slots b,
+.slots button {
+  font-size: 1.45rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.slots button {
+  position: absolute;
+  inset: 0;
+}
+
+.slots li[data-state="next"] {
+  border-style: solid;
+  border-color: var(--ink);
+}
+
+.slots li[data-state="placed"] {
+  border-style: solid;
+  border-color: var(--guess);
+  color: var(--guess);
+}
+
+.slots li[data-state="locked"] {
+  border-style: solid;
+  border-color: var(--answer);
+  background: var(--answer);
+  color: var(--card);
+}
+
+.events {
+  display: grid;
+  gap: 6px;
+}
+
+.event {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) auto;
+  gap: 11px;
+  align-items: center;
+  width: 100%;
+  min-height: 56px;
+  padding: 8px 12px 8px 9px;
+  border: 1px solid var(--rule);
+  background: var(--card);
+  text-align: left;
+  transition:
+    border-color 0.2s,
+    opacity 0.2s;
+}
+
+button.event:hover:not(:disabled) {
+  border-color: var(--ink);
+}
+
+button.event:disabled:not([data-state]) {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.event-letter {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.event-text b {
+  display: block;
+  font-size: 1.02rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.event-text small {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.event-position {
+  min-width: 1.1em;
+  font-size: 1.5rem;
+  font-style: italic;
+  line-height: 1;
+  text-align: right;
+  color: var(--guess);
+}
+
+.event-year {
+  font-size: 1.3rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  color: var(--answer);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.event[data-state="placed"] {
+  border-color: var(--guess);
+}
+
+.event[data-state="placed"] .event-letter {
+  border-color: var(--guess);
+  background: var(--guess);
+  color: var(--card);
+}
+
+.event[data-state="locked"] {
+  border-color: var(--answer);
+  cursor: default;
+}
+
+.event[data-state="locked"] .event-letter {
+  border-color: var(--answer);
+  background: var(--answer);
+  color: var(--card);
+}
+
+.event[data-state="locked"] .event-position {
+  color: var(--answer);
+}
+
+.event[data-state="miss"] .event-letter {
+  border-color: var(--guess);
+  color: var(--guess);
+}
+
+ol.events li {
+  animation: rise 0.4s both;
+}
+
+ol.events li:nth-child(2) {
+  animation-delay: 0.08s;
+}
+ol.events li:nth-child(3) {
+  animation-delay: 0.16s;
+}
+ol.events li:nth-child(4) {
+  animation-delay: 0.24s;
+}
+ol.events li:nth-child(5) {
+  animation-delay: 0.32s;
+}
+ol.events li:nth-child(6) {
+  animation-delay: 0.4s;
+}
+
+/* ───────────────────────── Wider screens ───────────────────────── */
+
+@media (min-width: 640px) {
+  .events {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  ol.events {
+    grid-template-columns: 1fr;
+  }
+
+  .slots li {
+    height: 58px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .dossier:has(.plate) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .plate {
+    aspect-ratio: 4 / 3;
+    box-shadow: 5px 5px 0 var(--ink);
+  }
+
+  .progress {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .progress-score small {
+    display: inline;
+  }
+
+  .clues {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .clues li {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 12px;
+    border-top: 1px solid var(--rule);
+    border-left: 0;
+  }
+
+  .clues li:first-child {
+    border-top: 0;
+  }
+
+  .clues b {
+    text-align: right;
+  }
+
+  .meter li {
+    height: 11px;
+  }
+
+  .picker-list {
+    max-height: 250px;
+  }
+}
+
+/* Games whose map usually shows the whole world get a frame closer to the
+   shape of the world on phones, so less of it is empty. */
+.game[data-game="wayfarer"] .map-frame,
+.game[data-game="first-to-last"] .map-frame {
+  height: clamp(250px, 68vw, 440px);
+}
+
+@media (min-width: 1024px) {
+  .game[data-game="wayfarer"] .map-frame,
+  .game[data-game="first-to-last"] .map-frame {
+    height: clamp(420px, 62svh, 640px);
+  }
+}
+
+/* Cards in the same row share a height. */
+.events li {
+  display: grid;
+}
+
+@media (min-width: 1024px) {
+  /* Leave room for the line-up and the six cards under the map. */
+  .game[data-game="first-to-last"] .map-frame {
+    height: clamp(320px, 44svh, 520px);
+  }
+}

@@ -1,0 +1,74 @@
+"use client";
+
+import { translator, useLocale, type Locale } from "@/lib/i18n";
+
+export const MESSAGES = {
+  en: {
+    kicker: "Today's dig",
+    mystery: "Mystery site",
+    // *…* marks the emphasised words.
+    question: "Where does this place *lie buried*?",
+    mapAria: "World map: choose where to dig",
+    mapHint: "Tap the map to choose where to dig",
+    nextDig: "Dig {n}",
+    digHere: "Dig here",
+    ringHint: "Every dig draws a ring. The site lies somewhere on it.",
+    firstHint: "Read the clue, pick a spot and dig. You have {n} digs.",
+    kmAway: "{km} km away",
+    heat0: "Found it!",
+    heat1: "Scorching",
+    heat2: "Hot",
+    heat3: "Warm",
+    heat4: "Cold",
+    heat5: "Freezing",
+    digs: "digs",
+    foundFirst: "Struck it on the very first dig!",
+    foundIn: "Unearthed on dig {n}!",
+    lost: "It stays buried…",
+    lostDetail: "closest dig {km} km away",
+    statFound: "Found",
+    statAverage: "Avg. digs",
+    help1: "Every day a lost city or ancient site lies buried somewhere on the map. You get a photo and a clue — never its name.",
+    help2: "Tap the map and dig. You have five digs.",
+    help3: "Each dig tells you how far away the site is, and draws a ring: the site lies somewhere on that ring.",
+    help4: "Cross your rings to close in. A dig within 50 km finds it.",
+    help5: "Everyone hunts for the same site. A new one is buried tomorrow.",
+  },
+  pt: {
+    kicker: "A escavação de hoje",
+    mystery: "Sítio misterioso",
+    question: "Onde este lugar *está enterrado*?",
+    mapAria: "Mapa-múndi: escolha onde cavar",
+    mapHint: "Toque no mapa para escolher onde cavar",
+    nextDig: "Escavação {n}",
+    digHere: "Cavar aqui",
+    ringHint: "Cada escavação desenha um anel. O sítio está em algum ponto dele.",
+    firstHint: "Leia a pista, escolha um ponto e cave. Você tem {n} escavações.",
+    kmAway: "a {km} km",
+    heat0: "Achou!",
+    heat1: "Pelando",
+    heat2: "Quente",
+    heat3: "Morno",
+    heat4: "Frio",
+    heat5: "Congelando",
+    digs: "escavações",
+    foundFirst: "Achou logo na primeira escavação!",
+    foundIn: "Desenterrado na escavação {n}!",
+    lost: "Continua enterrado…",
+    lostDetail: "escavação mais próxima a {km} km",
+    statFound: "Achados",
+    statAverage: "Média",
+    help1: "Todo dia, uma cidade perdida ou um sítio antigo está enterrado em algum lugar do mapa. Você recebe uma foto e uma pista — nunca o nome.",
+    help2: "Toque no mapa e cave. Você tem cinco escavações.",
+    help3: "Cada escavação diz a que distância está o sítio e desenha um anel: o sítio fica em algum ponto desse anel.",
+    help4: "Cruze os anéis para fechar o cerco. Uma escavação a até 50 km encontra o sítio.",
+    help5: "Todo mundo procura o mesmo sítio. Amanhã, outro será enterrado.",
+  },
+} satisfies Record<Locale, Record<string, string>>;
+
+export type MessageKey = keyof (typeof MESSAGES)["en"];
+
+export function useGameT() {
+  const locale = useLocale();
+  return { locale, t: translator(MESSAGES, locale) };
+}

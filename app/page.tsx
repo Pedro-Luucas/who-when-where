@@ -43,8 +43,8 @@ export default function Home() {
             <SiteText k="todaysGames" />
           </h2>
           <div className="games">
-            {GAMES.map(({ Status, slug, title, blurb }) => (
-              <GameCard key={slug} game={{ slug, title, blurb }}>
+            {GAMES.map(({ Status, ...game }, index) => (
+              <GameCard key={game.slug} game={game} index={index}>
                 <Status />
               </GameCard>
             ))}

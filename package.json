@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "data:people": "node scripts/fetch-people.mjs"
+    "data:people": "node scripts/fetch-people.mjs",
+    "data:sites": "node scripts/fetch-sites.mjs",
+    "data:journeys": "node scripts/fetch-journeys.mjs"
   },
   "dependencies": {
     "d3-geo": "^3.1.2",
