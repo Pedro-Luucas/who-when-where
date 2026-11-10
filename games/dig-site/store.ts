@@ -1,6 +1,7 @@
 "use client";
 
 import { streaks } from "@/lib/stats";
+import type { SyncedSave } from "@/lib/saves";
 import { usePersistent } from "@/lib/storage";
 import { isFound, isOver, type Dig } from "./rules";
 
@@ -12,6 +13,10 @@ export type Save = {
 };
 
 const KEY = "dig-site:v1";
+
+/** How a signed-in player's days are copied to their account. */
+export const SYNC: SyncedSave = { game: "dig-site", key: KEY, progressField: "digs" };
+
 const EMPTY: Save = { days: {}, seenHelp: false };
 
 export function useSave() {

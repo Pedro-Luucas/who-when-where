@@ -36,6 +36,43 @@ The puzzle is chosen on the player's device from their local date, so the pages 
 
 The world map draws markers, great-circle arcs, routes through waypoints, distance rings and tappable pins; a game only passes it data. Labels that would overlap are hidden until the player zooms in.
 
+## Accounts and the API
+
+Playing needs no account. Signing in (`/account`) keeps a player's games and streaks in their account and brings them to every device they use.
+
+| Path | What lives there |
+| --- | --- |
+| `api/` | The accounts service: a small Node server (Hono) with a SQLite database. Its own `package.json`; runs TypeScript directly on Node 24+ |
+| `api/src/app.ts` | Every route: sign up / in / out, the account's settings, saved games |
+| `api/src/db.ts` | The schema, as a list of migrations. Append a new one to change it; never edit an old one |
+| `api/deploy/` | `setup.sh` prepares a server once; `deploy.sh` ships the code |
+| `account/` | The site's side: API client (`api.ts`), who is signed in (`state.ts`), save sync (`sync.ts`), the `/account` page |
+
+```bash
+npm --prefix api install   # once
+npm run api:dev            # the API on http://127.0.0.1:4310, database in api/data/
+npm run api:test
+```
+
+The site calls the API on its own origin, under `/api/…`, and Next forwards those requests to `API_ORIGIN` (`next.config.ts`). In development that defaults to the local API. For production, set `API_ORIGIN` to the API's address **when building** — the forwarding rule is fixed at build time:
+
+```bash
+API_ORIGIN=https://api.example.com npm run build
+```
+
+**How sign-in works.** Passwords are hashed with scrypt. A session is a random token in an `HttpOnly` cookie; the database stores only its hash. Sessions last 30 days and renew while in use. Changing the password signs the account out everywhere else.
+
+**How saves sync.** Each puzzle a player starts is one row: `(account, game, day) → record`. A record's progress — how many moves it holds — only grows, so when two devices disagree the one further along wins. Games played before signing in are added to the account; signing out removes them from the device. A game takes part by exporting `SYNC` from its `store.ts` and being listed in `games/saves.ts`.
+
+**Deploying the API.** On a fresh Ubuntu server with Node 24+, as root:
+
+```bash
+ssh <host> "DOMAIN=api.example.com bash -s" < api/deploy/setup.sh   # once
+npm run api:deploy -- <host>                                         # every release
+```
+
+`setup.sh` creates a locked-down service user, systemd units for the API and a nightly database backup (kept 14 days in `/var/lib/who-when-where/backups`), installs Caddy for HTTPS and opens ports 80 and 443. The database is `/var/lib/who-when-where/app.db`; settings are in `/etc/who-when-where/api.env`. Logs: `journalctl -u who-when-where-api`.
+
 ## Where the data comes from
 
 | Game | Source list (edit this) | Generated file (don't edit) |
@@ -60,6 +97,7 @@ Changing the size of a roster reshuffles that game's schedule, so today's puzzle
 1. Create `games/<slug>/` with the game's component and logic. Wrap it in `<Daily>` and reuse the map, panels and result footer from `components/`.
 2. Add the route at `app/<slug>/page.tsx`.
 3. List it in `games/registry.ts` so the hub shows it.
+4. Export `SYNC` from its `store.ts` and add it to `games/saves.ts`, so signed-in players keep their games.
 
 ## Scoring
 

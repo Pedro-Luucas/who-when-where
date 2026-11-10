@@ -1,6 +1,7 @@
 "use client";
 
 import { streaks } from "@/lib/stats";
+import type { SyncedSave } from "@/lib/saves";
 import { usePersistent } from "@/lib/storage";
 import { PUZZLE_SIZE, eventById, eventsForDay, type HistoryEvent } from "./events";
 import { isOver, isSolved, truthOf, type Attempt } from "./rules";
@@ -14,6 +15,10 @@ export type Save = {
 };
 
 const KEY = "first-to-last:v1";
+
+/** How a signed-in player's days are copied to their account. */
+export const SYNC: SyncedSave = { game: "first-to-last", key: KEY, progressField: "attempts" };
+
 const EMPTY: Save = { days: {}, seenHelp: false };
 
 export function useSave() {

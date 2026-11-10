@@ -1,6 +1,7 @@
 "use client";
 
 import { streaks } from "@/lib/stats";
+import type { SyncedSave } from "@/lib/saves";
 import { usePersistent } from "@/lib/storage";
 import { ROUNDS, totalScore, type Guess } from "./rules";
 
@@ -12,6 +13,10 @@ export type Save = {
 };
 
 const KEY = "who-when-where:v1";
+
+/** How a signed-in player's days are copied to their account. */
+export const SYNC: SyncedSave = { game: "who-when-where", key: KEY, progressField: "guesses" };
+
 const EMPTY: Save = { days: {}, seenHelp: false };
 
 export function useSave() {

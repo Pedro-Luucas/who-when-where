@@ -7,6 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "api:dev": "npm --prefix api run dev",
+    "api:test": "npm --prefix api test",
+    "api:deploy": "bash api/deploy/deploy.sh",
     "data:people": "node scripts/fetch-people.mjs",
     "data:sites": "node scripts/fetch-sites.mjs",
     "data:journeys": "node scripts/fetch-journeys.mjs"

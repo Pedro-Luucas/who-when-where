@@ -12,14 +12,15 @@ function detectLocale(): Locale {
   return navigator.language.toLowerCase().startsWith("pt") ? "pt" : "en";
 }
 
-function currentLocale(): Locale {
+/** The player's language: their saved choice, else the browser's. Browser only. */
+export function getLocale(): Locale {
   return readStore<Locale | null>(LOCALE_KEY, null) ?? detectLocale();
 }
 
-/** The player's language: their saved choice, else the browser's. */
+/** The player's language, as a hook. */
 export function useLocale(): Locale {
   // The server renders English; the client corrects it right after hydration.
-  return useSyncExternalStore(subscribeToStore, currentLocale, () => "en");
+  return useSyncExternalStore(subscribeToStore, getLocale, () => "en");
 }
 
 export function setLocale(locale: Locale): void {

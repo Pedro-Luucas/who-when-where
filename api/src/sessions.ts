@@ -1,0 +1,87 @@
+import { createHash, randomBytes } from "node:crypto";
+import type { DatabaseSync } from "node:sqlite";
+
+// A session is a random token held in an HttpOnly cookie. Only its hash is
+// stored, so a copy of the database cannot be used to sign in.
+
+export const SESSION_COOKIE = "www_session";
+export const SESSION_TTL_MS = 30 * 24 * 60 * 60 * 1000;
+
+const hashToken = (token: string) => createHash("sha256").update(token).digest("base64url");
+
+export type User = {
+  id: string;
+  email: string;
+  displayName: string;
+  locale: string;
+  createdAt: number;
+};
+
+export type UserRow = {
+  id: string;
+  email: string;
+  password_hash: string;
+  display_name: string;
+  locale: string;
+  created_at: number;
+};
+
+export const toUser = (row: UserRow): User => ({
+  id: row.id,
+  email: row.email,
+  displayName: row.display_name,
+  locale: row.locale,
+  createdAt: row.created_at,
+});
+
+export function createSession(db: DatabaseSync, userId: string, now = Date.now()): string {
+  const token = randomBytes(32).toString("base64url");
+  db.prepare("INSERT INTO sessions (token_hash, user_id, created_at, expires_at) VALUES (?, ?, ?, ?)").run(
+    hashToken(token),
+    userId,
+    now,
+    now + SESSION_TTL_MS,
+  );
+  return token;
+}
+
+/**
+ * The account a session token belongs to, if the session is still valid.
+ * `renewed` is true when a session past half its life was extended, and the
+ * cookie should be sent again.
+ */
+export function readSession(
+  db: DatabaseSync,
+  token: string,
+  now = Date.now(),
+): { user: UserRow; renewed: boolean } | null {
+  const tokenHash = hashToken(token);
+  const row = db
+    .prepare(
+      `SELECT u.id, u.email, u.password_hash, u.display_name, u.locale, u.created_at, s.expires_at
+         FROM sessions s JOIN users u ON u.id = s.user_id
+        WHERE s.token_hash = ? AND s.expires_at > ?`,
+    )
+    .get(tokenHash, now) as (UserRow & { expires_at: number }) | undefined;
+  if (!row) return null;
+
+  const { expires_at: expiresAt, ...user } = row;
+  const renewed = expiresAt - now < SESSION_TTL_MS / 2;
+  if (renewed) {
+    db.prepare("UPDATE sessions SET expires_at = ? WHERE token_hash = ?").run(now + SESSION_TTL_MS, tokenHash);
+  }
+  return { user, renewed };
+}
+
+export function deleteSession(db: DatabaseSync, token: string): void {
+  db.prepare("DELETE FROM sessions WHERE token_hash = ?").run(hashToken(token));
+}
+
+/** Signs an account out everywhere except the given session. */
+export function deleteOtherSessions(db: DatabaseSync, userId: string, keepToken: string): void {
+  db.prepare("DELETE FROM sessions WHERE user_id = ? AND token_hash <> ?").run(userId, hashToken(keepToken));
+}
+
+export function deleteExpiredSessions(db: DatabaseSync, now = Date.now()): void {
+  db.prepare("DELETE FROM sessions WHERE expires_at <= ?").run(now);
+}
