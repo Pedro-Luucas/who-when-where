@@ -61,14 +61,6 @@ export default function Home() {
                 <Status />
               </GameCard>
             ))}
-            <div className="game-card game-card-soon">
-              <h3>
-                <SiteText k="comingSoon" />
-              </h3>
-              <p>
-                <SiteText k="comingSoonBody" />
-              </p>
-            </div>
           </div>
         </section>
 

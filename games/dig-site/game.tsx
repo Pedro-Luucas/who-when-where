@@ -50,6 +50,7 @@ function Play({ day }: { day: number }) {
         <ResultActions path="/dig-site" shareText={(url) => shareText(day, digs, url)} />
       </DigSiteBoard>
       <GamePanels
+        game="dig-site"
         help={[t("help1"), t("help2"), t("help3"), t("help4"), t("help5")]}
         seenHelp={save.seenHelp}
         onSeenHelp={() => setSave((previous) => ({ ...previous, seenHelp: true }))}

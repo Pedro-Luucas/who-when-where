@@ -14,6 +14,7 @@ export function Panels({ day }: { day: number }) {
 
   return (
     <GamePanels
+      game="who-when-where"
       help={[t("help1"), t("help2"), t("help3"), t("help4"), t("help5")]}
       seenHelp={save.seenHelp}
       onSeenHelp={() => setSave((previous) => ({ ...previous, seenHelp: true }))}

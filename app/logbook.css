@@ -1,0 +1,562 @@
+/* ═════════════════════════ Logbook ═════════════════════════
+   The player's level, achievements and atlas — and the small things that
+   answer what they do anywhere on the site: notices, confetti, settings. */
+
+/* A postmark: a few characters inside a double ring. Vermilion once it is
+   earned, a dashed pencil outline until then. */
+.seal {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1.5px solid var(--guess);
+  border-radius: 50%;
+  outline: 1px solid var(--guess);
+  outline-offset: 2px;
+  color: var(--guess);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  transform: rotate(-8deg);
+}
+
+.seal-large {
+  width: 84px;
+  height: 84px;
+  border-width: 2px;
+  outline-offset: 3px;
+  font-size: 2.4rem;
+  font-weight: 500;
+}
+
+/* How far along something is. */
+.bar {
+  display: block;
+  height: 7px;
+  border: 1px solid var(--ink);
+  background: var(--card);
+}
+
+.bar i {
+  display: block;
+  height: 100%;
+  max-width: 100%;
+  background: var(--answer);
+  transition: width 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* ───────────────────────── Level ───────────────────────── */
+
+.level {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 18px 22px;
+  align-items: center;
+  box-shadow: 5px 5px 0 var(--ink);
+}
+
+.level-text h2 {
+  margin: 4px 0 12px;
+  font-size: clamp(1.9rem, 6vw, 2.8rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.level-text .hint {
+  margin-top: 8px;
+}
+
+.level-stats {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+  gap: 1px;
+  border: 1px solid var(--rule);
+  background: var(--rule);
+}
+
+.level-stats div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 13px 12px 11px;
+  background: var(--card);
+}
+
+.level-stats dd {
+  font-size: 1.8rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: lining-nums;
+}
+
+.level-stats dt {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.level .activity {
+  grid-column: 1 / -1;
+}
+
+/* ───────────────────────── Achievements ───────────────────────── */
+
+.badges {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
+  border: 1px solid var(--rule);
+  overflow: hidden;
+}
+
+/* Each card rules off its right and bottom edge, so a last row that is not
+   full leaves plain card behind it. */
+.badge-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 14px;
+  box-shadow:
+    1px 0 0 var(--rule),
+    0 1px 0 var(--rule);
+}
+
+.badge-card > span {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.badge-card b {
+  font-size: 1.12rem;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+
+.badge-card small {
+  font-size: 0.9rem;
+  line-height: 1.3;
+  color: var(--ink-2);
+}
+
+.badge-card em {
+  margin-top: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--answer);
+}
+
+.badge-card:not([data-earned]) .seal {
+  border-style: dashed;
+  border-color: var(--ink-3);
+  outline: 0;
+  color: var(--ink-3);
+  transform: none;
+}
+
+.badge-card:not([data-earned]) b {
+  color: var(--ink-2);
+}
+
+.badge-progress {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.badge-progress .bar {
+  height: 5px;
+  border-color: var(--ink-3);
+}
+
+.badge-progress .bar i {
+  background: var(--ink-2);
+}
+
+.badge-progress small {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+}
+
+/* ───────────────────────── Atlas ───────────────────────── */
+
+.atlas > .hint {
+  margin-bottom: 14px;
+}
+
+.atlas .map-frame {
+  height: clamp(260px, 62vw, 560px);
+}
+
+.collection {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 0 26px;
+  margin-top: 14px;
+}
+
+.collection > li {
+  border-bottom: 1px solid var(--rule);
+}
+
+.collection summary {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 4px 10px;
+  align-items: center;
+  padding: 12px 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.collection summary::-webkit-details-marker {
+  display: none;
+}
+
+/* The mark each kind is drawn with on the map. */
+.collection summary > i {
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--card);
+  border-radius: 50%;
+  background: var(--guess);
+  box-shadow: 0 0 0 1px var(--rule);
+}
+
+.collection li[data-kind="site"] summary > i {
+  background: var(--answer);
+}
+
+.collection li[data-kind="event"] summary > i {
+  border-color: var(--answer);
+  background: var(--card);
+  box-shadow: none;
+}
+
+.collection li[data-kind="journey"] summary > i,
+.collection li[data-kind="crossing"] summary > i {
+  height: 0;
+  border: 0;
+  border-top: 2.5px solid var(--answer);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.collection li[data-kind="crossing"] summary > i {
+  border-top: 2.5px dotted var(--guess);
+}
+
+.collection li[data-kind="country"] summary > i {
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--answer) 62%, var(--card));
+  box-shadow: 0 0 0 1px var(--answer);
+}
+
+.collection summary b {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.collection summary > span:not(.bar) {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--ink-2);
+}
+
+.collection summary .bar {
+  grid-column: 1 / -1;
+  height: 5px;
+  border-color: var(--rule);
+}
+
+.collection ol {
+  display: grid;
+  gap: 2px;
+  max-height: 260px;
+  margin-bottom: 12px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.collection ol li {
+  display: grid;
+  grid-template-columns: 4.5em minmax(0, 1fr);
+  gap: 8px;
+  align-items: baseline;
+  padding: 3px 0;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.collection ol small {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--ink-3);
+}
+
+.collection ol a {
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 3px;
+}
+
+.collection ol a:hover {
+  text-decoration-color: var(--guess);
+}
+
+/* ───────────────────────── The hub's level line ───────────────────────── */
+
+.daily-level {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule);
+}
+
+.daily-rank {
+  flex: 1 1 280px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+}
+
+.daily-rank > span {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.daily-rank b {
+  font-size: 1.25rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.daily-rank small {
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.02em;
+  color: var(--ink-2);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.daily-rank .bar {
+  height: 5px;
+  max-width: 360px;
+}
+
+.daily-rank strong {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--guess);
+}
+
+@media (max-width: 480px) {
+  .daily-rank strong {
+    display: none;
+  }
+}
+
+/* ───────────────────────── Notices ───────────────────────── */
+
+.toasts {
+  position: fixed;
+  right: 0;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  left: 0;
+  z-index: 60;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 0 16px;
+  pointer-events: none;
+}
+
+@keyframes toast {
+  from {
+    opacity: 0;
+    transform: translateY(18px) rotate(-1.5deg);
+  }
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: min(380px, 100%);
+  padding: 12px 18px 12px 14px;
+  border: 1.5px solid var(--ink);
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: 5px 5px 0 var(--guess);
+  text-align: left;
+  pointer-events: auto;
+  animation: toast 0.45s cubic-bezier(0.2, 1.3, 0.4, 1) both;
+}
+
+.toast > span {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.toast b {
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+
+.toast small {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.confetti {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ───────────────────────── Settings ───────────────────────── */
+
+.settings li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding: 13px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.settings li:first-child {
+  padding-top: 2px;
+  border-top: 0;
+}
+
+.settings li:last-child {
+  padding-bottom: 0;
+}
+
+.settings li > span {
+  font-size: 1.1rem;
+}
+
+.settings .locale-toggle {
+  border: 1.5px solid var(--ink);
+  border-radius: 0;
+  padding: 0;
+  font-size: 0.7rem;
+}
+
+.settings .locale-toggle button {
+  padding: 9px 12px;
+  border-radius: 0;
+}
+
+.settings .locale-toggle button + button {
+  border-left: 1px solid var(--rule);
+}
+
+/* ───────────────────────── Statistics: how the puzzles went ───────────────────────── */
+
+/* Five tiles in three columns: the last one takes the room that is left. */
+.stat-tiles div:nth-child(5):last-child {
+  grid-column: span 2;
+}
+
+.distribution {
+  margin-top: 18px;
+}
+
+.distribution ol {
+  display: grid;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.distribution li {
+  display: grid;
+  grid-template-columns: 2.6em minmax(0, 1fr) 2em;
+  gap: 8px;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.distribution li > span {
+  color: var(--ink-2);
+  text-align: right;
+}
+
+.distribution li > i {
+  min-width: 3px;
+  height: 14px;
+  background: var(--answer);
+  transition: width 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.distribution li > i[data-empty] {
+  background: var(--rule);
+}
+
+.distribution li:last-child > i:not([data-empty]) {
+  background: var(--ink-3);
+}
+
+.distribution b {
+  font-weight: 600;
+}
+
+@media (min-width: 720px) {
+  .level {
+    grid-template-columns: auto minmax(0, 1fr) minmax(0, 1.2fr);
+  }
+
+  .level-stats {
+    grid-column: auto;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    animation: none;
+  }
+}

@@ -12,7 +12,9 @@
     "api:deploy": "bash api/deploy/deploy.sh",
     "data:people": "node scripts/fetch-people.mjs",
     "data:sites": "node scripts/fetch-sites.mjs",
-    "data:journeys": "node scripts/fetch-journeys.mjs"
+    "data:journeys": "node scripts/fetch-journeys.mjs",
+    "data:countries": "node scripts/build-countries.mjs",
+    "images": "node scripts/build-images.mjs"
   },
   "dependencies": {
     "d3-geo": "^3.1.2",

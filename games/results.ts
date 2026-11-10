@@ -6,6 +6,8 @@ import { readStore, subscribeToStore } from "@/lib/storage";
 import * as digSite from "./dig-site/store";
 import type { GameSlug } from "./slugs";
 import * as firstToLast from "./first-to-last/store";
+import * as outline from "./outline/store";
+import * as overland from "./overland/store";
 import * as wayfarer from "./wayfarer/store";
 import * as whoWhenWhere from "./who-when-where/store";
 
@@ -28,6 +30,8 @@ const SOURCES: Source[] = [
   { game: "wayfarer", key: wayfarer.SYNC.key, resultOf: wayfarer.resultOf },
   { game: "dig-site", key: digSite.SYNC.key, resultOf: digSite.resultOf },
   { game: "first-to-last", key: firstToLast.SYNC.key, resultOf: firstToLast.resultOf },
+  { game: "overland", key: overland.SYNC.key, resultOf: overland.resultOf },
+  { game: "outline", key: outline.SYNC.key, resultOf: outline.resultOf },
 ];
 
 type Save = { days?: Record<string, unknown> } | null;

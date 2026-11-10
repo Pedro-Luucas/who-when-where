@@ -54,6 +54,7 @@ function Play({ day }: { day: number }) {
         />
       </FirstToLastBoard>
       <GamePanels
+        game="first-to-last"
         help={[t("help1"), t("help2"), t("help3"), t("help4"), t("help5")]}
         seenHelp={save.seenHelp}
         onSeenHelp={() => setSave((previous) => ({ ...previous, seenHelp: true }))}

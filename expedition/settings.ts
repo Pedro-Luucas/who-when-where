@@ -16,10 +16,15 @@ export type ExpeditionSettings = {
   /** grouped: game by game · alternate: one of each in turn · shuffle: any order. */
   order: (typeof ORDERS)[number];
   timeLimit: number;
-  /** Tries per puzzle: digs in Dig Site, guesses in Wayfarer, attempts in First to Last. */
+  /**
+   * Tries per puzzle: digs in Dig Site, guesses in Wayfarer and Outline,
+   * attempts in First to Last, and guesses to spare in Overland (beyond the
+   * fewest that could do it).
+   */
   digs: number;
   guesses: number;
   attempts: number;
+  spare: number;
   /** In a party — together: nobody moves on until everyone has finished the puzzle. */
   pace: (typeof PACES)[number];
 };
@@ -29,18 +34,19 @@ export const TRIES = {
   digs: { min: 3, max: 6 },
   guesses: { min: 3, max: 6 },
   attempts: { min: 1, max: 4 },
+  spare: { min: 1, max: 5 },
 } as const;
 export type TriesKey = keyof typeof TRIES;
 
 export const DIFFICULTIES = {
-  relaxed: { digs: 6, guesses: 6, attempts: 4 },
-  standard: { digs: 5, guesses: 6, attempts: 3 },
-  hard: { digs: 4, guesses: 4, attempts: 2 },
+  relaxed: { digs: 6, guesses: 6, attempts: 4, spare: 5 },
+  standard: { digs: 5, guesses: 6, attempts: 3, spare: 4 },
+  hard: { digs: 4, guesses: 4, attempts: 2, spare: 2 },
 } as const;
 export type Difficulty = keyof typeof DIFFICULTIES;
 
 export const DEFAULT_SETTINGS: ExpeditionSettings = {
-  rounds: { "who-when-where": 1, wayfarer: 1, "dig-site": 1, "first-to-last": 1 },
+  rounds: { "who-when-where": 1, wayfarer: 1, "dig-site": 1, "first-to-last": 1, overland: 1, outline: 1 },
   order: "grouped",
   timeLimit: 0,
   ...DIFFICULTIES.standard,
@@ -56,7 +62,10 @@ export function difficultyOf(settings: ExpeditionSettings): Difficulty | "custom
   const match = (Object.keys(DIFFICULTIES) as Difficulty[]).find((name) => {
     const preset = DIFFICULTIES[name];
     return (
-      preset.digs === settings.digs && preset.guesses === settings.guesses && preset.attempts === settings.attempts
+      preset.digs === settings.digs &&
+      preset.guesses === settings.guesses &&
+      preset.attempts === settings.attempts &&
+      preset.spare === settings.spare
     );
   });
   return match ?? "custom";
@@ -87,6 +96,7 @@ export function normalizeSettings(value: unknown): ExpeditionSettings {
     digs: integer(input.digs, TRIES.digs.min, TRIES.digs.max, defaults.digs),
     guesses: integer(input.guesses, TRIES.guesses.min, TRIES.guesses.max, defaults.guesses),
     attempts: integer(input.attempts, TRIES.attempts.min, TRIES.attempts.max, defaults.attempts),
+    spare: integer(input.spare, TRIES.spare.min, TRIES.spare.max, defaults.spare),
     pace: choice(input.pace, PACES, defaults.pace),
   };
   // An expedition has at least one puzzle.
@@ -110,18 +120,21 @@ const fromBase64Url = (text: string) =>
 
 /** The `?c=` value of a link to this very expedition. */
 export function encodeChallenge({ seed, settings }: Challenge): string {
-  const { rounds, order, timeLimit, digs, guesses, attempts } = settings;
+  const { rounds, order, timeLimit, digs, guesses, attempts, spare } = settings;
   const counts = GAME_SLUGS.map((game) => rounds[game]);
-  return toBase64Url(JSON.stringify([seed, counts, order, timeLimit, digs, guesses, attempts]));
+  return toBase64Url(JSON.stringify([seed, counts, order, timeLimit, digs, guesses, attempts, spare]));
 }
 
 export function decodeChallenge(code: string | null): Challenge | null {
   if (!code || code.length > 400) return null;
   try {
-    const [seed, counts, order, timeLimit, digs, guesses, attempts] = JSON.parse(fromBase64Url(code)) as unknown[];
+    const [seed, counts, order, timeLimit, digs, guesses, attempts, spare] = JSON.parse(
+      fromBase64Url(code),
+    ) as unknown[];
     if (typeof seed !== "string" || !/^[\w-]{4,24}$/.test(seed) || !Array.isArray(counts)) return null;
-    const rounds = Object.fromEntries(GAME_SLUGS.map((game, i) => [game, counts[i]]));
-    return { seed, settings: normalizeSettings({ rounds, order, timeLimit, digs, guesses, attempts }) };
+    // A link made before a game existed has no puzzles of it.
+    const rounds = Object.fromEntries(GAME_SLUGS.map((game, i) => [game, counts[i] ?? 0]));
+    return { seed, settings: normalizeSettings({ rounds, order, timeLimit, digs, guesses, attempts, spare }) };
   } catch {
     return null;
   }

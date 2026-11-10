@@ -14,8 +14,8 @@ import {
   readInteger,
   readLine,
   readPartySettings,
+  storedPartySettings,
   stageCount,
-  type PartySettings,
 } from "./validate.ts";
 
 // A party is a room where a group plays the same expedition: a run of
@@ -124,7 +124,7 @@ export function registerParties(account: Hono<Env>, { db, limit, body }: Deps): 
         name: party.name,
         hostId: party.host_id,
         visibility: party.visibility,
-        settings: JSON.parse(party.settings) as PartySettings,
+        settings: storedPartySettings(party.settings),
         status: party.status,
         run: party.run,
         seed: party.seed,
@@ -170,7 +170,7 @@ export function registerParties(account: Hono<Env>, { db, limit, body }: Deps): 
       status: row.status,
       visibility: row.visibility,
       players: row.players,
-      stages: stageCount(JSON.parse(row.settings) as PartySettings),
+      stages: stageCount(storedPartySettings(row.settings)),
       host: toPublic(row, now),
     }));
   }
@@ -311,7 +311,7 @@ export function registerParties(account: Hono<Env>, { db, limit, body }: Deps): 
   account.post("/parties/:code/release", async (c) => {
     const user = c.get("user");
     const party = partyForHost(c.req.param("code"), user.id);
-    const stages = stageCount(JSON.parse(party.settings) as PartySettings);
+    const stages = stageCount(storedPartySettings(party.settings));
     const stage = readInteger((await body(c)).stage, 0, stages - 1, "stage");
     db.prepare("UPDATE parties SET released = MAX(released, ?) WHERE id = ?").run(stage, party.id);
     return c.json(describe(partyByCode(party.code), user.id, undefined));
@@ -322,7 +322,7 @@ export function registerParties(account: Hono<Env>, { db, limit, body }: Deps): 
     const user = c.get("user");
     const party = partyFor(c.req.param("code"), user.id);
     const input = await body(c);
-    const stages = stageCount(JSON.parse(party.settings) as PartySettings);
+    const stages = stageCount(storedPartySettings(party.settings));
     const run = readInteger(input.run, 1, Number.MAX_SAFE_INTEGER, "run");
     const stage = readInteger(input.stage, 0, stages - 1, "stage");
     const points = readInteger(input.points, 0, MAX_POINTS, "points");

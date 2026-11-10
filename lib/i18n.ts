@@ -8,19 +8,18 @@ export type Localized = Record<Locale, string>;
 
 const LOCALE_KEY = "locale";
 
-function detectLocale(): Locale {
-  return navigator.language.toLowerCase().startsWith("pt") ? "pt" : "en";
-}
+/** The language for players who have not picked one. */
+export const DEFAULT_LOCALE: Locale = "pt";
 
-/** The player's language: their saved choice, else the browser's. Browser only. */
+/** The player's language: their saved choice, else Portuguese. Browser only. */
 export function getLocale(): Locale {
-  return readStore<Locale | null>(LOCALE_KEY, null) ?? detectLocale();
+  return readStore<Locale | null>(LOCALE_KEY, null) ?? DEFAULT_LOCALE;
 }
 
 /** The player's language, as a hook. */
 export function useLocale(): Locale {
-  // The server renders English; the client corrects it right after hydration.
-  return useSyncExternalStore(subscribeToStore, getLocale, () => "en");
+  // The server renders the default; the client corrects it right after hydration.
+  return useSyncExternalStore(subscribeToStore, getLocale, () => DEFAULT_LOCALE);
 }
 
 export function setLocale(locale: Locale): void {
@@ -87,14 +86,24 @@ export const SITE_MESSAGES = {
     seeResult: "See result",
     notPlayed: "Not played yet",
     inProgress: "In progress",
-    comingSoon: "More games on the way",
-    comingSoonBody: "New daily history-and-geography games will show up here.",
     help: "How to play",
     stats: "Statistics",
     language: "Language",
     allGames: "All games",
     dataCredit: "Data, texts and images from Wikipedia, Wikidata and Wikimedia Commons.",
     close: "Close",
+    statsSpread: "How your puzzles went",
+    logbook: "Logbook",
+    settings: "Settings",
+    theme: "Theme",
+    theme_auto: "Auto",
+    theme_light: "Light",
+    theme_dark: "Dark",
+    sound: "Sound",
+    haptics: "Vibration",
+    effects: "Confetti",
+    on: "On",
+    off: "Off",
   },
   pt: {
     tagline: "Jogos diários de adivinhação sobre pessoas, lugares e tempo.",
@@ -128,14 +137,24 @@ export const SITE_MESSAGES = {
     seeResult: "Ver resultado",
     notPlayed: "Ainda não jogado",
     inProgress: "Em andamento",
-    comingSoon: "Mais jogos a caminho",
-    comingSoonBody: "Novos jogos diários de história e geografia vão aparecer aqui.",
     help: "Como jogar",
     stats: "Estatísticas",
     language: "Idioma",
     allGames: "Todos os jogos",
     dataCredit: "Dados, textos e imagens da Wikipedia, Wikidata e Wikimedia Commons.",
     close: "Fechar",
+    statsSpread: "Como foram os seus desafios",
+    logbook: "Diário de bordo",
+    settings: "Ajustes",
+    theme: "Tema",
+    theme_auto: "Auto",
+    theme_light: "Claro",
+    theme_dark: "Escuro",
+    sound: "Som",
+    haptics: "Vibração",
+    effects: "Confete",
+    on: "Sim",
+    off: "Não",
   },
 } satisfies Record<Locale, Record<string, string>>;
 

@@ -6,6 +6,10 @@ import { SITES, siteById, siteLabel } from "@/games/dig-site/sites";
 import { eventById, eventsForSeed, type HistoryEvent } from "@/games/first-to-last/events";
 import { FirstToLastBoard } from "@/games/first-to-last/game";
 import { scoreOf as firstToLastScore, type Attempt } from "@/games/first-to-last/rules";
+import { OutlineBoard } from "@/games/outline/game";
+import { TARGETS, scoreOf as outlineScore } from "@/games/outline/rules";
+import { OverlandBoard } from "@/games/overland/game";
+import { isPlayable, puzzlesForSeed, scoreOf as overlandScore } from "@/games/overland/rules";
 import { GAME_SLUGS, type GameSlug } from "@/games/slugs";
 import { WayfarerBoard } from "@/games/wayfarer/game";
 import { JOURNEYS, journeyById } from "@/games/wayfarer/journeys";
@@ -13,6 +17,7 @@ import { scoreOf as wayfarerScore, type Guess as WayfarerGuess } from "@/games/w
 import { WhoWhenWhereBoard } from "@/games/who-when-where/game";
 import { PEOPLE, personById } from "@/games/who-when-where/people";
 import { scoreOf as whoWhenWhereScore, type Guess as LifeGuess } from "@/games/who-when-where/rules";
+import { countryById } from "@/lib/countries";
 import { seededShuffle } from "@/lib/daily";
 import { formatYear, type Locale } from "@/lib/i18n";
 import type { Score } from "@/lib/points";
@@ -20,7 +25,10 @@ import type { ExpeditionSettings } from "./settings";
 
 // The puzzles of an expedition, and how each game plays and scores one.
 
-/** One puzzle: the game, and the ids that name it (six events for First to Last, else one). */
+/**
+ * One puzzle: the game, and the ids that name it — six events for First to
+ * Last, the two ends of the crossing for Overland, else one.
+ */
 export type Stage = { game: GameSlug; ids: string[] };
 
 /**
@@ -50,6 +58,14 @@ export function buildStages(settings: ExpeditionSettings, seed: string): Stage[]
       game: "first-to-last" as const,
       ids: events.map((event) => event.id),
     })),
+    overland: puzzlesForSeed(`${seed}:overland`, settings.rounds.overland).map((puzzle) => ({
+      game: "overland" as const,
+      ids: [puzzle.from, puzzle.to],
+    })),
+    outline: pick(
+      TARGETS.map((country) => country.id),
+      "outline",
+    ),
   };
 
   if (settings.order === "grouped") return GAME_SLUGS.flatMap((game) => byGame[game]);
@@ -68,6 +84,8 @@ export function buildStages(settings: ExpeditionSettings, seed: string): Stage[]
 const eventsOf = (stage: Stage): HistoryEvent[] =>
   stage.ids.map(eventById).filter((event): event is HistoryEvent => event !== undefined);
 
+const crossingOf = (stage: Stage) => ({ from: stage.ids[0], to: stage.ids[1] });
+
 /** How a stage stands after `moves`, on the scale every game shares. */
 export function stageScore(stage: Stage, moves: unknown[], settings: ExpeditionSettings): Score {
   switch (stage.game) {
@@ -79,6 +97,10 @@ export function stageScore(stage: Stage, moves: unknown[], settings: ExpeditionS
       return digSiteScore(moves as Dig[], settings.digs);
     case "first-to-last":
       return firstToLastScore(eventsOf(stage), moves as Attempt[], settings.attempts);
+    case "overland":
+      return overlandScore(crossingOf(stage), moves as string[], settings.spare);
+    case "outline":
+      return outlineScore(stage.ids[0], moves as string[], settings.guesses);
   }
 }
 
@@ -97,6 +119,10 @@ export function stageAnswer(stage: Stage, locale: Locale): string {
       const years = eventsOf(stage).map((event) => event.year);
       return years.length ? `${formatYear(Math.min(...years), locale)} → ${formatYear(Math.max(...years), locale)}` : "";
     }
+    case "overland":
+      return stage.ids.map((id) => countryById(id)?.name[locale] ?? "").join(" → ");
+    case "outline":
+      return countryById(stage.ids[0])?.name[locale] ?? "";
   }
 }
 
@@ -160,5 +186,27 @@ export function StageBoard({ stage, moves, onMove, settings, label, children }: 
           {children}
         </FirstToLastBoard>
       );
+    case "overland": {
+      const puzzle = crossingOf(stage);
+      return isPlayable(puzzle) ? (
+        <OverlandBoard puzzle={puzzle} guesses={moves as string[]} onGuess={onMove} spare={settings.spare} label={label}>
+          {children}
+        </OverlandBoard>
+      ) : null;
+    }
+    case "outline": {
+      const country = countryById(stage.ids[0]);
+      return country ? (
+        <OutlineBoard
+          country={country}
+          guesses={moves as string[]}
+          onGuess={onMove}
+          maxGuesses={settings.guesses}
+          label={label}
+        >
+          {children}
+        </OutlineBoard>
+      ) : null;
+    }
   }
 }

@@ -23,8 +23,11 @@
   --grain-blend: multiply;
 }
 
+/* Dark follows the device unless the player picked a theme (lib/prefs.ts sets
+   data-theme on <html>), so each dark rule is written twice: once for the
+   device's choice, once for the player's. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     color-scheme: dark;
     --paper: #11151b;
     --paper-2: #0b0e13;
@@ -42,6 +45,25 @@
     --backdrop: rgb(0 0 0 / 0.65);
     --grain-blend: overlay;
   }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #11151b;
+  --paper-2: #0b0e13;
+  --card: #19202a;
+  --ink: #ece4d2;
+  --ink-2: #a39a86;
+  --ink-3: #6f6a5f;
+  --rule: rgb(236 228 210 / 0.16);
+  --guess: #ff6f52;
+  --answer: #4fd0b6;
+  --sea: #0e1218;
+  --land: #2a3441;
+  --land-edge: #5b6a7d;
+  --graticule: rgb(236 228 210 / 0.07);
+  --backdrop: rgb(0 0 0 / 0.65);
+  --grain-blend: overlay;
 }
 
 @theme inline {
@@ -427,19 +449,6 @@ a.game-card:hover {
   font-weight: 600;
 }
 
-.game-card-soon {
-  border-style: dashed;
-  border-color: var(--ink-3);
-  background: transparent;
-  box-shadow: none;
-  color: var(--ink-2);
-}
-
-.game-card-soon h3 {
-  font-style: italic;
-  font-weight: 400;
-}
-
 /* ───────────────────────── Game layout ───────────────────────── */
 
 .game {
@@ -480,10 +489,15 @@ a.game-card:hover {
 }
 
 @media (prefers-color-scheme: dark) {
-  .portrait img {
+  :root:not([data-theme="light"]) .portrait img {
     filter: grayscale(1) contrast(1.05) brightness(0.92);
     mix-blend-mode: normal;
   }
+}
+
+:root[data-theme="dark"] .portrait img {
+  filter: grayscale(1) contrast(1.05) brightness(0.92);
+  mix-blend-mode: normal;
 }
 
 .dossier-name {
@@ -1490,13 +1504,21 @@ a.game-card:hover {
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --heat-1: #ff6f52;
     --heat-2: #ff9a4a;
     --heat-3: #e2c04e;
     --heat-4: #7fb2e0;
     --heat-5: #9a9cf0;
   }
+}
+
+:root[data-theme="dark"] {
+  --heat-1: #ff6f52;
+  --heat-2: #ff9a4a;
+  --heat-3: #e2c04e;
+  --heat-4: #7fb2e0;
+  --heat-5: #9a9cf0;
 }
 
 [data-tone="heat-0"] {

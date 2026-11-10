@@ -88,8 +88,8 @@ export function readLine(value: unknown, max: number, field: string, allowEmpty 
 export const MESSAGE_MAX = 500;
 export const PARTY_NAME_MAX = 40;
 
-/** The games that keep scores. */
-export const GAMES = ["who-when-where", "wayfarer", "dig-site", "first-to-last"] as const;
+/** The games that keep scores (the site's games/slugs.ts lists the same). */
+export const GAMES = ["who-when-where", "wayfarer", "dig-site", "first-to-last", "overland", "outline"] as const;
 export type Game = (typeof GAMES)[number];
 
 export const isGame = (value: unknown): value is Game => GAMES.includes(value as Game);
@@ -128,29 +128,38 @@ export type PartySettings = {
   order: (typeof PARTY_ORDERS)[number];
   /** Seconds per puzzle; 0 for no clock. */
   timeLimit: number;
-  /** Tries per puzzle in Dig Site, Wayfarer and First to Last. */
+  /**
+   * Tries per puzzle: digs in Dig Site, guesses in Wayfarer and Outline,
+   * attempts in First to Last, guesses to spare in Overland.
+   */
   digs: number;
   guesses: number;
   attempts: number;
+  spare: number;
   /** "together": nobody moves on until everyone has finished the puzzle. */
   pace: (typeof PARTY_PACES)[number];
 };
+
+/** Spare guesses in Overland when the settings don't say. */
+const DEFAULT_SPARE = 4;
 
 export function readPartySettings(value: unknown): PartySettings {
   const input = asObject(value, "settings");
   const rounds = asObject(input.rounds, "settings.rounds");
   const settings: PartySettings = {
-    rounds: {
-      "who-when-where": readInteger(rounds["who-when-where"], 0, MAX_ROUNDS_PER_GAME, "settings.rounds"),
-      wayfarer: readInteger(rounds.wayfarer, 0, MAX_ROUNDS_PER_GAME, "settings.rounds"),
-      "dig-site": readInteger(rounds["dig-site"], 0, MAX_ROUNDS_PER_GAME, "settings.rounds"),
-      "first-to-last": readInteger(rounds["first-to-last"], 0, MAX_ROUNDS_PER_GAME, "settings.rounds"),
-    },
+    // A game the sender has not heard of (a page loaded before it existed) is left out.
+    rounds: Object.fromEntries(
+      GAMES.map((game) => [
+        game,
+        rounds[game] === undefined ? 0 : readInteger(rounds[game], 0, MAX_ROUNDS_PER_GAME, "settings.rounds"),
+      ]),
+    ) as Record<Game, number>,
     order: readChoice(input.order, PARTY_ORDERS, "settings.order"),
     timeLimit: readInteger(input.timeLimit, 0, 300, "settings.timeLimit"),
     digs: readInteger(input.digs, 3, 6, "settings.digs"),
     guesses: readInteger(input.guesses, 3, 6, "settings.guesses"),
     attempts: readInteger(input.attempts, 1, 4, "settings.attempts"),
+    spare: input.spare === undefined ? DEFAULT_SPARE : readInteger(input.spare, 1, 5, "settings.spare"),
     pace: readChoice(input.pace, PARTY_PACES, "settings.pace"),
   };
   if (!PARTY_TIME_LIMITS.includes(settings.timeLimit)) throw new Invalid("settings.timeLimit");
@@ -161,6 +170,19 @@ export function readPartySettings(value: unknown): PartySettings {
 /** Puzzles in one run of a party. */
 export const stageCount = (settings: PartySettings): number =>
   GAMES.reduce((sum, game) => sum + settings.rounds[game], 0);
+
+/**
+ * A party's settings as they were stored, made whole: a party opened before
+ * a game existed plays none of it.
+ */
+export function storedPartySettings(json: string): PartySettings {
+  const stored = JSON.parse(json) as PartySettings;
+  return {
+    ...stored,
+    rounds: Object.fromEntries(GAMES.map((game) => [game, stored.rounds[game] ?? 0])) as Record<Game, number>,
+    spare: stored.spare ?? DEFAULT_SPARE,
+  };
+}
 
 export function readChoice<const T extends readonly string[]>(value: unknown, choices: T, field: string): T[number] {
   if (typeof value !== "string" || !choices.includes(value)) throw new Invalid(field);

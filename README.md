@@ -8,6 +8,8 @@ Daily guessing games about people, places and time, all played on a world map. E
 | **Wayfarer** | `/wayfarer` | A famous journey is traced on the map a stretch at a time. Name it in six tries. |
 | **Dig Site** | `/dig-site` | A lost city is buried somewhere. Each dig draws a ring it lies on. Find it in five. |
 | **First to Last** | `/first-to-last` | Six moments in history, pinned where they happened. Put them in order in three tries. |
+| **Overland** | `/overland` | Two countries. Name the countries that join them, border to border, wasting as few guesses as you can. |
+| **Outline** | `/outline` | A country, cut out of the map. Every miss says how far away it is, and which way. Name it in six. |
 
 ```bash
 npm run dev            # http://localhost:3000
@@ -16,6 +18,8 @@ npm run lint
 npm run data:people    # rebuild Who When Where's roster from Wikipedia/Wikidata
 npm run data:sites     # rebuild Dig Site's sites (and photos)
 npm run data:journeys  # rebuild Wayfarer's journeys
+npm run data:countries # rebuild the countries Overland and Outline are played with
+npm run images         # redraw the app icons and the card shown for shared links
 ```
 
 In development, `?day=N` on any game (or the hub) plays day N's puzzle.
@@ -24,7 +28,8 @@ Around the daily games there is a community — all of it optional, none of it n
 
 | Page | Route | What it is |
 | --- | --- | --- |
-| **Daily challenge** | `/` | Finish all four of today's puzzles. A year-long activity graph and day streaks, built from the games saved on the device. |
+| **Daily challenge** | `/` | Finish all six of today's puzzles. A year-long activity graph and day streaks, built from the games saved on the device; one button shares the whole day. |
+| **Logbook** | `/logbook` | The player's level (every point is experience), 21 achievements, and an atlas: every person, journey, site, moment and country their puzzles revealed, pinned on one map. Built from the device's saves; no account needed. |
 | **Expedition** | `/expedition` | A custom game: puzzles from any of the games, one after the other. The player picks the games, how many puzzles, the order, a clock and the difficulty. Solo, no account needed; a link challenges a friend to the very same puzzles. |
 | **Party** | `/party` | A room (joined by code, invitation or the open list) where up to 12 players race through the same expedition, with live standings and chat. |
 | **Leaderboard** | `/leaderboard` | Today, the last 7 days and all time; every game or one; everyone or friends. |
@@ -35,13 +40,14 @@ Around the daily games there is a community — all of it optional, none of it n
 
 | Path | What lives there |
 | --- | --- |
-| `lib/` | Shared base for every game: daily clock and schedule (`daily.ts`, `clock.ts`), localStorage state (`storage.ts`), streaks (`stats.ts`), EN/PT strings (`i18n.ts`), geography helpers (`geo.ts`), clipboard (`share.ts`) |
-| `components/` | Shared UI: world map (`world-map.tsx`), year ruler (`year-dial.tsx`), the daily gate (`daily.tsx`), help and statistics panels (`game-panels.tsx`), share button and countdown (`result-footer.tsx`), header, hub card |
+| `lib/` | Shared base for every game: daily clock and schedule (`daily.ts`, `clock.ts`), localStorage state (`storage.ts`), streaks (`stats.ts`), EN/PT strings (`i18n.ts`), geography helpers (`geo.ts`), the countries and their borders (`countries.ts`), sharing (`share.ts`), the player's preferences (`prefs.ts`: theme, sound, vibration, confetti), sounds and confetti (`fx.ts`), notices (`toasts.ts`) |
+| `components/` | Shared UI: world map (`world-map.tsx`), year ruler (`year-dial.tsx`), country search (`country-picker.tsx`), the daily gate (`daily.tsx`), help and statistics panels (`game-panels.tsx`), share button and countdown (`result-footer.tsx`, `share-button.tsx`), settings (`settings-button.tsx`), header, hub card |
 | `games/registry.ts` | The list of games shown on the hub |
 | `games/<slug>/` | One game: its rules, saved progress and statistics (`store.ts`), strings (`messages.ts`), share text and UI. `game.tsx` exports a `…Board` — one puzzle, with its moves held by whoever renders it — which both the daily page and expeditions play |
 | `games/results.ts` | Every game's finished days on one scale (`lib/points.ts`: up to 1,000 points a puzzle) — what the daily challenge, the activity graph and the leaderboards read |
 | `expedition/` | The custom game: its rules (`settings.ts`), dealing the puzzles from a seed (`stages.tsx`), the run being played (`run.ts`, `runner.tsx`), the set-up form and the solo page |
 | `party/` | The party pages: the list (`party-page.tsx`), the room (`room.tsx`: lobby, race, chat), the standings |
+| `logbook/` | The logbook: levels (`level.ts`), achievements (`achievements.ts`), what the player has discovered (`discoveries.ts`), the page, and `watcher.tsx` — mounted in the root layout, it answers every move and finished puzzle with a sound, confetti or a notice, so no game has to |
 | `social/` | The community: API client (`client.ts`), polling (`remote.ts`, `pulse.ts`), friends, chat, leaderboard, profile, the hub's daily panel, and their EN/PT strings (`messages.ts`) |
 | `scripts/` | Data pipelines; `scripts/lib/wiki.mjs` is the shared, cached Wikipedia/Wikidata client |
 | `public/geo/` | World map (Natural Earth 1:50m, via the `world-atlas` package) |
@@ -49,7 +55,7 @@ Around the daily games there is a community — all of it optional, none of it n
 
 The puzzle is chosen on the player's device from their local date, so the pages are fully static. Day 1 is 10 November 2026 (`lib/daily.ts`). Each game plays through its whole roster once per cycle, in a shuffled order.
 
-The world map draws markers, great-circle arcs, routes through waypoints, distance rings and tappable pins; a game only passes it data. Labels that would overlap are hidden until the player zooms in.
+The world map draws markers, great-circle arcs, routes through waypoints, distance rings, tappable pins and whole countries coloured in; a game only passes it data. Labels that would overlap are hidden until the player zooms in.
 
 ## Accounts and the API
 
@@ -75,8 +81,12 @@ npm run api:test
 The site calls the API on its own origin, under `/api/…`, and Next forwards those requests to `API_ORIGIN` (`next.config.ts`). In development that defaults to the local API. For production, set `API_ORIGIN` to the API's address **when building** — the forwarding rule is fixed at build time:
 
 ```bash
-API_ORIGIN=https://api.example.com npm run build
+API_ORIGIN=https://api.example.com SITE_URL=https://example.com npm run build
 ```
+
+`SITE_URL` is the site's own public address: it goes into the link previews (the card in `app/opengraph-image.png`).
+
+The site can be installed as an app (`app/manifest.ts`). The theme, sound, vibration and confetti are the player's to choose, in the settings behind the header's last button; they stay on the device.
 
 **How sign-in works.** Passwords are hashed with scrypt. A session is a random token in an `HttpOnly` cookie; the database stores only its hash. Sessions last 30 days and renew while in use. Changing the password signs the account out everywhere else.
 
@@ -103,6 +113,7 @@ npm run api:deploy -- <host>                                         # every rel
 | Dig Site | `scripts/sites-roster.mjs` | `games/dig-site/data/sites.json` |
 | Wayfarer | `scripts/journeys-roster.mjs` | `games/wayfarer/data/journeys.json` |
 | First to Last | `games/first-to-last/events.ts` | — |
+| Overland, Outline | the tables in `scripts/build-countries.mjs` | `lib/data/countries.json` |
 
 **People.** Add the English Wikipedia article title to `ROSTER` and run `npm run data:people`. It prints one line per person; check the places and years. If Wikidata points at a building or an odd label, add a correction to `OVERRIDES` (`-- --no-images` skips the portrait downloads). Descriptions are shown during play, so they must not give a place or a year away.
 
@@ -112,6 +123,8 @@ npm run api:deploy -- <host>                                         # every rel
 
 **Events.** One line each: year, coordinates, what happened and where, in both languages. The name must not give the year away. Each day's six are dealt from a shuffle so that no two are less than 5 years or 2,500 km apart.
 
+**Countries.** Shapes, borders, sizes and centres are worked out from the world map the site ships (`public/geo/countries-50m.json`); names come from the runtime's CLDR data, so `npm run data:countries` needs no network. The script's tables say which shapes are countries, which belong to another (Somaliland, Hong Kong…), which names to prefer and what else a player may type ("USA", "Holland"). Overland plays crossings with two to six countries between the ends; Outline keeps countries under 2,500 km² as guesses only.
+
 Changing the size of a roster reshuffles that game's schedule, so today's puzzle may change when you deploy new data. A day the player has already started keeps its puzzle.
 
 ## Adding a game
@@ -120,7 +133,8 @@ Changing the size of a roster reshuffles that game's schedule, so today's puzzle
 2. Add the route at `app/<slug>/page.tsx`.
 3. List it in `games/registry.ts` so the hub shows it.
 4. Export `SYNC` from its `store.ts` and add it to `games/saves.ts`, so signed-in players keep their games.
-5. To make it count in the daily challenge, leaderboards and expeditions: give `rules.ts` a `scoreOf` (0–1,000), export `resultOf` from `store.ts` and a `…Board` from `game.tsx`, then add the slug to `games/slugs.ts`, `games/results.ts`, `expedition/stages.tsx` and `GAMES` in `api/src/validate.ts`.
+5. To make it count in the daily challenge, leaderboards and expeditions: give `rules.ts` a `scoreOf` (0–1,000), export `resultOf` from `store.ts` and a `…Board` from `game.tsx`, then add the slug to the end of `games/slugs.ts`, to `games/results.ts`, `expedition/stages.tsx` and `expedition/settings.ts`, and to `GAMES` in `api/src/validate.ts` (the API has to be deployed before the site sends it scores of the new game).
+6. Pass its slug to `<GamePanels game=…>` for the chart in its statistics, and list what it reveals in `logbook/discoveries.ts` to put it in the atlas.
 
 ## Scoring
 
@@ -128,5 +142,7 @@ Changing the size of a roster reshuffles that game's schedule, so today's puzzle
 - **Wayfarer** — six tries. A wrong guess says whether the real journey set out earlier or later, and reveals more of the route; the travel mode, century and stop names unlock along the way (`games/wayfarer/rules.ts`).
 - **Dig Site** — five digs. Each returns the distance to the site; a dig within 50 km finds it (`games/dig-site/rules.ts`).
 - **First to Last** — three tries. Events in the right position lock in place between tries (`games/first-to-last/rules.ts`).
+- **Overland** — as many guesses as the shortest way needs, plus four. Each country named is on a shortest route, one border out of the way, or off course; the crossing is made when the named countries join the two ends (`games/overland/rules.ts`).
+- **Outline** — six guesses. A miss gives the distance and direction between the two countries' centres; the hemispheres, the size and the number of neighbours unlock along the way (`games/outline/rules.ts`).
 
-For leaderboards, the daily challenge and expeditions, every puzzle is also worth up to 1,000 points (`lib/points.ts`): Who When Where's own score; in the other three, 1,000 for solving on the first try down to 250 on the last, and a small consolation for a near miss.
+For leaderboards, the daily challenge and expeditions, every puzzle is also worth up to 1,000 points (`lib/points.ts`): Who When Where's own score; in the others, 1,000 for solving on the first try down to 250 on the last (in Overland, 1,000 for the shortest way down to 250 with every spare guess spent), and a small consolation for a near miss.

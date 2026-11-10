@@ -44,6 +44,9 @@ export type MapRoute = {
 /** A circle of constant distance around a point. */
 export type MapRing = LatLon & { km: number; tone?: string };
 
+/** A country coloured in. `shape` is its name in the world map's data. */
+export type MapRegion = { shape: string; tone?: string };
+
 type Labels = {
   loading: string;
   error: string;
@@ -57,6 +60,7 @@ type Props = {
   arcs?: MapArc[];
   routes?: MapRoute[];
   rings?: MapRing[];
+  regions?: MapRegion[];
   /** Makes the map clickable: called with the clicked location. */
   onPick?: (point: LatLon) => void;
   /** The view animates to frame these points whenever they change. */
@@ -90,7 +94,8 @@ export function useMapLabels(): Labels {
 
 let worldRequest: Promise<FeatureCollection> | null = null;
 
-function loadWorld(): Promise<FeatureCollection> {
+/** The world's countries, fetched once and shared by every map on the page. */
+export function loadWorld(): Promise<FeatureCollection> {
   worldRequest ??= fetch("/geo/countries-50m.json")
     .then((response) => {
       if (!response.ok) throw new Error(`World map: HTTP ${response.status}`);
@@ -133,6 +138,7 @@ export function WorldMap({
   arcs = [],
   routes = [],
   rings = [],
+  regions = [],
   onPick,
   focus,
   labels,
@@ -216,6 +222,19 @@ export function WorldMap({
       return { d, tone };
     });
   }, [projection, ringKey]);
+
+  // Regions are whole countries from the map's own data, drawn over the land.
+  const regionKey = regions.map((region) => `${region.shape}|${region.tone ?? ""}`).join(";");
+  const regionPaths = useMemo(() => {
+    if (!projection || !world || !regionKey) return [];
+    const path = geoPath(projection);
+    return regionKey.split(";").flatMap((entry) => {
+      const [shape, tone] = entry.split("|");
+      const country = world.features.find((item) => item.properties?.name === shape);
+      const d = country ? path(country) : null;
+      return d ? [{ shape, d, tone }] : [];
+    });
+  }, [projection, world, regionKey]);
 
   // Pan and zoom. Rebuilt (and the view reset) whenever the frame resizes.
   useEffect(() => {
@@ -418,6 +437,9 @@ export function WorldMap({
         >
           <g transform={view.toString()}>
             <BaseMap sphere={base.sphere} graticule={base.graticule} land={base.land} />
+            {regionPaths.map((region) => (
+              <path key={region.shape} d={region.d} className="map-region" data-tone={region.tone || undefined} />
+            ))}
             {ringPaths.map((ring, i) => (
               <path key={i} d={ring.d} className="map-ring" data-tone={ring.tone || undefined} />
             ))}

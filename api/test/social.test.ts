@@ -396,3 +396,32 @@ test("deleting an account removes its traces", async () => {
   }
   assert.equal((await bob.call("GET", "/friends")).body.friends.length, 0);
 });
+
+test("the newer games keep scores; party settings from before them are made whole", async () => {
+  const { player } = world();
+  const ada = await player("ada");
+  const today = utcDay();
+
+  const put = await ada.call("PUT", "/results", {
+    results: [
+      { game: "overland", day: today, points: 813, detail: "4/7" },
+      { game: "outline", day: today, points: 1000, detail: "1/6" },
+    ],
+  });
+  assert.equal(put.status, 204);
+  assert.equal((await ada.call("GET", `/leaderboard?day=${today}&game=outline`)).body.rows[0].points, 1000);
+
+  // SETTINGS is what a page loaded before Overland and Outline existed would send.
+  const old = (await ada.call("POST", "/parties", { settings: SETTINGS })).body.party;
+  assert.deepEqual(old.settings.rounds, { ...SETTINGS.rounds, overland: 0, outline: 0 });
+  assert.equal(old.settings.spare, 4);
+
+  const settings = { ...SETTINGS, rounds: { ...SETTINGS.rounds, overland: 2, outline: 1 }, spare: 2 };
+  const party = (await ada.call("POST", "/parties", { settings })).body.party;
+  assert.equal(party.settings.rounds.overland, 2);
+  assert.equal(party.settings.spare, 2);
+  assert.equal(
+    (await ada.call("POST", "/parties", { settings: { ...settings, spare: 9 } })).body.field,
+    "settings.spare",
+  );
+});

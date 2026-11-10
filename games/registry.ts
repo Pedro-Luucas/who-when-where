@@ -2,6 +2,8 @@ import type { ComponentType } from "react";
 import type { Localized } from "@/lib/i18n";
 import { DigSiteStatus } from "./dig-site/status";
 import { FirstToLastStatus } from "./first-to-last/status";
+import { OutlineStatus } from "./outline/status";
+import { OverlandStatus } from "./overland/status";
 import { WayfarerStatus } from "./wayfarer/status";
 import { WhoWhenWhereStatus } from "./who-when-where/status";
 
@@ -57,5 +59,25 @@ export const GAMES: GameInfo[] = [
       pt: "Seis momentos da história, marcados onde aconteceram. Toque neles em ordem, do mais antigo ao mais recente.",
     },
     Status: FirstToLastStatus,
+  },
+  {
+    slug: "overland",
+    title: "Overland",
+    theme: { en: "Borders", pt: "Fronteiras" },
+    blurb: {
+      en: "Two countries, and everything between them. Name the countries that join them, border to border.",
+      pt: "Dois países, e tudo o que há entre eles. Diga os países que ligam um ao outro, de fronteira em fronteira.",
+    },
+    Status: OverlandStatus,
+  },
+  {
+    slug: "outline",
+    title: "Outline",
+    theme: { en: "Shapes", pt: "Contornos" },
+    blurb: {
+      en: "A country, cut out of the map. Every miss tells you how far away it is, and which way. Name it in six.",
+      pt: "Um país, recortado do mapa. Cada erro diz a que distância ele está, e em que direção. Descubra em seis.",
+    },
+    Status: OutlineStatus,
   },
 ];

@@ -65,11 +65,13 @@ export function ActivityGraph({ activity, today }: Props) {
                   // Before the first puzzle there was nothing to play.
                   if (day < 1) return <i key={row} data-level="before" title={date} />;
                   const entry = byDay.get(day);
-                  const level = Math.min(entry?.puzzles ?? 0, GAME_SLUGS.length);
+                  // Four shades: the last one is a day with every puzzle finished.
+                  const level = Math.ceil((Math.min(entry?.puzzles ?? 0, GAME_SLUGS.length) / GAME_SLUGS.length) * 4);
                   const title = entry
                     ? t("activityDay", {
                         date,
                         puzzles: entry.puzzles,
+                        total: GAME_SLUGS.length,
                         points: formatNumber(entry.points, locale),
                       })
                     : t("activityNone", { date });

@@ -2,6 +2,7 @@
 
 import { useEffect, useEffectEvent, useMemo, useSyncExternalStore } from "react";
 import { GAME_TITLES } from "@/games/slugs";
+import { cue, cuePuzzle } from "@/lib/fx";
 import { formatNumber } from "@/lib/i18n";
 import { useSocialT } from "@/social/messages";
 import { gradeOf, runTotal, type Run, type StageResult } from "./run";
@@ -51,13 +52,15 @@ export function Runner({ run, onChange, onResult, onFinish, hold, aside }: Props
     const scored: StageResult = { points: score.points, detail: score.detail, ...(timedOut ? { timedOut } : {}) };
     onChange({ ...run, moves, results: [...run.results, scored] });
     onResult?.(run.stage, scored);
+    cuePuzzle(score.points, timedOut || score.detail.startsWith("X"));
   }
 
   function move(next: unknown) {
     if (result) return;
     const moves = [...run.moves, next];
-    if (stageScore(stage, moves, run.settings).over) finish(moves, false);
-    else onChange({ ...run, moves });
+    if (stageScore(stage, moves, run.settings).over) return finish(moves, false);
+    onChange({ ...run, moves });
+    cue("move");
   }
 
   // The clock ran out: the puzzle ends with what was earned so far.

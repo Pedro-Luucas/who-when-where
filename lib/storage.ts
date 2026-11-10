@@ -29,18 +29,19 @@ function writeRaw(key: string, raw: string): void {
 
 export function readStore<T>(key: string, fallback: T): T {
   const raw = readRaw(key);
+  // Nothing stored: each caller gets its own fallback, so it is never cached
+  // (two callers may read the same key with different ones).
+  if (raw === null) return fallback;
   const cached = cache.get(key);
   if (cached && cached.raw === raw) return cached.value as T;
-  let value = fallback;
-  if (raw !== null) {
-    try {
-      value = JSON.parse(raw) as T;
-    } catch {
-      // Corrupt entry: fall back, and let the next write replace it.
-    }
+  try {
+    const value = JSON.parse(raw) as T;
+    cache.set(key, { raw, value });
+    return value;
+  } catch {
+    // Corrupt entry: fall back, and let the next write replace it.
+    return fallback;
   }
-  cache.set(key, { raw, value });
-  return value;
 }
 
 export function writeStore<T>(key: string, value: T): void {

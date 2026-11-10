@@ -1,0 +1,4842 @@
+[
+ {
+  "id": "ad",
+  "name": {
+   "en": "Andorra",
+   "pt": "Andorra"
+  },
+  "shapes": [
+   "Andorra"
+  ],
+  "lat": 42.54,
+  "lon": 1.56,
+  "box": [
+   1.4,
+   42.4,
+   1.7,
+   42.6
+  ],
+  "area": 441,
+  "borders": [
+   "es",
+   "fr"
+  ]
+ },
+ {
+  "id": "ae",
+  "name": {
+   "en": "United Arab Emirates",
+   "pt": "Emirados Árabes Unidos"
+  },
+  "also": [
+   "UAE",
+   "Emirates",
+   "Emirados"
+  ],
+  "shapes": [
+   "United Arab Emirates"
+  ],
+  "lat": 23.9,
+  "lon": 54.3,
+  "box": [
+   51.6,
+   22.6,
+   56.4,
+   26.1
+  ],
+  "area": 71265,
+  "borders": [
+   "om",
+   "sa"
+  ]
+ },
+ {
+  "id": "af",
+  "name": {
+   "en": "Afghanistan",
+   "pt": "Afeganistão"
+  },
+  "shapes": [
+   "Afghanistan"
+  ],
+  "lat": 33.82,
+  "lon": 65.93,
+  "box": [
+   60.5,
+   29.4,
+   74.9,
+   38.5
+  ],
+  "area": 642058,
+  "borders": [
+   "cn",
+   "ir",
+   "pk",
+   "tj",
+   "tm",
+   "uz"
+  ]
+ },
+ {
+  "id": "ag",
+  "name": {
+   "en": "Antigua and Barbuda",
+   "pt": "Antígua e Barbuda"
+  },
+  "shapes": [
+   "Antigua and Barb."
+  ],
+  "lat": 17.08,
+  "lon": -61.79,
+  "box": [
+   -61.9,
+   17,
+   -61.7,
+   17.2
+  ],
+  "area": 433,
+  "borders": []
+ },
+ {
+  "id": "al",
+  "name": {
+   "en": "Albania",
+   "pt": "Albânia"
+  },
+  "shapes": [
+   "Albania"
+  ],
+  "lat": 41.13,
+  "lon": 20.05,
+  "box": [
+   19.3,
+   39.7,
+   21,
+   42.6
+  ],
+  "area": 28337,
+  "borders": [
+   "gr",
+   "me",
+   "mk",
+   "xk"
+  ]
+ },
+ {
+  "id": "am",
+  "name": {
+   "en": "Armenia",
+   "pt": "Armênia"
+  },
+  "shapes": [
+   "Armenia"
+  ],
+  "lat": 40.29,
+  "lon": 44.94,
+  "box": [
+   43.4,
+   38.9,
+   46.6,
+   41.3
+  ],
+  "area": 29568,
+  "borders": [
+   "az",
+   "ge",
+   "ir",
+   "tr"
+  ]
+ },
+ {
+  "id": "ao",
+  "name": {
+   "en": "Angola",
+   "pt": "Angola"
+  },
+  "shapes": [
+   "Angola"
+  ],
+  "lat": -12.31,
+  "lon": 17.56,
+  "box": [
+   11.7,
+   -18,
+   24,
+   -5.9
+  ],
+  "area": 1249380,
+  "borders": [
+   "cd",
+   "cg",
+   "na",
+   "zm"
+  ]
+ },
+ {
+  "id": "ar",
+  "name": {
+   "en": "Argentina",
+   "pt": "Argentina"
+  },
+  "shapes": [
+   "Argentina"
+  ],
+  "lat": -34.54,
+  "lon": -64.75,
+  "box": [
+   -73.6,
+   -52.4,
+   -53.7,
+   -21.8
+  ],
+  "area": 2782703,
+  "borders": [
+   "bo",
+   "br",
+   "cl",
+   "py",
+   "uy"
+  ]
+ },
+ {
+  "id": "at",
+  "name": {
+   "en": "Austria",
+   "pt": "Áustria"
+  },
+  "shapes": [
+   "Austria"
+  ],
+  "lat": 47.59,
+  "lon": 14.11,
+  "box": [
+   9.5,
+   46.4,
+   17.1,
+   49
+  ],
+  "area": 83901,
+  "borders": [
+   "ch",
+   "cz",
+   "de",
+   "hu",
+   "it",
+   "li",
+   "si",
+   "sk"
+  ]
+ },
+ {
+  "id": "au",
+  "name": {
+   "en": "Australia",
+   "pt": "Austrália"
+  },
+  "shapes": [
+   "Australia"
+  ],
+  "lat": -25.63,
+  "lon": 134.21,
+  "box": [
+   113.2,
+   -39.1,
+   153.6,
+   -10.7
+  ],
+  "area": 7706009,
+  "borders": []
+ },
+ {
+  "id": "az",
+  "name": {
+   "en": "Azerbaijan",
+   "pt": "Azerbaijão"
+  },
+  "shapes": [
+   "Azerbaijan"
+  ],
+  "lat": 40.34,
+  "lon": 47.67,
+  "box": [
+   45,
+   38.4,
+   50.4,
+   41.9
+  ],
+  "area": 86400,
+  "borders": [
+   "am",
+   "ge",
+   "ir",
+   "ru",
+   "tr"
+  ]
+ },
+ {
+  "id": "ba",
+  "name": {
+   "en": "Bosnia and Herzegovina",
+   "pt": "Bósnia e Herzegovina"
+  },
+  "shapes": [
+   "Bosnia and Herz."
+  ],
+  "lat": 44.17,
+  "lon": 17.77,
+  "box": [
+   15.7,
+   42.6,
+   19.6,
+   45.3
+  ],
+  "area": 51690,
+  "borders": [
+   "hr",
+   "me",
+   "rs"
+  ]
+ },
+ {
+  "id": "bb",
+  "name": {
+   "en": "Barbados",
+   "pt": "Barbados"
+  },
+  "shapes": [
+   "Barbados"
+  ],
+  "lat": 13.18,
+  "lon": -59.56,
+  "box": [
+   -59.6,
+   13.1,
+   -59.4,
+   13.3
+  ],
+  "area": 388,
+  "borders": []
+ },
+ {
+  "id": "bd",
+  "name": {
+   "en": "Bangladesh",
+   "pt": "Bangladesh"
+  },
+  "shapes": [
+   "Bangladesh"
+  ],
+  "lat": 23.89,
+  "lon": 90.23,
+  "box": [
+   88,
+   20.8,
+   92.6,
+   26.6
+  ],
+  "area": 135674,
+  "borders": [
+   "in",
+   "mm"
+  ]
+ },
+ {
+  "id": "be",
+  "name": {
+   "en": "Belgium",
+   "pt": "Bélgica"
+  },
+  "shapes": [
+   "Belgium"
+  ],
+  "lat": 50.64,
+  "lon": 4.65,
+  "box": [
+   2.5,
+   49.5,
+   6.4,
+   51.5
+  ],
+  "area": 30627,
+  "borders": [
+   "de",
+   "fr",
+   "lu",
+   "nl"
+  ]
+ },
+ {
+  "id": "bf",
+  "name": {
+   "en": "Burkina Faso",
+   "pt": "Burquina Faso"
+  },
+  "shapes": [
+   "Burkina Faso"
+  ],
+  "lat": 12.27,
+  "lon": -1.76,
+  "box": [
+   -5.5,
+   9.4,
+   2.4,
+   15.1
+  ],
+  "area": 273690,
+  "borders": [
+   "bj",
+   "ci",
+   "gh",
+   "ml",
+   "ne",
+   "tg"
+  ]
+ },
+ {
+  "id": "bg",
+  "name": {
+   "en": "Bulgaria",
+   "pt": "Bulgária"
+  },
+  "shapes": [
+   "Bulgaria"
+  ],
+  "lat": 42.77,
+  "lon": 25.21,
+  "box": [
+   22.3,
+   41.2,
+   28.6,
+   44.2
+  ],
+  "area": 112424,
+  "borders": [
+   "gr",
+   "mk",
+   "ro",
+   "rs",
+   "tr"
+  ]
+ },
+ {
+  "id": "bh",
+  "name": {
+   "en": "Bahrain",
+   "pt": "Barein"
+  },
+  "shapes": [
+   "Bahrain"
+  ],
+  "lat": 26.04,
+  "lon": 50.54,
+  "box": [
+   50.5,
+   25.8,
+   50.6,
+   26.2
+  ],
+  "area": 544,
+  "borders": []
+ },
+ {
+  "id": "bi",
+  "name": {
+   "en": "Burundi",
+   "pt": "Burundi"
+  },
+  "shapes": [
+   "Burundi"
+  ],
+  "lat": -3.36,
+  "lon": 29.88,
+  "box": [
+   29,
+   -4.5,
+   30.8,
+   -2.3
+  ],
+  "area": 27217,
+  "borders": [
+   "cd",
+   "rw",
+   "tz"
+  ]
+ },
+ {
+  "id": "bj",
+  "name": {
+   "en": "Benin",
+   "pt": "Benin"
+  },
+  "shapes": [
+   "Benin"
+  ],
+  "lat": 9.64,
+  "lon": 2.33,
+  "box": [
+   0.8,
+   6.2,
+   3.8,
+   12.4
+  ],
+  "area": 116553,
+  "borders": [
+   "bf",
+   "ne",
+   "ng",
+   "tg"
+  ]
+ },
+ {
+  "id": "bn",
+  "name": {
+   "en": "Brunei",
+   "pt": "Brunei"
+  },
+  "shapes": [
+   "Brunei"
+  ],
+  "lat": 4.49,
+  "lon": 114.59,
+  "box": [
+   114.1,
+   4,
+   115,
+   5
+  ],
+  "area": 5669,
+  "borders": [
+   "my"
+  ]
+ },
+ {
+  "id": "bo",
+  "name": {
+   "en": "Bolivia",
+   "pt": "Bolívia"
+  },
+  "shapes": [
+   "Bolivia"
+  ],
+  "lat": -16.68,
+  "lon": -64.7,
+  "box": [
+   -69.6,
+   -22.9,
+   -57.5,
+   -9.7
+  ],
+  "area": 1090271,
+  "borders": [
+   "ar",
+   "br",
+   "cl",
+   "pe",
+   "py"
+  ]
+ },
+ {
+  "id": "br",
+  "name": {
+   "en": "Brazil",
+   "pt": "Brasil"
+  },
+  "shapes": [
+   "Brazil"
+  ],
+  "lat": -10.69,
+  "lon": -53.24,
+  "box": [
+   -74,
+   -33.7,
+   -34.8,
+   5.3
+  ],
+  "area": 8499400,
+  "borders": [
+   "ar",
+   "bo",
+   "co",
+   "gy",
+   "pe",
+   "py",
+   "sr",
+   "uy",
+   "ve"
+  ]
+ },
+ {
+  "id": "bs",
+  "name": {
+   "en": "Bahamas",
+   "pt": "Bahamas"
+  },
+  "shapes": [
+   "Bahamas"
+  ],
+  "lat": 24.7,
+  "lon": -78.04,
+  "box": [
+   -78.4,
+   24.3,
+   -77.7,
+   25.2
+  ],
+  "area": 12657,
+  "borders": []
+ },
+ {
+  "id": "bt",
+  "name": {
+   "en": "Bhutan",
+   "pt": "Butão"
+  },
+  "shapes": [
+   "Bhutan"
+  ],
+  "lat": 27.41,
+  "lon": 90.4,
+  "box": [
+   88.7,
+   26.7,
+   92.1,
+   28.3
+  ],
+  "area": 39870,
+  "borders": [
+   "cn",
+   "in"
+  ]
+ },
+ {
+  "id": "bw",
+  "name": {
+   "en": "Botswana",
+   "pt": "Botsuana"
+  },
+  "shapes": [
+   "Botswana"
+  ],
+  "lat": -22.17,
+  "lon": 23.81,
+  "box": [
+   20,
+   -26.9,
+   29.4,
+   -17.8
+  ],
+  "area": 580622,
+  "borders": [
+   "na",
+   "za",
+   "zw"
+  ]
+ },
+ {
+  "id": "by",
+  "name": {
+   "en": "Belarus",
+   "pt": "Bielorrússia"
+  },
+  "also": [
+   "Belarus",
+   "Bielorrússia"
+  ],
+  "shapes": [
+   "Belarus"
+  ],
+  "lat": 53.52,
+  "lon": 28.02,
+  "box": [
+   23.2,
+   51.3,
+   32.7,
+   56.1
+  ],
+  "area": 206698,
+  "borders": [
+   "lt",
+   "lv",
+   "pl",
+   "ru",
+   "ua"
+  ]
+ },
+ {
+  "id": "bz",
+  "name": {
+   "en": "Belize",
+   "pt": "Belize"
+  },
+  "shapes": [
+   "Belize"
+  ],
+  "lat": 17.19,
+  "lon": -88.72,
+  "box": [
+   -89.2,
+   15.9,
+   -88.1,
+   18.5
+  ],
+  "area": 22770,
+  "borders": [
+   "gt",
+   "mx"
+  ]
+ },
+ {
+  "id": "ca",
+  "name": {
+   "en": "Canada",
+   "pt": "Canadá"
+  },
+  "shapes": [
+   "Canada"
+  ],
+  "lat": 58.59,
+  "lon": -99,
+  "box": [
+   -141,
+   41.7,
+   -55.7,
+   72
+  ],
+  "area": 9872102,
+  "borders": [
+   "us"
+  ]
+ },
+ {
+  "id": "cd",
+  "name": {
+   "en": "DR Congo",
+   "pt": "República Democrática do Congo"
+  },
+  "also": [
+   "Democratic Republic of the Congo",
+   "Congo-Kinshasa",
+   "RDC",
+   "DRC"
+  ],
+  "shapes": [
+   "Dem. Rep. Congo"
+  ],
+  "lat": -2.87,
+  "lon": 23.64,
+  "box": [
+   12.2,
+   -13.5,
+   31.3,
+   5.3
+  ],
+  "area": 2334703,
+  "borders": [
+   "ao",
+   "bi",
+   "cf",
+   "cg",
+   "rw",
+   "ss",
+   "tz",
+   "ug",
+   "zm"
+  ]
+ },
+ {
+  "id": "cf",
+  "name": {
+   "en": "Central African Republic",
+   "pt": "República Centro-Africana"
+  },
+  "shapes": [
+   "Central African Rep."
+  ],
+  "lat": 6.57,
+  "lon": 20.46,
+  "box": [
+   14.4,
+   2.3,
+   27.4,
+   11
+  ],
+  "area": 620987,
+  "borders": [
+   "cd",
+   "cg",
+   "cm",
+   "sd",
+   "ss",
+   "td"
+  ]
+ },
+ {
+  "id": "cg",
+  "name": {
+   "en": "Republic of the Congo",
+   "pt": "República do Congo"
+  },
+  "also": [
+   "Congo",
+   "Congo-Brazzaville"
+  ],
+  "shapes": [
+   "Congo"
+  ],
+  "lat": -0.84,
+  "lon": 15.22,
+  "box": [
+   11.1,
+   -5,
+   18.6,
+   3.7
+  ],
+  "area": 346857,
+  "borders": [
+   "ao",
+   "cd",
+   "cf",
+   "cm",
+   "ga"
+  ]
+ },
+ {
+  "id": "ch",
+  "name": {
+   "en": "Switzerland",
+   "pt": "Suíça"
+  },
+  "shapes": [
+   "Switzerland"
+  ],
+  "lat": 46.8,
+  "lon": 8.21,
+  "box": [
+   6,
+   45.8,
+   10.5,
+   47.8
+  ],
+  "area": 41215,
+  "borders": [
+   "at",
+   "de",
+   "fr",
+   "it",
+   "li"
+  ]
+ },
+ {
+  "id": "ci",
+  "name": {
+   "en": "Ivory Coast",
+   "pt": "Costa do Marfim"
+  },
+  "also": [
+   "Côte d'Ivoire"
+  ],
+  "shapes": [
+   "Côte d'Ivoire"
+  ],
+  "lat": 7.63,
+  "lon": -5.57,
+  "box": [
+   -8.6,
+   4.4,
+   -2.5,
+   10.7
+  ],
+  "area": 322298,
+  "borders": [
+   "bf",
+   "gh",
+   "gn",
+   "lr",
+   "ml"
+  ]
+ },
+ {
+  "id": "cl",
+  "name": {
+   "en": "Chile",
+   "pt": "Chile"
+  },
+  "shapes": [
+   "Chile"
+  ],
+  "lat": -34.36,
+  "lon": -70.95,
+  "box": [
+   -75.7,
+   -53.9,
+   -67,
+   -17.5
+  ],
+  "area": 737442,
+  "borders": [
+   "ar",
+   "bo",
+   "pe"
+  ]
+ },
+ {
+  "id": "cm",
+  "name": {
+   "en": "Cameroon",
+   "pt": "Camarões"
+  },
+  "shapes": [
+   "Cameroon"
+  ],
+  "lat": 5.68,
+  "lon": 12.73,
+  "box": [
+   8.5,
+   1.7,
+   16.2,
+   13.1
+  ],
+  "area": 465902,
+  "borders": [
+   "cf",
+   "cg",
+   "ga",
+   "gq",
+   "ng",
+   "td"
+  ]
+ },
+ {
+  "id": "cn",
+  "name": {
+   "en": "China",
+   "pt": "China"
+  },
+  "shapes": [
+   "China",
+   "Macao",
+   "Hong Kong"
+  ],
+  "lat": 36.76,
+  "lon": 103.35,
+  "box": [
+   73.6,
+   20.3,
+   134.8,
+   53.6
+  ],
+  "area": 9372278,
+  "borders": [
+   "af",
+   "bt",
+   "in",
+   "kg",
+   "kp",
+   "kz",
+   "la",
+   "mm",
+   "mn",
+   "np",
+   "pk",
+   "ru",
+   "tj",
+   "vn"
+  ]
+ },
+ {
+  "id": "co",
+  "name": {
+   "en": "Colombia",
+   "pt": "Colômbia"
+  },
+  "shapes": [
+   "Colombia"
+  ],
+  "lat": 3.9,
+  "lon": -73.08,
+  "box": [
+   -79,
+   -4.2,
+   -66.9,
+   12.4
+  ],
+  "area": 1139434,
+  "borders": [
+   "br",
+   "ec",
+   "pa",
+   "pe",
+   "ve"
+  ]
+ },
+ {
+  "id": "cr",
+  "name": {
+   "en": "Costa Rica",
+   "pt": "Costa Rica"
+  },
+  "shapes": [
+   "Costa Rica"
+  ],
+  "lat": 9.98,
+  "lon": -84.19,
+  "box": [
+   -85.9,
+   8.1,
+   -82.6,
+   11.2
+  ],
+  "area": 51511,
+  "borders": [
+   "ni",
+   "pa"
+  ]
+ },
+ {
+  "id": "cu",
+  "name": {
+   "en": "Cuba",
+   "pt": "Cuba"
+  },
+  "shapes": [
+   "Cuba"
+  ],
+  "lat": 21.63,
+  "lon": -78.91,
+  "box": [
+   -84.9,
+   19.9,
+   -74.1,
+   23.2
+  ],
+  "area": 109285,
+  "borders": []
+ },
+ {
+  "id": "cv",
+  "name": {
+   "en": "Cape Verde",
+   "pt": "Cabo Verde"
+  },
+  "also": [
+   "Cabo Verde"
+  ],
+  "shapes": [
+   "Cabo Verde"
+  ],
+  "lat": 15.08,
+  "lon": -23.64,
+  "box": [
+   -23.8,
+   14.9,
+   -23.4,
+   15.3
+  ],
+  "area": 3587,
+  "borders": []
+ },
+ {
+  "id": "cy",
+  "name": {
+   "en": "Cyprus",
+   "pt": "Chipre"
+  },
+  "shapes": [
+   "Cyprus",
+   "N. Cyprus"
+  ],
+  "lat": 34.92,
+  "lon": 33.01,
+  "box": [
+   32.3,
+   34.6,
+   34.1,
+   35.2
+  ],
+  "area": 9182,
+  "borders": []
+ },
+ {
+  "id": "cz",
+  "name": {
+   "en": "Czechia",
+   "pt": "Tchéquia"
+  },
+  "also": [
+   "Czech Republic",
+   "República Tcheca"
+  ],
+  "shapes": [
+   "Czechia"
+  ],
+  "lat": 49.74,
+  "lon": 15.32,
+  "box": [
+   12.1,
+   48.6,
+   18.8,
+   51
+  ],
+  "area": 78487,
+  "borders": [
+   "at",
+   "de",
+   "pl",
+   "sk"
+  ]
+ },
+ {
+  "id": "de",
+  "name": {
+   "en": "Germany",
+   "pt": "Alemanha"
+  },
+  "shapes": [
+   "Germany"
+  ],
+  "lat": 51.03,
+  "lon": 10.35,
+  "box": [
+   5.9,
+   47.3,
+   15,
+   54.9
+  ],
+  "area": 356163,
+  "borders": [
+   "at",
+   "be",
+   "ch",
+   "cz",
+   "dk",
+   "fr",
+   "lu",
+   "nl",
+   "pl"
+  ]
+ },
+ {
+  "id": "dj",
+  "name": {
+   "en": "Djibouti",
+   "pt": "Djibuti"
+  },
+  "shapes": [
+   "Djibouti"
+  ],
+  "lat": 11.75,
+  "lon": 42.56,
+  "box": [
+   41.8,
+   10.9,
+   43.4,
+   12.7
+  ],
+  "area": 21693,
+  "borders": [
+   "er",
+   "et",
+   "so"
+  ]
+ },
+ {
+  "id": "dk",
+  "name": {
+   "en": "Denmark",
+   "pt": "Dinamarca"
+  },
+  "shapes": [
+   "Denmark"
+  ],
+  "lat": 56.23,
+  "lon": 9.35,
+  "box": [
+   8.1,
+   54.8,
+   10.9,
+   57.7
+  ],
+  "area": 42411,
+  "borders": [
+   "de"
+  ]
+ },
+ {
+  "id": "dm",
+  "name": {
+   "en": "Dominica",
+   "pt": "Dominica"
+  },
+  "shapes": [
+   "Dominica"
+  ],
+  "lat": 15.44,
+  "lon": -61.36,
+  "box": [
+   -61.5,
+   15.2,
+   -61.3,
+   15.6
+  ],
+  "area": 688,
+  "borders": []
+ },
+ {
+  "id": "do",
+  "name": {
+   "en": "Dominican Republic",
+   "pt": "República Dominicana"
+  },
+  "shapes": [
+   "Dominican Rep."
+  ],
+  "lat": 18.9,
+  "lon": -70.51,
+  "box": [
+   -72,
+   17.6,
+   -68.3,
+   19.9
+  ],
+  "area": 48592,
+  "borders": [
+   "ht"
+  ]
+ },
+ {
+  "id": "dz",
+  "name": {
+   "en": "Algeria",
+   "pt": "Argélia"
+  },
+  "shapes": [
+   "Algeria"
+  ],
+  "lat": 28.06,
+  "lon": 2.63,
+  "box": [
+   -8.7,
+   19,
+   12,
+   37.1
+  ],
+  "area": 2322788,
+  "borders": [
+   "eh",
+   "ly",
+   "ma",
+   "ml",
+   "mr",
+   "ne",
+   "tn"
+  ]
+ },
+ {
+  "id": "ec",
+  "name": {
+   "en": "Ecuador",
+   "pt": "Equador"
+  },
+  "shapes": [
+   "Ecuador"
+  ],
+  "lat": -1.44,
+  "lon": -78.39,
+  "box": [
+   -81,
+   -5,
+   -75.2,
+   1.5
+  ],
+  "area": 255658,
+  "borders": [
+   "co",
+   "pe"
+  ]
+ },
+ {
+  "id": "ee",
+  "name": {
+   "en": "Estonia",
+   "pt": "Estônia"
+  },
+  "shapes": [
+   "Estonia"
+  ],
+  "lat": 58.68,
+  "lon": 25.84,
+  "box": [
+   23.4,
+   57.5,
+   28.2,
+   59.6
+  ],
+  "area": 45442,
+  "borders": [
+   "lv",
+   "ru"
+  ]
+ },
+ {
+  "id": "eg",
+  "name": {
+   "en": "Egypt",
+   "pt": "Egito"
+  },
+  "shapes": [
+   "Egypt"
+  ],
+  "lat": 26.46,
+  "lon": 29.88,
+  "box": [
+   24.7,
+   22,
+   36.9,
+   31.7
+  ],
+  "area": 1003707,
+  "borders": [
+   "il",
+   "ly",
+   "ps",
+   "sd"
+  ]
+ },
+ {
+  "id": "eh",
+  "name": {
+   "en": "Western Sahara",
+   "pt": "Saara Ocidental"
+  },
+  "shapes": [
+   "W. Sahara"
+  ],
+  "lat": 24.21,
+  "lon": -12.27,
+  "box": [
+   -17.1,
+   20.8,
+   -8.7,
+   27.7
+  ],
+  "area": 90820,
+  "borders": [
+   "dz",
+   "ma",
+   "mr"
+  ]
+ },
+ {
+  "id": "er",
+  "name": {
+   "en": "Eritrea",
+   "pt": "Eritreia"
+  },
+  "shapes": [
+   "Eritrea"
+  ],
+  "lat": 15.36,
+  "lon": 38.85,
+  "box": [
+   36.4,
+   12.4,
+   43.1,
+   18
+  ],
+  "area": 123678,
+  "borders": [
+   "dj",
+   "et",
+   "sd"
+  ]
+ },
+ {
+  "id": "es",
+  "name": {
+   "en": "Spain",
+   "pt": "Espanha"
+  },
+  "shapes": [
+   "Spain"
+  ],
+  "lat": 40.37,
+  "lon": -3.57,
+  "box": [
+   -9.2,
+   36,
+   3.3,
+   43.8
+  ],
+  "area": 506178,
+  "borders": [
+   "ad",
+   "fr",
+   "pt"
+  ]
+ },
+ {
+  "id": "et",
+  "name": {
+   "en": "Ethiopia",
+   "pt": "Etiópia"
+  },
+  "shapes": [
+   "Ethiopia"
+  ],
+  "lat": 8.61,
+  "lon": 39.61,
+  "box": [
+   33,
+   3.5,
+   48,
+   14.9
+  ],
+  "area": 1131761,
+  "borders": [
+   "dj",
+   "er",
+   "ke",
+   "sd",
+   "so",
+   "ss"
+  ]
+ },
+ {
+  "id": "fi",
+  "name": {
+   "en": "Finland",
+   "pt": "Finlândia"
+  },
+  "shapes": [
+   "Finland",
+   "Åland"
+  ],
+  "lat": 64.26,
+  "lon": 26.21,
+  "box": [
+   20.6,
+   59.8,
+   31.5,
+   70.1
+  ],
+  "area": 331242,
+  "borders": [
+   "no",
+   "ru",
+   "se"
+  ]
+ },
+ {
+  "id": "fj",
+  "name": {
+   "en": "Fiji",
+   "pt": "Fiji"
+  },
+  "shapes": [
+   "Fiji"
+  ],
+  "lat": -17.82,
+  "lon": 177.97,
+  "box": [
+   177.3,
+   -18.3,
+   178.7,
+   -17.3
+  ],
+  "area": 18398,
+  "borders": []
+ },
+ {
+  "id": "fm",
+  "name": {
+   "en": "Micronesia",
+   "pt": "Micronésia"
+  },
+  "shapes": [
+   "Micronesia"
+  ],
+  "lat": 6.89,
+  "lon": 158.23,
+  "box": [
+   158.1,
+   6.8,
+   158.3,
+   7
+  ],
+  "area": 524,
+  "borders": []
+ },
+ {
+  "id": "fr",
+  "name": {
+   "en": "France",
+   "pt": "França"
+  },
+  "shapes": [
+   "France"
+  ],
+  "lat": 46.57,
+  "lon": 2.46,
+  "box": [
+   -4.8,
+   42.3,
+   8.1,
+   51.1
+  ],
+  "area": 635064,
+  "borders": [
+   "ad",
+   "be",
+   "ch",
+   "de",
+   "es",
+   "it",
+   "lu",
+   "mc"
+  ]
+ },
+ {
+  "id": "ga",
+  "name": {
+   "en": "Gabon",
+   "pt": "Gabão"
+  },
+  "shapes": [
+   "Gabon"
+  ],
+  "lat": -0.59,
+  "lon": 11.79,
+  "box": [
+   8.7,
+   -3.9,
+   14.5,
+   2.3
+  ],
+  "area": 260715,
+  "borders": [
+   "cg",
+   "cm",
+   "gq"
+  ]
+ },
+ {
+  "id": "gb",
+  "name": {
+   "en": "United Kingdom",
+   "pt": "Reino Unido"
+  },
+  "also": [
+   "UK",
+   "Great Britain",
+   "Britain",
+   "England",
+   "Grã-Bretanha",
+   "Inglaterra"
+  ],
+  "shapes": [
+   "United Kingdom"
+  ],
+  "lat": 53.83,
+  "lon": -2.41,
+  "box": [
+   -6.1,
+   50,
+   1.7,
+   58.6
+  ],
+  "area": 239616,
+  "borders": [
+   "ie"
+  ]
+ },
+ {
+  "id": "gd",
+  "name": {
+   "en": "Grenada",
+   "pt": "Granada"
+  },
+  "shapes": [
+   "Grenada"
+  ],
+  "lat": 12.12,
+  "lon": -61.68,
+  "box": [
+   -61.8,
+   12,
+   -61.6,
+   12.2
+  ],
+  "area": 288,
+  "borders": []
+ },
+ {
+  "id": "ge",
+  "name": {
+   "en": "Georgia",
+   "pt": "Geórgia"
+  },
+  "shapes": [
+   "Georgia"
+  ],
+  "lat": 42.17,
+  "lon": 43.52,
+  "box": [
+   40,
+   41.1,
+   46.7,
+   43.6
+  ],
+  "area": 69297,
+  "borders": [
+   "am",
+   "az",
+   "ru",
+   "tr"
+  ]
+ },
+ {
+  "id": "gh",
+  "name": {
+   "en": "Ghana",
+   "pt": "Gana"
+  },
+  "shapes": [
+   "Ghana"
+  ],
+  "lat": 7.95,
+  "lon": -1.22,
+  "box": [
+   -3.2,
+   4.8,
+   1.2,
+   11.2
+  ],
+  "area": 239589,
+  "borders": [
+   "bf",
+   "ci",
+   "tg"
+  ]
+ },
+ {
+  "id": "gl",
+  "name": {
+   "en": "Greenland",
+   "pt": "Groenlândia"
+  },
+  "shapes": [
+   "Greenland"
+  ],
+  "lat": 73.08,
+  "lon": -41.8,
+  "box": [
+   -72.8,
+   59.8,
+   -11.4,
+   83.6
+  ],
+  "area": 2154754,
+  "borders": []
+ },
+ {
+  "id": "gm",
+  "name": {
+   "en": "Gambia",
+   "pt": "Gâmbia"
+  },
+  "shapes": [
+   "Gambia"
+  ],
+  "lat": 13.45,
+  "lon": -15.4,
+  "box": [
+   -16.8,
+   13.1,
+   -13.8,
+   13.8
+  ],
+  "area": 10324,
+  "borders": [
+   "sn"
+  ]
+ },
+ {
+  "id": "gn",
+  "name": {
+   "en": "Guinea",
+   "pt": "Guiné"
+  },
+  "shapes": [
+   "Guinea"
+  ],
+  "lat": 10.44,
+  "lon": -10.93,
+  "box": [
+   -15,
+   7.2,
+   -7.7,
+   12.7
+  ],
+  "area": 244938,
+  "borders": [
+   "ci",
+   "gw",
+   "lr",
+   "ml",
+   "sl",
+   "sn"
+  ]
+ },
+ {
+  "id": "gq",
+  "name": {
+   "en": "Equatorial Guinea",
+   "pt": "Guiné Equatorial"
+  },
+  "shapes": [
+   "Eq. Guinea"
+  ],
+  "lat": 1.57,
+  "lon": 10.47,
+  "box": [
+   9.4,
+   1,
+   11.3,
+   2.3
+  ],
+  "area": 26637,
+  "borders": [
+   "cm",
+   "ga"
+  ]
+ },
+ {
+  "id": "gr",
+  "name": {
+   "en": "Greece",
+   "pt": "Grécia"
+  },
+  "shapes": [
+   "Greece"
+  ],
+  "lat": 39.46,
+  "lon": 22.57,
+  "box": [
+   20,
+   36.4,
+   26.6,
+   41.7
+  ],
+  "area": 130177,
+  "borders": [
+   "al",
+   "bg",
+   "mk",
+   "tr"
+  ]
+ },
+ {
+  "id": "gt",
+  "name": {
+   "en": "Guatemala",
+   "pt": "Guatemala"
+  },
+  "shapes": [
+   "Guatemala"
+  ],
+  "lat": 15.69,
+  "lon": -90.37,
+  "box": [
+   -92.2,
+   13.7,
+   -88.2,
+   17.8
+  ],
+  "area": 108520,
+  "borders": [
+   "bz",
+   "hn",
+   "mx",
+   "sv"
+  ]
+ },
+ {
+  "id": "gw",
+  "name": {
+   "en": "Guinea-Bissau",
+   "pt": "Guiné-Bissau"
+  },
+  "shapes": [
+   "Guinea-Bissau"
+  ],
+  "lat": 12.06,
+  "lon": -14.92,
+  "box": [
+   -16.7,
+   10.9,
+   -13.7,
+   12.7
+  ],
+  "area": 32044,
+  "borders": [
+   "gn",
+   "sn"
+  ]
+ },
+ {
+  "id": "gy",
+  "name": {
+   "en": "Guyana",
+   "pt": "Guiana"
+  },
+  "shapes": [
+   "Guyana"
+  ],
+  "lat": 4.79,
+  "lon": -58.98,
+  "box": [
+   -61.4,
+   1.2,
+   -56.5,
+   8.5
+  ],
+  "area": 211930,
+  "borders": [
+   "br",
+   "sr",
+   "ve"
+  ]
+ },
+ {
+  "id": "hn",
+  "name": {
+   "en": "Honduras",
+   "pt": "Honduras"
+  },
+  "shapes": [
+   "Honduras"
+  ],
+  "lat": 14.83,
+  "lon": -86.62,
+  "box": [
+   -89.4,
+   13,
+   -83.2,
+   16
+  ],
+  "area": 113531,
+  "borders": [
+   "gt",
+   "ni",
+   "sv"
+  ]
+ },
+ {
+  "id": "hr",
+  "name": {
+   "en": "Croatia",
+   "pt": "Croácia"
+  },
+  "shapes": [
+   "Croatia"
+  ],
+  "lat": 45.16,
+  "lon": 16.42,
+  "box": [
+   13.5,
+   42.9,
+   19.4,
+   46.5
+  ],
+  "area": 54414,
+  "borders": [
+   "ba",
+   "hu",
+   "me",
+   "rs",
+   "si"
+  ]
+ },
+ {
+  "id": "ht",
+  "name": {
+   "en": "Haiti",
+   "pt": "Haiti"
+  },
+  "shapes": [
+   "Haiti"
+  ],
+  "lat": 18.93,
+  "lon": -72.68,
+  "box": [
+   -74.5,
+   18,
+   -71.6,
+   19.9
+  ],
+  "area": 26822,
+  "borders": [
+   "do"
+  ]
+ },
+ {
+  "id": "hu",
+  "name": {
+   "en": "Hungary",
+   "pt": "Hungria"
+  },
+  "shapes": [
+   "Hungary"
+  ],
+  "lat": 47.17,
+  "lon": 19.38,
+  "box": [
+   16.1,
+   45.8,
+   22.9,
+   48.6
+  ],
+  "area": 92966,
+  "borders": [
+   "at",
+   "hr",
+   "ro",
+   "rs",
+   "si",
+   "sk",
+   "ua"
+  ]
+ },
+ {
+  "id": "id",
+  "name": {
+   "en": "Indonesia",
+   "pt": "Indonésia"
+  },
+  "shapes": [
+   "Indonesia"
+  ],
+  "lat": -0.19,
+  "lon": 114.01,
+  "box": [
+   108.9,
+   -4.2,
+   119,
+   4.4
+  ],
+  "area": 1872242,
+  "borders": [
+   "my",
+   "pg",
+   "tl"
+  ]
+ },
+ {
+  "id": "ie",
+  "name": {
+   "en": "Ireland",
+   "pt": "Irlanda"
+  },
+  "shapes": [
+   "Ireland"
+  ],
+  "lat": 53.16,
+  "lon": -8.14,
+  "box": [
+   -10.4,
+   51.5,
+   -6,
+   55.4
+  ],
+  "area": 68700,
+  "borders": [
+   "gb"
+  ]
+ },
+ {
+  "id": "il",
+  "name": {
+   "en": "Israel",
+   "pt": "Israel"
+  },
+  "shapes": [
+   "Israel"
+  ],
+  "lat": 31.45,
+  "lon": 35,
+  "box": [
+   34.2,
+   29.5,
+   35.9,
+   33.4
+  ],
+  "area": 22284,
+  "borders": [
+   "eg",
+   "jo",
+   "lb",
+   "ps",
+   "sy"
+  ]
+ },
+ {
+  "id": "in",
+  "name": {
+   "en": "India",
+   "pt": "Índia"
+  },
+  "shapes": [
+   "India"
+  ],
+  "lat": 22.8,
+  "lon": 79.53,
+  "box": [
+   68.2,
+   8.1,
+   97.3,
+   35.5
+  ],
+  "area": 3155807,
+  "borders": [
+   "bd",
+   "bt",
+   "cn",
+   "mm",
+   "np",
+   "pk"
+  ]
+ },
+ {
+  "id": "iq",
+  "name": {
+   "en": "Iraq",
+   "pt": "Iraque"
+  },
+  "shapes": [
+   "Iraq"
+  ],
+  "lat": 33.01,
+  "lon": 43.77,
+  "box": [
+   38.8,
+   29.1,
+   48.5,
+   37.4
+  ],
+  "area": 437462,
+  "borders": [
+   "ir",
+   "jo",
+   "kw",
+   "sa",
+   "sy",
+   "tr"
+  ]
+ },
+ {
+  "id": "ir",
+  "name": {
+   "en": "Iran",
+   "pt": "Irã"
+  },
+  "also": [
+   "Persia",
+   "Pérsia"
+  ],
+  "shapes": [
+   "Iran"
+  ],
+  "lat": 32.53,
+  "lon": 54.44,
+  "box": [
+   44,
+   25.1,
+   63.3,
+   39.8
+  ],
+  "area": 1622847,
+  "borders": [
+   "af",
+   "am",
+   "az",
+   "iq",
+   "pk",
+   "tm",
+   "tr"
+  ]
+ },
+ {
+  "id": "is",
+  "name": {
+   "en": "Iceland",
+   "pt": "Islândia"
+  },
+  "shapes": [
+   "Iceland"
+  ],
+  "lat": 65,
+  "lon": -18.58,
+  "box": [
+   -24.5,
+   63.4,
+   -13.6,
+   66.5
+  ],
+  "area": 101161,
+  "borders": []
+ },
+ {
+  "id": "it",
+  "name": {
+   "en": "Italy",
+   "pt": "Itália"
+  },
+  "shapes": [
+   "Italy"
+  ],
+  "lat": 43.49,
+  "lon": 12.3,
+  "box": [
+   6.6,
+   37.9,
+   18.5,
+   47.1
+  ],
+  "area": 300267,
+  "borders": [
+   "at",
+   "ch",
+   "fr",
+   "si",
+   "sm",
+   "va"
+  ]
+ },
+ {
+  "id": "jm",
+  "name": {
+   "en": "Jamaica",
+   "pt": "Jamaica"
+  },
+  "shapes": [
+   "Jamaica"
+  ],
+  "lat": 18.16,
+  "lon": -77.31,
+  "box": [
+   -78.3,
+   17.7,
+   -76.2,
+   18.5
+  ],
+  "area": 10935,
+  "borders": []
+ },
+ {
+  "id": "jo",
+  "name": {
+   "en": "Jordan",
+   "pt": "Jordânia"
+  },
+  "shapes": [
+   "Jordan"
+  ],
+  "lat": 31.24,
+  "lon": 36.76,
+  "box": [
+   35,
+   29.2,
+   39.3,
+   33.4
+  ],
+  "area": 88856,
+  "borders": [
+   "il",
+   "iq",
+   "ps",
+   "sa",
+   "sy"
+  ]
+ },
+ {
+  "id": "jp",
+  "name": {
+   "en": "Japan",
+   "pt": "Japão"
+  },
+  "shapes": [
+   "Japan"
+  ],
+  "lat": 36.63,
+  "lon": 137.88,
+  "box": [
+   130.9,
+   33.5,
+   142,
+   41.5
+  ],
+  "area": 370074,
+  "borders": []
+ },
+ {
+  "id": "ke",
+  "name": {
+   "en": "Kenya",
+   "pt": "Quênia"
+  },
+  "shapes": [
+   "Kenya"
+  ],
+  "lat": 0.6,
+  "lon": 37.8,
+  "box": [
+   33.9,
+   -4.7,
+   41.9,
+   5.5
+  ],
+  "area": 594848,
+  "borders": [
+   "et",
+   "so",
+   "ss",
+   "tz",
+   "ug"
+  ]
+ },
+ {
+  "id": "kg",
+  "name": {
+   "en": "Kyrgyzstan",
+   "pt": "Quirguistão"
+  },
+  "shapes": [
+   "Kyrgyzstan"
+  ],
+  "lat": 41.47,
+  "lon": 74.51,
+  "box": [
+   69.2,
+   39.2,
+   80.2,
+   43.2
+  ],
+  "area": 198661,
+  "borders": [
+   "cn",
+   "kz",
+   "tj",
+   "uz"
+  ]
+ },
+ {
+  "id": "kh",
+  "name": {
+   "en": "Cambodia",
+   "pt": "Camboja"
+  },
+  "shapes": [
+   "Cambodia"
+  ],
+  "lat": 12.72,
+  "lon": 104.91,
+  "box": [
+   102.3,
+   10.4,
+   107.6,
+   14.7
+  ],
+  "area": 181373,
+  "borders": [
+   "la",
+   "th",
+   "vn"
+  ]
+ },
+ {
+  "id": "ki",
+  "name": {
+   "en": "Kiribati",
+   "pt": "Quiribati"
+  },
+  "shapes": [
+   "Kiribati"
+  ],
+  "lat": 1.85,
+  "lon": -157.37,
+  "box": [
+   -157.6,
+   1.7,
+   -157.2,
+   2
+  ],
+  "area": 941,
+  "borders": []
+ },
+ {
+  "id": "km",
+  "name": {
+   "en": "Comoros",
+   "pt": "Comores"
+  },
+  "shapes": [
+   "Comoros"
+  ],
+  "lat": -11.65,
+  "lon": 43.34,
+  "box": [
+   43.2,
+   -11.9,
+   43.5,
+   -11.4
+  ],
+  "area": 1582,
+  "borders": []
+ },
+ {
+  "id": "kn",
+  "name": {
+   "en": "Saint Kitts and Nevis",
+   "pt": "São Cristóvão e Névis"
+  },
+  "shapes": [
+   "St. Kitts and Nevis"
+  ],
+  "lat": 17.33,
+  "lon": -62.75,
+  "box": [
+   -62.8,
+   17.2,
+   -62.6,
+   17.4
+  ],
+  "area": 234,
+  "borders": []
+ },
+ {
+  "id": "kp",
+  "name": {
+   "en": "North Korea",
+   "pt": "Coreia do Norte"
+  },
+  "also": [
+   "DPRK"
+  ],
+  "shapes": [
+   "North Korea"
+  ],
+  "lat": 40.14,
+  "lon": 127.16,
+  "box": [
+   124.3,
+   37.7,
+   130.7,
+   43
+  ],
+  "area": 122496,
+  "borders": [
+   "cn",
+   "kr",
+   "ru"
+  ]
+ },
+ {
+  "id": "kr",
+  "name": {
+   "en": "South Korea",
+   "pt": "Coreia do Sul"
+  },
+  "also": [
+   "Korea",
+   "Coreia"
+  ],
+  "shapes": [
+   "South Korea"
+  ],
+  "lat": 36.45,
+  "lon": 127.87,
+  "box": [
+   126.2,
+   34.3,
+   129.6,
+   38.6
+  ],
+  "area": 97165,
+  "borders": [
+   "kp"
+  ]
+ },
+ {
+  "id": "kw",
+  "name": {
+   "en": "Kuwait",
+   "pt": "Kuwait"
+  },
+  "shapes": [
+   "Kuwait"
+  ],
+  "lat": 29.32,
+  "lon": 47.56,
+  "box": [
+   46.5,
+   28.5,
+   48.4,
+   30.1
+  ],
+  "area": 17330,
+  "borders": [
+   "iq",
+   "sa"
+  ]
+ },
+ {
+  "id": "kz",
+  "name": {
+   "en": "Kazakhstan",
+   "pt": "Cazaquistão"
+  },
+  "shapes": [
+   "Kazakhstan"
+  ],
+  "lat": 48.36,
+  "lon": 67.25,
+  "box": [
+   46.6,
+   40.6,
+   87.3,
+   55.4
+  ],
+  "area": 2712747,
+  "borders": [
+   "cn",
+   "kg",
+   "ru",
+   "tm",
+   "uz"
+  ]
+ },
+ {
+  "id": "la",
+  "name": {
+   "en": "Laos",
+   "pt": "Laos"
+  },
+  "shapes": [
+   "Laos"
+  ],
+  "lat": 18.49,
+  "lon": 103.78,
+  "box": [
+   100.1,
+   13.9,
+   107.7,
+   22.5
+  ],
+  "area": 228928,
+  "borders": [
+   "cn",
+   "kh",
+   "mm",
+   "th",
+   "vn"
+  ]
+ },
+ {
+  "id": "lb",
+  "name": {
+   "en": "Lebanon",
+   "pt": "Líbano"
+  },
+  "shapes": [
+   "Lebanon"
+  ],
+  "lat": 33.92,
+  "lon": 35.88,
+  "box": [
+   35.1,
+   33.1,
+   36.6,
+   34.7
+  ],
+  "area": 10010,
+  "borders": [
+   "il",
+   "sy"
+  ]
+ },
+ {
+  "id": "lc",
+  "name": {
+   "en": "Saint Lucia",
+   "pt": "Santa Lúcia"
+  },
+  "shapes": [
+   "Saint Lucia"
+  ],
+  "lat": 13.89,
+  "lon": -60.97,
+  "box": [
+   -61.1,
+   13.7,
+   -60.9,
+   14.1
+  ],
+  "area": 552,
+  "borders": []
+ },
+ {
+  "id": "li",
+  "name": {
+   "en": "Liechtenstein",
+   "pt": "Liechtenstein"
+  },
+  "shapes": [
+   "Liechtenstein"
+  ],
+  "lat": 47.14,
+  "lon": 9.54,
+  "box": [
+   9.5,
+   47.1,
+   9.6,
+   47.3
+  ],
+  "area": 138,
+  "borders": [
+   "at",
+   "ch"
+  ]
+ },
+ {
+  "id": "lk",
+  "name": {
+   "en": "Sri Lanka",
+   "pt": "Sri Lanka"
+  },
+  "shapes": [
+   "Sri Lanka"
+  ],
+  "lat": 7.61,
+  "lon": 80.7,
+  "box": [
+   79.7,
+   5.9,
+   81.9,
+   9.8
+  ],
+  "area": 66046,
+  "borders": []
+ },
+ {
+  "id": "lr",
+  "name": {
+   "en": "Liberia",
+   "pt": "Libéria"
+  },
+  "shapes": [
+   "Liberia"
+  ],
+  "lat": 6.45,
+  "lon": -9.32,
+  "box": [
+   -11.5,
+   4.4,
+   -7.4,
+   8.5
+  ],
+  "area": 95648,
+  "borders": [
+   "ci",
+   "gn",
+   "sl"
+  ]
+ },
+ {
+  "id": "ls",
+  "name": {
+   "en": "Lesotho",
+   "pt": "Lesoto"
+  },
+  "shapes": [
+   "Lesotho"
+  ],
+  "lat": -29.58,
+  "lon": 28.23,
+  "box": [
+   27.1,
+   -30.6,
+   29.4,
+   -28.6
+  ],
+  "area": 30020,
+  "borders": [
+   "za"
+  ]
+ },
+ {
+  "id": "lt",
+  "name": {
+   "en": "Lithuania",
+   "pt": "Lituânia"
+  },
+  "shapes": [
+   "Lithuania"
+  ],
+  "lat": 55.32,
+  "lon": 23.9,
+  "box": [
+   21,
+   53.9,
+   26.8,
+   56.4
+  ],
+  "area": 64519,
+  "borders": [
+   "by",
+   "lv",
+   "pl",
+   "ru"
+  ]
+ },
+ {
+  "id": "lu",
+  "name": {
+   "en": "Luxembourg",
+   "pt": "Luxemburgo"
+  },
+  "shapes": [
+   "Luxembourg"
+  ],
+  "lat": 49.77,
+  "lon": 6.07,
+  "box": [
+   5.7,
+   49.4,
+   6.5,
+   50.2
+  ],
+  "area": 2614,
+  "borders": [
+   "be",
+   "de",
+   "fr"
+  ]
+ },
+ {
+  "id": "lv",
+  "name": {
+   "en": "Latvia",
+   "pt": "Letônia"
+  },
+  "shapes": [
+   "Latvia"
+  ],
+  "lat": 56.86,
+  "lon": 24.92,
+  "box": [
+   21,
+   55.7,
+   28.2,
+   58.1
+  ],
+  "area": 64254,
+  "borders": [
+   "by",
+   "ee",
+   "lt",
+   "ru"
+  ]
+ },
+ {
+  "id": "ly",
+  "name": {
+   "en": "Libya",
+   "pt": "Líbia"
+  },
+  "shapes": [
+   "Libya"
+  ],
+  "lat": 27.02,
+  "lon": 18.07,
+  "box": [
+   9.3,
+   19.5,
+   25.2,
+   33.2
+  ],
+  "area": 1626369,
+  "borders": [
+   "dz",
+   "eg",
+   "ne",
+   "sd",
+   "td",
+   "tn"
+  ]
+ },
+ {
+  "id": "ma",
+  "name": {
+   "en": "Morocco",
+   "pt": "Marrocos"
+  },
+  "shapes": [
+   "Morocco"
+  ],
+  "lat": 29.77,
+  "lon": -8.73,
+  "box": [
+   -17,
+   21.4,
+   -1.1,
+   35.9
+  ],
+  "area": 582378,
+  "borders": [
+   "dz",
+   "eh"
+  ]
+ },
+ {
+  "id": "mc",
+  "name": {
+   "en": "Monaco",
+   "pt": "Mônaco"
+  },
+  "shapes": [
+   "Monaco"
+  ],
+  "lat": 43.75,
+  "lon": 7.41,
+  "box": [
+   7.4,
+   43.7,
+   7.4,
+   43.8
+  ],
+  "area": 12,
+  "borders": [
+   "fr"
+  ]
+ },
+ {
+  "id": "md",
+  "name": {
+   "en": "Moldova",
+   "pt": "Moldávia"
+  },
+  "shapes": [
+   "Moldova"
+  ],
+  "lat": 47.19,
+  "lon": 28.47,
+  "box": [
+   26.6,
+   45.5,
+   30.1,
+   48.5
+  ],
+  "area": 33115,
+  "borders": [
+   "ro",
+   "ua"
+  ]
+ },
+ {
+  "id": "me",
+  "name": {
+   "en": "Montenegro",
+   "pt": "Montenegro"
+  },
+  "shapes": [
+   "Montenegro"
+  ],
+  "lat": 42.79,
+  "lon": 19.24,
+  "box": [
+   18.4,
+   41.9,
+   20.3,
+   43.5
+  ],
+  "area": 13663,
+  "borders": [
+   "al",
+   "ba",
+   "hr",
+   "rs",
+   "xk"
+  ]
+ },
+ {
+  "id": "mg",
+  "name": {
+   "en": "Madagascar",
+   "pt": "Madagascar"
+  },
+  "shapes": [
+   "Madagascar"
+  ],
+  "lat": -19.32,
+  "lon": 46.74,
+  "box": [
+   43.3,
+   -25.6,
+   50.5,
+   -12.1
+  ],
+  "area": 594622,
+  "borders": []
+ },
+ {
+  "id": "mh",
+  "name": {
+   "en": "Marshall Islands",
+   "pt": "Ilhas Marshall"
+  },
+  "shapes": [
+   "Marshall Is."
+  ],
+  "lat": 7.11,
+  "lon": 171.19,
+  "box": [
+   171,
+   7.1,
+   171.4,
+   7.2
+  ],
+  "area": 236,
+  "borders": []
+ },
+ {
+  "id": "mk",
+  "name": {
+   "en": "North Macedonia",
+   "pt": "Macedônia do Norte"
+  },
+  "also": [
+   "Macedonia",
+   "Macedônia"
+  ],
+  "shapes": [
+   "Macedonia"
+  ],
+  "lat": 41.6,
+  "lon": 21.68,
+  "box": [
+   20.5,
+   40.9,
+   23,
+   42.4
+  ],
+  "area": 25366,
+  "borders": [
+   "al",
+   "bg",
+   "gr",
+   "rs",
+   "xk"
+  ]
+ },
+ {
+  "id": "ml",
+  "name": {
+   "en": "Mali",
+   "pt": "Mali"
+  },
+  "shapes": [
+   "Mali"
+  ],
+  "lat": 17.32,
+  "lon": -3.59,
+  "box": [
+   -12.3,
+   10.1,
+   4.2,
+   25
+  ],
+  "area": 1258185,
+  "borders": [
+   "bf",
+   "ci",
+   "dz",
+   "gn",
+   "mr",
+   "ne",
+   "sn"
+  ]
+ },
+ {
+  "id": "mm",
+  "name": {
+   "en": "Myanmar",
+   "pt": "Mianmar"
+  },
+  "also": [
+   "Burma",
+   "Birmânia"
+  ],
+  "shapes": [
+   "Myanmar"
+  ],
+  "lat": 21.15,
+  "lon": 96.49,
+  "box": [
+   92.2,
+   10,
+   101.1,
+   28.5
+  ],
+  "area": 662746,
+  "borders": [
+   "bd",
+   "cn",
+   "in",
+   "la",
+   "th"
+  ]
+ },
+ {
+  "id": "mn",
+  "name": {
+   "en": "Mongolia",
+   "pt": "Mongólia"
+  },
+  "shapes": [
+   "Mongolia"
+  ],
+  "lat": 46.96,
+  "lon": 103.12,
+  "box": [
+   87.7,
+   41.6,
+   119.9,
+   52.1
+  ],
+  "area": 1560428,
+  "borders": [
+   "cn",
+   "ru"
+  ]
+ },
+ {
+  "id": "mr",
+  "name": {
+   "en": "Mauritania",
+   "pt": "Mauritânia"
+  },
+  "shapes": [
+   "Mauritania"
+  ],
+  "lat": 20.22,
+  "lon": -10.37,
+  "box": [
+   -17.1,
+   14.7,
+   -4.8,
+   27.3
+  ],
+  "area": 1038352,
+  "borders": [
+   "dz",
+   "eh",
+   "ml",
+   "sn"
+  ]
+ },
+ {
+  "id": "mt",
+  "name": {
+   "en": "Malta",
+   "pt": "Malta"
+  },
+  "shapes": [
+   "Malta"
+  ],
+  "lat": 35.89,
+  "lon": 14.44,
+  "box": [
+   14.4,
+   35.8,
+   14.6,
+   36
+  ],
+  "area": 276,
+  "borders": []
+ },
+ {
+  "id": "mu",
+  "name": {
+   "en": "Mauritius",
+   "pt": "Maurício"
+  },
+  "shapes": [
+   "Mauritius"
+  ],
+  "lat": -20.28,
+  "lon": 57.57,
+  "box": [
+   57.3,
+   -20.5,
+   57.8,
+   -20
+  ],
+  "area": 1880,
+  "borders": []
+ },
+ {
+  "id": "mv",
+  "name": {
+   "en": "Maldives",
+   "pt": "Maldivas"
+  },
+  "shapes": [
+   "Maldives"
+  ],
+  "lat": 4.2,
+  "lon": 73.5,
+  "box": [
+   73.5,
+   4.2,
+   73.5,
+   4.2
+  ],
+  "area": 67,
+  "borders": []
+ },
+ {
+  "id": "mw",
+  "name": {
+   "en": "Malawi",
+   "pt": "Malaui"
+  },
+  "shapes": [
+   "Malawi"
+  ],
+  "lat": -13.21,
+  "lon": 34.28,
+  "box": [
+   32.7,
+   -17.1,
+   35.9,
+   -9.4
+  ],
+  "area": 119763,
+  "borders": [
+   "mz",
+   "tz",
+   "zm"
+  ]
+ },
+ {
+  "id": "mx",
+  "name": {
+   "en": "Mexico",
+   "pt": "México"
+  },
+  "shapes": [
+   "Mexico"
+  ],
+  "lat": 23.92,
+  "lon": -102.15,
+  "box": [
+   -117.1,
+   14.5,
+   -86.8,
+   32.7
+  ],
+  "area": 1962279,
+  "borders": [
+   "bz",
+   "gt",
+   "us"
+  ]
+ },
+ {
+  "id": "my",
+  "name": {
+   "en": "Malaysia",
+   "pt": "Malásia"
+  },
+  "shapes": [
+   "Malaysia"
+  ],
+  "lat": 3.62,
+  "lon": 114.72,
+  "box": [
+   109.5,
+   0.9,
+   119.3,
+   7
+  ],
+  "area": 327621,
+  "borders": [
+   "bn",
+   "id",
+   "th"
+  ]
+ },
+ {
+  "id": "mz",
+  "name": {
+   "en": "Mozambique",
+   "pt": "Moçambique"
+  },
+  "shapes": [
+   "Mozambique"
+  ],
+  "lat": -17.2,
+  "lon": 35.6,
+  "box": [
+   30.2,
+   -26.9,
+   40.8,
+   -10.5
+  ],
+  "area": 790643,
+  "borders": [
+   "mw",
+   "sz",
+   "tz",
+   "za",
+   "zm",
+   "zw"
+  ]
+ },
+ {
+  "id": "na",
+  "name": {
+   "en": "Namibia",
+   "pt": "Namíbia"
+  },
+  "shapes": [
+   "Namibia"
+  ],
+  "lat": -22.07,
+  "lon": 17.2,
+  "box": [
+   11.7,
+   -28.9,
+   25.3,
+   -17
+  ],
+  "area": 824750,
+  "borders": [
+   "ao",
+   "bw",
+   "za",
+   "zm"
+  ]
+ },
+ {
+  "id": "ne",
+  "name": {
+   "en": "Niger",
+   "pt": "Níger"
+  },
+  "shapes": [
+   "Niger"
+  ],
+  "lat": 17.41,
+  "lon": 9.33,
+  "box": [
+   0.2,
+   11.7,
+   16,
+   23.5
+  ],
+  "area": 1185111,
+  "borders": [
+   "bf",
+   "bj",
+   "dz",
+   "ly",
+   "ml",
+   "ng",
+   "td"
+  ]
+ },
+ {
+  "id": "ng",
+  "name": {
+   "en": "Nigeria",
+   "pt": "Nigéria"
+  },
+  "shapes": [
+   "Nigeria"
+  ],
+  "lat": 9.59,
+  "lon": 8.08,
+  "box": [
+   2.7,
+   4.3,
+   14.6,
+   13.9
+  ],
+  "area": 911496,
+  "borders": [
+   "bj",
+   "cm",
+   "ne",
+   "td"
+  ]
+ },
+ {
+  "id": "ni",
+  "name": {
+   "en": "Nicaragua",
+   "pt": "Nicarágua"
+  },
+  "shapes": [
+   "Nicaragua"
+  ],
+  "lat": 12.85,
+  "lon": -85.03,
+  "box": [
+   -87.7,
+   10.7,
+   -83.2,
+   15
+  ],
+  "area": 129225,
+  "borders": [
+   "cr",
+   "hn"
+  ]
+ },
+ {
+  "id": "nl",
+  "name": {
+   "en": "Netherlands",
+   "pt": "Países Baixos"
+  },
+  "also": [
+   "Holland",
+   "Holanda"
+  ],
+  "shapes": [
+   "Netherlands"
+  ],
+  "lat": 52.28,
+  "lon": 5.63,
+  "box": [
+   3.5,
+   50.8,
+   7.2,
+   53.4
+  ],
+  "area": 37132,
+  "borders": [
+   "be",
+   "de"
+  ]
+ },
+ {
+  "id": "no",
+  "name": {
+   "en": "Norway",
+   "pt": "Noruega"
+  },
+  "shapes": [
+   "Norway"
+  ],
+  "lat": 63.79,
+  "lon": 12.16,
+  "box": [
+   4.9,
+   58,
+   31,
+   71.1
+  ],
+  "area": 384264,
+  "borders": [
+   "fi",
+   "ru",
+   "se"
+  ]
+ },
+ {
+  "id": "np",
+  "name": {
+   "en": "Nepal",
+   "pt": "Nepal"
+  },
+  "shapes": [
+   "Nepal"
+  ],
+  "lat": 28.26,
+  "lon": 83.95,
+  "box": [
+   80.1,
+   26.4,
+   88.2,
+   30.4
+  ],
+  "area": 147193,
+  "borders": [
+   "cn",
+   "in"
+  ]
+ },
+ {
+  "id": "nr",
+  "name": {
+   "en": "Nauru",
+   "pt": "Nauru"
+  },
+  "shapes": [
+   "Nauru"
+  ],
+  "lat": -0.52,
+  "lon": 166.93,
+  "box": [
+   166.9,
+   -0.6,
+   167,
+   -0.5
+  ],
+  "area": 28,
+  "borders": []
+ },
+ {
+  "id": "nz",
+  "name": {
+   "en": "New Zealand",
+   "pt": "Nova Zelândia"
+  },
+  "shapes": [
+   "New Zealand"
+  ],
+  "lat": -43.95,
+  "lon": 170.61,
+  "box": [
+   166.5,
+   -46.6,
+   174.4,
+   -40.5
+  ],
+  "area": 266828,
+  "borders": []
+ },
+ {
+  "id": "om",
+  "name": {
+   "en": "Oman",
+   "pt": "Omã"
+  },
+  "shapes": [
+   "Oman"
+  ],
+  "lat": 20.56,
+  "lon": 56.06,
+  "box": [
+   52,
+   16.6,
+   59.8,
+   25
+  ],
+  "area": 312041,
+  "borders": [
+   "ae",
+   "sa",
+   "ye"
+  ]
+ },
+ {
+  "id": "pa",
+  "name": {
+   "en": "Panama",
+   "pt": "Panamá"
+  },
+  "shapes": [
+   "Panama"
+  ],
+  "lat": 8.53,
+  "lon": -80.11,
+  "box": [
+   -83,
+   7.2,
+   -77.2,
+   9.6
+  ],
+  "area": 74235,
+  "borders": [
+   "co",
+   "cr"
+  ]
+ },
+ {
+  "id": "pe",
+  "name": {
+   "en": "Peru",
+   "pt": "Peru"
+  },
+  "shapes": [
+   "Peru"
+  ],
+  "lat": -9.11,
+  "lon": -74.42,
+  "box": [
+   -81.3,
+   -18.3,
+   -68.7,
+   0
+  ],
+  "area": 1296279,
+  "borders": [
+   "bo",
+   "br",
+   "cl",
+   "co",
+   "ec"
+  ]
+ },
+ {
+  "id": "pg",
+  "name": {
+   "en": "Papua New Guinea",
+   "pt": "Papua-Nova Guiné"
+  },
+  "shapes": [
+   "Papua New Guinea"
+  ],
+  "lat": -6.6,
+  "lon": 144.23,
+  "box": [
+   140.9,
+   -10.7,
+   150.9,
+   -2.6
+  ],
+  "area": 464271,
+  "borders": [
+   "id"
+  ]
+ },
+ {
+  "id": "ph",
+  "name": {
+   "en": "Philippines",
+   "pt": "Filipinas"
+  },
+  "shapes": [
+   "Philippines"
+  ],
+  "lat": 15.95,
+  "lon": 121.42,
+  "box": [
+   119.8,
+   12.6,
+   124.1,
+   18.6
+  ],
+  "area": 290318,
+  "borders": []
+ },
+ {
+  "id": "pk",
+  "name": {
+   "en": "Pakistan",
+   "pt": "Paquistão"
+  },
+  "shapes": [
+   "Pakistan"
+  ],
+  "lat": 29.88,
+  "lon": 69.17,
+  "box": [
+   60.8,
+   23.8,
+   77,
+   37
+  ],
+  "area": 873772,
+  "borders": [
+   "af",
+   "cn",
+   "in",
+   "ir"
+  ]
+ },
+ {
+  "id": "pl",
+  "name": {
+   "en": "Poland",
+   "pt": "Polônia"
+  },
+  "shapes": [
+   "Poland"
+  ],
+  "lat": 52.11,
+  "lon": 19.42,
+  "box": [
+   14.1,
+   49,
+   24.1,
+   54.8
+  ],
+  "area": 312566,
+  "borders": [
+   "by",
+   "cz",
+   "de",
+   "lt",
+   "ru",
+   "sk",
+   "ua"
+  ]
+ },
+ {
+  "id": "ps",
+  "name": {
+   "en": "Palestine",
+   "pt": "Palestina"
+  },
+  "shapes": [
+   "Palestine"
+  ],
+  "lat": 31.95,
+  "lon": 35.25,
+  "box": [
+   34.9,
+   31.4,
+   35.6,
+   32.5
+  ],
+  "area": 6336,
+  "borders": [
+   "eg",
+   "il",
+   "jo"
+  ]
+ },
+ {
+  "id": "pt",
+  "name": {
+   "en": "Portugal",
+   "pt": "Portugal"
+  },
+  "shapes": [
+   "Portugal"
+  ],
+  "lat": 39.65,
+  "lon": -7.98,
+  "box": [
+   -9.5,
+   37,
+   -6.2,
+   42.1
+  ],
+  "area": 90766,
+  "borders": [
+   "es"
+  ]
+ },
+ {
+  "id": "pw",
+  "name": {
+   "en": "Palau",
+   "pt": "Palau"
+  },
+  "shapes": [
+   "Palau"
+  ],
+  "lat": 7.51,
+  "lon": 134.58,
+  "box": [
+   134.5,
+   7.4,
+   134.7,
+   7.7
+  ],
+  "area": 343,
+  "borders": []
+ },
+ {
+  "id": "py",
+  "name": {
+   "en": "Paraguay",
+   "pt": "Paraguai"
+  },
+  "shapes": [
+   "Paraguay"
+  ],
+  "lat": -23.21,
+  "lon": -58.44,
+  "box": [
+   -62.6,
+   -27.6,
+   -54.2,
+   -19.3
+  ],
+  "area": 400900,
+  "borders": [
+   "ar",
+   "bo",
+   "br"
+  ]
+ },
+ {
+  "id": "qa",
+  "name": {
+   "en": "Qatar",
+   "pt": "Catar"
+  },
+  "shapes": [
+   "Qatar"
+  ],
+  "lat": 25.3,
+  "lon": 51.18,
+  "box": [
+   50.8,
+   24.6,
+   51.6,
+   26.2
+  ],
+  "area": 11076,
+  "borders": [
+   "sa"
+  ]
+ },
+ {
+  "id": "ro",
+  "name": {
+   "en": "Romania",
+   "pt": "Romênia"
+  },
+  "shapes": [
+   "Romania"
+  ],
+  "lat": 45.85,
+  "lon": 24.98,
+  "box": [
+   20.2,
+   43.7,
+   29.7,
+   48.3
+  ],
+  "area": 235752,
+  "borders": [
+   "bg",
+   "hu",
+   "md",
+   "rs",
+   "ua"
+  ]
+ },
+ {
+  "id": "rs",
+  "name": {
+   "en": "Serbia",
+   "pt": "Sérvia"
+  },
+  "shapes": [
+   "Serbia"
+  ],
+  "lat": 44.21,
+  "lon": 20.81,
+  "box": [
+   18.8,
+   42.2,
+   23,
+   46.2
+  ],
+  "area": 77481,
+  "borders": [
+   "ba",
+   "bg",
+   "hr",
+   "hu",
+   "me",
+   "mk",
+   "ro",
+   "xk"
+  ]
+ },
+ {
+  "id": "ru",
+  "name": {
+   "en": "Russia",
+   "pt": "Rússia"
+  },
+  "also": [
+   "Russian Federation"
+  ],
+  "shapes": [
+   "Russia"
+  ],
+  "lat": 65.89,
+  "lon": 95.53,
+  "box": [
+   27.4,
+   41.2,
+   -169.7,
+   77.7
+  ],
+  "area": 16879701,
+  "borders": [
+   "az",
+   "by",
+   "cn",
+   "ee",
+   "fi",
+   "ge",
+   "kp",
+   "kz",
+   "lt",
+   "lv",
+   "mn",
+   "no",
+   "pl",
+   "ua"
+  ]
+ },
+ {
+  "id": "rw",
+  "name": {
+   "en": "Rwanda",
+   "pt": "Ruanda"
+  },
+  "shapes": [
+   "Rwanda"
+  ],
+  "lat": -1.99,
+  "lon": 29.92,
+  "box": [
+   28.9,
+   -2.8,
+   30.9,
+   -1.1
+  ],
+  "area": 25377,
+  "borders": [
+   "bi",
+   "cd",
+   "tz",
+   "ug"
+  ]
+ },
+ {
+  "id": "sa",
+  "name": {
+   "en": "Saudi Arabia",
+   "pt": "Arábia Saudita"
+  },
+  "shapes": [
+   "Saudi Arabia"
+  ],
+  "lat": 24.09,
+  "lon": 44.67,
+  "box": [
+   34.6,
+   16.4,
+   55.6,
+   32.1
+  ],
+  "area": 1925871,
+  "borders": [
+   "ae",
+   "iq",
+   "jo",
+   "kw",
+   "om",
+   "qa",
+   "ye"
+  ]
+ },
+ {
+  "id": "sb",
+  "name": {
+   "en": "Solomon Islands",
+   "pt": "Ilhas Salomão"
+  },
+  "shapes": [
+   "Solomon Is."
+  ],
+  "lat": -9.62,
+  "lon": 160.17,
+  "box": [
+   159.6,
+   -9.9,
+   160.8,
+   -9.3
+  ],
+  "area": 25732,
+  "borders": []
+ },
+ {
+  "id": "sc",
+  "name": {
+   "en": "Seychelles",
+   "pt": "Seicheles"
+  },
+  "shapes": [
+   "Seychelles"
+  ],
+  "lat": -4.66,
+  "lon": 55.48,
+  "box": [
+   55.4,
+   -4.8,
+   55.5,
+   -4.6
+  ],
+  "area": 172,
+  "borders": []
+ },
+ {
+  "id": "sd",
+  "name": {
+   "en": "Sudan",
+   "pt": "Sudão"
+  },
+  "shapes": [
+   "Sudan"
+  ],
+  "lat": 15.97,
+  "lon": 29.91,
+  "box": [
+   21.8,
+   8.7,
+   38.6,
+   22.2
+  ],
+  "area": 1863027,
+  "borders": [
+   "cf",
+   "eg",
+   "er",
+   "et",
+   "ly",
+   "ss",
+   "td"
+  ]
+ },
+ {
+  "id": "se",
+  "name": {
+   "en": "Sweden",
+   "pt": "Suécia"
+  },
+  "shapes": [
+   "Sweden"
+  ],
+  "lat": 62.43,
+  "lon": 16.25,
+  "box": [
+   11.1,
+   55.3,
+   24.2,
+   69
+  ],
+  "area": 442970,
+  "borders": [
+   "fi",
+   "no"
+  ]
+ },
+ {
+  "id": "sg",
+  "name": {
+   "en": "Singapore",
+   "pt": "Singapura"
+  },
+  "shapes": [
+   "Singapore"
+  ],
+  "lat": 1.36,
+  "lon": 103.82,
+  "box": [
+   103.7,
+   1.3,
+   104,
+   1.4
+  ],
+  "area": 484,
+  "borders": []
+ },
+ {
+  "id": "si",
+  "name": {
+   "en": "Slovenia",
+   "pt": "Eslovênia"
+  },
+  "shapes": [
+   "Slovenia"
+  ],
+  "lat": 46.12,
+  "lon": 14.8,
+  "box": [
+   13.4,
+   45.4,
+   16.5,
+   46.9
+  ],
+  "area": 20198,
+  "borders": [
+   "at",
+   "hr",
+   "hu",
+   "it"
+  ]
+ },
+ {
+  "id": "sk",
+  "name": {
+   "en": "Slovakia",
+   "pt": "Eslováquia"
+  },
+  "shapes": [
+   "Slovakia"
+  ],
+  "lat": 48.71,
+  "lon": 19.47,
+  "box": [
+   16.9,
+   47.8,
+   22.5,
+   49.6
+  ],
+  "area": 48337,
+  "borders": [
+   "at",
+   "cz",
+   "hu",
+   "pl",
+   "ua"
+  ]
+ },
+ {
+  "id": "sl",
+  "name": {
+   "en": "Sierra Leone",
+   "pt": "Serra Leoa"
+  },
+  "shapes": [
+   "Sierra Leone"
+  ],
+  "lat": 8.57,
+  "lon": -11.79,
+  "box": [
+   -13.3,
+   6.9,
+   -10.3,
+   10
+  ],
+  "area": 71877,
+  "borders": [
+   "gn",
+   "lr"
+  ]
+ },
+ {
+  "id": "sm",
+  "name": {
+   "en": "San Marino",
+   "pt": "San Marino"
+  },
+  "shapes": [
+   "San Marino"
+  ],
+  "lat": 43.94,
+  "lon": 12.46,
+  "box": [
+   12.4,
+   43.9,
+   12.5,
+   44
+  ],
+  "area": 70,
+  "borders": [
+   "it"
+  ]
+ },
+ {
+  "id": "sn",
+  "name": {
+   "en": "Senegal",
+   "pt": "Senegal"
+  },
+  "shapes": [
+   "Senegal"
+  ],
+  "lat": 14.36,
+  "lon": -14.47,
+  "box": [
+   -17.5,
+   12.3,
+   -11.4,
+   16.7
+  ],
+  "area": 197300,
+  "borders": [
+   "gm",
+   "gn",
+   "gw",
+   "ml",
+   "mr"
+  ]
+ },
+ {
+  "id": "so",
+  "name": {
+   "en": "Somalia",
+   "pt": "Somália"
+  },
+  "shapes": [
+   "Somalia",
+   "Somaliland"
+  ],
+  "lat": 4.74,
+  "lon": 45.68,
+  "box": [
+   41,
+   -1.7,
+   51.4,
+   12
+  ],
+  "area": 642106,
+  "borders": [
+   "dj",
+   "et",
+   "ke"
+  ]
+ },
+ {
+  "id": "sr",
+  "name": {
+   "en": "Suriname",
+   "pt": "Suriname"
+  },
+  "shapes": [
+   "Suriname"
+  ],
+  "lat": 4.13,
+  "lon": -55.91,
+  "box": [
+   -58.1,
+   1.8,
+   -54,
+   6
+  ],
+  "area": 145559,
+  "borders": [
+   "br",
+   "gy"
+  ]
+ },
+ {
+  "id": "ss",
+  "name": {
+   "en": "South Sudan",
+   "pt": "Sudão do Sul"
+  },
+  "shapes": [
+   "S. Sudan"
+  ],
+  "lat": 7.31,
+  "lon": 30.25,
+  "box": [
+   24.1,
+   3.5,
+   35.3,
+   12.2
+  ],
+  "area": 623998,
+  "borders": [
+   "cd",
+   "cf",
+   "et",
+   "ke",
+   "sd",
+   "ug"
+  ]
+ },
+ {
+  "id": "st",
+  "name": {
+   "en": "São Tomé and Príncipe",
+   "pt": "São Tomé e Príncipe"
+  },
+  "shapes": [
+   "São Tomé and Principe"
+  ],
+  "lat": 0.24,
+  "lon": 6.61,
+  "box": [
+   6.5,
+   0,
+   6.7,
+   0.4
+  ],
+  "area": 979,
+  "borders": []
+ },
+ {
+  "id": "sv",
+  "name": {
+   "en": "El Salvador",
+   "pt": "El Salvador"
+  },
+  "shapes": [
+   "El Salvador"
+  ],
+  "lat": 13.74,
+  "lon": -88.87,
+  "box": [
+   -90.1,
+   13.2,
+   -87.7,
+   14.4
+  ],
+  "area": 20401,
+  "borders": [
+   "gt",
+   "hn"
+  ]
+ },
+ {
+  "id": "sy",
+  "name": {
+   "en": "Syria",
+   "pt": "Síria"
+  },
+  "shapes": [
+   "Syria"
+  ],
+  "lat": 35.02,
+  "lon": 38.49,
+  "box": [
+   35.8,
+   32.3,
+   42.4,
+   37.3
+  ],
+  "area": 185733,
+  "borders": [
+   "il",
+   "iq",
+   "jo",
+   "lb",
+   "tr"
+  ]
+ },
+ {
+  "id": "sz",
+  "name": {
+   "en": "Eswatini",
+   "pt": "Essuatíni"
+  },
+  "also": [
+   "Swaziland",
+   "Suazilândia"
+  ],
+  "shapes": [
+   "eSwatini"
+  ],
+  "lat": -26.56,
+  "lon": 31.48,
+  "box": [
+   30.8,
+   -27.3,
+   32.1,
+   -25.7
+  ],
+  "area": 17007,
+  "borders": [
+   "mz",
+   "za"
+  ]
+ },
+ {
+  "id": "td",
+  "name": {
+   "en": "Chad",
+   "pt": "Chade"
+  },
+  "shapes": [
+   "Chad"
+  ],
+  "lat": 15.28,
+  "lon": 18.64,
+  "box": [
+   13.4,
+   7.5,
+   24,
+   23.4
+  ],
+  "area": 1270927,
+  "borders": [
+   "cf",
+   "cm",
+   "ly",
+   "ne",
+   "ng",
+   "sd"
+  ]
+ },
+ {
+  "id": "tg",
+  "name": {
+   "en": "Togo",
+   "pt": "Togo"
+  },
+  "shapes": [
+   "Togo"
+  ],
+  "lat": 8.52,
+  "lon": 0.96,
+  "box": [
+   -0.1,
+   6.1,
+   1.8,
+   11.1
+  ],
+  "area": 57156,
+  "borders": [
+   "bf",
+   "bj",
+   "gh"
+  ]
+ },
+ {
+  "id": "th",
+  "name": {
+   "en": "Thailand",
+   "pt": "Tailândia"
+  },
+  "shapes": [
+   "Thailand"
+  ],
+  "lat": 15.1,
+  "lon": 101,
+  "box": [
+   97.4,
+   5.6,
+   105.6,
+   20.4
+  ],
+  "area": 515720,
+  "borders": [
+   "kh",
+   "la",
+   "mm",
+   "my"
+  ]
+ },
+ {
+  "id": "tj",
+  "name": {
+   "en": "Tajikistan",
+   "pt": "Tadjiquistão"
+  },
+  "shapes": [
+   "Tajikistan"
+  ],
+  "lat": 38.53,
+  "lon": 71.03,
+  "box": [
+   67.4,
+   36.7,
+   75.1,
+   41
+  ],
+  "area": 142300,
+  "borders": [
+   "af",
+   "cn",
+   "kg",
+   "uz"
+  ]
+ },
+ {
+  "id": "tl",
+  "name": {
+   "en": "Timor-Leste",
+   "pt": "Timor-Leste"
+  },
+  "also": [
+   "East Timor",
+   "Timor Leste"
+  ],
+  "shapes": [
+   "Timor-Leste"
+  ],
+  "lat": -8.81,
+  "lon": 125.92,
+  "box": [
+   124.9,
+   -9.5,
+   127.3,
+   -8.3
+  ],
+  "area": 15018,
+  "borders": [
+   "id"
+  ]
+ },
+ {
+  "id": "tm",
+  "name": {
+   "en": "Turkmenistan",
+   "pt": "Turcomenistão"
+  },
+  "shapes": [
+   "Turkmenistan"
+  ],
+  "lat": 39.13,
+  "lon": 59.45,
+  "box": [
+   52.5,
+   35.2,
+   66.6,
+   42.8
+  ],
+  "area": 470600,
+  "borders": [
+   "af",
+   "ir",
+   "kz",
+   "uz"
+  ]
+ },
+ {
+  "id": "tn",
+  "name": {
+   "en": "Tunisia",
+   "pt": "Tunísia"
+  },
+  "shapes": [
+   "Tunisia"
+  ],
+  "lat": 34.09,
+  "lon": 9.55,
+  "box": [
+   7.5,
+   30.2,
+   11.5,
+   37.3
+  ],
+  "area": 156653,
+  "borders": [
+   "dz",
+   "ly"
+  ]
+ },
+ {
+  "id": "to",
+  "name": {
+   "en": "Tonga",
+   "pt": "Tonga"
+  },
+  "shapes": [
+   "Tonga"
+  ],
+  "lat": -21.17,
+  "lon": -175.22,
+  "box": [
+   -175.4,
+   -21.3,
+   -175.1,
+   -21.1
+  ],
+  "area": 431,
+  "borders": []
+ },
+ {
+  "id": "tr",
+  "name": {
+   "en": "Turkey",
+   "pt": "Turquia"
+  },
+  "also": [
+   "Türkiye"
+  ],
+  "shapes": [
+   "Turkey"
+  ],
+  "lat": 39.06,
+  "lon": 35.41,
+  "box": [
+   26.1,
+   35.8,
+   44.8,
+   42.1
+  ],
+  "area": 779797,
+  "borders": [
+   "am",
+   "az",
+   "bg",
+   "ge",
+   "gr",
+   "iq",
+   "ir",
+   "sy"
+  ]
+ },
+ {
+  "id": "tt",
+  "name": {
+   "en": "Trinidad and Tobago",
+   "pt": "Trinidad e Tobago"
+  },
+  "shapes": [
+   "Trinidad and Tobago"
+  ],
+  "lat": 10.42,
+  "lon": -61.29,
+  "box": [
+   -61.9,
+   10.1,
+   -60.9,
+   10.8
+  ],
+  "area": 5102,
+  "borders": []
+ },
+ {
+  "id": "tw",
+  "name": {
+   "en": "Taiwan",
+   "pt": "Taiwan"
+  },
+  "shapes": [
+   "Taiwan"
+  ],
+  "lat": 23.75,
+  "lon": 120.96,
+  "box": [
+   120.1,
+   21.9,
+   121.9,
+   25.3
+  ],
+  "area": 36005,
+  "borders": []
+ },
+ {
+  "id": "tz",
+  "name": {
+   "en": "Tanzania",
+   "pt": "Tanzânia"
+  },
+  "shapes": [
+   "Tanzania"
+  ],
+  "lat": -6.27,
+  "lon": 34.79,
+  "box": [
+   29.3,
+   -11.7,
+   40.5,
+   -1
+  ],
+  "area": 945781,
+  "borders": [
+   "bi",
+   "cd",
+   "ke",
+   "mw",
+   "mz",
+   "rw",
+   "ug",
+   "zm"
+  ]
+ },
+ {
+  "id": "ua",
+  "name": {
+   "en": "Ukraine",
+   "pt": "Ucrânia"
+  },
+  "shapes": [
+   "Ukraine"
+  ],
+  "lat": 49.2,
+  "lon": 31.32,
+  "box": [
+   22.1,
+   45.2,
+   40.1,
+   52.4
+  ],
+  "area": 570135,
+  "borders": [
+   "by",
+   "hu",
+   "md",
+   "pl",
+   "ro",
+   "ru",
+   "sk"
+  ]
+ },
+ {
+  "id": "ug",
+  "name": {
+   "en": "Uganda",
+   "pt": "Uganda"
+  },
+  "shapes": [
+   "Uganda"
+  ],
+  "lat": 1.27,
+  "lon": 32.37,
+  "box": [
+   29.6,
+   -1.5,
+   35,
+   4.2
+  ],
+  "area": 242568,
+  "borders": [
+   "cd",
+   "ke",
+   "rw",
+   "ss",
+   "tz"
+  ]
+ },
+ {
+  "id": "us",
+  "name": {
+   "en": "United States",
+   "pt": "Estados Unidos"
+  },
+  "also": [
+   "USA",
+   "United States of America",
+   "America",
+   "EUA",
+   "Estados Unidos da América"
+  ],
+  "shapes": [
+   "United States of America"
+  ],
+  "lat": 39.89,
+  "lon": -98.82,
+  "box": [
+   -124.7,
+   25.1,
+   -67,
+   49.4
+  ],
+  "area": 9439424,
+  "borders": [
+   "ca",
+   "mx"
+  ]
+ },
+ {
+  "id": "uy",
+  "name": {
+   "en": "Uruguay",
+   "pt": "Uruguai"
+  },
+  "shapes": [
+   "Uruguay"
+  ],
+  "lat": -32.79,
+  "lon": -56.03,
+  "box": [
+   -58.4,
+   -34.9,
+   -53.1,
+   -30.1
+  ],
+  "area": 177569,
+  "borders": [
+   "ar",
+   "br"
+  ]
+ },
+ {
+  "id": "uz",
+  "name": {
+   "en": "Uzbekistan",
+   "pt": "Uzbequistão"
+  },
+  "shapes": [
+   "Uzbekistan"
+  ],
+  "lat": 41.78,
+  "lon": 63.29,
+  "box": [
+   56,
+   37.2,
+   73.1,
+   45.6
+  ],
+  "area": 447381,
+  "borders": [
+   "af",
+   "kg",
+   "kz",
+   "tj",
+   "tm"
+  ]
+ },
+ {
+  "id": "va",
+  "name": {
+   "en": "Vatican City",
+   "pt": "Vaticano"
+  },
+  "also": [
+   "Holy See",
+   "Santa Sé"
+  ],
+  "shapes": [
+   "Vatican"
+  ],
+  "lat": 41.9,
+  "lon": 12.43,
+  "box": [
+   12.4,
+   41.9,
+   12.4,
+   41.9
+  ],
+  "area": 1,
+  "borders": [
+   "it"
+  ]
+ },
+ {
+  "id": "vc",
+  "name": {
+   "en": "Saint Vincent and the Grenadines",
+   "pt": "São Vicente e Granadinas"
+  },
+  "shapes": [
+   "St. Vin. and Gren."
+  ],
+  "lat": 13.25,
+  "lon": -61.2,
+  "box": [
+   -61.3,
+   13.1,
+   -61.1,
+   13.4
+  ],
+  "area": 312,
+  "borders": []
+ },
+ {
+  "id": "ve",
+  "name": {
+   "en": "Venezuela",
+   "pt": "Venezuela"
+  },
+  "shapes": [
+   "Venezuela"
+  ],
+  "lat": 7.12,
+  "lon": -66.18,
+  "box": [
+   -73.4,
+   0.7,
+   -59.8,
+   12.2
+  ],
+  "area": 914310,
+  "borders": [
+   "br",
+   "co",
+   "gy"
+  ]
+ },
+ {
+  "id": "vn",
+  "name": {
+   "en": "Vietnam",
+   "pt": "Vietnã"
+  },
+  "shapes": [
+   "Vietnam"
+  ],
+  "lat": 16.55,
+  "lon": 106.35,
+  "box": [
+   102.1,
+   8.6,
+   109.4,
+   23.3
+  ],
+  "area": 328959,
+  "borders": [
+   "cn",
+   "kh",
+   "la"
+  ]
+ },
+ {
+  "id": "vu",
+  "name": {
+   "en": "Vanuatu",
+   "pt": "Vanuatu"
+  },
+  "shapes": [
+   "Vanuatu"
+  ],
+  "lat": -15.23,
+  "lon": 166.85,
+  "box": [
+   166.5,
+   -15.6,
+   167.2,
+   -14.6
+  ],
+  "area": 11266,
+  "borders": []
+ },
+ {
+  "id": "ws",
+  "name": {
+   "en": "Samoa",
+   "pt": "Samoa"
+  },
+  "shapes": [
+   "Samoa"
+  ],
+  "lat": -13.63,
+  "lon": -172.44,
+  "box": [
+   -172.8,
+   -13.8,
+   -172.2,
+   -13.5
+  ],
+  "area": 2705,
+  "borders": []
+ },
+ {
+  "id": "xk",
+  "name": {
+   "en": "Kosovo",
+   "pt": "Kosovo"
+  },
+  "shapes": [
+   "Kosovo"
+  ],
+  "lat": 42.57,
+  "lon": 20.87,
+  "box": [
+   20,
+   41.9,
+   21.8,
+   43.3
+  ],
+  "area": 10914,
+  "borders": [
+   "al",
+   "me",
+   "mk",
+   "rs"
+  ]
+ },
+ {
+  "id": "ye",
+  "name": {
+   "en": "Yemen",
+   "pt": "Iêmen"
+  },
+  "shapes": [
+   "Yemen"
+  ],
+  "lat": 15.94,
+  "lon": 47.52,
+  "box": [
+   42.7,
+   12.6,
+   53.1,
+   19
+  ],
+  "area": 454139,
+  "borders": [
+   "om",
+   "sa"
+  ]
+ },
+ {
+  "id": "za",
+  "name": {
+   "en": "South Africa",
+   "pt": "África do Sul"
+  },
+  "shapes": [
+   "South Africa"
+  ],
+  "lat": -28.97,
+  "lon": 25.19,
+  "box": [
+   16.4,
+   -34.8,
+   32.9,
+   -22.1
+  ],
+  "area": 1221609,
+  "borders": [
+   "bw",
+   "ls",
+   "mz",
+   "na",
+   "sz",
+   "zw"
+  ]
+ },
+ {
+  "id": "zm",
+  "name": {
+   "en": "Zambia",
+   "pt": "Zâmbia"
+  },
+  "shapes": [
+   "Zambia"
+  ],
+  "lat": -13.46,
+  "lon": 27.81,
+  "box": [
+   22,
+   -18,
+   33.7,
+   -8.2
+  ],
+  "area": 755593,
+  "borders": [
+   "ao",
+   "cd",
+   "mw",
+   "mz",
+   "na",
+   "tz",
+   "zw"
+  ]
+ },
+ {
+  "id": "zw",
+  "name": {
+   "en": "Zimbabwe",
+   "pt": "Zimbábue"
+  },
+  "shapes": [
+   "Zimbabwe"
+  ],
+  "lat": -19,
+  "lon": 29.85,
+  "box": [
+   25.2,
+   -22.4,
+   33,
+   -15.6
+  ],
+  "area": 390202,
+  "borders": [
+   "bw",
+   "mz",
+   "za",
+   "zm"
+  ]
+ }
+]

@@ -72,6 +72,7 @@ function Play({ day }: { day: number }) {
         <ResultActions path="/wayfarer" shareText={(url) => shareText(day, journey.id, guesses, url)} />
       </WayfarerBoard>
       <GamePanels
+        game="wayfarer"
         help={[t("help1"), t("help2"), t("help3"), t("help4"), t("help5")]}
         seenHelp={save.seenHelp}
         onSeenHelp={() => setSave((previous) => ({ ...previous, seenHelp: true }))}

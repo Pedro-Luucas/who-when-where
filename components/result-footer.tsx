@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { useSecondsUntilTomorrow } from "@/lib/clock";
 import { useSiteT } from "@/lib/i18n";
-import { copyText } from "@/lib/share";
+import { ShareButton } from "./share-button";
 
 const clock = (seconds: number) =>
   [Math.floor(seconds / 3600), Math.floor(seconds / 60) % 60, seconds % 60]
@@ -11,7 +10,7 @@ const clock = (seconds: number) =>
     .join(":");
 
 type ActionsProps = {
-  /** Builds the spoiler-free text to copy; `url` is this game's address. */
+  /** Builds the spoiler-free text to share; `url` is this game's address. */
   shareText: (url: string) => string;
   /** The game's path, e.g. "/wayfarer". */
   path: string;
@@ -23,20 +22,10 @@ type ActionsProps = {
 export function ResultActions({ shareText, path, nextLabel }: ActionsProps) {
   const t = useSiteT();
   const secondsLeft = useSecondsUntilTomorrow();
-  const [copied, setCopied] = useState(false);
-
-  async function share() {
-    if (await copyText(shareText(window.location.origin + path))) {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2400);
-    }
-  }
 
   return (
     <div className="summary-actions">
-      <button type="button" className="button" onClick={share}>
-        {copied ? t("copied") : t("share")}
-      </button>
+      <ShareButton label={t("share")} text={() => shareText(window.location.origin + path)} />
       <p className="countdown">
         <span>{nextLabel ?? t("nextIn")}</span>
         <time>{clock(secondsLeft)}</time>

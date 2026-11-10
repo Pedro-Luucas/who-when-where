@@ -26,7 +26,7 @@ type Props = {
   party?: boolean;
 };
 
-const TRIES_KEYS: TriesKey[] = ["digs", "guesses", "attempts"];
+const TRIES_KEYS: TriesKey[] = ["digs", "guesses", "attempts", "spare"];
 const DIFFICULTY_NAMES = Object.keys(DIFFICULTIES) as Difficulty[];
 
 /** "1:30" for 90 seconds. */
