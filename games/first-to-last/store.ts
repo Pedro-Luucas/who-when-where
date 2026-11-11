@@ -1,8 +1,5 @@
-"use client";
-
 import { streaks } from "@/lib/stats";
-import { saveShape, type SyncedSave } from "@/lib/saves";
-import { usePersistent } from "@/lib/storage";
+import type { GameSave } from "../platform/types";
 import { PUZZLE_SIZE, eventById, eventsForDay, type HistoryEvent } from "./events";
 import type { Score } from "@/lib/points";
 import { isOver, isSolved, scoreOf, truthOf, type Attempt } from "./rules";
@@ -10,22 +7,7 @@ import { isOver, isSolved, scoreOf, truthOf, type Attempt } from "./rules";
 /** `ids` are the day's events in lettered order, so a pool change can't reshuffle a saved day. */
 export type DayRecord = { ids: string[]; attempts: Attempt[] };
 
-export type Save = {
-  days: Record<string, DayRecord>;
-  seenHelp: boolean;
-};
-
-const KEY = "first-to-last:v1";
-
-/** How a signed-in player's days are copied to their account. */
-export const SYNC: SyncedSave = { game: "first-to-last", key: KEY, progressField: "attempts" };
-
-const VALID = saveShape(SYNC.progressField, "ids");
-const EMPTY: Save = { days: {}, seenHelp: false };
-
-export function useSave() {
-  return usePersistent<Save>(KEY, EMPTY, VALID);
-}
+export type Save = GameSave<DayRecord>;
 
 /** The day's events and the attempts made on them, from the save or freshly dealt. */
 export function puzzleOf(save: Save, day: number): { events: HistoryEvent[]; attempts: Attempt[] } {

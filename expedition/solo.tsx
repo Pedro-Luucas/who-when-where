@@ -21,6 +21,7 @@ import {
   type ExpeditionSettings,
 } from "./settings";
 import { SettingsForm, useSettingsLine } from "./setup";
+import { usePreloadedGames } from "./stages";
 import { RunSummary, runShareText } from "./summary";
 
 // An expedition played alone. Nothing leaves the device: the run and the
@@ -56,6 +57,8 @@ function Expedition() {
   // A link from a friend carries their expedition: same puzzles, same rules.
   const challenge = decodeChallenge(useSearchParams().get("c"));
   const { run } = solo;
+  // While the settings are on screen, the games they call for are fetched.
+  usePreloadedGames(run && !challenge ? null : (challenge?.settings ?? settings));
 
   function start(seed: string, rules: ExpeditionSettings) {
     setSolo((previous) => ({ ...previous, run: newRun(`solo:${seed}`, seed, rules) }));
@@ -114,7 +117,7 @@ function Expedition() {
           >
             {copied ? t("copied") : t("shareChallenge")}
           </button>
-          <button type="button" className="button button-quiet" onClick={() => start(newSeed(), run.settings)}>
+          <button type="button" className="button button-quiet" onClick={() => start(newSeed(), normalizeSettings(run.settings))}>
             {t("playAgain")}
           </button>
           <button

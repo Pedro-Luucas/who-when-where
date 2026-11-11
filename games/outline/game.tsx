@@ -1,12 +1,10 @@
 "use client";
 
 import { CountryPicker } from "@/components/country-picker";
-import { Daily } from "@/components/daily";
-import { GamePanels } from "@/components/game-panels";
-import { ResultActions } from "@/components/result-footer";
+import { ResultHead } from "@/components/result-head";
 import { WorldMap, useMapLabels, type MapMarker, type MapRegion } from "@/components/world-map";
 import { COUNTRIES, cornersOf, countryById, type Country } from "@/lib/countries";
-import { formatNumber, useSiteT } from "@/lib/i18n";
+import { formatNumber } from "@/lib/i18n";
 import { useGameT, type MessageKey } from "./messages";
 import {
   BORDERS_CLUE_AT,
@@ -14,75 +12,13 @@ import {
   MAX_GUESSES,
   SIZE_CLUE_AT,
   closenessOf,
-  countryForDay,
   isSolved,
   readingOf,
   type Reading,
 } from "./rules";
-import { shareText } from "./share";
 import { Silhouette } from "./silhouette";
-import { computeStats, useSave } from "./store";
 
 const ARROWS = ["↑", "↗", "→", "↘", "↓", "↙", "←", "↖"];
-
-export function Outline() {
-  // Keyed by day: at midnight the next puzzle starts from a clean slate.
-  return <Daily>{(day) => <Play key={day} day={day} />}</Daily>;
-}
-
-function Play({ day }: { day: number }) {
-  const [save, setSave] = useSave();
-  const { t } = useGameT();
-  const siteT = useSiteT();
-
-  // A saved record names its country, so a roster change can't reassign it.
-  const stored = save.days[day];
-  const record = stored && countryById(stored.countryId) ? stored : undefined;
-  const country = (record && countryById(record.countryId)) ?? countryForDay(day);
-  const guesses = record?.guesses ?? [];
-  const stats = computeStats(save, day);
-
-  function guess(id: string) {
-    setSave((previous) => ({
-      ...previous,
-      days: {
-        ...previous.days,
-        // Only a record of this very country is carried on: a stale one is replaced, never mixed in.
-        [day]: {
-          countryId: country.id,
-          guesses: [...(previous.days[day]?.countryId === country.id ? previous.days[day].guesses : []), id],
-        },
-      },
-    }));
-  }
-
-  return (
-    <>
-      <OutlineBoard
-        country={country}
-        guesses={guesses}
-        onGuess={guess}
-        label={`${siteT("puzzleNo", { n: day })} — ${t("kicker")}`}
-      >
-        <ResultActions path="/outline" shareText={(url) => shareText(day, country.id, guesses, url)} />
-      </OutlineBoard>
-      <GamePanels
-        game="outline"
-        help={[t("help1"), t("help2"), t("help3"), t("help4"), t("help5")]}
-        seenHelp={save.seenHelp}
-        onSeenHelp={() => setSave((previous) => ({ ...previous, seenHelp: true }))}
-        played={stats.played}
-        tiles={[
-          { label: siteT("statPlayed"), value: stats.played },
-          { label: t("statSolved"), value: `${stats.solvedRate}%` },
-          { label: t("statAverage"), value: stats.averageGuesses },
-          { label: siteT("statStreak"), value: stats.streak },
-          { label: siteT("statLongest"), value: stats.longestStreak },
-        ]}
-      />
-    </>
-  );
-}
 
 type BoardProps = {
   country: Country;
@@ -191,23 +127,16 @@ export function OutlineBoard({ country, guesses, onGuess, maxGuesses = MAX_GUESS
 
       <section className="stage">
         {over ? (
-          <div className="result-head" role="status">
-            <div className="stamp" data-lost={solved ? undefined : ""}>
-              <strong>
-                {solved ? used : "×"}/{maxGuesses}
-              </strong>
-              <span>{t("guesses")}</span>
-            </div>
-            <div className="verdict-text">
-              <p className="verdict-headline">
-                {!solved ? t("lost") : used === 1 ? t("solvedFirst") : t("solvedIn", { n: used })}
-              </p>
-              <p className="verdict-answer">
-                {country.name[locale]}
-                {!solved && ` · ${t("lostDetail", { km: formatNumber(closest, locale) })}`}
-              </p>
-            </div>
-          </div>
+          <ResultHead
+            solved={solved}
+            used={used}
+            max={maxGuesses}
+            unit={t("guesses")}
+            headline={!solved ? t("lost") : used === 1 ? t("solvedFirst") : t("solvedIn", { n: used })}
+          >
+            {country.name[locale]}
+            {!solved && ` · ${t("lostDetail", { km: formatNumber(closest, locale) })}`}
+          </ResultHead>
         ) : (
           <h2 className="question">
             {t("question")

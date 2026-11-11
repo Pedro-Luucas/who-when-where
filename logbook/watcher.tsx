@@ -3,7 +3,7 @@
 import { useEffect, useRef, useSyncExternalStore } from "react";
 import { readDailyResults, useDailyResults, type DailyResult } from "@/games/results";
 import { countMoves } from "@/games/saves";
-import { GAME_SLUGS } from "@/games/slugs";
+import { GAME_SLUGS } from "@/games/registry";
 import { useDayNumber } from "@/lib/clock";
 import { confetti, cue, cuePuzzle } from "@/lib/fx";
 import { readStore, subscribeToStore, writeStore } from "@/lib/storage";

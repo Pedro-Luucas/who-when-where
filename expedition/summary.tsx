@@ -1,16 +1,28 @@
 "use client";
 
-import { useMemo } from "react";
-import { GAME_TITLES } from "@/games/slugs";
+import { Suspense, use, useMemo } from "react";
+import { GAME_TITLES, gameBySlug } from "@/games/registry";
 import { formatNumber } from "@/lib/i18n";
 import { useSocialT } from "@/social/messages";
 import { gradeOf, runMax, runTotal, type Run } from "./run";
-import { buildStages, stageAnswer } from "./stages";
+import { normalizeSettings } from "./settings";
+import { dealStages, stageAnswer } from "./stages";
 
 /** The score of a finished run, and what each puzzle was and earned. */
 export function RunSummary({ run }: { run: Run }) {
+  return (
+    // Naming what each puzzle was takes the games it came from.
+    <Suspense fallback={<div className="page-skeleton skeleton-block" aria-busy="true" />}>
+      <Summary run={run} />
+    </Suspense>
+  );
+}
+
+function Summary({ run }: { run: Run }) {
   const { locale, t } = useSocialT();
-  const stages = useMemo(() => buildStages(run.settings, run.seed), [run.settings, run.seed]);
+  const settings = useMemo(() => normalizeSettings(run.settings), [run.settings]);
+  const dealt = use(dealStages(settings, run.seed));
+  const { stages } = dealt;
   const total = runTotal(run.results);
 
   return (
@@ -30,10 +42,10 @@ export function RunSummary({ run }: { run: Run }) {
             <li key={i} data-grade={result ? gradeOf(result.points) : undefined}>
               <span className="stage-list-n">{i + 1}</span>
               <span className="stage-list-text">
-                <b>{stageAnswer(stage, locale)}</b>
+                <b>{stageAnswer(dealt, stage, locale)}</b>
                 <small>
                   {GAME_TITLES[stage.game]}
-                  {result?.timedOut ? ` · ${t("timeUp")}` : result && stage.game !== "who-when-where" ? ` · ${result.detail}` : ""}
+                  {result?.timedOut ? ` · ${t("timeUp")}` : result && gameBySlug(stage.game).status === "detail" ? ` · ${result.detail}` : ""}
                 </small>
               </span>
               <span className="stage-list-points">{result ? formatNumber(result.points, locale) : "—"}</span>

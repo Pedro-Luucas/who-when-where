@@ -430,3 +430,36 @@ test("the newer games keep scores; party settings from before them are made whol
     "settings.spare",
   );
 });
+
+test("party settings: tries are kept per game, and still read under their older names", async () => {
+  const { player } = world();
+  const ada = await player("ada");
+
+  // SETTINGS is what a page from before per-game tries sends: the older names only.
+  const old = (await ada.call("POST", "/parties", { settings: { ...SETTINGS, guesses: 4 } })).body.party;
+  assert.deepEqual(old.settings.tries, { wayfarer: 4, "dig-site": 5, "first-to-last": 3, overland: 4, outline: 4 });
+
+  // Today's page sends both. The per-game tries win, each game has its own…
+  const tries = { wayfarer: 3, "dig-site": 4, "first-to-last": 2, overland: 1, outline: 6 };
+  const party = (await ada.call("POST", "/parties", { settings: { ...SETTINGS, tries } })).body.party;
+  assert.deepEqual(party.settings.tries, tries);
+  // …and a page that only knows the older names is still answered in them.
+  assert.equal(party.settings.guesses, 3);
+  assert.equal(party.settings.digs, 4);
+  assert.equal(party.settings.attempts, 2);
+  assert.equal(party.settings.spare, 1);
+
+  // The per-game tries are enough on their own; a game they leave out plays by its usual tries.
+  const lean = { rounds: SETTINGS.rounds, order: "grouped", timeLimit: 0, pace: "free", tries: { outline: 5 } };
+  const made = (await ada.call("POST", "/parties", { settings: lean })).body.party;
+  assert.deepEqual(made.settings.tries, { wayfarer: 6, "dig-site": 5, "first-to-last": 3, overland: 4, outline: 5 });
+
+  assert.equal(
+    (await ada.call("POST", "/parties", { settings: { ...lean, tries: { outline: 9 } } })).body.field,
+    "settings.tries",
+  );
+
+  const changed = await ada.call("PATCH", `/parties/${made.code}`, { settings: { ...lean, tries: { wayfarer: 4, outline: 3 } } });
+  assert.equal(changed.body.party.settings.tries.wayfarer, 4);
+  assert.equal(changed.body.party.settings.tries.outline, 3);
+});

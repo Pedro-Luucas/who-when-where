@@ -3,11 +3,12 @@
 import { useEffect } from "react";
 import { Modal } from "@/components/modal";
 import { useDailyResults, type DailyResult } from "@/games/results";
-import type { GameSlug } from "@/games/slugs";
+import type { StatTile } from "@/games/platform/types";
+import type { GameSlug } from "@/games/registry";
 import { formatNumber, useLocale, useSiteT } from "@/lib/i18n";
 import { openPanel, usePanel } from "@/lib/ui";
 
-export type StatTile = { label: string; value: number | string };
+export type { StatTile };
 
 type Props = {
   /** The game these panels belong to: its finished days make the chart. */

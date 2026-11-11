@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useDailyResults } from "@/games/results";
-import { GAME_SLUGS, GAME_THEMES, GAME_TITLES, isGameSlug, type GameSlug } from "@/games/slugs";
+import { GAME_SLUGS, GAME_THEMES, GAME_TITLES, type GameSlug } from "@/games/registry";
 import { useDayNumber, useSecondsUntilTomorrow } from "@/lib/clock";
 import { useLocale, useSiteT } from "@/lib/i18n";
 import { ShareButton } from "./share-button";
@@ -15,8 +15,8 @@ const clock = (seconds: number) =>
 type ActionsProps = {
   /** Builds the spoiler-free text to share; `url` is this game's address. */
   shareText: (url: string) => string;
-  /** The game's path, e.g. "/wayfarer". */
-  path: string;
+  /** The game that was played. */
+  game: GameSlug;
   /** Overrides "Next puzzle in". */
   nextLabel?: string;
 };
@@ -25,21 +25,20 @@ type ActionsProps = {
  * What every finished daily puzzle ends with: a share button, the countdown,
  * and the way on to the next of today's puzzles.
  */
-export function ResultActions({ shareText, path, nextLabel }: ActionsProps) {
+export function ResultActions({ shareText, game, nextLabel }: ActionsProps) {
   const t = useSiteT();
   const secondsLeft = useSecondsUntilTomorrow();
-  const slug = path.slice(1);
 
   return (
     <>
       <div className="summary-actions">
-        <ShareButton label={t("share")} text={() => shareText(window.location.origin + path)} />
+        <ShareButton label={t("share")} text={() => shareText(`${window.location.origin}/play/${game}`)} />
         <p className="countdown">
           <span>{nextLabel ?? t("nextIn")}</span>
           <time>{clock(secondsLeft)}</time>
         </p>
       </div>
-      {isGameSlug(slug) && <NextUp current={slug} />}
+      <NextUp current={game} />
     </>
   );
 }
@@ -77,7 +76,7 @@ function NextUp({ current }: { current: GameSlug }) {
         </ol>
       </div>
       {next ? (
-        <Link href={`/${next}`} className="next-up-link">
+        <Link href={`/play/${next}`} className="next-up-link">
           <span>
             <small>
               {t("upNext")} · {GAME_THEMES[next][locale]}

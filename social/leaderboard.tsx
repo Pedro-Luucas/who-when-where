@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useAccount } from "@/account/state";
 import { BrowserOnly, Segmented } from "@/components/controls";
-import { GAME_SLUGS, GAME_TITLES, type GameSlug } from "@/games/slugs";
+import { GAME_SLUGS, GAME_TITLES, type GameSlug } from "@/games/registry";
 import { useDayNumber } from "@/lib/clock";
 import { formatNumber } from "@/lib/i18n";
 import { Player } from "./avatar";

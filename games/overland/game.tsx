@@ -1,67 +1,11 @@
 "use client";
 
 import { CountryPicker } from "@/components/country-picker";
-import { Daily } from "@/components/daily";
-import { GamePanels } from "@/components/game-panels";
-import { ResultActions } from "@/components/result-footer";
+import { ResultHead } from "@/components/result-head";
 import { WorldMap, useMapLabels, type MapMarker, type MapRegion, type MapRoute } from "@/components/world-map";
 import { cornersOf, countryById, shortestRoute, type Country } from "@/lib/countries";
-import { useSiteT } from "@/lib/i18n";
 import { useGameT, type MessageKey } from "./messages";
 import { BORDERED, SPARE, fewestBetween, isSolved, maxGuesses, verdictOf, type Puzzle, type Verdict } from "./rules";
-import { shareText } from "./share";
-import { computeStats, puzzleOf, useSave } from "./store";
-
-export function Overland() {
-  // Keyed by day: at midnight the next puzzle starts from a clean slate.
-  return <Daily>{(day) => <Play key={day} day={day} />}</Daily>;
-}
-
-function Play({ day }: { day: number }) {
-  const [save, setSave] = useSave();
-  const { t } = useGameT();
-  const siteT = useSiteT();
-
-  const { puzzle, guesses } = puzzleOf(save, day);
-  const stats = computeStats(save, day);
-
-  function guess(id: string) {
-    setSave((previous) => ({
-      ...previous,
-      days: {
-        ...previous.days,
-        [day]: { ...puzzle, guesses: [...puzzleOf(previous, day).guesses, id] },
-      },
-    }));
-  }
-
-  return (
-    <>
-      <OverlandBoard
-        puzzle={puzzle}
-        guesses={guesses}
-        onGuess={guess}
-        label={`${siteT("puzzleNo", { n: day })} — ${t("kicker")}`}
-      >
-        <ResultActions path="/overland" shareText={(url) => shareText(day, puzzle, guesses, url)} />
-      </OverlandBoard>
-      <GamePanels
-        game="overland"
-        help={[t("help1"), t("help2"), t("help3"), t("help4"), t("help5")]}
-        seenHelp={save.seenHelp}
-        onSeenHelp={() => setSave((previous) => ({ ...previous, seenHelp: true }))}
-        played={stats.played}
-        tiles={[
-          { label: siteT("statPlayed"), value: stats.played },
-          { label: t("statArrived"), value: `${stats.arrivedRate}%` },
-          { label: t("statShortest"), value: stats.shortest },
-          { label: siteT("statStreak"), value: stats.streak },
-          { label: siteT("statLongest"), value: stats.longestStreak },
-        ]}
-      />
-    </>
-  );
-}
 
 type BoardProps = {
   puzzle: Puzzle;
@@ -174,26 +118,21 @@ export function OverlandBoard({ puzzle, guesses, onGuess, spare = SPARE, label, 
 
       <section className="stage">
         {over && (
-          <div className="result-head" role="status">
-            <div className="stamp" data-lost={solved ? undefined : ""}>
-              <strong>
-                {solved ? guesses.length : "×"}/{max}
-              </strong>
-              <span>{t("guesses")}</span>
-            </div>
-            <div className="verdict-text">
-              <p className="verdict-headline">
-                {!solved
-                  ? t("lost")
-                  : guesses.length === fewest
-                    ? t("solvedShortest")
-                    : t("solvedIn", { n: guesses.length })}
-              </p>
-              <p className="verdict-answer">
-                {t("theWay")}: {way.map((country) => country.name[locale]).join(" → ")}
-              </p>
-            </div>
-          </div>
+          <ResultHead
+            solved={solved}
+            used={guesses.length}
+            max={max}
+            unit={t("guesses")}
+            headline={
+              !solved
+                ? t("lost")
+                : guesses.length === fewest
+                  ? t("solvedShortest")
+                  : t("solvedIn", { n: guesses.length })
+            }
+          >
+            {t("theWay")}: {way.map((country) => country.name[locale]).join(" → ")}
+          </ResultHead>
         )}
 
         <WorldMap

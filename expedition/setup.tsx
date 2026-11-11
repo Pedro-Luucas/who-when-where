@@ -1,20 +1,20 @@
 "use client";
 
 import { Segmented, Stepper } from "@/components/controls";
-import { GAME_SLUGS, GAME_TITLES } from "@/games/slugs";
+import { GAMES } from "@/games/registry";
 import { useSocialT } from "@/social/messages";
 import {
-  DIFFICULTIES,
+  DIFFICULTY_NAMES,
   MAX_ROUNDS,
   ORDERS,
   PACES,
   TIME_LIMITS,
-  TRIES,
+  TRIES_GAMES,
   difficultyOf,
   stageCount,
+  withDifficulty,
   type Difficulty,
   type ExpeditionSettings,
-  type TriesKey,
 } from "./settings";
 
 type Props = {
@@ -26,15 +26,12 @@ type Props = {
   party?: boolean;
 };
 
-const TRIES_KEYS: TriesKey[] = ["digs", "guesses", "attempts", "spare"];
-const DIFFICULTY_NAMES = Object.keys(DIFFICULTIES) as Difficulty[];
-
 /** "1:30" for 90 seconds. */
 const clock = (seconds: number) => `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
 
 /** Everything about an expedition a player can turn: which games, how many, in what order, how hard. */
 export function SettingsForm({ value, onChange, disabled, party }: Props) {
-  const { t } = useSocialT();
+  const { locale, t } = useSocialT();
   const total = stageCount(value);
   const difficulty = difficultyOf(value);
 
@@ -45,14 +42,14 @@ export function SettingsForm({ value, onChange, disabled, party }: Props) {
           {t("setupGames")} <small>{t("puzzleCount", { n: total })}</small>
         </legend>
         <ul className="setup-games">
-          {GAME_SLUGS.map((game) => (
+          {GAMES.map(({ slug: game, title, expedition }) => (
             <li key={game} data-off={value.rounds[game] === 0 ? "" : undefined}>
               <span>
-                <b>{GAME_TITLES[game]}</b>
-                <small>{t(`about_${game}`)}</small>
+                <b>{title}</b>
+                <small>{expedition.about[locale]}</small>
               </span>
               <Stepper
-                label={GAME_TITLES[game]}
+                label={title}
                 value={value.rounds[game]}
                 min={
                   // The last game left keeps at least one puzzle.
@@ -104,19 +101,19 @@ export function SettingsForm({ value, onChange, disabled, party }: Props) {
           ]}
           value={difficulty}
           disabled={disabled}
-          onChange={(name) => name !== "custom" && onChange({ ...value, ...DIFFICULTIES[name] })}
+          onChange={(name) => name !== "custom" && onChange(withDifficulty(value, name))}
         />
         <ul className="setup-tries">
-          {TRIES_KEYS.map((key) => (
-            <li key={key}>
-              <span>{t(`tries_${key}`)}</span>
+          {TRIES_GAMES.map(({ slug, tries }) => (
+            <li key={slug}>
+              <span>{tries.label[locale]}</span>
               <Stepper
-                label={t(`tries_${key}`)}
-                value={value[key]}
-                min={TRIES[key].min}
-                max={TRIES[key].max}
+                label={tries.label[locale]}
+                value={value.tries[slug] ?? tries.presets.standard}
+                min={tries.min}
+                max={tries.max}
                 disabled={disabled}
-                onChange={(tries) => onChange({ ...value, [key]: tries })}
+                onChange={(count) => onChange({ ...value, tries: { ...value.tries, [slug]: count } })}
               />
             </li>
           ))}

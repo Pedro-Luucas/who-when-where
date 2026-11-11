@@ -7,7 +7,7 @@ import { useAccount } from "@/account/state";
 import { ShareButton } from "@/components/share-button";
 import { gradeOf } from "@/expedition/run";
 import { activityOf, useDailyResults, type DailyResult } from "@/games/results";
-import { GAME_SLUGS, GAME_TITLES, type GameSlug } from "@/games/slugs";
+import { GAME_SLUGS, GAME_TITLES, type GameSlug } from "@/games/registry";
 import { useDayNumber } from "@/lib/clock";
 import { formatNumber, type Locale } from "@/lib/i18n";
 import { MAX_POINTS } from "@/lib/points";
@@ -116,7 +116,7 @@ function Panel() {
           const result = todays.get(game);
           return (
             <li key={game}>
-              <Link href={`/${game}`} data-done={result ? "" : undefined}>
+              <Link href={`/play/${game}`} data-done={result ? "" : undefined}>
                 <i aria-hidden="true">{result ? "✓" : ""}</i>
                 <b>{GAME_TITLES[game]}</b>
                 <span>{result ? formatNumber(result.points, locale) : `${t("play")} →`}</span>

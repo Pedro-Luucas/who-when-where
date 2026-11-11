@@ -1,30 +1,12 @@
-"use client";
-
 import { countryById } from "@/lib/countries";
 import { streaks } from "@/lib/stats";
-import { saveShape, type SyncedSave } from "@/lib/saves";
-import { usePersistent } from "@/lib/storage";
+import type { GameSave } from "../platform/types";
 import type { Score } from "@/lib/points";
 import { isOver, isSolved, scoreOf } from "./rules";
 
 export type DayRecord = { countryId: string; guesses: string[] };
 
-export type Save = {
-  days: Record<string, DayRecord>;
-  seenHelp: boolean;
-};
-
-const KEY = "outline:v1";
-
-/** How a signed-in player's days are copied to their account. */
-export const SYNC: SyncedSave = { game: "outline", key: KEY, progressField: "guesses" };
-
-const VALID = saveShape(SYNC.progressField);
-const EMPTY: Save = { days: {}, seenHelp: false };
-
-export function useSave() {
-  return usePersistent<Save>(KEY, EMPTY, VALID);
-}
+export type Save = GameSave<DayRecord>;
 
 /** A finished day's score, or null while it is still being played. */
 export function resultOf(record: DayRecord): Score | null {

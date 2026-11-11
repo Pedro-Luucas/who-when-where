@@ -10,7 +10,8 @@ import { useDayNumber } from "@/lib/clock";
  *
  *   <Daily>{(day) => <Play key={day} day={day} />}</Daily>
  *
- * Key the game by `day` so the next puzzle starts clean at midnight.
+ * Key the game by `day` so the next puzzle starts clean at midnight. Every
+ * game's daily page is built this way, in games/platform/board.tsx.
  */
 export function Daily({ children }: { children: (day: number) => React.ReactNode }) {
   return (
@@ -25,7 +26,8 @@ function Today({ children }: { children: (day: number) => React.ReactNode }) {
   return children(useDayNumber());
 }
 
-function GameSkeleton() {
+/** What a game's page shows until the game itself is on screen. */
+export function GameSkeleton() {
   return (
     <main className="game game-skeleton" aria-busy="true">
       <div className="dossier">

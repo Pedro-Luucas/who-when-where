@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { GAME_SLUGS } from "@/games/slugs";
+import { GAME_SLUGS } from "@/games/registry";
 import { useDayNumber } from "@/lib/clock";
 import { formatNumber } from "@/lib/i18n";
 import { Player } from "./avatar";

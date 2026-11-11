@@ -1,5 +1,4 @@
 import type { Localized } from "@/lib/i18n";
-import type { GameSlug } from "./slugs";
 
 // Game families: how the catalogue is grouped and coloured. Each family has a
 // colour token (--color-family-<id> in app/tokens.css) used on tiles, chips
@@ -16,14 +15,4 @@ export const FAMILIES: Record<FamilyId, { name: Localized }> = {
   flags: { name: { en: "Flags", pt: "Bandeiras" } },
   words: { name: { en: "Words & trivia", pt: "Palavras e curiosidades" } },
   numbers: { name: { en: "Numbers & facts", pt: "Números e fatos" } },
-};
-
-/** Which family each of today's games belongs to. */
-export const GAME_FAMILIES: Record<GameSlug, FamilyId> = {
-  "who-when-where": "who",
-  wayfarer: "where",
-  "dig-site": "where",
-  "first-to-last": "when",
-  overland: "shapes",
-  outline: "shapes",
 };

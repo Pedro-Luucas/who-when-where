@@ -37,7 +37,7 @@ export function newRun(id: string, seed: string, settings: ExpeditionSettings, r
 export const runTotal = (results: { points: number }[]): number =>
   results.reduce((sum, result) => sum + result.points, 0);
 
-export const runMax = (settings: ExpeditionSettings): number => stageCount(settings) * MAX_POINTS;
+export const runMax = (settings: Pick<ExpeditionSettings, "rounds">): number => stageCount(settings) * MAX_POINTS;
 
 export const isRunOver = (run: Run): boolean => run.stage >= stageCount(run.settings);
 

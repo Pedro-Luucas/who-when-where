@@ -1,0 +1,43 @@
+"use client";
+
+import type { Country } from "@/lib/countries";
+import { defineBoard } from "../platform/board";
+import type { BoardProps } from "../platform/types";
+import data from "./data";
+import { definition } from "./definition";
+import { OutlineBoard } from "./game";
+import { MESSAGES, type MessageKey } from "./messages";
+import { shareText } from "./share";
+import { computeStats, type DayRecord } from "./store";
+
+function Board({ puzzle, moves, onMove, tries, label, children }: BoardProps<Country, string>) {
+  return (
+    <OutlineBoard country={puzzle} guesses={moves} onGuess={onMove} maxGuesses={tries} label={label}>
+      {children}
+    </OutlineBoard>
+  );
+}
+
+export default defineBoard<Country, string, DayRecord, MessageKey>(definition, {
+  data,
+  Board,
+  messages: MESSAGES,
+  daily: (t) => ({
+    kicker: t("kicker"),
+    help: [t("help1"), t("help2"), t("help3"), t("help4"), t("help5")],
+  }),
+  share: ({ day, puzzle, moves, url }) => shareText(day, puzzle.id, moves, url),
+  stats(save, today, { t, site }) {
+    const stats = computeStats(save, today);
+    return {
+      played: stats.played,
+      tiles: [
+        { label: site("statPlayed"), value: stats.played },
+        { label: t("statSolved"), value: `${stats.solvedRate}%` },
+        { label: t("statAverage"), value: stats.averageGuesses },
+        { label: site("statStreak"), value: stats.streak },
+        { label: site("statLongest"), value: stats.longestStreak },
+      ],
+    };
+  },
+});

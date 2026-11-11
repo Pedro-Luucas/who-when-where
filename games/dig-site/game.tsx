@@ -2,72 +2,18 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { Daily } from "@/components/daily";
-import { GamePanels } from "@/components/game-panels";
 import { Question } from "@/components/question";
-import { ReadMore, ResultActions } from "@/components/result-footer";
+import { ReadMore } from "@/components/result-footer";
+import { ResultHead } from "@/components/result-head";
 import { WorldMap, useMapLabels, type MapMarker, type MapRing } from "@/components/world-map";
 import { formatCoordinates, type LatLon } from "@/lib/geo";
 import { formatNumber, useSiteT } from "@/lib/i18n";
 import { useFinePointer } from "@/lib/pointer";
 import { useGameT, type MessageKey } from "./messages";
 import { FOUND_KM, MAX_DIGS, closestKm, gradeDig, heatOf, isFound, isOver, type Dig } from "./rules";
-import { shareText } from "./share";
-import { siteById, siteForDay, siteLabel, type Site } from "./sites";
-import { computeStats, useSave } from "./store";
+import { siteLabel, type Site } from "./sites";
 
 const NUMERALS = ["I", "II", "III", "IV", "V", "VI"];
-
-export function DigSite() {
-  // Keyed by day: at midnight the next puzzle starts from a clean slate.
-  return <Daily>{(day) => <Play key={day} day={day} />}</Daily>;
-}
-
-function Play({ day }: { day: number }) {
-  const [save, setSave] = useSave();
-  const { t } = useGameT();
-  const siteT = useSiteT();
-
-  // A saved record names its site, so a roster change can't reassign it.
-  const stored = save.days[day];
-  const record = stored && siteById(stored.siteId) ? stored : undefined;
-  const site = (record && siteById(record.siteId)) ?? siteForDay(day);
-  const digs = record?.digs ?? [];
-  const stats = computeStats(save, day);
-
-  function dig(graded: Dig) {
-    setSave((previous) => ({
-      ...previous,
-      days: {
-        ...previous.days,
-        // Only a record of this very site is carried on: a stale one is replaced, never mixed in.
-        [day]: { siteId: site.id, digs: [...(previous.days[day]?.siteId === site.id ? previous.days[day].digs : []), graded] },
-      },
-    }));
-  }
-
-  return (
-    <>
-      <DigSiteBoard site={site} digs={digs} onDig={dig} label={`${siteT("puzzleNo", { n: day })} — ${t("kicker")}`}>
-        <ResultActions path="/dig-site" shareText={(url) => shareText(day, digs, url)} />
-      </DigSiteBoard>
-      <GamePanels
-        game="dig-site"
-        help={[t("help1"), t("help2"), t("help3"), t("help4"), t("help5")]}
-        seenHelp={save.seenHelp}
-        onSeenHelp={() => setSave((previous) => ({ ...previous, seenHelp: true }))}
-        played={stats.played}
-        tiles={[
-          { label: siteT("statPlayed"), value: stats.played },
-          { label: t("statFound"), value: `${stats.foundRate}%` },
-          { label: t("statAverage"), value: stats.averageDigs },
-          { label: siteT("statStreak"), value: stats.streak },
-          { label: siteT("statLongest"), value: stats.longestStreak },
-        ]}
-      />
-    </>
-  );
-}
 
 type BoardProps = {
   site: Site;
@@ -167,27 +113,22 @@ export function DigSiteBoard({ site, digs, onDig, maxDigs = MAX_DIGS, label, chi
 
       <section className="stage">
         {over ? (
-          <div className="result-head" role="status">
-            <div className="stamp" data-lost={found ? undefined : ""}>
-              <strong>
-                {found ? digs.length : "×"}/{maxDigs}
-              </strong>
-              <span>{t("digs")}</span>
-            </div>
-            <div className="verdict-text">
-              <p className="verdict-headline">
-                {!found
-                  ? t("lost")
-                  : digs.length === 1
-                    ? t("foundFirst")
-                    : t("foundIn", { n: digs.length })}
-              </p>
-              <p className="verdict-answer">
-                {siteLabel(site, locale)}
-                {!found && ` · ${t("lostDetail", { km: formatNumber(closestKm(digs), locale) })}`}
-              </p>
-            </div>
-          </div>
+          <ResultHead
+            solved={found}
+            used={digs.length}
+            max={maxDigs}
+            unit={t("digs")}
+            headline={
+              !found
+                ? t("lost")
+                : digs.length === 1
+                  ? t("foundFirst")
+                  : t("foundIn", { n: digs.length })
+            }
+          >
+            {siteLabel(site, locale)}
+            {!found && ` · ${t("lostDetail", { km: formatNumber(closestKm(digs), locale) })}`}
+          </ResultHead>
         ) : (
           <Question text={t("question")} />
         )}

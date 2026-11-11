@@ -2,15 +2,14 @@
 
 import type { SyncedSave } from "@/lib/saves";
 import { readStore } from "@/lib/storage";
-import { SYNC as digSite } from "./dig-site/store";
-import { SYNC as firstToLast } from "./first-to-last/store";
-import { SYNC as outline } from "./outline/store";
-import { SYNC as overland } from "./overland/store";
-import { SYNC as wayfarer } from "./wayfarer/store";
-import { SYNC as whoWhenWhere } from "./who-when-where/store";
+import { GAMES } from "./registry";
 
-/** Saves that follow a signed-in player across devices. List every game's here. */
-export const SYNCED_SAVES: SyncedSave[] = [whoWhenWhere, wayfarer, digSite, firstToLast, overland, outline];
+/** Saves that follow a signed-in player across devices: every game's. */
+export const SYNCED_SAVES: SyncedSave[] = GAMES.map(({ slug, save }) => ({
+  game: slug,
+  key: save.key,
+  progressField: save.progressField,
+}));
 
 type Save = { days?: Record<string, Record<string, unknown> | null> } | null;
 

@@ -1,6 +1,6 @@
 import { api } from "@/account/api";
-import type { ExpeditionSettings } from "@/expedition/settings";
-import type { GameSlug } from "@/games/slugs";
+import { normalizeSettings, wireSettings, type ExpeditionSettings } from "@/expedition/settings";
+import type { GameSlug } from "@/games/registry";
 
 // The community side of the accounts API (api/src/social.ts, chat.ts and
 // parties.ts): what it returns, and one function per call.
@@ -148,25 +148,45 @@ export type PartySummary = {
 
 export const listParties = () => api<{ mine: PartySummary[]; open: PartySummary[] }>("GET", "/parties");
 
-export const createParty = (input: { name: string; settings: ExpeditionSettings; visibility: Visibility }) =>
-  api<PartyState>("POST", "/parties", input);
+/**
+ * A party's state as the pages use it. The settings come back in whatever
+ * shape the API of the day keeps them (see wireSettings): here they are made
+ * whole, so the rest of the site only ever sees one.
+ */
+const party = (state: Promise<PartyState>): Promise<PartyState> =>
+  state.then((current) =>
+    current?.party
+      ? { ...current, party: { ...current.party, settings: normalizeSettings(current.party.settings) } }
+      : current,
+  );
 
-export const joinParty = (code: string) => api<PartyState>("POST", "/parties/join", { code });
+export const createParty = (input: { name: string; settings: ExpeditionSettings; visibility: Visibility }) =>
+  party(api<PartyState>("POST", "/parties", { ...input, settings: wireSettings(input.settings) }));
+
+export const joinParty = (code: string) => party(api<PartyState>("POST", "/parties/join", { code }));
 
 export const getParty = (code: string, after?: number) =>
-  api<PartyState>("GET", `/parties/${code}${after === undefined ? "" : `?after=${after}`}`);
+  party(api<PartyState>("GET", `/parties/${code}${after === undefined ? "" : `?after=${after}`}`));
 
+/** Changes a party. `before` is the settings the party has now, when new ones are sent (see wireSettings). */
 export const updateParty = (
   code: string,
   changes: { name?: string; settings?: ExpeditionSettings; visibility?: Visibility },
-) => api<PartyState>("PATCH", `/parties/${code}`, changes);
+  before?: ExpeditionSettings,
+) =>
+  party(
+    api<PartyState>("PATCH", `/parties/${code}`, {
+      ...changes,
+      ...(changes.settings ? { settings: wireSettings(changes.settings, before) } : {}),
+    }),
+  );
 
-export const startParty = (code: string) => api<PartyState>("POST", `/parties/${code}/start`);
-export const reopenLobby = (code: string) => api<PartyState>("POST", `/parties/${code}/lobby`);
+export const startParty = (code: string) => party(api<PartyState>("POST", `/parties/${code}/start`));
+export const reopenLobby = (code: string) => party(api<PartyState>("POST", `/parties/${code}/lobby`));
 export const releaseStage = (code: string, stage: number) =>
-  api<PartyState>("POST", `/parties/${code}/release`, { stage });
+  party(api<PartyState>("POST", `/parties/${code}/release`, { stage }));
 export const kickMember = (code: string, userId: string) =>
-  api<PartyState>("POST", `/parties/${code}/kick`, { userId });
+  party(api<PartyState>("POST", `/parties/${code}/kick`, { userId }));
 
 export const postPartyResult = (
   code: string,

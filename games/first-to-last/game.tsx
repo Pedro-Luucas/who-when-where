@@ -1,77 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { Daily } from "@/components/daily";
-import { GamePanels } from "@/components/game-panels";
-import { ResultActions } from "@/components/result-footer";
+import { ResultHead } from "@/components/result-head";
 import { WorldMap, useMapLabels, type MapMarker, type MapRoute } from "@/components/world-map";
-import { formatYear, useSiteT } from "@/lib/i18n";
+import { formatYear } from "@/lib/i18n";
 import { useFinePointer } from "@/lib/pointer";
 import { chronological, type HistoryEvent } from "./events";
 import { useGameT } from "./messages";
 import { MAX_ATTEMPTS, inPlace, isOver, isSolved, truthOf, type Attempt } from "./rules";
-import { shareText } from "./share";
-import { computeStats, puzzleOf, useSave } from "./store";
 
 const LETTERS = "ABCDEFGH";
-
-export function FirstToLast() {
-  // Keyed by day: at midnight the next puzzle starts from a clean slate.
-  return <Daily>{(day) => <Play key={day} day={day} />}</Daily>;
-}
-
-function Play({ day }: { day: number }) {
-  const [save, setSave] = useSave();
-  const { t } = useGameT();
-  const siteT = useSiteT();
-
-  const { events, attempts } = puzzleOf(save, day);
-  const stats = computeStats(save, day);
-
-  function attempt(order: Attempt) {
-    setSave((previous) => ({
-      ...previous,
-      days: {
-        ...previous.days,
-        [day]: {
-          ids: events.map((event) => event.id),
-          // puzzleOf drops attempts made on events that are no longer in the roster.
-          attempts: [...puzzleOf(previous, day).attempts, order],
-        },
-      },
-    }));
-  }
-
-  return (
-    <>
-      <FirstToLastBoard
-        events={events}
-        attempts={attempts}
-        onAttempt={attempt}
-        label={`${siteT("puzzleNo", { n: day })} — ${t("kicker")}`}
-      >
-        <ResultActions
-          path="/first-to-last"
-          shareText={(url) => shareText(day, attempts, truthOf(events), url)}
-        />
-      </FirstToLastBoard>
-      <GamePanels
-        game="first-to-last"
-        help={[t("help1"), t("help2"), t("help3"), t("help4"), t("help5")]}
-        seenHelp={save.seenHelp}
-        onSeenHelp={() => setSave((previous) => ({ ...previous, seenHelp: true }))}
-        played={stats.played}
-        tiles={[
-          { label: siteT("statPlayed"), value: stats.played },
-          { label: t("statSolved"), value: `${stats.solvedRate}%` },
-          { label: t("statFlawless"), value: stats.flawless },
-          { label: siteT("statStreak"), value: stats.streak },
-          { label: siteT("statLongest"), value: stats.longestStreak },
-        ]}
-      />
-    </>
-  );
-}
 
 type BoardProps = {
   /** The puzzle's events, in the order they are lettered. */
@@ -194,24 +132,21 @@ export function FirstToLastBoard({
 
       <section className="stage">
         {over && (
-          <div className="result-head" role="status">
-            <div className="stamp" data-lost={solved ? undefined : ""}>
-              <strong>
-                {solved ? attempts.length : "×"}/{maxAttempts}
-              </strong>
-              <span>{t("tries")}</span>
-            </div>
-            <div className="verdict-text">
-              <p className="verdict-headline">
-                {!solved
-                  ? t("lost", { n: right })
-                  : attempts.length === 1
-                    ? t("flawless")
-                    : t("solvedIn", { n: attempts.length })}
-              </p>
-              <p className="verdict-answer">{t("theOrder")} ↓</p>
-            </div>
-          </div>
+          <ResultHead
+            solved={solved}
+            used={attempts.length}
+            max={maxAttempts}
+            unit={t("tries")}
+            headline={
+              !solved
+                ? t("lost", { n: right })
+                : attempts.length === 1
+                  ? t("flawless")
+                  : t("solvedIn", { n: attempts.length })
+            }
+          >
+            {t("theOrder")} ↓
+          </ResultHead>
         )}
 
         <WorldMap

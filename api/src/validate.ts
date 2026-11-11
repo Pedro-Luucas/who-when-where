@@ -88,7 +88,7 @@ export function readLine(value: unknown, max: number, field: string, allowEmpty 
 export const MESSAGE_MAX = 500;
 export const PARTY_NAME_MAX = 40;
 
-/** The games that keep scores (the site's games/slugs.ts lists the same). */
+/** The games that keep scores (the site's games/registry.ts lists the same). */
 export const GAMES = ["who-when-where", "wayfarer", "dig-site", "first-to-last", "overland", "outline"] as const;
 export type Game = (typeof GAMES)[number];
 
@@ -121,6 +121,23 @@ export const PARTY_PACES = ["free", "together"] as const;
 export const PARTY_TIME_LIMITS = [0, 60, 90, 120, 180, 300];
 export const MAX_ROUNDS_PER_GAME = 5;
 
+/**
+ * The tries per puzzle a host can set, game by game: their bounds, what they
+ * are when nothing says, and the field that carried them before they were
+ * kept per game (Wayfarer and Outline shared one). The site's game
+ * definitions say the same (games/<slug>/definition.ts).
+ */
+const TRIES: Partial<Record<Game, { min: number; max: number; fallback: number; older: OlderTries }>> = {
+  wayfarer: { min: 3, max: 6, fallback: 6, older: "guesses" },
+  "dig-site": { min: 3, max: 6, fallback: 5, older: "digs" },
+  "first-to-last": { min: 1, max: 4, fallback: 3, older: "attempts" },
+  overland: { min: 1, max: 5, fallback: 4, older: "spare" },
+  outline: { min: 3, max: 6, fallback: 6, older: "guesses" },
+};
+type OlderTries = "digs" | "guesses" | "attempts" | "spare";
+
+const TRIES_GAMES = GAMES.filter((game) => TRIES[game] !== undefined);
+
 /** How a party plays; the site's expedition/settings.ts is the same shape. */
 export type PartySettings = {
   /** Puzzles of each game; 0 leaves the game out. */
@@ -128,9 +145,12 @@ export type PartySettings = {
   order: (typeof PARTY_ORDERS)[number];
   /** Seconds per puzzle; 0 for no clock. */
   timeLimit: number;
+  /** Tries per puzzle, by game: digs in Dig Site, guesses in Wayfarer, guesses to spare in Overland… */
+  tries: Partial<Record<Game, number>>;
   /**
-   * Tries per puzzle: digs in Dig Site, guesses in Wayfarer and Outline,
-   * attempts in First to Last, guesses to spare in Overland.
+   * The same tries under their older names, for pages loaded before they were
+   * kept per game: digs in Dig Site, guesses in Wayfarer and Outline, attempts
+   * in First to Last, guesses to spare in Overland.
    */
   digs: number;
   guesses: number;
@@ -143,9 +163,38 @@ export type PartySettings = {
 /** Spare guesses in Overland when the settings don't say. */
 const DEFAULT_SPARE = 4;
 
+/** The tries under their older names: the first game that used a name speaks for it. */
+function olderTries(tries: Partial<Record<Game, number>>): Record<OlderTries, number> {
+  const older: Partial<Record<OlderTries, number>> = {};
+  for (const game of TRIES_GAMES) {
+    const rule = TRIES[game]!;
+    older[rule.older] ??= tries[game] ?? rule.fallback;
+  }
+  return older as Record<OlderTries, number>;
+}
+
 export function readPartySettings(value: unknown): PartySettings {
   const input = asObject(value, "settings");
   const rounds = asObject(input.rounds, "settings.rounds");
+
+  // A page from before tries were kept per game sends them under the older names only.
+  const given = input.tries === undefined ? null : asObject(input.tries, "settings.tries");
+  const older: Record<OlderTries, number> | null = given
+    ? null
+    : {
+        digs: readInteger(input.digs, 3, 6, "settings.digs"),
+        guesses: readInteger(input.guesses, 3, 6, "settings.guesses"),
+        attempts: readInteger(input.attempts, 1, 4, "settings.attempts"),
+        spare: input.spare === undefined ? DEFAULT_SPARE : readInteger(input.spare, 1, 5, "settings.spare"),
+      };
+  const tries: Partial<Record<Game, number>> = {};
+  for (const game of TRIES_GAMES) {
+    const rule = TRIES[game]!;
+    // A game the sender has not heard of plays by its usual tries.
+    if (older) tries[game] = older[rule.older];
+    else tries[game] = given![game] === undefined ? rule.fallback : readInteger(given![game], rule.min, rule.max, "settings.tries");
+  }
+
   const settings: PartySettings = {
     // A game the sender has not heard of (a page loaded before it existed) is left out.
     rounds: Object.fromEntries(
@@ -156,10 +205,8 @@ export function readPartySettings(value: unknown): PartySettings {
     ) as Record<Game, number>,
     order: readChoice(input.order, PARTY_ORDERS, "settings.order"),
     timeLimit: readInteger(input.timeLimit, 0, 300, "settings.timeLimit"),
-    digs: readInteger(input.digs, 3, 6, "settings.digs"),
-    guesses: readInteger(input.guesses, 3, 6, "settings.guesses"),
-    attempts: readInteger(input.attempts, 1, 4, "settings.attempts"),
-    spare: input.spare === undefined ? DEFAULT_SPARE : readInteger(input.spare, 1, 5, "settings.spare"),
+    tries,
+    ...(older ?? olderTries(tries)),
     pace: readChoice(input.pace, PARTY_PACES, "settings.pace"),
   };
   if (!PARTY_TIME_LIMITS.includes(settings.timeLimit)) throw new Invalid("settings.timeLimit");
@@ -177,10 +224,16 @@ export const stageCount = (settings: PartySettings): number =>
  */
 export function storedPartySettings(json: string): PartySettings {
   const stored = JSON.parse(json) as PartySettings;
+  const spare = stored.spare ?? DEFAULT_SPARE;
+  // A party opened before tries were kept per game has them under the older names only.
+  const older = { digs: stored.digs, guesses: stored.guesses, attempts: stored.attempts, spare };
   return {
     ...stored,
     rounds: Object.fromEntries(GAMES.map((game) => [game, stored.rounds[game] ?? 0])) as Record<Game, number>,
-    spare: stored.spare ?? DEFAULT_SPARE,
+    tries: Object.fromEntries(
+      TRIES_GAMES.map((game) => [game, stored.tries?.[game] ?? older[TRIES[game]!.older] ?? TRIES[game]!.fallback]),
+    ),
+    spare,
   };
 }
 

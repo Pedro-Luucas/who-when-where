@@ -1,4 +1,5 @@
 import { GameCard } from "@/components/game-card";
+import { GameStatus } from "@/components/game-status";
 import { FamilyIcon } from "@/components/ui/family-icon";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -57,9 +58,9 @@ export default function Home() {
             <SiteText k="todaysGames" />
           </h2>
           <div className="games">
-            {GAMES.map(({ Status, ...game }, index) => (
-              <GameCard key={game.slug} game={game} index={index}>
-                <Status />
+            {GAMES.map(({ slug, title, theme, blurb, family }, index) => (
+              <GameCard key={slug} game={{ slug, title, theme, blurb, family }} index={index}>
+                <GameStatus game={slug} />
               </GameCard>
             ))}
           </div>

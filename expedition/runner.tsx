@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useEffectEvent, useMemo, useSyncExternalStore } from "react";
-import { GAME_TITLES } from "@/games/slugs";
+import { Suspense, use, useEffect, useEffectEvent, useMemo, useSyncExternalStore } from "react";
+import { GAME_TITLES } from "@/games/registry";
 import { cue, cuePuzzle } from "@/lib/fx";
 import { formatNumber } from "@/lib/i18n";
 import { useSocialT } from "@/social/messages";
 import { gradeOf, runTotal, type Run, type StageResult } from "./run";
-import { StageBoard, buildStages, stageAnswer, stageScore } from "./stages";
+import { normalizeSettings } from "./settings";
+import { dealStages, loadBoards, stageAnswer, stagePuzzle, stageScore } from "./stages";
 
 type Props = {
   run: Run;
@@ -37,18 +38,40 @@ function useSecondsLeft(deadline: number | null): number {
 
 const clock = (seconds: number) => `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
 
+// The year dials stop at the current year.
+const THIS_YEAR = new Date().getFullYear();
+
 /** Plays a run's puzzles one after the other. Renders nothing once the run is over. */
-export function Runner({ run, onChange, onResult, onFinish, hold, aside }: Props) {
+export function Runner(props: Props) {
+  return (
+    // The games in the run are fetched before its first puzzle is shown.
+    <Suspense
+      fallback={
+        <main className="page" aria-busy="true">
+          <div className="page-skeleton skeleton-block" />
+        </main>
+      }
+    >
+      <Play {...props} />
+    </Suspense>
+  );
+}
+
+function Play({ run, onChange, onResult, onFinish, hold, aside }: Props) {
   const { locale, t } = useSocialT();
-  const stages = useMemo(() => buildStages(run.settings, run.seed), [run.settings, run.seed]);
+  // A run saved before tries were kept per game still names them the old way.
+  const settings = useMemo(() => normalizeSettings(run.settings), [run.settings]);
+  const dealt = use(dealStages(settings, run.seed));
+  const boards = use(loadBoards(settings));
+  const { stages } = dealt;
   const stage = stages[run.stage];
   const result: StageResult | undefined = run.results[run.stage];
-  const limit = run.settings.timeLimit;
+  const limit = settings.timeLimit;
   const deadline = limit > 0 && stage && !result ? run.startedAt + limit * 1000 : null;
   const secondsLeft = useSecondsLeft(deadline);
 
   function finish(moves: unknown[], timedOut: boolean) {
-    const score = stageScore(stage, moves, run.settings);
+    const score = stageScore(dealt, stage, moves, settings);
     const scored: StageResult = { points: score.points, detail: score.detail, ...(timedOut ? { timedOut } : {}) };
     onChange({ ...run, moves, results: [...run.results, scored] });
     onResult?.(run.stage, scored);
@@ -58,7 +81,7 @@ export function Runner({ run, onChange, onResult, onFinish, hold, aside }: Props
   function move(next: unknown) {
     if (result) return;
     const moves = [...run.moves, next];
-    if (stageScore(stage, moves, run.settings).over) return finish(moves, false);
+    if (stageScore(dealt, stage, moves, settings).over) return finish(moves, false);
     onChange({ ...run, moves });
     cue("move");
   }
@@ -85,6 +108,8 @@ export function Runner({ run, onChange, onResult, onFinish, hold, aside }: Props
 
   const label = t("stageOf", { n: run.stage + 1, total: stages.length });
   const total = runTotal(run.results);
+  const Board = boards[stage.game]?.Board;
+  const puzzle = stagePuzzle(dealt, stage);
 
   const onwards = result && (
     <div className="stage-footer" role="status">
@@ -137,23 +162,24 @@ export function Runner({ run, onChange, onResult, onFinish, hold, aside }: Props
           </p>
           <h1>{t("timeUp")}</h1>
           <p className="timeout-answer">
-            {t("itWas")} <b>{stageAnswer(stage, locale)}</b>
+            {t("itWas")} <b>{stageAnswer(dealt, stage, locale)}</b>
           </p>
           {onwards}
         </main>
-      ) : (
+      ) : Board && puzzle !== undefined ? (
         // Keyed by stage: each puzzle starts from a clean board.
-        <StageBoard
+        <Board
           key={`${run.id}:${run.stage}`}
-          stage={stage}
+          puzzle={puzzle}
           moves={run.moves}
           onMove={move}
-          settings={run.settings}
+          tries={settings.tries[stage.game]}
+          year={THIS_YEAR}
           label={`${label} — ${GAME_TITLES[stage.game]}`}
         >
           {onwards}
-        </StageBoard>
-      )}
+        </Board>
+      ) : null}
     </>
   );
 }

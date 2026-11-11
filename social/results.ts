@@ -1,6 +1,6 @@
 "use client";
 
-import { readDailyResults } from "@/games/results";
+import { readDailyResults, settleResults } from "@/games/results";
 import { readStore, writeStore } from "@/lib/storage";
 import { putResults } from "./client";
 
@@ -23,6 +23,8 @@ const CHUNK = 100;
 export async function pushResults(userId: string): Promise<void> {
   const stored = readStore(SENT_KEY, NOTHING_SENT);
   const sent = new Set(stored.owner === userId ? stored.keys : []);
+  // Days that have just arrived from the account may not be scored yet.
+  await settleResults();
   const pending = readDailyResults().filter((result) => !sent.has(`${result.game}:${result.day}`));
 
   for (let start = 0; start < pending.length; start += CHUNK) {

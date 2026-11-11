@@ -1,6 +1,6 @@
 "use client";
 
-import { GAME_SLUGS } from "@/games/slugs";
+import { GAME_SLUGS } from "@/games/registry";
 import { dateOfDay } from "@/lib/daily";
 import { formatNumber, numberLocale } from "@/lib/i18n";
 import { useSocialT } from "./messages";

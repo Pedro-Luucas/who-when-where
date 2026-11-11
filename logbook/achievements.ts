@@ -1,5 +1,5 @@
 import { activityOf, type DailyResult } from "@/games/results";
-import { GAME_SLUGS, type GameSlug } from "@/games/slugs";
+import { GAME_SLUGS, type GameSlug } from "@/games/registry";
 import { MAX_POINTS } from "@/lib/points";
 import { streaks } from "@/lib/stats";
 

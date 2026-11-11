@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useAccount } from "@/account/state";
 import { BrowserOnly } from "@/components/controls";
-import { GAME_SLUGS, GAME_TITLES } from "@/games/slugs";
+import { GAME_SLUGS, GAME_TITLES } from "@/games/registry";
 import { useDayNumber } from "@/lib/clock";
 import { formatNumber, numberLocale } from "@/lib/i18n";
 import { ActivityGraph } from "./activity-graph";

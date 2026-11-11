@@ -9,6 +9,7 @@ import { isRunOver, newRun, type Run, type StageResult } from "@/expedition/run"
 import { Runner } from "@/expedition/runner";
 import { stageCount, type ExpeditionSettings } from "@/expedition/settings";
 import { SettingsForm } from "@/expedition/setup";
+import { usePreloadedGames } from "@/expedition/stages";
 import { RunSummary } from "@/expedition/summary";
 import { copyText } from "@/lib/share";
 import { readStore, usePersistent, writeStore } from "@/lib/storage";
@@ -401,10 +402,12 @@ function Lobby({ state, me, title, act, onLeave, offline, problem, chat }: Lobby
   const [draft, setDraft] = useState<ExpeditionSettings | null>(null);
   const [invited, setInvited] = useState<string[]>([]);
   const inside = new Set(members.map((member) => member.user.id));
+  // While everyone waits in the lobby, the games of the next run are fetched.
+  usePreloadedGames(party.settings);
 
   async function changeSettings(settings: ExpeditionSettings) {
     setDraft(settings);
-    await act(() => updateParty(code, { settings }));
+    await act(() => updateParty(code, { settings }, party.settings));
     setDraft((current) => (current === settings ? null : current));
   }
 

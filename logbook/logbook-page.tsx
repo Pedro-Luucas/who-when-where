@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { BrowserOnly } from "@/components/controls";
 import { WorldMap, useMapLabels, type MapMarker, type MapRegion, type MapRoute } from "@/components/world-map";
 import { activityOf, useDailyResults } from "@/games/results";
@@ -8,7 +9,7 @@ import { formatNumber } from "@/lib/i18n";
 import { streaks } from "@/lib/stats";
 import { ActivityGraph } from "@/social/activity-graph";
 import { standingsOf, type Standing } from "./achievements";
-import { KINDS, TOTALS, useDiscoveries, type Discovery, type Kind } from "./discoveries";
+import { KINDS, useDiscoveries, type Kind } from "./discoveries";
 import { levelOf } from "./level";
 import { useLogbookT, type LogbookKey } from "./messages";
 
@@ -25,7 +26,6 @@ function Book() {
   const { locale, t } = useLogbookT();
   const today = useDayNumber();
   const results = useDailyResults();
-  const discoveries = useDiscoveries();
 
   const activity = activityOf(results);
   const points = results.reduce((sum, result) => sum + result.points, 0);
@@ -91,7 +91,16 @@ function Book() {
         </ul>
       </section>
 
-      <Atlas discoveries={discoveries} />
+      {/* The atlas asks every game what was found: it arrives once they are fetched. */}
+      <Suspense
+        fallback={
+          <section className="panel atlas" aria-busy="true">
+            <div className="page-skeleton skeleton-block" />
+          </section>
+        }
+      >
+        <Atlas />
+      </Suspense>
     </main>
   );
 }
@@ -126,8 +135,9 @@ function Badge({ standing }: { standing: Standing }) {
   );
 }
 
-function Atlas({ discoveries }: { discoveries: Discovery[] }) {
+function Atlas() {
   const { locale, t } = useLogbookT();
+  const { discoveries, totals } = useDiscoveries();
   const mapLabels = useMapLabels();
 
   const markers: MapMarker[] = [];
@@ -173,7 +183,7 @@ function Atlas({ discoveries }: { discoveries: Discovery[] }) {
       <ul className="collection">
         {KINDS.map((kind) => {
           const found = byKind(kind);
-          const total = TOTALS[kind];
+          const total = totals[kind];
           return (
             <li key={kind} data-kind={kind}>
               <details>

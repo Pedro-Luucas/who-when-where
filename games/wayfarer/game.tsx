@@ -1,15 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { Daily } from "@/components/daily";
-import { GamePanels } from "@/components/game-panels";
-import { ReadMore, ResultActions } from "@/components/result-footer";
+import { ReadMore } from "@/components/result-footer";
+import { ResultHead } from "@/components/result-head";
 import { WorldMap, useMapLabels, type MapMarker, type MapRoute } from "@/components/world-map";
-import { formatYear, useSiteT } from "@/lib/i18n";
+import { formatYear } from "@/lib/i18n";
 import {
   JOURNEYS,
   journeyById,
-  journeyForDay,
   routeSlice,
   stopsWithin,
   type Journey,
@@ -25,70 +23,9 @@ import {
   revealAt,
   type Guess,
 } from "./rules";
-import { shareText } from "./share";
-import { computeStats, useSave } from "./store";
-
-export function Wayfarer() {
-  // Keyed by day: at midnight the next puzzle starts from a clean slate.
-  return <Daily>{(day) => <Play key={day} day={day} />}</Daily>;
-}
 
 // "Tânger" matches "tanger".
 const fold = (text: string) => text.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
-
-function Play({ day }: { day: number }) {
-  const [save, setSave] = useSave();
-  const { t } = useGameT();
-  const siteT = useSiteT();
-
-  // A saved record names its journey, so a roster change can't reassign it.
-  const stored = save.days[day];
-  const record = stored && journeyById(stored.journeyId) ? stored : undefined;
-  const journey = (record && journeyById(record.journeyId)) ?? journeyForDay(day);
-  const guesses = record?.guesses ?? [];
-  const stats = computeStats(save, day);
-
-  function guess(next: Guess) {
-    setSave((previous) => ({
-      ...previous,
-      days: {
-        ...previous.days,
-        [day]: {
-          journeyId: journey.id,
-          // Only a record of this very journey is carried on: a stale one is replaced, never mixed in.
-          guesses: [...(previous.days[day]?.journeyId === journey.id ? previous.days[day].guesses : []), next],
-        },
-      },
-    }));
-  }
-
-  return (
-    <>
-      <WayfarerBoard
-        journey={journey}
-        guesses={guesses}
-        onGuess={guess}
-        label={`${siteT("puzzleNo", { n: day })} — ${t("kicker")}`}
-      >
-        <ResultActions path="/wayfarer" shareText={(url) => shareText(day, journey.id, guesses, url)} />
-      </WayfarerBoard>
-      <GamePanels
-        game="wayfarer"
-        help={[t("help1"), t("help2"), t("help3"), t("help4"), t("help5")]}
-        seenHelp={save.seenHelp}
-        onSeenHelp={() => setSave((previous) => ({ ...previous, seenHelp: true }))}
-        played={stats.played}
-        tiles={[
-          { label: siteT("statPlayed"), value: stats.played },
-          { label: t("statSolved"), value: `${stats.solvedRate}%` },
-          { label: t("statAverage"), value: stats.averageTries },
-          { label: siteT("statStreak"), value: stats.streak },
-          { label: siteT("statLongest"), value: stats.longestStreak },
-        ]}
-      />
-    </>
-  );
-}
 
 type BoardProps = {
   journey: Journey;
@@ -204,22 +141,15 @@ export function WayfarerBoard({ journey, guesses, onGuess, maxGuesses = MAX_GUES
 
       <section className="stage">
         {over && (
-          <div className="result-head" role="status">
-            <div className="stamp" data-lost={solved ? undefined : ""}>
-              <strong>
-                {solved ? used : "×"}/{maxGuesses}
-              </strong>
-              <span>{t("tries")}</span>
-            </div>
-            <div className="verdict-text">
-              <p className="verdict-headline">
-                {!solved ? t("lost") : used === 1 ? t("solvedFirst") : t("solvedIn", { n: used })}
-              </p>
-              <p className="verdict-answer">
-                {journey.name[locale]} · {years}
-              </p>
-            </div>
-          </div>
+          <ResultHead
+            solved={solved}
+            used={used}
+            max={maxGuesses}
+            unit={t("tries")}
+            headline={!solved ? t("lost") : used === 1 ? t("solvedFirst") : t("solvedIn", { n: used })}
+          >
+            {journey.name[locale]} · {years}
+          </ResultHead>
         )}
 
         <WorldMap
