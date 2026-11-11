@@ -11,9 +11,9 @@ import type { Guess } from "./rules";
 import { shareText } from "./share";
 import { computeStats, type DayRecord } from "./store";
 
-function Board({ puzzle, moves, onMove, tries, label, children }: BoardProps<Journey, Guess>) {
+function Board({ puzzle, moves, onMove, onMoves, tries, label, children }: BoardProps<Journey, Guess>) {
   return (
-    <WayfarerBoard journey={puzzle} guesses={moves} onGuess={onMove} maxGuesses={tries} label={label}>
+    <WayfarerBoard journey={puzzle} guesses={moves} onGuess={onMove} onGuesses={onMoves} maxGuesses={tries} label={label}>
       {children}
     </WayfarerBoard>
   );

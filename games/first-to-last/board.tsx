@@ -11,9 +11,9 @@ import { truthOf, type Attempt } from "./rules";
 import { shareText } from "./share";
 import { computeStats, type DayRecord } from "./store";
 
-function Board({ puzzle, moves, onMove, tries, label, children }: BoardProps<HistoryEvent[], Attempt>) {
+function Board({ puzzle, moves, onMove, onMoves, tries, label, children }: BoardProps<HistoryEvent[], Attempt>) {
   return (
-    <FirstToLastBoard events={puzzle} attempts={moves} onAttempt={onMove} maxAttempts={tries} label={label}>
+    <FirstToLastBoard events={puzzle} attempts={moves} onAttempt={onMove} onAttempts={onMoves} maxAttempts={tries} label={label}>
       {children}
     </FirstToLastBoard>
   );

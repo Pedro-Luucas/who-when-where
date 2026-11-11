@@ -2,15 +2,17 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { Question } from "@/components/question";
+import { Hud, type Pip } from "@/components/play/hud";
+import { Plaque } from "@/components/play/plaque";
+import { ResultCard, type ReviewRow } from "@/components/play/result-card";
 import { ReadMore } from "@/components/result-footer";
-import { ResultHead } from "@/components/result-head";
 import { WorldMap, useMapLabels, type MapMarker, type MapRing } from "@/components/world-map";
 import { formatCoordinates, type LatLon } from "@/lib/geo";
 import { formatNumber, useSiteT } from "@/lib/i18n";
 import { useFinePointer } from "@/lib/pointer";
+import { useShellT } from "@/lib/shell-messages";
 import { useGameT, type MessageKey } from "./messages";
-import { FOUND_KM, MAX_DIGS, closestKm, gradeDig, heatOf, isFound, isOver, type Dig } from "./rules";
+import { FOUND_KM, MAX_DIGS, PASS, closestKm, gradeDig, heatOf, isFound, isOver, isPass, scoreOf, type Dig } from "./rules";
 import { siteLabel, type Site } from "./sites";
 
 const NUMERALS = ["I", "II", "III", "IV", "V", "VI"];
@@ -19,6 +21,8 @@ type BoardProps = {
   site: Site;
   digs: Dig[];
   onDig: (dig: Dig) => void;
+  /** Adds several digs at once (giving up passes every dig that is left). */
+  onDigs: (digs: Dig[]) => void;
   maxDigs?: number;
   /** The line above the title: "No. 12 — Today's dig", "Stage 3 of 8 — Dig Site". */
   label: string;
@@ -27,8 +31,9 @@ type BoardProps = {
 };
 
 /** One Dig Site puzzle. The digs live with whoever renders it. */
-export function DigSiteBoard({ site, digs, onDig, maxDigs = MAX_DIGS, label, children }: BoardProps) {
+export function DigSiteBoard({ site, digs, onDig, onDigs, maxDigs = MAX_DIGS, label, children }: BoardProps) {
   const { locale, t } = useGameT();
+  const shell = useShellT();
   const mouse = useFinePointer();
   const siteT = useSiteT();
   const mapLabels = useMapLabels();
@@ -36,7 +41,9 @@ export function DigSiteBoard({ site, digs, onDig, maxDigs = MAX_DIGS, label, chi
 
   const found = isFound(digs);
   const over = isOver(digs, maxDigs);
-  const last = digs.at(-1);
+  // The digs actually made: a given-up one has no place on the map.
+  const made = digs.filter((entry) => !isPass(entry));
+  const last = made.at(-1);
 
   function dig() {
     if (!pin || over) return;
@@ -47,7 +54,7 @@ export function DigSiteBoard({ site, digs, onDig, maxDigs = MAX_DIGS, label, chi
   const heatName = (km: number) => t(`heat${heatOf(km)}` as MessageKey);
   const tone = (km: number) => `heat-${heatOf(km)}`;
 
-  const markers: MapMarker[] = digs.map((entry, i) => ({
+  const markers: MapMarker[] = made.map((entry, i) => ({
     lat: entry.lat,
     lon: entry.lon,
     kind: "guess",
@@ -58,14 +65,60 @@ export function DigSiteBoard({ site, digs, onDig, maxDigs = MAX_DIGS, label, chi
   else if (pin) markers.push({ ...pin, kind: "guess" });
 
   // The site lies somewhere on each ring.
-  const rings: MapRing[] = digs
+  const rings: MapRing[] = made
     .filter((entry) => entry.km > FOUND_KM)
     .map((entry) => ({ ...entry, tone: tone(entry.km) }));
 
-  const nearest = digs.find((entry) => entry.km === closestKm(digs));
+  const closest = made.length ? closestKm(made) : null;
+  const pips: Pip[] = Array.from({ length: maxDigs }, (_, i) => {
+    const entry = digs[i];
+    if (!entry) return i === digs.length && !over ? "current" : "todo";
+    if (isPass(entry)) return "skip";
+    return entry.km <= FOUND_KM ? "hit" : heatOf(entry.km) <= 2 ? "near" : "miss";
+  });
+  const review: ReviewRow[] = digs.map((entry, i) => ({
+    id: String(i),
+    label: shell("tryN", { n: i + 1 }),
+    verdict: isPass(entry) ? "skip" : entry.km <= FOUND_KM ? "hit" : heatOf(entry.km) <= 2 ? "near" : "miss",
+    yours: isPass(entry) ? shell("gaveUp") : heatName(entry.km),
+    value: isPass(entry) ? undefined : `${formatNumber(entry.km, locale)} km`,
+  }));
+  const map = (
+    <WorldMap
+      markers={markers}
+      rings={rings}
+      onPick={over ? undefined : setPin}
+      // Once it is over, every dig stays in the frame with the site.
+      focus={over ? [site, ...made] : undefined}
+      labels={mapLabels}
+      ariaLabel={t("mapAria")}
+    >
+      {over ? null : pin ? (
+        <>
+          <b>{t("nextDig", { n: digs.length + 1 })}</b> {formatCoordinates(pin)}
+        </>
+      ) : (
+        t(mouse ? "mapHintMouse" : "mapHint")
+      )}
+    </WorldMap>
+  );
 
   return (
-    <main className="game" data-summary={over ? "" : undefined}>
+    <main className="game" data-game="dig-site" data-summary={over ? "" : undefined}>
+      <Hud
+        step={{ n: Math.min(digs.length + 1, maxDigs), total: maxDigs, kind: "try" }}
+        pips={pips}
+        stats={[
+          {
+            icon: "flag",
+            label: shell("statClosest"),
+            value: closest === null ? "—" : `${formatNumber(closest, locale)} km`,
+          },
+        ]}
+        onGiveUp={() => onDigs(Array.from({ length: maxDigs - digs.length }, () => PASS))}
+        over={over}
+      />
+
       <aside className="dossier">
         <div className="plate" data-revealed={over ? "" : undefined}>
           <Image
@@ -90,13 +143,14 @@ export function DigSiteBoard({ site, digs, onDig, maxDigs = MAX_DIGS, label, chi
         <ol className="progress" style={{ "--steps": maxDigs } as React.CSSProperties}>
           {Array.from({ length: maxDigs }, (_, i) => {
             const entry = digs[i];
+            const passed = entry && isPass(entry);
             const state = entry ? "done" : i === digs.length && !over ? "current" : "todo";
             return (
-              <li key={i} data-state={state} data-tone={entry && tone(entry.km)}>
+              <li key={i} data-state={state} data-tone={entry && !passed ? tone(entry.km) : undefined}>
                 <span className="progress-numeral">{NUMERALS[i]}</span>
-                <span className="progress-label">{entry ? heatName(entry.km) : " "}</span>
+                <span className="progress-label">{passed ? shell("gaveUp") : entry ? heatName(entry.km) : " "}</span>
                 <span className="progress-score">
-                  {entry ? (
+                  {entry && !passed ? (
                     <>
                       {formatNumber(entry.km, locale)}
                       <small> km</small>
@@ -113,46 +167,32 @@ export function DigSiteBoard({ site, digs, onDig, maxDigs = MAX_DIGS, label, chi
 
       <section className="stage">
         {over ? (
-          <ResultHead
-            solved={found}
-            used={digs.length}
-            max={maxDigs}
-            unit={t("digs")}
-            headline={
-              !found
-                ? t("lost")
-                : digs.length === 1
-                  ? t("foundFirst")
-                  : t("foundIn", { n: digs.length })
-            }
-          >
-            {siteLabel(site, locale)}
-            {!found && ` · ${t("lostDetail", { km: formatNumber(closestKm(digs), locale) })}`}
-          </ResultHead>
-        ) : (
-          <Question text={t("question")} />
-        )}
-
-        <WorldMap
-          markers={markers}
-          rings={rings}
-          onPick={over ? undefined : setPin}
-          focus={over && nearest ? [site, nearest] : undefined}
-          labels={mapLabels}
-          ariaLabel={t("mapAria")}
-        >
-          {over ? null : pin ? (
-            <>
-              <b>{t("nextDig", { n: digs.length + 1 })}</b> {formatCoordinates(pin)}
-            </>
-          ) : (
-            t(mouse ? "mapHintMouse" : "mapHint")
-          )}
-        </WorldMap>
-
-        {over ? (
           <div className="summary">
-            {children}
+            <ResultCard
+              label={label}
+              headline={!found ? t("lost") : digs.length === 1 ? t("foundFirst") : t("foundIn", { n: digs.length })}
+              answer={
+                <>
+                  {siteLabel(site, locale)}
+                  {!found && closest !== null && ` · ${t("lostDetail", { km: formatNumber(closest, locale) })}`}
+                </>
+              }
+              points={scoreOf(digs, maxDigs).points}
+              stats={[
+                { label: shell("statTries"), value: `${found ? digs.length : "X"}/${maxDigs}`, tone: found ? "hit" : "miss" },
+                { label: shell("statClosest"), value: closest === null ? "—" : `${formatNumber(closest, locale)} km` },
+                { label: shell("statFound"), value: shell(found ? "yes" : "no"), tone: found ? "hit" : "miss" },
+              ]}
+              review={review}
+            >
+              {children}
+            </ResultCard>
+            <figure className="life">
+              <figcaption>
+                <span className="eyebrow">{shell("onTheMap")}</span>
+              </figcaption>
+              {map}
+            </figure>
             <ReadMore
               text={site.extract[locale] ?? site.extract.en}
               href={site.wiki[locale] ?? site.wiki.en}
@@ -160,20 +200,27 @@ export function DigSiteBoard({ site, digs, onDig, maxDigs = MAX_DIGS, label, chi
             />
           </div>
         ) : (
-          <div className="controls">
-            <div>
-              {last && (
-                <p className="feedback" data-tone={tone(last.km)} role="status">
-                  <b>{heatName(last.km)}</b>{" "}
-                  {t("kmAway", { km: formatNumber(last.km, locale) })}
-                </p>
-              )}
+          <>
+            <Plaque
+              eyebrow={shell("plaqueDig")}
+              text={t("question")}
+              tone={last ? tone(last.km) : undefined}
+              status={
+                last && (
+                  <>
+                    <b>{heatName(last.km)}</b> {t("kmAway", { km: formatNumber(last.km, locale) })}
+                  </>
+                )
+              }
+            />
+            {map}
+            <div className="controls action-bar">
               <p className="hint">{last ? t("ringHint") : t("firstHint", { n: maxDigs })}</p>
+              <button type="button" className="button" disabled={!pin} onClick={dig}>
+                {t("digHere")}
+              </button>
             </div>
-            <button type="button" className="button" disabled={!pin} onClick={dig}>
-              {t("digHere")}
-            </button>
-          </div>
+          </>
         )}
       </section>
     </main>

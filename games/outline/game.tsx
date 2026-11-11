@@ -1,19 +1,24 @@
 "use client";
 
 import { CountryPicker } from "@/components/country-picker";
-import { ResultHead } from "@/components/result-head";
+import { Hud, type Pip } from "@/components/play/hud";
+import { Plaque } from "@/components/play/plaque";
+import { ResultCard, type ReviewRow } from "@/components/play/result-card";
 import { WorldMap, useMapLabels, type MapMarker, type MapRegion } from "@/components/world-map";
 import { COUNTRIES, cornersOf, countryById, type Country } from "@/lib/countries";
 import { formatNumber } from "@/lib/i18n";
+import { useShellT } from "@/lib/shell-messages";
 import { useGameT, type MessageKey } from "./messages";
 import {
   BORDERS_CLUE_AT,
   HEMISPHERE_CLUE_AT,
   MAX_GUESSES,
+  PASS,
   SIZE_CLUE_AT,
   closenessOf,
   isSolved,
   readingOf,
+  scoreOf,
   type Reading,
 } from "./rules";
 import { Silhouette } from "./silhouette";
@@ -24,6 +29,8 @@ type BoardProps = {
   country: Country;
   guesses: string[];
   onGuess: (id: string) => void;
+  /** Adds several guesses at once (giving up passes every guess that is left). */
+  onGuesses: (ids: string[]) => void;
   maxGuesses?: number;
   /** The line above the title: "No. 12 — Today's outline", "Stage 3 of 8 — Outline". */
   label: string;
@@ -38,8 +45,17 @@ function roundedArea(km2: number): number {
 }
 
 /** One Outline puzzle. The guesses live with whoever renders it. */
-export function OutlineBoard({ country, guesses, onGuess, maxGuesses = MAX_GUESSES, label, children }: BoardProps) {
+export function OutlineBoard({
+  country,
+  guesses,
+  onGuess,
+  onGuesses,
+  maxGuesses = MAX_GUESSES,
+  label,
+  children,
+}: BoardProps) {
   const { locale, t } = useGameT();
+  const shell = useShellT();
   const mapLabels = useMapLabels();
 
   const used = guesses.length;
@@ -94,8 +110,47 @@ export function OutlineBoard({ country, guesses, onGuess, maxGuesses = MAX_GUESS
     { label: t("clueBorders"), value: borderCount, at: BORDERS_CLUE_AT },
   ];
 
+  const pips: Pip[] = Array.from({ length: maxGuesses }, (_, i) => {
+    const id = guesses[i];
+    if (id === undefined) return i === used && !over ? "current" : "todo";
+    const reading = readingOf(country, id);
+    if (!reading) return "skip";
+    return reading.hit ? "hit" : reading.heat <= 2 ? "near" : "miss";
+  });
+  const review: ReviewRow[] = guesses.map((id, i) => {
+    const reading = readingOf(country, id);
+    return {
+      id: `${i}-${id}`,
+      label: shell("tryN", { n: i + 1 }),
+      verdict: !reading ? "skip" : reading.hit ? "hit" : reading.heat <= 2 ? "near" : "miss",
+      yours: reading ? reading.country.name[locale] : shell("gaveUp"),
+      value:
+        reading && !reading.hit
+          ? `${ARROWS[reading.direction]} ${t("kmAway", { km: formatNumber(reading.km, locale) })} · ${t("closeness", { n: closenessOf(reading.km) })}`
+          : undefined,
+    };
+  });
+  const map = (
+    <WorldMap
+      markers={markers}
+      regions={regions}
+      // Once it is over, the country and every miss stay in the frame.
+      focus={over ? [...cornersOf(country), ...misses.map((reading) => reading.country)] : misses.map((reading) => reading.country)}
+      labels={mapLabels}
+      ariaLabel={t("mapAria")}
+    />
+  );
+
   return (
     <main className="game" data-game="outline" data-summary={over ? "" : undefined}>
+      <Hud
+        step={{ n: Math.min(used + 1, maxGuesses), total: maxGuesses, kind: "try" }}
+        pips={pips}
+        stats={[{ icon: "flag", label: shell("statClosest"), value: misses.length ? `${formatNumber(closest, locale)} km` : "—" }]}
+        onGiveUp={() => onGuesses(Array.from({ length: maxGuesses - used }, () => PASS))}
+        over={over}
+      />
+
       <aside className="dossier">
         <Silhouette country={country} revealed={over} label={over ? country.name[locale] : t("silhouetteAria")} />
 
@@ -115,51 +170,36 @@ export function OutlineBoard({ country, guesses, onGuess, maxGuesses = MAX_GUESS
             ))}
           </ul>
         )}
-
-        <ol className="meter" aria-label={`${used}/${maxGuesses}`}>
-          {Array.from({ length: maxGuesses }, (_, i) => {
-            const reading = readings[i];
-            const state = reading ? (reading.hit ? "hit" : "miss") : i === used && !over ? "current" : "todo";
-            return <li key={i} data-state={state} data-tone={reading && !reading.hit ? tone(reading) : undefined} />;
-          })}
-        </ol>
       </aside>
 
       <section className="stage">
         {over ? (
-          <ResultHead
-            solved={solved}
-            used={used}
-            max={maxGuesses}
-            unit={t("guesses")}
-            headline={!solved ? t("lost") : used === 1 ? t("solvedFirst") : t("solvedIn", { n: used })}
-          >
-            {country.name[locale]}
-            {!solved && ` · ${t("lostDetail", { km: formatNumber(closest, locale) })}`}
-          </ResultHead>
-        ) : (
-          <h2 className="question">
-            {t("question")
-              .split("*")
-              .map((part, i) => (i % 2 ? <em key={i}>{part}</em> : part))}
-          </h2>
-        )}
-
-        <WorldMap
-          markers={markers}
-          regions={regions}
-          focus={
-            over
-              ? [...cornersOf(country), ...misses.filter((reading) => reading.heat <= 2).map((reading) => reading.country)]
-              : misses.map((reading) => reading.country)
-          }
-          labels={mapLabels}
-          ariaLabel={t("mapAria")}
-        />
-
-        {over ? (
           <div className="summary">
-            {children}
+            <ResultCard
+              label={label}
+              headline={!solved ? t("lost") : used === 1 ? t("solvedFirst") : t("solvedIn", { n: used })}
+              answer={
+                <>
+                  {country.name[locale]}
+                  {!solved && misses.length > 0 && ` · ${t("lostDetail", { km: formatNumber(closest, locale) })}`}
+                </>
+              }
+              points={scoreOf(country.id, guesses, maxGuesses).points}
+              stats={[
+                { label: shell("statTries"), value: `${solved ? used : "X"}/${maxGuesses}`, tone: solved ? "hit" : "miss" },
+                { label: shell("statClosest"), value: misses.length ? `${formatNumber(closest, locale)} km` : "—" },
+                { label: shell("statFound"), value: shell(solved ? "yes" : "no"), tone: solved ? "hit" : "miss" },
+              ]}
+              review={review}
+            >
+              {children}
+            </ResultCard>
+            <figure className="life">
+              <figcaption>
+                <span className="eyebrow">{shell("onTheMap")}</span>
+              </figcaption>
+              {map}
+            </figure>
             <dl className="facts">
               <div>
                 <dt>{t("factArea")}</dt>
@@ -173,14 +213,21 @@ export function OutlineBoard({ country, guesses, onGuess, maxGuesses = MAX_GUESS
           </div>
         ) : (
           <>
-            {last ? (
-              <p className="feedback" data-tone={tone(last)} role="status">
-                <b>{heatName(last)}</b> {t("kmAway", { km: formatNumber(last.km, locale) })}{" "}
-                <span aria-hidden="true">{ARROWS[last.direction]}</span>
-              </p>
-            ) : (
-              <p className="hint">{t("firstHint")}</p>
-            )}
+            <Plaque
+              eyebrow={shell("plaqueCountry")}
+              text={t("question")}
+              tone={last ? tone(last) : undefined}
+              status={
+                last ? (
+                  <>
+                    <b>{heatName(last)}</b> {t("kmAway", { km: formatNumber(last.km, locale) })}{" "}
+                    <span aria-hidden="true">{ARROWS[last.direction]}</span>
+                  </>
+                ) : undefined
+              }
+            />
+            {map}
+            {!last && <p className="hint">{t("firstHint")}</p>}
             <CountryPicker
               pool={COUNTRIES}
               taken={new Set(guesses)}
@@ -192,31 +239,30 @@ export function OutlineBoard({ country, guesses, onGuess, maxGuesses = MAX_GUESS
                 noMatch: t("noMatch"),
               }}
             />
+            {readings.length > 0 && (
+              <ol className="tries" reversed>
+                {readings
+                  .map((reading, i) => (
+                    <li
+                      key={reading.country.id}
+                      data-state={reading.hit ? "hit" : "miss"}
+                      data-tone={reading.hit ? undefined : tone(reading)}
+                    >
+                      <span className="tries-n">{i + 1}</span>
+                      <span className="tries-name">{reading.country.name[locale]}</span>
+                      {!reading.hit && (
+                        <span className="tries-hint">
+                          <i aria-hidden="true">{ARROWS[reading.direction]}</i>{" "}
+                          {t("kmAway", { km: formatNumber(reading.km, locale) })} ·{" "}
+                          {t("closeness", { n: closenessOf(reading.km) })}
+                        </span>
+                      )}
+                    </li>
+                  ))
+                  .reverse()}
+              </ol>
+            )}
           </>
-        )}
-
-        {readings.length > 0 && (
-          <ol className="tries" reversed>
-            {readings
-              .map((reading, i) => (
-                <li
-                  key={reading.country.id}
-                  data-state={reading.hit ? "hit" : "miss"}
-                  data-tone={reading.hit ? undefined : tone(reading)}
-                >
-                  <span className="tries-n">{i + 1}</span>
-                  <span className="tries-name">{reading.country.name[locale]}</span>
-                  {!reading.hit && (
-                    <span className="tries-hint">
-                      <i aria-hidden="true">{ARROWS[reading.direction]}</i>{" "}
-                      {t("kmAway", { km: formatNumber(reading.km, locale) })} ·{" "}
-                      {t("closeness", { n: closenessOf(reading.km) })}
-                    </span>
-                  )}
-                </li>
-              ))
-              .reverse()}
-          </ol>
         )}
       </section>
     </main>

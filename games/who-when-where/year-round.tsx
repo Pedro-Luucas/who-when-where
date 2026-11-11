@@ -49,7 +49,7 @@ export function YearRound({ person, round, maxYear, locked, onLock, onNext, next
       )}
 
       {locked ? (
-        <div className="verdict" role="status">
+        <div className="verdict action-bar" role="status">
           <ScoreStamp score={locked.score} />
           <div className="verdict-text">
             <p className="verdict-headline">
@@ -68,7 +68,7 @@ export function YearRound({ person, round, maxYear, locked, onLock, onNext, next
           </button>
         </div>
       ) : (
-        <div className="controls">
+        <div className="controls action-bar">
           <p className="hint">{t("yearHint")}</p>
           <button
             type="button"

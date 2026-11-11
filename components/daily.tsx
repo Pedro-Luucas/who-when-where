@@ -26,14 +26,16 @@ function Today({ children }: { children: (day: number) => React.ReactNode }) {
   return children(useDayNumber());
 }
 
-/** What a game's page shows until the game itself is on screen. */
+/** What a game's page shows until the game itself is on screen: the HUD, the brief and the map, in their places. */
 export function GameSkeleton() {
   return (
     <main className="game game-skeleton" aria-busy="true">
+      <div className="hud skeleton-block" />
       <div className="dossier">
-        <div className="portrait skeleton-block" />
+        <div className="skeleton-block skeleton-brief" />
       </div>
       <section className="stage">
+        <div className="plaque skeleton-block" />
         <div className="map-frame skeleton-block" />
       </section>
     </main>

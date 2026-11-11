@@ -10,9 +10,9 @@ import type { Puzzle } from "./rules";
 import { shareText } from "./share";
 import { computeStats, type DayRecord } from "./store";
 
-function Board({ puzzle, moves, onMove, tries, label, children }: BoardProps<Puzzle, string>) {
+function Board({ puzzle, moves, onMove, onMoves, tries, label, children }: BoardProps<Puzzle, string>) {
   return (
-    <OverlandBoard puzzle={puzzle} guesses={moves} onGuess={onMove} spare={tries} label={label}>
+    <OverlandBoard puzzle={puzzle} guesses={moves} onGuess={onMove} onGuesses={onMoves} spare={tries} label={label}>
       {children}
     </OverlandBoard>
   );

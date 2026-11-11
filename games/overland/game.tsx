@@ -1,16 +1,32 @@
 "use client";
 
 import { CountryPicker } from "@/components/country-picker";
-import { ResultHead } from "@/components/result-head";
+import { Hud, type Pip } from "@/components/play/hud";
+import { Plaque } from "@/components/play/plaque";
+import { ResultCard, type ReviewRow } from "@/components/play/result-card";
 import { WorldMap, useMapLabels, type MapMarker, type MapRegion, type MapRoute } from "@/components/world-map";
 import { cornersOf, countryById, shortestRoute, type Country } from "@/lib/countries";
+import { useShellT } from "@/lib/shell-messages";
 import { useGameT, type MessageKey } from "./messages";
-import { BORDERED, SPARE, fewestBetween, isSolved, maxGuesses, verdictOf, type Puzzle, type Verdict } from "./rules";
+import {
+  BORDERED,
+  PASS,
+  SPARE,
+  fewestBetween,
+  isSolved,
+  maxGuesses,
+  scoreOf,
+  verdictOf,
+  type Puzzle,
+  type Verdict,
+} from "./rules";
 
 type BoardProps = {
   puzzle: Puzzle;
   guesses: string[];
   onGuess: (id: string) => void;
+  /** Adds several guesses at once (giving up passes every guess that is left). */
+  onGuesses: (ids: string[]) => void;
   /** Guesses allowed beyond the fewest that could do it. */
   spare?: number;
   /** The line above the title: "No. 12 — Today's crossing", "Stage 3 of 8 — Overland". */
@@ -22,8 +38,9 @@ type BoardProps = {
 const METER_STATE: Record<Verdict, string> = { on: "hit", near: "near", off: "miss" };
 
 /** One Overland puzzle. The guesses live with whoever renders it. */
-export function OverlandBoard({ puzzle, guesses, onGuess, spare = SPARE, label, children }: BoardProps) {
+export function OverlandBoard({ puzzle, guesses, onGuess, onGuesses, spare = SPARE, label, children }: BoardProps) {
   const { locale, t } = useGameT();
+  const shell = useShellT();
   const mapLabels = useMapLabels();
 
   const from = countryById(puzzle.from);
@@ -79,17 +96,53 @@ export function OverlandBoard({ puzzle, guesses, onGuess, spare = SPARE, label, 
 
   // The map frames the two ends and the guesses that lead somewhere. A guess
   // that went astray is framed too while it is the latest, so it can be seen.
-  const framed = guessed.filter((entry) => entry.verdict !== "off" || (entry === last && !over));
+  // Once it is over, every guess stays in the frame.
+  const framed = over ? guessed : guessed.filter((entry) => entry.verdict !== "off" || entry === last);
+
+  const pips: Pip[] = Array.from({ length: max }, (_, i) => {
+    const id = guesses[i];
+    if (id === undefined) return i === guesses.length && !over ? "current" : "todo";
+    if (id === PASS) return "skip";
+    return METER_STATE[verdictOf(puzzle, id)] as Pip;
+  });
+  const review: ReviewRow[] = guesses.map((id, i) => {
+    const country = countryById(id);
+    const verdict = verdictOf(puzzle, id);
+    return {
+      id: `${i}-${id}`,
+      label: shell("tryN", { n: i + 1 }),
+      verdict: !country ? "skip" : verdict === "on" ? "hit" : verdict === "near" ? "near" : "miss",
+      yours: country ? country.name[locale] : shell("gaveUp"),
+      value: country ? t(`verdict_${verdict}` as MessageKey) : undefined,
+    };
+  });
+  const map = (
+    <WorldMap
+      markers={markers}
+      regions={regions}
+      routes={routes}
+      focus={[...cornersOf(from), ...cornersOf(to), ...framed.map((entry) => entry.country)]}
+      labels={mapLabels}
+      ariaLabel={t("mapAria")}
+    />
+  );
+  const title = question.split("*").map((part, i) => (i % 2 ? <em key={i}>{part}</em> : part));
 
   return (
     <main className="game" data-game="overland" data-summary={over ? "" : undefined}>
+      <Hud
+        step={{ n: Math.min(guesses.length + 1, max), total: max, kind: "try" }}
+        pips={pips}
+        stats={[{ icon: "flag", label: t("clueOnWay"), value: onTheWay }]}
+        onGiveUp={() => onGuesses(Array.from({ length: max - guesses.length }, () => PASS))}
+        over={over}
+      />
+
       <aside className="dossier dossier-plain">
         <div className="dossier-text">
           <p className="eyebrow">{label}</p>
-          <h1 className="dossier-name">
-            {question.split("*").map((part, i) => (i % 2 ? <em key={i}>{part}</em> : part))}
-          </h1>
-          <p className="dossier-description">{t("lead")}</p>
+          {over && <h1 className="dossier-name">{title}</h1>}
+          <p className={over ? "dossier-description" : "dossier-lead"}>{t("lead")}</p>
         </div>
 
         <ul className="clues">
@@ -106,55 +159,55 @@ export function OverlandBoard({ puzzle, guesses, onGuess, spare = SPARE, label, 
             <b>{over ? "—" : max - guesses.length}</b>
           </li>
         </ul>
-
-        <ol className="meter" aria-label={`${guesses.length}/${max}`}>
-          {Array.from({ length: max }, (_, i) => {
-            const entry = guessed[i];
-            const state = entry ? METER_STATE[entry.verdict] : i === guesses.length && !over ? "current" : "todo";
-            return <li key={i} data-state={state} />;
-          })}
-        </ol>
       </aside>
 
       <section className="stage">
-        {over && (
-          <ResultHead
-            solved={solved}
-            used={guesses.length}
-            max={max}
-            unit={t("guesses")}
-            headline={
-              !solved
-                ? t("lost")
-                : guesses.length === fewest
-                  ? t("solvedShortest")
-                  : t("solvedIn", { n: guesses.length })
-            }
-          >
-            {t("theWay")}: {way.map((country) => country.name[locale]).join(" → ")}
-          </ResultHead>
-        )}
-
-        <WorldMap
-          markers={markers}
-          regions={regions}
-          routes={routes}
-          focus={[...cornersOf(from), ...cornersOf(to), ...framed.map((entry) => entry.country)]}
-          labels={mapLabels}
-          ariaLabel={t("mapAria")}
-        />
-
         {over ? (
-          <div className="summary">{children}</div>
+          <div className="summary">
+            <ResultCard
+              label={label}
+              headline={
+                !solved ? t("lost") : guesses.length === fewest ? t("solvedShortest") : t("solvedIn", { n: guesses.length })
+              }
+              answer={`${t("theWay")}: ${way.map((country) => country.name[locale]).join(" → ")}`}
+              points={scoreOf(puzzle, guesses, spare).points}
+              stats={[
+                {
+                  label: shell("statTries"),
+                  value: `${solved ? guesses.length : "X"}/${max}`,
+                  tone: solved ? "hit" : "miss",
+                },
+                { label: shell("statOnTheWay"), value: onTheWay },
+                { label: t("clueFewest"), value: fewest },
+              ]}
+              review={review}
+            >
+              {children}
+            </ResultCard>
+            <figure className="life">
+              <figcaption>
+                <span className="eyebrow">{shell("onTheMap")}</span>
+              </figcaption>
+              {map}
+            </figure>
+          </div>
         ) : (
           <>
-            {last ? (
-              <p className="feedback" data-tone={last.verdict} role="status">
-                <b>{t(`verdict_${last.verdict}` as MessageKey)}</b> {last.country.name[locale]}
-              </p>
-            ) : (
-              <p className="hint">{t("firstHint", { n: max })}</p>
-            )}
+            <Plaque
+              eyebrow={shell("plaqueCrossing")}
+              text={question}
+              as="h1"
+              tone={last?.verdict}
+              status={
+                last ? (
+                  <>
+                    <b>{t(`verdict_${last.verdict}` as MessageKey)}</b> {last.country.name[locale]}
+                  </>
+                ) : undefined
+              }
+            />
+            {map}
+            {!last && <p className="hint">{t("firstHint", { n: max })}</p>}
             <CountryPicker
               pool={BORDERED}
               taken={taken}
@@ -166,21 +219,20 @@ export function OverlandBoard({ puzzle, guesses, onGuess, spare = SPARE, label, 
                 noMatch: t("noMatch"),
               }}
             />
+            {guessed.length > 0 && (
+              <ol className="tries" reversed>
+                {guessed
+                  .map(({ country, verdict }, i) => (
+                    <li key={country.id} data-state={METER_STATE[verdict]} data-tone={verdict}>
+                      <span className="tries-n">{i + 1}</span>
+                      <span className="tries-name">{country.name[locale]}</span>
+                      <span className="tries-hint">{t(`hint_${verdict}` as MessageKey)}</span>
+                    </li>
+                  ))
+                  .reverse()}
+              </ol>
+            )}
           </>
-        )}
-
-        {guessed.length > 0 && (
-          <ol className="tries" reversed>
-            {guessed
-              .map(({ country, verdict }, i) => (
-                <li key={country.id} data-state={METER_STATE[verdict]} data-tone={verdict}>
-                  <span className="tries-n">{i + 1}</span>
-                  <span className="tries-name">{country.name[locale]}</span>
-                  <span className="tries-hint">{t(`hint_${verdict}` as MessageKey)}</span>
-                </li>
-              ))
-              .reverse()}
-          </ol>
         )}
       </section>
     </main>

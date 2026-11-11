@@ -22,13 +22,22 @@ npm run data:countries # rebuild the countries Overland and Outline are played w
 npm run images         # redraw the app icons and the card shown for shared links
 ```
 
-In development, `?day=N` on any game (or the hub) plays day N's puzzle.
+In development, `?day=N` on any game (or the home page) plays day N's puzzle.
+
+The site is laid out after geocore.fun's "space HUD": a header with the main places as pills (Play, Daily, Leaderboard, Community, Party), search on the `/` key, a language chip and the account menu; a bottom bar on phones.
+
+| Page | Route | What it is |
+| --- | --- | --- |
+| **Home** | `/` | A landing for guests, a dashboard once signed in (streak, level, today's points, the next puzzle waiting); today's dailies, the ways to play, every game. |
+| **Games** | `/play` | The catalogue: today's dailies, then every game with an illustrated thumbnail, searchable and filtered by family, favourites, today's progress and mechanic, with "Surprise me". Picking one opens its setup panel (a bottom sheet on phones): how to play, options, the player's record, Play. |
+| **Daily games** | `/daily` | Today's puzzle in every game, the day's progress and countdown, and the daily challenge below. |
+| **A game** | `/play/<slug>` | The HUD bar (all games, round, pips, live numbers, Give up, how to play, statistics), the prompt plaque, the board, a sticky action bar on phones, and the result card with its answer-by-answer review. |
 
 Around the daily games there is a community — all of it optional, none of it needed to play:
 
 | Page | Route | What it is |
 | --- | --- | --- |
-| **Daily challenge** | `/` | Finish all six of today's puzzles. A year-long activity graph and day streaks, built from the games saved on the device; one button shares the whole day. |
+| **Daily challenge** | `/daily` | Finish all six of today's puzzles. A year-long activity graph and day streaks, built from the games saved on the device; one button shares the whole day. |
 | **Logbook** | `/logbook` | The player's level (every point is experience), 21 achievements, and an atlas: every person, journey, site, moment and country their puzzles revealed, pinned on one map. Built from the device's saves; no account needed. |
 | **Expedition** | `/expedition` | A custom game: puzzles from any of the games, one after the other. The player picks the games, how many puzzles, the order, a clock and the difficulty. Solo, no account needed; a link challenges a friend to the very same puzzles. |
 | **Party** | `/party` | A room (joined by code, invitation or the open list) where up to 12 players race through the same expedition, with live standings and chat. |
@@ -41,8 +50,8 @@ Around the daily games there is a community — all of it optional, none of it n
 | Path | What lives there |
 | --- | --- |
 | `lib/` | Shared base for every game: daily clock and schedule (`daily.ts`, `clock.ts`), localStorage state (`storage.ts`), streaks (`stats.ts`), EN/PT strings (`i18n.ts`), geography helpers (`geo.ts`), the countries and their borders (`countries.ts`), sharing (`share.ts`), the player's preferences (`prefs.ts`: theme, sound, vibration, confetti), sounds and confetti (`fx.ts`), notices (`toasts.ts`) |
-| `components/` | Shared UI: world map (`world-map.tsx`), year ruler (`year-dial.tsx`), country search (`country-picker.tsx`), the daily gate (`daily.tsx`), help and statistics panels (`game-panels.tsx`), share button and countdown (`result-footer.tsx`, `share-button.tsx`), settings (`settings-button.tsx`), header, hub card |
-| `games/registry.ts` | Every game on the site, as plain data: the hub, the pages at `/play/<slug>`, sync, expeditions and parties all read this list. It loads no game |
+| `components/` | Shared UI: world map (`world-map.tsx`), year ruler (`year-dial.tsx`), country search (`country-picker.tsx`), the daily gate (`daily.tsx`), help and statistics panels (`game-panels.tsx`), share button and countdown (`result-footer.tsx`, `share-button.tsx`), settings (`settings-button.tsx`), the header (`site-header.tsx`) and its parts (`shell/`: nav pills, search, language chip, account menu, bottom bar), the catalogue, dailies and setup panel (`catalogue/`), the home page (`home/`), each game's illustrated thumbnail (`game-art.tsx`), and the game screen's shared parts (`play/`: HUD, prompt plaque, result card) |
+| `games/registry.ts` | Every game on the site, as plain data: the catalogue, the pages at `/play/<slug>`, sync, expeditions and parties all read this list. It loads no game |
 | `games/loaders.tsx` | The one place the games themselves are imported from, each as its own chunk: a page that shows one game fetches that game only |
 | `games/platform/` | What every game shares: the shape of a definition (`definition.ts`), of a game's data and board (`types.ts`), the daily page built around a board (`board.tsx`), and the saved-games hook (`store.ts`) |
 | `games/<slug>/` | One game. `definition.ts`: its name, family, save and expedition settings, as plain data. `data.ts`: its roster and rules — dealing, scoring, what a finished puzzle reveals. `board.tsx`: its interface for the platform, around the `…Board` in `game.tsx` (one puzzle, with its moves held by whoever renders it), which both the daily page and expeditions play. Plus its rules (`rules.ts`), statistics (`store.ts`), strings (`messages.ts`) and share text |
@@ -88,7 +97,7 @@ API_ORIGIN=https://api.example.com SITE_URL=https://example.com npm run build
 
 `SITE_URL` is the site's own public address: it goes into the link previews (the card in `app/opengraph-image.png`).
 
-The site can be installed as an app (`app/manifest.ts`). The theme, sound, vibration and confetti are the player's to choose, in the settings behind the header's last button; they stay on the device.
+The site can be installed as an app (`app/manifest.ts`). The theme, sound, vibration and confetti are the player's to choose, in the settings behind the account menu (the avatar at the header's end); they stay on the device.
 
 **How sign-in works.** Passwords are hashed with scrypt. A session is a random token in an `HttpOnly` cookie; the database stores only its hash. Sessions last 30 days and renew while in use. Changing the password signs the account out everywhere else.
 
@@ -134,11 +143,11 @@ Changing the size of a roster reshuffles that game's schedule, so today's puzzle
 1. Create `games/<slug>/` with three modules:
    - `definition.ts` — `defineGame({ slug, title, theme, blurb, family, engine, save, status, expedition })`. Plain data, no imports of the game.
    - `data.ts` — `defineData(slug, { puzzleForDay, deal, puzzleOf, score, resultOf, answer, discover, totals, … })`: the roster and the rules, scored 0–1,000 (`lib/points.ts`).
-   - `board.tsx` — `defineBoard(definition, { data, Board, messages, daily, share, stats })`: the board one puzzle is played on, and the words and statistics of its daily page. The platform adds the saving, the result footer, the help and statistics panels.
+   - `board.tsx` — `defineBoard(definition, { data, Board, messages, daily, share, stats })`: the board one puzzle is played on, and the words and statistics of its daily page. The platform adds the saving, the result footer, the help and statistics panels. A board renders the shared screen parts from `components/play/`: `Hud` (round, pips, Give up through `onMoves`), `Plaque` (the prompt) and, once the puzzle is over, `ResultCard` (points of 1,000, a few numbers, the answer-by-answer review), then its map and reading. Give it a thumbnail scene in `components/game-art.tsx` (without one it shows its family's mark).
 2. List the definition at the end of `games/registry.ts`, and name the game's modules in `games/loaders.tsx`.
 3. Add the slug to `GAMES` in `api/src/validate.ts` (and its tries, if it has any, to `TRIES`), and deploy the API before the site sends it scores of the new game.
 
-That is all: the hub card, the page at `/play/<slug>`, account sync, the daily challenge, leaderboards, expeditions, parties and the logbook's atlas pick the game up from its definition. (A game that reveals a new kind of thing also names it in `DISCOVERY_KINDS` and the logbook's strings.)
+That is all: the catalogue tile, the dailies, the page at `/play/<slug>`, account sync, the daily challenge, leaderboards, expeditions, parties and the logbook's atlas pick the game up from its definition. (A game that reveals a new kind of thing also names it in `DISCOVERY_KINDS` and the logbook's strings.)
 
 ## Scoring
 

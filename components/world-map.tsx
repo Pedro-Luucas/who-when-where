@@ -11,6 +11,7 @@ import type { GeometryCollection, Topology } from "topojson-specification";
 import type { LatLon } from "@/lib/geo";
 import { useSiteT } from "@/lib/i18n";
 import { motionMs } from "@/lib/motion";
+import { useShellT } from "@/lib/shell-messages";
 
 export type MapMarker = LatLon & {
   /**
@@ -54,6 +55,8 @@ type Labels = {
   zoomIn: string;
   zoomOut: string;
   zoomReset: string;
+  /** How to play the map from the keyboard, read when it takes the focus. */
+  keys: string;
 };
 
 type Props = {
@@ -84,14 +87,21 @@ const LABEL_CHAR_WIDTH = 6.9;
 /** The map's own interface strings, in the player's language. */
 export function useMapLabels(): Labels {
   const t = useSiteT();
+  const shell = useShellT();
   return {
     loading: t("mapLoading"),
     error: t("mapError"),
     zoomIn: t("zoomIn"),
     zoomOut: t("zoomOut"),
     zoomReset: t("zoomReset"),
+    keys: shell("mapKeys"),
   };
 }
+
+/** How far one press of an arrow key moves the keyboard cursor, in screen pixels (Shift: four times as far). */
+const CURSOR_STEP = 12;
+/** The cursor stays this far inside the frame; past it, the map pans instead. */
+const CURSOR_MARGIN = 28;
 
 let worldRequest: Promise<FeatureCollection> | null = null;
 
@@ -155,6 +165,9 @@ export function WorldMap({
   const [world, setWorld] = useState<FeatureCollection | null>(null);
   const [failed, setFailed] = useState(false);
   const [view, setView] = useState<ZoomTransform>(zoomIdentity);
+  // The keyboard's cursor, in screen pixels: shown while a pickable map has the focus.
+  const [cursor, setCursor] = useState<[number, number] | null>(null);
+  const [keyboard, setKeyboard] = useState(false);
 
   useEffect(() => {
     let alive = true;
@@ -322,16 +335,65 @@ export function WorldMap({
     }
   }
 
-  function handleClick(event: React.MouseEvent<SVGSVGElement>) {
+  /** Picks the place under a point of the frame (screen pixels), if it is on the globe. */
+  function pickAt(screenX: number, screenY: number) {
     if (!onPick || !projection) return;
-    const box = event.currentTarget.getBoundingClientRect();
-    const [x, y] = view.invert([event.clientX - box.left, event.clientY - box.top]);
+    const [x, y] = view.invert([screenX, screenY]);
     const location = projection.invert?.([x, y]);
     if (!location) return;
     // Clicks outside the globe invert to nonsense that doesn't project back.
     const back = projection(location);
     if (!back || Math.hypot(back[0] - x, back[1] - y) > 0.5) return;
     onPick({ lon: location[0], lat: location[1] });
+  }
+
+  function handleClick(event: React.MouseEvent<SVGSVGElement>) {
+    const box = event.currentTarget.getBoundingClientRect();
+    pickAt(event.clientX - box.left, event.clientY - box.top);
+  }
+
+  // Keyboard play: the arrow keys move a cursor (panning the map at the edges),
+  // Enter or Space drops the pin under it, + and - zoom, 0 shows the whole world.
+  function handleKey(event: React.KeyboardEvent<SVGSVGElement>) {
+    if (!size) return;
+    const svg = svgRef.current;
+    const behavior = zoomRef.current;
+    const at = cursor ?? [size.width / 2, size.height / 2];
+    const step = CURSOR_STEP * (event.shiftKey ? 4 : 1);
+    const moves: Record<string, [number, number]> = {
+      ArrowLeft: [-step, 0],
+      ArrowRight: [step, 0],
+      ArrowUp: [0, -step],
+      ArrowDown: [0, step],
+    };
+    const move = moves[event.key];
+    if (move) {
+      event.preventDefault();
+      setKeyboard(true);
+      const x = at[0] + move[0];
+      const y = at[1] + move[1];
+      const clampedX = Math.min(Math.max(x, CURSOR_MARGIN), size.width - CURSOR_MARGIN);
+      const clampedY = Math.min(Math.max(y, CURSOR_MARGIN), size.height - CURSOR_MARGIN);
+      // Past the margin the cursor stays put and the world slides under it.
+      if (svg && behavior && (clampedX !== x || clampedY !== y)) {
+        select(svg).call(behavior.translateBy, (clampedX - x) / view.k, (clampedY - y) / view.k);
+      }
+      setCursor([clampedX, clampedY]);
+    } else if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      setKeyboard(true);
+      pickAt(at[0], at[1]);
+      if (!cursor) setCursor(at);
+    } else if (event.key === "+" || event.key === "=") {
+      event.preventDefault();
+      zoomBy(1.8);
+    } else if (event.key === "-" || event.key === "_") {
+      event.preventDefault();
+      zoomBy(1 / 1.8);
+    } else if (event.key === "0") {
+      event.preventDefault();
+      zoomHome();
+    }
   }
 
   const toScreen = (point: LatLon): [number, number] | null => {
@@ -432,9 +494,20 @@ export function WorldMap({
           width={size.width}
           height={size.height}
           viewBox={`0 0 ${size.width} ${size.height}`}
-          role="img"
-          aria-label={ariaLabel}
+          {...(onPick
+            ? {
+                // A pickable map is played from the keyboard too (handleKey).
+                role: "application",
+                tabIndex: 0,
+                "aria-roledescription": "map",
+                "aria-label": `${ariaLabel}. ${labels.keys}`,
+                onKeyDown: handleKey,
+                onFocus: () => setCursor((at) => at ?? [size.width / 2, size.height / 2]),
+                onBlur: () => setKeyboard(false),
+              }
+            : { role: "img", "aria-label": ariaLabel })}
           onClick={handleClick}
+          onPointerDown={() => setKeyboard(false)}
         >
           <g transform={view.toString()}>
             <BaseMap sphere={base.sphere} graticule={base.graticule} land={base.land} />
@@ -510,6 +583,13 @@ export function WorldMap({
               </g>
             );
           })}
+
+          {onPick && keyboard && cursor && (
+            <g className="map-cursor" transform={`translate(${cursor[0]},${cursor[1]})`} aria-hidden="true">
+              <circle r={11} />
+              <path d="M-18 0h10M8 0h10M0-18v10M0 8v10" />
+            </g>
+          )}
         </svg>
       )}
 

@@ -1144,10 +1144,6 @@ button.chip-solid:hover:not(:disabled) {
   color: var(--ink);
 }
 
-.together {
-  margin-top: clamp(36px, 6vw, 64px);
-}
-
 /* ───────────────────────── Expedition: setting up ───────────────────────── */
 
 .setup {

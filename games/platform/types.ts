@@ -87,6 +87,8 @@ export type BoardProps<Puzzle, Move> = {
   moves: Move[];
   /** Adds the player's next move. */
   onMove: (move: Move) => void;
+  /** Adds several moves at once: giving up fills the tries that are left. */
+  onMoves: (moves: Move[]) => void;
   /** Tries allowed, when the host sets them (an expedition); the game's own otherwise. */
   tries?: number;
   /** The current year: the latest a year dial allows. */

@@ -64,7 +64,7 @@ export function PlaceRound({ person, round, locked, onLock, onNext, nextLabel }:
       </WorldMap>
 
       {locked ? (
-        <div className="verdict" role="status">
+        <div className="verdict action-bar" role="status">
           <ScoreStamp score={locked.score} />
           <div className="verdict-text">
             <p className="verdict-headline">
@@ -79,7 +79,7 @@ export function PlaceRound({ person, round, locked, onLock, onNext, nextLabel }:
           </button>
         </div>
       ) : (
-        <div className="controls">
+        <div className="controls action-bar">
           <p className="hint">{t(mouse ? "mapHintZoomMouse" : "mapHintZoom")}</p>
           <button
             type="button"

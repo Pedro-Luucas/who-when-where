@@ -39,9 +39,10 @@ export function computeStats(save: Save, today: number): Stats {
     ([, record]) => isPlayable(record) && isOver(record, record.guesses),
   );
   const arrived = finished.filter(([, record]) => isSolved(record, record.guesses));
-  // A streak is a run of days on which the crossing was completed.
+  // A streak is a run of days with the puzzle finished, solved or not: the one rule
+  // every game, the daily challenge and the accounts API share.
   const { streak, longest } = streaks(
-    arrived.map(([day]) => Number(day)),
+    finished.map(([day]) => Number(day)),
     today,
   );
   return {

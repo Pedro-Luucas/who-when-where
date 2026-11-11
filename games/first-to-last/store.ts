@@ -43,9 +43,10 @@ export function computeStats(save: Save, today: number): Stats {
   const days = Object.keys(save.days).map((day) => ({ day: Number(day), ...puzzleOf(save, Number(day)) }));
   const finished = days.filter(({ events, attempts }) => isOver(attempts, truthOf(events)));
   const solved = finished.filter(({ events, attempts }) => isSolved(attempts, truthOf(events)));
-  // A streak is a run of days on which the order was found.
+  // A streak is a run of days with the puzzle finished, solved or not: the one rule
+  // every game, the daily challenge and the accounts API share.
   const { streak, longest } = streaks(
-    solved.map(({ day }) => day),
+    finished.map(({ day }) => day),
     today,
   );
   return {

@@ -1,0 +1,730 @@
+/* ═════════════════════════ Game screen ═════════════════════════
+   The parts every game's screen shares (components/play): the HUD bar, the
+   prompt plaque, the sticky action bar on phones, the map's space backdrop
+   and keyboard cursor, and the result card with its answer-by-answer review.
+   Inside the components layer, so utilities can override. */
+
+@layer components {
+/* ───────────────────────── HUD ───────────────────────── */
+
+.hud {
+  grid-column: 1 / -1;
+  position: sticky;
+  top: 66px;
+  z-index: 30;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 6px 8px;
+  padding: 6px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--glass);
+  box-shadow: var(--shadow-card);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  backdrop-filter: blur(16px) saturate(1.2);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .hud {
+    background: var(--surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+.hud-side {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.hud-end {
+  justify-content: flex-end;
+}
+
+.hud-center {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  justify-self: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 12px;
+  padding: 4px 8px 4px 4px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: rgb(1 4 11 / 0.4);
+}
+
+:root[data-theme="light"] .hud-center {
+  background: var(--sunken);
+}
+
+.hud-key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 11px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--key-sheen), var(--surface);
+  color: var(--fg);
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow:
+    var(--key-face),
+    0 2px 0 var(--key-side);
+  transition:
+    border-color 120ms var(--ease-out),
+    transform 120ms var(--ease-press),
+    box-shadow 120ms var(--ease-press);
+}
+
+.hud-key:hover {
+  border-color: rgb(79 171 246 / 0.7);
+}
+
+.hud-key:active {
+  transform: translateY(2px);
+  box-shadow: var(--key-face-pressed);
+}
+
+.hud-key[data-danger] {
+  border-color: var(--danger);
+  background: var(--danger-soft);
+  color: var(--fg);
+  animation: var(--animate-shake);
+}
+
+.hud-icon {
+  padding: 0;
+}
+
+/* On phones "All games" keeps only its arrow; the words stay for screen readers. */
+.hud-back span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.hud-game {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hud-game i {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  background: var(--fam, var(--accent));
+  box-shadow: 0 0 10px var(--fam, var(--accent));
+}
+
+.hud-round {
+  padding: 4px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  background: var(--sunken);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+.hud-pips {
+  display: flex;
+  gap: 4px;
+}
+
+.hud-pips li {
+  width: 16px;
+  height: 7px;
+  border-radius: 3px;
+  background: var(--line-strong);
+  transition: background 0.3s;
+}
+
+.hud-pips li[data-state="current"] {
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.hud-pips li[data-state="hit"] {
+  background: var(--answer);
+}
+
+.hud-pips li[data-state="near"] {
+  background: var(--heat-3);
+}
+
+.hud-pips li[data-state="miss"] {
+  background: var(--danger);
+}
+
+.hud-pips li[data-state="skip"] {
+  background: repeating-linear-gradient(135deg, var(--fg-3) 0 2px, transparent 2px 4px);
+}
+
+.hud-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.hud-stat svg {
+  color: var(--accent);
+}
+
+@media (min-width: 40rem) {
+  .hud-back span {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+  }
+
+  .hud-game {
+    display: inline-flex;
+  }
+}
+
+@media (min-width: 64rem) {
+  .hud {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  }
+
+  .hud-center {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .hud-end {
+    grid-column: 3;
+  }
+}
+
+/* In an expedition or a party the run's own bar sticks under the header; the HUD scrolls. */
+.run-bar {
+  top: 60px;
+}
+
+.run-bar ~ .game .hud {
+  position: relative;
+  top: auto;
+}
+
+/* ───────────────────────── Prompt plaque ───────────────────────── */
+
+.plaque {
+  --tone: var(--accent);
+  position: relative;
+  z-index: 2;
+  padding: 14px 18px 16px;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--panel-fill);
+  box-shadow: var(--shadow-raised);
+  text-align: center;
+  animation: rise 0.35s var(--ease-out) both;
+}
+
+.plaque::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--fam, var(--accent));
+  box-shadow: 0 0 14px var(--fam, var(--accent));
+}
+
+.plaque-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.plaque-prompt.question {
+  margin-top: 4px;
+  font-size: clamp(1.35rem, 1rem + 2vw, 2.15rem);
+}
+
+.plaque-prompt:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.plaque-status {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 4px 12px;
+  border: 1px solid color-mix(in oklab, var(--tone) 60%, transparent);
+  border-radius: var(--radius-pill);
+  background: color-mix(in oklab, var(--tone) 14%, transparent);
+  color: var(--fg);
+  font-size: 0.92rem;
+  animation: pop 0.3s var(--ease-spring) both;
+}
+
+.plaque-status b {
+  color: var(--tone);
+}
+
+.plaque-status[data-tone="on"] {
+  --tone: var(--answer);
+}
+
+.plaque-status[data-tone="near"] {
+  --tone: var(--heat-3);
+}
+
+.plaque-status[data-tone="off"] {
+  --tone: var(--danger);
+}
+
+/* On wide screens the plaque rides over the top edge of the map, as on geocore. */
+@media (min-width: 64rem) {
+  .stage > .plaque:has(+ .map-frame) {
+    justify-self: center;
+    width: min(620px, 86%);
+    margin-bottom: -58px;
+  }
+
+  /* The plaque covers the frame's top-left corner: the readout moves to the bottom. */
+  .stage > .plaque + .map-frame .map-readout {
+    top: auto;
+    bottom: 12px;
+  }
+}
+
+/* ───────────────────────── Brief and layout ───────────────────────── */
+
+.dossier-lead {
+  margin-top: 6px;
+  color: var(--fg-2);
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.game[data-summary] .stage {
+  max-width: none;
+}
+
+/* On phones the HUD's pips stand in for the list of rounds. */
+@media (max-width: 63.99rem) {
+  .game[data-game="who-when-where"]:not([data-summary]) .progress {
+    display: none;
+  }
+}
+
+/* ───────────────────────── Map: full bleed, space around the world ───────────────────────── */
+
+.map-frame {
+  background:
+    radial-gradient(1px 1px at 8% 14%, rgb(237 250 255 / 0.55), transparent 60%),
+    radial-gradient(1px 1px at 22% 86%, rgb(237 250 255 / 0.4), transparent 60%),
+    radial-gradient(1.5px 1.5px at 46% 6%, rgb(237 250 255 / 0.5), transparent 60%),
+    radial-gradient(1px 1px at 71% 92%, rgb(237 250 255 / 0.4), transparent 60%),
+    radial-gradient(1px 1px at 92% 18%, rgb(237 250 255 / 0.5), transparent 60%),
+    radial-gradient(1px 1px at 96% 64%, rgb(237 250 255 / 0.35), transparent 60%),
+    radial-gradient(1px 1px at 3% 58%, rgb(237 250 255 / 0.35), transparent 60%),
+    var(--bg-deep);
+}
+
+:root[data-theme="light"] .map-frame {
+  background: var(--bg-deep);
+}
+
+.map-outline {
+  stroke: rgb(79 171 246 / 0.55);
+  stroke-width: 1.5;
+}
+
+:root[data-theme="light"] .map-outline {
+  stroke: var(--land-edge);
+}
+
+.map-frame > svg:focus {
+  outline: none;
+}
+
+.map-frame > svg:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -3px;
+}
+
+.map-cursor {
+  pointer-events: none;
+}
+
+.map-cursor circle,
+.map-cursor path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 4px rgb(79 171 246 / 0.8));
+}
+
+@media (max-width: 39.99rem) {
+  /* Map first: edge to edge, a little taller. */
+  .stage > .map-frame,
+  .stage .life .map-frame {
+    height: clamp(300px, 56svh, 560px);
+    margin-inline: calc(-1 * clamp(16px, 4vw, 40px));
+    border-inline: 0;
+    border-radius: 0;
+  }
+
+  .game[data-game="wayfarer"] .stage > .map-frame,
+  .game[data-game="first-to-last"] .stage > .map-frame {
+    height: clamp(250px, 72vw, 440px);
+  }
+}
+
+/* ───────────────────────── Action bar (phones) ───────────────────────── */
+
+@media (max-width: 63.99rem) {
+  .action-bar {
+    position: sticky;
+    bottom: 0;
+    z-index: 20;
+    min-height: 0;
+    margin-inline: calc(-1 * clamp(16px, 4vw, 40px));
+    padding: 10px clamp(16px, 4vw, 40px) calc(10px + env(safe-area-inset-bottom));
+    border-top: 1px solid var(--line-strong);
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+    backdrop-filter: blur(16px) saturate(1.2);
+  }
+
+  .action-bar .hint {
+    font-size: 0.82rem;
+  }
+
+  .verdict.action-bar .stamp {
+    width: 62px;
+    height: 62px;
+  }
+}
+
+/* ───────────────────────── Result card ───────────────────────── */
+
+.result-card {
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-xl);
+  background: var(--panel-fill);
+  box-shadow: var(--shadow-raised);
+  animation: rise 0.4s var(--ease-out) both;
+}
+
+.result-card-head {
+  position: relative;
+  padding: 18px 20px 16px;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(180deg, color-mix(in oklab, var(--fam, var(--accent)) 16%, transparent), transparent);
+}
+
+.result-card-head::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--fam, var(--accent));
+  box-shadow: 0 0 14px var(--fam, var(--accent));
+}
+
+.result-card-head .eyebrow b {
+  margin-right: 8px;
+  color: var(--fg);
+}
+
+.result-card-head h2 {
+  margin-top: 4px;
+  font-size: clamp(1.6rem, 1.2rem + 2vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.05;
+}
+
+.result-card-head h2:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.result-card-answer {
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--answer);
+}
+
+.result-card-grid {
+  display: grid;
+  gap: 20px;
+  padding: 18px 20px 20px;
+}
+
+.result-score-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.result-points {
+  display: grid;
+}
+
+.result-points strong {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 2rem + 3vw, 4rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.result-points > span:last-child {
+  color: var(--fg-2);
+}
+
+.result-bar {
+  display: block;
+  height: 6px;
+  margin-top: 14px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--sunken);
+}
+
+.result-bar i {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  transition: width 1s var(--ease-out);
+}
+
+.result-share {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: var(--fg-3);
+}
+
+.result-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.result-stats > div {
+  padding-top: 6px;
+  border-top: 2px solid var(--line-strong);
+}
+
+.result-stats > div[data-tone="hit"] {
+  border-color: var(--answer);
+}
+
+.result-stats > div[data-tone="miss"] {
+  border-color: var(--danger);
+}
+
+.result-stats dt {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+.result-stats dd {
+  margin-top: 2px;
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.result-actions .summary-actions {
+  margin-top: 0;
+}
+
+.result-actions .next-up {
+  margin-top: 14px;
+}
+
+.result-review h3 {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.result-review ol {
+  display: grid;
+  gap: 8px;
+}
+
+.result-review li {
+  --v: var(--fg-3);
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--v);
+  border-radius: var(--radius-md);
+  background: var(--sunken);
+  animation: rise 0.35s var(--ease-out) both;
+}
+
+.result-review li:nth-child(2) {
+  animation-delay: 60ms;
+}
+.result-review li:nth-child(3) {
+  animation-delay: 120ms;
+}
+.result-review li:nth-child(4) {
+  animation-delay: 180ms;
+}
+.result-review li:nth-child(n + 5) {
+  animation-delay: 240ms;
+}
+
+.result-review li[data-verdict="hit"] {
+  --v: var(--answer);
+}
+
+.result-review li[data-verdict="near"] {
+  --v: var(--heat-3);
+}
+
+.result-review li[data-verdict="miss"] {
+  --v: var(--danger);
+}
+
+.review-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.review-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+.review-verdict {
+  padding: 1px 9px;
+  border: 1px solid color-mix(in oklab, var(--v) 70%, transparent);
+  border-radius: var(--radius-pill);
+  background: color-mix(in oklab, var(--v) 14%, transparent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.review-answers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 6px 18px;
+  margin-top: 6px;
+}
+
+.review-answers > span {
+  display: grid;
+  min-width: 0;
+}
+
+.review-answers small {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+.review-answers b {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.review-answers .review-value {
+  display: block;
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--fg-2);
+  text-align: right;
+}
+
+@media (min-width: 48rem) {
+  .result-card-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "score review"
+      "actions review";
+    align-items: start;
+  }
+
+  .result-score {
+    grid-area: score;
+  }
+
+  .result-actions {
+    grid-area: actions;
+  }
+
+  .result-review {
+    grid-area: review;
+  }
+}
+
+/* ───────────────────────── Loading ───────────────────────── */
+
+.game-skeleton .hud {
+  position: static;
+  height: 54px;
+}
+
+.game-skeleton .plaque {
+  height: 96px;
+}
+
+.skeleton-brief {
+  height: 140px;
+  border-radius: var(--radius-lg);
+}
+} /* @layer components */

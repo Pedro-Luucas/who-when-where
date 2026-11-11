@@ -1,10 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { Hud, type Pip } from "@/components/play/hud";
+import { Plaque } from "@/components/play/plaque";
+import { ResultCard, type ReviewRow } from "@/components/play/result-card";
 import { ReadMore } from "@/components/result-footer";
-import { ResultHead } from "@/components/result-head";
 import { WorldMap, useMapLabels, type MapMarker, type MapRoute } from "@/components/world-map";
 import { formatYear } from "@/lib/i18n";
+import { useShellT } from "@/lib/shell-messages";
 import {
   JOURNEYS,
   journeyById,
@@ -21,6 +24,7 @@ import {
   hintFor,
   isSolved,
   revealAt,
+  scoreOf,
   type Guess,
 } from "./rules";
 
@@ -31,6 +35,8 @@ type BoardProps = {
   journey: Journey;
   guesses: Guess[];
   onGuess: (guess: Guess) => void;
+  /** Adds several guesses at once (giving up skips every try that is left). */
+  onGuesses: (guesses: Guess[]) => void;
   maxGuesses?: number;
   /** The line above the title: "No. 12 — Today's journey", "Stage 3 of 8 — Wayfarer". */
   label: string;
@@ -39,8 +45,17 @@ type BoardProps = {
 };
 
 /** One Wayfarer puzzle. The guesses live with whoever renders it. */
-export function WayfarerBoard({ journey, guesses, onGuess, maxGuesses = MAX_GUESSES, label, children }: BoardProps) {
+export function WayfarerBoard({
+  journey,
+  guesses,
+  onGuess,
+  onGuesses,
+  maxGuesses = MAX_GUESSES,
+  label,
+  children,
+}: BoardProps) {
   const { locale, t } = useGameT();
+  const shell = useShellT();
   const mapLabels = useMapLabels();
   const [query, setQuery] = useState("");
   const [choice, setChoice] = useState<string | null>(null);
@@ -109,16 +124,61 @@ export function WayfarerBoard({ journey, guesses, onGuess, maxGuesses = MAX_GUES
     { label: t("clueStops"), value: t("clueStopsOn"), at: NAMES_CLUE_AT },
   ];
 
+  const pips = Array.from({ length: maxGuesses }, (_, i) => meterState(guesses[i], journey.id, i === used && !over) as Pip);
+  const seen = clues.filter((clue) => used >= clue.at).length;
+
+  const review: ReviewRow[] = guesses.map((guess, i) => {
+    const guessed = guess === null ? undefined : journeyById(guess);
+    const hit = guess === journey.id;
+    const hint = guessed && !hit ? hintFor(guessed, journey) : null;
+    return {
+      id: String(i),
+      label: shell("tryN", { n: i + 1 }),
+      verdict: hit ? "hit" : guessed ? (hint?.direction === 0 ? "near" : "miss") : "skip",
+      yours: guessed ? guessed.name[locale] : t("skipped"),
+      value: hint
+        ? hint.direction === 0
+          ? t("hintSame")
+          : `${t(hint.direction > 0 ? "hintLater" : "hintEarlier")}, ${t(`gap${hint.gap}`)}`
+        : undefined,
+    };
+  });
+
+  const map = (
+    <WorldMap
+      markers={markers}
+      routes={routes}
+      focus={over ? stops : visible}
+      labels={mapLabels}
+      ariaLabel={t("mapAria")}
+    />
+  );
+
   return (
     <main className="game" data-game="wayfarer" data-summary={over ? "" : undefined}>
+      <Hud
+        step={{ n: Math.min(used + 1, maxGuesses), total: maxGuesses, kind: "try" }}
+        pips={pips}
+        stats={[{ icon: "help", label: shell("statClues"), value: `${seen}/${clues.length}` }]}
+        onSkip={() => submit(null)}
+        onGiveUp={() => onGuesses(Array.from({ length: maxGuesses - used }, () => null))}
+        over={over}
+      />
+
       <aside className="dossier dossier-plain">
         <div className="dossier-text">
           <p className="eyebrow">{label}</p>
-          <h1 className="dossier-name">{over ? journey.name[locale] : t("question")}</h1>
-          <p className="dossier-description">
-            {over ? mode : t("lead")}
-            {over && <span className="dossier-dates">{years}</span>}
-          </p>
+          {over ? (
+            <h1 className="dossier-name">{journey.name[locale]}</h1>
+          ) : (
+            <p className="dossier-lead">{t("lead")}</p>
+          )}
+          {over && (
+            <p className="dossier-description">
+              {mode}
+              <span className="dossier-dates">{years}</span>
+            </p>
+          )}
         </div>
 
         {!over && (
@@ -131,91 +191,87 @@ export function WayfarerBoard({ journey, guesses, onGuess, maxGuesses = MAX_GUES
             ))}
           </ul>
         )}
-
-        <ol className="meter" aria-label={`${used}/${maxGuesses}`}>
-          {Array.from({ length: maxGuesses }, (_, i) => (
-            <li key={i} data-state={meterState(guesses[i], journey.id, i === used && !over)} />
-          ))}
-        </ol>
       </aside>
 
       <section className="stage">
-        {over && (
-          <ResultHead
-            solved={solved}
-            used={used}
-            max={maxGuesses}
-            unit={t("tries")}
-            headline={!solved ? t("lost") : used === 1 ? t("solvedFirst") : t("solvedIn", { n: used })}
-          >
-            {journey.name[locale]} · {years}
-          </ResultHead>
-        )}
-
-        <WorldMap
-          markers={markers}
-          routes={routes}
-          focus={over ? stops : visible}
-          labels={mapLabels}
-          ariaLabel={t("mapAria")}
-        />
-
         {over ? (
           <div className="summary">
-            {children}
+            <ResultCard
+              label={label}
+              headline={!solved ? t("lost") : used === 1 ? t("solvedFirst") : t("solvedIn", { n: used })}
+              answer={`${journey.name[locale]} · ${years}`}
+              points={scoreOf(journey.id, guesses, maxGuesses).points}
+              stats={[
+                { label: shell("statTries"), value: `${solved ? used : "X"}/${maxGuesses}`, tone: solved ? "hit" : "miss" },
+                { label: shell("statClues"), value: `${seen}/${clues.length}` },
+                { label: shell("statFound"), value: shell(solved ? "yes" : "no"), tone: solved ? "hit" : "miss" },
+              ]}
+              review={review}
+            >
+              {children}
+            </ResultCard>
+            <figure className="life">
+              <figcaption>
+                <span className="eyebrow">{shell("onTheMap")}</span>
+              </figcaption>
+              {map}
+            </figure>
             <ReadMore
               text={journey.extract[locale] ?? journey.extract.en}
               href={journey.wiki[locale] ?? journey.wiki.en}
             />
           </div>
         ) : (
-          <form
-            className="picker"
-            onSubmit={(event) => {
-              event.preventDefault();
-              if (picked) submit(picked);
-            }}
-          >
-            <input
-              className="picker-input"
-              type="search"
-              value={query}
-              onChange={(event) => {
-                setQuery(event.target.value);
-                setChoice(null);
+          <>
+            <Plaque eyebrow={shell("plaqueJourney")} text={t("question")} as="h1" />
+            {map}
+            <form
+              className="picker"
+              onSubmit={(event) => {
+                event.preventDefault();
+                if (picked) submit(picked);
               }}
-              placeholder={t("searchPlaceholder")}
-              aria-label={t("searchLabel")}
-              autoComplete="off"
-              spellCheck={false}
-            />
-            <ul className="picker-list">
-              {matches.map((option) => (
-                <li key={option.id}>
-                  <button
-                    type="button"
-                    disabled={tried.has(option.id)}
-                    aria-pressed={picked === option.id}
-                    onClick={() => setChoice(option.id)}
-                  >
-                    {option.label}
-                  </button>
-                </li>
-              ))}
-              {matches.length === 0 && <li className="picker-empty">{t("noMatch")}</li>}
-            </ul>
-            <div className="picker-actions">
-              <button type="button" className="button button-quiet" onClick={() => submit(null)}>
-                {t("skip")}
-              </button>
-              <button type="submit" className="button" disabled={!picked}>
-                {t("guess")}
-              </button>
-            </div>
-          </form>
+            >
+              <input
+                className="picker-input"
+                type="search"
+                value={query}
+                onChange={(event) => {
+                  setQuery(event.target.value);
+                  setChoice(null);
+                }}
+                placeholder={t("searchPlaceholder")}
+                aria-label={t("searchLabel")}
+                autoComplete="off"
+                spellCheck={false}
+              />
+              <ul className="picker-list">
+                {matches.map((option) => (
+                  <li key={option.id}>
+                    <button
+                      type="button"
+                      disabled={tried.has(option.id)}
+                      aria-pressed={picked === option.id}
+                      onClick={() => setChoice(option.id)}
+                    >
+                      {option.label}
+                    </button>
+                  </li>
+                ))}
+                {matches.length === 0 && <li className="picker-empty">{t("noMatch")}</li>}
+              </ul>
+              <div className="picker-actions action-bar">
+                <button type="button" className="button button-quiet" onClick={() => submit(null)}>
+                  {t("skip")}
+                </button>
+                <button type="submit" className="button" disabled={!picked}>
+                  {t("guess")}
+                </button>
+              </div>
+            </form>
+            <Tries guesses={guesses} journey={journey} />
+          </>
         )}
-
-        <Tries guesses={guesses} journey={journey} />
       </section>
     </main>
   );

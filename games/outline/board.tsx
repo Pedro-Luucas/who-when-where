@@ -10,9 +10,9 @@ import { MESSAGES, type MessageKey } from "./messages";
 import { shareText } from "./share";
 import { computeStats, type DayRecord } from "./store";
 
-function Board({ puzzle, moves, onMove, tries, label, children }: BoardProps<Country, string>) {
+function Board({ puzzle, moves, onMove, onMoves, tries, label, children }: BoardProps<Country, string>) {
   return (
-    <OutlineBoard country={puzzle} guesses={moves} onGuess={onMove} maxGuesses={tries} label={label}>
+    <OutlineBoard country={puzzle} guesses={moves} onGuess={onMove} onGuesses={onMoves} maxGuesses={tries} label={label}>
       {children}
     </OutlineBoard>
   );

@@ -25,7 +25,10 @@ type Props = {
 export function SignIn({ embedded = false }: Props) {
   const t = useAccountT();
   const router = useRouter();
-  const [creating, setCreating] = useState(embedded);
+  // /account?mode=signup (the header's "Create free account") opens on the sign-up form.
+  const [creating, setCreating] = useState(
+    () => embedded || (typeof window !== "undefined" && new URLSearchParams(window.location.search).get("mode") === "signup"),
+  );
 
   async function submit({ email, password, username }: Record<string, string>) {
     await (creating ? signUp(email, password, username) : signIn(email, password));

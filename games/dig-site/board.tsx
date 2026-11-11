@@ -11,9 +11,9 @@ import { shareText } from "./share";
 import type { Site } from "./sites";
 import { computeStats, type DayRecord } from "./store";
 
-function Board({ puzzle, moves, onMove, tries, label, children }: BoardProps<Site, Dig>) {
+function Board({ puzzle, moves, onMove, onMoves, tries, label, children }: BoardProps<Site, Dig>) {
   return (
-    <DigSiteBoard site={puzzle} digs={moves} onDig={onMove} maxDigs={tries} label={label}>
+    <DigSiteBoard site={puzzle} digs={moves} onDig={onMove} onDigs={onMoves} maxDigs={tries} label={label}>
       {children}
     </DigSiteBoard>
   );

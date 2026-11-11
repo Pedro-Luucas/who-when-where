@@ -1,20 +1,18 @@
 "use client";
 
-import { useFocusWhenLost } from "@/lib/focus";
+import { Plaque } from "@/components/play/plaque";
+import { useShellT } from "@/lib/shell-messages";
 import { useGameT, type MessageKey } from "./messages";
 import type { Person } from "./people";
 import type { Round } from "./rules";
 
-/** "Where was Charles Darwin *born*?" with the starred word emphasised. */
+/** "Where was Charles Darwin *born*?" on the prompt plaque, with the starred word lit. */
 export function Question({ person, round }: { person: Person; round: Round }) {
   const { locale, t } = useGameT();
+  const shell = useShellT();
   const key = `q_${round.id}` as MessageKey;
-  const parts = t(key, { name: person.name[locale] }).split("*");
-  const heading = useFocusWhenLost<HTMLHeadingElement>();
   return (
-    <h2 className="question" ref={heading} tabIndex={-1}>
-      {parts.map((part, i) => (i % 2 ? <em key={i}>{part}</em> : part))}
-    </h2>
+    <Plaque eyebrow={shell(round.kind === "place" ? "plaquePin" : "plaqueYear")} text={t(key, { name: person.name[locale] })} />
   );
 }
 

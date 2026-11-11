@@ -46,7 +46,7 @@ export function ResultActions({ shareText, game, nextLabel }: ActionsProps) {
 /**
  * Today's other puzzles: a trail of the six, and a link to the next one not
  * yet finished (after this one, wrapping round) — or, once all are done, to
- * the hub, where the whole day can be shared.
+ * /daily, where the whole day can be shared.
  */
 function NextUp({ current }: { current: GameSlug }) {
   const t = useSiteT();
@@ -86,7 +86,7 @@ function NextUp({ current }: { current: GameSlug }) {
           <i aria-hidden="true">→</i>
         </Link>
       ) : (
-        <Link href="/" className="next-up-link">
+        <Link href="/daily" className="next-up-link">
           <span>
             <small>{t("dayDone", { n: total })}</small>
             <b>{t("dayDoneCta")}</b>

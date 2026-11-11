@@ -26,9 +26,10 @@ export type Stats = {
 export function computeStats(save: Save, today: number): Stats {
   const finished = Object.entries(save.days).filter(([, record]) => isOver(record.digs));
   const found = finished.filter(([, record]) => isFound(record.digs));
-  // A streak is a run of days on which the site was found.
+  // A streak is a run of days with the puzzle finished, solved or not: the one rule
+  // every game, the daily challenge and the accounts API share.
   const { streak, longest } = streaks(
-    found.map(([day]) => Number(day)),
+    finished.map(([day]) => Number(day)),
     today,
   );
   const digs = found.reduce((sum, [, record]) => sum + record.digs.length, 0);

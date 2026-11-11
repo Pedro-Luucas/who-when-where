@@ -169,86 +169,31 @@
   white-space: nowrap;
 }
 
-/* ═════════════════════════ Hub ═════════════════════════
-   On wide screens the lead sits beside the title, so today's challenge
-   shows without scrolling; the four ways to play together share one row. */
-
-@media (min-width: 1024px) {
-  .hero {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    align-items: end;
-    gap: 48px;
-  }
-
-  .hero-lead {
-    margin: 0 0 6px;
-    justify-self: end;
-    text-align: right;
-  }
-}
-
-.together .games {
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
-}
-
 /* ═════════════════════════ Header ═════════════════════════
-   The name is written "W<em>ho</em>"…; on a narrow screen that also holds a
-   game's own buttons it shrinks to W·W·W, so the bar stays one line. */
+   The name is written "W<em>ho</em>"…; on a narrow screen it shrinks to
+   W·W·W, so the bar (search, language, account) stays one line. */
 
 .wordmark em {
   font-style: inherit;
 }
 
 @media (max-width: 459px) {
-  .site-header:has(.site-actions > :nth-child(6)) .wordmark em,
+  .wordmark em {
+    display: none;
+  }
+}
+
+@media (max-width: 359px) {
   .wordmark::before {
     display: none;
   }
 
-  .site-header:has(.site-actions > :nth-child(6)) .site-actions {
-    gap: 6px;
-  }
-
-  /* Drawn smaller so the row fits one line, but the tap area stays 44px. */
-  .site-actions .icon-button {
-    width: 34px;
-    height: 34px;
-  }
-
-  .site-actions .icon-button::after {
-    content: "";
-    position: absolute;
-    inset: -5px;
-  }
-}
-
-@media (max-width: 379px) {
   .site-header {
     gap: 8px;
   }
 
-  .wordmark {
-    font-size: 1rem;
-  }
-
-  .wordmark em,
-  .wordmark::before {
-    display: none;
-  }
-
-  .site-header .site-actions,
-  .site-header:has(.site-actions > :nth-child(6)) .site-actions {
-    gap: 3px;
-  }
-
-  .site-actions .icon-button {
-    width: 30px;
-    height: 30px;
-  }
-
-  .site-actions .icon-button::after {
-    inset: -7px;
+  .site-actions {
+    gap: 4px;
   }
 }
 

@@ -7,6 +7,7 @@ import { yearOfDay } from "@/lib/daily";
 import { translator, useLocale, useSiteT } from "@/lib/i18n";
 import type { GameSlug } from "../registry";
 import type { GameDefinition } from "./definition";
+import { GameFrameProvider } from "./frame";
 import { movesOf, useGameSave } from "./store";
 import type { GameBoard, GameBoardOf, GameData } from "./types";
 
@@ -43,32 +44,36 @@ function Play({ day, definition, board }: { day: number; definition: GameDefinit
   const stored = save.days[day];
   const kept = stored === undefined ? undefined : data.puzzleOfRecord(stored);
   const puzzle = kept ?? data.puzzleForDay(day);
-  const moves = kept === undefined ? [] : movesOf<unknown>(definition, stored);
+  const soFar = kept === undefined ? [] : movesOf<unknown>(definition, stored);
   const stats = board.stats(save, day, { t, site });
 
-  function move(next: unknown) {
+  function moves(next: unknown[]) {
+    if (!next.length) return;
     setSave((previous) => {
       const before = previous.days[day];
       const played = before === undefined ? undefined : data.puzzleOfRecord(before);
       // Only a record of this very puzzle is carried on: a stale one is replaced, never mixed in.
       const carried =
         played !== undefined && sameIds(data.idsOf(played), data.idsOf(puzzle)) ? movesOf<unknown>(definition, before) : [];
-      return { ...previous, days: { ...previous.days, [day]: data.recordOf(puzzle, [...carried, next]) } };
+      return { ...previous, days: { ...previous.days, [day]: data.recordOf(puzzle, [...carried, ...next]) } };
     });
   }
 
   return (
-    <>
+    <GameFrameProvider
+      value={{ slug: definition.slug, title: definition.title, family: definition.family, daily: true }}
+    >
       <Board
         puzzle={puzzle}
-        moves={moves}
-        onMove={move}
+        moves={soFar}
+        onMove={(next) => moves([next])}
+        onMoves={moves}
         year={yearOfDay(day)}
         label={`${site("puzzleNo", { n: day })} — ${words.kicker}`}
       >
         <ResultActions
           game={definition.slug}
-          shareText={(url) => board.share({ day, puzzle, moves, locale, url })}
+          shareText={(url) => board.share({ day, puzzle, moves: soFar, locale, url })}
           nextLabel={words.nextLabel}
         />
       </Board>
@@ -80,6 +85,6 @@ function Play({ day, definition, board }: { day: number; definition: GameDefinit
         played={stats.played}
         tiles={stats.tiles}
       />
-    </>
+    </GameFrameProvider>
   );
 }

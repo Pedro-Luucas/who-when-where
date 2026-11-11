@@ -1,7 +1,8 @@
 "use client";
 
 import { Suspense, use, useEffect, useEffectEvent, useMemo, useSyncExternalStore } from "react";
-import { GAME_TITLES } from "@/games/registry";
+import { GameFrameProvider } from "@/games/platform/frame";
+import { GAME_TITLES, gameBySlug } from "@/games/registry";
 import { cue, cuePuzzle } from "@/lib/fx";
 import { formatNumber } from "@/lib/i18n";
 import { useSocialT } from "@/social/messages";
@@ -78,9 +79,9 @@ function Play({ run, onChange, onResult, onFinish, hold, aside }: Props) {
     cuePuzzle(score.points, timedOut || score.detail.startsWith("X"));
   }
 
-  function move(next: unknown) {
-    if (result) return;
-    const moves = [...run.moves, next];
+  function move(next: unknown[]) {
+    if (result || !next.length) return;
+    const moves = [...run.moves, ...next];
     if (stageScore(dealt, stage, moves, settings).over) return finish(moves, false);
     onChange({ ...run, moves });
     cue("move");
@@ -168,17 +169,20 @@ function Play({ run, onChange, onResult, onFinish, hold, aside }: Props) {
         </main>
       ) : Board && puzzle !== undefined ? (
         // Keyed by stage: each puzzle starts from a clean board.
+        <GameFrameProvider value={{ slug: stage.game, title: GAME_TITLES[stage.game], family: gameBySlug(stage.game).family, daily: false }}>
         <Board
           key={`${run.id}:${run.stage}`}
           puzzle={puzzle}
           moves={run.moves}
-          onMove={move}
+          onMove={(next) => move([next])}
+          onMoves={move}
           tries={settings.tries[stage.game]}
           year={THIS_YEAR}
           label={`${label} — ${GAME_TITLES[stage.game]}`}
         >
           {onwards}
         </Board>
+        </GameFrameProvider>
       ) : null}
     </>
   );

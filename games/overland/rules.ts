@@ -5,6 +5,14 @@ import { triesPoints, type Score } from "@/lib/points";
 /** Two countries to join overland. */
 export type Puzzle = { from: string; to: string };
 
+/**
+ * A guess given up rather than made: it fills a try and names no country, so
+ * it can't join the two ends or bring a reading closer. Saved like any other
+ * guess, so every older reader still understands the record.
+ */
+export const PASS = "-";
+
+
 /** Guesses allowed beyond the fewest that could do it. */
 export const SPARE = 4;
 

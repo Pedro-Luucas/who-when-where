@@ -10,6 +10,17 @@ export const FOUND_KM = 50;
 
 export type Dig = { lat: number; lon: number; km: number };
 
+/**
+ * A dig given up rather than made: it fills a try without touching the map.
+ * Saved as an ordinary dig so every older reader still understands the record;
+ * this far off it can never find the site or bring a ring closer.
+ */
+export const PASS_KM = 99_999;
+
+export const PASS: Dig = { lat: 0, lon: 0, km: PASS_KM };
+
+export const isPass = (dig: Dig): boolean => dig.km >= PASS_KM;
+
 // How warm a dig is, from 0 (found) to 5 (freezing). Each step is a ring
 // roughly two to three times wider than the last.
 const HEAT_LIMITS_KM = [FOUND_KM, 250, 700, 1800, 4500];

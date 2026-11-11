@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { Hud, type Pip } from "@/components/play/hud";
+import { useShellT } from "@/lib/shell-messages";
 import { useGameT } from "./messages";
 import type { Person } from "./people";
 import { Dossier } from "./dossier";
 import { PlaceRound } from "./place-round";
-import { ROUNDS, type Guess, type PlaceGuess, type YearGuess } from "./rules";
+import { ROUNDS, ROUND_MAX, totalScore, type Guess, type PlaceGuess, type YearGuess } from "./rules";
 import { Summary } from "./summary";
 import { YearRound } from "./year-round";
 
@@ -24,6 +26,7 @@ type BoardProps = {
 /** One Who When Where puzzle. The guesses live with whoever renders it. */
 export function WhoWhenWhereBoard({ person, guesses, onGuess, maxYear, label, children }: BoardProps) {
   const { t } = useGameT();
+  const shell = useShellT();
   // True between locking a guess and pressing "next": the answer is on screen.
   const [revealing, setRevealing] = useState(false);
 
@@ -41,8 +44,21 @@ export function WhoWhenWhereBoard({ person, guesses, onGuess, maxYear, label, ch
   const nextLabel = finished ? t("seeResults") : t("next");
   const proceed = () => setRevealing(false);
 
+  // One pip per round: how many of its 250 points it earned.
+  const pips: Pip[] = ROUNDS.map((_, i) => {
+    const guess = guesses[i];
+    if (!guess) return i === roundIndex && !showSummary ? "current" : "todo";
+    return guess.score >= ROUND_MAX * 0.8 ? "hit" : guess.score >= ROUND_MAX * 0.4 ? "near" : "miss";
+  });
+
   return (
-    <main className="game" data-summary={showSummary ? "" : undefined}>
+    <main className="game" data-game="who-when-where" data-summary={showSummary ? "" : undefined}>
+      <Hud
+        step={{ n: Math.min(roundIndex + 1, ROUNDS.length), total: ROUNDS.length, kind: "round" }}
+        pips={pips}
+        stats={[{ icon: "star", label: shell("score"), value: totalScore(guesses) }]}
+        over={showSummary}
+      />
       <Dossier
         person={person}
         label={label}
@@ -53,7 +69,7 @@ export function WhoWhenWhereBoard({ person, guesses, onGuess, maxYear, label, ch
 
       <section className="stage">
         {showSummary ? (
-          <Summary person={person} guesses={guesses}>
+          <Summary person={person} guesses={guesses} label={label}>
             {children}
           </Summary>
         ) : round.kind === "place" ? (
