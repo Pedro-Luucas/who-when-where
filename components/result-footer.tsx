@@ -1,7 +1,10 @@
 "use client";
 
-import { useSecondsUntilTomorrow } from "@/lib/clock";
-import { useSiteT } from "@/lib/i18n";
+import Link from "next/link";
+import { useDailyResults } from "@/games/results";
+import { GAME_SLUGS, GAME_THEMES, GAME_TITLES, isGameSlug, type GameSlug } from "@/games/slugs";
+import { useDayNumber, useSecondsUntilTomorrow } from "@/lib/clock";
+import { useLocale, useSiteT } from "@/lib/i18n";
 import { ShareButton } from "./share-button";
 
 const clock = (seconds: number) =>
@@ -18,19 +21,81 @@ type ActionsProps = {
   nextLabel?: string;
 };
 
-/** What every finished puzzle ends with: a share button and the countdown. */
+/**
+ * What every finished daily puzzle ends with: a share button, the countdown,
+ * and the way on to the next of today's puzzles.
+ */
 export function ResultActions({ shareText, path, nextLabel }: ActionsProps) {
   const t = useSiteT();
   const secondsLeft = useSecondsUntilTomorrow();
+  const slug = path.slice(1);
 
   return (
-    <div className="summary-actions">
-      <ShareButton label={t("share")} text={() => shareText(window.location.origin + path)} />
-      <p className="countdown">
-        <span>{nextLabel ?? t("nextIn")}</span>
-        <time>{clock(secondsLeft)}</time>
-      </p>
-    </div>
+    <>
+      <div className="summary-actions">
+        <ShareButton label={t("share")} text={() => shareText(window.location.origin + path)} />
+        <p className="countdown">
+          <span>{nextLabel ?? t("nextIn")}</span>
+          <time>{clock(secondsLeft)}</time>
+        </p>
+      </div>
+      {isGameSlug(slug) && <NextUp current={slug} />}
+    </>
+  );
+}
+
+/**
+ * Today's other puzzles: a trail of the six, and a link to the next one not
+ * yet finished (after this one, wrapping round) — or, once all are done, to
+ * the hub, where the whole day can be shared.
+ */
+function NextUp({ current }: { current: GameSlug }) {
+  const t = useSiteT();
+  const locale = useLocale();
+  const today = useDayNumber();
+  const results = useDailyResults();
+
+  const done = new Set(results.filter((result) => result.day === today).map((result) => result.game));
+  const total = GAME_SLUGS.length;
+  const at = GAME_SLUGS.indexOf(current);
+  const next = [...GAME_SLUGS.slice(at + 1), ...GAME_SLUGS.slice(0, at)].find((game) => !done.has(game));
+  const progress = t("dayProgress", { n: done.size, total });
+
+  return (
+    <nav className="next-up" aria-label={t("backToToday")} data-complete={next ? undefined : ""}>
+      <div className="next-up-head">
+        <span className="eyebrow">{progress}</span>
+        <ol className="next-up-trail" aria-hidden="true">
+          {GAME_SLUGS.map((game) => (
+            <li
+              key={game}
+              title={GAME_TITLES[game]}
+              data-done={done.has(game) ? "" : undefined}
+              data-current={game === current ? "" : undefined}
+            />
+          ))}
+        </ol>
+      </div>
+      {next ? (
+        <Link href={`/${next}`} className="next-up-link">
+          <span>
+            <small>
+              {t("upNext")} · {GAME_THEMES[next][locale]}
+            </small>
+            <b>{GAME_TITLES[next]}</b>
+          </span>
+          <i aria-hidden="true">→</i>
+        </Link>
+      ) : (
+        <Link href="/" className="next-up-link">
+          <span>
+            <small>{t("dayDone", { n: total })}</small>
+            <b>{t("dayDoneCta")}</b>
+          </span>
+          <i aria-hidden="true">→</i>
+        </Link>
+      )}
+    </nav>
   );
 }
 

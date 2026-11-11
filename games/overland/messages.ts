@@ -40,7 +40,8 @@ export const MESSAGES = {
   },
   pt: {
     kicker: "A travessia de hoje",
-    question: "De *{from}* até *{to}*",
+    // Portuguese would need an article for each country (da Moldávia, ao Butão): an arrow reads right for all.
+    question: "*{from}* → *{to}*",
     lead: "Ligue os dois por terra: diga os países que ficam no caminho, em qualquer ordem.",
     mapAria: "Mapa-múndi com os dois países a ligar",
     clueFewest: "Caminho mais curto",

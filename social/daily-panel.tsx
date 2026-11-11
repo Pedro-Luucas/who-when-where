@@ -156,7 +156,7 @@ function Panel() {
       <p className="hint daily-note">
         {account.status === "guest" ? (
           <>
-            {t("dailyGuest")} <Link href="/account">{t("joinAction")}</Link>
+            {t("dailyGuest")} <Link href="/account?next=/">{t("joinAction")}</Link>
           </>
         ) : (
           <>

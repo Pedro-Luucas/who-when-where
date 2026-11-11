@@ -9,6 +9,7 @@ import { ReadMore, ResultActions } from "@/components/result-footer";
 import { WorldMap, useMapLabels, type MapMarker, type MapRing } from "@/components/world-map";
 import { formatCoordinates, type LatLon } from "@/lib/geo";
 import { formatNumber, useSiteT } from "@/lib/i18n";
+import { useFinePointer } from "@/lib/pointer";
 import { useGameT, type MessageKey } from "./messages";
 import { FOUND_KM, MAX_DIGS, closestKm, gradeDig, heatOf, isFound, isOver, type Dig } from "./rules";
 import { shareText } from "./share";
@@ -81,6 +82,7 @@ type BoardProps = {
 /** One Dig Site puzzle. The digs live with whoever renders it. */
 export function DigSiteBoard({ site, digs, onDig, maxDigs = MAX_DIGS, label, children }: BoardProps) {
   const { locale, t } = useGameT();
+  const mouse = useFinePointer();
   const siteT = useSiteT();
   const mapLabels = useMapLabels();
   const [pin, setPin] = useState<LatLon | null>(null);
@@ -202,7 +204,7 @@ export function DigSiteBoard({ site, digs, onDig, maxDigs = MAX_DIGS, label, chi
               <b>{t("nextDig", { n: digs.length + 1 })}</b> {formatCoordinates(pin)}
             </>
           ) : (
-            t("mapHint")
+            t(mouse ? "mapHintMouse" : "mapHint")
           )}
         </WorldMap>
 

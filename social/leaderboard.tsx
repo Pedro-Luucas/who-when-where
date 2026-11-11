@@ -106,7 +106,7 @@ function Board() {
       )}
       {!me && account.status !== "loading" && (
         <p className="hint board-foot">
-          {t("boardGuest")} <Link href="/account">{t("joinAction")}</Link>
+          {t("boardGuest")} <Link href="/account?next=/leaderboard">{t("joinAction")}</Link>
         </p>
       )}
       {me && !me.username && (

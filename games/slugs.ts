@@ -14,4 +14,14 @@ export const GAME_TITLES: Record<GameSlug, string> = {
   outline: "Outline",
 };
 
+/** One or two words on what each game is about ("Journeys", "Borders"). */
+export const GAME_THEMES: Record<GameSlug, { en: string; pt: string }> = {
+  "who-when-where": { en: "Lives", pt: "Vidas" },
+  wayfarer: { en: "Journeys", pt: "Viagens" },
+  "dig-site": { en: "Lost cities", pt: "Cidades perdidas" },
+  "first-to-last": { en: "Chronology", pt: "Cronologia" },
+  overland: { en: "Borders", pt: "Fronteiras" },
+  outline: { en: "Shapes", pt: "Contornos" },
+};
+
 export const isGameSlug = (value: unknown): value is GameSlug => GAME_SLUGS.includes(value as GameSlug);

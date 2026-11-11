@@ -6,6 +6,7 @@ import { GamePanels } from "@/components/game-panels";
 import { ResultActions } from "@/components/result-footer";
 import { WorldMap, useMapLabels, type MapMarker, type MapRoute } from "@/components/world-map";
 import { formatYear, useSiteT } from "@/lib/i18n";
+import { useFinePointer } from "@/lib/pointer";
 import { chronological, type HistoryEvent } from "./events";
 import { useGameT } from "./messages";
 import { MAX_ATTEMPTS, inPlace, isOver, isSolved, truthOf, type Attempt } from "./rules";
@@ -94,6 +95,7 @@ export function FirstToLastBoard({
 }: BoardProps) {
   const { locale, t } = useGameT();
   const mapLabels = useMapLabels();
+  const mouse = useFinePointer();
 
   const truth = truthOf(events);
   const solved = isSolved(attempts, truth);
@@ -297,12 +299,32 @@ export function FirstToLastBoard({
                   ? `${right ? t("feedback", { n: right }) : t("feedbackNone")} ${
                       triesLeft === 1 ? t("lastTry") : t("triesLeft", { n: triesLeft })
                     }`
-                  : t("howTo")}
+                  : t(mouse ? "howToMouse" : "howTo")}
               </p>
               <button type="button" className="button" disabled={!full} onClick={check}>
                 {t("check")}
               </button>
             </div>
+
+            {attempts.length > 0 && (
+              <ol className="ftl-history" aria-label={t("yourTries")}>
+                {attempts.map((attempt, n) => (
+                  <li key={n}>
+                    <span className="ftl-n">{n + 1}</span>
+                    <ol aria-label={attempt.map((id) => byId.get(id)?.letter).join(" ")}>
+                      {attempt.map((id, i) => (
+                        <li key={i} data-state={truth[i] === id ? "hit" : "miss"}>
+                          {byId.get(id)?.letter}
+                        </li>
+                      ))}
+                    </ol>
+                    <span className="ftl-score">
+                      {inPlace(attempt, truth)}/{truth.length}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            )}
           </>
         )}
       </section>

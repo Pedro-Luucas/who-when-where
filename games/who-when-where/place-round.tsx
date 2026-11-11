@@ -4,6 +4,7 @@ import { useState } from "react";
 import { WorldMap, useMapLabels, type MapArc, type MapMarker } from "@/components/world-map";
 import { formatCoordinates, type LatLon } from "@/lib/geo";
 import { formatNumber } from "@/lib/i18n";
+import { useFinePointer } from "@/lib/pointer";
 import { useGameT } from "./messages";
 import { placeLabel, type Person } from "./people";
 import { Question, ScoreStamp } from "./round-parts";
@@ -22,6 +23,7 @@ type Props = {
 export function PlaceRound({ person, round, locked, onLock, onNext, nextLabel }: Props) {
   const { locale, t } = useGameT();
   const mapLabels = useMapLabels();
+  const mouse = useFinePointer();
   const [pin, setPin] = useState<LatLon | null>(null);
 
   const target = person[round.event].place;
@@ -57,7 +59,7 @@ export function PlaceRound({ person, round, locked, onLock, onNext, nextLabel }:
             <b>{t("yourPin")}</b> {formatCoordinates(pin)}
           </>
         ) : (
-          t("mapHint")
+          t(mouse ? "mapHintMouse" : "mapHint")
         )}
       </WorldMap>
 
@@ -78,7 +80,7 @@ export function PlaceRound({ person, round, locked, onLock, onNext, nextLabel }:
         </div>
       ) : (
         <div className="controls">
-          <p className="hint">{t("mapHintZoom")}</p>
+          <p className="hint">{t(mouse ? "mapHintZoomMouse" : "mapHintZoom")}</p>
           <button
             type="button"
             className="button"

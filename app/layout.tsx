@@ -8,6 +8,7 @@ import "./globals.css";
 import "./social.css";
 import "./atlas.css";
 import "./logbook.css";
+import "./flow.css";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",

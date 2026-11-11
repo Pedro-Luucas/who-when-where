@@ -313,11 +313,11 @@ button {
 }
 
 .hero {
-  padding: clamp(36px, 7vw, 88px) 0 clamp(32px, 6vw, 72px);
+  padding: clamp(28px, 5vw, 56px) 0 clamp(28px, 4vw, 48px);
 }
 
 .hero-title {
-  font-size: clamp(4.2rem, 19vw, 13rem);
+  font-size: clamp(4.2rem, 15vw, 8.5rem);
   font-weight: 300;
   line-height: 0.84;
   letter-spacing: -0.055em;

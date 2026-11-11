@@ -19,6 +19,8 @@ export const MESSAGES = {
 
     mapHint: "Tap the map to drop your pin",
     mapHintZoom: "Pinch, scroll or drag to move around",
+    mapHintMouse: "Click the map to drop your pin",
+    mapHintZoomMouse: "Scroll to zoom, drag to move around",
     yourPin: "Your pin",
     yearHint: "Drag the ruler, tap the steps or type a year",
     yearLabel: "Year",
@@ -71,6 +73,8 @@ export const MESSAGES = {
 
     mapHint: "Toque no mapa para marcar seu palpite",
     mapHintZoom: "Pince, role ou arraste para navegar",
+    mapHintMouse: "Clique no mapa para marcar seu palpite",
+    mapHintZoomMouse: "Role para aproximar, arraste para navegar",
     yourPin: "Seu palpite",
     yearHint: "Arraste a régua, toque nos passos ou digite um ano",
     yearLabel: "Ano",

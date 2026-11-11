@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { ActionForm, UsernameField } from "@/account/form";
+import { SignIn } from "@/account/sign-in";
 import { updateAccount, useAccount, type Account } from "@/account/state";
 import { useSocialT } from "./messages";
 import { SocialTabs, type SocialTab } from "./tabs";
@@ -33,10 +33,9 @@ export function Members({ tab, children }: Props) {
         <section className="notice">
           <h1>{t("joinTitle")}</h1>
           <p>{t("joinLead")}</p>
-          <div className="page-actions">
-            <Link href="/account" className="button">
-              {t("joinAction")}
-            </Link>
+          {/* Signing up here keeps the visitor on this page, which opens once they are in. */}
+          <div className="notice-sign-in">
+            <SignIn embedded />
           </div>
         </section>
       )}

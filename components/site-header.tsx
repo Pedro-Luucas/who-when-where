@@ -7,12 +7,19 @@ import { LogbookButton, SettingsButton } from "./settings-button";
 export function SiteHeader({ children }: { children?: React.ReactNode }) {
   return (
     <header className="site-header">
+      {/* On narrow screens with a game's own buttons, the name shrinks to W·W·W. */}
       <Link href="/" className="wordmark" aria-label="Who When Where — home">
-        <span>Who</span>
+        <span>
+          W<em>ho</em>
+        </span>
         <i aria-hidden="true">·</i>
-        <span>When</span>
+        <span>
+          W<em>hen</em>
+        </span>
         <i aria-hidden="true">·</i>
-        <span>Where</span>
+        <span>
+          W<em>here</em>
+        </span>
       </Link>
       <nav className="site-actions">
         {children}

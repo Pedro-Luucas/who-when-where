@@ -1,0 +1,278 @@
+/* ═════════════════════════ Flow ═════════════════════════
+   Getting from one of today's puzzles to the next: the card at the end of a
+   finished puzzle (components/result-footer.tsx). */
+
+.next-up {
+  display: grid;
+  gap: 12px;
+  margin-top: 26px;
+  padding: 16px 18px 18px;
+  border: 1.5px solid var(--ink);
+  background: var(--card);
+  box-shadow: 5px 5px 0 var(--ink);
+  animation: rise 0.45s 0.15s both;
+}
+
+.next-up[data-complete] {
+  box-shadow: 5px 5px 0 var(--answer);
+}
+
+.next-up-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+
+.next-up-trail {
+  display: flex;
+  gap: 5px;
+}
+
+.next-up-trail li {
+  width: 22px;
+  height: 8px;
+  border: 1px solid var(--ink-3);
+}
+
+.next-up-trail li[data-done] {
+  border-color: var(--answer);
+  background: var(--answer);
+}
+
+.next-up-trail li[data-current] {
+  outline: 1.5px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.next-up-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+}
+
+.next-up-link > span {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.next-up-link small {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--guess);
+}
+
+.next-up[data-complete] .next-up-link small {
+  color: var(--answer);
+}
+
+.next-up-link b {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+
+.next-up-link i {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--paper);
+  font-style: normal;
+  font-size: 1.3rem;
+  transition: transform 0.2s;
+}
+
+.next-up-link:hover i,
+.next-up-link:focus-visible i {
+  transform: translateX(4px);
+  background: var(--guess);
+}
+
+/* ═════════════════════════ First to Last: earlier tries ═════════════════════════ */
+
+.ftl-history {
+  display: grid;
+  gap: 8px;
+  padding-top: 14px;
+  border-top: 1.5px solid var(--ink);
+}
+
+.ftl-history > li {
+  display: grid;
+  grid-template-columns: 1.7em minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.ftl-history .ftl-n {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--ink-3);
+}
+
+.ftl-history ol {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 34px));
+  gap: 5px;
+}
+
+.ftl-history ol li {
+  display: grid;
+  place-items: center;
+  height: 30px;
+  border: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.ftl-history ol li[data-state="hit"] {
+  border-color: var(--answer);
+  background: var(--answer);
+  color: var(--paper);
+}
+
+.ftl-history ol li[data-state="miss"] {
+  border-color: var(--guess);
+  color: var(--guess);
+  text-decoration: line-through;
+}
+
+.ftl-history .ftl-score {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+/* ═════════════════════════ Hub ═════════════════════════
+   On wide screens the lead sits beside the title, so today's challenge
+   shows without scrolling; the four ways to play together share one row. */
+
+@media (min-width: 1024px) {
+  .hero {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: end;
+    gap: 48px;
+  }
+
+  .hero-lead {
+    margin: 0 0 6px;
+    justify-self: end;
+    text-align: right;
+  }
+}
+
+.together .games {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+}
+
+/* ═════════════════════════ Header ═════════════════════════
+   The name is written "W<em>ho</em>"…; on a narrow screen that also holds a
+   game's own buttons it shrinks to W·W·W, so the bar stays one line. */
+
+.wordmark em {
+  font-style: inherit;
+}
+
+@media (max-width: 459px) {
+  .site-header:has(.site-actions > :nth-child(6)) .wordmark em {
+    display: none;
+  }
+
+  .site-header:has(.site-actions > :nth-child(6)) .site-actions {
+    gap: 6px;
+  }
+}
+
+@media (max-width: 379px) {
+  .site-header {
+    gap: 8px;
+  }
+
+  .wordmark {
+    font-size: 1rem;
+  }
+
+  .wordmark em {
+    display: none;
+  }
+
+  .site-header .site-actions,
+  .site-header:has(.site-actions > :nth-child(6)) .site-actions {
+    gap: 3px;
+  }
+
+  .site-actions .icon-button {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* ═════════════════════════ Phones ═════════════════════════ */
+
+@media (max-width: 639px) {
+  /* The hint reads above a full-width button, not squeezed beside it. */
+  .controls {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+  }
+
+  .controls > .button {
+    width: 100%;
+  }
+
+  .next-up {
+    margin-top: 20px;
+    padding: 14px 14px 16px;
+  }
+
+  .next-up-link i {
+    width: 42px;
+    height: 42px;
+  }
+
+  /* Notices come down from the top, clear of the buttons at the thumb. */
+  .toasts {
+    top: max(10px, env(safe-area-inset-top));
+    bottom: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .next-up {
+    animation: none;
+  }
+}
+
+/* ═════════════════════════ Joining from a community page ═════════════════════════
+   social/gate.tsx shows the sign-up form in place, so the page opens as soon
+   as the visitor is in. */
+
+.notice-sign-in {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule);
+}
+
+.notice-sign-in .account-form {
+  margin-top: 12px;
+}
+
+.sign-in-switch-head {
+  color: var(--guess);
+}
