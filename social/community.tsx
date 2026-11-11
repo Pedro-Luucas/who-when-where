@@ -38,7 +38,7 @@ export function Invitations() {
             {t("invitedBy", { name: invite.from.name })} <b>{invite.name || t("partyOf", { name: invite.from.name })}</b>
           </p>
           <span className="relation">
-            <button type="button" className="chip chip-solid" onClick={() => router.push(`/party?code=${invite.code}`)}>
+            <button type="button" className="chip chip-solid" onClick={() => router.push(`/party?code=${invite.code}&join=1`)}>
               {t("join")}
             </button>
             <button

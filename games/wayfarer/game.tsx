@@ -55,7 +55,8 @@ function Play({ day }: { day: number }) {
         ...previous.days,
         [day]: {
           journeyId: journey.id,
-          guesses: [...(previous.days[day]?.guesses ?? []), next],
+          // Only a record of this very journey is carried on: a stale one is replaced, never mixed in.
+          guesses: [...(previous.days[day]?.journeyId === journey.id ? previous.days[day].guesses : []), next],
         },
       },
     }));

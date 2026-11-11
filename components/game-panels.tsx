@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { Modal } from "@/components/modal";
 import { useDailyResults, type DailyResult } from "@/games/results";
 import type { GameSlug } from "@/games/slugs";
@@ -62,6 +63,9 @@ export function GamePanels({ game, help, seenHelp, onSeenHelp, tiles, played }: 
   const panel = usePanel();
   const results = useDailyResults();
   const helpOpen = panel === "help" || !seenHelp;
+
+  // The open panel is module state: leaving the game must not carry it to the next page.
+  useEffect(() => () => openPanel(null), []);
 
   function closeHelp() {
     if (!seenHelp) onSeenHelp();

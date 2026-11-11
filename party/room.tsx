@@ -40,7 +40,7 @@ import { Racers, Standings } from "./standings";
 /** How often a page in the room asks how things stand. */
 const POLL_MS = 2500;
 /** Errors that mean the player is not in the room any more. */
-const OUT = ["no_such_party", "not_member", "party_full", "username_required", "unauthenticated"];
+const OUT = ["no_such_party", "not_member", "join_needed", "banned", "party_full", "username_required", "unauthenticated"];
 
 type View = {
   state: PartyState | null;
@@ -51,9 +51,11 @@ type View = {
 };
 
 /** Enters the room and keeps asking how it stands for as long as the page is on it. */
-function useRoom(code: string) {
+function useRoom(code: string, joinAtOnce: boolean) {
   const [view, setView] = useState<View>({ state: null, messages: [], error: null });
   const [entry, setEntry] = useState(0);
+  // Opening a bare link only looks; joining happens when the player says so.
+  const [consent, setConsent] = useState(joinAtOnce);
 
   /** Takes in a fresh state: from a poll, or the answer to something the player did. */
   const apply = useCallback((state: PartyState) => {
@@ -71,14 +73,16 @@ function useRoom(code: string) {
       busy = true;
       try {
         // The first call enters the room (and changes nothing for someone already in it).
-        const state = inside ? await getParty(code, last) : await joinParty(code);
+        const state = inside || !consent ? await getParty(code, last) : await joinParty(code);
         inside = true;
         if (stale) return;
         last = state.messages.at(-1)?.id ?? last ?? 0;
         apply(state);
       } catch (error) {
         if (stale) return;
-        const name = error instanceof ApiError ? error.code : "network";
+        let name = error instanceof ApiError ? error.code : "network";
+        // Not in the room yet, and nobody has asked to join: offer, do not join.
+        if (!inside && !consent && name === "not_member") name = "join_needed";
         if (OUT.includes(name)) {
           clearInterval(timer);
           setView((previous) => ({ ...previous, state: null, error: name }));
@@ -98,7 +102,7 @@ function useRoom(code: string) {
       clearInterval(timer);
       document.removeEventListener("visibilitychange", poll);
     };
-  }, [code, entry, apply]);
+  }, [code, entry, consent, apply]);
 
   /** Adds chat lines that arrived outside a poll (the player's own, just sent). */
   const hear = useCallback((incoming: ChatMessage[]) => {
@@ -110,14 +114,20 @@ function useRoom(code: string) {
     setEntry((value) => value + 1);
   }, []);
 
-  return { ...view, apply, hear, reenter };
+  const join = useCallback(() => {
+    setView({ state: null, messages: [], error: null });
+    setConsent(true);
+    setEntry((value) => value + 1);
+  }, []);
+
+  return { ...view, apply, hear, reenter, join };
 }
 
 /** A party's room: the lobby, the race, and the chat that runs through both. */
-export function Room({ code, me }: { code: string; me: Member }) {
+export function Room({ code, me, joinAtOnce }: { code: string; me: Member; joinAtOnce: boolean }) {
   const { t } = useSocialT();
   const router = useRouter();
-  const { state, messages, error, apply, hear, reenter } = useRoom(code);
+  const { state, messages, error, apply, hear, reenter, join } = useRoom(code, joinAtOnce);
   const runKey = `party-run:${code}`;
   const [run, setRun] = usePersistent<Run | null>(runKey, null);
   const posting = useRef(false);
@@ -187,10 +197,23 @@ export function Room({ code, me }: { code: string; me: Member }) {
         <SocialTabs current="party" />
         {error ? (
           <section className="notice">
-            <h1>{t(error === "not_member" ? "partyRemovedTitle" : "partyGoneTitle")}</h1>
-            <p>{t(socialError(new ApiError(error, 0)))}</p>
+            <h1>
+              {t(
+                error === "join_needed"
+                  ? "joinPartyTitle"
+                  : error === "not_member" || error === "banned"
+                    ? "partyRemovedTitle"
+                    : "partyGoneTitle",
+              )}
+            </h1>
+            <p>{error === "join_needed" ? t("joinPartyLead", { code }) : t(socialError(new ApiError(error, 0)))}</p>
             <div className="page-actions">
-              {error !== "no_such_party" && (
+              {error === "join_needed" && (
+                <button type="button" className="button" onClick={join}>
+                  {t("joinParty")}
+                </button>
+              )}
+              {error !== "join_needed" && error !== "no_such_party" && error !== "not_member" && error !== "banned" && (
                 <button type="button" className="button" onClick={reenter}>
                   {t("tryAgain")}
                 </button>
@@ -226,7 +249,7 @@ export function Room({ code, me }: { code: string; me: Member }) {
     const finishedStage = active.results.length > active.stage;
     const waitingFor = members.filter(
       (member) =>
-        member.user.id !== me.id && member.here && !member.spectator && member.results.length <= active.stage,
+        member.user.id !== me.id && !member.spectator && member.results.length <= active.stage,
     );
     const held =
       party.settings.pace === "together" && finishedStage && waitingFor.length > 0 && party.released < active.stage;
@@ -284,7 +307,8 @@ export function Room({ code, me }: { code: string; me: Member }) {
 
   // ── The race, seen from the side: finished, or watching ──
   if (party.status === "playing") {
-    const everyoneDone = members.every((member) => member.spectator || !member.here || member.results.length >= stages);
+    // Someone whose tab went quiet is not finished: the host can end the race from the buttons below.
+    const everyoneDone = members.every((member) => member.spectator || member.results.length >= stages);
     return (
       <main className="page">
         <SocialTabs current="party" />
@@ -305,10 +329,19 @@ export function Room({ code, me }: { code: string; me: Member }) {
             <Standings members={members} stages={stages} me={me.id} hostId={party.hostId} />
             {isHost && (
               <div className="page-actions">
-                <button type="button" className="button" onClick={() => act(() => startParty(code))}>
-                  {t("playAgain")}
-                </button>
-                <button type="button" className="button button-quiet" onClick={() => act(() => reopenLobby(code))}>
+                {everyoneDone && (
+                  <button type="button" className="button" onClick={() => act(() => startParty(code))}>
+                    {t("playAgain")}
+                  </button>
+                )}
+                <button
+                  type="button"
+                  className="button button-quiet"
+                  onClick={() => {
+                    // Others may still be playing: asking first keeps one click from wiping their race.
+                    if (everyoneDone || window.confirm(t("endRunConfirm"))) void act(() => reopenLobby(code));
+                  }}
+                >
                   {t("backToLobby")}
                 </button>
               </div>

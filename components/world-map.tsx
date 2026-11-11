@@ -10,6 +10,7 @@ import { feature } from "topojson-client";
 import type { GeometryCollection, Topology } from "topojson-specification";
 import type { LatLon } from "@/lib/geo";
 import { useSiteT } from "@/lib/i18n";
+import { motionMs } from "@/lib/motion";
 
 export type MapMarker = LatLon & {
   /**
@@ -304,20 +305,20 @@ export function WorldMap({
       .translate(size.width / 2 - scale * centerX, size.height / 2 - scale * centerY)
       .scale(scale);
 
-    select(svg).transition().duration(1100).call(behavior.transform, target);
+    select(svg).transition().duration(motionMs(1100)).call(behavior.transform, target);
   }, [focusKey, projection, size, base]);
 
   function zoomBy(factor: number) {
     const svg = svgRef.current;
     const behavior = zoomRef.current;
-    if (svg && behavior) select(svg).transition().duration(250).call(behavior.scaleBy, factor);
+    if (svg && behavior) select(svg).transition().duration(motionMs(250)).call(behavior.scaleBy, factor);
   }
 
   function zoomHome() {
     const svg = svgRef.current;
     const behavior = zoomRef.current;
     if (svg && behavior) {
-      select(svg).transition().duration(500).call(behavior.transform, homeRef.current);
+      select(svg).transition().duration(motionMs(500)).call(behavior.transform, homeRef.current);
     }
   }
 

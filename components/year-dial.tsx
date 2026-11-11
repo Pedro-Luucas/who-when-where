@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { prefersReducedMotion } from "@/lib/motion";
 
 type Props = {
   initial: number;
@@ -9,6 +10,8 @@ type Props = {
   onChange: (year: number) => void;
   /** Accessible name for the year field and ruler. */
   label: string;
+  /** The player has used the dial in some way (even to keep the year it started on). */
+  onTouch?: () => void;
 };
 
 const PX_PER_YEAR = 9;
@@ -20,7 +23,7 @@ const STEPS = [-10, -1, 1, 10];
  * a fractional position while it is dragged or coasting and settles on a
  * whole year when it stops.
  */
-export function YearDial({ initial, min, max, onChange, label }: Props) {
+export function YearDial({ initial, min, max, onChange, label, onTouch }: Props) {
   const [position, setPosition] = useState(initial);
   const [draft, setDraft] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
@@ -56,6 +59,7 @@ export function YearDial({ initial, min, max, onChange, label }: Props) {
   );
 
   function handlePointerDown(event: React.PointerEvent<HTMLDivElement>) {
+    onTouch?.();
     stopCoasting();
     event.currentTarget.setPointerCapture(event.pointerId);
     drag.current = {
@@ -88,7 +92,8 @@ export function YearDial({ initial, min, max, onChange, label }: Props) {
     drag.current = null;
     setDragging(false);
 
-    let velocity = event.timeStamp - state.t > 80 ? 0 : state.v;
+    // Coasting is an animation: with reduced motion the ruler stops where it was let go.
+    let velocity = event.timeStamp - state.t > 80 || prefersReducedMotion() ? 0 : state.v;
     let current = state.startPosition - (event.clientX - state.startX) / PX_PER_YEAR;
     if (Math.abs(velocity) < 0.02) {
       moveTo(Math.round(current));
@@ -112,6 +117,7 @@ export function YearDial({ initial, min, max, onChange, label }: Props) {
   }
 
   function nudge(amount: number) {
+    onTouch?.();
     stopCoasting();
     moveTo(year + amount);
   }
@@ -130,6 +136,20 @@ export function YearDial({ initial, min, max, onChange, label }: Props) {
     if (amount === undefined) return;
     event.preventDefault();
     nudge(amount);
+  }
+
+  /** A year typed so far counts at once, so "Lock in" never sends a stale value if the field never blurs. */
+  function typing(text: string) {
+    onTouch?.();
+    setDraft(text);
+    const typed = parseInt(text, 10);
+    if (Number.isFinite(typed)) {
+      const next = Math.round(clamp(typed));
+      if (next !== reported.current) {
+        reported.current = next;
+        onChange(next);
+      }
+    }
   }
 
   function commitDraft() {
@@ -160,7 +180,7 @@ export function YearDial({ initial, min, max, onChange, label }: Props) {
           inputMode="numeric"
           aria-label={label}
           value={draft ?? String(year)}
-          onChange={(event) => setDraft(event.target.value.replace(/[^\d]/g, "").slice(0, 4))}
+          onChange={(event) => typing(event.target.value.replace(/[^\d]/g, "").slice(0, 4))}
           onFocus={(event) => event.target.select()}
           onBlur={commitDraft}
           onKeyDown={(event) => {

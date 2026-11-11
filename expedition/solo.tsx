@@ -94,7 +94,8 @@ function Expedition() {
     );
   }
 
-  if (run) {
+  // A challenge link wins over the previous finished run's summary (it used to be ignored).
+  if (run && !challenge) {
     const link = `${window.location.origin}/expedition?c=${encodeChallenge(run)}`;
     return (
       <main className="page page-narrow">

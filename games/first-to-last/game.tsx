@@ -35,7 +35,8 @@ function Play({ day }: { day: number }) {
         ...previous.days,
         [day]: {
           ids: events.map((event) => event.id),
-          attempts: [...(previous.days[day]?.attempts ?? []), order],
+          // puzzleOf drops attempts made on events that are no longer in the roster.
+          attempts: [...puzzleOf(previous, day).attempts, order],
         },
       },
     }));

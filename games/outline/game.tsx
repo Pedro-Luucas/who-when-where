@@ -47,7 +47,11 @@ function Play({ day }: { day: number }) {
       ...previous,
       days: {
         ...previous.days,
-        [day]: { countryId: country.id, guesses: [...(previous.days[day]?.guesses ?? []), id] },
+        // Only a record of this very country is carried on: a stale one is replaced, never mixed in.
+        [day]: {
+          countryId: country.id,
+          guesses: [...(previous.days[day]?.countryId === country.id ? previous.days[day].guesses : []), id],
+        },
       },
     }));
   }

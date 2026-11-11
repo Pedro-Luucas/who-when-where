@@ -39,6 +39,10 @@ HOST=127.0.0.1
 PORT=$PORT
 DATABASE_PATH=/var/lib/who-when-where/app.db
 TRUST_PROXY=1
+# Behind the Vercel rewrite every request reaches Caddy from a Vercel address, so
+# rate limits would share one bucket. Once the site is served only through Vercel,
+# uncomment to key limits on the visitor instead:
+# CLIENT_IP_HEADER=x-vercel-forwarded-for
 EOF
   chown root:"$APP_USER" "$ENV_FILE"
   chmod 0640 "$ENV_FILE"

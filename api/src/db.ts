@@ -136,6 +136,15 @@ const MIGRATIONS: string[] = [
   ) STRICT, WITHOUT ROWID;
   CREATE INDEX party_invites_user ON party_invites(user_id);
   `,
+  // 2: players the host removed from a room cannot walk back in.
+  `
+  CREATE TABLE party_bans (
+    party_id   TEXT NOT NULL REFERENCES parties(id) ON DELETE CASCADE,
+    user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    created_at INTEGER NOT NULL,
+    PRIMARY KEY (party_id, user_id)
+  ) STRICT, WITHOUT ROWID;
+  `,
 ];
 
 export function openDatabase(path: string): DatabaseSync {

@@ -32,7 +32,7 @@ export function Dossier({ person, label, guesses, current, revealAll }: Props) {
             width={person.image.width}
             height={person.image.height}
             sizes="(min-width: 1024px) 280px, 96px"
-            priority
+            preload
           />
         </div>
       )}

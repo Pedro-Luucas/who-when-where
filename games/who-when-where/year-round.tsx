@@ -28,6 +28,8 @@ export function YearRound({ person, round, maxYear, locked, onLock, onNext, next
   const min = isDeath ? person.birth.year : 1;
   const start = isDeath ? person.birth.year : BIRTH_DIAL_START;
   const [year, setYear] = useState(start);
+  // "Lock in" waits until the dial has been used, so a stray tap cannot submit the starting year.
+  const [touched, setTouched] = useState(false);
 
   const answer = person[round.event].year;
 
@@ -39,7 +41,10 @@ export function YearRound({ person, round, maxYear, locked, onLock, onNext, next
         <YearComparison guess={locked.year} answer={answer} event={round.event} />
       ) : (
         <div className="dial-panel">
-          <YearDial initial={start} min={min} max={maxYear} onChange={setYear} label={t("yearLabel")} />
+          <YearDial initial={start} min={min} max={maxYear} onChange={setYear}
+            onTouch={() => setTouched(true)}
+            label={t("yearLabel")}
+          />
         </div>
       )}
 
@@ -65,7 +70,12 @@ export function YearRound({ person, round, maxYear, locked, onLock, onNext, next
       ) : (
         <div className="controls">
           <p className="hint">{t("yearHint")}</p>
-          <button type="button" className="button" onClick={() => onLock(gradeYear(person, round, year))}>
+          <button
+            type="button"
+            className="button"
+            disabled={!touched}
+            onClick={() => onLock(gradeYear(person, round, year))}
+          >
             {t("lockIn")}
           </button>
         </div>

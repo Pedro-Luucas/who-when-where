@@ -323,6 +323,9 @@ test("parties: open, join, play a run, scores in order", async () => {
   assert.equal((await score(ada, 0, 1000)).status, 204);
   assert.equal((await ada.call("POST", `/parties/${code}/release`, { stage: 0 })).body.party.released, 0);
 
+  // A run still in progress is not restarted over the players in it (ada has one puzzle left).
+  assert.equal((await ada.call("POST", `/parties/${code}/start`)).body.error, "run_in_progress");
+
   await bob.call("POST", `/parties/${code}/chat`, { body: "gg" });
   const state = (await ada.call("GET", `/parties/${code}`)).body;
   const results = Object.fromEntries(
@@ -360,6 +363,8 @@ test("parties: kicking, leaving, and closing", async () => {
   assert.equal((await bob.call("POST", `/parties/${code}/kick`, { userId: cy.id })).body.error, "not_host");
   assert.equal((await ada.call("POST", `/parties/${code}/kick`, { userId: cy.id })).body.members.length, 2);
   assert.equal((await cy.call("GET", `/parties/${code}`)).body.error, "not_member");
+  // Removed means removed: the same code does not let them back in.
+  assert.equal((await cy.call("POST", "/parties/join", { code })).body.error, "banned");
 
   // The host leaves: the room passes to whoever has been there longest.
   assert.equal((await ada.call("POST", `/parties/${code}/leave`)).status, 204);

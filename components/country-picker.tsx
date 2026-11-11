@@ -26,12 +26,21 @@ export function CountryPicker({ pool, taken, onSubmit, labels, children }: Props
   const [query, setQuery] = useState("");
   const [choice, setChoice] = useState<string | null>(null);
 
-  const matches = searchCountries(query, pool, locale).slice(0, SHOWN);
-  const open = matches.filter((country) => !taken.has(country.id));
-  const picked = choice && open.some((country) => country.id === choice) ? choice : (open[0]?.id ?? null);
+  // Take the countries already named out *before* cutting the list, so they never crowd out valid matches.
+  const found = searchCountries(query, pool, locale);
+  const open = found.filter((country) => !taken.has(country.id));
+  const matches = [...open, ...found.filter((country) => taken.has(country.id))].slice(0, SHOWN);
+  const chosen = choice && open.some((country) => country.id === choice) ? choice : null;
+  const picked = chosen ?? (open[0]?.id ?? null);
+  // Enter (or the button) only submits a country the player chose, typed out in full, or is the only one left.
+  const typed = query.trim().toLowerCase();
+  const sure =
+    chosen !== null ||
+    open.length === 1 ||
+    (open[0] !== undefined && typed !== "" && open[0].name[locale].toLowerCase() === typed);
 
   function submit() {
-    if (!picked) return;
+    if (!picked || !sure) return;
     onSubmit(picked);
     setQuery("");
     setChoice(null);
@@ -39,7 +48,8 @@ export function CountryPicker({ pool, taken, onSubmit, labels, children }: Props
 
   function move(step: number) {
     if (!open.length) return;
-    const at = open.findIndex((country) => country.id === picked);
+    // From an unchosen list the first press lands on the first match.
+    const at = chosen ? open.findIndex((country) => country.id === chosen) : step > 0 ? -1 : 0;
     setChoice(open[(at + step + open.length) % open.length].id);
   }
 
@@ -88,7 +98,7 @@ export function CountryPicker({ pool, taken, onSubmit, labels, children }: Props
       )}
       <div className="picker-actions">
         {children ?? <span />}
-        <button type="submit" className="button" disabled={!picked}>
+        <button type="submit" className="button" disabled={!picked || !sure}>
           {labels.submit}
         </button>
       </div>

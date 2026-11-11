@@ -11,16 +11,15 @@
   --card: #f8f2e4;
   --ink: #1d1915;
   --ink-2: #5f5646;
-  --ink-3: #91866f;
+  --ink-3: #686050; /* 4.5:1+ on paper, paper-2 and card */
   --rule: rgb(29 25 21 / 0.16);
-  --guess: #c8412b;
+  --guess: #ad3420; /* 4.6:1+ as text on every paper */
   --answer: #1b6b62;
   --sea: #efe7d3;
   --land: #d9c9a2;
   --land-edge: #8f7e5b;
   --graticule: rgb(29 25 21 / 0.08);
   --backdrop: rgb(29 25 21 / 0.55);
-  --grain-blend: multiply;
 }
 
 /* Dark follows the device unless the player picked a theme (lib/prefs.ts sets
@@ -34,7 +33,7 @@
     --card: #19202a;
     --ink: #ece4d2;
     --ink-2: #a39a86;
-    --ink-3: #6f6a5f;
+    --ink-3: #908a7c;
     --rule: rgb(236 228 210 / 0.16);
     --guess: #ff6f52;
     --answer: #4fd0b6;
@@ -43,7 +42,6 @@
     --land-edge: #5b6a7d;
     --graticule: rgb(236 228 210 / 0.07);
     --backdrop: rgb(0 0 0 / 0.65);
-    --grain-blend: overlay;
   }
 }
 
@@ -54,7 +52,7 @@
   --card: #19202a;
   --ink: #ece4d2;
   --ink-2: #a39a86;
-  --ink-3: #6f6a5f;
+  --ink-3: #908a7c;
   --rule: rgb(236 228 210 / 0.16);
   --guess: #ff6f52;
   --answer: #4fd0b6;
@@ -63,7 +61,6 @@
   --land-edge: #5b6a7d;
   --graticule: rgb(236 228 210 / 0.07);
   --backdrop: rgb(0 0 0 / 0.65);
-  --grain-blend: overlay;
 }
 
 @theme inline {
@@ -90,19 +87,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-display);
-  font-variation-settings: "SOFT" 30, "WONK" 0;
   -webkit-font-smoothing: antialiased;
-}
-
-/* Paper grain over everything. */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 40;
-  pointer-events: none;
-  mix-blend-mode: var(--grain-blend);
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .11 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
 button {
@@ -211,10 +196,11 @@ button {
 }
 
 .icon-button {
+  position: relative;
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
+  width: 44px;
+  height: 44px;
   border: 1px solid var(--rule);
   border-radius: 50%;
   font-family: var(--font-mono);
@@ -321,7 +307,6 @@ button {
   font-weight: 300;
   line-height: 0.84;
   letter-spacing: -0.055em;
-  font-variation-settings: "SOFT" 100, "WONK" 1;
 }
 
 .hero-line {
@@ -602,19 +587,20 @@ a.game-card:hover {
   animation: rise 0.5s 0.08s both;
 }
 
+.question:focus:not(:focus-visible) {
+  outline: none;
+}
+
 .question {
   font-size: clamp(1.55rem, 5.2vw, 2.7rem);
   font-weight: 400;
   line-height: 1.06;
   letter-spacing: -0.025em;
   text-wrap: balance;
-  font-variation-settings: "SOFT" 60, "WONK" 1;
 }
 
 .question em {
   color: var(--guess);
-  /* the "wonky" italic b reads as a 6 */
-  font-variation-settings: "SOFT" 60, "WONK" 0;
 }
 
 .controls,
@@ -863,8 +849,8 @@ a.game-card:hover {
 .map-controls button {
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
+  width: 44px;
+  height: 44px;
   font-family: var(--font-mono);
   font-size: 1.05rem;
   line-height: 1;
@@ -919,12 +905,11 @@ a.game-card:hover {
   background: transparent;
   color: var(--ink);
   font-family: var(--font-display);
-  font-size: clamp(3.4rem, 15vw, 8rem);
+  font-size: clamp(3rem, 13.5vw, 8rem);
   font-weight: 300;
   line-height: 1.05;
   letter-spacing: -0.045em;
   text-align: center;
-  font-variation-settings: "SOFT" 100, "WONK" 0;
   font-variant-numeric: lining-nums;
 }
 
@@ -935,8 +920,8 @@ a.game-card:hover {
 
 .dial-step {
   flex: none;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border: 1px solid var(--rule);
   border-radius: 50%;
   font-family: var(--font-mono);
@@ -1137,7 +1122,6 @@ a.game-card:hover {
   font-weight: 300;
   line-height: 0.86;
   letter-spacing: -0.055em;
-  font-variation-settings: "SOFT" 100, "WONK" 0;
   font-variant-numeric: lining-nums tabular-nums;
 }
 
@@ -1496,11 +1480,12 @@ a.game-card:hover {
    cold slate. Any element with data-tone="heat-N" gets --tone. */
 :root {
   --heat-0: var(--answer);
-  --heat-1: #c8412b;
-  --heat-2: #cf6d24;
-  --heat-3: #a98a1f;
-  --heat-4: #5f8fb8;
-  --heat-5: #5257a6;
+  /* Dark enough to read as text on paper (4.5:1+); the dark theme overrides them below. */
+  --heat-1: #ad3420;
+  --heat-2: #944909;
+  --heat-3: #765c00;
+  --heat-4: #31648d;
+  --heat-5: #4a4f9c;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -1865,6 +1850,7 @@ a.game-card:hover {
 .picker-list button {
   display: block;
   width: 100%;
+  min-height: 44px;
   padding: 9px 14px;
   border-bottom: 1px solid var(--rule);
   font-size: 1rem;
@@ -2418,4 +2404,27 @@ ol.events li:nth-child(6) {
 
 .button-danger:active:not(:disabled) {
   box-shadow: 1px 1px 0 var(--ink);
+}
+
+/* ═════════════════════════ Touch targets ═════════════════════════
+   On touch screens every control is at least 44 x 44 px. */
+
+@media (pointer: coarse) {
+  button.chip,
+  a.chip,
+  .locale-toggle button,
+  .link-button,
+  .segmented button,
+  .social-tabs a {
+    min-height: 44px;
+  }
+
+  .locale-toggle button {
+    min-width: 44px;
+  }
+
+  .link-button {
+    display: inline-flex;
+    align-items: center;
+  }
 }

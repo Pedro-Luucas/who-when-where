@@ -103,6 +103,19 @@ export function registerParties(account: Hono<Env>, { db, limit, body }: Deps): 
     (db.prepare("SELECT COUNT(*) AS total FROM party_members WHERE party_id = ?").get(partyId) as { total: number })
       .total;
 
+  /** Every player who was in at the start has scored every puzzle of the run. */
+  function runIsFinished(party: PartyRow): boolean {
+    const stages = stageCount(storedPartySettings(party.settings));
+    const players = db
+      .prepare("SELECT user_id FROM party_members WHERE party_id = ? AND joined_at <= ?")
+      .all(party.id, party.started_at) as { user_id: string }[];
+    const scored = db
+      .prepare("SELECT user_id, COUNT(*) AS done FROM party_results WHERE party_id = ? AND run = ? GROUP BY user_id")
+      .all(party.id, party.run) as { user_id: string; done: number }[];
+    const done = new Map(scored.map((row) => [row.user_id, row.done]));
+    return players.every((player) => (done.get(player.user_id) ?? 0) >= stages);
+  }
+
   /** Everything a member's page shows: the room, who is in it, the scores and new chat. */
   function describe(party: PartyRow, userId: string, after: number | undefined) {
     const now = Date.now();
@@ -242,6 +255,9 @@ export function registerParties(account: Hono<Env>, { db, limit, body }: Deps): 
 
     const now = Date.now();
     if (!membership(party.id, user.id)) {
+      if (db.prepare("SELECT 1 FROM party_bans WHERE party_id = ? AND user_id = ?").get(party.id, user.id)) {
+        throw new Failure(403, "banned");
+      }
       if (memberCount(party.id) >= MAX_MEMBERS) throw new Failure(409, "party_full");
       db.prepare("INSERT INTO party_members (party_id, user_id, joined_at, last_seen) VALUES (?, ?, ?, ?)").run(
         party.id,
@@ -291,6 +307,8 @@ export function registerParties(account: Hono<Env>, { db, limit, body }: Deps): 
   account.post("/parties/:code/start", (c) => {
     const user = c.get("user");
     const party = partyForHost(c.req.param("code"), user.id);
+    // A run in progress is not restarted over the heads of players still in it.
+    if (party.status === "playing" && !runIsFinished(party)) throw new Failure(409, "run_in_progress");
     const now = Date.now();
     db.prepare(
       `UPDATE parties SET status = 'playing', run = run + 1, seed = ?, started_at = ?, released = -1, updated_at = ?
@@ -375,6 +393,13 @@ export function registerParties(account: Hono<Env>, { db, limit, body }: Deps): 
     const party = partyForHost(c.req.param("code"), user.id);
     const target = asObject(await body(c)).userId;
     if (typeof target !== "string" || target === user.id) throw new Invalid("userId");
+    if (membership(party.id, target)) {
+      db.prepare("INSERT OR IGNORE INTO party_bans (party_id, user_id, created_at) VALUES (?, ?, ?)").run(
+        party.id,
+        target,
+        Date.now(),
+      );
+    }
     remove(party, target);
     return c.json(describe(partyByCode(party.code), user.id, undefined));
   });

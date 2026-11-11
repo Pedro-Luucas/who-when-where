@@ -8,13 +8,35 @@ export type Localized = Record<Locale, string>;
 
 const LOCALE_KEY = "locale";
 
-/** The language for players who have not picked one. */
+/** What the server renders, and the language for a browser that names neither Portuguese nor English. */
 export const DEFAULT_LOCALE: Locale = "pt";
 
-/** The player's language: their saved choice, else Portuguese. Browser only. */
-export function getLocale(): Locale {
-  return readStore<Locale | null>(LOCALE_KEY, null) ?? DEFAULT_LOCALE;
+/**
+ * The language a browser asks for: the first of its languages that the site
+ * has, else English. (Portuguese stays what the server renders; see useLocale.)
+ */
+export function browserLocale(): Locale {
+  const asked = typeof navigator === "undefined" ? [] : (navigator.languages?.length ? navigator.languages : [navigator.language]);
+  for (const language of asked) {
+    const base = String(language).toLowerCase().split("-")[0];
+    if (base === "pt" || base === "en") return base;
+  }
+  return "en";
 }
+
+/** The player's language: their saved choice, else the browser's. Browser only. */
+export function getLocale(): Locale {
+  return readStore<Locale | null>(LOCALE_KEY, null) ?? browserLocale();
+}
+
+/** The value of <html lang> for a language. */
+export const htmlLang = (locale: Locale): string => (locale === "pt" ? "pt-BR" : "en");
+
+/**
+ * Runs in <head> before the first paint, so <html lang> matches the player's
+ * language from the start (same choice as getLocale, without the modules).
+ */
+export const LOCALE_SCRIPT = `(function(){try{var l=JSON.parse(localStorage.getItem("www:${LOCALE_KEY}")||"null");if(l!=="pt"&&l!=="en"){l="en";var a=navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language];for(var i=0;i<a.length;i++){var b=String(a[i]).toLowerCase().split("-")[0];if(b==="pt"||b==="en"){l=b;break}}}document.documentElement.lang=l==="pt"?"pt-BR":"en"}catch(e){}})()`;
 
 /** The player's language, as a hook. */
 export function useLocale(): Locale {
@@ -63,6 +85,10 @@ export const SITE_MESSAGES = {
     heroWhere: "all of it, pinned on the map",
     todaysGames: "Today's games",
     puzzleNo: "No. {n}",
+    errorTitle: "Something went wrong",
+    errorLead: "This page hit a problem. Your saved games are safe on this device. Try again, or go back to the start.",
+    errorRetry: "Try again",
+    errorHome: "Back to the start",
     mapLoading: "Unrolling the map…",
     mapError: "The map could not be loaded. Check your connection and reload.",
     zoomIn: "Zoom in",
@@ -119,6 +145,10 @@ export const SITE_MESSAGES = {
     heroWhere: "tudo isso, marcado no mapa",
     todaysGames: "Jogos de hoje",
     puzzleNo: "N.º {n}",
+    errorTitle: "Algo deu errado",
+    errorLead: "Esta página encontrou um problema. Seus jogos salvos continuam seguros neste aparelho. Tente de novo ou volte ao início.",
+    errorRetry: "Tentar de novo",
+    errorHome: "Voltar ao início",
     mapLoading: "Desenrolando o mapa…",
     mapError: "Não foi possível carregar o mapa. Verifique a conexão e recarregue.",
     zoomIn: "Aproximar",

@@ -21,6 +21,7 @@ import {
   merge,
   slugify,
   summaryUrl,
+  stripHatnote,
 } from "./lib/wiki.mjs";
 import { ROSTER, OVERRIDES } from "./people-roster.mjs";
 
@@ -138,7 +139,7 @@ async function main() {
             ptSummary?.description,
         ),
       },
-      extract: { en: summary.extract, pt: ptSummary?.extract ?? null },
+      extract: { en: stripHatnote(summary.extract) || summary.extract, pt: stripHatnote(ptSummary?.extract) || null },
       wiki: {
         en: summary.content_urls.desktop.page,
         pt: ptSummary?.content_urls.desktop.page ?? null,

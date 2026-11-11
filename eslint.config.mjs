@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Scratch output of agent runs (screenshots, throwaway scripts).
+    ".claude-runs/**",
   ]),
 ]);
 

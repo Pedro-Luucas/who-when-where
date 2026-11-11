@@ -1,5 +1,6 @@
 "use client";
 
+import { useFocusWhenLost } from "@/lib/focus";
 import { useGameT, type MessageKey } from "./messages";
 import type { Person } from "./people";
 import type { Round } from "./rules";
@@ -9,8 +10,9 @@ export function Question({ person, round }: { person: Person; round: Round }) {
   const { locale, t } = useGameT();
   const key = `q_${round.id}` as MessageKey;
   const parts = t(key, { name: person.name[locale] }).split("*");
+  const heading = useFocusWhenLost<HTMLHeadingElement>();
   return (
-    <h2 className="question">
+    <h2 className="question" ref={heading} tabIndex={-1}>
       {parts.map((part, i) => (i % 2 ? <em key={i}>{part}</em> : part))}
     </h2>
   );

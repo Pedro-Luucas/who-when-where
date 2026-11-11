@@ -197,6 +197,18 @@
   .site-header:has(.site-actions > :nth-child(6)) .site-actions {
     gap: 6px;
   }
+
+  /* Drawn smaller so the row fits one line, but the tap area stays 44px. */
+  .site-actions .icon-button {
+    width: 34px;
+    height: 34px;
+  }
+
+  .site-actions .icon-button::after {
+    content: "";
+    position: absolute;
+    inset: -5px;
+  }
 }
 
 @media (max-width: 379px) {
@@ -220,6 +232,10 @@
   .site-actions .icon-button {
     width: 30px;
     height: 30px;
+  }
+
+  .site-actions .icon-button::after {
+    inset: -7px;
   }
 }
 

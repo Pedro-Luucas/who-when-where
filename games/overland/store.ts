@@ -1,7 +1,7 @@
 "use client";
 
 import { streaks } from "@/lib/stats";
-import type { SyncedSave } from "@/lib/saves";
+import { saveShape, type SyncedSave } from "@/lib/saves";
 import { usePersistent } from "@/lib/storage";
 import type { Score } from "@/lib/points";
 import { fewestBetween, isOver, isPlayable, isSolved, puzzleForDay, scoreOf, type Puzzle } from "./rules";
@@ -18,10 +18,11 @@ const KEY = "overland:v1";
 /** How a signed-in player's days are copied to their account. */
 export const SYNC: SyncedSave = { game: "overland", key: KEY, progressField: "guesses" };
 
+const VALID = saveShape(SYNC.progressField);
 const EMPTY: Save = { days: {}, seenHelp: false };
 
 export function useSave() {
-  return usePersistent<Save>(KEY, EMPTY);
+  return usePersistent<Save>(KEY, EMPTY, VALID);
 }
 
 /** The day's crossing and the guesses made on it, from the save or freshly dealt. */

@@ -95,7 +95,7 @@ export const SOCIAL_MESSAGES = {
     friendRequests: "Friend requests",
     sentRequests: "Requests you sent",
     noFriendsYet: "No friends yet. Search for a username above to add someone.",
-    friendToday: "Today: {points} pts · {puzzles}/4",
+    friendToday: "Today: {points} pts · {puzzles}/{total}",
     addFriend: "Add friend",
     requested: "Requested",
     cancelRequest: "Take the request back",
@@ -275,6 +275,11 @@ export const SOCIAL_MESSAGES = {
     errPartyFull: "That party is full.",
     errNotHost: "Only the host can do that.",
     errInProgress: "Wait for the game to end first.",
+    errBanned: "The host removed you from this party.",
+    errRunInProgress: "Some players are still racing. End the game first.",
+    joinPartyTitle: "Join this party?",
+    joinPartyLead: "You opened an invitation to party {code}. Joining shows your name to everyone in the room.",
+    joinParty: "Join party",
     errMessage: "Messages can have up to 500 characters.",
   },
   pt: {
@@ -356,7 +361,7 @@ export const SOCIAL_MESSAGES = {
     friendRequests: "Pedidos de amizade",
     sentRequests: "Pedidos que você enviou",
     noFriendsYet: "Nenhum amigo ainda. Procure um nome de usuário acima para adicionar alguém.",
-    friendToday: "Hoje: {points} pts · {puzzles}/4",
+    friendToday: "Hoje: {points} pts · {puzzles}/{total}",
     addFriend: "Adicionar",
     requested: "Pedido enviado",
     cancelRequest: "Cancelar o pedido",
@@ -531,6 +536,11 @@ export const SOCIAL_MESSAGES = {
     errPartyFull: "Essa party está cheia.",
     errNotHost: "Só o anfitrião pode fazer isso.",
     errInProgress: "Espere o jogo terminar primeiro.",
+    errBanned: "O anfitrião removeu você desta party.",
+    errRunInProgress: "Ainda tem gente jogando. Encerre o jogo primeiro.",
+    joinPartyTitle: "Entrar nesta party?",
+    joinPartyLead: "Você abriu um convite para a party {code}. Entrar mostra seu nome para todo mundo na sala.",
+    joinParty: "Entrar na party",
     errMessage: "As mensagens podem ter até 500 caracteres.",
   },
 } satisfies Record<Locale, Record<string, string>>;
@@ -572,6 +582,8 @@ const BY_CODE: Record<string, SocialKey> = {
   party_full: "errPartyFull",
   not_host: "errNotHost",
   in_progress: "errInProgress",
+  banned: "errBanned",
+  run_in_progress: "errRunInProgress",
 };
 
 /** The message to show for a failed community action. */

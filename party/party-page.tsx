@@ -28,9 +28,10 @@ export function PartyPage() {
 }
 
 function Party({ me }: { me: Member }) {
-  const code = useSearchParams().get("code")?.trim().toUpperCase();
-  // Keyed by code: each room starts from nothing.
-  return code ? <Room key={code} code={code} me={me} /> : <Parties me={me} />;
+  const params = useSearchParams();
+  const code = params.get("code")?.trim().toUpperCase();
+  // Keyed by code: each room starts from nothing. A bare shared link asks before joining.
+  return code ? <Room key={code} code={code} me={me} joinAtOnce={params.get("join") === "1"} /> : <Parties me={me} />;
 }
 
 function Parties({ me }: { me: Member }) {
@@ -64,7 +65,7 @@ function Parties({ me }: { me: Member }) {
     const code = String(new FormData(event.currentTarget).get("code") ?? "")
       .trim()
       .toUpperCase();
-    if (code) router.push(`/party?code=${encodeURIComponent(code)}`);
+    if (code) router.push(`/party?code=${encodeURIComponent(code)}&join=1`);
   }
 
   const list = (entries: PartySummary[], action: string) =>
@@ -79,7 +80,7 @@ function Parties({ me }: { me: Member }) {
         />
         <span className="relation">
           {party.status === "playing" && <span className="chip chip-flat">{t("inGame")}</span>}
-          <button type="button" className="chip chip-solid" onClick={() => router.push(`/party?code=${party.code}`)}>
+          <button type="button" className="chip chip-solid" onClick={() => router.push(`/party?code=${party.code}&join=1`)}>
             {action}
           </button>
         </span>

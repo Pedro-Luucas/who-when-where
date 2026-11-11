@@ -117,12 +117,25 @@ export async function getPtSummary(entity) {
   return title ? getSummary("pt", title) : null;
 }
 
+// Wikipedia summaries can open with a hatnote ("This article is about X. For Y, see Z.")
+// that reads as if it were part of the text, and can name the answer. Drop those sentences
+// (an extract that was nothing else comes back empty).
+const HATNOTE =
+  /^(This article is (about|on)|This page is about|For (other|the|more)\b|Not to be confused|See also|Este artigo (é|trata)|Esta página (é|trata)|Para (outros|o |a |os |as |mais)|Não confundir|Veja também)/i;
+
+export function stripHatnote(text) {
+  if (!text) return text;
+  const sentences = text.split(/(?<=[.!?])\s+(?=[\p{Lu}"“])/u);
+  while (sentences.length > 0 && HATNOTE.test(sentences[0])) sentences.shift();
+  return sentences.join(" ");
+}
+
 /**
  * Saves a Wikipedia summary thumbnail under public/<folder>/<id>.<ext> and
  * returns what next/image needs. Wikimedia serves thumbnails in fixed width
  * steps; 500px is one of them.
  */
-export async function downloadImage(folder, id, thumb) {
+export async function downloadImage(folder, id, thumb, { hidden = false } = {}) {
   const dir = path.join(ROOT, "public", folder);
   await mkdir(dir, { recursive: true });
   const wanted = thumb.source.replace(/\/\d+px-/, "/500px-");
@@ -136,7 +149,9 @@ export async function downloadImage(folder, id, thumb) {
   }
   const type = res.headers.get("content-type") ?? "";
   const ext = type.includes("png") ? "png" : type.includes("webp") ? "webp" : "jpg";
-  const file = `${id}.${ext}`;
+  // A hidden image gets an opaque name: a file called petra.jpg gives the answer away.
+  const name = hidden ? createHash("sha1").update(`www:site-image:${id}`).digest("hex").slice(0, 12) : id;
+  const file = `${name}.${ext}`;
   await writeFile(path.join(dir, file), Buffer.from(await res.arrayBuffer()));
   return {
     src: `/${folder}/${file}`,

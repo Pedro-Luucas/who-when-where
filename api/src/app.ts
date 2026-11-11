@@ -50,6 +50,11 @@ export function createApp(db: DatabaseSync, config: Config, limiter = new RateLi
   const app = new Hono<Env>();
 
   function clientAddress(c: Context): string {
+    if (config.clientIpHeader) {
+      // Behind a CDN the proxy only sees the CDN's address; the CDN names the visitor.
+      const named = c.req.header(config.clientIpHeader)?.split(",")[0]?.trim();
+      if (named) return named;
+    }
     if (config.trustProxy) {
       // The proxy in front of us appends the address it saw; take that one.
       const forwarded = c.req.header("x-forwarded-for")?.split(",").at(-1)?.trim();

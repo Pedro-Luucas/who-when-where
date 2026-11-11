@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, IBM_Plex_Mono } from "next/font/google";
 import { Toasts } from "@/components/toasts";
-import { ENTRY_SCRIPT } from "@/lib/entry";
+import { LangSync } from "@/components/lang-sync";
+import { LOCALE_SCRIPT } from "@/lib/i18n";
 import { THEME_SCRIPT } from "@/lib/prefs";
 import { Celebrations } from "@/logbook/watcher";
 import "./globals.css";
@@ -10,16 +11,17 @@ import "./atlas.css";
 import "./logbook.css";
 import "./flow.css";
 
+// Only what the pages use: Latin glyphs, upright, with the optical-size axis. The italic
+// file and the SOFT/WONK axes cost about 300 KB per page; slanted text is drawn by the browser.
 const fraunces = Fraunces({
   variable: "--font-fraunces",
-  subsets: ["latin", "latin-ext"],
-  style: ["normal", "italic"],
-  axes: ["SOFT", "WONK", "opsz"],
+  subsets: ["latin"],
+  axes: ["opsz"],
 });
 
 const plexMono = IBM_Plex_Mono({
   variable: "--font-plex-mono",
-  subsets: ["latin", "latin-ext"],
+  subsets: ["latin"],
   weight: ["400", "500", "600"],
 });
 
@@ -49,11 +51,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     // the client, to match the player's choices: hence suppressHydrationWarning.
     <html lang="pt-BR" className={`${fraunces.variable} ${plexMono.variable}`} suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: ENTRY_SCRIPT }} />
+        <script dangerouslySetInnerHTML={{ __html: LOCALE_SCRIPT }} />
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
       <body>
         {children}
+        <LangSync />
         <Toasts />
         <Celebrations />
       </body>

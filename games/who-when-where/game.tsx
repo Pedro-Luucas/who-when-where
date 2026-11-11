@@ -39,7 +39,8 @@ function Play({ day }: { day: number }) {
         ...previous.days,
         [day]: {
           personId: person.id,
-          guesses: [...(previous.days[day]?.guesses ?? []), guess],
+          // Only a record of this very person is carried on: a stale one is replaced, never mixed in.
+          guesses: [...(previous.days[day]?.personId === person.id ? previous.days[day].guesses : []), guess],
         },
       },
     }));

@@ -20,6 +20,7 @@ import {
   label,
   merge,
   slugify,
+  stripHatnote,
 } from "./lib/wiki.mjs";
 import { SITES, SITE_OVERRIDES } from "./sites-roster.mjs";
 
@@ -69,7 +70,7 @@ async function main() {
 
     let image = previous.get(id)?.image ?? null;
     if (!summary.thumbnail) warnings.push("no photo");
-    else if (!SKIP_IMAGES) image = await downloadImage("sites", id, summary.thumbnail);
+    else if (!SKIP_IMAGES) image = await downloadImage("sites", id, summary.thumbnail, { hidden: true });
     else if (!image) warnings.push("photo not downloaded yet");
 
     const entry = {
@@ -83,7 +84,7 @@ async function main() {
       lon: lon === undefined ? null : +lon.toFixed(4),
       era: site.era,
       clue: site.clue,
-      extract: { en: summary.extract, pt: ptSummary?.extract ?? null },
+      extract: { en: stripHatnote(summary.extract) || summary.extract, pt: stripHatnote(ptSummary?.extract) || null },
       wiki: {
         en: summary.content_urls.desktop.page,
         pt: ptSummary?.content_urls.desktop.page ?? null,

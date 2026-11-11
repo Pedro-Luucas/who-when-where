@@ -1,7 +1,7 @@
 "use client";
 
 import { streaks } from "@/lib/stats";
-import type { SyncedSave } from "@/lib/saves";
+import { saveShape, type SyncedSave } from "@/lib/saves";
 import { usePersistent } from "@/lib/storage";
 import type { Score } from "@/lib/points";
 import { isOver, isSolved, scoreOf, type Guess } from "./rules";
@@ -18,10 +18,11 @@ const KEY = "wayfarer:v1";
 /** How a signed-in player's days are copied to their account. */
 export const SYNC: SyncedSave = { game: "wayfarer", key: KEY, progressField: "guesses" };
 
+const VALID = saveShape(SYNC.progressField);
 const EMPTY: Save = { days: {}, seenHelp: false };
 
 export function useSave() {
-  return usePersistent<Save>(KEY, EMPTY);
+  return usePersistent<Save>(KEY, EMPTY, VALID);
 }
 
 /** A finished day's score, or null while it is still being played. */

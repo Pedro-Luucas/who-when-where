@@ -40,7 +40,8 @@ function Play({ day }: { day: number }) {
       ...previous,
       days: {
         ...previous.days,
-        [day]: { siteId: site.id, digs: [...(previous.days[day]?.digs ?? []), graded] },
+        // Only a record of this very site is carried on: a stale one is replaced, never mixed in.
+        [day]: { siteId: site.id, digs: [...(previous.days[day]?.siteId === site.id ? previous.days[day].digs : []), graded] },
       },
     }));
   }
@@ -127,7 +128,7 @@ export function DigSiteBoard({ site, digs, onDig, maxDigs = MAX_DIGS, label, chi
             width={site.image.width}
             height={site.image.height}
             sizes="(min-width: 1024px) 280px, 112px"
-            priority
+            preload
           />
         </div>
 

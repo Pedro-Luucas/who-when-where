@@ -54,7 +54,8 @@
 }
 
 .page-skeleton {
-  height: 360px;
+  /* About a screen tall, so the footer is already below the fold and does not jump when the page fills in. */
+  height: max(360px, calc(100svh - 220px));
   margin-top: 24px;
   border: 1px solid var(--rule);
 }
@@ -627,6 +628,8 @@ button.chip-solid:hover:not(:disabled) {
 
 .chat {
   display: grid;
+  grid-template-columns: minmax(0, 1fr); /* the log and form never push past the card */
+  min-width: 0;
   gap: 12px;
 }
 
@@ -702,6 +705,7 @@ button.chip-solid:hover:not(:disabled) {
 }
 
 .chat-form .button {
+  flex: none;
   padding: 12px 16px;
 }
 
