@@ -2,6 +2,9 @@
    Pieces shared by Overland and Outline, the games played with whole
    countries: a country coloured in on the map, and what a guess was worth. */
 
+/* Inside the components layer, so Tailwind utilities (and components/ui) can
+   override these classes. Not indented, to keep the history readable. */
+@layer components {
 /* How a country stands in an Overland crossing. Any element with one of
    these data-tones gets --tone, like the heat of a dig. */
 [data-tone="on"],
@@ -143,7 +146,7 @@
 .facts {
   display: grid;
   gap: 0;
-  border-top: 1.5px solid var(--ink);
+  border-top: 1px solid var(--line-strong);
 }
 
 .facts > div {
@@ -158,7 +161,7 @@
 .facts dt {
   padding-top: 3px;
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-2);
@@ -168,3 +171,4 @@
   font-size: 1.05rem;
   line-height: 1.35;
 }
+} /* @layer components */

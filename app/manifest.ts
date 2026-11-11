@@ -9,8 +9,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Daily guessing games about people, places and time, all played on the map.",
     start_url: "/",
     display: "standalone",
-    background_color: "#f0e8d6",
-    theme_color: "#f0e8d6",
+    background_color: "#040914",
+    theme_color: "#040914",
     categories: ["games", "education"],
     icons: [
       { src: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },

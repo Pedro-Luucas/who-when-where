@@ -130,7 +130,7 @@ export function confetti(amount: 1 | 2 | 3): void {
   context.scale(ratio, ratio);
 
   const tokens = getComputedStyle(document.documentElement);
-  const colours = ["--guess", "--answer", "--ink", "--heat-3", "--heat-4"]
+  const colours = ["--accent", "--answer", "--pro", "--guess", "--heat-5"]
     .map((name) => tokens.getPropertyValue(name).trim())
     .filter(Boolean);
 
@@ -150,7 +150,7 @@ export function confetti(amount: 1 | 2 | 3): void {
       turn: Math.random() * Math.PI * 2,
       spin: (Math.random() - 0.5) * 0.4,
       sway: Math.random() * Math.PI * 2,
-      colour: colours[i % colours.length] ?? "#c8412b",
+      colour: colours[i % colours.length] ?? "#4fabf6",
     };
   });
 

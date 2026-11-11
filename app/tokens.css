@@ -1,0 +1,315 @@
+/* ═════════════════════════ Night Atlas: design tokens ═════════════════════════
+   A dark "space HUD": deep navy surfaces, cyan-tinted hairlines, chunky key
+   buttons and electric accents, after the look of geocore.fun. "Daylight" is
+   the light theme, opted into with data-theme="light" on <html>
+   (lib/prefs.ts; "auto" puts it there when the device asks for light).
+
+   Three layers:
+   1. @theme: the raw palette, fonts, radii, shadows and motion. Each one is a
+      Tailwind utility too (bg-space-900, text-family-where, rounded-lg,
+      shadow-card, ease-spring, font-display…).
+   2. :root / [data-theme="light"]: the semantic layer components read
+      (--bg, --surface, --fg, --line, --primary…). Themes swap only these.
+   3. @theme inline: the semantic layer as utilities (bg-surface, text-fg-2,
+      border-line…), plus the names the older stylesheets still use
+      (--paper, --card, --ink, --rule), pointed at the new values. */
+
+/* `light:` variant for the rare utility that differs in Daylight. */
+@custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
+
+@theme static {
+  /* ── Space: the background ramp, darkest first ── */
+  --color-space-980: #01040b;
+  --color-space-950: #040914;
+  --color-space-900: #07111f;
+  --color-space-850: #0a1727;
+  --color-space-800: #0d2032;
+  --color-space-700: #123653;
+  --color-space-600: #1b4a70;
+
+  /* ── Text on space ── */
+  --color-ice-50: #edfaff;
+  --color-ice-200: #a9c6d8;
+  --color-ice-400: #6f91a7;
+
+  /* ── Accents ── */
+  --color-cyan: #4fabf6;
+  --color-cyan-bright: #5fd8ff;
+  --color-blue: #1e72e8;
+  --color-blue-deep: #0d4fc4;
+  --color-gold: #ffd45c;
+  --color-green: #3ef08a;
+  --color-red: #ff466d;
+  --color-purple: #b07cff;
+  --color-teal: #2dd4bf;
+  --color-periwinkle: #818cf8;
+  --color-pink: #f472b6;
+
+  /* ── Game families: tiles, chips, the stripe on a game's prompt ── */
+  --color-family-who: #f472b6; /* people */
+  --color-family-when: #b07cff; /* time */
+  --color-family-where: #4fabf6; /* places */
+  --color-family-shapes: #2dd4bf; /* borders and shapes */
+  --color-family-flags: #818cf8;
+  --color-family-words: #5fd8ff;
+  --color-family-numbers: #ffd45c;
+
+  /* ── Fonts (next/font variables, set in app/layout.tsx) ── */
+  --font-sans: var(--font-chakra), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-chakra), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "Cascadia Mono", monospace;
+
+  /* ── Type scale additions (Tailwind's text-xs…text-3xl stay) ── */
+  --text-display: clamp(2.5rem, 1.6rem + 4vw, 4.5rem);
+  --text-display--line-height: 1;
+  --text-score: clamp(3rem, 2rem + 5vw, 6rem);
+  --text-score--line-height: 0.9;
+
+  /* ── Shape: small, technical radii ── */
+  --radius-xs: 3px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-pill: 999px;
+
+  /* ── Elevation: dark-friendly, never an offset "print" shadow ── */
+  --shadow-card: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 8px 24px rgb(0 0 0 / 0.35);
+  --shadow-raised: inset 0 1px 0 rgb(255 255 255 / 0.06), 0 16px 40px rgb(0 0 0 / 0.45);
+  --shadow-press: inset 0 2px 7px rgb(1 4 11 / 0.55);
+
+  /* ── Motion ── */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.42, 0.5, 1);
+  --ease-press: cubic-bezier(0.3, 0, 0.2, 1);
+  --ease-emphatic: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --animate-pop: pop 320ms var(--ease-spring) both;
+  --animate-rise: rise 320ms var(--ease-out) both;
+  --animate-shake: shake 360ms var(--ease-press);
+
+  /* ── Layout ── */
+  --container-page: 76rem;
+  --container-prose: 42rem;
+}
+
+/* ───────────────────────── Semantic layer: Night Atlas (default) ───────────────────────── */
+
+:root {
+  color-scheme: dark;
+
+  /* Surfaces, back to front. */
+  --bg-deep: #01040b; /* behind the map and the hero; theme-color */
+  --bg: #040914; /* the page */
+  --surface: #0a1727; /* cards, header, inputs */
+  --surface-2: #0d2032; /* raised cards, hover */
+  --surface-3: #123653; /* selected, strong hover */
+  --sunken: #07111f; /* wells: chat logs, skeletons, tracks */
+  /* Glass panels: a translucent navy gradient. */
+  --panel-fill: linear-gradient(145deg, rgb(13 32 50 / 0.94), rgb(4 9 20 / 0.86));
+  --glass: rgb(10 23 39 / 0.78);
+
+  /* Text: 15.9 / 9.9 / 5.3 : 1 on --surface. --fg-3 never under 12px. */
+  --fg: #edfaff;
+  --fg-2: #a9c6d8;
+  --fg-3: #6f91a7;
+
+  /* Hairlines, tinted cyan. */
+  --line: rgb(79 171 246 / 0.18);
+  --line-strong: rgb(79 171 246 / 0.34);
+
+  /* Brand and states. */
+  --accent: #4fabf6; /* links, focus, active tabs, "you" */
+  --accent-soft: rgb(79 171 246 / 0.12);
+  --primary: #1e72e8;
+  --primary-fill: linear-gradient(180deg, #1a62c8 0%, #1553ad 100%);
+  --primary-fill-hover: linear-gradient(180deg, #1c68d2 0%, #1758b5 100%);
+  --primary-solid: #1a62c8;
+  --primary-edge: #7cc0ff;
+  --primary-deep: #0c3a7a;
+  --on-primary: #ffffff;
+  --play: #3ef08a; /* the Play button, correct, success */
+  --play-fill: linear-gradient(180deg, #188548, #13773f 34%, #0e6331);
+  --play-fill-hover: linear-gradient(180deg, #1a8b4c, #147a42 34%, #10693a);
+  --play-edge: #34c46e;
+  --play-deep: #0a3f22;
+  --on-play: #ffffff;
+  --danger: #ff466d;
+  --danger-soft: rgb(255 70 109 / 0.12);
+  --pro: #ffd45c;
+  --pro-fill: linear-gradient(180deg, #ffe89a, #e5a722);
+  --on-pro: #1c1302;
+  --streak: #ffd45c;
+
+  /* Key buttons: the darker edge under a neutral key. */
+  --key-side: #1a2335;
+  --key-face: inset 0 1px 0 rgb(255 255 255 / 0.18), inset 0 -2px 0 rgb(0 0 0 / 0.2);
+  --key-face-pressed: inset 0 1px 0 rgb(255 255 255 / 0.06), inset 0 2px 4px rgb(0 0 0 / 0.3);
+  --key-sheen: linear-gradient(rgb(255 255 255 / 0.08), rgb(255 255 255 / 0.01) 60%);
+
+  /* The player's marks and the truth, on the map and in the verdicts. */
+  --guess: #ff466d;
+  --answer: #3ef08a;
+
+  /* Map. Land and sea differ clearly (3:1+). */
+  --sea: #050d1a;
+  --land: #15385a;
+  --land-edge: #3f6f9c;
+  --graticule: rgb(79 171 246 / 0.08);
+
+  /* How warm a guess is, near to far. Always paired with a number or words. */
+  --heat-1: #ff466d;
+  --heat-2: #ff9a5c;
+  --heat-3: #ffd45c;
+  --heat-4: #5fd8ff;
+  --heat-5: #818cf8;
+
+  --backdrop: rgb(1 4 11 / 0.72);
+  --glow-success: 0 0 0 1px rgb(62 240 138 / 0.45), 0 0 28px rgb(62 240 138 / 0.14);
+  --glow-accent: 0 0 0 1px rgb(79 171 246 / 0.5), 0 0 24px rgb(79 171 246 / 0.18);
+  --glow-pro: 0 0 0 1px rgb(255 212 92 / 0.5), 0 0 24px rgb(255 212 92 / 0.16);
+
+  /* The page backdrop: a faint aurora at the top of space. */
+  --atmosphere:
+    radial-gradient(1100px 520px at 78% -12%, rgb(30 114 232 / 0.2), transparent 62%),
+    radial-gradient(900px 480px at -8% -6%, rgb(95 216 255 / 0.08), transparent 60%);
+}
+
+/* ───────────────────────── Semantic layer: Daylight ───────────────────────── */
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --bg-deep: #e6eef7;
+  --bg: #f3f7fc;
+  --surface: #ffffff;
+  --surface-2: #eef4fb;
+  --surface-3: #dce9f8;
+  --sunken: #e9f0f8;
+  --panel-fill: linear-gradient(145deg, #ffffff, #f5f9fd);
+  --glass: rgb(255 255 255 / 0.84);
+
+  --fg: #07111f;
+  --fg-2: #33506a;
+  --fg-3: #4d6a83;
+
+  --line: rgb(13 32 50 / 0.13);
+  --line-strong: rgb(13 32 50 / 0.24);
+
+  --accent: #1553ad;
+  --accent-soft: rgb(30 114 232 / 0.1);
+  --primary: #1e72e8;
+  --primary-edge: #4f95f0;
+  --primary-deep: #0c3a7a;
+  --play: #137a3f;
+  --play-edge: #1e9a55;
+  --play-deep: #0a4a26;
+  --danger: #c8264d;
+  --danger-soft: rgb(200 38 77 / 0.08);
+  --pro: #8a5a00;
+  --streak: #a35d00;
+
+  --key-side: #b8c7d8;
+  --key-face: inset 0 1px 0 rgb(255 255 255 / 0.7), inset 0 -2px 0 rgb(13 32 50 / 0.06);
+  --key-face-pressed: inset 0 2px 4px rgb(13 32 50 / 0.16);
+  --key-sheen: linear-gradient(rgb(255 255 255 / 0.6), rgb(255 255 255 / 0) 60%);
+
+  --guess: #c8264d;
+  --answer: #137a3f;
+
+  --sea: #e4eef8;
+  --land: #c4d5e8;
+  --land-edge: #7d97b3;
+  --graticule: rgb(13 32 50 / 0.07);
+
+  --heat-1: #c8264d;
+  --heat-2: #a8460c;
+  --heat-3: #7a5a00;
+  --heat-4: #0b6b8f;
+  --heat-5: #4a4fb8;
+
+  --backdrop: rgb(7 17 31 / 0.5);
+  --glow-success: 0 0 0 1px rgb(19 122 63 / 0.45), 0 8px 24px rgb(19 122 63 / 0.12);
+  --glow-accent: 0 0 0 1px rgb(21 83 173 / 0.45), 0 8px 24px rgb(21 83 173 / 0.12);
+  --glow-pro: 0 0 0 1px rgb(138 90 0 / 0.45), 0 8px 24px rgb(138 90 0 / 0.12);
+
+  --atmosphere:
+    radial-gradient(1100px 520px at 78% -12%, rgb(30 114 232 / 0.1), transparent 62%),
+    radial-gradient(900px 480px at -8% -6%, rgb(95 216 255 / 0.12), transparent 60%);
+}
+
+:root[data-theme="light"] {
+  /* Shadows read softer on a light page. */
+  --shadow-card: 0 1px 2px rgb(13 32 50 / 0.06), 0 6px 18px rgb(13 32 50 / 0.07);
+  --shadow-raised: 0 2px 4px rgb(13 32 50 / 0.06), 0 16px 36px rgb(13 32 50 / 0.12);
+  --shadow-press: inset 0 2px 5px rgb(13 32 50 / 0.15);
+}
+
+/* ───────────────────────── Semantic utilities and legacy names ───────────────────────── */
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-deep: var(--bg-deep);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-sunken: var(--sunken);
+  --color-fg: var(--fg);
+  --color-fg-2: var(--fg-2);
+  --color-fg-3: var(--fg-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-play: var(--play);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-pro: var(--pro);
+  --color-on-pro: var(--on-pro);
+  --color-streak: var(--streak);
+  --color-guess: var(--guess);
+  --color-answer: var(--answer);
+}
+
+/* The older stylesheets (globals, social, atlas, logbook, flow) were written
+   for a paper atlas: --paper, --card, --ink and --rule. They now mean the
+   matching Night Atlas surfaces, so every screen follows the theme. New code
+   uses the semantic names above. */
+:root {
+  --paper: var(--bg);
+  --paper-2: var(--sunken);
+  --card: var(--surface);
+  --ink: var(--fg);
+  --ink-2: var(--fg-2);
+  --ink-3: var(--fg-3);
+  --rule: var(--line);
+}
+
+/* ───────────────────────── Keyframes ───────────────────────── */
+
+@keyframes shake {
+  20%,
+  60% {
+    transform: translateX(-6px);
+  }
+  40%,
+  80% {
+    transform: translateX(6px);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}

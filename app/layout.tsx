@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, IBM_Plex_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Chakra_Petch, JetBrains_Mono } from "next/font/google";
 import { Toasts } from "@/components/toasts";
 import { LangSync } from "@/components/lang-sync";
 import { LOCALE_SCRIPT } from "@/lib/i18n";
@@ -11,18 +11,23 @@ import "./atlas.css";
 import "./logbook.css";
 import "./flow.css";
 
-// Only what the pages use: Latin glyphs, upright, with the optical-size axis. The italic
-// file and the SOFT/WONK axes cost about 300 KB per page; slanted text is drawn by the browser.
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+// Night Atlas type (see app/tokens.css): Chakra Petch for the interface,
+// Bricolage Grotesque for headings, JetBrains Mono for labels and numbers.
+// Latin only, upright only, no unused axes.
+const chakra = Chakra_Petch({
+  variable: "--font-chakra",
   subsets: ["latin"],
-  axes: ["opsz"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const plexMono = IBM_Plex_Mono({
-  variable: "--font-plex-mono",
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+});
+
+const jetbrains = JetBrains_Mono({
+  variable: "--font-jetbrains",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -35,21 +40,19 @@ export const metadata: Metadata = {
   description:
     "Daily guessing games about people, places and time: famous lives, great journeys, lost cities, borders and the order of history — all played on the map.",
   applicationName: "Who When Where",
-  appleWebApp: { capable: true, title: "Who When Where", statusBarStyle: "default" },
+  appleWebApp: { capable: true, title: "Who When Where", statusBarStyle: "black" },
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f0e8d6" },
-    { media: "(prefers-color-scheme: dark)", color: "#11151b" },
-  ],
+  // Night Atlas is the default theme; the bar matches its page colour.
+  themeColor: "#040914",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     // The script in <head> sets `data-theme` and LocaleToggle sets `lang` on
     // the client, to match the player's choices: hence suppressHydrationWarning.
-    <html lang="pt-BR" className={`${fraunces.variable} ${plexMono.variable}`} suppressHydrationWarning>
+    <html lang="pt-BR" className={`${chakra.variable} ${bricolage.variable} ${jetbrains.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: LOCALE_SCRIPT }} />
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />

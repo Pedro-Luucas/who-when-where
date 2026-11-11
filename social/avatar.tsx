@@ -1,27 +1,8 @@
 import Link from "next/link";
 
-/** How many avatar colours there are to pick from (the API knows the same number). */
-export const AVATAR_COUNT = 8;
-
-type AvatarProps = {
-  /** The initial comes from here. */
-  name: string;
-  color: number;
-  /** Adds the dot that says the player is online (true) or away (false). */
-  online?: boolean;
-  size?: "small" | "large";
-};
-
-/** A player's mark: their initial on the colour they picked. */
-export function Avatar({ name, color, online, size }: AvatarProps) {
-  const initial = [...name.trim()][0]?.toUpperCase() ?? "?";
-  return (
-    <span className="avatar" data-color={color % AVATAR_COUNT} data-size={size} aria-hidden="true">
-      {initial}
-      {online !== undefined && <i data-online={online ? "" : undefined} />}
-    </span>
-  );
-}
+// The avatar itself is the UI kit's (components/ui/avatar.tsx).
+import { Avatar } from "@/components/ui/avatar";
+export { AVATAR_COUNT, Avatar } from "@/components/ui/avatar";
 
 type PlayerProps = {
   user: { username: string; name: string; avatar: number; online?: boolean };

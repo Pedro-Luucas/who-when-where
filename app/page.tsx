@@ -1,4 +1,5 @@
 import { GameCard } from "@/components/game-card";
+import { FamilyIcon } from "@/components/ui/family-icon";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { SiteText } from "@/components/site-text";
@@ -70,9 +71,12 @@ export default function Home() {
           </h2>
           <div className="games">
             {TOGETHER.map((card, index) => (
-              <Link key={card.href} href={card.href} className="game-card">
+              <Link key={card.href} href={card.href} className="game-card" data-family="social">
+                <span className="game-card-art" aria-hidden="true">
+                  <b>{String.fromCharCode(65 + index)}</b>
+                  <FamilyIcon family="social" />
+                </span>
                 <span className="game-card-theme">
-                  <i>{String.fromCharCode(65 + index)}</i>
                   <SocialText k={card.theme} />
                 </span>
                 <h3>

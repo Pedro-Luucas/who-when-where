@@ -2,6 +2,9 @@
    The player's level, achievements and atlas — and the small things that
    answer what they do anywhere on the site: notices, confetti, settings. */
 
+/* Inside the components layer, so Tailwind utilities (and components/ui) can
+   override these classes. Not indented, to keep the history readable. */
+@layer components {
 /* A postmark: a few characters inside a double ring. Vermilion once it is
    earned, a dashed pencil outline until then. */
 .seal {
@@ -10,15 +13,16 @@
   place-items: center;
   width: 46px;
   height: 46px;
-  border: 1.5px solid var(--guess);
+  border: 1.5px solid var(--streak);
   border-radius: 50%;
-  outline: 1px solid var(--guess);
+  outline: 1px solid var(--streak);
   outline-offset: 2px;
-  color: var(--guess);
+  background: rgb(255 212 92 / 0.1);
+  color: var(--streak);
   font-family: var(--font-display);
   font-size: 0.95rem;
-  font-style: italic;
-  font-weight: 600;
+  font-weight: 800;
+  box-shadow: 0 0 18px rgb(255 212 92 / 0.18);
   line-height: 1;
   letter-spacing: -0.03em;
   white-space: nowrap;
@@ -38,16 +42,20 @@
 .bar {
   display: block;
   height: 7px;
-  border: 1px solid var(--ink);
-  background: var(--card);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--sunken);
 }
 
 .bar i {
   display: block;
   height: 100%;
   max-width: 100%;
-  background: var(--answer);
-  transition: width 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--color-blue), var(--answer));
+  box-shadow: 0 0 10px rgb(62 240 138 / 0.35);
+  transition: width 0.6s var(--ease-out);
 }
 
 /* ───────────────────────── Level ───────────────────────── */
@@ -57,14 +65,13 @@
   grid-template-columns: auto minmax(0, 1fr);
   gap: 18px 22px;
   align-items: center;
-  box-shadow: 5px 5px 0 var(--ink);
+  box-shadow: var(--shadow-card);
 }
 
 .level-text h2 {
   margin: 4px 0 12px;
-  font-size: clamp(1.9rem, 6vw, 2.8rem);
-  font-style: italic;
-  font-weight: 400;
+  font-size: clamp(1.8rem, 5.5vw, 2.5rem);
+  font-weight: 700;
   line-height: 1;
   letter-spacing: -0.03em;
 }
@@ -78,8 +85,10 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
   gap: 1px;
-  border: 1px solid var(--rule);
-  background: var(--rule);
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--line);
 }
 
 .level-stats div {
@@ -91,7 +100,9 @@
 }
 
 .level-stats dd {
-  font-size: 1.8rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 1.6rem;
   line-height: 1;
   letter-spacing: -0.03em;
   font-variant-numeric: lining-nums;
@@ -99,7 +110,7 @@
 
 .level-stats dt {
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: 0.75rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--ink-2);
@@ -114,7 +125,9 @@
 .badges {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
-  border: 1px solid var(--rule);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--panel-fill);
   overflow: hidden;
 }
 
@@ -152,7 +165,7 @@
 .badge-card em {
   margin-top: 3px;
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   font-style: normal;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -191,7 +204,7 @@
 
 .badge-progress small {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.75rem;
 }
 
 /* ───────────────────────── Atlas ───────────────────────── */
@@ -276,7 +289,7 @@
 
 .collection summary > span:not(.bar) {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   color: var(--ink-2);
 }
 
@@ -307,7 +320,7 @@
 
 .collection ol small {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   color: var(--ink-3);
 }
 
@@ -318,7 +331,7 @@
 }
 
 .collection ol a:hover {
-  text-decoration-color: var(--guess);
+  text-decoration-color: var(--accent);
 }
 
 /* ───────────────────────── The hub's level line ───────────────────────── */
@@ -348,9 +361,9 @@
 }
 
 .daily-rank b {
-  font-size: 1.25rem;
-  font-style: italic;
-  font-weight: 400;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
   line-height: 1;
   letter-spacing: -0.02em;
 }
@@ -358,7 +371,7 @@
 .daily-rank small {
   overflow: hidden;
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   letter-spacing: 0.02em;
   color: var(--ink-2);
   text-overflow: ellipsis;
@@ -372,12 +385,12 @@
 
 .daily-rank strong {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   white-space: nowrap;
-  color: var(--guess);
+  color: var(--accent);
 }
 
 @media (max-width: 480px) {
@@ -404,7 +417,7 @@
 @keyframes toast {
   from {
     opacity: 0;
-    transform: translateY(18px) rotate(-1.5deg);
+    transform: translateY(18px) scale(0.96);
   }
 }
 
@@ -414,13 +427,16 @@
   gap: 14px;
   width: min(380px, 100%);
   padding: 12px 18px 12px 14px;
-  border: 1.5px solid var(--ink);
-  background: var(--card);
-  color: var(--ink);
-  box-shadow: 5px 5px 0 var(--guess);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  color: var(--fg);
+  box-shadow: var(--shadow-raised), var(--glow-accent);
   text-align: left;
   pointer-events: auto;
-  animation: toast 0.45s cubic-bezier(0.2, 1.3, 0.4, 1) both;
+  animation: toast 0.45s var(--ease-spring) both;
 }
 
 .toast > span {
@@ -438,7 +454,7 @@
 
 .toast small {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-2);
@@ -479,10 +495,11 @@
 }
 
 .settings .locale-toggle {
-  border: 1.5px solid var(--ink);
-  border-radius: 0;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
   padding: 0;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
 }
 
 .settings .locale-toggle button {
@@ -517,7 +534,7 @@
   gap: 8px;
   align-items: center;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
 }
 
 .distribution li > span {
@@ -528,8 +545,9 @@
 .distribution li > i {
   min-width: 3px;
   height: 14px;
+  border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
   background: var(--answer);
-  transition: width 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition: width 0.5s var(--ease-out);
 }
 
 .distribution li > i[data-empty] {
@@ -560,3 +578,4 @@
     animation: none;
   }
 }
+} /* @layer components */

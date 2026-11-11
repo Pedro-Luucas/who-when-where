@@ -3,67 +3,8 @@
 import { Suspense, use } from "react";
 import { browser } from "react-dom";
 
-type SegmentedProps<T extends string | number> = {
-  /** Names the group for assistive technology. */
-  label: string;
-  options: { value: T; label: string }[];
-  value: T;
-  onChange: (value: T) => void;
-  disabled?: boolean;
-};
-
-/** A row of choices where exactly one is pressed. */
-export function Segmented<T extends string | number>({ label, options, value, onChange, disabled }: SegmentedProps<T>) {
-  return (
-    <div className="segmented" role="group" aria-label={label}>
-      {options.map((option) => (
-        <button
-          key={option.value}
-          type="button"
-          aria-pressed={option.value === value}
-          disabled={disabled}
-          onClick={() => onChange(option.value)}
-        >
-          {option.label}
-        </button>
-      ))}
-    </div>
-  );
-}
-
-type StepperProps = {
-  label: string;
-  value: number;
-  min: number;
-  max: number;
-  onChange: (value: number) => void;
-  disabled?: boolean;
-};
-
-/** A number turned up and down one step at a time. */
-export function Stepper({ label, value, min, max, onChange, disabled }: StepperProps) {
-  return (
-    <div className="stepper" role="group" aria-label={label}>
-      <button
-        type="button"
-        aria-label={`${label} −`}
-        disabled={disabled || value <= min}
-        onClick={() => onChange(value - 1)}
-      >
-        −
-      </button>
-      <output>{value}</output>
-      <button
-        type="button"
-        aria-label={`${label} +`}
-        disabled={disabled || value >= max}
-        onClick={() => onChange(value + 1)}
-      >
-        +
-      </button>
-    </div>
-  );
-}
+// The choice controls live in the UI kit; re-exported here for the screens that import them from this file.
+export { Segmented, Stepper } from "./ui/segmented";
 
 /**
  * Renders its children in the browser only: for pages built from what the

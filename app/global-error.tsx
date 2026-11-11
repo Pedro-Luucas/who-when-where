@@ -43,14 +43,14 @@ export default function GlobalError({ error, retry }: { error: unknown; retry: (
           display: "grid",
           placeItems: "center",
           padding: 24,
-          background: "#060b16",
-          color: "#eef5ff",
+          background: "#040914",
+          color: "#edfaff",
           fontFamily: "system-ui, sans-serif",
         }}
       >
         <main style={{ maxWidth: 420 }} role="alert">
           <h1 style={{ fontSize: "1.5rem", margin: "0 0 8px" }}>{text.title}</h1>
-          <p style={{ color: "#a9bdd4", lineHeight: 1.5 }}>{text.lead}</p>
+          <p style={{ color: "#a9c6d8", lineHeight: 1.5 }}>{text.lead}</p>
           <button
             type="button"
             onClick={() => retry()}
@@ -58,9 +58,10 @@ export default function GlobalError({ error, retry }: { error: unknown; retry: (
               marginTop: 12,
               minHeight: 44,
               padding: "0 20px",
-              border: 0,
-              borderRadius: 8,
-              background: "#2f6fe0",
+              border: "1px solid #0c3a7a",
+              borderRadius: 4,
+              background: "linear-gradient(180deg, #1a62c8, #1553ad)",
+              boxShadow: "0 3px 0 #0c3a7a",
               color: "#fff",
               font: "inherit",
               fontWeight: 600,

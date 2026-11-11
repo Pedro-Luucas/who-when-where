@@ -2,19 +2,23 @@
    Getting from one of today's puzzles to the next: the card at the end of a
    finished puzzle (components/result-footer.tsx). */
 
+/* Inside the components layer, so Tailwind utilities (and components/ui) can
+   override these classes. Not indented, to keep the history readable. */
+@layer components {
 .next-up {
   display: grid;
   gap: 12px;
   margin-top: 26px;
   padding: 16px 18px 18px;
-  border: 1.5px solid var(--ink);
-  background: var(--card);
-  box-shadow: 5px 5px 0 var(--ink);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--panel-fill);
+  box-shadow: var(--shadow-card);
   animation: rise 0.45s 0.15s both;
 }
 
 .next-up[data-complete] {
-  box-shadow: 5px 5px 0 var(--answer);
+  box-shadow: var(--shadow-card), var(--glow-success);
 }
 
 .next-up-head {
@@ -34,6 +38,7 @@
   width: 22px;
   height: 8px;
   border: 1px solid var(--ink-3);
+  border-radius: var(--radius-xs);
 }
 
 .next-up-trail li[data-done] {
@@ -42,7 +47,7 @@
 }
 
 .next-up-trail li[data-current] {
-  outline: 1.5px solid var(--ink);
+  outline: 1.5px solid var(--accent);
   outline-offset: 2px;
 }
 
@@ -63,10 +68,10 @@
 
 .next-up-link small {
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--guess);
+  color: var(--accent);
 }
 
 .next-up[data-complete] .next-up-link small {
@@ -74,8 +79,9 @@
 }
 
 .next-up-link b {
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  font-weight: 400;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3.6vw, 1.8rem);
+  font-weight: 700;
   line-height: 1.05;
   letter-spacing: -0.025em;
 }
@@ -86,18 +92,22 @@
   place-items: center;
   width: 48px;
   height: 48px;
-  border-radius: 50%;
-  background: var(--ink);
-  color: var(--paper);
+  border: 1px solid var(--play-edge);
+  border-radius: var(--radius-md);
+  background: var(--play-fill);
+  color: var(--on-play);
   font-style: normal;
   font-size: 1.3rem;
-  transition: transform 0.2s;
+  box-shadow:
+    var(--key-face),
+    0 3px 0 var(--play-deep);
+  transition: transform 200ms var(--ease-spring);
 }
 
 .next-up-link:hover i,
 .next-up-link:focus-visible i {
   transform: translateX(4px);
-  background: var(--guess);
+  background: var(--play-fill-hover);
 }
 
 /* ═════════════════════════ First to Last: earlier tries ═════════════════════════ */
@@ -106,7 +116,7 @@
   display: grid;
   gap: 8px;
   padding-top: 14px;
-  border-top: 1.5px solid var(--ink);
+  border-top: 1px solid var(--line-strong);
 }
 
 .ftl-history > li {
@@ -118,7 +128,7 @@
 
 .ftl-history .ftl-n {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--ink-3);
 }
 
@@ -133,6 +143,7 @@
   place-items: center;
   height: 30px;
   border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
   font-family: var(--font-mono);
   font-size: 0.8rem;
   font-weight: 600;
@@ -153,7 +164,7 @@
 
 .ftl-history .ftl-score {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   color: var(--ink-2);
   white-space: nowrap;
 }
@@ -190,7 +201,8 @@
 }
 
 @media (max-width: 459px) {
-  .site-header:has(.site-actions > :nth-child(6)) .wordmark em {
+  .site-header:has(.site-actions > :nth-child(6)) .wordmark em,
+  .wordmark::before {
     display: none;
   }
 
@@ -220,7 +232,8 @@
     font-size: 1rem;
   }
 
-  .wordmark em {
+  .wordmark em,
+  .wordmark::before {
     display: none;
   }
 
@@ -290,5 +303,6 @@
 }
 
 .sign-in-switch-head {
-  color: var(--guess);
+  color: var(--accent);
 }
+} /* @layer components */

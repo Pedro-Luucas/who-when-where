@@ -1,82 +1,14 @@
 @import "tailwindcss";
+@import "./tokens.css";
 
-/* ───────────────────────── Tokens ─────────────────────────
-   An old atlas plate: warm paper, black ink, a vermilion pencil for the
-   player's marks and a verdigris stamp for the truth. */
+/* ───────────────────────── Base ─────────────────────────
+   Tokens live in tokens.css. Body text is Chakra Petch, headings Bricolage
+   Grotesque, labels and numbers JetBrains Mono. */
 
-:root {
-  color-scheme: light;
-  --paper: #f0e8d6;
-  --paper-2: #e6dbc3;
-  --card: #f8f2e4;
-  --ink: #1d1915;
-  --ink-2: #5f5646;
-  --ink-3: #686050; /* 4.5:1+ on paper, paper-2 and card */
-  --rule: rgb(29 25 21 / 0.16);
-  --guess: #ad3420; /* 4.6:1+ as text on every paper */
-  --answer: #1b6b62;
-  --sea: #efe7d3;
-  --land: #d9c9a2;
-  --land-edge: #8f7e5b;
-  --graticule: rgb(29 25 21 / 0.08);
-  --backdrop: rgb(29 25 21 / 0.55);
-}
-
-/* Dark follows the device unless the player picked a theme (lib/prefs.ts sets
-   data-theme on <html>), so each dark rule is written twice: once for the
-   device's choice, once for the player's. */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
-    --paper: #11151b;
-    --paper-2: #0b0e13;
-    --card: #19202a;
-    --ink: #ece4d2;
-    --ink-2: #a39a86;
-    --ink-3: #908a7c;
-    --rule: rgb(236 228 210 / 0.16);
-    --guess: #ff6f52;
-    --answer: #4fd0b6;
-    --sea: #0e1218;
-    --land: #2a3441;
-    --land-edge: #5b6a7d;
-    --graticule: rgb(236 228 210 / 0.07);
-    --backdrop: rgb(0 0 0 / 0.65);
-  }
-}
-
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --paper: #11151b;
-  --paper-2: #0b0e13;
-  --card: #19202a;
-  --ink: #ece4d2;
-  --ink-2: #a39a86;
-  --ink-3: #908a7c;
-  --rule: rgb(236 228 210 / 0.16);
-  --guess: #ff6f52;
-  --answer: #4fd0b6;
-  --sea: #0e1218;
-  --land: #2a3441;
-  --land-edge: #5b6a7d;
-  --graticule: rgb(236 228 210 / 0.07);
-  --backdrop: rgb(0 0 0 / 0.65);
-}
-
-@theme inline {
-  --color-paper: var(--paper);
-  --color-card: var(--card);
-  --color-ink: var(--ink);
-  --color-guess: var(--guess);
-  --color-answer: var(--answer);
-  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, "Courier New", monospace;
-}
-
-/* ───────────────────────── Base ───────────────────────── */
-
+@layer base {
 html {
   height: 100%;
+  background: var(--bg);
   -webkit-text-size-adjust: 100%;
 }
 
@@ -84,33 +16,62 @@ body {
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: var(--font-display);
+  background: var(--atmosphere), var(--bg);
+  background-repeat: no-repeat;
+  color: var(--fg);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+.display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  letter-spacing: -0.02em;
+}
+
+/* The highlighted word in a heading ("Where was she *born*?") is set in the
+   accent colour; the type has no italics, so none is faked. */
+h1 em,
+h2 em,
+h3 em {
+  font-style: normal;
 }
 
 button {
   cursor: pointer;
 }
 
-:focus-visible {
-  outline: 2px solid var(--guess);
-  outline-offset: 3px;
+::selection {
+  background: rgb(79 171 246 / 0.35);
 }
 
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+}
+
+/* Inside the components layer, so Tailwind utilities (and components/ui) can
+   override these classes. Not indented, to keep the history readable. */
+@layer components {
 .eyebrow,
 .hint {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ink-2);
+  color: var(--fg-2);
 }
 
 .hint {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
   text-transform: none;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.005em;
   line-height: 1.45;
 }
 
@@ -160,33 +121,65 @@ button {
 /* ───────────────────────── Header & footer ───────────────────────── */
 
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 12px clamp(16px, 4vw, 40px);
-  border-bottom: 1px solid var(--rule);
+  min-height: 60px;
+  padding: 8px clamp(16px, 4vw, 40px);
+  border-bottom: 1px solid var(--line);
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  backdrop-filter: blur(18px) saturate(1.2);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .site-header {
+    background: var(--surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
 }
 
 .wordmark {
   display: flex;
-  align-items: baseline;
-  gap: 0.28em;
+  align-items: center;
+  gap: 0.32em;
+  font-family: var(--font-display);
   font-size: 1.12rem;
-  font-weight: 600;
-  letter-spacing: -0.015em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   white-space: nowrap;
 }
 
+/* The globe mark before the name. */
+.wordmark::before {
+  content: "";
+  flex: none;
+  width: 26px;
+  height: 26px;
+  margin-right: 0.18em;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 68% 30%, var(--guess) 0 3.2px, transparent 3.6px),
+    radial-gradient(circle at 34% 30%, rgb(255 255 255 / 0.35), transparent 55%),
+    linear-gradient(160deg, #4fabf6, #1553ad 70%);
+  box-shadow:
+    0 0 0 1px rgb(124 192 255 / 0.5),
+    0 0 16px rgb(79 171 246 / 0.35);
+}
+
 .wordmark span:nth-of-type(2) {
-  font-style: italic;
-  font-weight: 400;
+  color: var(--accent);
 }
 
 .wordmark i {
-  color: var(--guess);
+  color: var(--fg-3);
   font-style: normal;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .site-actions {
@@ -195,93 +188,134 @@ button {
   gap: 8px;
 }
 
+/* A small key: icon buttons in the header, dialogs and the map. */
 .icon-button {
   position: relative;
   display: grid;
   place-items: center;
   width: 44px;
   height: 44px;
-  border: 1px solid var(--rule);
-  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--key-sheen), var(--surface);
+  color: var(--fg);
   font-family: var(--font-mono);
   font-size: 0.85rem;
   font-weight: 600;
+  box-shadow:
+    var(--key-face),
+    0 2px 0 var(--key-side);
   transition:
-    background 0.15s,
-    color 0.15s;
+    background 120ms var(--ease-out),
+    border-color 120ms var(--ease-out),
+    transform 120ms var(--ease-press),
+    box-shadow 120ms var(--ease-press);
 }
 
 .icon-button:hover {
-  background: var(--ink);
-  color: var(--paper);
+  border-color: rgb(79 171 246 / 0.7);
+  background: var(--key-sheen), var(--surface-2);
+}
+
+.icon-button:active {
+  transform: translateY(2px);
+  box-shadow: var(--key-face-pressed);
 }
 
 .locale-toggle {
   display: flex;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
   padding: 2px;
+  background: var(--sunken);
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.06em;
 }
 
 .locale-toggle button {
-  padding: 6px 9px;
-  border-radius: 999px;
-  color: var(--ink-2);
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  color: var(--fg-2);
 }
 
 .locale-toggle button[aria-pressed="true"] {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--primary-fill);
+  color: var(--on-primary);
+  box-shadow: var(--key-face);
 }
 
 .site-footer {
   margin-top: auto;
-  padding: 18px clamp(16px, 4vw, 40px) 22px;
-  border-top: 1px solid var(--rule);
+  padding: 20px clamp(16px, 4vw, 40px) 24px;
+  border-top: 1px solid var(--line);
+  background: var(--bg-deep);
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: 0.75rem;
   letter-spacing: 0.02em;
-  color: var(--ink-3);
+  color: var(--fg-3);
 }
 
-/* ───────────────────────── Buttons ───────────────────────── */
+/* ───────────────────────── Buttons ─────────────────────────
+   Chunky "keys": a gradient face, a darker edge underneath, and a press that
+   sinks the key into it. .button is the blue primary key; components/ui
+   Button uses the same classes (.key-*) for its variants. */
 
-.button {
+.button,
+.key {
+  --btn-fill: var(--primary-fill);
+  --btn-fill-hover: var(--primary-fill-hover);
+  --btn-side: var(--primary-deep);
+  --btn-edge: var(--primary-deep);
+  --btn-ink: var(--on-primary);
+  position: relative;
   flex: none;
-  padding: 14px 22px;
-  border-radius: 2px;
-  background: var(--ink);
-  color: var(--paper);
-  font-family: var(--font-mono);
-  font-size: 0.76rem;
-  font-weight: 600;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid var(--btn-edge);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(rgb(255 255 255 / 0.12), rgb(255 255 255 / 0) 30%), var(--btn-fill);
+  color: var(--btn-ink);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  text-align: center;
   white-space: nowrap;
-  box-shadow: 3px 3px 0 var(--guess);
+  box-shadow:
+    var(--key-face),
+    0 3px 0 var(--btn-side);
   transition:
-    transform 0.12s,
-    box-shadow 0.12s,
-    opacity 0.2s;
+    transform 120ms var(--ease-press),
+    box-shadow 120ms var(--ease-press),
+    filter 120ms var(--ease-out),
+    opacity 200ms;
 }
 
-.button:hover:not(:disabled) {
-  transform: translate(-1px, -1px);
-  box-shadow: 4px 4px 0 var(--guess);
+.button:hover:not(:disabled),
+.key:hover:not(:disabled) {
+  background: linear-gradient(rgb(255 255 255 / 0.14), rgb(255 255 255 / 0) 30%), var(--btn-fill-hover);
+  filter: brightness(1.06);
 }
 
-.button:active:not(:disabled) {
-  transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0 var(--guess);
+.button:active:not(:disabled),
+.key:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow:
+    var(--key-face-pressed),
+    0 1px 0 var(--btn-side);
 }
 
-.button:disabled {
-  opacity: 0.32;
-  box-shadow: none;
+.button:disabled,
+.key:disabled {
+  opacity: 0.5;
+  filter: saturate(0.4);
   cursor: not-allowed;
 }
 
@@ -289,11 +323,86 @@ button {
   width: 100%;
 }
 
+/* The green "go" key: Play, Start, Next. */
+.key-play,
+.button-play {
+  --btn-fill: var(--play-fill);
+  --btn-fill-hover: var(--play-fill-hover);
+  --btn-side: var(--play-deep);
+  --btn-edge: var(--play-edge);
+  --btn-ink: var(--on-play);
+}
+
+/* A neutral key on glass. */
+.key-secondary,
+.button-quiet {
+  --btn-fill: var(--surface);
+  --btn-fill-hover: var(--surface-2);
+  --btn-side: var(--key-side);
+  --btn-edge: var(--line-strong);
+  --btn-ink: var(--fg);
+  background: var(--key-sheen), var(--btn-fill);
+}
+
+.key-secondary:hover:not(:disabled),
+.button-quiet:hover:not(:disabled) {
+  border-color: rgb(79 171 246 / 0.7);
+  background: var(--key-sheen), var(--btn-fill-hover);
+}
+
+.key-ghost {
+  --btn-fill: transparent;
+  --btn-fill-hover: var(--surface-2);
+  --btn-edge: var(--line);
+  --btn-ink: var(--fg);
+  background: transparent;
+  box-shadow: none;
+}
+
+.key-ghost:hover:not(:disabled) {
+  background: var(--surface-2);
+}
+
+.key-ghost:active:not(:disabled) {
+  transform: none;
+  box-shadow: var(--key-face-pressed);
+}
+
+.key-danger,
+.button-danger {
+  --btn-fill: var(--danger-soft);
+  --btn-fill-hover: rgb(255 70 109 / 0.2);
+  --btn-side: color-mix(in srgb, var(--danger) 32%, #000);
+  --btn-edge: color-mix(in srgb, var(--danger) 60%, transparent);
+  --btn-ink: var(--danger);
+  background: var(--btn-fill);
+}
+
+.key-pro {
+  --btn-fill: var(--pro-fill);
+  --btn-fill-hover: linear-gradient(180deg, #fff0b8, #efb22c);
+  --btn-side: #8a5a00;
+  --btn-edge: #a86f0c;
+  --btn-ink: var(--on-pro);
+}
+
+.key-sm {
+  min-height: 36px;
+  padding: 0 14px;
+  font-size: 0.875rem;
+}
+
+.key-lg {
+  min-height: 52px;
+  padding: 0 26px;
+  font-size: 1.05rem;
+}
+
 /* ───────────────────────── Hub ───────────────────────── */
 
 .hub {
   width: 100%;
-  max-width: 1180px;
+  max-width: var(--container-page);
   margin: 0 auto;
   padding: 0 clamp(16px, 4vw, 40px) 64px;
 }
@@ -303,17 +412,17 @@ button {
 }
 
 .hero-title {
-  font-size: clamp(4.2rem, 15vw, 8.5rem);
-  font-weight: 300;
-  line-height: 0.84;
-  letter-spacing: -0.055em;
+  font-size: clamp(3.4rem, 12vw, 7rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.045em;
 }
 
 .hero-line {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: clamp(10px, 2vw, 28px);
-  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation: rise 0.7s var(--ease-out) both;
 }
 
 .hero-line:nth-child(2) {
@@ -325,41 +434,57 @@ button {
   animation-delay: 0.18s;
 }
 
-.hero-line:nth-child(2) b {
-  font-style: italic;
-  color: var(--guess);
-}
-
 .hero-line b {
   font-weight: inherit;
+  background: linear-gradient(180deg, var(--fg) 30%, var(--fg-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Each pillar in its family colour. */
+.hero-line:nth-child(1) b {
+  background-image: linear-gradient(180deg, var(--fg) 20%, var(--color-family-who) 140%);
+}
+
+.hero-line:nth-child(2) b {
+  background-image: linear-gradient(100deg, var(--color-cyan-bright), var(--color-blue) 70%);
+}
+
+.hero-line:nth-child(3) b {
+  background-image: linear-gradient(180deg, var(--fg) 20%, var(--color-family-where) 140%);
+}
+
+:root[data-theme="light"] .hero-line:nth-child(2) b {
+  background-image: linear-gradient(100deg, #0d6fb8, var(--color-blue-deep) 70%);
 }
 
 .hero-line small {
-  max-width: 17ch;
-  padding-top: 6px;
-  border-top: 1px solid var(--ink);
+  max-width: 18ch;
+  padding: 6px 0 0 10px;
+  border-left: 2px solid var(--accent);
   font-family: var(--font-mono);
-  font-size: clamp(0.6rem, 1.1vw, 0.76rem);
-  font-weight: 400;
+  font-size: clamp(0.75rem, 1.1vw, 0.8rem);
+  font-weight: 500;
   line-height: 1.4;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--ink-2);
-  align-self: center;
+  color: var(--fg-2);
 }
 
 .hero-lead {
   margin-top: clamp(24px, 4vw, 44px);
   max-width: 34ch;
-  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+  font-weight: 500;
   line-height: 1.3;
-  animation: rise 0.7s 0.3s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation: rise 0.7s 0.3s var(--ease-out) both;
 }
 
 .hero-lead span {
   display: block;
-  color: var(--ink-2);
-  font-style: italic;
+  color: var(--fg-2);
+  font-weight: 400;
 }
 
 .games-heading {
@@ -367,71 +492,179 @@ button {
   align-items: center;
   gap: 14px;
   margin-bottom: 18px;
+  color: var(--fg);
+  font-weight: 600;
+}
+
+.games-heading::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
 }
 
 .games-heading::after {
   content: "";
   flex: 1;
   height: 1px;
-  background: var(--rule);
+  background: linear-gradient(90deg, var(--line-strong), transparent);
 }
 
 .games {
   display: grid;
-  gap: 18px;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
 }
 
+/* A game tile: art band in the family colour, family + code, title, rule,
+   today's status. --fam comes from data-family (see .game-card[data-family]). */
 .game-card {
+  --fam: var(--accent);
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   min-height: 220px;
-  padding: 22px 22px 20px;
-  border: 1.5px solid var(--ink);
-  background: var(--card);
-  box-shadow: 5px 5px 0 var(--ink);
+  padding: 18px 18px 16px;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--panel-fill);
+  box-shadow: var(--shadow-card);
   transition:
-    transform 0.15s,
-    box-shadow 0.15s;
+    transform 200ms var(--ease-out),
+    border-color 200ms var(--ease-out),
+    box-shadow 200ms var(--ease-out);
 }
 
-a.game-card:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 7px 7px 0 var(--guess);
+a.game-card:hover,
+a.game-card:focus-visible {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--fam) 70%, transparent);
+  box-shadow:
+    var(--shadow-raised),
+    0 0 0 1px color-mix(in srgb, var(--fam) 50%, transparent),
+    0 0 28px color-mix(in srgb, var(--fam) 22%, transparent);
+}
+
+.game-card-art {
+  position: relative;
+  display: block;
+  height: 104px;
+  margin: -18px -18px 6px;
+  overflow: hidden;
+  border-bottom: 1px solid color-mix(in srgb, var(--fam) 35%, transparent);
+  background:
+    radial-gradient(120% 140% at 85% 110%, color-mix(in srgb, var(--fam) 55%, transparent), transparent 60%),
+    repeating-linear-gradient(0deg, transparent 0 19px, color-mix(in srgb, var(--fam) 14%, transparent) 19px 20px),
+    repeating-linear-gradient(90deg, transparent 0 19px, color-mix(in srgb, var(--fam) 14%, transparent) 19px 20px),
+    var(--bg-deep);
+}
+
+:root[data-theme="light"] .game-card-art {
+  background:
+    radial-gradient(120% 140% at 85% 110%, color-mix(in srgb, var(--fam) 40%, transparent), transparent 60%),
+    repeating-linear-gradient(0deg, transparent 0 19px, color-mix(in srgb, var(--fam) 16%, transparent) 19px 20px),
+    repeating-linear-gradient(90deg, transparent 0 19px, color-mix(in srgb, var(--fam) 16%, transparent) 19px 20px),
+    var(--surface-2);
+}
+
+/* The family's mark, drawn big in the corner of the art. */
+.game-card-art svg {
+  position: absolute;
+  right: 14px;
+  bottom: 10px;
+  width: 76px;
+  height: 76px;
+  color: var(--fam);
+  filter: drop-shadow(0 0 12px color-mix(in srgb, var(--fam) 60%, transparent));
+  transition: transform 320ms var(--ease-spring);
+}
+
+a.game-card:hover .game-card-art svg {
+  transform: scale(1.08) rotate(-4deg);
+}
+
+.game-card-art b {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  padding: 2px 6px;
+  border: 1px solid color-mix(in srgb, var(--fam) 45%, transparent);
+  border-radius: var(--radius-xs);
+  background: rgb(1 4 11 / 0.55);
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+:root[data-theme="light"] .game-card-art b {
+  background: rgb(255 255 255 / 0.8);
 }
 
 .game-card h3 {
-  font-size: 1.9rem;
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: -0.03em;
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
 }
 
 .game-card p {
-  font-size: 1.02rem;
-  line-height: 1.35;
-  color: var(--ink-2);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: var(--fg-2);
 }
 
 .game-card-foot {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 6px 12px;
   margin-top: auto;
-  padding-top: 14px;
-  border-top: 1px solid var(--rule);
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  color: var(--fg-2);
 }
 
 .game-card-foot strong {
-  color: var(--guess);
+  margin-left: auto;
+  color: var(--accent);
   font-weight: 600;
+  white-space: nowrap;
+}
+
+.game-card[data-family="who"] {
+  --fam: var(--color-family-who);
+}
+.game-card[data-family="when"] {
+  --fam: var(--color-family-when);
+}
+.game-card[data-family="where"] {
+  --fam: var(--color-family-where);
+}
+.game-card[data-family="shapes"] {
+  --fam: var(--color-family-shapes);
+}
+.game-card[data-family="flags"] {
+  --fam: var(--color-family-flags);
+}
+.game-card[data-family="words"] {
+  --fam: var(--color-family-words);
+}
+.game-card[data-family="numbers"] {
+  --fam: var(--color-family-numbers);
+}
+.game-card[data-family="social"] {
+  --fam: var(--color-teal);
 }
 
 /* ───────────────────────── Game layout ───────────────────────── */
@@ -439,7 +672,7 @@ a.game-card:hover {
 .game {
   flex: 1;
   width: 100%;
-  max-width: 1180px;
+  max-width: var(--container-page);
   margin: 0 auto;
   padding: 16px clamp(16px, 4vw, 40px) 48px;
   display: grid;
@@ -459,9 +692,10 @@ a.game-card:hover {
 .portrait {
   aspect-ratio: 4 / 5;
   overflow: hidden;
-  border: 1.5px solid var(--ink);
-  border-radius: 999px 999px 3px 3px;
-  background: var(--paper-2);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--sunken);
+  box-shadow: var(--shadow-card);
 }
 
 .portrait img {
@@ -469,26 +703,13 @@ a.game-card:hover {
   height: 100%;
   object-fit: cover;
   object-position: 50% 18%;
-  filter: grayscale(1) sepia(0.28) contrast(1.06);
-  mix-blend-mode: multiply;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .portrait img {
-    filter: grayscale(1) contrast(1.05) brightness(0.92);
-    mix-blend-mode: normal;
-  }
-}
-
-:root[data-theme="dark"] .portrait img {
-  filter: grayscale(1) contrast(1.05) brightness(0.92);
-  mix-blend-mode: normal;
+  filter: grayscale(1) contrast(1.06) brightness(0.95);
 }
 
 .dossier-name {
   margin-top: 2px;
   font-size: clamp(1.5rem, 6vw, 2.1rem);
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1.02;
   letter-spacing: -0.03em;
 }
@@ -496,7 +717,6 @@ a.game-card:hover {
 .dossier-description {
   margin-top: 4px;
   font-size: 0.98rem;
-  font-style: italic;
   line-height: 1.25;
   color: var(--ink-2);
 }
@@ -519,7 +739,10 @@ a.game-card:hover {
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  border: 1px solid var(--rule);
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
 }
 
 .progress li {
@@ -540,8 +763,9 @@ a.game-card:hover {
 }
 
 .progress li[data-state="current"] {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--accent-soft);
+  color: var(--fg);
+  box-shadow: inset 0 -2px 0 var(--accent);
 }
 
 .progress li[data-state="done"] {
@@ -550,7 +774,6 @@ a.game-card:hover {
 
 .progress-numeral {
   font-size: 0.82rem;
-  font-style: italic;
 }
 
 .progress-score {
@@ -566,7 +789,7 @@ a.game-card:hover {
   display: flex;
   flex-direction: column;
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: 0.75rem;
   font-style: normal;
   line-height: 1.35;
   letter-spacing: 0.04em;
@@ -592,15 +815,15 @@ a.game-card:hover {
 }
 
 .question {
-  font-size: clamp(1.55rem, 5.2vw, 2.7rem);
-  font-weight: 400;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-weight: 700;
   line-height: 1.06;
   letter-spacing: -0.025em;
   text-wrap: balance;
 }
 
 .question em {
-  color: var(--guess);
+  color: var(--accent);
 }
 
 .controls,
@@ -622,8 +845,9 @@ a.game-card:hover {
 }
 
 .verdict-headline {
+  font-family: var(--font-display);
   font-size: 1.45rem;
-  font-style: italic;
+  font-weight: 700;
   line-height: 1.08;
   letter-spacing: -0.015em;
 }
@@ -643,17 +867,20 @@ a.game-card:hover {
   width: 78px;
   height: 78px;
   margin: 4px;
-  border: 2px solid var(--guess);
+  border: 2px solid var(--accent);
   border-radius: 50%;
-  outline: 1px solid var(--guess);
+  outline: 1px solid var(--accent);
   outline-offset: 3px;
-  color: var(--guess);
+  background: var(--accent-soft);
+  color: var(--accent);
   text-align: center;
   transform: rotate(-9deg);
+  box-shadow: 0 0 22px rgb(79 171 246 / 0.25);
   animation: stamp 0.45s 0.15s cubic-bezier(0.2, 1.5, 0.4, 1) both;
 }
 
 .stamp strong {
+  font-family: var(--font-display);
   font-size: 1.55rem;
   font-weight: 700;
   line-height: 1;
@@ -662,7 +889,7 @@ a.game-card:hover {
 
 .stamp span {
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -674,17 +901,16 @@ a.game-card:hover {
 .dial-panel,
 .timeline {
   position: relative;
-  border: 1.5px solid var(--ink);
-  background: var(--card);
-  /* double rule, like the border of an atlas plate */
-  box-shadow:
-    inset 0 0 0 4px var(--card),
-    inset 0 0 0 5px var(--rule);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--panel-fill);
+  box-shadow: var(--shadow-card);
 }
 
 .map-frame {
   height: clamp(300px, 50svh, 620px);
-  padding: 5px;
+  padding: 0;
+  background: var(--sea);
   overflow: hidden;
   touch-action: none;
   user-select: none;
@@ -812,14 +1038,17 @@ a.game-card:hover {
 
 .map-readout {
   position: absolute;
-  top: 14px;
-  left: 14px;
-  max-width: calc(100% - 28px);
-  padding: 5px 9px;
-  border: 1px solid var(--rule);
-  background: var(--card);
+  top: 12px;
+  left: 12px;
+  max-width: calc(100% - 24px);
+  padding: 6px 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   letter-spacing: 0.02em;
   white-space: pre;
   pointer-events: none;
@@ -842,8 +1071,13 @@ a.game-card:hover {
   bottom: 14px;
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--ink);
-  background: var(--card);
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-card);
 }
 
 .map-controls button {
@@ -861,8 +1095,8 @@ a.game-card:hover {
 }
 
 .map-controls button:hover {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--surface-3);
+  color: var(--accent);
 }
 
 .map-status {
@@ -871,7 +1105,6 @@ a.game-card:hover {
   display: grid;
   place-items: center;
   padding: 24px;
-  font-style: italic;
   text-align: center;
   color: var(--ink-2);
   pointer-events: none;
@@ -880,7 +1113,7 @@ a.game-card:hover {
 /* ───────────────────────── Year dial ───────────────────────── */
 
 .dial-panel {
-  padding: 5px;
+  padding: 0;
   overflow: hidden;
 }
 
@@ -900,13 +1133,13 @@ a.game-card:hover {
   min-width: 0;
   padding: 0;
   border: 0;
-  border-bottom: 1px dashed var(--ink-3);
+  border-bottom: 1px dashed var(--fg-3);
   border-radius: 0;
   background: transparent;
-  color: var(--ink);
-  font-family: var(--font-display);
-  font-size: clamp(3rem, 13.5vw, 8rem);
-  font-weight: 300;
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: clamp(2.8rem, 12vw, 6.5rem);
+  font-weight: 600;
   line-height: 1.05;
   letter-spacing: -0.045em;
   text-align: center;
@@ -915,17 +1148,21 @@ a.game-card:hover {
 
 .dial-year:focus {
   outline: none;
-  border-bottom: 1px solid var(--guess);
+  border-bottom: 1px solid var(--accent);
 }
 
 .dial-step {
   flex: none;
   width: 44px;
   height: 44px;
-  border: 1px solid var(--rule);
-  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--key-sheen), var(--surface-2);
+  box-shadow:
+    var(--key-face),
+    0 2px 0 var(--key-side);
   font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-size: 0.75rem;
   font-weight: 600;
   transition:
     background 0.15s,
@@ -933,8 +1170,8 @@ a.game-card:hover {
 }
 
 .dial-step:hover {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--surface-3);
+  color: var(--fg);
 }
 
 .dial-ruler {
@@ -942,7 +1179,7 @@ a.game-card:hover {
   height: 84px;
   margin-top: clamp(16px, 4vw, 28px);
   overflow: hidden;
-  border-top: 1px solid var(--ink);
+  border-top: 1px solid var(--line-strong);
   cursor: grab;
   touch-action: none;
   user-select: none;
@@ -977,14 +1214,14 @@ a.game-card:hover {
 
 .dial-tick-decade {
   height: 26px;
-  background: var(--ink);
+  background: var(--fg-2);
 }
 
 .dial-tick-century {
   width: 2px;
   height: 36px;
   margin-left: -0.5px;
-  background: var(--ink);
+  background: var(--fg-2);
 }
 
 .dial-tick span {
@@ -993,7 +1230,7 @@ a.game-card:hover {
   left: 0;
   transform: translateX(-50%);
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   color: var(--ink-2);
 }
 
@@ -1032,7 +1269,7 @@ a.game-card:hover {
 .timeline-track {
   position: relative;
   height: 2px;
-  background: var(--ink);
+  background: var(--fg-2);
 }
 
 .timeline-gap {
@@ -1065,15 +1302,16 @@ a.game-card:hover {
 
 .timeline-flag small {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .timeline-flag strong {
-  font-size: clamp(1.9rem, 7vw, 2.8rem);
-  font-weight: 400;
+  font-family: var(--font-mono);
+  font-size: clamp(1.7rem, 6.5vw, 2.5rem);
+  font-weight: 600;
   line-height: 1;
   letter-spacing: -0.03em;
 }
@@ -1118,10 +1356,15 @@ a.game-card:hover {
 }
 
 .summary-total strong {
-  font-size: clamp(5rem, 22vw, 9.5rem);
-  font-weight: 300;
-  line-height: 0.86;
-  letter-spacing: -0.055em;
+  font-family: var(--font-display);
+  font-size: var(--text-score);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.045em;
+  background: linear-gradient(180deg, var(--fg) 35%, var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   font-variant-numeric: lining-nums tabular-nums;
 }
 
@@ -1133,14 +1376,15 @@ a.game-card:hover {
 
 .summary-rank {
   margin-top: 10px;
-  font-size: clamp(1.5rem, 5vw, 2.1rem);
-  font-style: italic;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 4.5vw, 1.9rem);
+  font-weight: 700;
   line-height: 1;
-  color: var(--guess);
+  color: var(--accent);
 }
 
 .breakdown {
-  border-top: 1.5px solid var(--ink);
+  border-top: 1px solid var(--line-strong);
 }
 
 .breakdown li {
@@ -1160,7 +1404,7 @@ a.game-card:hover {
 .breakdown-label {
   grid-area: label;
   font-family: var(--font-mono);
-  font-size: 0.64rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-2);
@@ -1175,15 +1419,16 @@ a.game-card:hover {
 .breakdown-detail {
   grid-area: detail;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: var(--guess);
 }
 
 .breakdown-score {
   grid-area: score;
   align-self: center;
-  font-size: 1.5rem;
-  font-weight: 500;
+  font-family: var(--font-mono);
+  font-size: 1.35rem;
+  font-weight: 600;
   text-align: right;
   font-variant-numeric: lining-nums tabular-nums;
 }
@@ -1214,14 +1459,15 @@ a.game-card:hover {
   flex-direction: column;
   align-items: flex-end;
   font-family: var(--font-mono);
-  font-size: 0.64rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-2);
 }
 
 .countdown time {
-  font-family: var(--font-display);
+  font-family: var(--font-mono);
+  font-weight: 600;
   font-size: 1.7rem;
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -1238,7 +1484,6 @@ a.game-card:hover {
 }
 
 .life-span {
-  font-style: italic;
   color: var(--answer);
 }
 
@@ -1258,7 +1503,7 @@ a.game-card:hover {
   gap: 6px 20px;
   margin-top: 12px;
   font-family: var(--font-mono);
-  font-size: 0.7rem !important;
+  font-size: 0.75rem !important;
   color: var(--ink-3);
 }
 
@@ -1266,29 +1511,76 @@ a.game-card:hover {
   color: var(--ink);
   font-weight: 600;
   text-decoration: underline;
-  text-decoration-color: var(--guess);
+  text-decoration-color: var(--accent);
   text-underline-offset: 3px;
 }
 
 /* ───────────────────────── Modal ───────────────────────── */
 
 .modal {
-  width: min(440px, calc(100vw - 32px));
+  width: min(460px, calc(100vw - 32px));
   max-height: calc(100svh - 32px);
   margin: auto;
   padding: 0;
-  border: 1.5px solid var(--ink);
-  background: var(--card);
-  color: var(--ink);
-  box-shadow: 6px 6px 0 var(--ink);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-xl);
+  background: var(--panel-fill), var(--surface);
+  color: var(--fg);
+  box-shadow: var(--shadow-raised);
 }
 
 .modal[open] {
-  animation: rise 0.25s both;
+  animation: rise 0.25s var(--ease-out) both;
 }
 
 .modal::backdrop {
   background: var(--backdrop);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+/* A sheet: up from the bottom on phones, a panel on the right on wide screens. */
+.modal[data-variant="sheet"] {
+  width: 100%;
+  max-width: 100%;
+  max-height: min(88svh, 720px);
+  margin: auto 0 0;
+  border-width: 1px 0 0;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.modal[data-variant="sheet"][open] {
+  animation: sheet-up 320ms var(--ease-out) both;
+}
+
+@keyframes sheet-up {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    transform: translateX(40px);
+    opacity: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .modal[data-variant="sheet"] {
+    width: 22rem;
+    height: 100svh;
+    max-height: 100svh;
+    margin: 0 0 0 auto;
+    border-width: 0 0 0 1px;
+    border-radius: 0;
+  }
+
+  .modal[data-variant="sheet"][open] {
+    animation-name: sheet-in;
+  }
 }
 
 .modal-body {
@@ -1304,9 +1596,8 @@ a.game-card:hover {
 }
 
 .modal-header h2 {
-  font-size: 1.7rem;
-  font-style: italic;
-  font-weight: 400;
+  font-size: 1.5rem;
+  font-weight: 700;
   letter-spacing: -0.02em;
 }
 
@@ -1324,8 +1615,7 @@ a.game-card:hover {
 
 .help-list li::marker {
   font-size: 0.82rem;
-  font-style: italic;
-  color: var(--guess);
+  color: var(--accent);
 }
 
 .stat-tiles {
@@ -1333,8 +1623,10 @@ a.game-card:hover {
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   margin-bottom: 14px;
-  border: 1px solid var(--rule);
-  background: var(--rule);
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--line);
 }
 
 .stat-tiles div {
@@ -1350,8 +1642,9 @@ a.game-card:hover {
 }
 
 .stat-tiles dd {
-  font-size: 2rem;
-  font-weight: 400;
+  font-family: var(--font-mono);
+  font-size: 1.75rem;
+  font-weight: 600;
   line-height: 1;
   letter-spacing: -0.03em;
   font-variant-numeric: lining-nums;
@@ -1359,7 +1652,7 @@ a.game-card:hover {
 
 .stat-tiles dt {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--ink-2);
@@ -1368,9 +1661,11 @@ a.game-card:hover {
 /* ───────────────────────── Skeleton ───────────────────────── */
 
 .skeleton-block {
-  border-color: var(--rule);
-  background: var(--paper-2);
+  border-color: var(--line);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(90deg, var(--sunken) 30%, var(--surface-2) 50%, var(--sunken) 70%) 0 0 / 200% 100%;
   box-shadow: none;
+  animation: shimmer 1.6s linear infinite;
 }
 
 /* ───────────────────────── Wider screens ───────────────────────── */
@@ -1438,7 +1733,7 @@ a.game-card:hover {
     grid-column: auto;
     grid-row: auto;
     flex-direction: row;
-    font-size: 0.68rem;
+    font-size: 0.75rem;
   }
 
   .progress-label i {
@@ -1476,34 +1771,11 @@ a.game-card:hover {
 /* ═════════════════════════ More games ═════════════════════════
    Pieces shared by Wayfarer, Dig Site and First to Last. */
 
-/* How warm a dig is: from the verdigris of a find, through vermilion, to
-   cold slate. Any element with data-tone="heat-N" gets --tone. */
+/* How warm a dig is: from the green of a find, through red and amber, to
+   cold blue. Any element with data-tone="heat-N" gets --tone. The scale
+   itself (--heat-1…5) is in tokens.css. */
 :root {
   --heat-0: var(--answer);
-  /* Dark enough to read as text on paper (4.5:1+); the dark theme overrides them below. */
-  --heat-1: #ad3420;
-  --heat-2: #944909;
-  --heat-3: #765c00;
-  --heat-4: #31648d;
-  --heat-5: #4a4f9c;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --heat-1: #ff6f52;
-    --heat-2: #ff9a4a;
-    --heat-3: #e2c04e;
-    --heat-4: #7fb2e0;
-    --heat-5: #9a9cf0;
-  }
-}
-
-:root[data-theme="dark"] {
-  --heat-1: #ff6f52;
-  --heat-2: #ff9a4a;
-  --heat-3: #e2c04e;
-  --heat-4: #7fb2e0;
-  --heat-5: #9a9cf0;
 }
 
 [data-tone="heat-0"] {
@@ -1529,19 +1801,33 @@ a.game-card:hover {
 
 .game-card-theme {
   display: flex;
-  align-items: baseline;
-  gap: 9px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: 0.75rem;
   letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--ink-2);
 }
 
+/* The family, as a chip: a dot in its colour and its name. */
 .game-card-theme i {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-style: normal;
   font-weight: 600;
-  color: var(--guess);
+  color: var(--fg);
+}
+
+.game-card-theme i::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--fam, var(--accent));
+  box-shadow: 0 0 8px var(--fam, var(--accent));
 }
 
 /* ───────────────────────── Brief (the left column) ───────────────────────── */
@@ -1551,7 +1837,7 @@ a.game-card:hover {
 }
 
 .dossier-name em {
-  color: var(--guess);
+  color: var(--accent);
 }
 
 .dossier:has(.plate) {
@@ -1564,16 +1850,17 @@ a.game-card:hover {
 .plate {
   aspect-ratio: 1;
   overflow: hidden;
-  border: 1.5px solid var(--ink);
-  background: var(--paper-2);
-  box-shadow: 3px 3px 0 var(--ink);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--sunken);
+  box-shadow: var(--shadow-card);
 }
 
 .plate img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(1) sepia(0.32) contrast(1.05);
+  filter: grayscale(1) contrast(1.08) brightness(0.9);
   transition: filter 1.4s ease-out;
 }
 
@@ -1599,7 +1886,10 @@ a.game-card:hover {
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  border: 1px solid var(--rule);
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
 }
 
 .clues li {
@@ -1616,7 +1906,7 @@ a.game-card:hover {
 
 .clues span {
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-2);
@@ -1624,7 +1914,7 @@ a.game-card:hover {
 
 .clues b {
   font-size: 0.95rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.15;
   color: var(--answer);
   animation: fade 0.6s both;
@@ -1632,7 +1922,7 @@ a.game-card:hover {
 
 .clues li[data-locked] b {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   font-weight: 400;
   line-height: 1.3;
   color: var(--ink-3);
@@ -1650,13 +1940,14 @@ a.game-card:hover {
   flex: 1;
   height: 9px;
   border: 1px solid var(--ink-3);
+  border-radius: var(--radius-xs);
   transition:
     background 0.3s,
     border-color 0.3s;
 }
 
 .meter li[data-state="current"] {
-  border-color: var(--ink);
+  border-color: var(--accent);
   box-shadow: inset 0 0 0 1px var(--ink);
 }
 
@@ -1784,7 +2075,6 @@ a.game-card:hover {
 .feedback {
   margin-bottom: 4px;
   font-size: 1.3rem;
-  font-style: italic;
   line-height: 1.1;
   letter-spacing: -0.015em;
   animation: rise 0.3s both;
@@ -1821,29 +2111,30 @@ a.game-card:hover {
 .picker-input {
   width: 100%;
   padding: 12px 14px;
-  border: 1.5px solid var(--ink);
-  border-radius: 0;
-  background: var(--card);
-  color: var(--ink);
-  font-family: var(--font-display);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--sunken);
+  color: var(--fg);
+  font-family: var(--font-sans);
   font-size: 1.05rem;
+  box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.18);
 }
 
 .picker-input::placeholder {
   color: var(--ink-3);
-  font-style: italic;
 }
 
 .picker-input:focus {
-  outline: 2px solid var(--guess);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
 .picker-list {
   max-height: 206px;
   overflow-y: auto;
-  border: 1px solid var(--rule);
-  background: var(--card);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface);
   overscroll-behavior: contain;
 }
 
@@ -1867,8 +2158,8 @@ a.game-card:hover {
 }
 
 .picker-list button[aria-pressed="true"] {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--primary-solid);
+  color: var(--on-primary);
 }
 
 .picker-list button:disabled {
@@ -1879,7 +2170,6 @@ a.game-card:hover {
 
 .picker-empty {
   padding: 12px 14px;
-  font-style: italic;
   color: var(--ink-2);
 }
 
@@ -1890,28 +2180,8 @@ a.game-card:hover {
   gap: 12px;
 }
 
-.button-quiet {
-  padding: 12.5px 18px;
-  border: 1.5px solid var(--ink);
-  background: transparent;
-  color: var(--ink);
-  box-shadow: none;
-}
-
-.button-quiet:hover:not(:disabled) {
-  transform: none;
-  background: var(--ink);
-  color: var(--paper);
-  box-shadow: none;
-}
-
-.button-quiet:active:not(:disabled) {
-  transform: translate(1px, 1px);
-  box-shadow: none;
-}
-
 .tries {
-  border-top: 1.5px solid var(--ink);
+  border-top: 1px solid var(--line-strong);
 }
 
 .tries li {
@@ -1926,7 +2196,7 @@ a.game-card:hover {
 
 .tries-n {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--ink-3);
 }
 
@@ -1942,7 +2212,6 @@ a.game-card:hover {
 }
 
 .tries li[data-state="skip"] .tries-name {
-  font-style: italic;
   color: var(--ink-2);
 }
 
@@ -1954,7 +2223,7 @@ a.game-card:hover {
 .tries-hint {
   grid-column: 2;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   line-height: 1.4;
   color: var(--guess);
 }
@@ -2002,14 +2271,15 @@ a.game-card:hover {
   top: 2px;
   left: 5px;
   font-family: var(--font-mono);
-  font-size: 0.56rem;
+  font-size: 0.75rem;
   opacity: 0.8;
 }
 
 .slots b,
 .slots button {
-  font-size: 1.45rem;
-  font-weight: 500;
+  font-family: var(--font-mono);
+  font-size: 1.3rem;
+  font-weight: 600;
   line-height: 1;
 }
 
@@ -2020,7 +2290,7 @@ a.game-card:hover {
 
 .slots li[data-state="next"] {
   border-style: solid;
-  border-color: var(--ink);
+  border-color: var(--accent);
 }
 
 .slots li[data-state="placed"] {
@@ -2050,6 +2320,7 @@ a.game-card:hover {
   min-height: 56px;
   padding: 8px 12px 8px 9px;
   border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
   background: var(--card);
   text-align: left;
   transition:
@@ -2058,7 +2329,7 @@ a.game-card:hover {
 }
 
 button.event:hover:not(:disabled) {
-  border-color: var(--ink);
+  border-color: var(--accent);
 }
 
 button.event:disabled:not([data-state]) {
@@ -2071,7 +2342,7 @@ button.event:disabled:not([data-state]) {
   place-items: center;
   width: 30px;
   height: 30px;
-  border: 1.5px solid var(--ink);
+  border: 1px solid var(--line-strong);
   border-radius: 50%;
   font-family: var(--font-mono);
   font-size: 0.78rem;
@@ -2084,13 +2355,13 @@ button.event:disabled:not([data-state]) {
 .event-text b {
   display: block;
   font-size: 1.02rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.2;
 }
 
 .event-text small {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--ink-2);
@@ -2098,15 +2369,18 @@ button.event:disabled:not([data-state]) {
 
 .event-position {
   min-width: 1.1em;
-  font-size: 1.5rem;
-  font-style: italic;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 1.35rem;
   line-height: 1;
   text-align: right;
   color: var(--guess);
 }
 
 .event-year {
-  font-size: 1.3rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 1.15rem;
   line-height: 1;
   letter-spacing: -0.02em;
   white-space: nowrap;
@@ -2187,7 +2461,7 @@ ol.events li:nth-child(6) {
 
   .plate {
     aspect-ratio: 4 / 3;
-    box-shadow: 5px 5px 0 var(--ink);
+    box-shadow: var(--shadow-card);
   }
 
   .progress {
@@ -2259,8 +2533,8 @@ ol.events li:nth-child(6) {
    The header link, the sign-in form and the settings page. */
 
 .icon-button[data-signed-in] {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--primary-solid);
+  color: var(--on-primary);
 }
 
 .account {
@@ -2272,9 +2546,8 @@ ol.events li:nth-child(6) {
 }
 
 .account h1 {
-  font-size: clamp(2.3rem, 8vw, 3.2rem);
-  font-style: italic;
-  font-weight: 400;
+  font-size: clamp(2.1rem, 7vw, 2.9rem);
+  font-weight: 700;
   line-height: 1;
   letter-spacing: -0.03em;
 }
@@ -2314,7 +2587,7 @@ ol.events li:nth-child(6) {
 .account-section > h2,
 .account-section > summary {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -2324,22 +2597,23 @@ ol.events li:nth-child(6) {
 .field input {
   width: 100%;
   padding: 12px 14px;
-  border: 1.5px solid var(--ink);
-  border-radius: 0;
-  background: var(--card);
-  color: var(--ink);
-  font-family: var(--font-display);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--sunken);
+  color: var(--fg);
+  font-family: var(--font-sans);
   font-size: 1.05rem;
+  box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.18);
 }
 
 .field input:focus {
-  outline: 2px solid var(--guess);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
 .field small {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   color: var(--ink-3);
 }
 
@@ -2350,7 +2624,7 @@ ol.events li:nth-child(6) {
 }
 
 .form-error {
-  color: var(--guess);
+  color: var(--danger);
 }
 
 .form-done {
@@ -2360,9 +2634,8 @@ ol.events li:nth-child(6) {
 .link-button {
   margin-top: 18px;
   font-size: 1rem;
-  font-style: italic;
   text-decoration: underline;
-  text-decoration-color: var(--guess);
+  text-decoration-color: var(--accent);
   text-underline-offset: 4px;
 }
 
@@ -2392,20 +2665,6 @@ ol.events li:nth-child(6) {
   margin-top: 14px;
 }
 
-.button-danger {
-  background: var(--guess);
-  color: var(--paper);
-  box-shadow: 3px 3px 0 var(--ink);
-}
-
-.button-danger:hover:not(:disabled) {
-  box-shadow: 4px 4px 0 var(--ink);
-}
-
-.button-danger:active:not(:disabled) {
-  box-shadow: 1px 1px 0 var(--ink);
-}
-
 /* ═════════════════════════ Touch targets ═════════════════════════
    On touch screens every control is at least 44 x 44 px. */
 
@@ -2428,3 +2687,4 @@ ol.events li:nth-child(6) {
     align-items: center;
   }
 }
+} /* @layer components */
