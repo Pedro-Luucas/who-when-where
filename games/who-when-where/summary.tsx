@@ -38,7 +38,7 @@ export function Summary({ person, guesses, label, children }: Props) {
   const pins: { lat: number; lon: number }[] = [];
   ROUNDS.forEach((round, i) => {
     const guess = guesses[i];
-    if (guess.kind !== "place") return;
+    if (guess.kind !== "place" || guess.skipped) return;
     markers.push({ lat: guess.lat, lon: guess.lon, kind: "guess" });
     arcs.push({ from: guess, to: person[round.event].place, kind: "miss" });
     pins.push(guess);
@@ -67,6 +67,7 @@ export function Summary({ person, guesses, label, children }: Props) {
   }
 
   const places = guesses.filter((guess) => guess.kind === "place");
+  const pinned = places.filter((guess) => !guess.skipped);
   const years = guesses.filter((guess) => guess.kind === "year");
   const sum = (list: Guess[]) => list.reduce((acc, guess) => acc + guess.score, 0);
   const max = (list: Guess[]) => formatNumber(list.length * ROUND_MAX, locale);
@@ -77,9 +78,10 @@ export function Summary({ person, guesses, label, children }: Props) {
     return {
       id: round.id,
       label: t(`r_${round.id}`),
-      verdict: verdictOf(guess.score),
-      yours:
-        guess.kind === "place"
+      verdict: guess.skipped ? "skip" : verdictOf(guess.score),
+      yours: guess.skipped
+        ? shell("gaveUp")
+        : guess.kind === "place"
           ? shell("kmOff", { km: formatNumber(guess.km, locale) })
           : guess.diff === 0
             ? `${guess.year} ✓`
@@ -104,7 +106,7 @@ export function Summary({ person, guesses, label, children }: Props) {
           { label: shell("statYears"), value: `${formatNumber(sum(years), locale)}/${max(years)}` },
           {
             label: shell("statClosest"),
-            value: places.length ? `${formatNumber(Math.min(...places.map((guess) => guess.km)), locale)} km` : "—",
+            value: pinned.length ? `${formatNumber(Math.min(...pinned.map((guess) => guess.km)), locale)} km` : "—",
           },
         ]}
         review={review}

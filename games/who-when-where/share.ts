@@ -13,8 +13,11 @@ export function shareText(day: number, guesses: Guess[], locale: Locale, url: st
   const lines = ROUNDS.map((round, i) => {
     const guess = guesses[i];
     const icon = (round.event === "birth" ? "🌱" : "🥀") + (round.kind === "place" ? "📍" : "📅");
-    const detail =
-      guess.kind === "place" ? `${formatNumber(guess.km, locale)} km` : `±${guess.diff}`;
+    const detail = guess.skipped
+      ? "—"
+      : guess.kind === "place"
+        ? `${formatNumber(guess.km, locale)} km`
+        : `±${guess.diff}`;
     return `${icon} ${meter(guess.score)} ${detail}`;
   });
   return [

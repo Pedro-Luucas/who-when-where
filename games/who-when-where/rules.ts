@@ -16,8 +16,9 @@ export type Round = (typeof ROUNDS)[number];
 export const ROUND_MAX = 250;
 export const TOTAL_MAX = ROUND_MAX * ROUNDS.length;
 
-export type PlaceGuess = { kind: "place"; lat: number; lon: number; km: number; score: number };
-export type YearGuess = { kind: "year"; year: number; diff: number; score: number };
+/** `skipped`: the player gave up before this round; it scored nothing and has no pin or year. */
+export type PlaceGuess = { kind: "place"; lat: number; lon: number; km: number; score: number; skipped?: true };
+export type YearGuess = { kind: "year"; year: number; diff: number; score: number; skipped?: true };
 export type Guess = PlaceGuess | YearGuess;
 
 // Full marks within 20 km (a pin can't be placed much finer than a city),
@@ -51,6 +52,15 @@ export function gradePlace(person: Person, round: Round, pin: LatLon): PlaceGues
 export function gradeYear(person: Person, round: Round, year: number): YearGuess {
   const diff = Math.abs(year - person[round.event].year);
   return { kind: "year", year, diff, score: scoreYear(diff) };
+}
+
+/** The rounds still to play from `from` on, given up: they score nothing. */
+export function giveUpFrom(from: number): Guess[] {
+  return ROUNDS.slice(from).map((round): Guess =>
+    round.kind === "place"
+      ? { kind: "place", lat: 0, lon: 0, km: 0, score: 0, skipped: true }
+      : { kind: "year", year: 0, diff: 0, score: 0, skipped: true },
+  );
 }
 
 export const totalScore = (guesses: Guess[]) =>

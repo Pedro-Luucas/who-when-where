@@ -11,9 +11,9 @@ import type { Guess } from "./rules";
 import { shareText } from "./share";
 import { computeStats, type DayRecord } from "./store";
 
-function Board({ puzzle, moves, onMove, year, label, children }: BoardProps<Person, Guess>) {
+function Board({ puzzle, moves, onMove, onMoves, year, label, children }: BoardProps<Person, Guess>) {
   return (
-    <WhoWhenWhereBoard person={puzzle} guesses={moves} onGuess={onMove} maxYear={year} label={label}>
+    <WhoWhenWhereBoard person={puzzle} guesses={moves} onGuess={onMove} onGuesses={onMoves} maxYear={year} label={label}>
       {children}
     </WhoWhenWhereBoard>
   );

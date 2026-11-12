@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import { Hud, type Pip } from "@/components/play/hud";
+import { cue } from "@/lib/fx";
 import { useShellT } from "@/lib/shell-messages";
 import { useGameT } from "./messages";
 import type { Person } from "./people";
 import { Dossier } from "./dossier";
 import { PlaceRound } from "./place-round";
-import { ROUNDS, ROUND_MAX, totalScore, type Guess, type PlaceGuess, type YearGuess } from "./rules";
+import { ROUNDS, ROUND_MAX, giveUpFrom, totalScore, type Guess, type PlaceGuess, type YearGuess } from "./rules";
 import { Summary } from "./summary";
 import { YearRound } from "./year-round";
 
@@ -15,6 +16,8 @@ type BoardProps = {
   person: Person;
   guesses: Guess[];
   onGuess: (guess: Guess) => void;
+  /** Several guesses at once (giving up fills in the rounds left). */
+  onGuesses?: (guesses: Guess[]) => void;
   /** Latest year the dials allow (the current year). */
   maxYear: number;
   /** The line above the name: "No. 12 — Today's mind", "Stage 3 of 8 — Who When Where". */
@@ -24,7 +27,7 @@ type BoardProps = {
 };
 
 /** One Who When Where puzzle. The guesses live with whoever renders it. */
-export function WhoWhenWhereBoard({ person, guesses, onGuess, maxYear, label, children }: BoardProps) {
+export function WhoWhenWhereBoard({ person, guesses, onGuess, onGuesses, maxYear, label, children }: BoardProps) {
   const { t } = useGameT();
   const shell = useShellT();
   // True between locking a guess and pressing "next": the answer is on screen.
@@ -37,8 +40,18 @@ export function WhoWhenWhereBoard({ person, guesses, onGuess, maxYear, label, ch
   const locked = revealing ? guesses[roundIndex] : null;
 
   function lock(guess: Guess) {
+    cue(guess.score >= ROUND_MAX * 0.8 ? "hit" : guess.score >= ROUND_MAX * 0.4 ? "near" : "miss");
     onGuess(guess);
     setRevealing(true);
+  }
+
+  /** Ends the puzzle: the rounds left score nothing, and the result shows the whole life. */
+  function giveUp() {
+    const rest = giveUpFrom(guesses.length);
+    if (!rest.length) return;
+    if (onGuesses) onGuesses(rest);
+    else rest.forEach(onGuess);
+    setRevealing(false);
   }
 
   const nextLabel = finished ? t("seeResults") : t("next");
@@ -57,7 +70,8 @@ export function WhoWhenWhereBoard({ person, guesses, onGuess, maxYear, label, ch
         step={{ n: Math.min(roundIndex + 1, ROUNDS.length), total: ROUNDS.length, kind: "round" }}
         pips={pips}
         stats={[{ icon: "star", label: shell("score"), value: totalScore(guesses) }]}
-        over={showSummary}
+        onGiveUp={giveUp}
+        over={showSummary || finished}
       />
       <Dossier
         person={person}
