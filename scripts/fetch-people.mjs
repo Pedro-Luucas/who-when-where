@@ -24,6 +24,8 @@ import {
   summaryUrl,
   stripHatnote,
 } from "./lib/wiki.mjs";
+import { findGiveaways, stripNationality } from "./lib/giveaways.mjs";
+import { DESCRIPTIONS } from "./people-descriptions.mjs";
 import { ROSTER, OVERRIDES } from "./people-roster.mjs";
 
 const OUT_JSON = path.join(ROOT, "games/who-when-where/data/people.json");
@@ -161,6 +163,18 @@ async function main() {
       death: { year: died.year, place: describePlace(person, "P20", warnings) },
     };
     merge(entry, OVERRIDES[title] ?? {});
+    // The description is shown during play: no nationality or place in it
+    // (scripts/people-descriptions.mjs; Wikidata's start with one).
+    const written = DESCRIPTIONS[title];
+    if (written) entry.description = { en: written[0], pt: written[1] };
+    else {
+      warnings.push("no hand-written description");
+      for (const lang of ["en", "pt"]) entry.description[lang] = stripNationality(entry.description[lang], lang);
+    }
+    for (const lang of ["en", "pt"]) {
+      const hits = findGiveaways(entry.description[lang]);
+      if (hits.length) warnings.push(`description.${lang} names ${hits.map((hit) => hit.term).join(", ")}`);
+    }
     result.push(entry);
 
     const b = entry.birth;

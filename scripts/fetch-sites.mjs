@@ -23,6 +23,7 @@ import {
   slugify,
   stripHatnote,
 } from "./lib/wiki.mjs";
+import { findGiveaways } from "./lib/giveaways.mjs";
 import { SITES, SITE_OVERRIDES } from "./sites-roster.mjs";
 
 const OUT_JSON = path.join(ROOT, "games/dig-site/data/sites.json");
@@ -104,6 +105,13 @@ async function main() {
       image,
     };
     merge(entry, SITE_OVERRIDES[site.title] ?? {});
+    // The clue and era show while the player searches: nothing in them may name a place.
+    for (const field of ["clue", "era"]) {
+      for (const lang of ["en", "pt"]) {
+        const hits = findGiveaways(entry[field][lang]);
+        if (hits.length) warnings.push(`${field}.${lang} names ${hits.map((hit) => hit.term).join(", ")}`);
+      }
+    }
     result.push(entry);
 
     console.log(

@@ -23,7 +23,7 @@ function Board({ puzzle, moves, onMove, onMoves, tries = MAX_TRIES, label, child
       items={puzzle.map((person) => ({
         id: person.id,
         name: person.name[locale],
-        note: [person.field[locale], person.citizenship?.[locale]].filter(Boolean).join(" · "),
+        note: person.field[locale],
         value: lifeYears(person.born.year, person.died.year, locale),
         media: <Monogram name={person.name.en} />,
       }))}

@@ -19,9 +19,31 @@ export type Move = PinMove | typeof PASS;
 const EXACT_KM = 25;
 const SCALE_KM: Record<RegionSet, number> = { world: 700, europe: 300, asia: 500, africa: 450, americas: 500, oceania: 450 };
 
-/** The cities each set deals from: the bigger ones, so they are fair to ask. */
+const fold = (name: string) =>
+  name
+    .normalize("NFD")
+    .replace(/\p{M}/gu, "")
+    .toLowerCase();
+
+/**
+ * Names that point at more than one well-known city. The round names only the
+ * city — never its country, which would give the answer away — so these would
+ * be guesswork: two Hyderabads, a Victoria in two oceans, San José and San Jose.
+ */
+const SHARED_NAMES = new Set(
+  [
+    "Santiago", "Valencia", "Vitoria", "San Jose", "San José", "Córdoba", "Tripoli", "Kingston", "Georgetown",
+    "George Town", "Victoria", "Panama City", "Portland", "Saint John's", "St. George's", "Santo Domingo", "La Paz",
+    "Memphis", "Mesa", "Natal", "Perth", "Columbus", "Birmingham", "Hyderabad", "Durango", "Newcastle", "Richmond",
+  ].map(fold),
+);
+const nameCount = new Map<string, number>();
+for (const city of CITIES) nameCount.set(fold(city.name.en), (nameCount.get(fold(city.name.en)) ?? 0) + 1);
+const unambiguous = (city: City) => !SHARED_NAMES.has(fold(city.name.en)) && nameCount.get(fold(city.name.en)) === 1;
+
+/** The cities each set deals from: the bigger ones, so they are fair to ask, with a name that is theirs alone. */
 function poolOf(set: RegionSet): City[] {
-  const inside = CITIES.filter((city) => inSet(city.country, set));
+  const inside = CITIES.filter((city) => inSet(city.country, set) && unambiguous(city));
   return set === "world" ? inside.filter((city) => city.pop >= 2_000_000 || city.capital) : inside.slice(0, 160);
 }
 

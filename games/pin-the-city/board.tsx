@@ -23,7 +23,8 @@ function Board({ puzzle, moves, onMove, onMoves, label, children }: BoardProps<P
     const country = countryById(city.country)?.name[locale] ?? "";
     return {
       key: city.id,
-      eyebrow: t(city.capital ? "eyebrowCapital" : "eyebrow", { country }),
+      // Only the city: its country would give the answer away.
+      eyebrow: t(city.capital ? "eyebrowCapital" : "eyebrow"),
       prompt: t("prompt", { city: city.name[locale] }),
       target: city,
       answer: `${city.name[locale]}, ${country}`,
@@ -44,7 +45,8 @@ function Board({ puzzle, moves, onMove, onMoves, label, children }: BoardProps<P
       describe={(round, move, judged) => {
         const at = isPinMove(move) ? { lat: move[0], lon: move[1] } : puzzle.cities[round];
         return {
-          marker: { ...at, kind: "guess" },
+          // The pin not yet locked in can be dragged to fine-tune it.
+          marker: { ...at, kind: "guess", draggable: !judged },
           text: judged ? kmText(judge(puzzle, round, move).km) : t("yourPin"),
         };
       }}

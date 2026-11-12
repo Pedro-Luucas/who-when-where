@@ -31,7 +31,8 @@ function Board({ puzzle, moves, onMove, onMoves, label, children }: BoardProps<P
     const placeName = place.name[locale];
     return {
       key: options.map((person) => person.id).join("."),
-      eyebrow: t("eyebrow", { country: place.country?.[locale] ?? "" }),
+      // The town and the map only: its country would point at a nationality.
+      eyebrow: t("eyebrow"),
       prompt: t("prompt", { place: placeName }),
       scene: (answered) => {
         const markers: MapMarker[] = [{ lat: place.lat, lon: place.lon, kind: "answer", label: placeName }];

@@ -7,8 +7,8 @@
       "pt": "Charles Darwin"
     },
     "description": {
-      "en": "English naturalist and biologist",
-      "pt": "biólogo e naturalista inglês"
+      "en": "Naturalist and biologist behind the theory of evolution by natural selection",
+      "pt": "Naturalista e biólogo, autor da teoria da evolução por seleção natural"
     },
     "extract": {
       "en": "Charles Robert Darwin was an English naturalist, geologist, and biologist, widely known for his contributions to evolutionary biology. His proposition that all species have descended from a common ancestor is now accepted and considered a fundamental scientific concept. In a joint presentation with Alfred Russel Wallace, he proposed that this branching pattern of evolution resulted from a process he called natural selection, in which the struggle for existence has a similar effect to the artificial selection involved in selective breeding. Darwin has been described as one of the most influential figures in human history and was honoured by burial in Westminster Abbey.",
@@ -69,8 +69,8 @@
       "pt": "Albert Einstein"
     },
     "description": {
-      "en": "German-born theoretical physicist",
-      "pt": "físico teórico alemão"
+      "en": "Theoretical physicist, author of the theory of relativity",
+      "pt": "Físico teórico, autor da teoria da relatividade"
     },
     "extract": {
       "en": "Albert Einstein was a German-born theoretical physicist best known for developing the theory of relativity. Einstein also made important contributions to quantum theory. His mass–energy equivalence formula E = mc2, which arises from special relativity, has been called \"the world's most famous equation\". He received the 1921 Nobel Prize in Physics for \"his services to theoretical physics, and especially for his discovery of the law of the photoelectric effect\".",
@@ -131,8 +131,8 @@
       "pt": "Isaac Newton"
     },
     "description": {
-      "en": "English polymath",
-      "pt": "matemático e físico inglês"
+      "en": "Mathematician and physicist who described gravity and the laws of motion",
+      "pt": "Matemático e físico que descreveu a gravidade e as leis do movimento"
     },
     "extract": {
       "en": "Sir Isaac Newton was an English polymath who was a mathematician, physicist, astronomer, alchemist, theologian, historian and inventor. He was a key figure in the Scientific Revolution and the Enlightenment that followed. His book Philosophiæ Naturalis Principia Mathematica, first published in 1687, achieved the first great unification in physics and established classical mechanics. Newton also made seminal contributions to optics, and shares credit with the German mathematician Gottfried Wilhelm Leibniz for formulating infinitesimal calculus, although he developed calculus years before Leibniz. Newton contributed to and refined the scientific method, and his work is considered the most influential in bringing forth modern science.",
@@ -193,8 +193,8 @@
       "pt": "Marie Curie"
     },
     "description": {
-      "en": "Polish-French physicist and chemist",
-      "pt": "física e química polonesa naturalizada francesa"
+      "en": "Physicist and chemist, pioneer of radioactivity and twice a Nobel laureate",
+      "pt": "Física e química, pioneira da radioatividade e duas vezes premiada com o Nobel"
     },
     "extract": {
       "en": "Maria Salomea Skłodowska Curie, better known as Marie Curie, was a Polish and naturalised-French physicist and chemist. She shared the 1903 Nobel Prize in Physics with her husband, Pierre Curie, \"for their joint researches on the radioactivity phenomena discovered by Professor Henri Becquerel\". She won the 1911 Nobel Prize in Chemistry \"[for] the discovery of the elements radium and polonium, by the isolation of radium and the study of the nature and compounds of this remarkable element\".",
@@ -255,8 +255,8 @@
       "pt": "Galileu Galilei"
     },
     "description": {
-      "en": "Italian physicist and astronomer",
-      "pt": "físico e astrônomo italiano"
+      "en": "Physicist and astronomer who turned the telescope to the sky",
+      "pt": "Físico e astrônomo que apontou o telescópio para o céu"
     },
     "extract": {
       "en": "Galileo di Vincenzo Bonaiuti de' Galilei, commonly referred to as Galileo Galilei or mononymously as Galileo, was an Italian astronomer, physicist, engineer and polymath. He was born in Pisa, then part of the Duchy of Florence. Galileo has been called the father of observational astronomy, classical physics, the scientific method, and modern science.",
@@ -317,8 +317,8 @@
       "pt": "Nikola Tesla"
     },
     "description": {
-      "en": "Serbian-American engineer and inventor",
-      "pt": "inventor e engenheiro sérvio-americano"
+      "en": "Engineer and inventor of alternating-current power systems",
+      "pt": "Engenheiro e inventor dos sistemas de corrente alternada"
     },
     "extract": {
       "en": "Nikola Tesla was a Serbian-American engineer, futurist, and inventor. He is known for his contributions to the design of the modern alternating current (AC) electricity supply system.",
@@ -379,8 +379,8 @@
       "pt": "Alan Turing"
     },
     "description": {
-      "en": "English computer scientist",
-      "pt": "matemático, cientista da computação, lógico e criptoanalista britânico"
+      "en": "Mathematician, codebreaker and father of theoretical computer science",
+      "pt": "Matemático, decifrador de códigos e pai da ciência da computação teórica"
     },
     "extract": {
       "en": "Alan Mathison Turing was an English mathematician and logician widely regarded as the father of theoretical computer science. He formalised the concepts of algorithm and computation with the Turing machine, a model of a general-purpose computer, and his contributions to cryptanalysis helped the Allies of World War II decipher messages encrypted by the German Enigma machine. He also contributed the Turing test to philosophy of artificial intelligence and the Turing pattern concept to mathematical and theoretical biology.",
@@ -441,8 +441,8 @@
       "pt": "Ada Lovelace"
     },
     "description": {
-      "en": "English mathematician",
-      "pt": "matemática britânica"
+      "en": "Mathematician who wrote the first published computer program",
+      "pt": "Matemática que escreveu o primeiro programa de computador publicado"
     },
     "extract": {
       "en": "Augusta Ada King, Countess of Lovelace, also known as Ada Lovelace, was an English mathematician and writer chiefly known for work on Charles Babbage's proposed mechanical general-purpose computer, the analytical engine. She was the first to recognise the machine had applications beyond pure calculation. Lovelace is often considered the first computer programmer.",
@@ -503,8 +503,8 @@
       "pt": "Stephen Hawking"
     },
     "description": {
-      "en": "English theoretical physicist",
-      "pt": "físico teórico, cosmólogo e autor inglês"
+      "en": "Theoretical physicist and cosmologist who studied black holes",
+      "pt": "Físico teórico e cosmólogo que estudou os buracos negros"
     },
     "extract": {
       "en": "Stephen William Hawking was an English theoretical astrophysicist, cosmologist, and author who was director of research at the Centre for Theoretical Cosmology at the University of Cambridge. Between 1979 and 2009, he was the Lucasian Professor of Mathematics at Cambridge, widely viewed as one of the most prestigious academic posts in the world.",
@@ -565,11 +565,11 @@
       "pt": "Richard Feynman"
     },
     "description": {
-      "en": "American theoretical physicist",
-      "pt": "físico teórico americano"
+      "en": "Theoretical physicist of quantum electrodynamics, famous for his diagrams",
+      "pt": "Físico teórico da eletrodinâmica quântica, famoso por seus diagramas"
     },
     "extract": {
-      "en": "Richard Phillips Feynman was an American theoretical physicist. He shared the 1965 Nobel Prize in Physics with Julian Schwinger and Shin'ichirō Tomonaga \"for their fundamental work in quantum electrodynamics (QED), with deep-ploughing consequences for the physics of elementary particles\".\nHe is also known for his work in the path integral formulation of quantum mechanics, the theory of the physics of the superfluidity of supercooled liquid helium, and the parton model. Feynman developed a pictorial representation scheme for the mathematical expressions describing the behavior of subatomic particles, which later became known as Feynman diagrams and remains widely used.",
+      "en": "Richard Phillips Feynman was an American theoretical physicist. He shared the 1965 Nobel Prize in Physics with Julian Schwinger and Shin'ichirō Tomonaga \"for their fundamental work in quantum electrodynamics (QED), with deep-ploughing consequences for the physics of elementary particles\". He is also known for his work in the path integral formulation of quantum mechanics, the theory of the physics of the superfluidity of supercooled liquid helium, and the parton model. Feynman developed a pictorial representation scheme for the mathematical expressions describing the behavior of subatomic particles, which later became known as Feynman diagrams and remains widely used.",
       "pt": "Richard Phillips Feynman foi um físico teórico norte-americano do século XX, foi um dos pioneiros da eletrodinâmica quântica e ficou conhecido pelos seus trabalhos no ramo da formulação integral da mecânica quântica. Pelas suas contribuições para o desenvolvimento da eletrodinâmica quântica, Feynman recebeu o Nobel de Física em 1965 junto ao Julian Schwinger e Shin'ichiro Tomonaga. É irmão mais velho da astrofísica Joan Feynman."
     },
     "wiki": {
@@ -627,8 +627,8 @@
       "pt": "Niels Bohr"
     },
     "description": {
-      "en": "Danish physicist",
-      "pt": "físico dinamarquês"
+      "en": "Physicist who modelled the atom and helped found quantum theory",
+      "pt": "Físico que modelou o átomo e ajudou a fundar a teoria quântica"
     },
     "extract": {
       "en": "Niels Henrik David Bohr was a Danish theoretical physicist who made foundational contributions to understanding atomic structure and quantum theory, for which he received the Nobel Prize in Physics in 1922. He was also a philosopher and a promoter of scientific research.",
@@ -689,8 +689,8 @@
       "pt": "Johannes Kepler"
     },
     "description": {
-      "en": "German astronomer and mathematician",
-      "pt": "matemático, astrônomo e astrólogo alemão"
+      "en": "Astronomer and mathematician who found the laws of planetary motion",
+      "pt": "Astrônomo e matemático que descobriu as leis do movimento dos planetas"
     },
     "extract": {
       "en": "Johannes Kepler was a German polymath who was an astronomer, mathematician, astrologer, natural philosopher and music theorist. He is a key figure in the 17th-century Scientific Revolution, best known for his laws of planetary motion, and his books Astronomia nova, Harmonice Mundi, and Epitome Astronomiae Copernicanae. The variety and impact of his work made Kepler one of the founders and fathers of modern astronomy, the scientific method, natural science, and modern science. He has been described as the \"father of science fiction\" for his novel Somnium.",
@@ -751,8 +751,8 @@
       "pt": "Nicolau Copérnico"
     },
     "description": {
-      "en": "Renaissance mathematician and astronomer",
-      "pt": "matemático e astrônomo polonês"
+      "en": "Renaissance astronomer who put the Sun at the centre of the universe",
+      "pt": "Astrônomo renascentista que pôs o Sol no centro do universo"
     },
     "extract": {
       "en": "Nicolaus Copernicus was a Renaissance polymath who formulated a model of the universe that placed the Sun rather than Earth at its center. The publication of Copernicus's model in his book De revolutionibus orbium coelestium, just before his death in 1543, was a major event in the history of science, triggering the Copernican Revolution and making a pioneering contribution to the Scientific Revolution. Though a similar heliocentric model had been developed eighteen centuries earlier by Aristarchus of Samos, an ancient Greek astronomer, Copernicus likely arrived at his model independently.",
@@ -813,8 +813,8 @@
       "pt": "Louis Pasteur"
     },
     "description": {
-      "en": "French chemist, pharmacist and microbiologist",
-      "pt": "químico francês"
+      "en": "Chemist and microbiologist, pioneer of vaccines and germ theory",
+      "pt": "Químico e microbiologista, pioneiro das vacinas e da teoria dos germes"
     },
     "extract": {
       "en": "Louis Pasteur was a French chemist, pharmacist, and microbiologist renowned for his discoveries of the principles of vaccination, microbial fermentation, and pasteurization, the last of which was named after him. His research in chemistry led to remarkable breakthroughs in the understanding of the causes and prevention of diseases, which laid down the foundations of hygiene, public health and much of modern medicine. Pasteur's works are credited with saving millions of lives through the development of vaccines for rabies and anthrax. He is regarded as one of the founders of modern bacteriology and has been honored as the \"father of bacteriology\" and the \"father of microbiology\".",
@@ -875,8 +875,8 @@
       "pt": "Dmitri Mendeleiev"
     },
     "description": {
-      "en": "Russian chemist",
-      "pt": "químico e físico russo"
+      "en": "Chemist who arranged the elements into the periodic table",
+      "pt": "Químico que organizou os elementos na tabela periódica"
     },
     "extract": {
       "en": "Dmitri Ivanovich Mendeleev was a Russian chemist known for formulating the periodic law and creating a version of the periodic table of elements. He used the periodic law not only to correct the then-accepted properties of some known elements, such as the valence and atomic weight of uranium, but also to predict the properties of three elements that were yet to be discovered. The synthetic element mendelevium is named in his honor. He was one of the founders of the Russian Chemical Society in 1868, and worked on the theory and practice of protectionist trade and on agriculture.",
@@ -937,8 +937,8 @@
       "pt": "Alexander von Humboldt"
     },
     "description": {
-      "en": "German polymath",
-      "pt": "naturalista alemão"
+      "en": "Naturalist and explorer, one of the founders of modern geography",
+      "pt": "Naturalista e explorador, um dos fundadores da geografia moderna"
     },
     "extract": {
       "en": "Friedrich Wilhelm Heinrich Alexander von Humboldt was a German polymath, geographer, naturalist, explorer, and proponent of Romantic philosophy and science. He was the younger brother of the Prussian minister, philosopher, and linguist Wilhelm von Humboldt (1767–1835). Humboldt's quantitative work on botanical geography laid the foundation for the field of biogeography, while his advocacy of long-term systematic geophysical measurement pioneered modern geomagnetic and meteorological monitoring. Humboldt and Carl Ritter are both regarded as the founders of modern geography as they established it as an independent scientific discipline.",
@@ -999,8 +999,8 @@
       "pt": "Carl Sagan"
     },
     "description": {
-      "en": "American scientist and science communicator",
-      "pt": "astrônomo e divulgador científico americano"
+      "en": "Astronomer and science communicator who brought the cosmos to television",
+      "pt": "Astrônomo e divulgador científico que levou o cosmos para a televisão"
     },
     "extract": {
       "en": "Carl Edward Sagan was an American astronomer, planetary scientist and science communicator. Initially an assistant professor at Harvard, Sagan later moved to Cornell, where he was the David Duncan Professor of Astronomy and Space Sciences and directed the Laboratory for Planetary Studies. He played an active role in the Mariner, Viking and Voyager programs. He published more than 600 scientific papers and articles and several popular science books, starting with The Cosmic Connection. He won the Pulitzer Prize for General Nonfiction for The Dragons of Eden.",
@@ -1061,8 +1061,8 @@
       "pt": "Rosalind Franklin"
     },
     "description": {
-      "en": "British X-ray crystallographer",
-      "pt": "química britânica"
+      "en": "Chemist whose X-ray images revealed the shape of DNA",
+      "pt": "Química cujas imagens de raios X revelaram a forma do DNA"
     },
     "extract": {
       "en": "Rosalind Elsie Franklin was an English chemist and X-ray crystallographer. Her work was central to the understanding of the molecular structures of DNA, RNA, viruses, coal, and graphite. Although her works on coal and viruses were appreciated in her lifetime, Franklin's contributions to the discovery of the structure of DNA were largely unrecognised during her life, for which Franklin has been variously referred to as the \"wronged heroine\", the \"dark lady of DNA\", the \"forgotten heroine\", a \"feminist icon\", and the \"Sylvia Plath of molecular biology\". James Watson believed that, had she not died, ideally, Franklin would have been awarded a Nobel Prize in Chemistry.",
@@ -1123,8 +1123,8 @@
       "pt": "Leonhard Euler"
     },
     "description": {
-      "en": "Swiss mathematician",
-      "pt": "matemático e físico suíço"
+      "en": "Mathematician and physicist, one of the most prolific of all time",
+      "pt": "Matemático e físico, um dos mais prolíficos de todos os tempos"
     },
     "extract": {
       "en": "Leonhard Euler was a Swiss polymath who was active as a mathematician, physicist, astronomer, logician, geographer, music theorist and engineer. He founded the studies of graph theory and topology and made influential discoveries in many other branches of mathematics, such as analytic number theory, complex analysis, and infinitesimal calculus. He also introduced much of modern mathematical terminology and notation, including the notion of a mathematical function. He is known for his work in mechanics, fluid dynamics, optics, astronomy, and music theory. Euler has been called a \"universal genius\" who \"was fully equipped with almost unlimited powers of imagination, intellectual gifts and extraordinary memory\". He spent most of his adult life in Saint Petersburg, Russia, and in Berlin, then the capital of Prussia.",
@@ -1185,8 +1185,8 @@
       "pt": "Carl Friedrich Gauss"
     },
     "description": {
-      "en": "German polymath and scholar",
-      "pt": "matemático e físico alemão"
+      "en": "Mathematician and physicist known as the prince of mathematicians",
+      "pt": "Matemático e físico conhecido como o príncipe da matemática"
     },
     "extract": {
       "en": "Johann Carl Friedrich Gauss was a German polymath active as a mathematician, astronomer, geodesist, and physicist, who contributed to many fields in mathematics and science. His mathematical contributions spanned the branches of number theory, algebra, analysis, geometry, statistics, and probability. Gauss was director of the Göttingen Observatory in Germany and professor of astronomy from 1807 until his death in 1855.",
@@ -1247,8 +1247,8 @@
       "pt": "Srinivasa Ramanujan"
     },
     "description": {
-      "en": "Indian mathematician",
-      "pt": "matemático indiano"
+      "en": "Self-taught mathematician of astonishing formulas and infinite series",
+      "pt": "Matemático autodidata de fórmulas espantosas e séries infinitas"
     },
     "extract": {
       "en": "Srinivasa Ramanujan Iyengar was an Indian mathematician who worked during the early 20th century. He made substantial contributions to mathematical analysis, number theory, infinite series, and continued fractions, including solutions to mathematical problems then considered unsolvable.",
@@ -1309,8 +1309,8 @@
       "pt": "Emmy Noether"
     },
     "description": {
-      "en": "German mathematician",
-      "pt": "matemática alemã"
+      "en": "Mathematician who tied every symmetry of nature to a conservation law",
+      "pt": "Matemática que ligou cada simetria da natureza a uma lei de conservação"
     },
     "extract": {
       "en": "Amalie Emmy Noether was a German mathematician who made many important contributions to abstract algebra and mathematical physics. As one of the leading mathematicians of her time, she developed theories of rings, fields, and algebras. She also proved Noether's first and second theorems, which play a fundamental role in mathematical physics, by explaining the connection between symmetry and conservation laws.",
@@ -1371,8 +1371,8 @@
       "pt": "Leonardo da Vinci"
     },
     "description": {
-      "en": "Italian polymath",
-      "pt": "artista, inventor e cientista do Renascimento italiano"
+      "en": "Renaissance painter, inventor and anatomist",
+      "pt": "Pintor, inventor e anatomista do Renascimento"
     },
     "extract": {
       "en": "Leonardo di ser Piero da Vinci, better known as Leonardo da Vinci, was an Italian polymath of the High Renaissance who was active as a painter, draughtsman, engineer, scientist, theorist, sculptor, and architect. While his fame initially rested on his achievements as a painter, he has also become known for his notebooks, in which he made drawings and notes on a variety of subjects, including anatomy, astronomy, botany, cartography, painting, and palaeontology. Leonardo is widely regarded as a genius who epitomised the Renaissance humanist ideal, and his collective works contributed to the development of European art to an extent rivalled only by that of his younger contemporary Michelangelo.",
@@ -1433,8 +1433,8 @@
       "pt": "Blaise Pascal"
     },
     "description": {
-      "en": "French polymath",
-      "pt": "matemático, escritor, físico, inventor, filósofo e teólogo francês"
+      "en": "Mathematician, physicist, inventor and religious philosopher",
+      "pt": "Matemático, físico, inventor e filósofo religioso"
     },
     "extract": {
       "en": "Blaise Pascal was a French mathematician, physicist, inventor, philosopher, and Catholic writer.",
@@ -1495,8 +1495,8 @@
       "pt": "Immanuel Kant"
     },
     "description": {
-      "en": "German philosopher",
-      "pt": "filósofo alemão"
+      "en": "Philosopher of reason, knowledge and moral duty",
+      "pt": "Filósofo da razão, do conhecimento e do dever moral"
     },
     "extract": {
       "en": "Immanuel Kant was a German philosopher. Born in Königsberg in the Kingdom of Prussia, he is considered one of the central thinkers of the Enlightenment. His comprehensive and systematic works in epistemology, metaphysics, logic, ethics, aesthetics, political theory, and philosophy of religion have made him one of the most influential and highly discussed figures in modern Western philosophy.",
@@ -1557,8 +1557,8 @@
       "pt": "René Descartes"
     },
     "description": {
-      "en": "French philosopher and mathematician",
-      "pt": "filósofo, matemático e cientista francês"
+      "en": "Philosopher and mathematician: “I think, therefore I am”",
+      "pt": "Filósofo e matemático: “penso, logo existo”"
     },
     "extract": {
       "en": "René Descartes was a French philosopher, mathematician, and scientist whose work was foundational to mathematics and modern philosophy, and influenced the development of early modern science. He connected the previously separate fields of geometry and algebra into analytic geometry, introduced a systematic method of inquiry that became influential in early modern philosophy, and made major contributions to epistemology and philosophy of mind as well as metaphysics.",
@@ -1619,8 +1619,8 @@
       "pt": "Voltaire"
     },
     "description": {
-      "en": "French writer and philosopher",
-      "pt": "escritor, historiador e filósofo francês"
+      "en": "Writer and philosopher of the Enlightenment, champion of free speech",
+      "pt": "Escritor e filósofo do Iluminismo, defensor da liberdade de expressão"
     },
     "extract": {
       "en": "François-Marie Arouet, known by his pen name Voltaire, was a French Enlightenment writer, philosopher (philosophe), satirist, and historian. Famous for his wit and his Criticisms of the Catholic Church and slavery, Voltaire was an advocate of freedom of speech, freedom of religion, and separation of church and state.",
@@ -1681,8 +1681,8 @@
       "pt": "Jean-Jacques Rousseau"
     },
     "description": {
-      "en": "Philosopher, writer and composer",
-      "pt": "filósofo, escritor e compositor"
+      "en": "Philosopher, writer and composer, author of The Social Contract",
+      "pt": "Filósofo, escritor e compositor, autor de O Contrato Social"
     },
     "extract": {
       "en": "Jean-Jacques Rousseau was a Genevan philosophe, writer, and composer. His political philosophy was influential during the Age of Enlightenment, as well as during the French Revolution.",
@@ -1743,8 +1743,8 @@
       "pt": "Karl Marx"
     },
     "description": {
-      "en": "German philosopher and socialist",
-      "pt": "filósofo alemão"
+      "en": "Philosopher and economist, co-author of The Communist Manifesto",
+      "pt": "Filósofo e economista, coautor do Manifesto Comunista"
     },
     "extract": {
       "en": "Karl Marx was a German philosopher, social and political theorist, journalist, and revolutionary socialist. He developed the theory of historical materialism, analysing societal structure and change, particularly class struggle under capitalism, and predicting the system's ultimate replacement by communism. Marx co-authored The Communist Manifesto (1848) with Friedrich Engels, and undertook a critique of classical political economy in his magnum opus, Das Kapital (1867–1894). His ideas and their later development, collectively known as Marxism, have had enormous influence on intellectual, political, and social history, and have inspired revolutionary movements in many countries.",
@@ -1805,8 +1805,8 @@
       "pt": "Friedrich Nietzsche"
     },
     "description": {
-      "en": "German philosopher",
-      "pt": "filósofo alemão"
+      "en": "Philosopher of the will to power, who declared that God is dead",
+      "pt": "Filósofo da vontade de potência, que declarou que Deus está morto"
     },
     "extract": {
       "en": "Friedrich Wilhelm Nietzsche was a German philosopher and writer who started his career as a classical philologist and turned to philosophy early in his academic career. In 1869, at age 24, he was appointed Professor of Classical Philology at the University of Basel. Plagued by health problems for most of his life, he resigned from the university in 1879. He afterward lived as an independent writer, spending much of his life in relative solitude and financial insecurity while moving between Switzerland, Italy, and southern France in search of climates that might alleviate his condition, and in the following decade, he completed much of his core writing. In 1889, aged 44, he suffered a neurological collapse, and thereafter a complete loss of his mental faculties, with paralysis and vascular dementia; he lived out his remaining 11 years, first under the care of his mother, and later his sister, until his death. His works and his philosophy have fostered not only extensive scholarship but also much popular interest.",
@@ -1867,8 +1867,8 @@
       "pt": "Sigmund Freud"
     },
     "description": {
-      "en": "Austrian neurologist and founder of psychoanalysis",
-      "pt": "neurologista austríaco e fundador da psicanálise"
+      "en": "Neurologist and founder of psychoanalysis",
+      "pt": "Neurologista e fundador da psicanálise"
     },
     "extract": {
       "en": "Sigmund Freud was an Austrian neurologist and the founder of psychoanalysis, a clinical method for evaluating and treating pathologies arising from conflicts in the psyche through dialogue between patient and psychoanalyst, and the distinctive theory of mind and human agency it posits.",
@@ -1929,8 +1929,8 @@
       "pt": "Gottfried Leibniz"
     },
     "description": {
-      "en": "German polymath",
-      "pt": "filósofo e matemático alemão"
+      "en": "Polymath who invented calculus at the same time as a famous rival",
+      "pt": "Polímata que inventou o cálculo ao mesmo tempo que um rival famoso"
     },
     "extract": {
       "en": "Gottfried Wilhelm Leibniz was a German polymath active as a mathematician, philosopher, scientist, engineer, inventor, historian and diplomat. Alongside Isaac Newton, he is widely credited with the invention of calculus. He is also credited with making foundational contributions to other areas of mathematics, such as binary arithmetic and statistics.",
@@ -1991,8 +1991,8 @@
       "pt": "Baruch Espinoza"
     },
     "description": {
-      "en": "Dutch philosopher of Portuguese-Jewish origin",
-      "pt": "filósofo holandês de origem judaico-portuguesa"
+      "en": "Rationalist philosopher who saw God and nature as one",
+      "pt": "Filósofo racionalista que via Deus e a natureza como uma coisa só"
     },
     "extract": {
       "en": "Baruch (de) Spinoza, also known under his Latinized pen name Benedictus de Spinoza, was a philosopher of Portuguese-Jewish origin who was born and lived in the Dutch Republic. A forerunner of the Enlightenment, Spinoza significantly influenced modern biblical criticism, 17th-century rationalism, and Dutch intellectual culture, establishing himself as one of the most important and radical philosophers of the early modern period. Influenced by Stoicism, Thomas Hobbes, René Descartes, and heterodox Christians, Spinoza was a leading philosopher of the Dutch Golden Age.",
@@ -2053,8 +2053,8 @@
       "pt": "Adam Smith"
     },
     "description": {
-      "en": "Scottish economist and philosopher",
-      "pt": "filósofo e economista escocês"
+      "en": "Economist and moral philosopher, author of The Wealth of Nations",
+      "pt": "Economista e filósofo moral, autor de A Riqueza das Nações"
     },
     "extract": {
       "en": "Adam Smith was a Scottish economist and philosopher who was a pioneer in the field of political economy and key figure during the Scottish Enlightenment. Seen by many as the \"father of economics\", or the \"father of capitalism\", he is primarily known for two classic works: The Theory of Moral Sentiments (1759) and An Inquiry into the Nature and Causes of the Wealth of Nations (1776). The latter, often abbreviated as The Wealth of Nations, is regarded as his magnum opus, marking the inception of modern economic scholarship as a comprehensive system and an academic discipline. Smith refuses to explain the distribution of wealth and power in terms of divine will and instead appeals to natural, political, social, economic, legal, environmental and technological factors, as well as the interactions among them. The work is notable for its contribution to economic theory, particularly in its exposition of the concept of absolute advantage.",
@@ -2115,8 +2115,8 @@
       "pt": "Simone de Beauvoir"
     },
     "description": {
-      "en": "French philosopher, social theorist and activist",
-      "pt": "filósofa, teórica social e ativista francesa"
+      "en": "Philosopher, novelist and feminist, author of The Second Sex",
+      "pt": "Filósofa, romancista e feminista, autora de O Segundo Sexo"
     },
     "extract": {
       "en": "Simone Lucie Ernestine Marie Bertrand de Beauvoir was a French existentialist philosopher, writer, social theorist, and feminist activist. Though she did not consider herself a philosopher, nor was she considered one at the time of her death, she had a significant influence on both feminist existentialism and feminist theory.",
@@ -2177,8 +2177,8 @@
       "pt": "Hannah Arendt"
     },
     "description": {
-      "en": "German-American historian and philosopher",
-      "pt": "filósofa e teórica política alemã-americana"
+      "en": "Political philosopher of totalitarianism and the banality of evil",
+      "pt": "Filósofa política do totalitarismo e da banalidade do mal"
     },
     "extract": {
       "en": "Hannah Arendt was a German and American philosopher, political theorist, and public historian. She was one of the most influential political theorists of the twentieth century.",
@@ -2239,8 +2239,8 @@
       "pt": "Ludwig Wittgenstein"
     },
     "description": {
-      "en": "Austrian philosopher and logician",
-      "pt": "filósofo austríaco"
+      "en": "Philosopher of logic and language",
+      "pt": "Filósofo da lógica e da linguagem"
     },
     "extract": {
       "en": "Ludwig Josef Johann Wittgenstein was an Austro-British philosopher who worked in logic, philosophy of mathematics, philosophy of mind, and philosophy of language.",
@@ -2301,8 +2301,8 @@
       "pt": "Bertrand Russell"
     },
     "description": {
-      "en": "English philosopher and logician",
-      "pt": "matemático, filósofo, ensaísta e historiador britânico"
+      "en": "Philosopher, logician and Nobel laureate in literature",
+      "pt": "Filósofo, lógico e ganhador do Nobel de Literatura"
     },
     "extract": {
       "en": "Bertrand Arthur William Russell, 3rd Earl Russell, was an English mathematician, philosopher, and social critic.",
@@ -2363,8 +2363,8 @@
       "pt": "Avicena"
     },
     "description": {
-      "en": "Persian polymath, physician and philosopher",
-      "pt": "filósofo, matemático e médico persa"
+      "en": "Polymath and physician, author of The Canon of Medicine",
+      "pt": "Polímata e médico, autor de O Cânone da Medicina"
     },
     "extract": {
       "en": "Ibn Sina, commonly known in the West as Avicenna, was a preeminent philosopher and physician of the Muslim world. He was a seminal figure of the Islamic Golden Age, serving in the courts of various Iranian rulers, and was influential to medieval European medical and Scholastic thought. Avicenna is considered one of the greatest thinkers and medical scholars in history.",
@@ -2425,8 +2425,8 @@
       "pt": "Ibn Khaldun"
     },
     "description": {
-      "en": "Arab Islamic scholar, historian and philosopher",
-      "pt": "historiador e filósofo árabe"
+      "en": "Historian and philosopher, one of the founders of sociology",
+      "pt": "Historiador e filósofo, um dos fundadores da sociologia"
     },
     "extract": {
       "en": "Ibn Khaldūn was an Arab Tunisian scholar, historian, philosopher, and sociologist. He is widely acknowledged to be one of the greatest social scientists of the Middle Ages, and is considered by a number of scholars to be a major forerunner of historiography, sociology, economics, and demography studies.",
@@ -2487,8 +2487,8 @@
       "pt": "Paulo Freire"
     },
     "description": {
-      "en": "Brazilian educator",
-      "pt": "filósofo e educador brasileiro"
+      "en": "Educator and philosopher, author of Pedagogy of the Oppressed",
+      "pt": "Educador e filósofo, autor de Pedagogia do Oprimido"
     },
     "extract": {
       "en": "Paulo Reglus Neves Freire was a Brazilian educator and Marxist philosopher whose work has affected global thought on education. He is best known for Pedagogy of the Oppressed, in which he reimagines teaching as a political act of liberation rather than critical cultural transmission of values. A founder of critical pedagogy, Freire’s influence spans literacy movements, liberation theology, postcolonial education, Marxism, and contemporary theories of social justice and learning. He is widely regarded as one of the most important educational theorists of the twentieth century, alongside figures such as John Dewey and Maria Montessori.",
@@ -2549,8 +2549,8 @@
       "pt": "Virginia Woolf"
     },
     "description": {
-      "en": "English modernist writer",
-      "pt": "escritora inglesa"
+      "en": "Modernist novelist and essayist, author of A Room of One’s Own",
+      "pt": "Romancista e ensaísta modernista, autora de Um Teto Todo Seu"
     },
     "extract": {
       "en": "Adeline Virginia Woolf was an English writer and one of the most influential 20th-century modernist authors. She helped to pioneer the use of stream of consciousness narration as a literary device.",
@@ -2611,8 +2611,8 @@
       "pt": "Fiódor Dostoiévski"
     },
     "description": {
-      "en": "Russian novelist and philosopher",
-      "pt": "romancista e filósofo russo"
+      "en": "Novelist of guilt and faith, author of Crime and Punishment",
+      "pt": "Romancista da culpa e da fé, autor de Crime e Castigo"
     },
     "extract": {
       "en": "Fyodor Mikhailovich Dostoevsky was a Russian philosopher, novelist, short-story writer, essayist, and journalist. He is regarded as one of the greatest novelists in both Russian and world literature, and many of his works are considered highly influential masterpieces. Dostoevsky's literary works explore the human condition in the troubled political, social and spiritual atmospheres of 19th-century Russia, and engage with a variety of philosophical and religious themes. His most acclaimed novels include Crime and Punishment (1866), The Idiot (1869), Demons (1872), The Adolescent (1875) and The Brothers Karamazov (1880). His Notes from Underground, a novella published in 1864, is considered one of the first works of existentialist literature.",
@@ -2673,8 +2673,8 @@
       "pt": "Liev Tolstói"
     },
     "description": {
-      "en": "Russian writer",
-      "pt": "escritor russo"
+      "en": "Novelist, author of War and Peace",
+      "pt": "Romancista, autor de Guerra e Paz"
     },
     "extract": {
       "en": "Count Lev Nikolayevich Tolstoy, usually referred to in English as Leo Tolstoy, was a Russian writer. He is regarded as one of the greatest and most influential authors of all time.",
@@ -2735,8 +2735,8 @@
       "pt": "Franz Kafka"
     },
     "description": {
-      "en": "German-language novelist and writer",
-      "pt": "escritor de língua alemã"
+      "en": "Novelist and short-story writer, author of The Metamorphosis",
+      "pt": "Romancista e contista, autor de A Metamorfose"
     },
     "extract": {
       "en": "Franz Kafka was a German-language Jewish writer from Prague. Widely regarded as a major figure of 20th-century literature, his works fuse elements of realism and the fantastique, and typically feature isolated protagonists facing bizarre or surreal predicaments and incomprehensible bureaucratic powers. The term Kafkaesque has entered the lexicon to describe situations like those depicted in his writings. His best-known works include the novella The Metamorphosis (1915) and the novels The Trial (1925) and The Castle (1926). He is also celebrated for his brief fables and aphorisms, which frequently incorporated comedic elements alongside the darker themes of his longer works. His work has widely influenced artists, philosophers, composers, filmmakers, literary historians, religious scholars, and cultural theorists.",
@@ -2797,11 +2797,11 @@
       "pt": "Jorge Luis Borges"
     },
     "description": {
-      "en": "Argentine writer",
-      "pt": "escritor argentino"
+      "en": "Writer of labyrinths, mirrors and infinite libraries",
+      "pt": "Escritor de labirintos, espelhos e bibliotecas infinitas"
     },
     "extract": {
-      "en": "Jorge Francisco Isidoro Luis Borges was an Argentine short-story writer, essayist, poet and translator regarded as a key figure in Spanish-language and international literature. His best-known works, Ficciones (transl. Fictions) and El Aleph, published in the 1940s, are collections of short stories exploring motifs such as dreams, labyrinths, chance, infinity, archives, mirrors, fictional writers, and mythology. Borges's works have contributed to philosophical literature and the fantasy genre, and have had a major influence on the magical realist movement in 20th century Latin American literature.",
+      "en": "Jorge Francisco Isidoro Luis Borges was an Argentine short-story writer, essayist, poet and translator regarded as a key figure in Spanish-language and international literature. His best-known works, Ficciones (transl. Fictions) and El Aleph, published in the 1940s, are collections of short stories exploring motifs such as dreams, labyrinths, chance, infinity, archives, mirrors, fictional writers, and mythology. Borges's works have contributed to philosophical literature and the fantasy genre, and have had a major influence on the magical realist movement in 20th century Latin American literature.",
       "pt": "Jorge Francisco Isidoro Luis Borges Acevedo ; Buenos Aires, 24 de agosto de 1899 – Genebra, 14 de junho de 1986) foi um escritor, poeta, tradutor, crítico literário e ensaísta argentino, considerado um dos maiores escritores do século XX. Sua obra, que dialogava com o surrealismo e a literatura fantástica, exerceu grande influência sobre o boom latino-americano e a literatura contemporânea em geral."
     },
     "wiki": {
@@ -2859,8 +2859,8 @@
       "pt": "Machado de Assis"
     },
     "description": {
-      "en": "Brazilian writer",
-      "pt": "escritor brasileiro"
+      "en": "Novelist and short-story writer, author of Dom Casmurro",
+      "pt": "Romancista e contista, autor de Dom Casmurro"
     },
     "extract": {
       "en": "Joaquim Maria Machado de Assis, sometimes called Bruxo do Cosme Velho, was a pioneer Brazilian novelist, poet, playwright and short story writer, widely regarded as the greatest writer of Brazilian literature. In 1897, he founded and became the first President of the Brazilian Academy of Letters. He was multilingual, having taught himself French, English, German and Greek later in life.",
@@ -2921,8 +2921,8 @@
       "pt": "Fernando Pessoa"
     },
     "description": {
-      "en": "Portuguese poet, writer, and philosopher",
-      "pt": "poeta português"
+      "en": "Poet who wrote as dozens of invented authors",
+      "pt": "Poeta que escreveu como dezenas de autores inventados"
     },
     "extract": {
       "en": "Fernando António Nogueira de Seabra Pessoa was a Portuguese poet, writer, literary critic, translator, and publisher. He has been described as one of the most significant literary figures of the 20th century and one of the greatest poets in the Portuguese literature. He also wrote in and translated from English and French.",
@@ -2983,8 +2983,8 @@
       "pt": "Gabriel García Márquez"
     },
     "description": {
-      "en": "Colombian writer and Nobel laureate",
-      "pt": "escritor colombiano e ganhador do Prêmio Nobel"
+      "en": "Novelist of magical realism and Nobel laureate",
+      "pt": "Romancista do realismo mágico e ganhador do Nobel"
     },
     "extract": {
       "en": "Gabriel José García Márquez was a Colombian writer and journalist, known affectionately as Gabo or Gabito throughout Latin America. Considered one of the most significant authors of the 20th century, particularly in the Spanish language, he was awarded the 1972 Neustadt International Prize for Literature and the 1982 Nobel Prize in Literature. He pursued a self-directed education that resulted in leaving law school for a career in journalism. From early on he showed no inhibitions in his criticism of Colombian and foreign politics. In 1958, he married Mercedes Barcha Pardo; they had two sons, Rodrigo and Gonzalo.",
@@ -3045,8 +3045,8 @@
       "pt": "Rabindranath Tagore"
     },
     "description": {
-      "en": "Indian polymath",
-      "pt": "poeta e filósofo bengali"
+      "en": "Poet, composer and philosopher, Nobel laureate in literature",
+      "pt": "Poeta, compositor e filósofo, ganhador do Nobel de Literatura"
     },
     "extract": {
       "en": "Rabindranath Tagore was a Bengali polymath - who worked as a poet, author, playwright, musician, composer, philosopher, social reformer, painter, and was one of the foremost figures of the Bengal Renaissance. In 1913, Tagore became the first Indian and non-European to win a Nobel Prize in any category, and also the first lyricist to win the Nobel Prize in Literature. A significant moulder of culture within Bengal and the Indian subcontinent, he wrote and composed the national anthems of India and Bangladesh.",

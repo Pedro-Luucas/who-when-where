@@ -2,7 +2,7 @@ export const MESSAGES = {
   en: {
     kicker: "Today's ten towns",
     lead: "A town lights up on the map. Which of the four was born there?",
-    eyebrow: "Born here · {country}",
+    eyebrow: "Born here",
     prompt: "Who was born in *{place}*?",
     mapAria: "Map with {place} marked",
     reveal: "{name} was born in {place} in {year}.",
@@ -16,7 +16,7 @@ export const MESSAGES = {
   pt: {
     kicker: "As dez cidades de hoje",
     lead: "Uma cidade se acende no mapa. Qual dos quatro nasceu ali?",
-    eyebrow: "Nasceu aqui · {country}",
+    eyebrow: "Nasceu aqui",
     prompt: "Quem nasceu em *{place}*?",
     mapAria: "Mapa com {place} marcada",
     reveal: "{name} nasceu em {place} em {year}.",

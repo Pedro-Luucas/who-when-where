@@ -13,8 +13,8 @@ import data, { answersOf, gapOf, metOf, type Puzzle } from "./data";
 import { definition } from "./definition";
 import { MESSAGES, type MessageKey } from "./messages";
 
-const noteOf = (person: Notable, locale: Locale) =>
-  [person.field[locale], person.citizenship?.[locale]].filter(Boolean).join(" · ");
+// Their field only: a nationality would hint at where, and so at when.
+const noteOf = (person: Notable, locale: Locale) => person.field[locale];
 
 function Board({ puzzle, moves, onMove, onMoves, label, children }: BoardProps<Puzzle, string>) {
   const locale = useLocale();

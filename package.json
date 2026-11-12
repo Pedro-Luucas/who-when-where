@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "eslint && node scripts/check-giveaways.mjs",
     "api:dev": "npm --prefix api run dev",
     "api:test": "npm --prefix api test",
     "api:deploy": "bash api/deploy/deploy.sh",
@@ -20,7 +20,8 @@
     "data:facts": "node scripts/fetch-country-facts.mjs",
     "data:flags": "node scripts/build-flags.mjs",
     "data:credits": "node scripts/fetch-image-credits.mjs",
-    "images": "node scripts/build-images.mjs"
+    "images": "node scripts/build-images.mjs",
+    "check:text": "node scripts/check-giveaways.mjs"
   },
   "dependencies": {
     "d3-geo": "^3.1.2",
@@ -45,6 +46,7 @@
     "@types/topojson-specification": "^1.0.5",
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
+    "jiti": "2.7.0",
     "tailwindcss": "4.3.3",
     "typescript": "^5"
   }

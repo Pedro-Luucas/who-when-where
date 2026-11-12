@@ -10,6 +10,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { ROOT, best, cleanTitle, countryId, getEntities, getJson, label, slugify } from "./lib/wiki.mjs";
+import { findGiveaways, stripNationality } from "./lib/giveaways.mjs";
 import { ROSTER } from "./notables-roster.mjs";
 
 const OUT_JSON = path.join(ROOT, "lib/data/notables.json");
@@ -117,6 +118,25 @@ const wikiUrl = (lang, title) =>
 
 const round = (n) => Math.round(n * 100) / 100;
 
+/** Occupations Wikidata only labels in English. */
+const FIELD_PT = {
+  cytogeneticist: "citogeneticista",
+  "jazz singer": "cantor de jazz",
+  "female crusader": "cruzada",
+};
+
+/** Where no occupation will do (none given, or every one names a culture), by Wikidata id. */
+const FIELDS = {
+  Q467650: { en: "queen", pt: "rainha" }, // Nzinga of Ndongo and Matamba
+  Q171977: { en: "military leader", pt: "líder militar" }, // Tokugawa Ieyasu (samurai)
+  Q44741: { en: "explorer", pt: "explorador" }, // Francisco Pizarro (conquistador)
+  Q7326: { en: "explorer", pt: "explorador" }, // Hernán Cortés (conquistador)
+};
+const GENERIC_FIELD = { en: "historical figure", pt: "figura histórica" };
+
+/** Wikidata descriptions that describe the item, not the person. */
+const JUNK = /descrit[oa] no projeto|described (in|by) the project/i;
+
 async function main() {
   // Who When Where's people keep their ids, so the two rosters agree, and
   // their hand-checked places (scripts/people-roster.mjs).
@@ -199,13 +219,17 @@ async function main() {
       .map((statement) => labelled[statement.mainsnak.datavalue?.value?.id])
       .filter(Boolean)
       .map(localized)
-      .filter((field) => field.en);
+      .filter((field) => field.en)
+      .map((field) => ({ ...field, pt: field.pt === field.en ? (FIELD_PT[field.en] ?? field.pt) : field.pt }))
+      // "samurai" or "conquistador" says where as much as what.
+      .filter((field) => !findGiveaways(field.en).length && !findGiveaways(field.pt).length);
+    if (FIELDS[person.id]) return FIELDS[person.id];
     const description = (person.descriptions?.en?.value ?? "").toLowerCase();
     const at = (field) => {
       const found = description.indexOf(field.en.toLowerCase());
       return found === -1 ? Infinity : found;
     };
-    return fields.reduce((chosen, field) => (at(field) < at(chosen) ? field : chosen), fields[0]) ?? null;
+    return fields.reduce((chosen, field) => (at(field) < at(chosen) ? field : chosen), fields[0]) ?? GENERIC_FIELD;
   };
 
   const result = [];
@@ -235,10 +259,21 @@ async function main() {
           : person.descriptions?.en?.value,
       );
       // Dates and names give the answer away: the occupation says less.
-      if (!text || namesThem(text, `${name.en} ${name.pt}`) || /\d{2,}(?!\d*(st|nd|rd|th)\b)/.test(text)) {
+      if (!text || JUNK.test(text) || namesThem(text, `${name.en} ${name.pt}`) || /\d{2,}(?!\d*(st|nd|rd|th)\b)/.test(text)) {
         return field?.[lang] ?? null;
       }
-      return text;
+      // So do nationalities and places ("Dutch seafarer", "rei da Macedônia"): strip
+      // them, and where something is still left that names a place, fall back too.
+      const plain = stripNationality(text, lang);
+      // A lone word ("Leader") says less than the field ("military leader").
+      if (!plain || !/\s/.test(plain) || findGiveaways(plain).length) return field?.[lang] ?? null;
+      return plain;
+    };
+    /** A notable work, unless its title names the person or a place ("Noether's theorem", "The History of Mexico"). */
+    const telling = (title) => !title || namesThem(title, `${name.en} ${name.pt}`) || findGiveaways(title).length > 0;
+    const workOf = (entity) => {
+      const work = entity ? localized(entity) : null;
+      return work && !telling(work.en) && !telling(work.pt) ? work : null;
     };
 
     let id = checked?.id ?? slugify(enTitle);
@@ -247,7 +282,7 @@ async function main() {
 
     const sex = person.claims?.P21 ? firstId(person, "P21") : null;
     const citizenship = labelled[firstId(person, "P27")];
-    const work = labelled[firstId(person, "P800")];
+    const work = workOf(labelled[firstId(person, "P800")]);
     result.push({
       id,
       qid: person.id,
@@ -258,7 +293,9 @@ async function main() {
       born: { year: bornYear, place: bornPlace },
       died: { year: diedYear, place: curated(checked?.death.place) ?? placeOf(person, "P20") },
       citizenship: citizenship ? localized(citizenship) : null,
-      work: work ? localized(work) : null,
+      work,
+      // A name that names a place or a people (Joan of Arc, Julius Caesar) is no clue to show for someone else.
+      placeInName: findGiveaways(name.en).length + findGiveaways(name.pt).length > 0,
       wiki: { en: wikiUrl("en", person.sitelinks.enwiki.title), pt: wikiUrl("pt", ptTitle) },
       fame: Object.keys(person.sitelinks ?? {}).filter((site) => /^[a-z_]+wiki$/.test(site) && site !== "commonswiki" && site !== "specieswiki").length,
     });

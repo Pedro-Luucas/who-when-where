@@ -29,6 +29,36 @@ const byId = new Map(JOURNEYS.map((journey) => [journey.id, journey]));
 
 export const journeyById = (id: string): Journey | undefined => byId.get(id);
 
+const fold = (text: string) =>
+  text
+    .normalize("NFD")
+    .replace(/\p{M}/gu, "")
+    .toLowerCase();
+
+/** The words of a journey's names that would give it away on the map ("Magellan", "Livingstone"). */
+export function telltaleWords(journey: Journey): string[] {
+  const small = new Set(["the", "and", "from", "with", "para", "pela", "pelo", "first", "primeira", "primeiro", "great", "grande", "voyage", "viagem", "expedition", "expedição", "route", "rota", "journey", "jornada", "march", "marcha", "crossing", "travessia", "descent", "descida", "pilgrimage", "peregrinação", "circumnavigation", "navegação"].map(fold));
+  return [
+    ...new Set(
+      [journey.name.en, journey.name.pt]
+        .flatMap((name) => fold(name).split(/[^\p{L}\p{N}]+/u))
+        .filter((word) => word.length >= 4 && !small.has(word)),
+    ),
+  ];
+}
+
+/**
+ * A stop's label while the journey is still a mystery: its name, unless the
+ * name gives the journey away (the Strait of Magellan on Magellan's voyage).
+ * Once the puzzle is over every stop shows its full name.
+ */
+export function stopLabelInPlay(stop: Stop, journey: Journey, locale: keyof Localized): string | undefined {
+  const name = stop.name?.[locale];
+  if (!name) return undefined;
+  const words = fold(name).split(/[^\p{L}\p{N}]+/u);
+  return telltaleWords(journey).some((word) => words.includes(word)) ? "?" : name;
+}
+
 export function journeyForDay(day: number): Journey {
   return JOURNEYS[dailyIndex(JOURNEYS.length, day, "wayfarer")];
 }

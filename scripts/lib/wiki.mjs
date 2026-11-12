@@ -8,7 +8,13 @@ import { fileURLToPath } from "node:url";
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const CACHE_DIR = path.join(ROOT, "scripts/.cache");
-const PACE_MS = 350;
+let PACE_MS = 350;
+
+/** Waits longer between requests (a long run that keeps hitting rate limits). */
+export function setPace(ms) {
+  PACE_MS = ms;
+}
+
 const HEADERS = { "User-Agent": "daily-geo-game-data-fetch/0.1 (nodejs)" };
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -183,7 +189,7 @@ const pageOf = (wiki, file) =>
   `${wiki === "commons" ? "https://commons.wikimedia.org" : `https://${wiki}.wikipedia.org`}/wiki/File:${encodeURIComponent(file.replace(/ /g, "_"))}`;
 
 /** Text of an extmetadata value: tags and entities out, spaces tidied. */
-function plain(html) {
+export function plain(html) {
   if (!html) return "";
   return String(html)
     .replace(/<[^>]*>/g, " ")
@@ -197,11 +203,11 @@ function plain(html) {
     .trim();
 }
 
-function shorten(text, max = 80) {
+export function shorten(text, max = 80) {
   return text.length <= max ? text : `${text.slice(0, max - 1).trimEnd()}…`;
 }
 
-function creditFrom(wiki, file, meta) {
+export function creditFrom(wiki, file, meta) {
   const value = (key) => meta?.[key]?.value;
   // A crop credits the file it was cut from first: "Original.jpg : Name" → "Name".
   let author = (plain(value("Artist")) || plain(value("Credit")))

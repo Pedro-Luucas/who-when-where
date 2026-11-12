@@ -24,8 +24,28 @@ export type Puzzle = { rounds: Round[]; lives?: number };
 const NOT_A_TOWN =
   /\d|birthplace|homestead|monument|fort\b|rue |street|monasterio|paramountcy|empire|county|municipality|province|governorate|borough|parish|district|partido|^portugal$|^francia$|^florida$/i;
 
-const PLAYABLE = NOTABLES.filter(
-  (person) => person.fame >= 40 && person.born.place.country && !NOT_A_TOWN.test(person.born.place.name.en),
+const fold = (text: string) =>
+  text
+    .normalize("NFD")
+    .replace(/\p{M}/gu, "")
+    .toLowerCase();
+
+/** Whether a name carries the birthplace in it (Francis of Assisi, Florence Nightingale). */
+function namedForBirthplace(person: Notable): boolean {
+  const place = person.born.place.name;
+  const placeWords = fold(`${place.en} ${place.pt}`)
+    .split(/[^\p{L}\p{N}]+/u)
+    .filter((word) => word.length >= 4 && !["city", "cidade", "town", "saint", "santa", "santo"].includes(word));
+  const nameWords = fold(`${person.name.en} ${person.name.pt}`).split(/[^\p{L}\p{N}]+/u);
+  return placeWords.some((word) => nameWords.some((part) => part === word || (word.length >= 5 && part.startsWith(word.slice(0, 5)) && part.length - word.length <= 2)));
+}
+
+export const PLAYABLE = NOTABLES.filter(
+  (person) =>
+    person.fame >= 40 &&
+    person.born.place.country &&
+    !NOT_A_TOWN.test(person.born.place.name.en) &&
+    !namedForBirthplace(person),
 );
 
 /** A round's id: the answer first, then the others. */

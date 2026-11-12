@@ -39,7 +39,7 @@ export function PlaceRound({ person, round, locked, onLock, onNext, nextLabel }:
     markers.push({ lat: target.lat, lon: target.lon, kind: "answer", label: target.name[locale] });
     arcs.push({ from: locked, to: target, kind: "miss" });
   } else if (pin) {
-    markers.push({ ...pin, kind: "guess" });
+    markers.push({ ...pin, kind: "guess", draggable: true });
   }
 
   return (

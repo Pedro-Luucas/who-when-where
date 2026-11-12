@@ -6,6 +6,7 @@ import { Hud, type Pip } from "@/components/play/hud";
 import { Plaque } from "@/components/play/plaque";
 import { ResultCard, type ReviewRow } from "@/components/play/result-card";
 import { ImageCredit } from "@/components/image-credit";
+import { Lightbox } from "@/components/ui/lightbox";
 import { ReadMore } from "@/components/result-footer";
 import { WorldMap, useMapLabels, type MapMarker, type MapRing } from "@/components/world-map";
 import { formatCoordinates, type LatLon } from "@/lib/geo";
@@ -13,6 +14,7 @@ import { formatNumber, useSiteT } from "@/lib/i18n";
 import { useFinePointer } from "@/lib/pointer";
 import { useShellT } from "@/lib/shell-messages";
 import { useGameT, type MessageKey } from "./messages";
+import { lightboxImages, useGallery } from "./gallery";
 import { FOUND_KM, MAX_DIGS, PASS, closestKm, gradeDig, heatOf, isFound, isOver, isPass, scoreOf, type Dig } from "./rules";
 import { siteLabel, type Site } from "./sites";
 
@@ -39,12 +41,19 @@ export function DigSiteBoard({ site, digs, onDig, onDigs, maxDigs = MAX_DIGS, la
   const siteT = useSiteT();
   const mapLabels = useMapLabels();
   const [pin, setPin] = useState<LatLon | null>(null);
+  /** The photo open in the lightbox, if any. */
+  const [viewing, setViewing] = useState<number | null>(null);
 
   const found = isFound(digs);
   const over = isOver(digs, maxDigs);
   // The digs actually made: a given-up one has no place on the map.
   const made = digs.filter((entry) => !isPass(entry));
   const last = made.at(-1);
+  // More photos of the site, fetched only once it is over: they would give it away.
+  const photos = useGallery(site.id, over);
+  const slides = over
+    ? lightboxImages(site, photos, locale, (n) => t("galleryPhotoN", { name: site.name[locale], n }))
+    : [];
 
   function dig() {
     if (!pin || over) return;
@@ -122,14 +131,36 @@ export function DigSiteBoard({ site, digs, onDig, onDigs, maxDigs = MAX_DIGS, la
 
       <aside className="dossier">
         <div className="plate" data-revealed={over ? "" : undefined}>
-          <Image
-            src={site.image.src}
-            alt={over ? site.name[locale] : t("mystery")}
-            width={site.image.width}
-            height={site.image.height}
-            sizes="(min-width: 1024px) 280px, 112px"
-            preload
-          />
+          {over ? (
+            <button
+              type="button"
+              className="plate-button"
+              onClick={() => setViewing(0)}
+              aria-label={t("galleryEnlarge")}
+              aria-haspopup="dialog"
+            >
+              <Image
+                src={site.image.src}
+                alt={site.name[locale]}
+                width={site.image.width}
+                height={site.image.height}
+                sizes="(min-width: 1024px) 280px, 112px"
+                preload
+              />
+              <span className="plate-zoom" aria-hidden="true">
+                <ZoomIcon />
+              </span>
+            </button>
+          ) : (
+            <Image
+              src={site.image.src}
+              alt={t("mystery")}
+              width={site.image.width}
+              height={site.image.height}
+              sizes="(min-width: 1024px) 280px, 112px"
+              preload
+            />
+          )}
         </div>
 
         <div className="dossier-text">
@@ -188,6 +219,29 @@ export function DigSiteBoard({ site, digs, onDig, onDigs, maxDigs = MAX_DIGS, la
             >
               {children}
             </ResultCard>
+            {slides.length > 1 && (
+              <figure className="gallery-strip">
+                <figcaption>
+                  <span className="eyebrow">{t("galleryTitle")}</span>
+                  <span className="eyebrow">{t("galleryCount", { n: slides.length })}</span>
+                </figcaption>
+                <ul>
+                  {slides.map((slide, i) => (
+                    <li key={slide.src}>
+                      <button
+                        type="button"
+                        className="gallery-thumb"
+                        onClick={() => setViewing(i)}
+                        aria-label={t("galleryOpen", { n: i + 1, total: slides.length })}
+                        aria-haspopup="dialog"
+                      >
+                        <Image src={slide.src} alt={slide.alt} width={slide.width} height={slide.height} sizes="120px" />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </figure>
+            )}
             <figure className="life">
               <figcaption>
                 <span className="eyebrow">{shell("onTheMap")}</span>
@@ -233,6 +287,37 @@ export function DigSiteBoard({ site, digs, onDig, onDigs, maxDigs = MAX_DIGS, la
           </>
         )}
       </section>
+
+      {over && (
+        <Lightbox
+          images={slides}
+          index={viewing}
+          onIndexChange={setViewing}
+          onClose={() => setViewing(null)}
+          labels={{
+            title: t("galleryDialog", { name: site.name[locale] }),
+            close: t("galleryClose"),
+            previous: t("galleryPrevious"),
+            next: t("galleryNext"),
+            position: (n, total) => t("galleryPosition", { n, total }),
+            credit: {
+              kind: t("creditPhoto"),
+              publicDomain: t("creditPublicDomain"),
+              unknownAuthor: t("creditUnknown"),
+              source: t("creditSource"),
+            },
+          }}
+        />
+      )}
     </main>
+  );
+}
+
+function ZoomIcon() {
+  return (
+    <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+      <circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" strokeWidth="1.6" />
+      <path d="M10.5 10.5L14 14M7 5v4M5 7h4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
   );
 }

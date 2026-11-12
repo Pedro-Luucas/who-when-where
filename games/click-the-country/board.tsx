@@ -1,7 +1,6 @@
 "use client";
 
 import { countryById } from "@/lib/countries";
-import { REGION_NAMES, regionOf } from "@/lib/geo-data";
 import { translator, useLocale } from "@/lib/i18n";
 import { useShellT } from "@/lib/shell-messages";
 import { countryAt } from "../engines/hit-test";
@@ -21,10 +20,10 @@ function Board({ puzzle, moves, onMove, onMoves, tries = MAX_TRIES, label, child
   const t = translator(MESSAGES, locale);
 
   const rounds: PinRound[] = puzzle.countries.map((country) => {
-    const region = regionOf(country.id);
     return {
       key: country.id,
-      eyebrow: t("eyebrow", { continent: region ? REGION_NAMES[region][locale] : "" }),
+      // No continent: that would halve the search.
+      eyebrow: t("eyebrow"),
       prompt: t("prompt", { country: country.name[locale] }),
       target: country,
       answer: country.name[locale],

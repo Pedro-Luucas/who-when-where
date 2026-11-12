@@ -12,6 +12,7 @@ import {
   JOURNEYS,
   journeyById,
   routeSlice,
+  stopLabelInPlay,
   stopsWithin,
   type Journey,
 } from "./journeys";
@@ -95,7 +96,8 @@ export function WayfarerBoard({
     stopsWithin(stops, shown)
       .filter((stop) => stop.name)
       .forEach((stop, i) => {
-        markers.push({ ...stop, kind: "stop", label: stop.name?.[locale], labelBelow: i % 2 === 1 });
+        const label = over ? stop.name?.[locale] : stopLabelInPlay(stop, journey, locale);
+        markers.push({ ...stop, kind: "stop", label, labelBelow: i % 2 === 1 });
       });
   } else {
     markers.push({ ...stops[0], kind: "ghost", label: t("start") });

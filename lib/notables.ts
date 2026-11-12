@@ -32,6 +32,8 @@ export type Notable = {
   wiki: { en: string; pt: string | null };
   /** How many Wikipedias have an article on them: a rough measure of fame. */
   fame: number;
+  /** The name itself names a place, a people or a ruler tied to one (Joan of Arc, Julius Caesar). */
+  placeInName?: boolean;
 };
 
 export const NOTABLES = data as Notable[];

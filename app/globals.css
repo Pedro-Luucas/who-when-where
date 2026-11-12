@@ -643,9 +643,17 @@ button {
   padding: 0;
   background: var(--sea);
   overflow: hidden;
-  touch-action: none;
+  /* At the home view an up-and-down drag scrolls the page, so the map never
+     traps it; sideways drags, pinches and taps are the map's (world-map.tsx).
+     Zoomed in, every gesture on the map is the map's. */
+  touch-action: pan-y;
   user-select: none;
   -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.map-frame[data-zoomed] {
+  touch-action: none;
 }
 
 .map-frame > svg {
@@ -679,6 +687,41 @@ button {
   stroke-width: 0.55;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
+}
+
+/* Zoomed in close, the detailed land (drawn in .map-detail) stands in for
+   the everyday map's, and the graticule has nothing left to say. */
+[data-detail] > .map-land,
+[data-detail] > .map-graticule {
+  visibility: hidden;
+}
+
+.map-detail {
+  pointer-events: none;
+}
+
+.map-detail-land {
+  fill: var(--land);
+}
+
+.map-detail-edge {
+  fill: none;
+  stroke: var(--land-edge);
+  stroke-width: 0.7;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.map-detail .map-region {
+  animation: none;
+}
+
+.map-region[data-part="fill"] {
+  stroke: none;
+}
+
+.map-region[data-part="edge"] {
+  fill: none;
 }
 
 .map-outline {
@@ -817,7 +860,7 @@ button {
   width: 44px;
   height: 44px;
   font-family: var(--font-mono);
-  font-size: 1.05rem;
+  font-size: 1.35rem;
   line-height: 1;
 }
 
@@ -825,9 +868,26 @@ button {
   border-top: 1px solid var(--rule);
 }
 
-.map-controls button:hover {
+.map-controls button:hover:not([aria-disabled]) {
   background: var(--surface-3);
   color: var(--accent);
+}
+
+.map-controls button[aria-disabled] {
+  opacity: 0.38;
+  cursor: default;
+}
+
+.map-controls button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -3px;
+}
+
+@media (max-width: 39.99rem) {
+  .map-controls {
+    right: 10px;
+    bottom: 10px;
+  }
 }
 
 .map-status {
@@ -1717,6 +1777,22 @@ button {
 
 .map-marker-hit {
   fill: transparent;
+}
+
+/* The player's own pin can be dragged to fine-tune it. */
+.map-marker[data-drag] {
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+}
+
+.map-marker[data-dragging] {
+  cursor: grabbing;
+}
+
+.map-marker[data-dragging] .map-marker-dot {
+  animation: none;
+  transform: scale(1.35);
 }
 
 .map-marker-badge {
