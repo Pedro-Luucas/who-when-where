@@ -9,7 +9,7 @@ import { Chip } from "@/components/ui/chip";
 import { CHALLENGE_GAMES } from "@/games/registry";
 import { streakDays, useDailyResults } from "@/games/results";
 import { useToday } from "@/games/today";
-import { formatNumber, useLocale } from "@/lib/i18n";
+import { formatNumber, useLocale, useSiteT } from "@/lib/i18n";
 import { useShellT } from "@/lib/shell-messages";
 import { streaks } from "@/lib/stats";
 import { levelOf } from "@/logbook/level";
@@ -21,6 +21,7 @@ import { levelOf } from "@/logbook/level";
  */
 export function HomeHero() {
   const t = useShellT();
+  const site = useSiteT();
   const locale = useLocale();
   const account = useAccount();
   const { day, done, of } = useToday();
@@ -61,13 +62,14 @@ export function HomeHero() {
           </>
         )}
         <div className="home-actions">
+          {/* Started today: carry on with the next daily. All done: the day to look back on and share. */}
           <ButtonLink
-            href={user && next ? `/play/${next.slug}` : "/play"}
+            href={!next ? "/daily" : user || done > 0 ? `/play/${next.slug}` : "/play"}
             variant="play"
             size="lg"
-            icon={<Icon name="play" size={18} />}
+            icon={<Icon name={next ? "play" : "calendar"} size={18} />}
           >
-            {user && next ? t("continue") : t("playNow")}
+            {!next ? site("dayDoneCta") : user || done > 0 ? t("continue") : t("playNow")}
           </ButtonLink>
           <ButtonLink href="/party" size="lg" icon={<Icon name="party" size={18} />}>
             {t("playWithFriends")}
