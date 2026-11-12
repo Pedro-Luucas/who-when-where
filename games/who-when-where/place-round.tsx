@@ -5,6 +5,7 @@ import { WorldMap, useMapLabels, type MapArc, type MapMarker } from "@/component
 import { formatCoordinates, type LatLon } from "@/lib/geo";
 import { formatNumber } from "@/lib/i18n";
 import { useFinePointer } from "@/lib/pointer";
+import { useBoardKeys } from "../engines/reveal";
 import { useGameT } from "./messages";
 import { placeLabel, type Person } from "./people";
 import { Question, ScoreStamp } from "./round-parts";
@@ -25,6 +26,15 @@ export function PlaceRound({ person, round, locked, onLock, onNext, nextLabel }:
   const mapLabels = useMapLabels();
   const mouse = useFinePointer();
   const [pin, setPin] = useState<LatLon | null>(null);
+
+  // Enter locks the pin in, then goes on to the next round.
+  useBoardKeys((key) => {
+    if (key !== "Enter") return false;
+    if (locked) onNext();
+    else if (pin) onLock(gradePlace(person, round, pin));
+    else return false;
+    return true;
+  });
 
   const target = person[round.event].place;
   const markers: MapMarker[] = [];

@@ -303,6 +303,10 @@ export function WorldMap({
   // The keyboard's cursor, in screen pixels: shown while a pickable map has the focus.
   const [cursor, setCursor] = useState<Point | null>(null);
   const [keyboard, setKeyboard] = useState(false);
+  /** Where Enter last dropped the pin: a second Enter on the same spot is the board's (Lock in). */
+  const droppedAt = useRef<Point | null>(null);
+  /** The last thing done on the map was a pointer's (a click, a tap, a drag). */
+  const byPointer = useRef(false);
   // Where a dragged marker is, in screen pixels, until it is let go.
   const [dragAt, setDragAt] = useState<Point | null>(null);
   const [detail, setDetail] = useState<Detail | null>(null);
@@ -631,6 +635,7 @@ export function WorldMap({
 
   function handlePointerDown(event: React.PointerEvent<SVGSVGElement>) {
     setKeyboard(false);
+    byPointer.current = true;
     const svg = svgRef.current;
     if (!svg) return;
     const touch = event.pointerType !== "mouse";
@@ -796,6 +801,7 @@ export function WorldMap({
     if (move) {
       event.preventDefault();
       setKeyboard(true);
+      byPointer.current = false;
       const x = at[0] + move[0];
       const y = at[1] + move[1];
       const clampedX = Math.min(Math.max(x, CURSOR_MARGIN), size.width - CURSOR_MARGIN);
@@ -806,9 +812,15 @@ export function WorldMap({
       }
       setCursor([clampedX, clampedY]);
     } else if (event.key === "Enter" || event.key === " ") {
+      // The pin was placed by pointer, or already dropped here: Enter goes on to
+      // the board, which locks it in. Space always drops (it never locks).
+      const same = droppedAt.current && cursor && droppedAt.current[0] === cursor[0] && droppedAt.current[1] === cursor[1];
+      if (event.key === "Enter" && onPick && ((!keyboard && byPointer.current) || same)) return;
+      byPointer.current = false;
       event.preventDefault();
       setKeyboard(true);
       pickAt(at[0], at[1]);
+      droppedAt.current = at;
       if (!cursor) setCursor(at);
     } else if (event.key === "+" || event.key === "=") {
       event.preventDefault();

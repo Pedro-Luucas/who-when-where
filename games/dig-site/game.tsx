@@ -13,6 +13,7 @@ import { formatCoordinates, type LatLon } from "@/lib/geo";
 import { formatNumber, useSiteT } from "@/lib/i18n";
 import { useFinePointer } from "@/lib/pointer";
 import { useShellT } from "@/lib/shell-messages";
+import { useBoardKeys } from "../engines/reveal";
 import { useGameT, type MessageKey } from "./messages";
 import { lightboxImages, useGallery } from "./gallery";
 import { FOUND_KM, MAX_DIGS, PASS, closestKm, gradeDig, heatOf, isFound, isOver, isPass, scoreOf, type Dig } from "./rules";
@@ -60,6 +61,13 @@ export function DigSiteBoard({ site, digs, onDig, onDigs, maxDigs = MAX_DIGS, la
     onDig(gradeDig(site, pin));
     setPin(null);
   }
+
+  // Enter digs where the pin is.
+  useBoardKeys((key) => {
+    if (key !== "Enter" || !pin) return false;
+    dig();
+    return true;
+  }, !over);
 
   const heatName = (km: number) => t(`heat${heatOf(km)}` as MessageKey);
   const tone = (km: number) => `heat-${heatOf(km)}`;

@@ -139,8 +139,13 @@ export function PinBoard<Move>({
       reveal.next();
       return true;
     }
+    // A pin on the map: Enter locks it in.
+    if (showing === null && key === "Enter" && chosen && chosen.move !== null) {
+      lock();
+      return true;
+    }
     return false;
-  }, showing !== null);
+  }, !walk.over);
 
   const pips: Pip[] = rounds.map((_, i) => {
     const entry = walk.rounds[i];

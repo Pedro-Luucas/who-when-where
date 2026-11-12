@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { YearDial } from "@/components/year-dial";
+import { useBoardKeys } from "../engines/reveal";
 import { useGameT } from "./messages";
 import type { Person } from "./people";
 import { Question, ScoreStamp } from "./round-parts";
@@ -32,6 +33,15 @@ export function YearRound({ person, round, maxYear, locked, onLock, onNext, next
   const [touched, setTouched] = useState(false);
 
   const answer = person[round.event].year;
+
+  // Enter locks the year in (once the dial has been used), then goes on.
+  useBoardKeys((key) => {
+    if (key !== "Enter") return false;
+    if (locked) onNext();
+    else if (touched) onLock(gradeYear(person, round, year));
+    else return false;
+    return true;
+  });
 
   return (
     <>

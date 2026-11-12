@@ -28,9 +28,13 @@ export function useBoardKeys(onKey: (key: string) => boolean | void, active = tr
   useEffect(() => {
     if (!active) return;
     function listen(event: KeyboardEvent) {
-      if (event.ctrlKey || event.metaKey || event.altKey) return;
+      if (event.ctrlKey || event.metaKey || event.altKey || event.repeat) return;
+      // Taken already: the map's own keys (Enter drops its pin), a field's.
+      if (event.defaultPrevented) return;
       const target = event.target as HTMLElement | null;
       if (target?.closest("input, textarea, select, [contenteditable='true'], dialog[open]")) return;
+      // A focused key (Next, Lock in) is pressed by Enter and Space itself: not twice.
+      if ((event.key === "Enter" || event.key === " ") && target?.closest("button, a, [role='button']")) return;
       if (handle(event.key)) event.preventDefault();
     }
     window.addEventListener("keydown", listen);
