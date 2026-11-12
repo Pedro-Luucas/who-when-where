@@ -43,6 +43,11 @@ TRUST_PROXY=1
 # rate limits would share one bucket. Once the site is served only through Vercel,
 # uncomment to key limits on the visitor instead:
 # CLIENT_IP_HEADER=x-vercel-forwarded-for
+# Web Push (streak reminders, challenges, invitations): run
+# "node scripts/vapid-keys.ts" in the API folder and paste its three lines here.
+# VAPID_PUBLIC_KEY=
+# VAPID_PRIVATE_KEY=
+# VAPID_SUBJECT=mailto:you@example.com
 EOF
   chown root:"$APP_USER" "$ENV_FILE"
   chmod 0640 "$ENV_FILE"

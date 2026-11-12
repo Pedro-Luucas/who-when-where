@@ -21,14 +21,17 @@ export const LEADERBOARD: NavItem = {
   href: "/leaderboard",
   label: "navLeaderboard",
   icon: "trophy",
-  match: (path) => path === "/leaderboard",
+  match: (path) => path === "/leaderboard" || path === "/league" || path === "/weekly",
 };
 export const COMMUNITY: NavItem = {
   href: "/community",
   label: "navCommunity",
   icon: "people",
-  match: (path) => path === "/community" || path === "/player",
+  match: (path) => path === "/community" || path === "/player" || path.startsWith("/u/") || path === "/inbox",
 };
+export const INBOX: NavItem = { href: "/inbox", label: "navInbox", icon: "bell", match: (path) => path === "/inbox" };
+export const LEAGUE: NavItem = { href: "/league", label: "navLeague", icon: "medal", match: (path) => path === "/league" };
+export const WEEKLY: NavItem = { href: "/weekly", label: "navWeekly", icon: "sparkle", match: (path) => path === "/weekly" };
 export const PARTY: NavItem = { href: "/party", label: "navParty", icon: "party", match: (path) => path === "/party" };
 
 /** The header's pills, in order. */
@@ -59,7 +62,12 @@ export type IconName =
   | "chevron"
   | "heart"
   | "clock"
-  | "target";
+  | "target"
+  | "bell"
+  | "medal"
+  | "sparkle"
+  | "swords"
+  | "share";
 
 const PATHS: Record<IconName, React.ReactNode> = {
   home: <path d="M3.5 10.5L12 3.8l8.5 6.7V20a.8.8 0 0 1-.8.8H15v-6h-6v6H4.3a.8.8 0 0 1-.8-.8z" />,
@@ -143,6 +151,24 @@ const PATHS: Record<IconName, React.ReactNode> = {
       <circle cx="12" cy="12" r="8.2" />
       <circle cx="12" cy="12" r="4.2" />
       <circle cx="12" cy="12" r=".9" />
+    </>
+  ),
+  bell: <path d="M6.5 16.5V11a5.5 5.5 0 0 1 11 0v5.5l1.5 2h-14zM10 20.5a2.2 2.2 0 0 0 4 0" />,
+  medal: (
+    <>
+      <path d="M8 3.5l2.6 5.2M16 3.5l-2.6 5.2M7 3.5h10" />
+      <circle cx="12" cy="14.5" r="5.5" />
+      <path d="M12 11.6l.9 1.9 2 .3-1.5 1.4.4 2-1.8-1-1.8 1 .4-2-1.5-1.4 2-.3z" />
+    </>
+  ),
+  sparkle: <path d="M12 3.5l1.8 5.2 5.2 1.8-5.2 1.8L12 17.5l-1.8-5.2L5 10.5l5.2-1.8zM18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z" />,
+  swords: <path d="M4 4l9.5 9.5M4 4v3.2M4 4h3.2M20 4l-9.5 9.5M20 4v3.2M20 4h-3.2M8.5 15.5l-3 3M15.5 15.5l3 3M6.8 13.2l4 4M17.2 13.2l-4 4" />,
+  share: (
+    <>
+      <circle cx="17.5" cy="5.5" r="2.3" />
+      <circle cx="6.5" cy="12" r="2.3" />
+      <circle cx="17.5" cy="18.5" r="2.3" />
+      <path d="M8.5 10.8l7-4.1M8.5 13.2l7 4.1" />
     </>
   ),
 };

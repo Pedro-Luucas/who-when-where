@@ -79,6 +79,11 @@ Playing needs no account. Signing in (`/account`) keeps a player's games and str
 | `api/src/social.ts` | Scores (`PUT /results`), leaderboards, public profiles, player search, friends, and `GET /pulse` (what is waiting for the player) |
 | `api/src/chat.ts` | The global room and direct messages between friends |
 | `api/src/parties.ts` | Party rooms: members, settings, runs, scores, invitations, party chat |
+| `api/src/challenges.ts` | Challenges: a finished expedition stored behind `/c/<id>` with the sender's score, played by anyone with the link or sent to one friend (a duel) |
+| `api/src/notify.ts` | The inbox (`GET /inbox`: notifications and conversations) and Web Push subscriptions (`PUT`/`DELETE /push`) |
+| `api/src/push.ts` | Web Push with `node:crypto` only: RFC 8291 payload encryption and RFC 8292 (VAPID) signing |
+| `api/src/leagues.ts` | Weekly leagues (`GET /league`: groups of 30, Bronze to Diamond, promotion and relegation) and the Weekly Special's board |
+| `api/src/reminders.ts` | "Your streak ends in 2 hours" pushes, after 22:00 UTC |
 | `api/src/db.ts` | The schema, as a list of migrations. Append a new one to change it; never edit an old one |
 | `api/deploy/` | `setup.sh` prepares a server once; `deploy.sh` ships the code |
 | `account/` | The site's side: API client (`api.ts`), who is signed in (`state.ts`), save sync (`sync.ts`), the `/account` page |
@@ -106,6 +111,10 @@ The site can be installed as an app (`app/manifest.ts`). The theme, sound, vibra
 **How scores work.** Every game scores a finished puzzle from 0 to 1,000 (`scoreOf` in its `rules.ts`). A signed-in player's finished daily puzzles are sent to the API after each save sync; the first score sent for a day stands. The games are graded on the player's device, so the API takes scores on trust — the leaderboards are for fun, not for prizes.
 
 **How the live parts work.** There are no sockets: pages poll. A party room asks how it stands every 2.5 s (one call returns the room, everyone's scores and the new chat), an open chat every 3 s, the header badge every 20 s — and none of them while the tab is hidden. This works through the `/api` forwarding on any host. A party's puzzles are never sent by the server: it stores a seed, and every player's page deals the same puzzles from it (`buildStages`).
+
+**Social v2.** Public profiles live at `/u/<username>` (with a share card), and can be made friends-only or hide their presence; a player may show a flag, which also puts them on that flag's leaderboard. `/inbox` gathers challenges, friend requests and conversations. A finished expedition can be shared as a challenge (`/c/<id>`): the recipient sees the score to beat, plays the same puzzles, then gets the head-to-head and a rematch. Whoever signs up through an invitation link (`/i/<username>`) becomes the inviter's friend. `/league` is the weekly league; `/weekly` the Weekly Special, one longer run a week (`social/weekly-special.ts` rotates its themes). Every one of these pages says so plainly when the API in front of it predates them.
+
+**Push notifications.** Off unless the API has a VAPID key pair. Make one with `node scripts/vapid-keys.ts` (in `api/`) and add the three lines it prints to `/etc/who-when-where/api.env` (`VAPID_SUBJECT` should be a real `mailto:` address), then restart the API. The site's service worker (`public/sw.js`) only shows notifications; players turn them on per device in `/inbox` or `/account`.
 
 **Deploying the API.** On a fresh Ubuntu server with Node 24+, as root:
 

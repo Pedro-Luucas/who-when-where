@@ -22,6 +22,12 @@ export type Account = {
   avatar: number;
   locale: Locale;
   createdAt: number;
+  /** Who may see the profile (an API from before privacy settings leaves these three out). */
+  profileVisibility?: "public" | "friends";
+  /** Others never see the player online. */
+  hidePresence?: boolean;
+  /** ISO 3166-1 alpha-2 flag shown on the profile; null for none. */
+  country?: string | null;
 };
 
 export type AccountState =
@@ -135,13 +141,19 @@ function onStoreChange(): void {
 
 // ── Actions. Each rejects with an ApiError when the server refuses. ─────────
 
+/** The handle of the friend whose invitation link brought this visitor (social/invite-page.tsx). */
+export const INVITED_BY_KEY = "account:invited-by";
+
 export async function signUp(email: string, password: string, username: string): Promise<void> {
+  const invitedBy = readStore<string | null>(INVITED_BY_KEY, null);
   const { user } = await api<{ user: Account }>("POST", "/auth/signup", {
     email,
     password,
     username,
     locale: getLocale(),
+    ...(invitedBy ? { invitedBy } : {}),
   });
+  writeStore(INVITED_BY_KEY, null);
   enter(user);
 }
 
@@ -167,6 +179,9 @@ export async function updateAccount(changes: {
   email?: string;
   /** Needed to change the e-mail. */
   currentPassword?: string;
+  profileVisibility?: "public" | "friends";
+  hidePresence?: boolean;
+  country?: string | null;
 }): Promise<void> {
   const { user } = await api<{ user: Account }>("PATCH", "/me", changes);
   if (state.status === "user") setState({ status: "user", account: user });

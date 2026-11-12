@@ -86,3 +86,21 @@ export function streaks(days: number[], now = Date.now()): { streak: number; lon
   const { streak, longest, freezes } = streakOf(days, utcDay(now));
   return { streak, longest, freezes };
 }
+
+// ── Weeks ───────────────────────────────────────────────────────────────────
+// A week runs Monday to Sunday, in UTC: week 1 began on Monday 9 Nov 2026,
+// the day before day 1 (the site's lib/weeks.ts says the same).
+
+/** The week a day falls in. */
+export const weekOfDay = (day: number): number => Math.floor(day / 7) + 1;
+
+/** This week's number. */
+export const currentWeek = (now = Date.now()): number => weekOfDay(utcDay(now));
+
+/** The first and last day of a week (week 1 starts before day 1, so at day 1). */
+export function weekDays(week: number): { first: number; last: number } {
+  return { first: Math.max(1, 7 * (week - 1)), last: 7 * week - 1 };
+}
+
+/** When a week ends (00:00 UTC on its last day's next day), in ms since the epoch. */
+export const weekEndsAt = (week: number): number => LAUNCH_UTC + (7 * week - 1) * DAY_MS;

@@ -1,6 +1,7 @@
 "use client";
 
 import { LocaleToggle } from "@/components/locale-toggle";
+import { SocialSettings } from "@/social/account-social";
 import { Avatar, AVATAR_COUNT } from "@/social/avatar";
 import { ActionForm, Field, UsernameField } from "./form";
 import { useAccountT } from "./messages";
@@ -48,6 +49,8 @@ export function Settings({ account }: { account: Account }) {
           />
         </ActionForm>
       </section>
+
+      <SocialSettings account={account} />
 
       <section className="account-section">
         <h2>{t("language")}</h2>

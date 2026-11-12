@@ -8,7 +8,7 @@ import type { UserRow } from "./sessions.ts";
 export const ONLINE_MS = 90_000;
 
 /** Columns of `users u` needed to describe a player to others. */
-export const PUBLIC_COLUMNS = "u.id, u.username, u.display_name, u.avatar, u.last_seen";
+export const PUBLIC_COLUMNS = "u.id, u.username, u.display_name, u.avatar, u.last_seen, u.hide_presence, u.country";
 
 export type PublicRow = {
   id: string;
@@ -16,6 +16,9 @@ export type PublicRow = {
   display_name: string;
   avatar: number;
   last_seen: number;
+  /** 1: the player keeps their presence to themselves. */
+  hide_presence?: number;
+  country?: string | null;
 };
 
 export type PublicUser = {
@@ -25,6 +28,8 @@ export type PublicUser = {
   name: string;
   avatar: number;
   online: boolean;
+  /** ISO 3166-1 alpha-2, when the player chose to show one. */
+  country: string | null;
 };
 
 export function toPublic(row: PublicRow, now = Date.now()): PublicUser {
@@ -33,7 +38,9 @@ export function toPublic(row: PublicRow, now = Date.now()): PublicUser {
     username: row.username ?? "",
     name: row.display_name || row.username || "",
     avatar: row.avatar,
-    online: now - row.last_seen < ONLINE_MS,
+    // A player who hides their presence never shows as online to others.
+    online: !row.hide_presence && now - row.last_seen < ONLINE_MS,
+    country: row.country ?? null,
   };
 }
 

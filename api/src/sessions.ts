@@ -19,7 +19,15 @@ export type User = {
   avatar: number;
   locale: string;
   createdAt: number;
+  /** "public": anyone may see the profile; "friends": only friends. */
+  profileVisibility: ProfileVisibility;
+  /** Others never see the player as online. */
+  hidePresence: boolean;
+  /** ISO 3166-1 alpha-2, shown as a flag and used by the country boards; null unless chosen. */
+  country: string | null;
 };
+
+export type ProfileVisibility = "public" | "friends";
 
 export type UserRow = {
   id: string;
@@ -31,6 +39,9 @@ export type UserRow = {
   username: string | null;
   avatar: number;
   last_seen: number;
+  profile_visibility: ProfileVisibility;
+  hide_presence: number;
+  country: string | null;
 };
 
 export const toUser = (row: UserRow): User => ({
@@ -41,6 +52,9 @@ export const toUser = (row: UserRow): User => ({
   avatar: row.avatar,
   locale: row.locale,
   createdAt: row.created_at,
+  profileVisibility: row.profile_visibility === "friends" ? "friends" : "public",
+  hidePresence: row.hide_presence === 1,
+  country: row.country ?? null,
 });
 
 export function createSession(db: DatabaseSync, userId: string, now = Date.now()): string {
@@ -68,7 +82,7 @@ export function readSession(
   const row = db
     .prepare(
       `SELECT u.id, u.email, u.password_hash, u.display_name, u.locale, u.created_at,
-              u.username, u.avatar, u.last_seen, s.expires_at
+              u.username, u.avatar, u.last_seen, u.profile_visibility, u.hide_presence, u.country, s.expires_at
          FROM sessions s JOIN users u ON u.id = s.user_id
         WHERE s.token_hash = ? AND s.expires_at > ?`,
     )

@@ -14,6 +14,8 @@ export type PublicUser = {
   /** Which avatar colour they picked. */
   avatar: number;
   online: boolean;
+  /** ISO 3166-1 alpha-2, when they chose to show one (an API from before countries leaves it out). */
+  country?: string | null;
 };
 
 /** How the viewer stands with another player. */
@@ -24,7 +26,7 @@ export type ChatMessage = { id: number; at: number; body: string; user: PublicUs
 // ── Leaderboards and profiles ───────────────────────────────────────────────
 
 export type Period = "day" | "week" | "all";
-export type Scope = "all" | "friends";
+export type Scope = "all" | "friends" | "country";
 export type Standing = { rank: number; points: number; puzzles: number };
 export type Leaderboard = {
   players: number;
@@ -33,8 +35,9 @@ export type Leaderboard = {
   me: Standing | null;
 };
 
-export function getLeaderboard(query: { day: number; period: Period; scope: Scope; game: GameSlug | "all" }) {
-  const params = new URLSearchParams({ ...query, day: String(query.day) });
+export function getLeaderboard(query: { day: number; period: Period; scope: Scope; game: GameSlug | "all"; country?: string }) {
+  const { country, ...rest } = query;
+  const params = new URLSearchParams({ ...rest, day: String(query.day), ...(country ? { country } : {}) });
   return api<Leaderboard>("GET", `/leaderboard?${params}`);
 }
 
@@ -44,6 +47,10 @@ export type Profile = {
   joinedAt: number;
   /** null when nobody is signed in. */
   relation: Relation | null;
+  /** A friends-only profile seen by someone who is not a friend: only `user`, `joinedAt` and `relation` come with it. */
+  private?: boolean;
+  /** The league tier they last played in (0 Bronze … 4 Diamond); null if never. */
+  leagueTier?: number | null;
   /** `freezes`: held now (an API from before freezes leaves it out). */
   stats: { points: number; puzzles: number; days: number; fullDays: number; streak: number; longest: number; freezes?: number };
   games: { game: GameSlug; played: number; points: number; best: number }[];
@@ -82,6 +89,8 @@ export type Pulse = {
   /** Unread direct messages, by who sent them. */
   unread: { userId: string; count: number }[];
   invites: Invite[];
+  /** Unread notifications in the inbox (an API from before the inbox leaves it out). */
+  notifications?: number;
 };
 
 export const getPulse = () => api<Pulse>("GET", "/pulse");

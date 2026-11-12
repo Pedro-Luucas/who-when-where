@@ -72,6 +72,43 @@ export function readUsername(value: unknown, field = "username"): string {
   return username;
 }
 
+export const PROFILE_VISIBILITIES = ["public", "friends"] as const;
+
+/** A country code (ISO 3166-1 alpha-2), or null to show none. */
+export function readCountry(value: unknown): string | null {
+  if (value === null || value === "") return null;
+  if (typeof value !== "string" || !/^[A-Za-z]{2}$/.test(value)) throw new Invalid("country");
+  return value.toUpperCase();
+}
+
+export function readBoolean(value: unknown, field: string): boolean {
+  if (typeof value !== "boolean") throw new Invalid(field);
+  return value;
+}
+
+/** Which puzzles an expedition deals: the site's newSeed() makes 10 of these. */
+export function readSeed(value: unknown): string {
+  if (typeof value !== "string" || !/^[\w-]{4,24}$/.test(value)) throw new Invalid("seed");
+  return value;
+}
+
+/** The most puzzles a challenge or the Weekly Special may have. */
+export const MAX_STAGES = 100;
+
+export type StageResult = { points: number; detail: string };
+
+/** One score per puzzle of a run, in order. */
+export function readStageResults(value: unknown, field = "results"): StageResult[] {
+  if (!Array.isArray(value) || value.length < 1 || value.length > MAX_STAGES) throw new Invalid(field);
+  return value.map((item) => {
+    const result = asObject(item, field);
+    return {
+      points: readInteger(result.points, 0, MAX_POINTS, `${field}.points`),
+      detail: result.detail === undefined ? "" : readLine(result.detail, DETAIL_MAX, `${field}.detail`, true),
+    };
+  });
+}
+
 export function readAvatar(value: unknown): number {
   return readInteger(value, 0, AVATARS - 1, "avatar");
 }

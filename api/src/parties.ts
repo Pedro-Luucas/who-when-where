@@ -4,6 +4,7 @@ import type { Hono } from "hono";
 import { listMessages, partyChannel, postMessage, readAfter } from "./chat.ts";
 import { Failure, isUniqueViolation, transaction, type Deps, type Env } from "./http.ts";
 import { PUBLIC_COLUMNS, areFriends, requireUsername, toPublic, type PublicRow } from "./people.ts";
+import type { Pusher } from "./push.ts";
 import { LIMITS } from "./rate-limit.ts";
 import {
   Invalid,
@@ -73,7 +74,7 @@ export function deleteStaleParties(db: DatabaseSync, now = Date.now()): void {
   for (const { id } of stale) deleteParty(db, id);
 }
 
-export function registerParties(account: Hono<Env>, { db, limit, body }: Deps): void {
+export function registerParties(account: Hono<Env>, { db, limit, body }: Deps, pusher: Pusher): void {
   function partyByCode(code: string): PartyRow {
     const party = db.prepare("SELECT * FROM parties WHERE code = ?").get(code.toUpperCase()) as PartyRow | undefined;
     if (!party) throw new Failure(404, "no_such_party");
@@ -417,6 +418,15 @@ export function registerParties(account: Hono<Env>, { db, limit, body }: Deps): 
         `INSERT INTO party_invites (party_id, user_id, from_id, created_at) VALUES (?, ?, ?, ?)
          ON CONFLICT (party_id, user_id) DO UPDATE SET from_id = excluded.from_id, created_at = excluded.created_at`,
       ).run(party.id, target, user.id, Date.now());
+      // Invitations live in the pulse; a push tells a friend who is not on the site.
+      const recipient = db.prepare("SELECT locale FROM users WHERE id = ?").get(target) as { locale: string } | undefined;
+      const name = user.display_name || user.username || "?";
+      void pusher.toUser(target, {
+        title: recipient?.locale === "pt" ? `${name} te chamou para uma party` : `${name} invited you to a party`,
+        body: recipient?.locale === "pt" ? "Entre e jogue junto." : "Jump in and play together.",
+        url: `/party?code=${party.code}&join=1`,
+        tag: `party-${party.code}`,
+      });
     }
     return c.body(null, 204);
   });

@@ -12,7 +12,10 @@ const SOCIAL: NavItem = {
   href: "/community",
   label: "navSocial",
   icon: "people",
-  match: (path) => ["/community", "/leaderboard", "/party", "/player"].includes(path),
+  match: (path) =>
+    ["/community", "/leaderboard", "/party", "/player", "/inbox", "/league", "/weekly"].includes(path) ||
+    path.startsWith("/u/") ||
+    path.startsWith("/c/"),
 };
 const ME: NavItem = {
   href: "/account",

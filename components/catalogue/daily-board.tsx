@@ -1,6 +1,7 @@
 "use client";
 
 import { DailyYear } from "@/social/daily-panel";
+import { WeekCards } from "@/social/week-cards";
 import { useDayNumber } from "@/lib/clock";
 import { dateOfDay } from "@/lib/daily";
 import { numberLocale, useLocale } from "@/lib/i18n";
@@ -43,6 +44,7 @@ export function DailyBoard() {
           <DailyYear />
         </div>
         <aside className="daily-aside">
+          <WeekCards />
           <StreakDial />
           <ArchiveCalendar />
         </aside>

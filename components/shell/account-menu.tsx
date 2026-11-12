@@ -57,12 +57,15 @@ export function AccountMenu() {
   const name = account ? account.displayName || account.username || account.email : t("guest");
   const items: { href: string; label: string; icon: IconName; badge?: number }[] = [
     ...(account?.username
-      ? [{ href: `/player?u=${encodeURIComponent(account.username)}`, label: t("profile"), icon: "user" as const }]
+      ? [{ href: `/u/${encodeURIComponent(account.username)}`, label: t("profile"), icon: "user" as const }]
       : []),
+    ...(account ? [{ href: "/inbox", label: t("navInbox"), icon: "bell" as const, badge: waiting }] : []),
     { href: "/account", label: account ? t("account") : t("signIn"), icon: account ? "sliders" : "user" },
     { href: "/logbook", label: t("logbook"), icon: "book" },
     { href: "/expedition", label: t("expedition"), icon: "compass" },
-    { href: "/community", label: t("navCommunity"), icon: "people", badge: waiting },
+    { href: "/community", label: t("navCommunity"), icon: "people" },
+    { href: "/league", label: t("navLeague"), icon: "medal" },
+    { href: "/weekly", label: t("navWeekly"), icon: "sparkle" },
     { href: "/leaderboard", label: t("navLeaderboard"), icon: "trophy" },
   ];
 

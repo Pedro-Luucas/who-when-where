@@ -1,0 +1,165 @@
+/* Social v2: profiles, challenges, the inbox, leagues and the Weekly Special.
+   Most of the look comes from the UI kit's utilities; these are the pieces
+   utilities can't say well. */
+
+/* Profile hero: a starry band across the top, the avatar overlapping it. */
+.profile-hero-band {
+  height: 92px;
+  background:
+    radial-gradient(1px 1px at 12% 30%, rgb(255 255 255 / 0.7), transparent 60%),
+    radial-gradient(1px 1px at 38% 62%, rgb(255 255 255 / 0.55), transparent 60%),
+    radial-gradient(1.5px 1.5px at 71% 24%, rgb(255 255 255 / 0.7), transparent 60%),
+    radial-gradient(1px 1px at 88% 70%, rgb(255 255 255 / 0.5), transparent 60%),
+    radial-gradient(600px 160px at 80% -40%, color-mix(in srgb, var(--accent) 45%, transparent), transparent 70%),
+    linear-gradient(120deg, var(--surface-3), var(--bg-deep));
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.profile-hero-avatar {
+  margin-top: -36px;
+  box-shadow: 0 0 0 4px var(--bg), 0 0 24px color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+/* League table: zones get a coloured edge and a divider line before them. */
+.league-table li {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.55rem 0.75rem;
+  border-left: 3px solid transparent;
+  border-radius: 6px;
+}
+
+.league-table li + li {
+  margin-top: 2px;
+}
+
+.league-table li[data-zone="up"] {
+  border-left-color: var(--answer);
+  background: color-mix(in srgb, var(--answer) 7%, transparent);
+}
+
+.league-table li[data-zone="down"] {
+  border-left-color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 7%, transparent);
+}
+
+.league-table li[data-me] {
+  outline: 1px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.league-table .league-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 0.25rem;
+  border: 0;
+  background: none;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+}
+
+.league-table .league-divider::after {
+  content: "";
+  flex: 1;
+  border-top: 1px dashed currentColor;
+  opacity: 0.6;
+}
+
+.league-table .league-divider[data-zone="up"] {
+  color: var(--answer);
+}
+
+.league-table .league-divider[data-zone="down"] {
+  color: var(--danger);
+}
+
+.league-rank {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  text-align: center;
+  color: var(--fg-2);
+}
+
+.league-points {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg);
+}
+
+/* The tier ladder: five shields, the player's own lit up. */
+.tier-ladder {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.25rem;
+}
+
+.tier-ladder li {
+  display: grid;
+  justify-items: center;
+  gap: 0.3rem;
+  min-width: 0;
+  padding: 0.6rem 0.1rem;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.02em;
+  overflow-wrap: anywhere;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  opacity: 0.65;
+}
+
+.tier-ladder li[data-current] {
+  opacity: 1;
+  color: var(--fg);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  outline: 1px solid color-mix(in srgb, var(--accent) 50%, transparent);
+}
+
+/* Head to head: two columns of puzzle scores, the better one lit. */
+.h2h-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 4.5rem 4.5rem;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.25rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.h2h-row > b {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: var(--fg-2);
+}
+
+.h2h-row > b[data-best] {
+  color: var(--answer);
+}
+
+/* Notification rows: unread ones carry a dot. */
+.notice-row[data-unread] .notice-dot {
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .rise-in {
+    animation: rise-in 360ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+  }
+}

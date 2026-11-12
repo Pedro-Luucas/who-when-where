@@ -12,6 +12,9 @@ const apiOrigin =
 const GAMES_ONCE_AT_ROOT = ["who-when-where", "wayfarer", "dig-site", "first-to-last", "overland", "outline"];
 
 const nextConfig: NextConfig = {
+  // The same origin for server code that reads the API itself (the share cards,
+  // lib/server-api.ts): fixed at build time, like the rewrite.
+  env: { API_ORIGIN_BUILT: apiOrigin ?? "" },
   async rewrites() {
     return apiOrigin ? [{ source: "/api/:path*", destination: `${apiOrigin}/:path*` }] : [];
   },

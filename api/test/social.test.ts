@@ -157,7 +157,7 @@ test("usernames: chosen at sign-up or later, unique, and needed to take part", a
 
   // Other players never see an e-mail address.
   const found = await ada.call("GET", "/players?q=gra");
-  assert.deepEqual(Object.keys(found.body.players[0].user).sort(), ["avatar", "id", "name", "online", "username"]);
+  assert.deepEqual(Object.keys(found.body.players[0].user).sort(), ["avatar", "country", "id", "name", "online", "username"]);
 });
 
 test("friends: ask, accept, decline, remove", async () => {

@@ -30,6 +30,12 @@ export const LIMITS = {
   partiesPerUser: { max: 20, windowMs: 60 * MINUTE },
   /** Party invitations sent per account. */
   invitesPerUser: { max: 60, windowMs: 60 * MINUTE },
+  /** Challenges sent per account. */
+  challengesPerUser: { max: 60, windowMs: 60 * MINUTE },
+  /** Push subscription changes and test notifications per account. */
+  pushPerUser: { max: 30, windowMs: 60 * MINUTE },
+  /** Scores sent to challenges and the Weekly Special per account. */
+  entriesPerUser: { max: 60, windowMs: MINUTE },
 } satisfies Record<string, Limit>;
 
 export class RateLimiter {

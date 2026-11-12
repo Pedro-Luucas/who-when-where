@@ -7,7 +7,9 @@ import { BrowserOnly, Segmented } from "@/components/controls";
 import { GAME_SLUGS, GAME_TITLES, type GameSlug } from "@/games/registry";
 import { useDayNumber } from "@/lib/clock";
 import { formatNumber } from "@/lib/i18n";
-import { Player } from "./avatar";
+import { Icon } from "@/components/shell/nav-items";
+import { Flag, Player } from "./avatar";
+import { useConnectT } from "./connect-messages";
 import { getLeaderboard, type Period, type Scope } from "./client";
 import { socialError, useSocialT } from "./messages";
 import { useRemote } from "./remote";
@@ -27,6 +29,7 @@ export function Leaderboard() {
 
 function Board() {
   const { locale, t } = useSocialT();
+  const { t: tc } = useConnectT();
   const day = useDayNumber();
   const account = useAccount();
   const me = account.status === "user" ? account.account : null;
@@ -34,11 +37,12 @@ function Board() {
   const [scope, setScope] = useState<Scope>("all");
   const [game, setGame] = useState<GameSlug | "all">("all");
 
-  // The friends board needs a session; visitors always see everyone.
-  const shownScope = me ? scope : "all";
+  // The friends board needs a session, and the flag board a flag; visitors always see everyone.
+  const country = me?.country ?? null;
+  const shownScope = !me || (scope === "country" && !country) ? "all" : scope;
   const board = useRemote(
-    `board:${day}:${period}:${shownScope}:${game}:${me?.id ?? ""}`,
-    () => getLeaderboard({ day, period, scope: shownScope, game }),
+    `board:${day}:${period}:${shownScope}:${game}:${me?.id ?? ""}:${country ?? ""}`,
+    () => getLeaderboard({ day, period, scope: shownScope, game, ...(shownScope === "country" && country ? { country } : {}) }),
     EVERY_MS,
   );
   const rows = board.data?.rows;
@@ -53,6 +57,33 @@ function Board() {
         <p>{t("leaderboardLead")}</p>
       </header>
 
+      <nav className="mb-5 grid gap-3 sm:grid-cols-2" aria-label={tc("boardsMore")}>
+        <Link
+          href="/league"
+          className="flex items-center gap-3 rounded-lg border border-line-strong bg-(image:--panel-fill) p-4 transition-colors hover:border-accent/70"
+        >
+          <span className="grid size-10 place-items-center rounded-full bg-accent-soft text-accent">
+            <Icon name="medal" size={22} />
+          </span>
+          <span className="min-w-0">
+            <b className="block text-fg">{tc("leagueTitle")}</b>
+            <small className="text-fg-2">Bronze → {tc("tier_4")}</small>
+          </span>
+        </Link>
+        <Link
+          href="/weekly"
+          className="flex items-center gap-3 rounded-lg border border-line-strong bg-(image:--panel-fill) p-4 transition-colors hover:border-accent/70"
+        >
+          <span className="grid size-10 place-items-center rounded-full bg-accent-soft text-accent">
+            <Icon name="sparkle" size={22} />
+          </span>
+          <span className="min-w-0">
+            <b className="block text-fg">{tc("weekly")}</b>
+            <small className="text-fg-2">{tc("weeklyBoard")}</small>
+          </span>
+        </Link>
+      </nav>
+
       <div className="filters">
         <Segmented
           label={t("period")}
@@ -66,6 +97,7 @@ function Board() {
             options={[
               { value: "all" as Scope, label: t("scope_all") },
               { value: "friends" as Scope, label: t("scope_friends") },
+              ...(country ? [{ value: "country" as Scope, label: tc("scope_country") }] : []),
             ]}
             value={scope}
             onChange={setScope}
@@ -92,7 +124,17 @@ function Board() {
             <strong className="board-points">{formatNumber(row.points, locale)}</strong>
           </li>
         ))}
-        {rows?.length === 0 && <li className="board-empty">{t(shownScope === "friends" ? "boardEmptyFriends" : "boardEmpty")}</li>}
+        {rows?.length === 0 && (
+          <li className="board-empty">
+            {shownScope === "country" ? (
+              <>
+                <Flag code={country} /> {tc("boardEmptyCountry")}
+              </>
+            ) : (
+              t(shownScope === "friends" ? "boardEmptyFriends" : "boardEmpty")
+            )}
+          </li>
+        )}
         {!rows && !board.error && <li className="board-empty">…</li>}
         {board.error && !rows && <li className="form-error">{t(socialError(board.error))}</li>}
       </ol>
@@ -107,6 +149,11 @@ function Board() {
       {!me && account.status !== "loading" && (
         <p className="hint board-foot">
           {t("boardGuest")} <Link href="/account?next=/leaderboard">{t("joinAction")}</Link>
+        </p>
+      )}
+      {me && me.username && !country && me.profileVisibility !== undefined && (
+        <p className="hint board-foot">
+          {tc("setCountry")} <Link href="/account">{tc("privacy")}</Link>
         </p>
       )}
       {me && !me.username && (

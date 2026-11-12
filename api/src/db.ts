@@ -145,6 +145,88 @@ const MIGRATIONS: string[] = [
     PRIMARY KEY (party_id, user_id)
   ) STRICT, WITHOUT ROWID;
   `,
+  // 3: social v2 — privacy, country, invitations, challenges, the inbox,
+  // push notifications, weekly leagues and the Weekly Special.
+  `
+  ALTER TABLE users ADD COLUMN profile_visibility TEXT NOT NULL DEFAULT 'public'; -- 'public' | 'friends'
+  ALTER TABLE users ADD COLUMN hide_presence INTEGER NOT NULL DEFAULT 0;
+  ALTER TABLE users ADD COLUMN country TEXT;                 -- ISO 3166-1 alpha-2, only if the player sets it
+  ALTER TABLE users ADD COLUMN invited_by TEXT REFERENCES users(id) ON DELETE SET NULL;
+  ALTER TABLE users ADD COLUMN league_tier INTEGER NOT NULL DEFAULT 0;
+  ALTER TABLE users ADD COLUMN reminded_day INTEGER NOT NULL DEFAULT 0; -- last day a streak reminder went out
+  CREATE INDEX users_country ON users(country) WHERE country IS NOT NULL;
+
+  -- A challenge: an expedition (seed + settings) someone played and dares
+  -- others to beat. Open to anyone with the link, or sent to one friend.
+  CREATE TABLE challenges (
+    id         TEXT PRIMARY KEY,           -- what the link carries: /c/<id>
+    from_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    to_id      TEXT REFERENCES users(id) ON DELETE CASCADE,  -- a duel sent to one friend
+    reply_to   TEXT,                       -- the challenge this one answers (a rematch)
+    seed       TEXT NOT NULL,
+    settings   TEXT NOT NULL,              -- JSON, the party settings' shape
+    created_at INTEGER NOT NULL
+  ) STRICT;
+  CREATE INDEX challenges_from ON challenges(from_id, created_at);
+  CREATE INDEX challenges_to ON challenges(to_id, created_at) WHERE to_id IS NOT NULL;
+
+  -- Everyone's score on a challenge, the sender's included. The first one stands.
+  CREATE TABLE challenge_entries (
+    challenge_id TEXT NOT NULL REFERENCES challenges(id) ON DELETE CASCADE,
+    user_id      TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    points       INTEGER NOT NULL,
+    results      TEXT NOT NULL,            -- JSON: [{ points, detail }] per puzzle
+    created_at   INTEGER NOT NULL,
+    PRIMARY KEY (challenge_id, user_id)
+  ) STRICT, WITHOUT ROWID;
+  CREATE INDEX challenge_entries_user ON challenge_entries(user_id, created_at);
+
+  -- The inbox: what happened to a player while they were away.
+  CREATE TABLE notifications (
+    id         INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    kind       TEXT NOT NULL,              -- see notify.ts
+    actor_id   TEXT REFERENCES users(id) ON DELETE CASCADE,
+    ref        TEXT NOT NULL DEFAULT '',   -- a challenge id, when there is one
+    points     INTEGER,
+    created_at INTEGER NOT NULL,
+    read_at    INTEGER
+  ) STRICT;
+  CREATE INDEX notifications_user ON notifications(user_id, id);
+
+  -- Web Push: one row per browser that agreed to get notifications.
+  CREATE TABLE push_subscriptions (
+    endpoint   TEXT PRIMARY KEY,
+    user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    p256dh     TEXT NOT NULL,
+    auth       TEXT NOT NULL,
+    created_at INTEGER NOT NULL
+  ) STRICT;
+  CREATE INDEX push_subscriptions_user ON push_subscriptions(user_id);
+
+  -- Weekly leagues: each week a player who scores is put in a group of up to
+  -- 30 at their tier; the top of a group goes up a tier, the bottom down.
+  CREATE TABLE league_members (
+    week      INTEGER NOT NULL,
+    user_id   TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    tier      INTEGER NOT NULL,
+    grp       INTEGER NOT NULL,
+    joined_at INTEGER NOT NULL,
+    PRIMARY KEY (week, user_id)
+  ) STRICT, WITHOUT ROWID;
+  CREATE INDEX league_groups ON league_members(week, tier, grp);
+
+  -- The Weekly Special: one run per player per week. The first score stands.
+  CREATE TABLE weekly_results (
+    week       INTEGER NOT NULL,
+    user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    points     INTEGER NOT NULL,
+    results    TEXT NOT NULL,
+    created_at INTEGER NOT NULL,
+    PRIMARY KEY (week, user_id)
+  ) STRICT, WITHOUT ROWID;
+  CREATE INDEX weekly_results_points ON weekly_results(week, points);
+  `,
 ];
 
 export function openDatabase(path: string): DatabaseSync {

@@ -11,6 +11,8 @@ import { FriendsPanel } from "./friends";
 import { Members, type Member } from "./gate";
 import { useSocialT } from "./messages";
 import { refreshPulse, usePulse } from "./pulse";
+import { useConnectT } from "./connect-messages";
+import { ShareKey } from "./share-key";
 import { SocialTabs } from "./tabs";
 
 /** The community page: friends on one side, the chat rooms on the other. */
@@ -61,6 +63,7 @@ export function Invitations() {
 
 function Hall({ me }: { me: Member }) {
   const { t } = useSocialT();
+  const { t: tc } = useConnectT();
   // The room on screen: everybody's, or the one shared with a friend.
   const [friend, setFriend] = useState<PublicUser | null>(null);
 
@@ -78,7 +81,7 @@ function Hall({ me }: { me: Member }) {
         <section className="panel" aria-labelledby="friends-heading">
           <header className="panel-head">
             <h2 id="friends-heading">{t("friends")}</h2>
-            <Link href={`/player?u=${me.username}`} className="panel-link">
+            <Link href={`/u/${me.username}`} className="panel-link">
               {t("myProfile")} →
             </Link>
           </header>
@@ -88,6 +91,16 @@ function Hall({ me }: { me: Member }) {
               document.getElementById("chat-heading")?.scrollIntoView({ behavior: "smooth", block: "nearest" });
             }}
           />
+          <div className="mt-5 rounded-md border border-dashed border-line-strong bg-sunken/60 p-4">
+            <h3 className="font-bold text-fg">{tc("yourInvite")}</h3>
+            <p className="mb-3 text-sm text-fg-2">{tc("yourInviteLead")}</p>
+            <ShareKey
+              text={() => [tc("inviteShareText"), `${window.location.origin}/i/${me.username}`].join("\n")}
+              label={tc("copyInvite")}
+              size="sm"
+              variant="primary"
+            />
+          </div>
         </section>
 
         <section className="panel panel-chat" aria-labelledby="chat-heading">

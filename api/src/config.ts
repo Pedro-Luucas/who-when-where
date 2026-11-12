@@ -1,5 +1,7 @@
 // Settings come from the environment; see deploy/api.env.example.
 
+import type { Vapid } from "./push.ts";
+
 export type Config = {
   host: string;
   port: number;
@@ -15,6 +17,8 @@ export type Config = {
    * API is reachable through that CDN alone, since any client can forge a header.
    */
   clientIpHeader?: string;
+  /** Web Push keys (VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT); push is off without them. */
+  vapid?: Vapid | null;
 };
 
 export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
@@ -26,5 +30,13 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
     secureCookies: production,
     trustProxy: env.TRUST_PROXY === "1",
     clientIpHeader: env.CLIENT_IP_HEADER?.trim().toLowerCase() || undefined,
+    vapid:
+      env.VAPID_PUBLIC_KEY && env.VAPID_PRIVATE_KEY
+        ? {
+            publicKey: env.VAPID_PUBLIC_KEY.trim(),
+            privateKey: env.VAPID_PRIVATE_KEY.trim(),
+            subject: env.VAPID_SUBJECT?.trim() || "mailto:admin@example.com",
+          }
+        : null,
   };
 }

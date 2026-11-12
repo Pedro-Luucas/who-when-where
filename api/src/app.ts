@@ -5,11 +5,16 @@ import { Hono, type Context } from "hono";
 import { bodyLimit } from "hono/body-limit";
 import { deleteCookie, getCookie, setCookie } from "hono/cookie";
 import { HTTPException } from "hono/http-exception";
+import { registerChallenges, registerPublicChallenges } from "./challenges.ts";
 import { registerChat } from "./chat.ts";
 import type { Config } from "./config.ts";
 import { Failure, isUniqueViolation, type Deps, type Env } from "./http.ts";
+import { registerLeagues } from "./leagues.ts";
+import { notify, registerInbox } from "./notify.ts";
 import { registerParties } from "./parties.ts";
 import { BusyError, hashPassword, verifyDecoy, verifyPassword } from "./passwords.ts";
+import { pairOf } from "./people.ts";
+import { createPusher, type Pusher } from "./push.ts";
 import { LIMITS, RateLimiter, type Limit } from "./rate-limit.ts";
 import {
   SESSION_COOKIE,
@@ -25,8 +30,12 @@ import { registerPublicSocial, registerSocial } from "./social.ts";
 import {
   AVATARS,
   Invalid,
+  PROFILE_VISIBILITIES,
   asObject,
   readAvatar,
+  readBoolean,
+  readChoice,
+  readCountry,
   readDisplayName,
   readEmail,
   readLocale,
@@ -46,7 +55,12 @@ const SEEN_EVERY_MS = 20_000;
 const takenCode = (error: unknown) =>
   error instanceof Error && error.message.includes("username") ? "username_taken" : "email_taken";
 
-export function createApp(db: DatabaseSync, config: Config, limiter = new RateLimiter()) {
+export function createApp(
+  db: DatabaseSync,
+  config: Config,
+  limiter = new RateLimiter(),
+  pusher: Pusher = createPusher(db, config.vapid ?? null),
+) {
   const app = new Hono<Env>();
 
   function clientAddress(c: Context): string {
@@ -175,6 +189,9 @@ export function createApp(db: DatabaseSync, config: Config, limiter = new RateLi
       username,
       avatar: randomInt(AVATARS),
       last_seen: now,
+      profile_visibility: "public",
+      hide_presence: 0,
+      country: null,
     };
     try {
       db.prepare(
@@ -197,9 +214,29 @@ export function createApp(db: DatabaseSync, config: Config, limiter = new RateLi
       if (isUniqueViolation(error)) throw new Failure(409, takenCode(error));
       throw error;
     }
+    welcomeInvited(row.id, input.invitedBy);
     startSession(c, row.id);
     return c.json({ user: toUser(row) }, 201);
   });
+
+  /**
+   * A newcomer who came through a friend's invitation link (/i/<username>):
+   * they become friends straight away, and the friend hears about it. A link
+   * to nobody is ignored: it never stops a sign-up.
+   */
+  function welcomeInvited(userId: string, invitedBy: unknown): void {
+    if (typeof invitedBy !== "string" || !/^[a-z0-9_]{3,20}$/i.test(invitedBy)) return;
+    const inviter = db.prepare("SELECT id FROM users WHERE username = ?").get(invitedBy.toLowerCase()) as
+      | { id: string }
+      | undefined;
+    if (!inviter || inviter.id === userId) return;
+    const [low, high] = pairOf(userId, inviter.id);
+    db.prepare("UPDATE users SET invited_by = ? WHERE id = ?").run(inviter.id, userId);
+    db.prepare(
+      "INSERT OR IGNORE INTO friendships (low, high, requester, status, created_at) VALUES (?, ?, ?, 'accepted', ?)",
+    ).run(low, high, inviter.id, Date.now());
+    notify(db, pusher, inviter.id, "invite_joined", userId);
+  }
 
   app.post("/auth/login", async (c) => {
     const input = await body(c);
@@ -226,8 +263,15 @@ export function createApp(db: DatabaseSync, config: Config, limiter = new RateLi
     return c.body(null, 204);
   });
 
-  // Leaderboards and profiles are open to everyone.
+  // Leaderboards, profiles and challenges are open to everyone.
   registerPublicSocial(app, deps);
+  registerPublicChallenges(app, deps);
+
+  /** The key browsers subscribe to push notifications with; 404 when push is off. */
+  app.get("/push/key", (c) => {
+    if (!pusher.publicKey) throw new Failure(404, "push_unavailable");
+    return c.json({ key: pusher.publicKey });
+  });
 
   // ── Everything below needs a session ────────────────────────────────────
 
@@ -257,14 +301,31 @@ export function createApp(db: DatabaseSync, config: Config, limiter = new RateLi
     if (input.locale !== undefined) next.locale = readLocale(input.locale);
     if (input.username !== undefined) next.username = readUsername(input.username);
     if (input.avatar !== undefined) next.avatar = readAvatar(input.avatar);
+    if (input.profileVisibility !== undefined) {
+      next.profile_visibility = readChoice(input.profileVisibility, PROFILE_VISIBILITIES, "profileVisibility");
+    }
+    if (input.hidePresence !== undefined) next.hide_presence = readBoolean(input.hidePresence, "hidePresence") ? 1 : 0;
+    if (input.country !== undefined) next.country = readCountry(input.country);
     if (input.email !== undefined) {
       next.email = readEmail(input.email);
       if (next.email !== user.email) await confirmPassword(user, input.currentPassword, "currentPassword");
     }
     try {
       db.prepare(
-        "UPDATE users SET email = ?, display_name = ?, locale = ?, username = ?, avatar = ?, updated_at = ? WHERE id = ?",
-      ).run(next.email, next.display_name, next.locale, next.username, next.avatar, Date.now(), user.id);
+        `UPDATE users SET email = ?, display_name = ?, locale = ?, username = ?, avatar = ?,
+                          profile_visibility = ?, hide_presence = ?, country = ?, updated_at = ? WHERE id = ?`,
+      ).run(
+        next.email,
+        next.display_name,
+        next.locale,
+        next.username,
+        next.avatar,
+        next.profile_visibility,
+        next.hide_presence,
+        next.country,
+        Date.now(),
+        user.id,
+      );
     } catch (error) {
       if (isUniqueViolation(error)) throw new Failure(409, takenCode(error));
       throw error;
@@ -339,9 +400,12 @@ export function createApp(db: DatabaseSync, config: Config, limiter = new RateLi
     return c.body(null, 204);
   });
 
-  registerSocial(account, deps);
+  registerSocial(account, deps, pusher);
   registerChat(account, deps);
-  registerParties(account, deps);
+  registerParties(account, deps, pusher);
+  registerChallenges(account, deps, pusher);
+  registerInbox(account, deps, pusher);
+  registerLeagues(app, account, deps);
 
   app.route("/", account);
   return app;

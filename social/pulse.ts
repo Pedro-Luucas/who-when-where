@@ -9,7 +9,7 @@ import { getPulse, type Pulse } from "./client";
 // every little while as long as something on screen shows it.
 
 const EVERY_MS = 20_000;
-const NOTHING: Pulse = { requests: 0, unread: [], invites: [] };
+const NOTHING: Pulse = { requests: 0, unread: [], invites: [], notifications: 0 };
 
 let pulse: Pulse = NOTHING;
 const listeners = new Set<() => void>();
@@ -58,4 +58,7 @@ export function usePulse(): Pulse {
 
 /** How many things are waiting, for a badge. */
 export const pulseCount = (value: Pulse): number =>
-  value.requests + value.invites.length + value.unread.reduce((sum, entry) => sum + entry.count, 0);
+  value.requests +
+  value.invites.length +
+  value.unread.reduce((sum, entry) => sum + entry.count, 0) +
+  (value.notifications ?? 0);

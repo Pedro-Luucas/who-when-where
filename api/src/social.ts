@@ -1,6 +1,8 @@
 import type { Hono } from "hono";
 import { earliestDay, latestDay, streaks, utcDay } from "./days.ts";
 import { Failure, transaction, type Deps, type Env } from "./http.ts";
+import { joinLeagueIfPlayed } from "./leagues.ts";
+import { notify, unreadNotifications } from "./notify.ts";
 import {
   PUBLIC_COLUMNS,
   friendIds,
@@ -12,8 +14,19 @@ import {
   toPublic,
   type PublicRow,
 } from "./people.ts";
+import type { Pusher } from "./push.ts";
 import { LIMITS } from "./rate-limit.ts";
-import { DAILY_SET, Invalid, inChallengeSql, isGame, readChoice, readLine, readResults, readUsername } from "./validate.ts";
+import {
+  DAILY_SET,
+  Invalid,
+  inChallengeSql,
+  isGame,
+  readChoice,
+  readCountry,
+  readLine,
+  readResults,
+  readUsername,
+} from "./validate.ts";
 
 // Scores, leaderboards, profiles and friends.
 
@@ -24,7 +37,7 @@ const ACTIVITY_DAYS = 371;
 const SEARCH_RESULTS = 10;
 
 const PERIODS = ["day", "week", "all"] as const;
-const SCOPES = ["all", "friends"] as const;
+const SCOPES = ["all", "friends", "country"] as const;
 
 function readDayQuery(value: string | undefined, now: number): number {
   if (value === undefined) return utcDay(now);
@@ -61,6 +74,14 @@ export function registerPublicSocial(app: Hono<Env>, { db, viewer }: Deps): void
       const ids = [me.id, ...friendIds(db, me.id)];
       where.push(`r.user_id IN (${placeholders(ids.length)})`);
       params.push(...ids);
+    }
+    // One country's players: the one asked for, or the viewer's own.
+    let country: string | null = null;
+    if (scope === "country") {
+      country = readCountry(c.req.query("country") ?? me?.country ?? null);
+      if (!country) throw new Failure(400, "country_required");
+      where.push("u.country = ?");
+      params.push(country);
     }
     const totals = `
       SELECT r.user_id, SUM(r.points) AS points, COUNT(*) AS puzzles, MAX(r.created_at) AS last
@@ -99,16 +120,23 @@ export function registerPublicSocial(app: Hono<Env>, { db, viewer }: Deps): void
         mine = { rank: ahead + 1, ...own };
       }
     }
-    return c.json({ day, period, game, scope, players, rows, me: mine });
+    return c.json({ day, period, game, scope, country, players, rows, me: mine });
   });
 
   /** A player's public profile: totals, the streak (lib/streak.ts's rule) and a year of activity. */
   app.get("/players/:username", (c) => {
     const now = Date.now();
     const row = db
-      .prepare(`SELECT ${PUBLIC_COLUMNS}, u.created_at FROM users u WHERE u.username = ?`)
-      .get(c.req.param("username").toLowerCase()) as (PublicRow & { created_at: number }) | undefined;
+      .prepare(`SELECT ${PUBLIC_COLUMNS}, u.created_at, u.profile_visibility FROM users u WHERE u.username = ?`)
+      .get(c.req.param("username").toLowerCase()) as (PublicRow & { created_at: number; profile_visibility: string }) | undefined;
     if (!row) throw new Failure(404, "no_such_player");
+
+    const me = viewer(c);
+    const relation = me ? relationOf(db, me.id, row.id) : null;
+    // A friends-only profile shows strangers the name and the way to ask, nothing more.
+    if (row.profile_visibility === "friends" && relation !== "self" && relation !== "friends") {
+      return c.json({ user: { ...toPublic(row, now), online: false }, joinedAt: row.created_at, relation, private: true });
+    }
 
     const days = db
       .prepare(
@@ -125,12 +153,17 @@ export function registerPublicSocial(app: Hono<Env>, { db, viewer }: Deps): void
       )
       .all(row.id) as { game: string; played: number; points: number; best: number }[];
 
-    const me = viewer(c);
     const firstShown = latestDay(now) - ACTIVITY_DAYS + 1;
+    const league = db
+      .prepare("SELECT tier FROM league_members WHERE user_id = ? ORDER BY week DESC LIMIT 1")
+      .get(row.id) as { tier: number } | undefined;
     return c.json({
       user: toPublic(row, now),
       joinedAt: row.created_at,
-      relation: me ? relationOf(db, me.id, row.id) : null,
+      relation,
+      private: false,
+      /** The league tier they last played in, if any. */
+      leagueTier: league?.tier ?? null,
       stats: {
         points: days.reduce((sum, entry) => sum + entry.points, 0),
         puzzles: days.reduce((sum, entry) => sum + entry.puzzles, 0),
@@ -152,7 +185,7 @@ export function registerPublicSocial(app: Hono<Env>, { db, viewer }: Deps): void
 }
 
 /** Routes that need a session. */
-export function registerSocial(account: Hono<Env>, { db, limit, body }: Deps): void {
+export function registerSocial(account: Hono<Env>, { db, limit, body }: Deps, pusher: Pusher): void {
   // ── Scores ────────────────────────────────────────────────────────────────
 
   /** Records finished daily puzzles. A day's first score stands. */
@@ -167,6 +200,7 @@ export function registerSocial(account: Hono<Env>, { db, limit, body }: Deps): v
     transaction(db, () => {
       for (const result of results) insert.run(user.id, result.game, result.day, result.points, result.detail, now);
     });
+    joinLeagueIfPlayed(db, user.id, now);
     return c.body(null, 204);
   });
 
@@ -247,6 +281,7 @@ export function registerSocial(account: Hono<Env>, { db, limit, body }: Deps): v
     if (existing) {
       if (existing.requester === user.id) return c.json({ relation: "outgoing" });
       accept(user.id, target.id);
+      notify(db, pusher, target.id, "friend_accepted", user.id);
       return c.json({ relation: "friends" });
     }
 
@@ -259,6 +294,7 @@ export function registerSocial(account: Hono<Env>, { db, limit, body }: Deps): v
     db.prepare(
       "INSERT INTO friendships (low, high, requester, status, created_at) VALUES (?, ?, ?, 'pending', ?)",
     ).run(low, high, user.id, Date.now());
+    notify(db, pusher, target.id, "friend_request", user.id);
     return c.json({ relation: "outgoing" }, 201);
   });
 
@@ -274,6 +310,7 @@ export function registerSocial(account: Hono<Env>, { db, limit, body }: Deps): v
 
   account.post("/friends/:id/accept", (c) => {
     accept(c.get("user").id, c.req.param("id"));
+    notify(db, pusher, c.req.param("id"), "friend_accepted", c.get("user").id);
     return c.json({ relation: "friends" });
   });
 
@@ -299,7 +336,10 @@ export function registerSocial(account: Hono<Env>, { db, limit, body }: Deps): v
       .prepare(
         `SELECT m.user_id AS userId, COUNT(*) AS count
            FROM messages m LEFT JOIN chat_reads r ON r.user_id = m.to_id AND r.channel = m.channel
-          WHERE m.to_id = ? AND m.id > COALESCE(r.last_id, 0)
+          WHERE m.to_id = ?1 AND m.id > COALESCE(r.last_id, 0)
+            -- Someone no longer a friend cannot be answered, so their messages are not news.
+            AND EXISTS (SELECT 1 FROM friendships f WHERE f.status = 'accepted'
+                         AND f.low = MIN(m.user_id, ?1) AND f.high = MAX(m.user_id, ?1))
           GROUP BY m.user_id`,
       )
       .all(user.id) as { userId: string; count: number }[];
@@ -315,6 +355,7 @@ export function registerSocial(account: Hono<Env>, { db, limit, body }: Deps): v
       requests,
       unread,
       invites: invites.map((row) => ({ code: row.code, name: row.name, from: toPublic(row, now) })),
+      notifications: unreadNotifications(db, user.id, true),
     });
   });
 }
