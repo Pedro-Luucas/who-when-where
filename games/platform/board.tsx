@@ -1,6 +1,6 @@
 "use client";
 
-import { Daily } from "@/components/daily";
+import { Daily, skeletonShapeOf } from "@/components/daily";
 import { GamePanels } from "@/components/game-panels";
 import { ResultActions } from "@/components/result-footer";
 import { useDayNumber } from "@/lib/clock";
@@ -28,7 +28,7 @@ export function defineBoard<Puzzle, Move, Saved, Key extends string>(
   function Screen() {
     // Keyed by day: at midnight the next puzzle starts from a clean slate.
     return (
-      <Daily>
+      <Daily skeleton={skeletonShapeOf(definition.slug)}>
         {(day, archive) => (
           <Play key={`${day}${archive ? ":archive" : ""}`} day={day} archive={archive} definition={definition} board={erased} />
         )}

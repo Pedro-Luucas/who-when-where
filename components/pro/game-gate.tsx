@@ -1,6 +1,6 @@
 "use client";
 
-import { GameSkeleton } from "@/components/daily";
+import { GameSkeleton, skeletonShapeOf } from "@/components/daily";
 import { Icon } from "@/components/shell/nav-items";
 import { ButtonLink } from "@/components/ui/button";
 import { gameBySlug, type GameSlug } from "@/games/registry";
@@ -16,7 +16,7 @@ export function ProGameGate({ game, children }: { game: GameSlug; children: Reac
   return (
     <Gate
       feature="games.pro"
-      loading={<GameSkeleton />}
+      loading={<GameSkeleton shape={skeletonShapeOf(game)} />}
       fallback={
         <main className="shell-page pro-gate-page">
           <ProTeaser

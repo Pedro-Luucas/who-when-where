@@ -4,7 +4,7 @@ import { Suspense, use, useState } from "react";
 import { browser } from "react-dom";
 import { useEntitlements } from "@/account/entitlements";
 import { usePracticeAllowance } from "@/account/practice-allowance";
-import { GameSkeleton } from "@/components/daily";
+import { GameSkeleton, skeletonShapeOf } from "@/components/daily";
 import { GamePanels } from "@/components/game-panels";
 import { ProTeaser } from "@/components/pro/gate";
 import { useProT } from "@/components/pro/messages";
@@ -61,7 +61,7 @@ function newSeed(): string {
 /** A game's practice page. Fetches that game, and no other. */
 export function PracticeScreen({ game }: { game: GameSlug }) {
   return (
-    <Suspense fallback={<GameSkeleton />}>
+    <Suspense fallback={<GameSkeleton shape={skeletonShapeOf(game)} />}>
       <Practice game={game} />
     </Suspense>
   );
@@ -102,7 +102,7 @@ function Practice({ game }: { game: GameSlug }) {
     window.scrollTo({ top: 0 });
   }
 
-  if (puzzle === undefined) return <GameSkeleton />;
+  if (puzzle === undefined) return <GameSkeleton shape={skeletonShapeOf(game)} />;
   // The day's allowance is used: the result of the last one stays, the next is not dealt.
   if (allowance.locked && !state.moves.length) return <PracticeLimit limit={allowance.limit ?? 0} />;
   const { Board } = board;

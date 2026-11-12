@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import type { ComponentType } from "react";
-import { GameSkeleton } from "@/components/daily";
+import { GameSkeleton, skeletonShapeOf } from "@/components/daily";
 import type { GameBoard, GameData } from "./platform/types";
 import type { GameSlug } from "./registry";
 
@@ -12,7 +12,13 @@ import type { GameSlug } from "./registry";
 //
 // A new game is named three times here — its screen, its board, its data.
 
-const loading = () => <GameSkeleton />;
+/** The loading screen of one game, in its own shape. */
+const skeleton = (slug: GameSlug) => {
+  const shape = skeletonShapeOf(slug);
+  return function Loading() {
+    return <GameSkeleton shape={shape} />;
+  };
+};
 const screen = (module: { default: GameBoard }) => module.default.Screen;
 
 /**
@@ -20,32 +26,32 @@ const screen = (module: { default: GameBoard }) => module.default.Screen;
  * announced in its HTML), so today's puzzle does not wait for a second trip.
  */
 export const SCREENS: Record<GameSlug, ComponentType> = {
-  "who-when-where": dynamic(() => import("./who-when-where/board").then(screen), { loading }),
-  wayfarer: dynamic(() => import("./wayfarer/board").then(screen), { loading }),
-  "dig-site": dynamic(() => import("./dig-site/board").then(screen), { loading }),
-  "first-to-last": dynamic(() => import("./first-to-last/board").then(screen), { loading }),
-  overland: dynamic(() => import("./overland/board").then(screen), { loading }),
-  outline: dynamic(() => import("./outline/board").then(screen), { loading }),
-  "lifelines": dynamic(() => import("./lifelines/board").then(screen), { loading }),
-  "clue-ladder": dynamic(() => import("./clue-ladder/board").then(screen), { loading }),
-  "born-here": dynamic(() => import("./born-here/board").then(screen), { loading }),
-  "could-they-meet": dynamic(() => import("./could-they-meet/board").then(screen), { loading }),
-  "earlier-or-later": dynamic(() => import("./earlier-or-later/board").then(screen), { loading }),
-  "same-year": dynamic(() => import("./same-year/board").then(screen), { loading }),
-  "pin-the-city": dynamic(() => import("./pin-the-city/board").then(screen), { loading }),
-  "click-the-country": dynamic(() => import("./click-the-country/board").then(screen), { loading }),
-  "type-the-countries": dynamic(() => import("./type-the-countries/board").then(screen), { loading }),
-  "flag-peek": dynamic(() => import("./flag-peek/board").then(screen), { loading }),
-  "higher-or-lower": dynamic(() => import("./higher-or-lower/board").then(screen), { loading }),
-  "border-chain": dynamic(() => import("./border-chain/board").then(screen), { loading }),
-  timeline: dynamic(() => import("./timeline/board").then(screen), { loading }),
-  "year-snap": dynamic(() => import("./year-snap/board").then(screen), { loading }),
-  "landmark-lens": dynamic(() => import("./landmark-lens/board").then(screen), { loading }),
-  "true-size": dynamic(() => import("./true-size/board").then(screen), { loading }),
-  "rivers-and-ranges": dynamic(() => import("./rivers-and-ranges/board").then(screen), { loading }),
-  "life-tracks": dynamic(() => import("./life-tracks/board").then(screen), { loading }),
-  quickplay: dynamic(() => import("./quickplay/board").then(screen), { loading }),
-  gauntlet: dynamic(() => import("./gauntlet/board").then(screen), { loading }),
+  "who-when-where": dynamic(() => import("./who-when-where/board").then(screen), { loading: skeleton("who-when-where") }),
+  wayfarer: dynamic(() => import("./wayfarer/board").then(screen), { loading: skeleton("wayfarer") }),
+  "dig-site": dynamic(() => import("./dig-site/board").then(screen), { loading: skeleton("dig-site") }),
+  "first-to-last": dynamic(() => import("./first-to-last/board").then(screen), { loading: skeleton("first-to-last") }),
+  overland: dynamic(() => import("./overland/board").then(screen), { loading: skeleton("overland") }),
+  outline: dynamic(() => import("./outline/board").then(screen), { loading: skeleton("outline") }),
+  "lifelines": dynamic(() => import("./lifelines/board").then(screen), { loading: skeleton("lifelines") }),
+  "clue-ladder": dynamic(() => import("./clue-ladder/board").then(screen), { loading: skeleton("clue-ladder") }),
+  "born-here": dynamic(() => import("./born-here/board").then(screen), { loading: skeleton("born-here") }),
+  "could-they-meet": dynamic(() => import("./could-they-meet/board").then(screen), { loading: skeleton("could-they-meet") }),
+  "earlier-or-later": dynamic(() => import("./earlier-or-later/board").then(screen), { loading: skeleton("earlier-or-later") }),
+  "same-year": dynamic(() => import("./same-year/board").then(screen), { loading: skeleton("same-year") }),
+  "pin-the-city": dynamic(() => import("./pin-the-city/board").then(screen), { loading: skeleton("pin-the-city") }),
+  "click-the-country": dynamic(() => import("./click-the-country/board").then(screen), { loading: skeleton("click-the-country") }),
+  "type-the-countries": dynamic(() => import("./type-the-countries/board").then(screen), { loading: skeleton("type-the-countries") }),
+  "flag-peek": dynamic(() => import("./flag-peek/board").then(screen), { loading: skeleton("flag-peek") }),
+  "higher-or-lower": dynamic(() => import("./higher-or-lower/board").then(screen), { loading: skeleton("higher-or-lower") }),
+  "border-chain": dynamic(() => import("./border-chain/board").then(screen), { loading: skeleton("border-chain") }),
+  timeline: dynamic(() => import("./timeline/board").then(screen), { loading: skeleton("timeline") }),
+  "year-snap": dynamic(() => import("./year-snap/board").then(screen), { loading: skeleton("year-snap") }),
+  "landmark-lens": dynamic(() => import("./landmark-lens/board").then(screen), { loading: skeleton("landmark-lens") }),
+  "true-size": dynamic(() => import("./true-size/board").then(screen), { loading: skeleton("true-size") }),
+  "rivers-and-ranges": dynamic(() => import("./rivers-and-ranges/board").then(screen), { loading: skeleton("rivers-and-ranges") }),
+  "life-tracks": dynamic(() => import("./life-tracks/board").then(screen), { loading: skeleton("life-tracks") }),
+  quickplay: dynamic(() => import("./quickplay/board").then(screen), { loading: skeleton("quickplay") }),
+  gauntlet: dynamic(() => import("./gauntlet/board").then(screen), { loading: skeleton("gauntlet") }),
 };
 
 const BOARDS: Record<GameSlug, () => Promise<{ default: GameBoard }>> = {
