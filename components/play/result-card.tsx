@@ -127,7 +127,12 @@ export function ResultCard({ label, headline, answer, points, stats, review, chi
       </header>
 
       <div className="result-card-grid">
-        <div className="result-score">
+        <div
+          className="result-score"
+          // When the count-up lands, a good score glows once (app/polish.css).
+          data-landed={shown === points && points > 0 ? "" : undefined}
+          data-tier={points >= 900 ? "great" : points >= 650 ? "good" : undefined}
+        >
           <div className="result-score-top">
             <ProgressRing value={shown / MAX_POINTS} size={84} stroke={9} color={ringColour(points)} />
             <p className="result-points">

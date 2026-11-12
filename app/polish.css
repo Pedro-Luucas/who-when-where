@@ -481,6 +481,40 @@
     transform: none;
   }
 }
+
+/* A good score glows once when its count-up lands; a great one twice as bright. */
+.result-score[data-landed][data-tier] .result-score-top > span:first-child {
+  animation: score-glow 1.1s var(--ease-out) both;
+}
+
+.result-score[data-landed][data-tier="great"] .result-points strong {
+  animation: score-pop 520ms var(--ease-spring);
+}
+
+@keyframes score-glow {
+  0% {
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  35% {
+    filter: drop-shadow(0 0 14px color-mix(in oklab, var(--play) 70%, transparent));
+  }
+  100% {
+    filter: drop-shadow(0 0 4px color-mix(in oklab, var(--play) 30%, transparent));
+  }
+}
+
+@keyframes score-pop {
+  40% {
+    transform: scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .result-score[data-landed] .result-score-top > span:first-child,
+  .result-score[data-landed] .result-points strong {
+    animation: none;
+  }
+}
 }
 
 /* connect.css is written outside the cascade layers, so this override is too.
