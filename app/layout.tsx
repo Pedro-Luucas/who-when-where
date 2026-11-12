@@ -19,6 +19,8 @@ import "./engines.css";
 import "./lightbox.css";
 import "./connect.css";
 import "./pro.css";
+// The phone UI, last so it wins: everything in it sits behind a phone breakpoint.
+import "./mobile.css";
 
 // Night Atlas type (see app/tokens.css): Chakra Petch for the interface,
 // Bricolage Grotesque for headings, JetBrains Mono for labels and numbers.
@@ -55,6 +57,9 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   // Night Atlas is the default theme; the bar matches its page colour.
   themeColor: "#040914",
+  // Draw under the notch and the home indicator; the shell pads itself with
+  // env(safe-area-inset-*) (app/mobile.css).
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

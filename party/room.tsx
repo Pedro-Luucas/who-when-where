@@ -9,6 +9,9 @@ import { useProT } from "@/components/pro/messages";
 import { ProChip } from "@/components/pro/pro-chip";
 import { LIMITS } from "@/shared/plans";
 import { Segmented } from "@/components/controls";
+import { Icon } from "@/components/shell/nav-items";
+import { Dialog } from "@/components/ui/dialog";
+import { useIsMobile } from "@/lib/media";
 import { isRunOver, newRun, type Run, type StageResult } from "@/expedition/run";
 import { Runner } from "@/expedition/runner";
 import { stageCount, type ExpeditionSettings } from "@/expedition/settings";
@@ -518,7 +521,7 @@ function Lobby({ state, me, title, act, onLeave, offline, problem, chat }: Lobby
           {!isHost && <p className="hint">{t("hostDecides")}</p>}
           <SettingsForm value={draft ?? party.settings} onChange={changeSettings} disabled={!isHost} party />
           {problem}
-          <div className="page-actions">
+          <div className={isHost ? "page-actions page-actions-dock" : "page-actions"}>
             {isHost ? (
               <button type="button" className="button button-wide" onClick={() => act(() => startParty(code))}>
                 {t(members.length > 1 ? "startParty" : "startAlone")}
@@ -566,14 +569,56 @@ type DrawerProps = {
   children: React.ReactNode;
 };
 
-/** The room while a puzzle is on screen: a button in the corner that opens the standings and the chat. */
+/**
+ * The room while a puzzle is on screen: a button in the corner that opens the
+ * standings and the chat. On phones the corner belongs to the puzzle's action
+ * bar, so the button sits at the end of the run's bar instead, and the room
+ * opens as a bottom sheet.
+ */
 function RoomDrawer({ messages, me, onSend, children }: DrawerProps) {
   const { t } = useSocialT();
+  const phone = useIsMobile();
   const [open, setOpen] = useState(false);
   const newest = messages.at(-1)?.id ?? 0;
   // The newest message the player has seen: what came later counts as unread.
   const [seen, setSeen] = useState(newest);
   const unread = open ? 0 : messages.filter((message) => message.id > seen && message.user.id !== me).length;
+
+  if (phone) {
+    return (
+      <>
+        <button
+          type="button"
+          className="room-key"
+          aria-haspopup="dialog"
+          aria-expanded={open}
+          onClick={() => {
+            setSeen(newest);
+            setOpen(true);
+          }}
+        >
+          <Icon name="people" size={18} />
+          <span>{t("partyRoom")}</span>
+          {unread > 0 && <i className="badge">{unread}</i>}
+        </button>
+        <Dialog
+          open={open}
+          onClose={() => {
+            setSeen(newest);
+            setOpen(false);
+          }}
+          title={t("partyRoom")}
+          closeLabel={t("close")}
+          className="room-sheet"
+        >
+          <div className="room-sheet-body">
+            {children}
+            <ChatLog messages={messages} me={me} onSend={onSend} empty={t("partyChatEmpty")} />
+          </div>
+        </Dialog>
+      </>
+    );
+  }
 
   return (
     <aside className="drawer" data-open={open ? "" : undefined}>

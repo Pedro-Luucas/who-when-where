@@ -295,7 +295,8 @@
   backdrop-filter: blur(18px) saturate(1.2);
 }
 
-.bottom-nav a {
+.bottom-nav a,
+.bottom-nav button {
   display: grid;
   justify-items: center;
   gap: 2px;
@@ -309,12 +310,14 @@
   letter-spacing: 0.04em;
 }
 
-.bottom-nav a[aria-current="page"] {
+.bottom-nav a[aria-current="page"],
+.bottom-nav button[data-current] {
   color: var(--fg);
   background: var(--accent-soft);
 }
 
-.bottom-nav a[aria-current="page"] svg {
+.bottom-nav a[aria-current="page"] svg,
+.bottom-nav button[data-current] svg {
   color: var(--accent);
   filter: drop-shadow(0 0 6px rgb(79 171 246 / 0.6));
 }
@@ -885,6 +888,8 @@ body:has(.bottom-nav) {
 
 .catalogue {
   display: grid;
+  /* One column that never grows past the page: the family tabs scroll inside it. */
+  grid-template-columns: minmax(0, 1fr);
   gap: 24px;
   align-items: start;
 }

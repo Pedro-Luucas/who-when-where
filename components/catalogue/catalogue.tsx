@@ -10,6 +10,7 @@ import { FAMILIES, FAMILY_IDS, type FamilyId } from "@/games/families";
 import type { Engine } from "@/games/platform/definition";
 import { GAMES, type GameSlug } from "@/games/registry";
 import { useFavourites, useToday, type TodayState } from "@/games/today";
+import { tap } from "@/lib/fx";
 import { useLocale } from "@/lib/i18n";
 import { WIDE, useMedia } from "@/lib/media";
 import { useShellT } from "@/lib/shell-messages";
@@ -173,7 +174,10 @@ export function Catalogue() {
               key={entry.id}
               type="button"
               aria-pressed={tab === entry.id}
-              onClick={() => setTab(entry.id)}
+              onClick={() => {
+                if (entry.id !== tab) tap();
+                setTab(entry.id);
+              }}
               data-family={entry.id === "all" || entry.id === "favourites" ? undefined : entry.id}
             >
               {entry.id === "favourites" && <Icon name="star" size={15} />}
@@ -192,7 +196,10 @@ export function Catalogue() {
                   index={GAMES.indexOf(game)}
                   today={of(game.slug)}
                   selected={game.slug === selected}
-                  onSelect={() => setSelected(game.slug === selected && !wide ? null : game.slug)}
+                  onSelect={() => {
+                    tap();
+                    setSelected(game.slug === selected && !wide ? null : game.slug);
+                  }}
                   favourite={{ on: favourites.has(game.slug), toggle: () => toggleFavourite(game.slug) }}
                 />
               </li>

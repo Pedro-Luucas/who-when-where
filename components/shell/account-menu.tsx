@@ -3,26 +3,30 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
-import { useAccount } from "@/account/state";
 import { SettingsDialog } from "@/components/settings-button";
 import { Avatar } from "@/components/ui/avatar";
 import { ButtonLink } from "@/components/ui/button";
+import { useIsMobile } from "@/lib/media";
 import { useShellT } from "@/lib/shell-messages";
-import { pulseCount, usePulse } from "@/social/pulse";
-import { Icon, type IconName } from "./nav-items";
+import { openPanel, usePanel } from "@/lib/ui";
+import { useAccountItems } from "./account-items";
+import { Icon } from "./nav-items";
 
 /**
  * The right end of the header: for guests, "Log in" and "Create free account"
  * (from the md breakpoint); for everyone, the avatar button that opens the
  * account menu — profile, logbook, expedition, community, settings.
+ *
+ * On phones the avatar opens the "Me" sheet instead (shell/me-sheet.tsx): the
+ * same list as a bottom sheet, within the thumb's reach.
  */
 export function AccountMenu() {
   const t = useShellT();
-  const state = useAccount();
-  const account = state.status === "user" ? state.account : null;
+  const { account, guest, name, note, waiting, items } = useAccountItems();
+  const phone = useIsMobile();
+  const sheetOpen = usePanel() === "me";
   const [open, setOpen] = useState(false);
   const [settings, setSettings] = useState(false);
-  const waiting = pulseCount(usePulse());
   const menuId = useId();
   const root = useRef<HTMLDivElement>(null);
   const button = useRef<HTMLButtonElement>(null);
@@ -54,25 +58,9 @@ export function AccountMenu() {
     };
   }, [open]);
 
-  const name = account ? account.displayName || account.username || account.email : t("guest");
-  const items: { href: string; label: string; icon: IconName; badge?: number }[] = [
-    ...(account?.username
-      ? [{ href: `/u/${encodeURIComponent(account.username)}`, label: t("profile"), icon: "user" as const }]
-      : []),
-    ...(account ? [{ href: "/inbox", label: t("navInbox"), icon: "bell" as const, badge: waiting }] : []),
-    { href: "/account", label: account ? t("account") : t("signIn"), icon: account ? "sliders" : "user" },
-    { href: "/logbook", label: t("logbook"), icon: "book" },
-    { href: "/expedition", label: t("expedition"), icon: "compass" },
-    { href: "/community", label: t("navCommunity"), icon: "people" },
-    { href: "/league", label: t("navLeague"), icon: "medal" },
-    { href: "/weekly", label: t("navWeekly"), icon: "sparkle" },
-    { href: "/leaderboard", label: t("navLeaderboard"), icon: "trophy" },
-    { href: "/pricing", label: t("navPricing"), icon: "crown" },
-  ];
-
   return (
     <div className="account-menu" ref={root}>
-      {state.status === "guest" && (
+      {guest && (
         <span className="account-cta">
           <Link href="/account" className="key key-ghost key-sm">
             {t("signIn")}
@@ -86,10 +74,11 @@ export function AccountMenu() {
         ref={button}
         type="button"
         className="account-button"
-        aria-expanded={open}
-        aria-controls={menuId}
+        aria-expanded={phone ? sheetOpen : open}
+        aria-controls={phone ? undefined : menuId}
+        aria-haspopup={phone ? "dialog" : undefined}
         aria-label={`${t("accountMenu")}: ${name}`}
-        onClick={() => setOpen((value) => !value)}
+        onClick={() => (phone ? openPanel("me") : setOpen((value) => !value))}
       >
         {account ? (
           <Avatar name={name} color={account.avatar} />
@@ -101,15 +90,15 @@ export function AccountMenu() {
         {waiting > 0 && <i className="badge">{waiting > 9 ? "9+" : waiting}</i>}
       </button>
 
-      <div id={menuId} className="account-popover" hidden={!open}>
+      <div id={menuId} className="account-popover" hidden={!open || phone}>
         <div className="account-popover-head">
           {account ? <Avatar name={name} color={account.avatar} size="large" /> : <Icon name="user" size={28} />}
           <span>
             <b>{name}</b>
-            <small>{account ? (account.username ? `@${account.username}` : account.email) : t("guestNote")}</small>
+            <small>{note}</small>
           </span>
         </div>
-        {state.status === "guest" && (
+        {guest && (
           <ButtonLink href="/account?mode=signup" wide size="sm" className="account-popover-cta">
             {t("createAccount")}
           </ButtonLink>

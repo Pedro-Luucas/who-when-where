@@ -68,6 +68,24 @@ The puzzle is chosen on the player's device from their local date, so the pages 
 
 The world map draws markers, great-circle arcs, routes through waypoints, distance rings, tappable pins and whole countries coloured in; a game only passes it data. Labels that would overlap are hidden until the player zooms in.
 
+## The phone UI
+
+Phones (and small tablets held upright) get an interface of their own rather than a squeezed desktop page. Two queries decide, the same in CSS and in code:
+
+| Name | Query | Where |
+| --- | --- | --- |
+| phone | `(max-width: 47.99rem)` | `PHONE` in `lib/media.ts`; the `@media` blocks of `app/mobile.css` |
+| landscape | `(orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem)` | `PHONE_LANDSCAPE` in `lib/media.ts`; the same blocks |
+
+- **Styling only differs:** `app/mobile.css`, loaded last, with every rule behind one of the two queries, so the desktop look is never touched. (`connect.css` and `pro.css` are written outside the cascade layers; the few phone overrides of them sit unlayered at the end of the file.)
+- **Structure differs:** the component asks `useIsMobile()` (`lib/media.ts`) and renders its phone variant:
+  - `components/shell/bottom-nav.tsx` — the tab bar (Home · Play · Daily · Social · Me), a side rail in landscape. "Me" opens `shell/me-sheet.tsx`, which stands in for the header's account popover (`shell/account-items.ts` feeds both).
+  - `components/play/hud.tsx` — `PhoneHud`: one row (back, round and pips, menu); Skip, Give up, How to play, Statistics and Settings live in the menu's sheet. Game pages hide the site header and footer and fill the screen; the map takes what is left and the action bar sits at the bottom edge. In landscape the map fills the right of the screen.
+  - `components/ui/dialog.tsx` — every dialog is a bottom sheet with a grip that can be dragged down to dismiss (search comes from the top instead).
+  - `components/result-footer.tsx` — `ResultDock`: Share and the next puzzle, docked at the bottom of a finished puzzle.
+  - `party/room.tsx` — during a race the room's key sits in the run bar and the standings and chat open as a sheet.
+- **Touch:** controls are at least 44px, nothing depends on hover (the activity graph reads a day on tap), safe-area insets pad the header, bars, sheets and docks, and `tap()` in `lib/fx.ts` gives a short buzz where the player left vibration on.
+
 ## Accounts and the API
 
 Playing needs no account. Signing in (`/account`) keeps a player's games and streaks in their account and brings them to every device they use. An account with a **username** (the public handle; the e-mail is never shown to others) can also take part in the community: leaderboards, friends, chat and parties.

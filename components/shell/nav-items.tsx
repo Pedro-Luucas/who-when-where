@@ -71,7 +71,10 @@ export type IconName =
   | "share"
   | "lock"
   | "crown"
-  | "check";
+  | "check"
+  | "more"
+  | "sound"
+  | "plus";
 
 const PATHS: Record<IconName, React.ReactNode> = {
   home: <path d="M3.5 10.5L12 3.8l8.5 6.7V20a.8.8 0 0 1-.8.8H15v-6h-6v6H4.3a.8.8 0 0 1-.8-.8z" />,
@@ -175,6 +178,15 @@ const PATHS: Record<IconName, React.ReactNode> = {
   ),
   crown: <path d="M4 8.5l4.2 3.6L12 5.5l3.8 6.6L20 8.5l-1.6 9.5H5.6zM5.6 20.5h12.8" />,
   check: <path d="M5 12.5l4.5 4.5L19 7.5" />,
+  more: (
+    <>
+      <circle cx="5" cy="12" r="1.5" fill="currentColor" />
+      <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+      <circle cx="19" cy="12" r="1.5" fill="currentColor" />
+    </>
+  ),
+  sound: <path d="M4.5 9.5v5h3.2l4.3 3.6V5.9L7.7 9.5zM15.5 9a4.2 4.2 0 0 1 0 6M17.8 6.4a7.8 7.8 0 0 1 0 11.2" />,
+  plus: <path d="M12 5v14M5 12h14" />,
   share: (
     <>
       <circle cx="17.5" cy="5.5" r="2.3" />

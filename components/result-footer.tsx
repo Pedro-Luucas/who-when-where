@@ -1,10 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { createPortal } from "react-dom";
+import { Icon } from "@/components/shell/nav-items";
 import { useDailyResults } from "@/games/results";
 import { CHALLENGE_SLUGS, GAME_THEMES, GAME_TITLES, inChallenge, type GameSlug } from "@/games/registry";
 import { useDayNumber, useSecondsUntilTomorrow } from "@/lib/clock";
 import { useLocale, useSiteT } from "@/lib/i18n";
+import { useIsMobile } from "@/lib/media";
 import { useShellT } from "@/lib/shell-messages";
 import { ShareButton } from "./share-button";
 
@@ -27,16 +30,27 @@ type ActionsProps = {
 /**
  * What every finished daily puzzle ends with: a share button, the countdown,
  * unlimited practice, and the way on to the next of today's puzzles.
+ *
+ * On phones the two things a thumb wants next — share, and the next puzzle —
+ * sit in a dock along the bottom edge (ResultDock), so the score, the review
+ * and the map can be as long as they like above it.
  */
 export function ResultActions({ shareText, game, nextLabel, archive }: ActionsProps) {
   const t = useSiteT();
   const shell = useShellT();
   const secondsLeft = useSecondsUntilTomorrow();
+  const phone = useIsMobile();
+  const next = useNextDaily(game);
+  const share = () => shareText(`${window.location.origin}/play/${game}`);
 
   if (archive) {
     return (
       <div className="summary-actions">
-        <ShareButton label={t("share")} text={() => shareText(`${window.location.origin}/play/${game}`)} />
+        {phone ? (
+          <ResultDock share={share} href={`/play/${game}`} label={shell("todaysPuzzle")} />
+        ) : (
+          <ShareButton label={t("share")} text={share} />
+        )}
         <p className="hint">{shell("archiveNote")}</p>
         <Link href="/daily#archive" className="key key-secondary key-sm">
           {shell("backToArchive")}
@@ -51,7 +65,16 @@ export function ResultActions({ shareText, game, nextLabel, archive }: ActionsPr
   return (
     <>
       <div className="summary-actions">
-        <ShareButton label={t("share")} text={() => shareText(`${window.location.origin}/play/${game}`)} />
+        {phone ? (
+          <ResultDock
+            share={share}
+            href={next ? `/play/${next}` : "/daily"}
+            label={next ? GAME_TITLES[next] : t("dayDoneCta")}
+            hint={next ? t("upNext") : undefined}
+          />
+        ) : (
+          <ShareButton label={t("share")} text={share} />
+        )}
         <p className="countdown">
           <span>{nextLabel ?? t("nextIn")}</span>
           <time>{clock(secondsLeft)}</time>
@@ -62,6 +85,36 @@ export function ResultActions({ shareText, game, nextLabel, archive }: ActionsPr
       </div>
       <NextUp current={game} />
     </>
+  );
+}
+
+/** The next of today's dailies not yet finished, after `current` and wrapping round; undefined once all are done. */
+function useNextDaily(current: GameSlug): GameSlug | undefined {
+  const today = useDayNumber();
+  const results = useDailyResults();
+  const done = new Set(results.filter((result) => result.day === today && inChallenge(result.game)).map((result) => result.game));
+  const at = CHALLENGE_SLUGS.indexOf(current);
+  return [...CHALLENGE_SLUGS.slice(at + 1), ...CHALLENGE_SLUGS.slice(0, Math.max(at, 0))].find((game) => !done.has(game));
+}
+
+/**
+ * The phone's result dock: Share and the way onwards, pinned to the bottom
+ * edge. Rendered on <body>, so no animated ancestor can move it.
+ */
+function ResultDock({ share, href, label, hint }: { share: () => string; href: string; label: string; hint?: string }) {
+  const t = useSiteT();
+  return createPortal(
+    <div className="result-dock" role="group" aria-label={t("backToToday")}>
+      <ShareButton label={t("share")} text={share} className="key key-secondary result-dock-share" />
+      <Link href={href} className="key key-play result-dock-next">
+        <span>
+          {hint && <small>{hint}</small>}
+          <b>{label}</b>
+        </span>
+        <Icon name="chevron" size={18} />
+      </Link>
+    </div>,
+    document.body,
   );
 }
 

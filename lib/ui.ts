@@ -5,7 +5,8 @@ import { useSyncExternalStore } from "react";
 // Which overlay panel is open. Lives outside React so the site header can
 // open a panel that the current game renders.
 
-export type Panel = "help" | "stats" | null;
+/** help, stats: the current game's panels. me: the phone's account sheet (shell/me-sheet.tsx). */
+export type Panel = "help" | "stats" | "me" | null;
 
 let current: Panel = null;
 const listeners = new Set<() => void>();

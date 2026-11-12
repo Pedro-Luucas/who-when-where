@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef } from "react";
+import { tap } from "@/lib/fx";
 import { cn } from "./cn";
 
 export type DialogProps = {
@@ -25,6 +26,10 @@ export type DialogProps = {
  * backdrop come free. Named by its title, which takes the focus when it opens
  * (so the first thing read is what the dialog is, not "close"); focus goes
  * back to what opened it when it closes.
+ *
+ * On phones every dialog is a bottom sheet (app/mobile.css): it rises from the
+ * bottom edge, within the thumb's reach, and a drag down on its grip or
+ * header puts it away.
  */
 export function Dialog({ open, onClose, title, closeLabel, description, variant = "center", className, children }: DialogProps) {
   const ref = useRef<HTMLDialogElement>(null);
@@ -41,6 +46,7 @@ export function Dialog({ open, onClose, title, closeLabel, description, variant 
       opener.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
       dialog.showModal();
       heading.current?.focus({ preventScroll: true });
+      tap();
     }
     if (!open && dialog.open) dialog.close();
     if (!open && opener.current) {
@@ -49,6 +55,46 @@ export function Dialog({ open, onClose, title, closeLabel, description, variant 
       if (back.isConnected) back.focus({ preventScroll: true });
     }
   }, [open]);
+
+  // Dragging the sheet down by its grip or header. The styles are set on the
+  // element itself, frame by frame: no render while the finger moves.
+  const drag = useRef<{ id: number; y: number; at: number; moved: number } | null>(null);
+  const sheetLike = () => {
+    const dialog = ref.current;
+    return !!dialog && getComputedStyle(dialog).getPropertyValue("--sheet").trim() === "1";
+  };
+  function onGrab(event: React.PointerEvent<HTMLElement>) {
+    if (event.pointerType === "mouse" || !sheetLike()) return;
+    if ((event.target as HTMLElement).closest("button, a, input, select, textarea")) return;
+    drag.current = { id: event.pointerId, y: event.clientY, at: event.timeStamp, moved: 0 };
+    event.currentTarget.setPointerCapture(event.pointerId);
+  }
+  function onDrag(event: React.PointerEvent<HTMLElement>) {
+    const state = drag.current;
+    const dialog = ref.current;
+    if (!state || state.id !== event.pointerId || !dialog) return;
+    state.moved = Math.max(0, event.clientY - state.y);
+    dialog.style.transition = "none";
+    dialog.style.transform = `translateY(${state.moved}px)`;
+  }
+  function onRelease(event: React.PointerEvent<HTMLElement>) {
+    const state = drag.current;
+    const dialog = ref.current;
+    if (!state || state.id !== event.pointerId || !dialog) return;
+    drag.current = null;
+    const speed = state.moved / Math.max(event.timeStamp - state.at, 1);
+    const away = event.type !== "pointercancel" && (state.moved > 110 || (state.moved > 30 && speed > 0.55));
+    dialog.style.transition = "transform 200ms cubic-bezier(0.16, 1, 0.3, 1)";
+    dialog.style.transform = away ? "translateY(100%)" : "";
+    const settle = () => {
+      dialog.style.transition = "";
+      dialog.style.transform = "";
+      if (away) onClose();
+    };
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) settle();
+    else setTimeout(settle, away ? 160 : 210);
+  }
+  const grab = { onPointerDown: onGrab, onPointerMove: onDrag, onPointerUp: onRelease, onPointerCancel: onRelease };
 
   return (
     <dialog
@@ -64,7 +110,9 @@ export function Dialog({ open, onClose, title, closeLabel, description, variant 
       }}
     >
       <div className="modal-body">
-        <header className="modal-header">
+        {/* The sheet's grip: only drawn where dialogs are sheets. */}
+        <span className="modal-grip" aria-hidden="true" {...grab} />
+        <header className="modal-header" {...grab}>
           <div className="min-w-0">
             <h2 id={titleId} ref={heading} tabIndex={-1} className="outline-none">
               {title}

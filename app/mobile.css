@@ -1,0 +1,1673 @@
+/* ═════════════════════════ Phone UI ═════════════════════════
+   The phone's own interface. Everything here sits behind one of two queries,
+   so the desktop look is untouched:
+
+     phone      (max-width: 47.99rem)   a phone upright, a small tablet upright
+     landscape  (orientation: landscape) and (max-height: 31.25rem)
+                and (max-width: 63.99rem)   a phone on its side
+
+   lib/media.ts has the same two as PHONE and PHONE_LANDSCAPE; components
+   whose structure differs ask useIsMobile(). What lives here:
+
+     1. Shell: compact header, the bottom tab bar (a side rail in landscape),
+        safe-area insets, 44px touch targets, no tap flash.
+     2. Sheets: every dialog rises from the bottom edge, with a grip.
+     3. Games: full screen — no site header or footer — a one-row HUD, the
+        map filling what is left, the action bar under the thumb. On its
+        side, the map takes the right of the screen at full height.
+     4. Results: the score first, the actions pinned within reach.
+     5. Catalogue and home: games as rows, snap-scrolling strips.
+     6. Every other route: social, party, expedition, account, logbook,
+        pricing.
+
+   Loaded last (app/layout.tsx), in the components layer like the rest. */
+
+@layer components {
+/* The sheet's grip and the list inside sheets exist only in the phone UI. */
+.modal-grip {
+  display: none;
+}
+
+.sheet-list {
+  display: grid;
+  gap: 2px;
+}
+
+.sheet-list li > a,
+.sheet-list li > button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  min-height: 52px;
+  padding: 0 12px;
+  border-radius: var(--radius-md);
+  color: var(--fg);
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: left;
+  transition: background 120ms var(--ease-out);
+}
+
+.sheet-list li > a > svg:first-child,
+.sheet-list li > button > svg:first-child {
+  flex: none;
+  color: var(--accent);
+}
+
+.sheet-list li > a > span,
+.sheet-list li > button > span {
+  flex: 1;
+  min-width: 0;
+}
+
+.sheet-list li > a:active,
+.sheet-list li > button:active,
+.sheet-list li > a[aria-current="page"] {
+  background: var(--accent-soft);
+}
+
+.sheet-list li > button[data-danger] {
+  background: var(--danger-soft);
+  color: var(--fg);
+  box-shadow: inset 0 0 0 1px var(--danger);
+}
+
+.sheet-list li > button[data-danger] > svg:first-child {
+  color: var(--danger);
+}
+
+.sheet-list-end {
+  color: var(--fg-3);
+}
+
+/* Two columns of places in the "Me" sheet. */
+.sheet-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.sheet-grid li > a {
+  min-height: 56px;
+  border: 1px solid var(--line);
+  background: var(--sunken);
+  font-size: 0.95rem;
+}
+
+.me-sheet .modal-header {
+  padding-left: 60px;
+}
+
+.me-sheet .modal-header h2 {
+  overflow: hidden;
+  font-size: 1.25rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.me-sheet-who {
+  position: absolute;
+  top: 34px;
+  left: 18px;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  pointer-events: none;
+}
+
+.me-sheet-who .avatar {
+  width: 46px;
+  height: 46px;
+  font-size: 1.15rem;
+}
+
+.me-sheet-who .account-guest {
+  width: 46px;
+  height: 46px;
+}
+
+.me-sheet-cta {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.me-sheet-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.me-sheet-language {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--fg-2);
+  font-size: 0.9rem;
+}
+
+/* The phone HUD: one row. (The wide HUD's rules are in play.css.) */
+.hud.hud-phone {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hud-phone .hud-center {
+  flex: 1;
+  flex-wrap: nowrap;
+  justify-content: center;
+  min-width: 0;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.hud-phone .hud-key.hud-icon {
+  flex: none;
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+}
+
+.hud-phone .hud-round {
+  flex: none;
+  padding: 4px 11px;
+  font-size: 0.95rem;
+}
+
+.hud-phone .hud-pips {
+  flex: 0 1 auto;
+  min-width: 0;
+  gap: 3px;
+}
+
+.hud-phone .hud-pips li {
+  flex: 0 1 14px;
+  width: 14px;
+  min-width: 3px;
+}
+
+.hud-phone .hud-stat {
+  flex: none;
+}
+
+/* Where there is no way back (a stage in a run), the family's colour marks the bar. */
+.hud-fam {
+  flex: none;
+  width: 6px;
+  height: 28px;
+  margin-inline: 6px 2px;
+  border-radius: 3px;
+  background: var(--fam, var(--accent));
+  box-shadow: 0 0 10px var(--fam, var(--accent));
+}
+
+/* ═════════════════════════ 1. Shell ═════════════════════════ */
+
+@media (max-width: 47.99rem), (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  html {
+    /* No grey flash under a tap: every control has its own pressed state. */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  a,
+  button,
+  label,
+  select,
+  summary,
+  input,
+  [role="button"] {
+    /* No double-tap zoom, so a tap answers at once. */
+    touch-action: manipulation;
+  }
+
+  /* iOS zooms the page when a field's type is under 16px. */
+  input,
+  select,
+  textarea {
+    font-size: max(1rem, 16px);
+  }
+
+  .site-header {
+    min-height: 56px;
+    gap: 8px;
+    padding: calc(6px + env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) 6px
+      max(12px, env(safe-area-inset-left));
+  }
+
+  .wordmark {
+    min-height: 44px;
+  }
+
+  .site-actions {
+    gap: 6px;
+  }
+
+  .search-button,
+  .language-chip {
+    justify-content: center;
+    min-width: 44px;
+    height: 44px;
+  }
+
+  .language-chip {
+    gap: 6px;
+    padding: 0 10px;
+  }
+
+  /* The bar's tabs: a lit top edge on the current one. */
+  .bottom-nav {
+    padding: 4px max(6px, env(safe-area-inset-right)) calc(4px + env(safe-area-inset-bottom))
+      max(6px, env(safe-area-inset-left));
+  }
+
+  .bottom-nav a,
+  .bottom-nav button {
+    position: relative;
+    align-content: center;
+    min-height: 54px;
+    padding: 6px 2px 5px;
+    transition:
+      color 160ms var(--ease-out),
+      background 160ms var(--ease-out);
+  }
+
+  .bottom-nav a:active,
+  .bottom-nav button:active {
+    background: var(--accent-soft);
+  }
+
+  .bottom-nav a[aria-current="page"]::before,
+  .bottom-nav button[data-current]::before {
+    content: "";
+    position: absolute;
+    inset: -5px 26% auto;
+    height: 3px;
+    border-radius: 0 0 3px 3px;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+  }
+
+  .bottom-nav svg {
+    transition: transform 200ms var(--ease-spring);
+  }
+
+  .bottom-nav a[aria-current="page"] svg,
+  .bottom-nav button[data-current] svg {
+    transform: translateY(-1px) scale(1.08);
+  }
+
+  /* The page gutter, by name, for the strips that bleed to the screen edges. */
+  .shell-page {
+    --gutter: clamp(16px, 4vw, 32px);
+  }
+
+  .page {
+    --gutter: clamp(16px, 4vw, 40px);
+  }
+
+  /* Clear of the notch on either side (the header pads itself). */
+  body {
+    padding-right: env(safe-area-inset-right);
+  }
+
+  .site-footer {
+    padding-bottom: 20px;
+  }
+
+  /* Keys: 44px to the thumb, whatever their size on a desk. */
+  .key-sm {
+    min-height: 44px;
+    padding: 0 16px;
+  }
+
+  .link-button,
+  .panel-link,
+  .pricing-guest {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .toasts {
+    top: calc(8px + env(safe-area-inset-top));
+  }
+}
+
+/* ── Upright: the bar along the bottom ── */
+@media (max-width: 47.99rem) {
+  .section-head {
+    gap: 8px 14px;
+    margin-bottom: 12px;
+  }
+}
+
+/* ── On its side: the bar becomes a rail down the left edge ── */
+@media (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  .bottom-nav {
+    inset: 0 auto 0 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 1fr;
+    width: calc(68px + env(safe-area-inset-left));
+    padding: max(6px, env(safe-area-inset-top)) 6px max(6px, env(safe-area-inset-bottom))
+      calc(6px + env(safe-area-inset-left));
+    border-top: 0;
+    border-right: 1px solid var(--line-strong);
+  }
+
+  .bottom-nav a,
+  .bottom-nav button {
+    min-height: 44px;
+  }
+
+  .bottom-nav a[aria-current="page"]::before,
+  .bottom-nav button[data-current]::before {
+    inset: 22% auto 22% -6px;
+    width: 3px;
+    height: auto;
+    border-radius: 0 3px 3px 0;
+  }
+
+  body:has(.bottom-nav) {
+    padding-bottom: 0;
+    padding-left: calc(68px + env(safe-area-inset-left));
+  }
+
+  .site-header {
+    min-height: 52px;
+    padding-left: 16px;
+  }
+}
+
+/* ═════════════════════════ 2. Sheets ═════════════════════════ */
+
+@media (max-width: 47.99rem) {
+  .modal:not(.search-dialog) {
+    /* Read by components/ui/dialog.tsx: this dialog is a sheet, so it can be dragged away. */
+    --sheet: 1;
+    width: 100%;
+    max-width: 100%;
+    max-height: calc(100dvh - 28px - env(safe-area-inset-top));
+    margin: auto 0 0;
+    padding-bottom: env(safe-area-inset-bottom);
+    border-width: 1px 0 0;
+    border-radius: 18px 18px 0 0;
+    overscroll-behavior: contain;
+    will-change: transform;
+  }
+
+  .modal:not(.search-dialog)[open] {
+    animation: sheet-rise 300ms var(--ease-out) both;
+  }
+
+  .modal:not(.search-dialog)::backdrop {
+    animation: fade 200ms both;
+    /* A blur behind a moving sheet costs frames on phones. */
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .modal-body {
+    position: relative;
+    padding: 0 18px 20px;
+  }
+
+  .modal-grip {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: block;
+    height: 22px;
+    margin-inline: -18px;
+    background: linear-gradient(var(--surface-2), transparent);
+    border-radius: 18px 18px 0 0;
+    touch-action: none;
+  }
+
+  .modal-grip::after {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    width: 44px;
+    height: 5px;
+    margin-left: -22px;
+    border-radius: 3px;
+    background: var(--line-strong);
+  }
+
+  .modal-header {
+    margin-bottom: 12px;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .modal-header h2 {
+    font-size: 1.35rem;
+  }
+
+  .modal .button-wide,
+  .modal .key.w-full {
+    min-height: 52px;
+  }
+
+  /* Search is the one dialog that comes from the top: the keyboard owns the bottom. */
+  .modal.search-dialog {
+    width: 100%;
+    max-width: 100%;
+    height: 100dvh;
+    max-height: 100dvh;
+    margin: 0;
+    padding-top: env(safe-area-inset-top);
+    border: 0;
+    border-radius: 0;
+  }
+
+  .modal.search-dialog .modal-body {
+    padding: 14px 16px;
+  }
+
+  .search-hits {
+    max-height: none;
+  }
+
+  .search-hit {
+    min-height: 52px;
+  }
+
+  .search-keys {
+    display: none;
+  }
+
+  /* The setup sheet: the Play key stays in view while the rest scrolls. */
+  .modal.setup-sheet {
+    max-height: calc(100dvh - 44px - env(safe-area-inset-top));
+  }
+
+  .setup-sheet .setup-art {
+    max-height: 150px;
+  }
+
+  .setup-mode {
+    min-height: 52px;
+    align-content: center;
+  }
+}
+
+@keyframes sheet-rise {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal[open] {
+    animation: none !important;
+  }
+}
+
+/* ═════════════════════════ 3. Games ═════════════════════════ */
+
+/* Full screen on a phone, either way up: the game is the whole app. */
+@media (max-width: 47.99rem), (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  body:has(main.game) > .site-header,
+  body:has(main.game) > .site-footer {
+    display: none;
+  }
+
+  main.game {
+    --pad: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 100svh;
+    padding: 0 max(var(--pad), env(safe-area-inset-right)) 0 max(var(--pad), env(safe-area-inset-left));
+  }
+
+  /* The HUD is the top bar. */
+  main.game > .hud {
+    top: 0;
+    margin-inline: calc(-1 * max(var(--pad), env(safe-area-inset-left)))
+      calc(-1 * max(var(--pad), env(safe-area-inset-right)));
+    padding: calc(5px + env(safe-area-inset-top)) max(8px, env(safe-area-inset-right)) 5px
+      max(8px, env(safe-area-inset-left));
+    border-width: 0 0 1px;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  /* In a run the run's bar is the top bar, and the HUD rides under it. */
+  body:has(.run-bar) > .site-header,
+  body:has(.run-bar) > .site-footer {
+    display: none;
+  }
+
+  .run-bar {
+    top: 0;
+    min-height: 48px;
+    gap: 6px 12px;
+    padding: calc(2px + env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) 2px
+      max(14px, env(safe-area-inset-left));
+  }
+
+  .run-quit {
+    display: inline-flex;
+    align-items: center;
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: flex-end;
+  }
+
+  /* A run is a game: the tab bar gives its place to the action bar. */
+  body:has(.run-bar) .bottom-nav {
+    display: none;
+  }
+
+  body:has(.run-bar) {
+    padding-bottom: 0;
+    padding-left: 0;
+  }
+
+  .run-bar ~ main.game {
+    min-height: 0;
+    flex: 1;
+  }
+
+  .run-bar ~ main.game > .hud {
+    padding-top: 5px;
+  }
+
+  /* The brief: a line, not a paragraph. The rules are a tap away in the menu. */
+  main.game:not([data-summary]) > .dossier-plain {
+    display: block;
+  }
+
+  main.game:not([data-summary]) > .dossier-plain .dossier-lead,
+  main.game:not([data-summary]) > .dossier-plain .dossier-description {
+    display: none;
+  }
+
+  main.game > .dossier {
+    gap: 12px;
+    animation: none;
+  }
+
+  main.game:not([data-summary]) > .dossier:not(.dossier-plain) {
+    grid-template-columns: 58px minmax(0, 1fr);
+  }
+
+  main.game:not([data-summary]) .dossier-name {
+    font-size: 1.3rem;
+  }
+
+  main.game:not([data-summary]) .dossier-description {
+    display: -webkit-box;
+    overflow: hidden;
+    font-size: 0.9rem;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  main.game > .stage {
+    flex: 1;
+    gap: 10px;
+    animation: none;
+  }
+
+  .plaque {
+    padding: 10px 12px 12px;
+  }
+
+  .plaque-prompt.question {
+    margin-top: 2px;
+    font-size: clamp(1.2rem, 0.9rem + 1.6vw, 1.5rem);
+  }
+
+  .plaque-status {
+    margin-top: 8px;
+    font-size: 0.9rem;
+  }
+
+  /* The action bar: flush to the edges, clear of the home indicator. */
+  .action-bar {
+    margin-inline: calc(-1 * max(var(--pad, 14px), env(safe-area-inset-left)))
+      calc(-1 * max(var(--pad, 14px), env(safe-area-inset-right)));
+    padding: 10px max(var(--pad, 14px), env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom))
+      max(var(--pad, 14px), env(safe-area-inset-left));
+  }
+
+  .action-bar .button,
+  .action-bar .key {
+    min-height: 50px;
+  }
+
+  .controls,
+  .verdict {
+    min-height: 0;
+  }
+}
+
+/* Upright: the map takes everything between the prompt and the action bar. */
+@media (max-width: 47.99rem) {
+  main.game:not([data-summary]) > .stage > .map-frame {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: min(46svh, 300px);
+    margin-inline: calc(-1 * max(var(--pad), env(safe-area-inset-left)))
+      calc(-1 * max(var(--pad), env(safe-area-inset-right)));
+    border-inline: 0;
+    border-radius: 0;
+  }
+
+  main.game:not([data-summary]) > .stage > .map-frame + :is(.action-bar, .picker) {
+    margin-top: -10px;
+  }
+
+  /* The last thing on the stage goes to the bottom edge. */
+  main.game > .stage > .action-bar:last-child {
+    margin-top: auto;
+  }
+
+  /* The year dial sits just above its key, under the thumb. */
+  main.game > .stage > .dial-panel {
+    margin-top: auto;
+  }
+
+  main.game > .stage > .dial-panel + .action-bar:last-child {
+    margin-top: 0;
+  }
+
+  .map-controls button {
+    width: 46px;
+    height: 46px;
+  }
+}
+
+/* Typed answers: the field and its key dock at the bottom edge, like a
+   message composer, and the matches open upwards from it. */
+@media (max-width: 47.99rem), (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  main.game > .stage > .picker,
+  main.game > .stage > .action-bar {
+    order: 10;
+  }
+
+  main.game > .stage > .picker {
+    position: sticky;
+    bottom: 0;
+    z-index: 20;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "list list"
+      "field keys";
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+    margin-inline: calc(-1 * max(var(--pad), env(safe-area-inset-left)))
+      calc(-1 * max(var(--pad), env(safe-area-inset-right)));
+    padding: 10px max(var(--pad), env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom))
+      max(var(--pad), env(safe-area-inset-left));
+    border-top: 1px solid var(--line-strong);
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+    backdrop-filter: blur(16px) saturate(1.2);
+  }
+
+  main.game > .stage > .picker > .picker-input {
+    grid-area: field;
+    min-width: 0;
+    height: 50px;
+    padding-block: 0;
+  }
+
+  main.game > .stage > .picker > .picker-list {
+    grid-area: list;
+    max-height: min(34svh, 232px);
+  }
+
+  main.game > .stage > .picker > .picker-actions {
+    grid-area: keys;
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+
+  main.game > .stage > .picker > .picker-actions > span:empty {
+    display: none;
+  }
+
+  main.game > .stage > .picker .button {
+    min-height: 50px;
+    padding-inline: 16px;
+  }
+
+  /* A picker with more than one key (Wayfarer: skip and guess; Border Chain:
+     step back and cross) gives them a row of their own. */
+  main.game > .stage > .picker:has(.picker-actions > .button ~ .button) {
+    grid-template-areas:
+      "list list"
+      "field field"
+      "keys keys";
+  }
+
+  main.game > .stage > .picker:has(.picker-actions > .button ~ .button) > .picker-actions > .button {
+    flex: 1;
+  }
+
+  main.game > .stage > .picker > .picker-actions.action-bar {
+    position: static;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    main.game > .stage > .picker {
+      background: var(--surface);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+}
+
+/* On its side: the map fills the right of the screen, top to bottom; the HUD,
+   the prompt and the action stay in a column on the left. */
+@media (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  main.game:not([data-summary]):has(> .stage > .map-frame) {
+    --map: 58vw;
+    padding-right: calc(var(--map) + var(--pad));
+  }
+
+  main.game:not([data-summary]) > .stage > .map-frame {
+    position: fixed;
+    inset: 0 0 0 auto;
+    z-index: 5;
+    width: var(--map);
+    height: 100svh;
+    border-width: 0 0 0 1px;
+    border-radius: 0;
+  }
+
+  main.game:not([data-summary]):has(> .stage > .map-frame) .map-controls {
+    right: max(10px, env(safe-area-inset-right));
+    bottom: max(10px, env(safe-area-inset-bottom));
+  }
+
+  main.game > .stage > .action-bar:last-child {
+    margin-top: auto;
+  }
+
+  main.game:not([data-summary]):has(> .stage > .map-frame) > .hud,
+  main.game:not([data-summary]):has(> .stage > .map-frame) .action-bar {
+    margin-right: calc(-1 * var(--pad));
+    padding-right: var(--pad);
+  }
+
+  .plaque-prompt.question {
+    font-size: 1.15rem;
+  }
+
+  /* There is no room to pin the field under a short screen: the column scrolls. */
+  main.game > .stage > .picker {
+    position: static;
+    margin-top: 0;
+    background: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  main.game[data-game="wayfarer"] > .stage > .picker > .picker-list {
+    max-height: 134px;
+  }
+}
+
+/* ═════════════════════════ 4. Results ═════════════════════════ */
+
+@media (max-width: 47.99rem) {
+  main.game[data-summary] {
+    gap: 12px;
+    padding-bottom: calc(20px + env(safe-area-inset-bottom));
+  }
+
+  .result-card {
+    margin-inline: calc(-1 * max(var(--pad, 14px), env(safe-area-inset-left)) + 6px)
+      calc(-1 * max(var(--pad, 14px), env(safe-area-inset-right)) + 6px);
+  }
+
+  .result-card-head {
+    padding: 16px 16px 14px;
+  }
+
+  .result-card-grid {
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .result-score-top {
+    gap: 14px;
+  }
+
+  .result-stats {
+    grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+  }
+
+  .result-stats dd {
+    font-size: 1.05rem;
+  }
+}
+
+/* ═════════════════════════ 5. Catalogue and home ═════════════════════════ */
+
+@media (max-width: 47.99rem) {
+  /* Games as rows: the scene on the left, the words beside it. 18 games fit
+     in a few thumb-lengths instead of nine screens. */
+  .tiles {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .tile-hit {
+    display: grid;
+    grid-template-columns: 104px minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr auto;
+    column-gap: 12px;
+    align-items: start;
+    min-height: 104px;
+    padding: 10px;
+  }
+
+  .tile-hit:hover {
+    transform: none;
+  }
+
+  .tile-hit:active {
+    border-color: color-mix(in oklab, var(--fam) 70%, transparent);
+    background: var(--surface-2);
+  }
+
+  .tile-art {
+    grid-row: 1 / -1;
+    align-self: stretch;
+    height: 100%;
+    min-height: 82px;
+    aspect-ratio: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+  }
+
+  .tile-art .game-art-caption {
+    display: none;
+  }
+
+  .tile-meta {
+    margin: 0;
+    padding-right: 38px;
+  }
+
+  .tile-title {
+    margin: 1px 0 0;
+    padding-right: 34px;
+    font-size: 1.08rem;
+  }
+
+  .tile:not(:has(.tile-star)) :is(.tile-meta, .tile-title) {
+    padding-right: 0;
+  }
+
+  .tile-blurb {
+    margin: 3px 0 0;
+    -webkit-line-clamp: 2;
+  }
+
+  .tile-foot {
+    margin: 8px 0 0;
+    padding: 0;
+  }
+
+  .tile-star {
+    top: 2px;
+    right: 2px;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    background: none;
+  }
+
+  /* The dailies: one card and a peek of the next, snapping as it scrolls. */
+  .daily-cards {
+    grid-auto-columns: min(78%, 300px);
+    gap: 12px;
+    scroll-padding-inline: var(--gutter, 16px);
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+
+  .daily-cards::-webkit-scrollbar {
+    display: none;
+  }
+
+  .daily-cards[data-variant="grid"] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Catalogue tools: search on its own row, the two keys side by side. */
+  .catalogue-head .section-lead {
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  .catalogue-modes {
+    margin-left: auto;
+  }
+
+  .catalogue-tools {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .catalogue-search {
+    grid-column: 1 / -1;
+  }
+
+  .catalogue-search input {
+    height: 48px;
+  }
+
+  .catalogue-filters {
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .family-tabs {
+    position: sticky;
+    top: calc(56px + env(safe-area-inset-top));
+    z-index: 20;
+    margin-inline: calc(-1 * var(--gutter, 16px));
+    padding-inline: calc(var(--gutter, 16px) - 6px);
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    overscroll-behavior-x: contain;
+  }
+
+  .family-tabs button {
+    min-height: 46px;
+  }
+}
+} /* @layer components */
+
+@layer components {
+/* ═════════════════════════ The result dock (phones) ═════════════════════════ */
+
+.result-dock {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 44;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
+  padding: 10px max(14px, env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom))
+    max(14px, env(safe-area-inset-left));
+  border-top: 1px solid var(--line-strong);
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  backdrop-filter: blur(18px) saturate(1.2);
+  animation: dock-rise 320ms var(--ease-out) both;
+}
+
+@keyframes dock-rise {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+.result-dock .key {
+  min-height: 52px;
+}
+
+.result-dock-next {
+  justify-content: space-between;
+  padding-inline: 16px 12px;
+  text-align: left;
+}
+
+.result-dock-next > span {
+  display: grid;
+  min-width: 0;
+}
+
+.result-dock-next small {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.result-dock-next b {
+  overflow: hidden;
+  font-size: 1rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .result-dock {
+    background: var(--surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .result-dock {
+    animation: none;
+  }
+}
+
+@media (max-width: 47.99rem), (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  /* Room for the dock under the last thing on the page. */
+  body:has(.result-dock) main.game[data-summary] {
+    padding-bottom: calc(86px + env(safe-area-inset-bottom));
+  }
+
+  /* The result leads: the brief above it keeps only what the card does not say. */
+  main.game[data-summary] > .dossier-plain :is(.eyebrow, .dossier-lead, .dossier-description) {
+    display: none;
+  }
+
+  main.game[data-summary] > .dossier-plain:not(:has(.dossier-name)) {
+    display: none;
+  }
+
+  main.game[data-summary] > .dossier-plain .dossier-name {
+    font-size: 1.35rem;
+  }
+
+  .summary-actions {
+    gap: 12px;
+  }
+
+  /* The "next puzzle" card of a run rides the bottom edge. */
+  .stage-footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 20;
+    margin-inline: calc(-1 * max(var(--pad, 14px), env(safe-area-inset-left)))
+      calc(-1 * max(var(--pad, 14px), env(safe-area-inset-right)));
+    padding: 10px max(var(--pad, 14px), env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom))
+      max(var(--pad, 14px), env(safe-area-inset-left));
+    border-width: 1px 0 0;
+    border-radius: 0;
+    background: var(--surface);
+  }
+
+  .stage-footer .button {
+    flex: 1;
+    min-height: 50px;
+  }
+
+  .stage-points strong {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  /* Result maps: the shape of the world, edge to edge. */
+  main.game .summary .life .map-frame,
+  .stage .life .map-frame {
+    height: clamp(240px, 78vw, 420px);
+    margin-inline: calc(-1 * max(var(--pad, 14px), env(safe-area-inset-left)))
+      calc(-1 * max(var(--pad, 14px), env(safe-area-inset-right)));
+    border-inline: 0;
+    border-radius: 0;
+  }
+}
+
+/* ═════════════════════════ Games, one by one ═════════════════════════ */
+
+@media (max-width: 47.99rem) {
+  /* Wayfarer: the logbook shows a few entries and scrolls; the route keeps the screen. */
+  main.game[data-game="wayfarer"] > .stage > .picker > .picker-list {
+    max-height: 134px;
+  }
+
+  main.game[data-game="wayfarer"]:not([data-summary]) > .stage > .map-frame {
+    min-height: min(34svh, 280px);
+  }
+
+  /* First to Last: the cards are the game; the map is the reference above them. */
+  main.game[data-game="first-to-last"]:not([data-summary]) > .stage > .map-frame {
+    flex: none;
+    height: min(34svh, 250px);
+    min-height: 0;
+  }
+
+  main.game[data-game="first-to-last"]:not([data-summary]) > .stage > .map-frame + * {
+    margin-top: 0;
+  }
+
+  /* Type the Countries: the field stays above the keyboard, the map above it. */
+  main.game[data-game="type-the-countries"]:not([data-summary]) > .stage > .map-frame {
+    min-height: min(34svh, 260px);
+  }
+
+  .events .event,
+  .pick-option {
+    min-height: 56px;
+  }
+}
+
+/* ═════════════════════════ 6. Every other route ═════════════════════════ */
+
+@media (max-width: 47.99rem) {
+  /* ── Home ── */
+  /* Ways to play: two across. */
+  .ways-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .way {
+    min-height: 0;
+  }
+
+  .way > a,
+  .way {
+    gap: 4px;
+    padding: 12px;
+  }
+
+  .way > a {
+    margin: -12px;
+  }
+
+  .way:has(.way-join) {
+    grid-column: 1 / -1;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    column-gap: 12px;
+  }
+
+  .way:has(.way-join) .way-icon {
+    margin-bottom: 0;
+  }
+
+  .way-icon {
+    width: 34px;
+    height: 34px;
+    margin-bottom: 4px;
+  }
+
+  .way-title {
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+
+  .way-blurb {
+    display: -webkit-box;
+    overflow: hidden;
+    font-size: 0.875rem;
+    line-height: 1.35;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .way-join input {
+    height: 46px;
+  }
+
+  /* ── Daily ── */
+  /* The five dailies as rows, like the catalogue. */
+  .daily-cards[data-variant="grid"] {
+    gap: 10px;
+  }
+
+  .daily-cards[data-variant="grid"] .daily-card-hit {
+    display: grid;
+    grid-template-columns: 104px minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr auto;
+    column-gap: 12px;
+    align-items: start;
+    min-height: 104px;
+    padding: 10px;
+  }
+
+  .daily-cards[data-variant="grid"] .daily-card-art {
+    grid-row: 1 / -1;
+    align-self: stretch;
+    height: 100%;
+    min-height: 82px;
+    aspect-ratio: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+  }
+
+  .daily-cards[data-variant="grid"] .game-art-caption {
+    display: none;
+  }
+
+  .daily-cards[data-variant="grid"] :is(.tile-meta, .tile-title, .tile-blurb) {
+    padding-right: 0;
+  }
+
+  .daily-card-hit:hover {
+    transform: none;
+  }
+
+  .archive-grid {
+    gap: 4px;
+  }
+
+  .archive-day {
+    min-height: 44px;
+  }
+
+  .archive-day small {
+    font-size: 0.75rem;
+    letter-spacing: 0;
+  }
+
+  /* ── Tabs, segmented controls, steppers, chips, fields ── */
+  .social-tabs {
+    position: sticky;
+    top: calc(56px + env(safe-area-inset-top));
+    z-index: 20;
+    margin-inline: calc(-1 * var(--gutter, 16px));
+    padding-inline: calc(var(--gutter, 16px) - 6px);
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    overscroll-behavior-x: contain;
+  }
+
+  .social-tabs a {
+    min-height: 46px;
+    padding-block: 0;
+  }
+
+  .segmented button {
+    min-height: 44px;
+    padding-inline: 12px;
+  }
+
+  .stepper button {
+    width: 44px;
+    height: 44px;
+  }
+
+  .stepper output {
+    min-width: 34px;
+    font-size: 1rem;
+  }
+
+  button.chip,
+  a.chip {
+    min-height: 44px;
+    padding-inline: 14px;
+  }
+
+  .locale-toggle button {
+    min-width: 46px;
+    min-height: 40px;
+  }
+
+  select,
+  .select select {
+    min-height: 46px;
+  }
+
+  label:has(> input[type="checkbox"]),
+  label:has(> input[type="radio"]) {
+    min-height: 44px;
+  }
+
+  summary {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .player {
+    min-height: 44px;
+  }
+
+  .pricing-toc a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  /* ── Small type: nothing under 12px ── */
+  .activity-legend span,
+  .tier-ladder li,
+  .plan-badge,
+  .lifeline-years,
+  .lifelines-axis span,
+  .source-line,
+  .bio-links span,
+  .bio-links a,
+  .level-stats dt {
+    font-size: 0.75rem;
+  }
+
+  .level-stats dt {
+    letter-spacing: 0;
+  }
+
+  .level-stats div {
+    padding-inline: 8px;
+  }
+
+  /* ── Profile ── */
+  .profile-hero h1 {
+    font-size: 1.6rem;
+    line-height: 1.1;
+  }
+}
+
+/* Search is not a sheet: no grip. */
+.modal.search-dialog .modal-grip {
+  display: none;
+}
+} /* @layer components */
+
+@layer components {
+/* ═════════════════════════ Docked page actions (phones) ═════════════════════════
+   Long set-up pages (an expedition, a party lobby) keep their one big key
+   docked above the tab bar while the options scroll under it. */
+
+@media (max-width: 47.99rem) {
+  .page-actions-dock {
+    position: sticky;
+    bottom: calc(62px + env(safe-area-inset-bottom));
+    z-index: 20;
+    flex-wrap: nowrap;
+    gap: 8px;
+    margin-inline: calc(-1 * var(--gutter, 16px));
+    padding: 10px var(--gutter, 16px);
+    border-top: 1px solid var(--line-strong);
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+    backdrop-filter: blur(16px) saturate(1.2);
+  }
+
+  /* Inside a panel the dock spans the panel, not the page. */
+  .panel .page-actions-dock {
+    margin-inline: 0;
+    padding-inline: 0;
+    border-top: 0;
+    background: var(--surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: 0 -12px 16px -8px var(--surface);
+  }
+
+  .page-actions-dock .button {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 50px;
+    padding-inline: 12px;
+    white-space: normal;
+  }
+
+  .page-actions-dock .button:first-child {
+    flex: 1.5 1 0;
+  }
+
+  .page-actions .button,
+  .page-actions .key {
+    min-height: 48px;
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    .page-actions-dock {
+      background: var(--surface);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+}
+} /* @layer components */
+
+@layer components {
+/* ═════════════════════════ The party room on a phone ═════════════════════════
+   During a race the room's key sits at the end of the run bar (the bottom
+   corner is the puzzle's), and the standings and chat open as a sheet. */
+
+.room-key {
+  position: fixed;
+  top: calc(2px + env(safe-area-inset-top));
+  right: max(10px, env(safe-area-inset-right));
+  z-index: 31;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--key-sheen), var(--surface);
+  color: var(--fg);
+  font-size: 0.875rem;
+  font-weight: 600;
+  box-shadow:
+    var(--key-face),
+    0 2px 0 var(--key-side);
+}
+
+.room-key:active {
+  transform: translateY(2px);
+  box-shadow: var(--key-face-pressed);
+}
+
+.room-key svg {
+  color: var(--accent);
+}
+
+.room-key .badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}
+
+/* The run bar leaves the corner to the key. */
+body:has(.room-key) .run-bar {
+  padding-right: calc(104px + env(safe-area-inset-right));
+}
+
+.room-sheet-body {
+  display: grid;
+  gap: 14px;
+}
+
+.room-sheet-body .chat-log {
+  height: min(34svh, 240px);
+}
+
+.room-sheet-body .link-button {
+  justify-self: start;
+}
+} /* @layer components */
+
+@layer components {
+/* ═════════════════════════ Activity graph: a day by touch ═════════════════════════ */
+
+.activity-weeks {
+  /* Up and down scrolls the page; a slide across the squares reads them. */
+  touch-action: pan-y;
+}
+
+.activity-readout {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--sunken);
+  color: var(--fg-2);
+  font-size: 0.875rem;
+  line-height: 1.35;
+  animation: fade 160ms both;
+}
+
+@media (max-width: 47.99rem) {
+  /* Bigger squares under a finger; fewer weeks fit, the latest ones stay. */
+  .activity {
+    --cell: 15px;
+    --gap: 3px;
+  }
+
+  .activity-days span,
+  .activity-month {
+    font-size: 0.75rem;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .activity-month {
+    overflow: visible;
+  }
+}
+} /* @layer components */
+
+@layer components {
+@media (max-width: 47.99rem) {
+  /* The last few under-sized targets and labels. */
+  .locale-toggle button {
+    min-height: 44px;
+  }
+
+  .today-card li a {
+    min-height: 44px;
+  }
+
+  .segmented button {
+    min-width: 44px;
+  }
+
+  .setup-group legend small,
+  .streak-stats dt,
+  .run-total small {
+    font-size: 0.75rem;
+  }
+}
+} /* @layer components */
+
+/* connect.css and pro.css are written outside the cascade layers, so what the
+   phone changes in them has to be unlayered too. Kept to the bare minimum. */
+@media (max-width: 47.99rem) {
+  .tier-ladder li {
+    font-size: 0.75rem;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .plan-badge {
+    font-size: 0.75rem;
+  }
+
+  .pricing-toc {
+    top: calc(60px + env(safe-area-inset-top));
+    gap: 0 18px;
+    padding-block: 2px;
+  }
+
+  .pricing-toc a {
+    min-height: 44px;
+  }
+}
+
+@layer components {
+/* ═════════════════════════ Speed and stillness (phones) ═════════════════════════ */
+
+@media (max-width: 47.99rem) {
+  /* Long lists paint only what is near the screen. */
+  .tiles > li,
+  .achievements > li,
+  .result-review li,
+  .board > li {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 104px;
+  }
+
+  .result-review li,
+  .board > li {
+    contain-intrinsic-size: auto 72px;
+  }
+
+  /* The page behind an open sheet stays put. */
+  html:has(dialog.modal[open]) {
+    overflow: hidden;
+  }
+
+  /* Rubber-banding at the ends of a full-screen game would drag the HUD about. */
+  html:has(main.game:not([data-summary])) {
+    overscroll-behavior-y: none;
+  }
+}
+} /* @layer components */
+
+@layer components {
+@media (max-width: 47.99rem) {
+  .clue-ladder small,
+  .person-card small {
+    font-size: 0.75rem;
+  }
+
+  .bio-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .bio-links {
+    align-items: center;
+    margin-top: 4px;
+  }
+}
+} /* @layer components */
+
+@media (max-width: 47.99rem) {
+  .pricing-toc a {
+    min-width: 44px;
+  }
+}
+
+@layer components {
+@media (max-width: 47.99rem) {
+  /* The opening hint under a map gives its line to the map: the rules are in the menu. */
+  main.game:not([data-summary]) > .stage > .map-frame ~ .hint {
+    display: none;
+  }
+}
+
+/* Short phones: the logbook shows two entries, the route keeps its room. */
+@media (max-width: 47.99rem) and (max-height: 43.75rem) {
+  main.game[data-game="wayfarer"] > .stage > .picker > .picker-list {
+    max-height: 90px;
+  }
+}
+} /* @layer components */
+
+@layer components {
+/* Short phones: the map gives up height before the docked field covers it. */
+@media (max-width: 47.99rem) and (max-height: 43.75rem) {
+  main.game:not([data-summary]) > .stage > .map-frame,
+  main.game[data-game="wayfarer"]:not([data-summary]) > .stage > .map-frame,
+  main.game[data-game="type-the-countries"]:not([data-summary]) > .stage > .map-frame {
+    min-height: 168px;
+  }
+}
+} /* @layer components */

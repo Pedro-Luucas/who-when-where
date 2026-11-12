@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { CHALLENGE_SLUGS } from "@/games/registry";
 import { dateOfDay } from "@/lib/daily";
 import { formatNumber, numberLocale } from "@/lib/i18n";
@@ -21,6 +22,9 @@ const ROWS = [0, 1, 2, 3, 4, 5, 6];
 /**
  * A year of daily play, one square per day and one column per week: the more
  * of the day's puzzles were finished, the darker the square.
+ *
+ * A mouse reads a day from its tooltip. A finger has no hover, so a tap on a
+ * square — or a slide across them — writes that day out under the graph.
  */
 export function ActivityGraph({ activity, today }: Props) {
   const { locale, t } = useSocialT();
@@ -34,6 +38,15 @@ export function ActivityGraph({ activity, today }: Props) {
   const firstDay = today - dateOfDay(today).getUTCDay() - 7 * (WEEKS - 1);
   const weeks = Array.from({ length: WEEKS }, (_, week) => firstDay + week * 7);
   const played = activity.filter((entry) => entry.day >= firstDay && entry.day <= today);
+  // The day under the finger, as its tooltip would read.
+  const [picked, setPicked] = useState<string | null>(null);
+
+  function read(event: React.PointerEvent<HTMLDivElement>) {
+    // A mouse only picks by pressing; hovering is the tooltip's.
+    if (event.pointerType === "mouse" && event.buttons === 0) return;
+    const under = document.elementFromPoint(event.clientX, event.clientY);
+    if (under instanceof HTMLElement && under.title && event.currentTarget.contains(under)) setPicked(under.title);
+  }
 
   return (
     <figure
@@ -51,7 +64,7 @@ export function ActivityGraph({ activity, today }: Props) {
             <span key={row}>{row % 2 ? weekdayName.format(Date.UTC(2025, 10, 2 + row)) : ""}</span>
           ))}
         </div>
-        <div className="activity-weeks" aria-hidden="true">
+        <div className="activity-weeks" aria-hidden="true" onPointerDown={read} onPointerMove={read}>
           {weeks.map((start, week) => {
             const month = dateOfDay(start + 6).getUTCMonth();
             const newMonth = week === 0 || month !== dateOfDay(start - 1).getUTCMonth();
@@ -82,6 +95,11 @@ export function ActivityGraph({ activity, today }: Props) {
           })}
         </div>
       </div>
+      {picked && (
+        <p className="activity-readout" aria-hidden="true">
+          {picked}
+        </p>
+      )}
       <figcaption className="activity-legend">
         <span>{t("activityLess")}</span>
         {[0, 1, 2, 3, 4].map((level) => (

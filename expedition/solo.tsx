@@ -222,7 +222,8 @@ function Expedition() {
       ) : (
         <>
           <SettingsForm value={settings} onChange={setSettings} />
-          <div className="page-actions">
+          {/* On phones the start key stays docked above the tab bar while the settings scroll. */}
+          <div className="page-actions page-actions-dock">
             <button type="button" className="button" onClick={() => start(newSeed(), settings, member ? duelTarget : null)}>
               {t("startExpedition")}
             </button>

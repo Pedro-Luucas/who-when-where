@@ -88,6 +88,23 @@ function buzz(cue: Cue): void {
   }
 }
 
+/**
+ * A light tick under the thumb, with no sound: a tab changed, a sheet opened,
+ * a card was placed. Phones only (no-op where the device cannot vibrate), and
+ * only when the player left vibration on.
+ */
+export function tap(strength: "light" | "firm" = "light"): void {
+  if (typeof navigator === "undefined" || !navigator.vibrate) return;
+  // Browsers refuse a buzz the player did not cause (a dialog that opens by itself).
+  if (navigator.userActivation && !navigator.userActivation.isActive) return;
+  if (!getPrefs().haptics) return;
+  try {
+    navigator.vibrate(strength === "light" ? 8 : 16);
+  } catch {
+    // Not allowed here: no matter.
+  }
+}
+
 // ── Confetti ────────────────────────────────────────────────────────────────
 // Scraps of paper in the atlas's own colours, shot up from the two lower
 // corners. Drawn on a canvas laid over the page and gone in three seconds.

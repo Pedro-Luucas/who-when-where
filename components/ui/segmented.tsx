@@ -1,5 +1,6 @@
 "use client";
 
+import { tap } from "@/lib/fx";
 import { cn } from "./cn";
 
 // One look for every set of choices on the site (settings, expedition setup,
@@ -25,7 +26,11 @@ export function Segmented<T extends string | number>({ label, options, value, on
           type="button"
           aria-pressed={option.value === value}
           disabled={disabled}
-          onClick={() => onChange(option.value)}
+          onClick={() => {
+            // A tick under the thumb when the choice changes (phones; lib/fx.ts).
+            if (option.value !== value) tap();
+            onChange(option.value);
+          }}
         >
           {option.label}
         </button>
@@ -51,7 +56,10 @@ export function Stepper({ label, value, min, max, onChange, disabled }: StepperP
         type="button"
         aria-label={`${label} −`}
         disabled={disabled || value <= min}
-        onClick={() => onChange(value - 1)}
+        onClick={() => {
+          tap();
+          onChange(value - 1);
+        }}
       >
         −
       </button>
@@ -60,7 +68,10 @@ export function Stepper({ label, value, min, max, onChange, disabled }: StepperP
         type="button"
         aria-label={`${label} +`}
         disabled={disabled || value >= max}
-        onClick={() => onChange(value + 1)}
+        onClick={() => {
+          tap();
+          onChange(value + 1);
+        }}
       >
         +
       </button>

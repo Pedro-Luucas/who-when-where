@@ -107,7 +107,8 @@ function ProfileView({ data, reload }: { data: ProfileData; reload: () => void }
     <>
       <Card as="section" className="profile-hero mb-5 !p-0" aria-labelledby="profile-name">
         <div className="profile-hero-band" aria-hidden="true" />
-        <div className="flex flex-wrap items-end gap-4 px-5 pb-5">
+        {/* Phones stack the avatar, the name and the actions; from md they sit in a row. */}
+        <div className="flex flex-col items-start gap-3 px-4 pb-4 md:flex-row md:flex-wrap md:items-end md:gap-4 md:px-5 md:pb-5">
           <Avatar
             name={data.user.name}
             color={data.user.avatar}
@@ -116,8 +117,8 @@ function ProfileView({ data, reload }: { data: ProfileData; reload: () => void }
             size="large"
             className="profile-hero-avatar"
           />
-          <div className="min-w-0 flex-1">
-            <h1 id="profile-name" className="flex flex-wrap items-center gap-2 font-display text-3xl font-bold text-fg">
+          <div className="min-w-0 max-w-full md:flex-1">
+            <h1 id="profile-name" className="flex flex-wrap items-center gap-2 font-display text-2xl font-bold text-fg md:text-3xl">
               {data.user.name} <Flag code={data.user.country} className="h-[18px] w-[25px] rounded-[3px] object-cover" />
             </h1>
             <p className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-sm text-fg-2">

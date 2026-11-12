@@ -165,10 +165,12 @@ export function loadWorld(): Promise<FeatureCollection> {
 /** The view a frame opens on: the whole world, a little closer in a tall frame. */
 function homeView(projection: GeoProjection, { width, height }: Size): ZoomTransform {
   const bounds = geoPath(projection).bounds({ type: "Sphere" });
-  // In a tall frame the whole world is a thin strip; start zoomed in a
-  // little so the map fills more of it. Zooming back out is always possible.
+  // In a tall frame the whole world is a thin strip; start zoomed in so the
+  // map fills more of it — most of the height on a phone held upright, where
+  // the frame is the screen. Zooming back out is always possible.
   const worldHeight = bounds[1][1] - bounds[0][1];
-  const scale = Math.min(Math.max(height / worldHeight, 1), 1.7);
+  const tall = height > width * 1.15;
+  const scale = Math.min(Math.max((height / worldHeight) * (tall ? 0.94 : 1), 1), tall ? 2.3 : 1.7);
   return zoomIdentity
     .translate(width / 2, height / 2)
     .scale(scale)

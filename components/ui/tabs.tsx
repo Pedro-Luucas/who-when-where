@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useId, useRef } from "react";
+import { tap } from "@/lib/fx";
 import { cn } from "./cn";
 
 export type TabItem<T extends string> = {
@@ -73,7 +74,10 @@ export function Tabs<T extends string>({ label, items, value, onChange, idBase, 
             aria-selected={selected}
             aria-controls={`${base}-panel-${item.id}`}
             tabIndex={selected ? 0 : -1}
-            onClick={() => onChange(item.id)}
+            onClick={() => {
+              if (item.id !== value) tap();
+              onChange(item.id);
+            }}
             onKeyDown={(event) => move(event, index)}
             className={cn(tabClass, selected ? current : idle)}
           >
