@@ -6,6 +6,7 @@ import { Plaque } from "@/components/play/plaque";
 import { ResultCard, type ResultStat, type ReviewRow } from "@/components/play/result-card";
 import { useFinePointer } from "@/lib/pointer";
 import { useShellT } from "@/lib/shell-messages";
+import { useOrderKeys, withoutLastPick } from "./reveal";
 import { inPlace, orderOver, orderScore, orderSolved, type OrderAttempt } from "./rules";
 
 // The Order engine: a handful of things to put in order (by birth, by date,
@@ -102,6 +103,19 @@ export function OrderBoard({
     onAttempt(order as string[]);
     setPicks(truth.map(() => null));
   }
+
+  useOrderKeys({
+    ids: items.map((entry) => entry.id),
+    toggle,
+    undo() {
+      const next = withoutLastPick(picks, locked);
+      if (next) setPicks(next);
+      return next !== null;
+    },
+    check,
+    full,
+    active: !over,
+  });
 
   const triesLeft = max - attempts.length;
   const right = last ? inPlace(last, truth) : 0;

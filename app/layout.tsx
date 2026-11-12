@@ -29,6 +29,7 @@ import "./wave2/life-tracks.css";
 import "./wave2/quickplay.css";
 // The phone UI, last so it wins: everything in it sits behind a phone breakpoint.
 import "./mobile.css";
+import "./polish.css";
 
 // Night Atlas type (see app/tokens.css): Chakra Petch for the interface,
 // Bricolage Grotesque for headings, JetBrains Mono for labels and numbers.

@@ -1,13 +1,17 @@
 "use client";
 
 import { getPrefs } from "./prefs";
+import { writeStore } from "./storage";
 
 // What the site does besides showing things: short sounds, a buzz on phones
 // and paper confetti. Every effect checks the player's preferences
 // (lib/prefs.ts) first, and none of them is needed to play.
 
-/** move: a guess went in · win, great: a puzzle went well · lose: it did not · unlock: an achievement. */
-export type Cue = "move" | "win" | "great" | "lose" | "unlock";
+/**
+ * move: a guess went in · hit, near, miss: how a try went (the plaque's verdict)
+ * · win, great: a puzzle went well · lose: it did not · unlock: an achievement.
+ */
+export type Cue = "move" | "hit" | "near" | "miss" | "win" | "great" | "lose" | "unlock";
 
 // ── Sound ───────────────────────────────────────────────────────────────────
 // A few plucked notes, made on the spot: no audio files to fetch.
@@ -17,6 +21,18 @@ type Note = { hz: number; at: number; length: number; gain?: number };
 const C5 = 523.25;
 const SCORES: Record<Cue, Note[]> = {
   move: [{ hz: 587.33, at: 0, length: 0.07, gain: 0.5 }],
+  hit: [
+    { hz: 880, at: 0, length: 0.09, gain: 0.6 },
+    { hz: 1318.5, at: 0.07, length: 0.18, gain: 0.55 },
+  ],
+  near: [
+    { hz: 659.25, at: 0, length: 0.1, gain: 0.5 },
+    { hz: 783.99, at: 0.08, length: 0.14, gain: 0.45 },
+  ],
+  miss: [
+    { hz: 233.08, at: 0, length: 0.16, gain: 0.65 },
+    { hz: 196, at: 0.09, length: 0.22, gain: 0.55 },
+  ],
   win: [
     { hz: C5, at: 0, length: 0.16 },
     { hz: 659.25, at: 0.09, length: 0.16 },
@@ -73,6 +89,9 @@ function play(cue: Cue): void {
 
 const BUZZES: Record<Cue, number | number[]> = {
   move: 12,
+  hit: [10, 30, 16],
+  near: 14,
+  miss: [40, 30, 40],
   win: [18, 50, 30],
   great: [18, 40, 18, 40, 60],
   lose: 70,
@@ -210,10 +229,34 @@ export function confetti(amount: 1 | 2 | 3): void {
 
 // ── Cues ────────────────────────────────────────────────────────────────────
 
+/** When a try's verdict last sounded: the plain "move" tick for that same try stays quiet. */
+let verdictAt = 0;
+
 /** A sound and a buzz for something that just happened. */
 export function cue(name: Cue): void {
+  const now = Date.now();
+  if (name === "hit" || name === "near" || name === "miss") verdictAt = now;
+  else if (name === "move" && now - verdictAt < 600) return;
   play(name);
   buzz(name);
+}
+
+/**
+ * The verdict cue for a plaque or chip tone ("on", "near", "off", "heat-N"…),
+ * or undefined for a tone that is no verdict.
+ */
+export function cueOfTone(tone: string | undefined): Cue | undefined {
+  if (!tone) return undefined;
+  if (tone === "on" || tone === "hit" || tone === "success") return "hit";
+  if (tone === "near" || tone === "heat-4" || tone === "heat-5") return "near";
+  if (tone === "off" || tone === "miss" || tone === "danger" || /^heat-[123]$/.test(tone)) return "miss";
+  return undefined;
+}
+
+/** Turns the sound on or off, and says so with a tick when it comes on. */
+export function setSound(on: boolean): void {
+  writeStore("prefs", { ...getPrefs(), sound: on });
+  if (on) play("move");
 }
 
 /**

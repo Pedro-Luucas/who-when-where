@@ -37,3 +37,41 @@ export function useBoardKeys(onKey: (key: string) => boolean | void, active = tr
     return () => window.removeEventListener("keydown", listen);
   }, [active]);
 }
+
+/**
+ * The keys of an ordering board (First to Last, Lifelines, any Order game):
+ * a letter puts that card in the next free slot (or takes it back), Backspace
+ * takes back the last card placed, Enter checks a full line.
+ */
+export function useOrderKeys(board: {
+  /** The cards, in the order they are lettered (A, B, C…). */
+  ids: readonly string[];
+  toggle: (id: string) => void;
+  /** Takes back the last card placed; false when there is none. */
+  undo: () => boolean;
+  check: () => void;
+  full: boolean;
+  active: boolean;
+}): void {
+  useBoardKeys((key) => {
+    if (key === "Enter") {
+      if (!board.full) return false;
+      board.check();
+      return true;
+    }
+    if (key === "Backspace") return board.undo();
+    if (key.length !== 1) return false;
+    const at = key.toUpperCase().charCodeAt(0) - 65;
+    if (at < 0 || at >= board.ids.length) return false;
+    board.toggle(board.ids[at]);
+    return true;
+  }, board.active);
+}
+
+/** The picks with the last one the player placed (not a locked one) taken back, or null if there is none. */
+export function withoutLastPick<T>(picks: readonly (T | null)[], locked: readonly (T | null)[]): (T | null)[] | null {
+  for (let i = picks.length - 1; i >= 0; i--) {
+    if (picks[i] !== null && locked[i] === null) return picks.map((pick, j) => (j === i ? null : pick));
+  }
+  return null;
+}

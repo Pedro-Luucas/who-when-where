@@ -8,6 +8,7 @@ import { WorldMap, useMapLabels, type MapMarker, type MapRoute } from "@/compone
 import { formatYear } from "@/lib/i18n";
 import { useFinePointer } from "@/lib/pointer";
 import { useShellT } from "@/lib/shell-messages";
+import { useOrderKeys, withoutLastPick } from "../engines/reveal";
 import { chronological, type HistoryEvent } from "./events";
 import { useGameT } from "./messages";
 import { MAX_ATTEMPTS, inPlace, isOver, isSolved, scoreOf, truthOf, type Attempt } from "./rules";
@@ -74,6 +75,19 @@ export function FirstToLastBoard({
     onAttempt(order as string[]);
     setPicks(truth.map(() => null));
   }
+
+  useOrderKeys({
+    ids: events.map((entry) => entry.id),
+    toggle,
+    undo() {
+      const next = withoutLastPick(picks, locked);
+      if (next) setPicks(next);
+      return next !== null;
+    },
+    check,
+    full,
+    active: !over,
+  });
 
   const markers: MapMarker[] = events.map((event, i) => {
     const isLocked = locked.includes(event.id);

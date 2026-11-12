@@ -1,0 +1,191 @@
+/* ═════════════════════════ Polish ═════════════════════════
+   Finishing touches across every game: a map that leaves the controls on
+   screen at desktop sizes, motion for answers and results, the sound key in
+   the HUD and the keyboard-shortcut sheet. Imported last (after mobile.css),
+   inside the components layer, so utilities still win. */
+
+@layer components {
+/* ───────────────────────── Desktop: the whole round on one screen ─────────────────────────
+   On a 1440×900 screen a 62svh map pushed a pick game's four answers, and the
+   pin games' Lock in, under the fold, so every round needed a scroll. The map
+   now takes what the viewport has left after the header, the HUD, the plaque
+   and whatever sits under the map. (Landmark Lens and First to Last keep
+   their own frames: a photo, and six cards, share their screens.) */
+@media (min-width: 64rem) {
+  main.game:not([data-summary], [data-game="landmark-lens"], [data-game="first-to-last"]) > .stage > .map-frame {
+    --below-map: 120px;
+    height: clamp(340px, calc(100svh - 300px - var(--below-map)), 620px);
+  }
+
+  /* Four answer cards (two rows) under the map. */
+  main.game:not([data-summary], [data-game="landmark-lens"], [data-game="first-to-last"]) > .stage:has(> .pick-options) > .map-frame {
+    --below-map: 200px;
+  }
+
+  /* A name picker under the map: the input and its buttons. */
+  main.game:not([data-summary], [data-game="landmark-lens"], [data-game="first-to-last"]) > .stage:has(> .map-frame + .picker) > .map-frame {
+    --below-map: 165px;
+  }
+
+  /* Something above the map (a picker, a clock): it starts lower down. */
+  main.game:not([data-summary], [data-game="landmark-lens"], [data-game="first-to-last"]) > .stage > :is(.picker, .action-bar) + .map-frame {
+    height: clamp(340px, calc(100svh - 480px), 620px);
+  }
+
+}
+
+/* ───────────────────────── Typed answers: the combobox ───────────────────────── */
+
+.picker-list [role="option"] {
+  cursor: pointer;
+  transition: background-color 90ms var(--ease-out);
+}
+
+.picker-list [role="option"][aria-selected="true"] {
+  box-shadow: inset 3px 0 0 var(--accent-2, #5fd8ff);
+}
+
+.picker-list:not([hidden]) {
+  animation: picker-open 160ms var(--ease-out) both;
+}
+
+@keyframes picker-open {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.99);
+  }
+}
+
+/* ───────────────────────── Verdicts: pop for a hit, shake for a miss ───────────────────────── */
+
+.plaque-status[data-fresh] {
+  animation: verdict-pop 380ms var(--ease-spring) both;
+}
+
+.plaque-status[data-fresh="miss"] {
+  animation:
+    verdict-pop 300ms var(--ease-spring) both,
+    shake 380ms var(--ease-press) 120ms;
+}
+
+.plaque-status[data-fresh="hit"] {
+  animation:
+    verdict-pop 380ms var(--ease-spring) both,
+    verdict-glow 900ms var(--ease-out) 100ms;
+}
+
+@keyframes verdict-pop {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.86);
+  }
+}
+
+@keyframes verdict-glow {
+  from {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--tone) 60%, transparent);
+  }
+  to {
+    box-shadow: 0 0 0 14px color-mix(in oklab, var(--tone) 0%, transparent);
+  }
+}
+
+/* The HUD's live numbers pop when they change (keyed by value in hud.tsx). */
+.hud-stat-value {
+  display: inline-block;
+  animation: stat-tick 420ms var(--ease-spring) both;
+}
+
+@keyframes stat-tick {
+  0% {
+    transform: translateY(-3px) scale(1.25);
+    color: var(--fg);
+  }
+}
+
+/* ───────────────────────── HUD: sound and keys ───────────────────────── */
+
+.hud-sound[data-off] {
+  color: var(--fg-3);
+}
+
+.hud-sound-icon {
+  animation: pop 260ms var(--ease-spring);
+}
+
+/* The keyboard sheet is for keyboards: phones and tablets without a fine pointer do not get its key. */
+@media (pointer: coarse) {
+  .hud-keys {
+    display: none;
+  }
+}
+
+.shortcuts-group + .shortcuts-group {
+  margin-top: 18px;
+}
+
+.shortcuts-group h3 {
+  margin-bottom: 8px;
+  color: var(--fg-2);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.shortcuts-group dl {
+  display: grid;
+  gap: 2px;
+}
+
+.shortcuts-group dl > div {
+  display: grid;
+  grid-template-columns: minmax(118px, auto) 1fr;
+  align-items: center;
+  gap: 14px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.shortcuts-group dl > div:last-child {
+  border-bottom: 0;
+}
+
+.shortcuts-group dt {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.shortcuts-group dd {
+  color: var(--fg-2);
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
+.shortcuts kbd {
+  display: inline-grid;
+  place-items: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 7px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--key-sheen), var(--surface-2);
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: 0 2px 0 var(--key-side);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .picker-list:not([hidden]),
+  .plaque-status[data-fresh],
+  .hud-stat-value,
+  .hud-sound-icon {
+    animation: none;
+  }
+}
+}
