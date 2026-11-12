@@ -3,7 +3,7 @@
 import { useEffect, useRef, useSyncExternalStore } from "react";
 import { readDailyResults, useDailyResults, type DailyResult } from "@/games/results";
 import { countMoves } from "@/games/saves";
-import { GAME_SLUGS } from "@/games/registry";
+import { CHALLENGE_SLUGS, inChallenge } from "@/games/registry";
 import { useDayNumber } from "@/lib/clock";
 import { confetti, cue, cuePuzzle } from "@/lib/fx";
 import { readStore, subscribeToStore, writeStore } from "@/lib/storage";
@@ -48,9 +48,16 @@ export function Celebrations() {
     const finished = results.filter((result) => result.day === today && !before.keys.has(keyOf(result)));
     if (finished.length !== 1) return cue("move");
     const [result] = finished;
-    cuePuzzle(result.points, result.detail.startsWith("X"));
-    // The last puzzle of the day gets the lot.
-    if (results.filter((entry) => entry.day === today).length === GAME_SLUGS.length) confetti(3);
+    // The last of the day's dailies gets the lot, whatever it scored: the whole day is done.
+    // (The other games' daily puzzles are extras and never finish a day.)
+    const dayDone =
+      inChallenge(result.game) &&
+      new Set(results.filter((entry) => entry.day === today && inChallenge(entry.game)).map((entry) => entry.game)).size ===
+        CHALLENGE_SLUGS.length;
+    if (dayDone) {
+      cue("great");
+      confetti(3);
+    } else cuePuzzle(result.points, result.detail.startsWith("X"));
   }, [results, moves, today]);
 
   // Achievements and levels.
