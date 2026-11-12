@@ -7,7 +7,7 @@ import { Icon } from "@/components/shell/nav-items";
 import { ButtonLink } from "@/components/ui/button";
 import { Chip } from "@/components/ui/chip";
 import { CHALLENGE_GAMES } from "@/games/registry";
-import { activityOf, useDailyResults } from "@/games/results";
+import { streakDays, useDailyResults } from "@/games/results";
 import { useToday } from "@/games/today";
 import { formatNumber, useLocale } from "@/lib/i18n";
 import { useShellT } from "@/lib/shell-messages";
@@ -27,10 +27,7 @@ export function HomeHero() {
   const results = useDailyResults();
   const user = account.status === "user" ? account.account : null;
 
-  const { streak } = streaks(
-    activityOf(results).map((entry) => entry.day),
-    day,
-  );
+  const { streak } = streaks(streakDays(results), day);
   const { level } = levelOf(results.reduce((sum, result) => sum + result.points, 0));
   const pointsToday = results.filter((result) => result.day === day).reduce((sum, result) => sum + result.points, 0);
   const next = CHALLENGE_GAMES.find((game) => of(game.slug).state !== "done");

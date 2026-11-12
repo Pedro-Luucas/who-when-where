@@ -1,11 +1,12 @@
 "use client";
 
-import { useCallback, useSyncExternalStore } from "react";
+import { useCallback, useMemo, useSyncExternalStore } from "react";
 import { useDayNumber } from "@/lib/clock";
 import { readStore, subscribeToStore, usePersistent } from "@/lib/storage";
+import { STRICT_RULES, streakOf, type Streak } from "@/lib/streak";
 import { movesOf } from "./platform/store";
-import { GAMES, inChallenge, type GameSlug } from "./registry";
-import { useDailyResults } from "./results";
+import { CHALLENGE_SLUGS, GAMES, inChallenge, type GameSlug } from "./registry";
+import { streakDays, useDailyResults, type DailyResult } from "./results";
 
 // How each game stands today, for the catalogue, the dailies strip and the
 // setup panel. Read from the saves and the scored results, so no game is loaded.
@@ -41,6 +42,46 @@ export function useToday(): { day: number; of: (slug: GameSlug) => Today; done: 
     return { state: going.has(slug) ? "started" : "todo" };
   };
   return { day, of, done: [...finished.keys()].filter(inChallenge).length };
+}
+
+/** One day of the dailies: how many were finished, and for how many points. */
+export type DailyDay = { done: number; points: number };
+
+/** The player's record over the dailies, as it stands today. */
+export type DailyRecord = {
+  day: number;
+  /** Each day with one of the dailies finished. */
+  days: Map<number, DailyDay>;
+  /** The streak, by the one rule (lib/streak.ts). */
+  streak: Streak;
+  /** Days in a row with every daily finished (no freezes), and how many such days in all. */
+  perfect: { streak: number; longest: number; days: number };
+};
+
+export function dailyRecordOf(results: DailyResult[], day: number): DailyRecord {
+  const days = new Map<number, DailyDay>();
+  for (const result of results) {
+    if (!inChallenge(result.game)) continue;
+    const entry = days.get(result.day) ?? { done: 0, points: 0 };
+    entry.done++;
+    entry.points += result.points;
+    days.set(result.day, entry);
+  }
+  const full = [...days].filter(([, entry]) => entry.done >= CHALLENGE_SLUGS.length).map(([played]) => played);
+  const perfect = streakOf(full, day, STRICT_RULES);
+  return {
+    day,
+    days,
+    streak: streakOf(streakDays(results), day),
+    perfect: { streak: perfect.streak, longest: perfect.longest, days: full.length },
+  };
+}
+
+/** The same, as a hook that follows the saves and the clock. Browser only. */
+export function useDailyRecord(): DailyRecord {
+  const day = useDayNumber();
+  const results = useDailyResults();
+  return useMemo(() => dailyRecordOf(results, day), [results, day]);
 }
 
 const NO_FAVOURITES: string[] = [];

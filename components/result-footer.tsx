@@ -20,16 +20,33 @@ type ActionsProps = {
   game: GameSlug;
   /** Overrides "Next puzzle in". */
   nextLabel?: string;
+  /** A past day played from the archive: the way back to it, in place of today's trail. */
+  archive?: boolean;
 };
 
 /**
  * What every finished daily puzzle ends with: a share button, the countdown,
  * unlimited practice, and the way on to the next of today's puzzles.
  */
-export function ResultActions({ shareText, game, nextLabel }: ActionsProps) {
+export function ResultActions({ shareText, game, nextLabel, archive }: ActionsProps) {
   const t = useSiteT();
   const shell = useShellT();
   const secondsLeft = useSecondsUntilTomorrow();
+
+  if (archive) {
+    return (
+      <div className="summary-actions">
+        <ShareButton label={t("share")} text={() => shareText(`${window.location.origin}/play/${game}`)} />
+        <p className="hint">{shell("archiveNote")}</p>
+        <Link href="/daily#archive" className="key key-secondary key-sm">
+          {shell("backToArchive")}
+        </Link>
+        <Link href={`/play/${game}`} className="key key-sm">
+          {shell("todaysPuzzle")}
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -49,7 +66,7 @@ export function ResultActions({ shareText, game, nextLabel }: ActionsProps) {
 }
 
 /**
- * Today's other puzzles: a trail of the six, and a link to the next one not
+ * Today's other puzzles: a trail of the dailies, and a link to the next one not
  * yet finished (after this one, wrapping round) — or, once all are done, to
  * /daily, where the whole day can be shared.
  */

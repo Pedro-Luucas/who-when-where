@@ -44,7 +44,8 @@ export type Profile = {
   joinedAt: number;
   /** null when nobody is signed in. */
   relation: Relation | null;
-  stats: { points: number; puzzles: number; days: number; fullDays: number; streak: number; longest: number };
+  /** `freezes`: held now (an API from before freezes leaves it out). */
+  stats: { points: number; puzzles: number; days: number; fullDays: number; streak: number; longest: number; freezes?: number };
   games: { game: GameSlug; played: number; points: number; best: number }[];
   activity: DayActivity[];
 };

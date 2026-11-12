@@ -1603,10 +1603,39 @@ a.setup-mode:hover {
 
 /* ───────────────────────── /daily ───────────────────────── */
 
+.daily-board {
+  display: grid;
+  gap: 20px;
+}
+
+.daily-board-head {
+  display: grid;
+  gap: 6px;
+}
+
+.daily-board-head h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 1.4rem + 2vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.daily-board-lead {
+  max-width: 44rem;
+  color: var(--fg-2);
+}
+
 .daily-board-grid {
   display: grid;
   gap: 18px;
   align-items: start;
+}
+
+.daily-main {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
 }
 
 .daily-aside {
@@ -1614,50 +1643,402 @@ a.setup-mode:hover {
   gap: 14px;
 }
 
-.daily-progress {
+/* The streak dial */
+
+.streak-dial {
   justify-items: center;
   text-align: center;
+  gap: 12px;
 }
 
-.daily-progress h2 {
+.streak-dial-ring {
+  padding: 6px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(62 240 138 / 0.08), transparent);
+}
+
+.streak-dial-count {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+}
+
+.streak-dial-count b {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.streak-dial-count small {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+}
+
+.streak-flame {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 6px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  background: var(--sunken);
+  color: var(--fg-2);
+}
+
+.streak-flame[data-lit] {
+  border-color: rgb(255 212 92 / 0.55);
+  background: rgb(255 212 92 / 0.1);
+  color: var(--streak);
+  box-shadow: var(--glow-pro);
+}
+
+.streak-flame-icon {
+  font-size: 1.3rem;
+  filter: grayscale(1);
+  opacity: 0.6;
+}
+
+.streak-flame[data-lit] .streak-flame-icon {
+  filter: none;
+  opacity: 1;
+}
+
+.streak-flame-number {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.streak-flame-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.streak-status {
+  font-size: 0.92rem;
+  color: var(--fg-2);
+}
+
+.streak-status[data-risk] {
+  color: var(--streak);
+}
+
+.streak-freezes {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 4px 10px;
   justify-self: stretch;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--sunken);
   text-align: left;
 }
 
-.daily-progress .done-ring {
-  flex-direction: column;
+.streak-freezes .hint {
+  grid-column: 1 / -1;
+  font-size: 0.8rem;
 }
 
-.daily-points {
+.streak-freeze-pips {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.streak-freeze-pips i {
+  font-style: normal;
+  color: var(--fg-3);
+  opacity: 0.45;
+}
+
+.streak-freeze-pips i[data-held] {
+  color: var(--color-cyan-bright);
+  opacity: 1;
+  text-shadow: 0 0 10px rgb(95 216 255 / 0.6);
+}
+
+.streak-freeze-count {
   font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--fg);
+}
+
+.streak-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  justify-self: stretch;
+}
+
+.streak-stats div {
+  display: grid;
+  gap: 4px;
+  padding-top: 8px;
+  border-top: 2px solid var(--line-strong);
+}
+
+.streak-stats dt {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+}
+
+.streak-stats dd {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+}
+
+.streak-stats dd small {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--fg-3);
+}
+
+.streak-share {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.streak-guest {
+  display: grid;
+  gap: 10px;
+  justify-self: stretch;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+/* The archive calendar */
+
+.archive {
+  gap: 12px;
+  scroll-margin-top: 80px;
+}
+
+.archive-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.archive-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.archive-weekday {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-align: center;
+  color: var(--fg-3);
+}
+
+.archive-day {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  aspect-ratio: 1;
+  min-height: 34px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--sunken);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.05;
+  color: var(--fg-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.archive-day small {
+  font-size: 0.58rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+button.archive-day {
+  cursor: pointer;
+  transition:
+    border-color 120ms var(--ease-out),
+    transform 120ms var(--ease-out);
+}
+
+button.archive-day:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.archive-day[aria-pressed="true"] {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  color: var(--fg);
+}
+
+.archive-day[data-today] {
+  border-color: var(--accent);
+  color: var(--fg);
+  font-weight: 700;
+}
+
+.archive-day:is([data-state="future"], [data-state="before"], [data-state="locked"]) {
+  opacity: 0.35;
+}
+
+.archive-day[data-state="full"],
+.archive-legend [data-state="full"]::before {
+  border-color: rgb(62 240 138 / 0.6);
+  background: rgb(62 240 138 / 0.18);
+  color: var(--fg);
+}
+
+.archive-day[data-state="part"],
+.archive-legend [data-state="part"]::before {
+  border-color: rgb(79 171 246 / 0.5);
+  background: rgb(79 171 246 / 0.14);
+  color: var(--fg);
+}
+
+.archive-day[data-state="frozen"],
+.archive-legend [data-state="frozen"]::before {
+  border-color: rgb(95 216 255 / 0.55);
+  background: repeating-linear-gradient(135deg, rgb(95 216 255 / 0.16) 0 4px, transparent 4px 8px);
+  color: var(--color-cyan-bright);
+}
+
+.archive-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--fg-3);
+}
+
+.archive-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.archive-legend span::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+}
+
+.archive-picked {
+  display: grid;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+
+.archive-picked ul {
+  display: grid;
+  gap: 6px;
+}
+
+.archive-picked a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 44px;
+  padding: 6px 10px 6px 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--fam);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  transition: border-color 120ms var(--ease-out);
+}
+
+.archive-picked a:hover {
+  border-color: var(--accent);
+  border-left-color: var(--fam);
+}
+
+.archive-game {
   font-weight: 600;
   color: var(--fg);
 }
 
-.perks ul {
+.archive-go {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--play);
+}
+
+/* The recap page */
+
+.recap {
   display: grid;
-  gap: 8px;
+  justify-items: start;
+  gap: 18px;
+  max-width: 60rem;
 }
 
-.perks li {
+.recap-card {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1200 / 630;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-raised);
+}
+
+.recap-actions {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   gap: 10px;
-  color: var(--fg-2);
-}
-
-.perks li svg {
-  color: var(--accent);
 }
 
 @media (min-width: 64rem) {
   .daily-board-grid {
-    grid-template-columns: minmax(0, 1fr) 300px;
+    grid-template-columns: minmax(0, 1fr) 340px;
+  }
+}
+
+/* One column: the dial first, then the cards, the archive, and the year last. */
+@media (max-width: 63.99rem) {
+  .daily-main,
+  .daily-aside {
+    display: contents;
   }
 
-  .daily-aside {
-    position: sticky;
-    top: 76px;
+  .streak-dial {
+    order: 1;
+  }
+
+  .daily-main > .daily-cards {
+    order: 2;
+  }
+
+  .archive {
+    order: 3;
+  }
+
+  .daily-main > :not(.daily-cards) {
+    order: 4;
   }
 }
 } /* @layer components */

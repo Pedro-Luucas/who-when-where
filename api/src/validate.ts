@@ -112,15 +112,16 @@ export const GAMES = [
 export type Game = (typeof GAMES)[number];
 
 /**
- * The daily challenge: the games a full day is made of, and the ones the
- * all-games boards add up (the site's CHALLENGE_SLUGS in games/registry.ts).
- * Every other game keeps scores too, on its own board.
+ * The dailies: the same games every day, the ones a full day is made of, a
+ * streak counts and the all-games boards add up. A copy of the site's
+ * DAILY_SET (games/daily-set.ts) — change both together; the tests check they
+ * match. Every other game keeps scores too, on its own board.
  */
-export const CHALLENGE_GAMES: readonly Game[] = ["who-when-where", "wayfarer", "dig-site", "first-to-last", "overland", "outline"];
+export const DAILY_SET: readonly Game[] = ["who-when-where", "wayfarer", "dig-site", "first-to-last", "outline"];
 
-/** SQL for "the result is one of the daily challenge's", for a results table aliased `alias`. */
+/** SQL for "the result is one of the dailies'", for a results table aliased `alias`. */
 export const inChallengeSql = (alias = "") =>
-  `${alias ? `${alias}.` : ""}game IN (${CHALLENGE_GAMES.map((game) => `'${game}'`).join(", ")})`;
+  `${alias ? `${alias}.` : ""}game IN (${DAILY_SET.map((game) => `'${game}'`).join(", ")})`;
 
 export const isGame = (value: unknown): value is Game => GAMES.includes(value as Game);
 

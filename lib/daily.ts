@@ -1,12 +1,27 @@
-// Daily puzzle clock, shared by every game on the site.
-// A "day" is the player's local calendar day; day 1 is the launch date.
+// Daily puzzle clock, shared by every game on the site and by the accounts
+// API (api/src/days.ts says the same).
+//
+// A "day" is a UTC calendar day: everybody in the world plays the same
+// puzzles at the same time, and the next ones arrive at 00:00 UTC (21:00 in
+// Brasília, 01:00 in Lisbon). Day 1 is the launch date, 10 Nov 2026.
+//
+// Until phase 7 a day was the player's own local date. The numbering did not
+// change — local day N and UTC day N are the same date — so every save, keyed
+// by its day number, stays valid as it is: there is nothing to rewrite. The
+// only seam is the night of the switch, when a player west of Greenwich may
+// skip one number; the streak's starting freeze (lib/streak.ts) covers it.
 
 const DAY_MS = 86_400_000;
 const LAUNCH_UTC = Date.UTC(2026, 10, 10); // 10 Nov 2026
 
+/** The puzzle number of the UTC day an instant falls in. */
 export function dayNumberFor(date: Date): number {
-  const localMidnight = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
-  return Math.floor((localMidnight - LAUNCH_UTC) / DAY_MS) + 1;
+  return Math.floor((date.getTime() - LAUNCH_UTC) / DAY_MS) + 1;
+}
+
+/** When the puzzles after `day` arrive: the next 00:00 UTC. */
+export function dayEndsAt(day: number): Date {
+  return new Date(LAUNCH_UTC + day * DAY_MS);
 }
 
 export function yearOfDay(day: number): number {
@@ -18,9 +33,9 @@ export function dateOfDay(day: number): Date {
   return new Date(LAUNCH_UTC + (day - 1) * DAY_MS);
 }
 
+/** Milliseconds until the next puzzles (00:00 UTC). */
 export function msUntilTomorrow(now: Date): number {
-  const next = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-  return next.getTime() - now.getTime();
+  return dayEndsAt(dayNumberFor(now)).getTime() - now.getTime();
 }
 
 function hashString(text: string): number {

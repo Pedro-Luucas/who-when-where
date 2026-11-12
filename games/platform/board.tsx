@@ -3,8 +3,10 @@
 import { Daily } from "@/components/daily";
 import { GamePanels } from "@/components/game-panels";
 import { ResultActions } from "@/components/result-footer";
+import { useDayNumber } from "@/lib/clock";
 import { yearOfDay } from "@/lib/daily";
 import { translator, useLocale, useSiteT } from "@/lib/i18n";
+import { useShellT } from "@/lib/shell-messages";
 import type { GameSlug } from "../registry";
 import type { GameDefinition } from "./definition";
 import { GameFrameProvider } from "./frame";
@@ -25,27 +27,54 @@ export function defineBoard<Puzzle, Move, Saved, Key extends string>(
   const erased = board as unknown as Board;
   function Screen() {
     // Keyed by day: at midnight the next puzzle starts from a clean slate.
-    return <Daily>{(day) => <Play key={day} day={day} definition={definition} board={erased} />}</Daily>;
+    return (
+      <Daily>
+        {(day, archive) => (
+          <Play key={`${day}${archive ? ":archive" : ""}`} day={day} archive={archive} definition={definition} board={erased} />
+        )}
+      </Daily>
+    );
   }
   return { ...erased, Screen };
 }
 
 const sameIds = (a: string[], b: string[]) => a.length === b.length && a.every((id, i) => id === b[i]);
 
-function Play({ day, definition, board }: { day: number; definition: GameDefinition<GameSlug>; board: Board }) {
+/** Whether a saved record is a finished puzzle. */
+function finished(data: GameData, record: unknown): boolean {
+  try {
+    return record !== undefined && data.resultOf(record) !== null;
+  } catch {
+    return false;
+  }
+}
+
+type PlayProps = { day: number; archive: boolean; definition: GameDefinition<GameSlug>; board: Board };
+
+function Play({ day, archive, definition, board }: PlayProps) {
   const { data, Board } = board;
-  const [save, setSave] = useGameSave<unknown>(definition);
+  const daily = useGameSave<unknown>(definition);
+  const shelf = useGameSave<unknown>(definition, "archive");
+  const today = useDayNumber();
   const locale = useLocale();
   const site = useSiteT();
+  const shell = useShellT();
   const t = translator(board.messages, locale);
   const words = board.daily(t);
+
+  // A past day finished on the day stays that record: the archive shows it, never replays it.
+  // Any other past day is played afresh on the archive shelf.
+  const onShelf = archive && !finished(data, daily[0].days[day]);
+  const [save, setSave] = onShelf ? shelf : daily;
+  const [dailySave, setDailySave] = daily;
 
   // A saved record names its puzzle, so a roster change can't reassign it.
   const stored = save.days[day];
   const kept = stored === undefined ? undefined : data.puzzleOfRecord(stored);
   const puzzle = kept ?? data.puzzleForDay(day);
   const soFar = kept === undefined ? [] : movesOf<unknown>(definition, stored);
-  const stats = board.stats(save, day, { t, site });
+  // The statistics are the daily puzzles', as they stand today.
+  const stats = board.stats(dailySave, archive ? today : day, { t, site });
 
   function moves(next: unknown[]) {
     if (!next.length) return;
@@ -69,10 +98,11 @@ function Play({ day, definition, board }: { day: number; definition: GameDefinit
         onMove={(next) => moves([next])}
         onMoves={moves}
         year={yearOfDay(day)}
-        label={`${site("puzzleNo", { n: day })} — ${words.kicker}`}
+        label={`${site("puzzleNo", { n: day })} — ${archive ? shell("archiveKicker") : words.kicker}`}
       >
         <ResultActions
           game={definition.slug}
+          archive={archive}
           shareText={(url) => board.share({ day, puzzle, moves: soFar, locale, url })}
           nextLabel={words.nextLabel}
         />
@@ -80,8 +110,8 @@ function Play({ day, definition, board }: { day: number; definition: GameDefinit
       <GamePanels
         game={definition.slug}
         help={words.help}
-        seenHelp={save.seenHelp}
-        onSeenHelp={() => setSave((previous) => ({ ...previous, seenHelp: true }))}
+        seenHelp={dailySave.seenHelp}
+        onSeenHelp={() => setDailySave((previous) => ({ ...previous, seenHelp: true }))}
         played={stats.played}
         tiles={stats.tiles}
       />

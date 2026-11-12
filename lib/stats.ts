@@ -1,17 +1,10 @@
+import { streakOf } from "./streak";
+
 /**
- * Streaks over the puzzle numbers a player has finished. The current streak
- * survives until a whole day is missed.
+ * The current and longest streak over the puzzle numbers a player has
+ * finished, by the site's one streak rule (lib/streak.ts).
  */
 export function streaks(days: number[], today: number): { streak: number; longest: number } {
-  const sorted = [...days].sort((a, b) => a - b);
-  let longest = 0;
-  let run = 0;
-  let previous = Number.NaN;
-  for (const day of sorted) {
-    run = day === previous + 1 ? run + 1 : 1;
-    longest = Math.max(longest, run);
-    previous = day;
-  }
-  const streak = previous === today || previous === today - 1 ? run : 0;
+  const { streak, longest } = streakOf(days, today);
   return { streak, longest };
 }

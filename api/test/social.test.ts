@@ -2,7 +2,19 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { createApp } from "../src/app.ts";
 import type { Config } from "../src/config.ts";
-import { latestDay, streaks, utcDay } from "../src/days.ts";
+import { latestDay, streakOf, streaks, utcDay } from "../src/days.ts";
+import { DAILY_SET } from "../src/validate.ts";
+import type { Streak, StreakRules } from "../src/days.ts";
+
+// The site's own copies, which the API's must match. Loaded at run time only: the
+// site is a separate package, and is not deployed with the API.
+const site = {
+  dailies: (await import(new URL("../../games/daily-set.ts", import.meta.url).href)) as { DAILY_SET: readonly string[] },
+  streak: (await import(new URL("../../lib/streak.ts", import.meta.url).href)) as {
+    STRICT_RULES: StreakRules;
+    streakOf: (days: number[], today: number, rules?: StreakRules) => Streak;
+  },
+};
 import { openDatabase } from "../src/db.ts";
 import { deleteStaleParties } from "../src/parties.ts";
 import { SESSION_COOKIE } from "../src/sessions.ts";
@@ -79,9 +91,41 @@ test("the puzzle calendar", () => {
   assert.equal(latestDay(launch + 11 * 3_600_000), 2); // already tomorrow at UTC+14
 
   const noon = launch + 9.5 * 86_400_000; // day 10
-  assert.deepEqual(streaks([1, 2, 3, 7, 8, 9], noon), { streak: 3, longest: 3 });
-  assert.deepEqual(streaks([1, 2, 3, 4, 6], noon), { streak: 0, longest: 4 });
-  assert.deepEqual(streaks([], noon), { streak: 0, longest: 0 });
+  // Day 4 spends the starting freeze; day 5 has none left.
+  assert.deepEqual(streaks([1, 2, 3, 7, 8, 9], noon), { streak: 3, longest: 3, freezes: 0 });
+  // Day 5 is frozen, so 1–6 is one run of five; day 7 breaks it.
+  assert.deepEqual(streaks([1, 2, 3, 4, 6], noon), { streak: 0, longest: 5, freezes: 0 });
+  assert.deepEqual(streaks([], noon), { streak: 0, longest: 0, freezes: 1 });
+});
+
+test("the streak rule: today never breaks it, a freeze saves one missed day, 7 days played earn one back", () => {
+  // Today (10) not played yet: the run to yesterday stands.
+  assert.deepEqual(streakOf([7, 8, 9], 10), { streak: 3, longest: 3, freezes: 1, frozen: [], playedToday: false });
+  assert.equal(streakOf([7, 8, 9, 10], 10).playedToday, true);
+  // Yesterday missed: the freeze is spent and the run goes on.
+  assert.deepEqual(streakOf([6, 7, 8], 10), { streak: 3, longest: 3, freezes: 0, frozen: [9], playedToday: false });
+  // Two days missed: the run is over, whatever came before.
+  assert.equal(streakOf([5, 6, 7], 10).streak, 0);
+  // Seven days played earn the freeze back (holding one at most).
+  const week = [1, 2, 3, 5, 6, 7, 8, 9];
+  assert.deepEqual(streakOf(week, 10), { streak: 8, longest: 8, freezes: 1, frozen: [4], playedToday: false });
+  // Days to come, and nonsense, count for nothing.
+  assert.equal(streakOf([9, 11, 12, 0, -3, 2.5], 10).streak, 1);
+});
+
+test("the API's streak rule and dailies are the site's", () => {
+  assert.deepEqual([...DAILY_SET], [...site.dailies.DAILY_SET]);
+
+  // Random histories: both rules must say the same thing, day for day.
+  let seed = 7;
+  const random = () => ((seed = (seed * 1103515245 + 12345) % 2 ** 31) / 2 ** 31);
+  for (let round = 0; round < 300; round++) {
+    const today = 1 + Math.floor(random() * 80);
+    const days = Array.from({ length: today + 3 }, (_, i) => i + 1).filter(() => random() < 0.75);
+    assert.deepEqual(streakOf(days, today), site.streak.streakOf(days, today));
+    const strict = site.streak.STRICT_RULES;
+    assert.deepEqual(streakOf(days, today, strict), site.streak.streakOf(days, today, strict));
+  }
 });
 
 test("usernames: chosen at sign-up or later, unique, and needed to take part", async () => {
@@ -485,7 +529,7 @@ test("party settings: tries are kept per game, and still read under their older 
   assert.equal(changed.body.party.settings.tries.outline, 3);
 });
 
-test("engine games keep scores on their own boards; the daily challenge adds up the original six", async () => {
+test("engine games keep scores on their own boards; the dailies add up the daily set", async () => {
   const { browser, player, befriend } = world();
   const ada = await player("ada");
   const bob = await player("bob");
@@ -513,16 +557,21 @@ test("engine games keep scores on their own boards; the daily challenge adds up 
   const list = (await bob.call("GET", `/friends?day=${today}`)).body;
   assert.deepEqual(list.friends[0].today, { points: 700, puzzles: 1 });
 
-  // A full day is the six puzzles of the challenge, whatever else was played.
-  const six = ["who-when-where", "dig-site", "first-to-last", "overland", "outline"].map((game) => ({
-    game,
-    day: today,
-    points: 500,
-  }));
-  await ada.call("PUT", "/results", { results: six });
+  // A full day is the five dailies, whatever else was played (Overland is no longer one of them).
+  const rest = ["who-when-where", "dig-site", "first-to-last", "overland"].map((game) => ({ game, day: today, points: 500 }));
+  await ada.call("PUT", "/results", { results: rest });
+  assert.equal((await guest("GET", "/players/ada")).body.stats.fullDays, 0);
+  await ada.call("PUT", "/results", { results: [{ game: "outline", day: today, points: 500 }] });
   const profile = (await guest("GET", "/players/ada")).body;
   assert.equal(profile.stats.fullDays, 1);
   assert.equal(profile.stats.puzzles, 8);
+  assert.equal(profile.stats.streak, 1);
+  assert.equal(profile.stats.freezes, 1);
+
+  // A day of games outside the dailies alone keeps no streak going.
+  const cy = await player("cyd");
+  await cy.call("PUT", "/results", { results: [{ game: "flag-peek", day: today, points: 900 }] });
+  assert.equal((await guest("GET", "/players/cyd")).body.stats.streak, 0);
 
   // A party can deal the newer games, with tries for the ones that have them.
   const settings = { ...SETTINGS, rounds: { ...SETTINGS.rounds, "border-chain": 2 }, tries: { "flag-peek": 4 } };

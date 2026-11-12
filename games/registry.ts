@@ -14,6 +14,7 @@ import { definition as typeTheCountries } from "./type-the-countries/definition"
 import { definition as flagPeek } from "./flag-peek/definition";
 import { definition as higherOrLower } from "./higher-or-lower/definition";
 import { definition as borderChain } from "./border-chain/definition";
+import { DAILY_SET } from "./daily-set";
 import type { GameDefinition } from "./platform/definition";
 import { definition as wayfarer } from "./wayfarer/definition";
 import { definition as whoWhenWhere } from "./who-when-where/definition";
@@ -62,22 +63,16 @@ const bySlug = new Map<string, GameDefinition<GameSlug>>(GAMES.map((game) => [ga
 export const isGameSlug = (value: unknown): value is GameSlug => typeof value === "string" && bySlug.has(value);
 
 /**
- * The daily challenge: the games whose puzzles make up "today" — the dailies
- * strip, the day's progress and share card, a full day in the activity graph.
- * Until "Today's Five" (phase 7) picks the day's games from the whole
- * catalogue, it is the six original games. Every other game still has a daily
- * puzzle of its own (on its page, with its own streak) and a practice mode.
+ * The daily challenge — "the dailies": the same games every day, set in one
+ * place, games/daily-set.ts. They make up "today": the dailies strip, the
+ * day's progress and share card, the streak, a full day in the activity graph.
+ * Every other game still has a daily puzzle of its own (on its page, with its
+ * own statistics) and a practice mode.
  */
-export const CHALLENGE_SLUGS: readonly GameSlug[] = [
-  "who-when-where",
-  "wayfarer",
-  "dig-site",
-  "first-to-last",
-  "overland",
-  "outline",
-] satisfies GameSlug[];
+export const CHALLENGE_SLUGS: readonly GameSlug[] = DAILY_SET satisfies readonly GameSlug[];
 
-export const CHALLENGE_GAMES: readonly GameDefinition<GameSlug>[] = GAMES.filter((game) => CHALLENGE_SLUGS.includes(game.slug));
+/** The dailies' definitions, in the order of DAILY_SET. */
+export const CHALLENGE_GAMES: readonly GameDefinition<GameSlug>[] = CHALLENGE_SLUGS.map((slug) => bySlug.get(slug)!);
 
 export const inChallenge = (slug: string): boolean => (CHALLENGE_SLUGS as readonly string[]).includes(slug);
 

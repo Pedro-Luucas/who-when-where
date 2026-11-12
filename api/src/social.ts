@@ -13,7 +13,7 @@ import {
   type PublicRow,
 } from "./people.ts";
 import { LIMITS } from "./rate-limit.ts";
-import { CHALLENGE_GAMES, Invalid, inChallengeSql, isGame, readChoice, readLine, readResults, readUsername } from "./validate.ts";
+import { DAILY_SET, Invalid, inChallengeSql, isGame, readChoice, readLine, readResults, readUsername } from "./validate.ts";
 
 // Scores, leaderboards, profiles and friends.
 
@@ -102,7 +102,7 @@ export function registerPublicSocial(app: Hono<Env>, { db, viewer }: Deps): void
     return c.json({ day, period, game, scope, players, rows, me: mine });
   });
 
-  /** A player's public profile: totals, streaks and a year of activity. */
+  /** A player's public profile: totals, the streak (lib/streak.ts's rule) and a year of activity. */
   app.get("/players/:username", (c) => {
     const now = Date.now();
     const row = db
@@ -115,6 +115,10 @@ export function registerPublicSocial(app: Hono<Env>, { db, viewer }: Deps): void
         "SELECT day, COUNT(*) AS puzzles, SUM(points) AS points FROM results WHERE user_id = ? GROUP BY day ORDER BY day",
       )
       .all(row.id) as { day: number; puzzles: number; points: number }[];
+    // A streak counts the days with one of the dailies finished.
+    const dailyDays = (
+      db.prepare(`SELECT DISTINCT day FROM results WHERE user_id = ? AND ${inChallengeSql()}`).all(row.id) as { day: number }[]
+    ).map((entry) => entry.day);
     const games = db
       .prepare(
         "SELECT game, COUNT(*) AS played, SUM(points) AS points, MAX(points) AS best FROM results WHERE user_id = ? GROUP BY game",
@@ -131,18 +135,15 @@ export function registerPublicSocial(app: Hono<Env>, { db, viewer }: Deps): void
         points: days.reduce((sum, entry) => sum + entry.points, 0),
         puzzles: days.reduce((sum, entry) => sum + entry.puzzles, 0),
         days: days.length,
-        /** Days on which every puzzle of the daily challenge was finished. */
+        /** Days on which every one of the dailies was finished. */
         fullDays: (
           db
             .prepare(
               `SELECT COUNT(*) AS n FROM (SELECT day FROM results WHERE user_id = ? AND ${inChallengeSql()} GROUP BY day HAVING COUNT(*) >= ?)`,
             )
-            .get(row.id, CHALLENGE_GAMES.length) as { n: number }
+            .get(row.id, DAILY_SET.length) as { n: number }
         ).n,
-        ...streaks(
-          days.map((entry) => entry.day),
-          now,
-        ),
+        ...streaks(dailyDays, now),
       },
       games,
       activity: days.filter((entry) => entry.day >= firstShown),

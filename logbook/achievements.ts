@@ -1,4 +1,4 @@
-import { activityOf, type DailyResult } from "@/games/results";
+import { activityOf, streakDays, type DailyResult } from "@/games/results";
 import { CHALLENGE_SLUGS, GAME_SLUGS, type GameSlug } from "@/games/registry";
 import { MAX_POINTS } from "@/lib/points";
 import { streaks } from "@/lib/stats";
@@ -86,10 +86,7 @@ export function standingsOf(results: DailyResult[], today: number): Standing[] {
       points: Math.max(0, ...activity.map((day) => day.points)),
       puzzles: Math.max(0, ...activity.map((day) => day.puzzles)),
     },
-    longestStreak: streaks(
-      activity.map((day) => day.day),
-      today,
-    ).longest,
+    longestStreak: streaks(streakDays(results), today).longest,
   };
   return ACHIEVEMENTS.map((achievement) => {
     const count = Math.min(achievement.count(facts), achievement.goal);

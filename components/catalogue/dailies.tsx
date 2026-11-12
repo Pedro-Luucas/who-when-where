@@ -7,8 +7,8 @@ import { ProgressRing } from "@/components/ui/progress-ring";
 import { FAMILIES } from "@/games/families";
 import { CHALLENGE_GAMES } from "@/games/registry";
 import { useToday } from "@/games/today";
-import { useSecondsUntilTomorrow } from "@/lib/clock";
-import { useLocale } from "@/lib/i18n";
+import { useNextDayAt, useSecondsUntilTomorrow } from "@/lib/clock";
+import { numberLocale, useLocale } from "@/lib/i18n";
 import { useShellT } from "@/lib/shell-messages";
 import { TodayChip } from "./game-tile";
 
@@ -20,11 +20,19 @@ export function useCountdown(): string {
   return hours ? `${hours} h ${String(minutes).padStart(2, "0")} min` : `${minutes} min`;
 }
 
-/** "New puzzles in 6 h 12 min", ticking. */
+/** "9:00 PM": when the next puzzles arrive (00:00 UTC), in the player's own time. Empty on the server. */
+export function useNextDayTime(): string {
+  const locale = useLocale();
+  const at = useNextDayAt();
+  return at ? new Intl.DateTimeFormat(numberLocale(locale), { hour: "numeric", minute: "2-digit" }).format(at) : "";
+}
+
+/** "New dailies at 9:00 PM your time · in 6 h 12 min", ticking. */
 export function Countdown() {
   const t = useShellT();
   const left = useCountdown();
-  return <span className="countdown-line">{t("newIn", { time: left })}</span>;
+  const at = useNextDayTime();
+  return <span className="countdown-line">{at ? t("newAt", { at, time: left }) : t("newIn", { time: left })}</span>;
 }
 
 /** Today's progress as a ring: "2/6 done today". */

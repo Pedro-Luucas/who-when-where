@@ -5,7 +5,7 @@ import { readStore, subscribeToStore, writeStore } from "@/lib/storage";
 import { loadData } from "./loaders";
 import type { GameDefinition } from "./platform/definition";
 import { scorerOf, type Scorer } from "./platform/scorers";
-import { GAMES, type GameSlug } from "./registry";
+import { GAMES, inChallenge, type GameSlug } from "./registry";
 
 // Every game's finished days, read on one scale (lib/points.ts). This is what
 // the daily challenge, the activity graph and the leaderboards are built on.
@@ -209,6 +209,14 @@ function subscribe(listener: () => void): () => void {
 /** The same, as a hook that follows the saves. */
 export function useDailyResults(): DailyResult[] {
   return useSyncExternalStore(subscribe, readDailyResults, () => NONE);
+}
+
+/**
+ * The days with at least one of the dailies finished (games/daily-set.ts):
+ * the days a streak counts (lib/streak.ts).
+ */
+export function streakDays(results: DailyResult[]): number[] {
+  return [...new Set(results.filter((result) => inChallenge(result.game)).map((result) => result.day))];
 }
 
 /** What was played on each day: how many puzzles, and for how many points. */

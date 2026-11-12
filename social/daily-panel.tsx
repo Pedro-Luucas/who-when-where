@@ -4,129 +4,49 @@ import Link from "next/link";
 import { Suspense, use } from "react";
 import { browser } from "react-dom";
 import { useAccount } from "@/account/state";
-import { ShareButton } from "@/components/share-button";
-import { gradeOf } from "@/expedition/run";
-import { activityOf, useDailyResults, type DailyResult } from "@/games/results";
-import { CHALLENGE_SLUGS, GAME_TITLES, inChallenge, type GameSlug } from "@/games/registry";
+import { activityOf, useDailyResults } from "@/games/results";
+import { inChallenge } from "@/games/registry";
 import { useDayNumber } from "@/lib/clock";
-import { formatNumber, type Locale } from "@/lib/i18n";
-import { MAX_POINTS } from "@/lib/points";
-import { streaks } from "@/lib/stats";
+import { formatNumber } from "@/lib/i18n";
+import { useShellT } from "@/lib/shell-messages";
 import { levelOf } from "@/logbook/level";
 import { useLogbookT, type LogbookKey } from "@/logbook/messages";
 import { ActivityGraph } from "./activity-graph";
 import { useSocialT } from "./messages";
 
 /**
- * The hub's daily challenge: finish all of today's puzzles, keep the streak
- * going, fill the year. Built from the games saved on this device, so it
- * works without an account.
+ * The daily page's year of play: the level the points have earned, and one
+ * square per day, shaded by how many of the dailies were finished. Built from
+ * the games saved on this device, so it works without an account.
  */
-export function DailyPanel() {
+export function DailyYear() {
   return (
     <Suspense fallback={<section className="daily skeleton-block" aria-busy="true" />}>
-      <Panel />
+      <Year />
     </Suspense>
   );
 }
 
-// One square per game, from a puzzle not played to one that went very well.
-const UNPLAYED = "⬜";
-const SQUARES = ["⬛", "🟥", "🟧", "🟨", "🟩"];
-
-/** The whole day in a few lines, to paste into a chat: no puzzle is given away. */
-function dayShareText(
-  day: number,
-  todays: Map<GameSlug, DailyResult>,
-  streak: number,
-  locale: Locale,
-  url: string,
-): string {
-  const points = [...todays.values()].reduce((sum, result) => sum + result.points, 0);
-  const trail = CHALLENGE_SLUGS.map((game) => {
-    const result = todays.get(game);
-    return result ? SQUARES[gradeOf(result.points)] : UNPLAYED;
-  }).join("");
-  const total = `${formatNumber(points, locale)}/${formatNumber(CHALLENGE_SLUGS.length * MAX_POINTS, locale)}`;
-  return [
-    `Who When Where #${day} · ${total}`,
-    streak > 1 ? `${trail} 🔥${streak}` : trail,
-    url,
-  ].join("\n");
-}
-
-function Panel() {
-  use(browser("The daily challenge is built from the player's local date and saved games."));
+function Year() {
+  use(browser("The year of play is built from the day by the clock and the saved games."));
   const { locale, t } = useSocialT();
+  const shell = useShellT();
   const { t: logbookT } = useLogbookT();
   const today = useDayNumber();
   const results = useDailyResults();
   const account = useAccount();
 
-  const activity = activityOf(results);
-  const { streak, longest } = streaks(
-    activity.map((entry) => entry.day),
-    today,
-  );
-  const todays = new Map(
-    results.filter((result) => result.day === today && inChallenge(result.game)).map((result) => [result.game, result]),
-  );
-  const done = todays.size;
-  const points = [...todays.values()].reduce((sum, result) => sum + result.points, 0);
-  const complete = done === CHALLENGE_SLUGS.length;
+  // The graph shades a day by its dailies; the level counts every puzzle's points.
+  const activity = activityOf(results.filter((result) => inChallenge(result.game)));
   const { level, into, step, rank } = levelOf(results.reduce((sum, result) => sum + result.points, 0));
 
   return (
-    <section className="daily" aria-labelledby="daily-heading" data-complete={complete ? "" : undefined}>
+    <section className="daily" aria-labelledby="daily-year-heading">
       <header className="daily-head">
-        <div>
-          <h2 id="daily-heading" className="eyebrow">
-            {t("dailyChallenge")} <span aria-hidden="true">—</span> {t("dayNo", { n: today })}
-          </h2>
-          <p className="daily-title">
-            {complete
-              ? t("dailyComplete", { n: CHALLENGE_SLUGS.length })
-              : done
-                ? t("dailyProgress", { n: CHALLENGE_SLUGS.length - done })
-                : t("dailyStart", { n: CHALLENGE_SLUGS.length })}
-          </p>
-        </div>
-        <dl className="daily-stats">
-          <div>
-            <dd>
-              {done}/{CHALLENGE_SLUGS.length}
-            </dd>
-            <dt>{t("statToday")}</dt>
-          </div>
-          <div>
-            <dd>{formatNumber(points, locale)}</dd>
-            <dt>{t("statPointsOf", { max: formatNumber(CHALLENGE_SLUGS.length * MAX_POINTS, locale) })}</dt>
-          </div>
-          <div data-lit={streak > 0 ? "" : undefined}>
-            <dd>{streak}</dd>
-            <dt>{t("statStreak")}</dt>
-          </div>
-          <div>
-            <dd>{longest}</dd>
-            <dt>{t("statLongest")}</dt>
-          </div>
-        </dl>
+        <h2 id="daily-year-heading" className="eyebrow">
+          {shell("yourYear")}
+        </h2>
       </header>
-
-      <ul className="daily-games">
-        {CHALLENGE_SLUGS.map((game) => {
-          const result = todays.get(game);
-          return (
-            <li key={game}>
-              <Link href={`/play/${game}`} data-done={result ? "" : undefined}>
-                <i aria-hidden="true">{result ? "✓" : ""}</i>
-                <b>{GAME_TITLES[game]}</b>
-                <span>{result ? formatNumber(result.points, locale) : `${t("play")} →`}</span>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
 
       <div className="daily-level">
         <Link href="/logbook" className="daily-rank">
@@ -144,13 +64,6 @@ function Panel() {
           </span>
           <strong>{logbookT("logbook")} →</strong>
         </Link>
-        {done > 0 && (
-          <ShareButton
-            className="chip"
-            label={t("shareDay")}
-            text={() => dayShareText(today, todays, streak, locale, window.location.origin)}
-          />
-        )}
       </div>
 
       <ActivityGraph activity={activity} today={today} />
@@ -158,7 +71,7 @@ function Panel() {
       <p className="hint daily-note">
         {account.status === "guest" ? (
           <>
-            {t("dailyGuest")} <Link href="/account?next=/">{t("joinAction")}</Link>
+            {t("dailyGuest")} <Link href="/account?next=/daily">{t("joinAction")}</Link>
           </>
         ) : (
           <>

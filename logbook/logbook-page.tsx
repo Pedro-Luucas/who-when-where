@@ -3,7 +3,7 @@
 import { Suspense } from "react";
 import { BrowserOnly } from "@/components/controls";
 import { WorldMap, useMapLabels, type MapMarker, type MapRegion, type MapRoute } from "@/components/world-map";
-import { activityOf, useDailyResults } from "@/games/results";
+import { activityOf, streakDays, useDailyResults } from "@/games/results";
 import { useDayNumber } from "@/lib/clock";
 import { formatNumber } from "@/lib/i18n";
 import { streaks } from "@/lib/stats";
@@ -29,10 +29,7 @@ function Book() {
 
   const activity = activityOf(results);
   const points = results.reduce((sum, result) => sum + result.points, 0);
-  const { streak, longest } = streaks(
-    activity.map((entry) => entry.day),
-    today,
-  );
+  const { streak, longest } = streaks(streakDays(results), today);
   const { level, into, step, rank } = levelOf(points);
   const standings = standingsOf(results, today);
   const earned = standings.filter((standing) => standing.unlocked).length;
