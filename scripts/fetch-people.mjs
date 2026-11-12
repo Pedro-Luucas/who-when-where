@@ -15,6 +15,7 @@ import {
   cleanTitle,
   countryId,
   downloadImage,
+  getImageCredits,
   getEntities,
   getJson,
   label,
@@ -48,6 +49,13 @@ const stripYears = (s) =>
     .replace(/\s+/g, " ")
     .trim();
 
+/** The image with its credit last; without a new one, whatever it had. */
+function withCredit(image, credit, warnings) {
+  const { credit: before, ...rest } = image;
+  if (!credit && !before) warnings.push("no image credit");
+  return { ...rest, credit: credit ?? before };
+}
+
 async function main() {
   await mkdir(path.dirname(OUT_JSON), { recursive: true });
 
@@ -61,6 +69,9 @@ async function main() {
   for (const title of ROSTER) {
     summaries.push(await getJson(summaryUrl("en", title)));
   }
+
+  // Who made each image, and under which licence (shown on the reveal).
+  const credits = await getImageCredits(summaries.map((s) => s.thumbnail?.source).filter(Boolean));
 
   const qids = summaries.map((s) => s.wikibase_item);
   const people = await getEntities(qids, "labels|descriptions|claims|sitelinks");
@@ -123,6 +134,7 @@ async function main() {
     else if (!SKIP_IMAGES) {
       image = await downloadImage("people", id, summary.thumbnail);
     } else if (!image) warnings.push("portrait not downloaded yet");
+    if (image && summary.thumbnail) image = withCredit(image, credits.get(summary.thumbnail.source), warnings);
 
     const entry = {
       id,

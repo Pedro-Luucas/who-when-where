@@ -1,0 +1,38 @@
+export const MESSAGES = {
+  en: {
+    kicker: "Today's five",
+    lead: "Five famous people. Put them in the order they were born, from the first to the last.",
+    eyebrow: "Birth order",
+    prompt: "Who was born *first*?",
+    first: "Born first",
+    last: "Born last",
+    flawless: "Flawless: in order at the first try!",
+    solvedIn: "In order on try {n}",
+    lost: "{n} of 5 in the right place",
+    answer: "Born between {from} and {to}",
+    lives: "Their lifetimes",
+    help1: "Five famous people, the same for everyone today.",
+    help2: "Tap them in the order they were born, from the first to the last.",
+    help3: "Check the order: the ones in the right place lock, and you reorder the rest.",
+    help4: "You have three tries. At the end, their lifetimes appear on one timeline — see who overlapped.",
+  },
+  pt: {
+    kicker: "Os cinco de hoje",
+    lead: "Cinco pessoas famosas. Ponha na ordem em que nasceram, da primeira à última.",
+    eyebrow: "Ordem de nascimento",
+    prompt: "Quem nasceu *primeiro*?",
+    first: "Nasceu antes",
+    last: "Nasceu depois",
+    flawless: "Impecável: na ordem de primeira!",
+    solvedIn: "Na ordem na tentativa {n}",
+    lost: "{n} de 5 na posição certa",
+    answer: "Nascidos entre {from} e {to}",
+    lives: "As vidas deles",
+    help1: "Cinco pessoas famosas, as mesmas para todo mundo hoje.",
+    help2: "Toque nelas na ordem em que nasceram, da primeira à última.",
+    help3: "Confira a ordem: as que estiverem na posição certa travam, e você reordena o resto.",
+    help4: "Você tem três tentativas. No fim, as vidas aparecem numa mesma linha do tempo — veja quem foi contemporâneo de quem.",
+  },
+};
+
+export type MessageKey = keyof (typeof MESSAGES)["en"];

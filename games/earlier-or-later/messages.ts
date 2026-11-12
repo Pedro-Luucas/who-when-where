@@ -1,0 +1,38 @@
+export const MESSAGES = {
+  en: {
+    kicker: "Today's run",
+    lead: "One moment after another. Did the new one happen before or after the one on the table? Three lives.",
+    eyebrow: "Earlier or later?",
+    prompt: "*{event}* — before or after?",
+    known: "On the table",
+    next: "New",
+    earlier: "Earlier",
+    later: "Later",
+    reveal: "{a}: {ya}. {b}: {yb}.",
+    answer: "{n} right out of {total}",
+    circa: "c.",
+    help1: "A chain of twenty moments in history, the same for everyone today.",
+    help2: "The year of the moment on the table is shown. Say whether the new one happened earlier or later.",
+    help3: "Then the new one goes on the table, and the next one comes up.",
+    help4: "Three wrong answers end the run. Every right answer is worth 50 points.",
+  },
+  pt: {
+    kicker: "A rodada de hoje",
+    lead: "Um momento atrás do outro. O novo aconteceu antes ou depois do que está na mesa? Três vidas.",
+    eyebrow: "Antes ou depois?",
+    prompt: "*{event}* — antes ou depois?",
+    known: "Na mesa",
+    next: "Novo",
+    earlier: "Antes",
+    later: "Depois",
+    reveal: "{a}: {ya}. {b}: {yb}.",
+    answer: "{n} acertos de {total}",
+    circa: "c.",
+    help1: "Uma sequência de vinte momentos da história, a mesma para todo mundo hoje.",
+    help2: "O ano do momento que está na mesa aparece. Diga se o novo aconteceu antes ou depois.",
+    help3: "Aí o novo vai para a mesa, e vem o próximo.",
+    help4: "Três erros encerram a rodada. Cada acerto vale 50 pontos.",
+  },
+};
+
+export type MessageKey = keyof (typeof MESSAGES)["en"];

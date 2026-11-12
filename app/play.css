@@ -727,4 +727,10 @@
   height: 140px;
   border-radius: var(--radius-lg);
 }
+
+/* An image's author and licence, tucked under the reading on the reveal. */
+.summary > .image-credit {
+  margin-top: -12px;
+  font-size: 0.7rem !important;
+}
 } /* @layer components */

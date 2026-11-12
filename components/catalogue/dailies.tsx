@@ -5,7 +5,7 @@ import { GameArt } from "@/components/game-art";
 import { Icon } from "@/components/shell/nav-items";
 import { ProgressRing } from "@/components/ui/progress-ring";
 import { FAMILIES } from "@/games/families";
-import { GAMES } from "@/games/registry";
+import { CHALLENGE_GAMES } from "@/games/registry";
 import { useToday } from "@/games/today";
 import { useSecondsUntilTomorrow } from "@/lib/clock";
 import { useLocale } from "@/lib/i18n";
@@ -31,7 +31,7 @@ export function Countdown() {
 export function DoneRing({ size = 64 }: { size?: number }) {
   const t = useShellT();
   const { done } = useToday();
-  const total = GAMES.length;
+  const total = CHALLENGE_GAMES.length;
   return (
     <span className="done-ring">
       <ProgressRing
@@ -48,14 +48,14 @@ export function DoneRing({ size = 64 }: { size?: number }) {
   );
 }
 
-/** Every game's daily puzzle as a card: its scene, family and number, how it stands, and the way in. */
+/** The daily challenge's puzzles as cards: its scene, family and number, how it stands, and the way in. */
 export function DailyCards({ variant = "strip" }: { variant?: "strip" | "grid" }) {
   const t = useShellT();
   const locale = useLocale();
   const { day, of } = useToday();
   return (
     <ul className="daily-cards" data-variant={variant}>
-      {GAMES.map((game) => {
+      {CHALLENGE_GAMES.map((game) => {
         const today = of(game.slug);
         return (
           <li

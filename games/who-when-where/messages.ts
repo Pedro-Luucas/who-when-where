@@ -48,6 +48,10 @@ export const MESSAGES = {
     lived: "{n} years",
     nextIn: "Next mind in",
     portraitCredit: "Portrait via Wikimedia Commons",
+    creditPortrait: "Portrait",
+    creditPublicDomain: "Public domain",
+    creditUnknown: "Unknown author",
+    creditSource: "Wikimedia Commons",
 
     statAverage: "Average",
     statBest: "Best",
@@ -102,6 +106,10 @@ export const MESSAGES = {
     lived: "{n} anos",
     nextIn: "Próxima mente em",
     portraitCredit: "Retrato via Wikimedia Commons",
+    creditPortrait: "Retrato",
+    creditPublicDomain: "Domínio público",
+    creditUnknown: "Autor desconhecido",
+    creditSource: "Wikimedia Commons",
 
     statAverage: "Média",
     statBest: "Melhor",

@@ -179,6 +179,71 @@ export const SHELL_MESSAGES = {
     no: "No",
     kmOff: "{km} km off",
     yearsOff: "{n} years off",
+
+    // Practice
+    modePractice: "Practice",
+    modePracticeNote: "Unlimited puzzles at random. They don’t count for streaks.",
+    practiceNo: "Practice · puzzle {n}",
+    practiceVariants: "Practice set",
+    practiceNext: "Another puzzle",
+    practiceDaily: "Today’s puzzle",
+    practiceHelp: "Practice deals puzzles at random, as many as you like. They don’t count for your streak or the leaderboards.",
+    practice: "Practice",
+
+    // Engines: pick
+    statCorrect: "Correct",
+    statLives: "Lives",
+    statBestRun: "Best run",
+    statSpotOn: "Spot on",
+    roundN: "Round {n}",
+    pickRight: "Right!",
+    pickWrong: "Not quite.",
+    pickItWas: "It was {answer}.",
+    livesLeft: "{n} lives left",
+    noLivesLeft: "No lives left — that’s the end of the run.",
+    nextRound: "Next",
+    pickHint: "Tap your answer — or press 1, 2, 3…",
+
+    // Engines: order
+    orderFeedback: "{n} in the right place.",
+    orderFeedbackNone: "None in the right place.",
+    orderLastTry: "Last try!",
+    orderTriesLeft: "{n} tries left.",
+    orderRemove: "Take back",
+    orderHowTo: "Tap them in order, from the first. Tap one again to take it back.",
+    orderHowToMouse: "Click them in order, from the first. Click one again to take it back.",
+    orderCheck: "Check",
+    orderYourTries: "Your tries",
+
+    // Engines: name
+    guess: "Guess",
+    ladderLost: "It got away this time…",
+    ladderFirst: "First guess!",
+    ladderSolvedIn: "Named on guess {n}",
+    ladderLastGuess: "last guess",
+    ladderGuessesLeft: "{n} guesses left",
+
+    // Engines: pin
+    pinRounds: "{n} rounds on the map",
+    pinLastTry: "last try",
+    pinTriesLeft: "{n} tries left",
+    pinHint: "Tap the map",
+    pinHintMouse: "Click the map",
+    pinZoom: "Pinch to zoom, then tap. Lock it in when you’re sure.",
+    pinZoomMouse: "Scroll to zoom, then click. Lock it in when you’re sure.",
+    lockIn: "Lock in",
+
+    // Engine games: results and modes
+    resultPerfect: "Perfect!",
+    resultGreat: "Great game",
+    resultGood: "Not bad at all",
+    resultPoor: "A tough one",
+    dataLabel: "Data",
+    modePracticeShort: "Unlimited, at random",
+    practicePlay: "Practice",
+    timeLeft: "Time left",
+    statFoundCount: "Found",
+    statSteps: "Steps",
   },
   pt: {
     mainNav: "Principal",
@@ -348,6 +413,71 @@ export const SHELL_MESSAGES = {
     no: "Não",
     kmOff: "{km} km de distância",
     yearsOff: "{n} anos de diferença",
+
+    // Practice
+    modePractice: "Treino",
+    modePracticeNote: "Desafios sem limite, ao acaso. Não contam para a sequência.",
+    practiceNo: "Treino · desafio {n}",
+    practiceVariants: "Conjunto de treino",
+    practiceNext: "Outro desafio",
+    practiceDaily: "Desafio de hoje",
+    practiceHelp: "No treino os desafios saem ao acaso, quantos você quiser. Eles não contam para a sua sequência nem para os rankings.",
+    practice: "Treinar",
+
+    // Engines: pick
+    statCorrect: "Acertos",
+    statLives: "Vidas",
+    statBestRun: "Melhor sequência",
+    statSpotOn: "Na mosca",
+    roundN: "Rodada {n}",
+    pickRight: "Certo!",
+    pickWrong: "Não foi dessa vez.",
+    pickItWas: "Era {answer}.",
+    livesLeft: "Restam {n} vidas",
+    noLivesLeft: "Acabaram as vidas — fim da rodada.",
+    nextRound: "Próxima",
+    pickHint: "Toque na resposta — ou aperte 1, 2, 3…",
+
+    // Engines: order
+    orderFeedback: "{n} na posição certa.",
+    orderFeedbackNone: "Nenhum na posição certa.",
+    orderLastTry: "Última tentativa!",
+    orderTriesLeft: "Restam {n} tentativas.",
+    orderRemove: "Tirar",
+    orderHowTo: "Toque neles em ordem, do primeiro. Toque de novo para tirar.",
+    orderHowToMouse: "Clique neles em ordem, do primeiro. Clique de novo para tirar.",
+    orderCheck: "Conferir",
+    orderYourTries: "Suas tentativas",
+
+    // Engines: name
+    guess: "Chutar",
+    ladderLost: "Dessa vez escapou…",
+    ladderFirst: "De primeira!",
+    ladderSolvedIn: "Descoberto no palpite {n}",
+    ladderLastGuess: "último palpite",
+    ladderGuessesLeft: "restam {n} palpites",
+
+    // Engines: pin
+    pinRounds: "{n} rodadas no mapa",
+    pinLastTry: "última tentativa",
+    pinTriesLeft: "restam {n} tentativas",
+    pinHint: "Toque no mapa",
+    pinHintMouse: "Clique no mapa",
+    pinZoom: "Use dois dedos para aproximar e toque. Confirme quando tiver certeza.",
+    pinZoomMouse: "Use a roda para aproximar e clique. Confirme quando tiver certeza.",
+    lockIn: "Confirmar",
+
+    // Engine games: results and modes
+    resultPerfect: "Perfeito!",
+    resultGreat: "Ótimo jogo",
+    resultGood: "Nada mal",
+    resultPoor: "Essa foi difícil",
+    dataLabel: "Dados",
+    modePracticeShort: "Sem limite, ao acaso",
+    practicePlay: "Treinar",
+    timeLeft: "Tempo restante",
+    statFoundCount: "Encontrados",
+    statSteps: "Passos",
   },
 } satisfies Record<"en" | "pt", Record<string, string>>;
 

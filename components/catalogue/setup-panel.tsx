@@ -79,6 +79,10 @@ export function SetupPanel({ game, index, headingId }: { game: Game; index: numb
                 {t("modeDaily")}
                 {day > 0 && <small>{t("puzzleOfDay", { n: day })}</small>}
               </span>
+              <Link href={`/play/${game.slug}/practice`} className="setup-mode">
+                {t("modePractice")}
+                <small>{t("modePracticeShort")}</small>
+              </Link>
               <Link href="/expedition" className="setup-mode">
                 {t("modeCustom")}
                 <small>{t("modeCustomNote")}</small>

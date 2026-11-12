@@ -89,8 +89,38 @@ export const MESSAGE_MAX = 500;
 export const PARTY_NAME_MAX = 40;
 
 /** The games that keep scores (the site's games/registry.ts lists the same). */
-export const GAMES = ["who-when-where", "wayfarer", "dig-site", "first-to-last", "overland", "outline"] as const;
+export const GAMES = [
+  "who-when-where",
+  "wayfarer",
+  "dig-site",
+  "first-to-last",
+  "overland",
+  "outline",
+  "lifelines",
+  "clue-ladder",
+  "born-here",
+  "could-they-meet",
+  "earlier-or-later",
+  "same-year",
+  "pin-the-city",
+  "click-the-country",
+  "type-the-countries",
+  "flag-peek",
+  "higher-or-lower",
+  "border-chain",
+] as const;
 export type Game = (typeof GAMES)[number];
+
+/**
+ * The daily challenge: the games a full day is made of, and the ones the
+ * all-games boards add up (the site's CHALLENGE_SLUGS in games/registry.ts).
+ * Every other game keeps scores too, on its own board.
+ */
+export const CHALLENGE_GAMES: readonly Game[] = ["who-when-where", "wayfarer", "dig-site", "first-to-last", "overland", "outline"];
+
+/** SQL for "the result is one of the daily challenge's", for a results table aliased `alias`. */
+export const inChallengeSql = (alias = "") =>
+  `${alias ? `${alias}.` : ""}game IN (${CHALLENGE_GAMES.map((game) => `'${game}'`).join(", ")})`;
 
 export const isGame = (value: unknown): value is Game => GAMES.includes(value as Game);
 
@@ -127,12 +157,17 @@ export const MAX_ROUNDS_PER_GAME = 5;
  * kept per game (Wayfarer and Outline shared one). The site's game
  * definitions say the same (games/<slug>/definition.ts).
  */
-const TRIES: Partial<Record<Game, { min: number; max: number; fallback: number; older: OlderTries }>> = {
+const TRIES: Partial<Record<Game, { min: number; max: number; fallback: number; older?: OlderTries }>> = {
   wayfarer: { min: 3, max: 6, fallback: 6, older: "guesses" },
   "dig-site": { min: 3, max: 6, fallback: 5, older: "digs" },
   "first-to-last": { min: 1, max: 4, fallback: 3, older: "attempts" },
   overland: { min: 1, max: 5, fallback: 4, older: "spare" },
   outline: { min: 3, max: 6, fallback: 6, older: "guesses" },
+  // Games from after tries were kept per game have no older name.
+  lifelines: { min: 1, max: 4, fallback: 3 },
+  "clue-ladder": { min: 3, max: 6, fallback: 6 },
+  "click-the-country": { min: 1, max: 3, fallback: 3 },
+  "flag-peek": { min: 3, max: 6, fallback: 6 },
 };
 type OlderTries = "digs" | "guesses" | "attempts" | "spare";
 
@@ -168,7 +203,7 @@ function olderTries(tries: Partial<Record<Game, number>>): Record<OlderTries, nu
   const older: Partial<Record<OlderTries, number>> = {};
   for (const game of TRIES_GAMES) {
     const rule = TRIES[game]!;
-    older[rule.older] ??= tries[game] ?? rule.fallback;
+    if (rule.older) older[rule.older] ??= tries[game] ?? rule.fallback;
   }
   return older as Record<OlderTries, number>;
 }
@@ -191,7 +226,7 @@ export function readPartySettings(value: unknown): PartySettings {
   for (const game of TRIES_GAMES) {
     const rule = TRIES[game]!;
     // A game the sender has not heard of plays by its usual tries.
-    if (older) tries[game] = older[rule.older];
+    if (older) tries[game] = rule.older ? older[rule.older] : rule.fallback;
     else tries[game] = given![game] === undefined ? rule.fallback : readInteger(given![game], rule.min, rule.max, "settings.tries");
   }
 
@@ -231,7 +266,10 @@ export function storedPartySettings(json: string): PartySettings {
     ...stored,
     rounds: Object.fromEntries(GAMES.map((game) => [game, stored.rounds[game] ?? 0])) as Record<Game, number>,
     tries: Object.fromEntries(
-      TRIES_GAMES.map((game) => [game, stored.tries?.[game] ?? older[TRIES[game]!.older] ?? TRIES[game]!.fallback]),
+      TRIES_GAMES.map((game) => {
+        const rule = TRIES[game]!;
+        return [game, stored.tries?.[game] ?? (rule.older ? older[rule.older] : undefined) ?? rule.fallback];
+      }),
     ),
     spare,
   };

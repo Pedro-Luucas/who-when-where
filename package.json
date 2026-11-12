@@ -14,6 +14,12 @@
     "data:sites": "node scripts/fetch-sites.mjs",
     "data:journeys": "node scripts/fetch-journeys.mjs",
     "data:countries": "node scripts/build-countries.mjs",
+    "data:notables": "node scripts/fetch-notables.mjs",
+    "data:regions": "node scripts/build-regions.mjs",
+    "data:cities": "node scripts/build-cities.mjs",
+    "data:facts": "node scripts/fetch-country-facts.mjs",
+    "data:flags": "node scripts/build-flags.mjs",
+    "data:credits": "node scripts/fetch-image-credits.mjs",
     "images": "node scripts/build-images.mjs"
   },
   "dependencies": {

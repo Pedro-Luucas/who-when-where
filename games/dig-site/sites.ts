@@ -1,4 +1,5 @@
 import { dailyIndex } from "@/lib/daily";
+import type { ImageCreditData } from "@/components/image-credit";
 import type { Locale, Localized } from "@/lib/i18n";
 import data from "./data/sites.json";
 
@@ -17,7 +18,8 @@ export type Site = {
   clue: Localized;
   extract: { en: string; pt: string | null };
   wiki: { en: string; pt: string | null };
-  image: { src: string; width: number; height: number };
+  /** The photo, with who took it and under which licence. */
+  image: { src: string; width: number; height: number; credit?: ImageCreditData };
 };
 
 // A site needs a photo and coordinates to be playable.

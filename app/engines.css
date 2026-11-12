@@ -1,0 +1,625 @@
+/* ═════════════════════════ Game engines ═════════════════════════
+   The boards the newer games share (games/engines): Pick (choose one), Order
+   (put in order), Name (a ladder of guesses) and Pin (rounds on the map), plus
+   the practice page around any game. Each game adds only what is its own,
+   under .game[data-game="<slug>"]. Inside the components layer, so utilities
+   can override. */
+
+@layer components {
+/* ───────────────────────── Practice ───────────────────────── */
+
+.practice-variants {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  width: 100%;
+  max-width: var(--container-page);
+  margin: 12px auto 0;
+  padding: 0 clamp(16px, 4vw, 40px);
+}
+
+.practice-variants .chip[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--fg);
+}
+
+.practice-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.hud-mode {
+  margin-left: 6px;
+  padding: 1px 6px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-xs, 3px);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+}
+
+/* ───────────────────────── Pick ───────────────────────── */
+
+.pick-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.pick-options[data-layout="list"] {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.pick-option {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  height: 100%;
+  min-height: 64px;
+  padding: 14px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--key-sheen), var(--surface);
+  color: var(--fg);
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  box-shadow:
+    var(--key-face),
+    0 3px 0 var(--key-side);
+  transition:
+    transform 120ms var(--ease-press),
+    box-shadow 120ms var(--ease-press),
+    border-color 160ms,
+    background 160ms,
+    opacity 200ms;
+}
+
+.pick-option:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: var(--key-sheen), var(--surface-2);
+}
+
+.pick-option:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: var(--key-face-pressed);
+}
+
+.pick-option:disabled {
+  cursor: default;
+}
+
+.pick-options[data-layout="pair"] .pick-option {
+  min-height: 150px;
+  padding: 18px;
+}
+
+.pick-options[data-layout="binary"] .pick-option {
+  min-height: 72px;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.pick-options[data-layout="list"] .pick-option {
+  flex-direction: row;
+  justify-content: flex-start;
+  text-align: left;
+  min-height: 56px;
+}
+
+.pick-label {
+  font-size: 1.02rem;
+}
+
+.pick-options[data-layout="pair"] .pick-label {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.pick-sub,
+.pick-fact {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--fg-2);
+}
+
+.pick-fact {
+  color: var(--fg);
+}
+
+.pick-media {
+  display: grid;
+  place-items: center;
+}
+
+.pick-media img {
+  display: block;
+  max-height: 64px;
+  width: auto;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px var(--line);
+}
+
+/* A flag SVG has no size of its own: give it one. */
+.pick-media .flag {
+  width: 96px;
+  height: 72px;
+  max-height: none;
+}
+
+.pick-key {
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--fg-3);
+}
+
+@media (pointer: coarse) {
+  .pick-key {
+    display: none;
+  }
+}
+
+.pick-option[data-state="right"] {
+  border-color: var(--answer);
+  background: linear-gradient(rgb(62 240 138 / 0.16), rgb(62 240 138 / 0.06)), var(--surface);
+  box-shadow: var(--glow-success);
+  transform: translateY(3px);
+}
+
+.pick-option[data-state="wrong"] {
+  border-color: var(--danger);
+  background: linear-gradient(rgb(255 70 109 / 0.16), rgb(255 70 109 / 0.05)), var(--surface);
+  box-shadow: 0 0 0 1px rgb(255 70 109 / 0.45);
+  transform: translateY(3px);
+}
+
+.pick-option[data-state="other"] {
+  opacity: 0.55;
+  box-shadow: none;
+  transform: translateY(3px);
+}
+
+.pick-option[data-state="right"]::after,
+.pick-option[data-state="wrong"]::after {
+  position: absolute;
+  top: 6px;
+  right: 9px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.pick-option[data-state="right"]::after {
+  content: "✓";
+  color: var(--answer);
+}
+
+.pick-option[data-state="wrong"]::after {
+  content: "✕";
+  color: var(--danger);
+}
+
+.pick-verdict {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px 16px;
+  align-items: center;
+  min-height: 72px;
+  padding: 12px 14px;
+  border: 1px solid var(--line-strong);
+  border-left: 3px solid var(--answer);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  animation: rise 0.3s both;
+}
+
+.pick-verdict[data-tone="off"] {
+  border-left-color: var(--danger);
+}
+
+.pick-verdict-text {
+  display: grid;
+  gap: 4px;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  color: var(--fg-2);
+}
+
+.pick-lives {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--danger);
+}
+
+.pick-hint {
+  text-align: center;
+}
+
+/* ───────────────────────── Order ───────────────────────── */
+
+.event:has(> .order-media) {
+  grid-template-columns: 30px auto minmax(0, 1fr) auto;
+}
+
+.order-media {
+  display: grid;
+  place-items: center;
+}
+
+/* ───────────────────────── Name ───────────────────────── */
+
+.picker-note {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--fg-3);
+}
+
+.ladder-dossier {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* A list of clues, opened one by one (Clue Ladder and the like). */
+.clue-ladder {
+  display: grid;
+  gap: 6px;
+  counter-reset: clue;
+}
+
+.clue-ladder li {
+  counter-increment: clue;
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  animation: rise 0.35s both;
+}
+
+.clue-ladder li::before {
+  content: counter(clue);
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.clue-ladder li > span {
+  display: grid;
+  gap: 2px;
+}
+
+.clue-ladder small {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+.clue-ladder b {
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.clue-ladder li[data-locked] {
+  border-style: dashed;
+  background: transparent;
+  color: var(--fg-3);
+  animation: none;
+}
+
+.clue-ladder li[data-locked]::before {
+  background: transparent;
+  color: var(--fg-3);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+
+/* ───────────────────────── Shared bits ───────────────────────── */
+
+/* A source line under a result: "Data: World Bank Open Data, CC BY 4.0". */
+.source-line {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--fg-3);
+}
+
+.source-line a {
+  color: var(--fg-2);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* A person's monogram, where there is no portrait. */
+.monogram {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--fam, var(--accent)) 22%, var(--surface));
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--fam, var(--accent)) 55%, transparent);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--fg);
+}
+
+/* A flag as a picture: always framed, never stretched. */
+.flag {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px var(--line-strong);
+}
+
+/* Lifespans on a shared time axis (Lifelines, Could They Have Met?). */
+.lifelines {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.lifelines-axis {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--fg-3);
+}
+
+.lifeline {
+  display: grid;
+  gap: 3px;
+}
+
+.lifeline-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.lifeline-track {
+  position: relative;
+  height: 12px;
+  border-radius: 6px;
+  background: var(--sunken);
+}
+
+.lifeline-bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 6px;
+  background: var(--fam, var(--accent));
+  opacity: 0.85;
+}
+
+.lifeline-overlap {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  border-radius: 3px;
+  background: rgb(255 255 255 / 0.18);
+  box-shadow: inset 0 0 0 1px var(--answer);
+}
+
+.lifeline-years {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--fg-2);
+}
+/* ───────────────────────── Wave 1 games ───────────────────────── */
+
+/* Two people side by side, without their dates (Could They Have Met?). */
+.people-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.person-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+
+.person-card > span {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.person-card b {
+  font-weight: 650;
+  line-height: 1.2;
+}
+
+.person-card small {
+  font-size: 0.78rem;
+  line-height: 1.3;
+  color: var(--fg-2);
+}
+
+/* The moment on the table and the new one (Earlier or Later). */
+.event-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.event-card {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  padding: 12px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  animation: rise 0.35s both;
+}
+
+.event-card[data-known] {
+  border-color: var(--line);
+  background: var(--sunken);
+}
+
+.event-card b {
+  font-weight: 650;
+  line-height: 1.25;
+}
+
+.event-card-place {
+  font-size: 0.78rem;
+  color: var(--fg-2);
+}
+
+.event-card-year {
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--fam, var(--accent));
+}
+
+/* A flag under a grid of tiles (Flag Peek). */
+.flag-peek {
+  position: relative;
+  width: min(100%, 360px);
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.flag-peek .flag {
+  border-radius: 6px;
+}
+
+.flag-peek-tiles {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  grid-template-rows: repeat(var(--rows), minmax(0, 1fr));
+}
+
+.flag-peek-tiles i {
+  background: var(--sunken);
+  box-shadow: inset 0 0 0 1px var(--line);
+  transition: opacity 0.45s var(--ease-out, ease-out);
+}
+
+.flag-peek-tiles i[data-open] {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flag-peek-tiles i {
+    transition: none;
+  }
+}
+
+/* Countries named so far, newest first (Type the Countries). */
+.type-countries .hint kbd {
+  padding: 1px 6px;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+.type-countries-found {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.type-countries-found li {
+  padding: 3px 9px;
+  border: 1px solid color-mix(in oklab, var(--answer) 45%, transparent);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--answer) 14%, transparent);
+  font-size: 0.8rem;
+  animation: rise 0.3s both;
+}
+
+/* The chain so far, and where it is going (Border Chain). */
+.chain-trail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+  margin-top: 10px;
+  font-size: 0.85rem;
+}
+
+.chain-trail li {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--answer) 16%, transparent);
+}
+
+.chain-trail li + li::before {
+  content: "→";
+  margin-right: 6px;
+  color: var(--fg-3);
+}
+
+.chain-trail li[data-target] {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  color: var(--fg-2);
+}
+
+.chain-trail li[data-target]::before {
+  content: "…";
+}
+
+@media (max-width: 520px) {
+  .people-pair,
+  .event-pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+}

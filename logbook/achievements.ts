@@ -1,5 +1,5 @@
 import { activityOf, type DailyResult } from "@/games/results";
-import { GAME_SLUGS, type GameSlug } from "@/games/registry";
+import { CHALLENGE_SLUGS, GAME_SLUGS, type GameSlug } from "@/games/registry";
 import { MAX_POINTS } from "@/lib/points";
 import { streaks } from "@/lib/stats";
 
@@ -49,7 +49,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     goal: GAME_SLUGS.length,
     count: (facts) => new Set(facts.results.map((result) => result.game)).size,
   },
-  { id: "tour", mark: `${GAME_SLUGS.length}/${GAME_SLUGS.length}`, goal: GAME_SLUGS.length, count: (facts) => facts.bestDay.puzzles },
+  { id: "tour", mark: `${CHALLENGE_SLUGS.length}/${CHALLENGE_SLUGS.length}`, goal: CHALLENGE_SLUGS.length, count: (facts) => facts.bestDay.puzzles },
   { id: "streak3", mark: "3d", goal: 3, count: (facts) => facts.longestStreak },
   { id: "streak7", mark: "7d", goal: 7, count: (facts) => facts.longestStreak },
   { id: "streak30", mark: "30d", goal: 30, count: (facts) => facts.longestStreak },

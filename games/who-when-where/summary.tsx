@@ -1,6 +1,7 @@
 "use client";
 
 import { ResultCard, type ReviewRow, type Verdict } from "@/components/play/result-card";
+import { ImageCredit } from "@/components/image-credit";
 import { ReadMore } from "@/components/result-footer";
 import { WorldMap, useMapLabels, type MapArc, type MapMarker } from "@/components/world-map";
 import { formatNumber } from "@/lib/i18n";
@@ -127,6 +128,15 @@ export function Summary({ person, guesses, label, children }: Props) {
       </figure>
 
       <ReadMore text={extract} href={article} credit={t("portraitCredit")} />
+      <ImageCredit
+        credit={person.image?.credit}
+        labels={{
+          kind: t("creditPortrait"),
+          publicDomain: t("creditPublicDomain"),
+          unknownAuthor: t("creditUnknown"),
+          source: t("creditSource"),
+        }}
+      />
     </div>
   );
 }

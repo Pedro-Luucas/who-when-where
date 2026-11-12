@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Hud, type Pip } from "@/components/play/hud";
 import { Plaque } from "@/components/play/plaque";
 import { ResultCard, type ReviewRow } from "@/components/play/result-card";
+import { ImageCredit } from "@/components/image-credit";
 import { ReadMore } from "@/components/result-footer";
 import { WorldMap, useMapLabels, type MapMarker, type MapRing } from "@/components/world-map";
 import { formatCoordinates, type LatLon } from "@/lib/geo";
@@ -197,6 +198,15 @@ export function DigSiteBoard({ site, digs, onDig, onDigs, maxDigs = MAX_DIGS, la
               text={site.extract[locale] ?? site.extract.en}
               href={site.wiki[locale] ?? site.wiki.en}
               credit={siteT("photoCredit")}
+            />
+            <ImageCredit
+              credit={site.image.credit}
+              labels={{
+                kind: t("creditPhoto"),
+                publicDomain: t("creditPublicDomain"),
+                unknownAuthor: t("creditUnknown"),
+                source: t("creditSource"),
+              }}
             />
           </div>
         ) : (

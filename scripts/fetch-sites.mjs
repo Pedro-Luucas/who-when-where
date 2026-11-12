@@ -14,6 +14,7 @@ import {
   cleanTitle,
   countryId,
   downloadImage,
+  getImageCredits,
   getEntities,
   getPtSummary,
   getSummary,
@@ -27,6 +28,13 @@ import { SITES, SITE_OVERRIDES } from "./sites-roster.mjs";
 const OUT_JSON = path.join(ROOT, "games/dig-site/data/sites.json");
 const SKIP_IMAGES = process.argv.includes("--no-images");
 
+/** The image with its credit last; without a new one, whatever it had. */
+function withCredit(image, credit, warnings) {
+  const { credit: before, ...rest } = image;
+  if (!credit && !before) warnings.push("no image credit");
+  return { ...rest, credit: credit ?? before };
+}
+
 async function main() {
   await mkdir(path.dirname(OUT_JSON), { recursive: true });
 
@@ -38,6 +46,9 @@ async function main() {
   console.log(`Fetching ${SITES.length} Wikipedia summaries…`);
   const summaries = [];
   for (const { title } of SITES) summaries.push(await getSummary("en", title));
+
+  // Who made each image, and under which licence (shown on the reveal).
+  const credits = await getImageCredits(summaries.map((s) => s.thumbnail?.source).filter(Boolean));
 
   const entities = await getEntities(
     summaries.map((s) => s.wikibase_item),
@@ -72,6 +83,7 @@ async function main() {
     if (!summary.thumbnail) warnings.push("no photo");
     else if (!SKIP_IMAGES) image = await downloadImage("sites", id, summary.thumbnail, { hidden: true });
     else if (!image) warnings.push("photo not downloaded yet");
+    if (image && summary.thumbnail) image = withCredit(image, credits.get(summary.thumbnail.source), warnings);
 
     const entry = {
       id,

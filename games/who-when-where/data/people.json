@@ -21,7 +21,14 @@
     "image": {
       "src": "/people/charles-darwin.jpg",
       "width": 500,
-      "height": 658
+      "height": 658,
+      "credit": {
+        "file": "Charles Darwin seated crop.jpg",
+        "author": "Henry Maull (1829–1914) and John Fox (1832–1907) (Maull & Fox)",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Charles_Darwin_seated_crop.jpg"
+      }
     },
     "birth": {
       "year": 1809,
@@ -76,7 +83,14 @@
     "image": {
       "src": "/people/albert-einstein.jpg",
       "width": 500,
-      "height": 618
+      "height": 618,
+      "credit": {
+        "file": "Albert Einstein Head cleaned.jpg",
+        "author": "Oren Jack Turner",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Albert_Einstein_Head_cleaned.jpg"
+      }
     },
     "birth": {
       "year": 1879,
@@ -131,7 +145,14 @@
     "image": {
       "src": "/people/isaac-newton.jpg",
       "width": 500,
-      "height": 602
+      "height": 602,
+      "credit": {
+        "file": "Portrait of Sir Isaac Newton, 1689 (brightened).jpg",
+        "author": "Godfrey Kneller",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Portrait_of_Sir_Isaac_Newton%2C_1689_(brightened).jpg"
+      }
     },
     "birth": {
       "year": 1642,
@@ -186,7 +207,14 @@
     "image": {
       "src": "/people/marie-curie.jpg",
       "width": 500,
-      "height": 679
+      "height": 679,
+      "credit": {
+        "file": "Marie Curie c. 1920s.jpg",
+        "author": "Henri Manuel",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Marie_Curie_c._1920s.jpg"
+      }
     },
     "birth": {
       "year": 1867,
@@ -241,7 +269,14 @@
     "image": {
       "src": "/people/galileo-galilei.jpg",
       "width": 500,
-      "height": 635
+      "height": 635,
+      "credit": {
+        "file": "Galileo Galilei (1564-1642) RMG BHC2700.tiff",
+        "author": "Justus Sustermans",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Galileo_Galilei_(1564-1642)_RMG_BHC2700.tiff"
+      }
     },
     "birth": {
       "year": 1564,
@@ -296,7 +331,14 @@
     "image": {
       "src": "/people/nikola-tesla.jpg",
       "width": 500,
-      "height": 670
+      "height": 670,
+      "credit": {
+        "file": "Tesla circa 1890.jpeg",
+        "author": "Napoleon Sarony",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Tesla_circa_1890.jpeg"
+      }
     },
     "birth": {
       "year": 1856,
@@ -351,7 +393,14 @@
     "image": {
       "src": "/people/alan-turing.jpg",
       "width": 500,
-      "height": 667
+      "height": 667,
+      "credit": {
+        "file": "Alan turing header.jpg",
+        "author": "Elliott & Fry",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Alan_turing_header.jpg"
+      }
     },
     "birth": {
       "year": 1912,
@@ -406,7 +455,14 @@
     "image": {
       "src": "/people/ada-lovelace.png",
       "width": 500,
-      "height": 647
+      "height": 647,
+      "credit": {
+        "file": "Ada Lovelace daguerreotype by Antoine Claudet 1843 - cropped.png",
+        "author": "Antoine Claudet",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Ada_Lovelace_daguerreotype_by_Antoine_Claudet_1843_-_cropped.png"
+      }
     },
     "birth": {
       "year": 1815,
@@ -461,7 +517,14 @@
     "image": {
       "src": "/people/stephen-hawking.jpg",
       "width": 500,
-      "height": 718
+      "height": 718,
+      "credit": {
+        "file": "Stephen Hawking.StarChild.jpg",
+        "author": "NASA",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Stephen_Hawking.StarChild.jpg"
+      }
     },
     "birth": {
       "year": 1942,
@@ -516,7 +579,14 @@
     "image": {
       "src": "/people/richard-feynman.jpg",
       "width": 500,
-      "height": 708
+      "height": 708,
+      "credit": {
+        "file": "Richard Feynman Nobel.jpg",
+        "author": "The Nobel Foundation",
+        "licence": "PD-Sweden",
+        "licenceUrl": null,
+        "source": "https://en.wikipedia.org/wiki/File:Richard_Feynman_Nobel.jpg"
+      }
     },
     "birth": {
       "year": 1918,
@@ -571,7 +641,14 @@
     "image": {
       "src": "/people/niels-bohr.jpg",
       "width": 500,
-      "height": 703
+      "height": 703,
+      "credit": {
+        "file": "Niels Bohr.jpg",
+        "author": "The American Institute of Physics credits the photo to AB Lagrelius & Westphal…",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Niels_Bohr.jpg"
+      }
     },
     "birth": {
       "year": 1885,
@@ -626,7 +703,14 @@
     "image": {
       "src": "/people/johannes-kepler.jpg",
       "width": 500,
-      "height": 718
+      "height": 718,
+      "credit": {
+        "file": "JKepler.jpg",
+        "author": "August Köhler",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:JKepler.jpg"
+      }
     },
     "birth": {
       "year": 1571,
@@ -681,7 +765,14 @@
     "image": {
       "src": "/people/nicolaus-copernicus.jpg",
       "width": 500,
-      "height": 624
+      "height": 624,
+      "credit": {
+        "file": "Nikolaus Kopernikus MOT.jpg",
+        "author": "Unknown author",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Nikolaus_Kopernikus_MOT.jpg"
+      }
     },
     "birth": {
       "year": 1473,
@@ -736,7 +827,14 @@
     "image": {
       "src": "/people/louis-pasteur.jpg",
       "width": 500,
-      "height": 689
+      "height": 689,
+      "credit": {
+        "file": "Louis Pasteur, foto av Paul Nadar, Crisco edit.jpg",
+        "author": "Paul Nadar",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Louis_Pasteur%2C_foto_av_Paul_Nadar%2C_Crisco_edit.jpg"
+      }
     },
     "birth": {
       "year": 1822,
@@ -791,7 +889,14 @@
     "image": {
       "src": "/people/dmitri-mendeleev.jpg",
       "width": 500,
-      "height": 688
+      "height": 688,
+      "credit": {
+        "file": "Dmitri Mendeleev.jpg",
+        "author": "Original: Unknown author Unknown author Upload: Germansociety2014",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Dmitri_Mendeleev.jpg"
+      }
     },
     "birth": {
       "year": 1834,
@@ -846,7 +951,14 @@
     "image": {
       "src": "/people/alexander-von-humboldt.jpg",
       "width": 500,
-      "height": 617
+      "height": 617,
+      "credit": {
+        "file": "Stieler, Joseph Karl - Alexander von Humboldt - 1843.jpg",
+        "author": "Joseph Karl Stieler",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Stieler%2C_Joseph_Karl_-_Alexander_von_Humboldt_-_1843.jpg"
+      }
     },
     "birth": {
       "year": 1769,
@@ -901,7 +1013,14 @@
     "image": {
       "src": "/people/carl-sagan.jpg",
       "width": 500,
-      "height": 683
+      "height": 683,
+      "credit": {
+        "file": "Carl Sagan Planetary Society.JPG",
+        "author": "NASA/JPL",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Carl_Sagan_Planetary_Society.JPG"
+      }
     },
     "birth": {
       "year": 1934,
@@ -956,7 +1075,14 @@
     "image": {
       "src": "/people/rosalind-franklin.jpg",
       "width": 500,
-      "height": 606
+      "height": 606,
+      "credit": {
+        "file": "Rosalind Franklin (retouched).jpg",
+        "author": "MRC Laboratory of Molecular Biology",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Rosalind_Franklin_(retouched).jpg"
+      }
     },
     "birth": {
       "year": 1920,
@@ -1011,7 +1137,14 @@
     "image": {
       "src": "/people/leonhard-euler.jpg",
       "width": 500,
-      "height": 647
+      "height": 647,
+      "credit": {
+        "file": "Leonhard Euler - Jakob Emanuel Handmann (Kunstmuseum Basel).jpg",
+        "author": "Jakob Emanuel Handmann",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Leonhard_Euler_-_Jakob_Emanuel_Handmann_(Kunstmuseum_Basel).jpg"
+      }
     },
     "birth": {
       "year": 1707,
@@ -1066,7 +1199,14 @@
     "image": {
       "src": "/people/carl-friedrich-gauss.jpg",
       "width": 500,
-      "height": 636
+      "height": 636,
+      "credit": {
+        "file": "Carl Friedrich Gauss 1840 by Jensen.jpg",
+        "author": "Christian Albrecht Jensen",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Carl_Friedrich_Gauss_1840_by_Jensen.jpg"
+      }
     },
     "birth": {
       "year": 1777,
@@ -1121,7 +1261,14 @@
     "image": {
       "src": "/people/srinivasa-ramanujan.jpg",
       "width": 500,
-      "height": 667
+      "height": 667,
+      "credit": {
+        "file": "Srinivasa Ramanujan-Add. MS a94 version2 (cropped).jpg",
+        "author": "Unknown author",
+        "licence": "CC BY 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Srinivasa_Ramanujan-Add._MS_a94_version2_(cropped).jpg"
+      }
     },
     "birth": {
       "year": 1887,
@@ -1176,7 +1323,14 @@
     "image": {
       "src": "/people/emmy-noether.jpg",
       "width": 500,
-      "height": 670
+      "height": 670,
+      "credit": {
+        "file": "Emmy Noether (3x4 cropped).jpg",
+        "author": "Unknown author",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Emmy_Noether_(3x4_cropped).jpg"
+      }
     },
     "birth": {
       "year": 1882,
@@ -1231,7 +1385,14 @@
     "image": {
       "src": "/people/leonardo-da-vinci.png",
       "width": 500,
-      "height": 717
+      "height": 717,
+      "credit": {
+        "file": "Francesco Melzi - Portrait of Leonardo (colour correction).png",
+        "author": "Attributed to Francesco Melzi",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Francesco_Melzi_-_Portrait_of_Leonardo_(colour_correction).png"
+      }
     },
     "birth": {
       "year": 1452,
@@ -1286,7 +1447,14 @@
     "image": {
       "src": "/people/blaise-pascal.jpg",
       "width": 500,
-      "height": 595
+      "height": 595,
+      "credit": {
+        "file": "Blaise Pascal Versailles, circa 1690.JPG",
+        "author": "Unknown author",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Blaise_Pascal_Versailles%2C_circa_1690.JPG"
+      }
     },
     "birth": {
       "year": 1623,
@@ -1341,7 +1509,14 @@
     "image": {
       "src": "/people/immanuel-kant.jpg",
       "width": 500,
-      "height": 653
+      "height": 653,
+      "credit": {
+        "file": "Immanuel Kant - Gemaelde 1.jpg",
+        "author": "Johann Gottlieb Becker (1720-1782)",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Immanuel_Kant_-_Gemaelde_1.jpg"
+      }
     },
     "birth": {
       "year": 1724,
@@ -1396,7 +1571,14 @@
     "image": {
       "src": "/people/rene-descartes.jpg",
       "width": 500,
-      "height": 612
+      "height": 612,
+      "credit": {
+        "file": "Frans Hals - Portret van René Descartes.jpg",
+        "author": "After Frans Hals",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg"
+      }
     },
     "birth": {
       "year": 1596,
@@ -1451,7 +1633,14 @@
     "image": {
       "src": "/people/voltaire.jpg",
       "width": 500,
-      "height": 667
+      "height": 667,
+      "credit": {
+        "file": "Nicolas de Largillière - Portrait de Voltaire (1694-1778) en 1718 - P208 - musée Carnavalet - 5 (cropped).jpg",
+        "author": "Nicolas de Largillière",
+        "licence": "CC0",
+        "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Nicolas_de_Largilli%C3%A8re_-_Portrait_de_Voltaire_(1694-1778)_en_1718_-_P208_-_mus%C3%A9e_Carnavalet_-_5_(cropped).jpg"
+      }
     },
     "birth": {
       "year": 1694,
@@ -1506,7 +1695,14 @@
     "image": {
       "src": "/people/jean-jacques-rousseau.jpg",
       "width": 500,
-      "height": 633
+      "height": 633,
+      "credit": {
+        "file": "Maurice Quentin de La Tour - Portrait of Jean-Jacques Rousseau - adjusted.jpg",
+        "author": "Maurice Quentin de La Tour",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Maurice_Quentin_de_La_Tour_-_Portrait_of_Jean-Jacques_Rousseau_-_adjusted.jpg"
+      }
     },
     "birth": {
       "year": 1712,
@@ -1561,7 +1757,14 @@
     "image": {
       "src": "/people/karl-marx.png",
       "width": 500,
-      "height": 739
+      "height": 739,
+      "credit": {
+        "file": "Karl Marx by John Jabez Edwin Mayall 1875 - Restored.png",
+        "author": "John Jabez Edwin Mayall",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Karl_Marx_by_John_Jabez_Edwin_Mayall_1875_-_Restored.png"
+      }
     },
     "birth": {
       "year": 1818,
@@ -1616,7 +1819,14 @@
     "image": {
       "src": "/people/friedrich-nietzsche.jpg",
       "width": 500,
-      "height": 679
+      "height": 679,
+      "credit": {
+        "file": "Nietzsche187a.jpg",
+        "author": "Friedrich Hermann Hartmann",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Nietzsche187a.jpg"
+      }
     },
     "birth": {
       "year": 1844,
@@ -1671,7 +1881,14 @@
     "image": {
       "src": "/people/sigmund-freud.jpg",
       "width": 500,
-      "height": 680
+      "height": 680,
+      "credit": {
+        "file": "Sigmund Freud, by Max Halberstadt (cropped).jpg",
+        "author": "Max Halberstadt",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Sigmund_Freud%2C_by_Max_Halberstadt_(cropped).jpg"
+      }
     },
     "birth": {
       "year": 1856,
@@ -1726,7 +1943,14 @@
     "image": {
       "src": "/people/gottfried-wilhelm-leibniz.jpg",
       "width": 500,
-      "height": 617
+      "height": 617,
+      "credit": {
+        "file": "Christoph Bernhard Francke - Bildnis des Philosophen Leibniz (ca. 1695).jpg",
+        "author": "Christoph Bernhard Francke",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Christoph_Bernhard_Francke_-_Bildnis_des_Philosophen_Leibniz_(ca._1695).jpg"
+      }
     },
     "birth": {
       "year": 1646,
@@ -1781,7 +2005,14 @@
     "image": {
       "src": "/people/baruch-spinoza.jpg",
       "width": 500,
-      "height": 580
+      "height": 580,
+      "credit": {
+        "file": "Spinoza.jpg",
+        "author": "anonymous",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Spinoza.jpg"
+      }
     },
     "birth": {
       "year": 1632,
@@ -1836,7 +2067,14 @@
     "image": {
       "src": "/people/adam-smith.jpg",
       "width": 500,
-      "height": 609
+      "height": 609,
+      "credit": {
+        "file": "Adam Smith The Muir portrait.jpg",
+        "author": "Unknown author",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Adam_Smith_The_Muir_portrait.jpg"
+      }
     },
     "birth": {
       "year": 1723,
@@ -1891,7 +2129,14 @@
     "image": {
       "src": "/people/simone-de-beauvoir.jpg",
       "width": 500,
-      "height": 668
+      "height": 668,
+      "credit": {
+        "file": "Simone De Beauvoir (cropped).jpg",
+        "author": "Moshe Milner",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Simone_De_Beauvoir_(cropped).jpg"
+      }
     },
     "birth": {
       "year": 1908,
@@ -1946,7 +2191,14 @@
     "image": {
       "src": "/people/hannah-arendt.jpg",
       "width": 500,
-      "height": 658
+      "height": 658,
+      "credit": {
+        "file": "Hannah Arendt auf dem 1. Kulturkritikerkongress, Barbara Niggl Radloff, FM-2019-1-5-9-16 (cropped).jpg",
+        "author": "Barbara Niggl Radloff",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Hannah_Arendt_auf_dem_1._Kulturkritikerkongress%2C_Barbara_Niggl_Radloff%2C_FM-2019-1-5-9-16_(cropped).jpg"
+      }
     },
     "birth": {
       "year": 1906,
@@ -2001,7 +2253,14 @@
     "image": {
       "src": "/people/ludwig-wittgenstein.jpg",
       "width": 500,
-      "height": 677
+      "height": 677,
+      "credit": {
+        "file": "Ludwig Wittgenstein 1929.jpg",
+        "author": "Moritz Nähr",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Ludwig_Wittgenstein_1929.jpg"
+      }
     },
     "birth": {
       "year": 1889,
@@ -2056,7 +2315,14 @@
     "image": {
       "src": "/people/bertrand-russell.jpg",
       "width": 500,
-      "height": 626
+      "height": 626,
+      "credit": {
+        "file": "Bertrand Russell in 1936.jpg",
+        "author": "Bassano Ltd",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Bertrand_Russell_in_1936.jpg"
+      }
     },
     "birth": {
       "year": 1872,
@@ -2111,7 +2377,14 @@
     "image": {
       "src": "/people/avicenna.jpg",
       "width": 500,
-      "height": 644
+      "height": 644,
+      "credit": {
+        "file": "Avicenna Bust, left profile (cropped).jpg",
+        "author": "National Library of Medicine",
+        "licence": "No restrictions",
+        "licenceUrl": "https://www.flickr.com/commons/usage/",
+        "source": "https://commons.wikimedia.org/wiki/File:Avicenna_Bust%2C_left_profile_(cropped).jpg"
+      }
     },
     "birth": {
       "year": 980,
@@ -2166,7 +2439,14 @@
     "image": {
       "src": "/people/ibn-khaldun.jpg",
       "width": 500,
-      "height": 767
+      "height": 767,
+      "credit": {
+        "file": "Bust of Ibn Khaldun (Casbah of Bejaia, Algeria).jpg",
+        "author": "Reda Kerbush",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Bust_of_Ibn_Khaldun_(Casbah_of_Bejaia%2C_Algeria).jpg"
+      }
     },
     "birth": {
       "year": 1332,
@@ -2221,7 +2501,14 @@
     "image": {
       "src": "/people/paulo-freire.jpg",
       "width": 500,
-      "height": 730
+      "height": 730,
+      "credit": {
+        "file": "Paulo Freire 1977 (cropped).jpg",
+        "author": "Slobodan Dimitrov",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Paulo_Freire_1977_(cropped).jpg"
+      }
     },
     "birth": {
       "year": 1921,
@@ -2276,7 +2563,14 @@
     "image": {
       "src": "/people/virginia-woolf.jpg",
       "width": 500,
-      "height": 683
+      "height": 683,
+      "credit": {
+        "file": "George Charles Beresford - Virginia Woolf in 1902 - Restoration.jpg",
+        "author": "George Charles Beresford / Adam Cuerden",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:George_Charles_Beresford_-_Virginia_Woolf_in_1902_-_Restoration.jpg"
+      }
     },
     "birth": {
       "year": 1882,
@@ -2331,7 +2625,14 @@
     "image": {
       "src": "/people/fyodor-dostoevsky.jpg",
       "width": 500,
-      "height": 626
+      "height": 626,
+      "credit": {
+        "file": "Vasily Perov - Портрет Ф.М.Достоевского - Google Art Project.jpg",
+        "author": "Vasily Perov",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Vasily_Perov_-_%D0%9F%D0%BE%D1%80%D1%82%D1%80%D0%B5%D1%82_%D0%A4.%D0%9C.%D0%94%D0%BE%D1%81%D1%82%D0%BE%D0%B5%D0%B2%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_-_Google_Art_Project.jpg"
+      }
     },
     "birth": {
       "year": 1821,
@@ -2386,7 +2687,14 @@
     "image": {
       "src": "/people/leo-tolstoy.jpg",
       "width": 500,
-      "height": 662
+      "height": 662,
+      "credit": {
+        "file": "Leo Tolstoy 1908 Portrait (3x4 cropped).jpg",
+        "author": "Sergei Prokudin-Gorskii",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Leo_Tolstoy_1908_Portrait_(3x4_cropped).jpg"
+      }
     },
     "birth": {
       "year": 1828,
@@ -2441,7 +2749,14 @@
     "image": {
       "src": "/people/franz-kafka.jpg",
       "width": 500,
-      "height": 667
+      "height": 667,
+      "credit": {
+        "file": "Franz Kafka, 1923.jpg",
+        "author": "Unknown author",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Franz_Kafka%2C_1923.jpg"
+      }
     },
     "birth": {
       "year": 1883,
@@ -2496,7 +2811,14 @@
     "image": {
       "src": "/people/jorge-luis-borges.jpg",
       "width": 500,
-      "height": 671
+      "height": 671,
+      "credit": {
+        "file": "Jorge Luis Borges 1951, by Grete Stern (full).jpg",
+        "author": "Grete Stern",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Jorge_Luis_Borges_1951%2C_by_Grete_Stern_(full).jpg"
+      }
     },
     "birth": {
       "year": 1899,
@@ -2551,7 +2873,14 @@
     "image": {
       "src": "/people/machado-de-assis.jpg",
       "width": 500,
-      "height": 674
+      "height": 674,
+      "credit": {
+        "file": "Machado de Assis by Marc Ferrez.jpg",
+        "author": "Marc Ferrez / Adam Cuerden",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Machado_de_Assis_by_Marc_Ferrez.jpg"
+      }
     },
     "birth": {
       "year": 1839,
@@ -2606,7 +2935,14 @@
     "image": {
       "src": "/people/fernando-pessoa.jpg",
       "width": 500,
-      "height": 698
+      "height": 698,
+      "credit": {
+        "file": "Pessoa chapeu.jpg",
+        "author": "Cavalão",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Pessoa_chapeu.jpg"
+      }
     },
     "birth": {
       "year": 1888,
@@ -2661,7 +2997,14 @@
     "image": {
       "src": "/people/gabriel-garcia-marquez.jpg",
       "width": 500,
-      "height": 750
+      "height": 750,
+      "credit": {
+        "file": "Gabriel Garcia Marquez.jpg",
+        "author": "Jose Lara",
+        "licence": "CC BY-SA 2.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Gabriel_Garcia_Marquez.jpg"
+      }
     },
     "birth": {
       "year": 1927,
@@ -2716,7 +3059,14 @@
     "image": {
       "src": "/people/rabindranath-tagore.jpg",
       "width": 500,
-      "height": 653
+      "height": 653,
+      "credit": {
+        "file": "1926 Rabindrath Tagore.jpg",
+        "author": "Georges Chevalier",
+        "licence": "CC BY 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:1926_Rabindrath_Tagore.jpg"
+      }
     },
     "birth": {
       "year": 1861,

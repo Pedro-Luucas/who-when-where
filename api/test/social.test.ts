@@ -402,6 +402,27 @@ test("deleting an account removes its traces", async () => {
   assert.equal((await bob.call("GET", "/friends")).body.friends.length, 0);
 });
 
+/** Wave 1 of the engine games: none of their puzzles in a party from before them. */
+const NEWER_GAMES_OFF = Object.fromEntries(
+  [
+    "lifelines",
+    "clue-ladder",
+    "born-here",
+    "could-they-meet",
+    "earlier-or-later",
+    "same-year",
+    "pin-the-city",
+    "click-the-country",
+    "type-the-countries",
+    "flag-peek",
+    "higher-or-lower",
+    "border-chain",
+  ].map((game) => [game, 0]),
+);
+
+/** Their usual tries, for the ones that let a host set them. */
+const NEWER_TRIES = { lifelines: 3, "clue-ladder": 6, "click-the-country": 3, "flag-peek": 6 };
+
 test("the newer games keep scores; party settings from before them are made whole", async () => {
   const { player } = world();
   const ada = await player("ada");
@@ -418,7 +439,7 @@ test("the newer games keep scores; party settings from before them are made whol
 
   // SETTINGS is what a page loaded before Overland and Outline existed would send.
   const old = (await ada.call("POST", "/parties", { settings: SETTINGS })).body.party;
-  assert.deepEqual(old.settings.rounds, { ...SETTINGS.rounds, overland: 0, outline: 0 });
+  assert.deepEqual(old.settings.rounds, { ...SETTINGS.rounds, overland: 0, outline: 0, ...NEWER_GAMES_OFF });
   assert.equal(old.settings.spare, 4);
 
   const settings = { ...SETTINGS, rounds: { ...SETTINGS.rounds, overland: 2, outline: 1 }, spare: 2 };
@@ -437,10 +458,10 @@ test("party settings: tries are kept per game, and still read under their older 
 
   // SETTINGS is what a page from before per-game tries sends: the older names only.
   const old = (await ada.call("POST", "/parties", { settings: { ...SETTINGS, guesses: 4 } })).body.party;
-  assert.deepEqual(old.settings.tries, { wayfarer: 4, "dig-site": 5, "first-to-last": 3, overland: 4, outline: 4 });
+  assert.deepEqual(old.settings.tries, { wayfarer: 4, "dig-site": 5, "first-to-last": 3, overland: 4, outline: 4, ...NEWER_TRIES });
 
   // Today's page sends both. The per-game tries win, each game has its own…
-  const tries = { wayfarer: 3, "dig-site": 4, "first-to-last": 2, overland: 1, outline: 6 };
+  const tries = { wayfarer: 3, "dig-site": 4, "first-to-last": 2, overland: 1, outline: 6, ...NEWER_TRIES, lifelines: 2 };
   const party = (await ada.call("POST", "/parties", { settings: { ...SETTINGS, tries } })).body.party;
   assert.deepEqual(party.settings.tries, tries);
   // …and a page that only knows the older names is still answered in them.
@@ -452,7 +473,7 @@ test("party settings: tries are kept per game, and still read under their older 
   // The per-game tries are enough on their own; a game they leave out plays by its usual tries.
   const lean = { rounds: SETTINGS.rounds, order: "grouped", timeLimit: 0, pace: "free", tries: { outline: 5 } };
   const made = (await ada.call("POST", "/parties", { settings: lean })).body.party;
-  assert.deepEqual(made.settings.tries, { wayfarer: 6, "dig-site": 5, "first-to-last": 3, overland: 4, outline: 5 });
+  assert.deepEqual(made.settings.tries, { wayfarer: 6, "dig-site": 5, "first-to-last": 3, overland: 4, outline: 5, ...NEWER_TRIES });
 
   assert.equal(
     (await ada.call("POST", "/parties", { settings: { ...lean, tries: { outline: 9 } } })).body.field,
@@ -462,4 +483,50 @@ test("party settings: tries are kept per game, and still read under their older 
   const changed = await ada.call("PATCH", `/parties/${made.code}`, { settings: { ...lean, tries: { wayfarer: 4, outline: 3 } } });
   assert.equal(changed.body.party.settings.tries.wayfarer, 4);
   assert.equal(changed.body.party.settings.tries.outline, 3);
+});
+
+test("engine games keep scores on their own boards; the daily challenge adds up the original six", async () => {
+  const { browser, player, befriend } = world();
+  const ada = await player("ada");
+  const bob = await player("bob");
+  await befriend(ada, bob);
+  const today = utcDay();
+
+  const put = await ada.call("PUT", "/results", {
+    results: [
+      { game: "wayfarer", day: today, points: 700, detail: "3/6" },
+      { game: "flag-peek", day: today, points: 850, detail: "2/6" },
+      { game: "higher-or-lower", day: today, points: 600, detail: "✓12/20" },
+    ],
+  });
+  assert.equal(put.status, 204);
+
+  const guest = browser();
+  const flags = (await guest("GET", `/leaderboard?day=${today}&game=flag-peek`)).body;
+  assert.equal(flags.rows[0].points, 850);
+  // "All games" is the daily challenge: the newer games' points are not added in.
+  const all = (await guest("GET", `/leaderboard?day=${today}`)).body;
+  assert.equal(all.rows[0].points, 700);
+  assert.equal(all.rows[0].puzzles, 1);
+
+  // Friends see the day's challenge too.
+  const list = (await bob.call("GET", `/friends?day=${today}`)).body;
+  assert.deepEqual(list.friends[0].today, { points: 700, puzzles: 1 });
+
+  // A full day is the six puzzles of the challenge, whatever else was played.
+  const six = ["who-when-where", "dig-site", "first-to-last", "overland", "outline"].map((game) => ({
+    game,
+    day: today,
+    points: 500,
+  }));
+  await ada.call("PUT", "/results", { results: six });
+  const profile = (await guest("GET", "/players/ada")).body;
+  assert.equal(profile.stats.fullDays, 1);
+  assert.equal(profile.stats.puzzles, 8);
+
+  // A party can deal the newer games, with tries for the ones that have them.
+  const settings = { ...SETTINGS, rounds: { ...SETTINGS.rounds, "border-chain": 2 }, tries: { "flag-peek": 4 } };
+  const party = (await ada.call("POST", "/parties", { settings })).body.party;
+  assert.equal(party.settings.rounds["border-chain"], 2);
+  assert.equal(party.settings.tries["flag-peek"], 4);
 });

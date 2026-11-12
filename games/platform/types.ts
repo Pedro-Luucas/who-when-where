@@ -46,9 +46,10 @@ export type GameDataOf<Puzzle, Move, Saved> = {
   puzzleForDay: (day: number) => Puzzle;
   /**
    * `count` puzzles for games played outside the daily calendar, each named by
-   * its ids. The same seed always deals the same puzzles.
+   * its ids. The same seed always deals the same puzzles. `variant` is one of
+   * the definition's variants (practice only); left out, the first.
    */
-  deal: (seed: string, count: number) => string[][];
+  deal: (seed: string, count: number, variant?: string) => string[][];
   /** The puzzle the ids name, unless it is no longer in the roster. */
   puzzleOf: (ids: string[]) => Puzzle | undefined;
   /** The puzzle a saved day was played on, unless it is no longer in the roster. */

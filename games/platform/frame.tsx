@@ -6,7 +6,8 @@ import type { FamilyId } from "../families";
 // What a board knows about the screen it is on, for the parts every game
 // shares (the HUD, the prompt plaque, the result card): which game it is, and
 // whether this is its daily page (with the way back to the catalogue, the rules
-// and the statistics) or a stage in someone's run (an expedition, a party).
+// and the statistics), its practice page (unlimited puzzles, no statistics) or
+// a stage in someone's run (an expedition, a party).
 
 export type GameFrame = {
   slug: string;
@@ -14,6 +15,8 @@ export type GameFrame = {
   family: FamilyId;
   /** The game's daily page: the HUD offers "All games", How to play and Statistics. */
   daily: boolean;
+  /** The game's practice page: "All games" and How to play, but no daily statistics. */
+  practice?: boolean;
 };
 
 const Frame = createContext<GameFrame | null>(null);

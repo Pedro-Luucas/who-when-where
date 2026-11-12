@@ -1,6 +1,7 @@
 "use client";
 
-import { readDailyResults, settleResults } from "@/games/results";
+import { inChallenge } from "@/games/registry";
+import { readDailyResults, settleResults, type DailyResult } from "@/games/results";
 import { readStore, writeStore } from "@/lib/storage";
 import { putResults } from "./client";
 
@@ -27,11 +28,22 @@ export async function pushResults(userId: string): Promise<void> {
   await settleResults();
   const pending = readDailyResults().filter((result) => !sent.has(`${result.game}:${result.day}`));
 
-  for (let start = 0; start < pending.length; start += CHUNK) {
-    const chunk = pending.slice(start, start + CHUNK);
-    await putResults(chunk);
-    for (const result of chunk) sent.add(`${result.game}:${result.day}`);
-    writeStore<Sent>(SENT_KEY, { owner: userId, keys: [...sent] });
+  async function send(results: DailyResult[]) {
+    for (let start = 0; start < results.length; start += CHUNK) {
+      const chunk = results.slice(start, start + CHUNK);
+      await putResults(chunk);
+      for (const result of chunk) sent.add(`${result.game}:${result.day}`);
+      writeStore<Sent>(SENT_KEY, { owner: userId, keys: [...sent] });
+    }
+  }
+
+  // The daily challenge's games first: every version of the accounts API keeps their scores.
+  await send(pending.filter((result) => inChallenge(result.game)));
+  try {
+    await send(pending.filter((result) => !inChallenge(result.game)));
+  } catch {
+    // An accounts API from before the newer games refuses their scores. They are
+    // not marked as sent, so they go up with a later sync, once it knows them.
   }
 }
 

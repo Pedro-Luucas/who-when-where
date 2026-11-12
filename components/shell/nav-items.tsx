@@ -56,7 +56,10 @@ export type IconName =
   | "back"
   | "close"
   | "link"
-  | "chevron";
+  | "chevron"
+  | "heart"
+  | "clock"
+  | "target";
 
 const PATHS: Record<IconName, React.ReactNode> = {
   home: <path d="M3.5 10.5L12 3.8l8.5 6.7V20a.8.8 0 0 1-.8.8H15v-6h-6v6H4.3a.8.8 0 0 1-.8-.8z" />,
@@ -128,6 +131,20 @@ const PATHS: Record<IconName, React.ReactNode> = {
   close: <path d="M6 6l12 12M18 6L6 18" />,
   link: <path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" />,
   chevron: <path d="M9 5.5l6.5 6.5L9 18.5" />,
+  heart: <path d="M12 19.5s-7.5-4.6-7.5-10A4.2 4.2 0 0 1 12 7.1a4.2 4.2 0 0 1 7.5 2.4c0 5.4-7.5 10-7.5 10z" />,
+  clock: (
+    <>
+      <circle cx="12" cy="12" r="8.2" />
+      <path d="M12 7.5V12l3 2" />
+    </>
+  ),
+  target: (
+    <>
+      <circle cx="12" cy="12" r="8.2" />
+      <circle cx="12" cy="12" r="4.2" />
+      <circle cx="12" cy="12" r=".9" />
+    </>
+  ),
 };
 
 /** A line icon on a 24-unit grid, in the current text colour. Decorative. */

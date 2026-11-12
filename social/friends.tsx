@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { GAME_SLUGS } from "@/games/registry";
+import { CHALLENGE_SLUGS } from "@/games/registry";
 import { useDayNumber } from "@/lib/clock";
 import { formatNumber } from "@/lib/i18n";
 import { Player } from "./avatar";
@@ -185,7 +185,7 @@ export function FriendsPanel({ onMessage, action }: Props) {
               presence
               note={
                 today
-                  ? t("friendToday", { points: formatNumber(today.points, locale), puzzles: today.puzzles, total: GAME_SLUGS.length })
+                  ? t("friendToday", { points: formatNumber(today.points, locale), puzzles: today.puzzles, total: CHALLENGE_SLUGS.length })
                   : undefined
               }
             />

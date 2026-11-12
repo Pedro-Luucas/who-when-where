@@ -1,0 +1,38 @@
+export const MESSAGES = {
+  en: {
+    kicker: "Today's flag",
+    lead: "A flag under tiles. Every wrong guess lifts more of them.",
+    eyebrow: "Whose flag is this?",
+    prompt: "Name the *country*",
+    placeholder: "Type a country…",
+    search: "Search countries",
+    noMatch: "No country by that name",
+    flagOf: "The flag of {country}",
+    hidden: "A flag, partly hidden",
+    sameContinent: "same continent · {km} km",
+    elsewhere: "{continent} · {km} km",
+    help1: "One country's flag is hidden under tiles, the same for everyone today.",
+    help2: "A few tiles are lifted at the start. Type a country to guess.",
+    help3: "Every wrong guess lifts more tiles, and says whether your guess is on the same continent and how far away it is.",
+    help4: "Six guesses. The fewer you need, the more points.",
+  },
+  pt: {
+    kicker: "A bandeira de hoje",
+    lead: "Uma bandeira sob peças. Cada palpite errado revela mais.",
+    eyebrow: "De quem é esta bandeira?",
+    prompt: "Descubra o *país*",
+    placeholder: "Digite um país…",
+    search: "Buscar países",
+    noMatch: "Nenhum país com esse nome",
+    flagOf: "A bandeira de {country}",
+    hidden: "Uma bandeira, parcialmente escondida",
+    sameContinent: "mesmo continente · {km} km",
+    elsewhere: "{continent} · {km} km",
+    help1: "A bandeira de um país está escondida sob peças, a mesma para todo mundo hoje.",
+    help2: "Algumas peças já começam levantadas. Digite um país para chutar.",
+    help3: "Cada palpite errado levanta mais peças e diz se o seu palpite fica no mesmo continente e a que distância.",
+    help4: "Seis palpites. Quanto menos precisar, mais pontos.",
+  },
+};
+
+export type MessageKey = keyof (typeof MESSAGES)["en"];

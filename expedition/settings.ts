@@ -1,5 +1,5 @@
 import { DIFFICULTY_NAMES, type Difficulty, type TriesSetting } from "@/games/platform/definition";
-import { GAMES, GAME_SLUGS, isGameSlug, type GameSlug } from "@/games/registry";
+import { GAMES, GAME_SLUGS, inChallenge, isGameSlug, type GameSlug } from "@/games/registry";
 
 // An expedition is a custom game: puzzles from any of the games, one after
 // the other, played alone or by a whole party. These are its rules.
@@ -40,7 +40,8 @@ const triesAt = (name: Difficulty): ExpeditionSettings["tries"] =>
   Object.fromEntries(TRIES_GAMES.map(({ slug, tries }) => [slug, tries.presets[name]]));
 
 export const DEFAULT_SETTINGS: ExpeditionSettings = {
-  rounds: Object.fromEntries(GAME_SLUGS.map((game) => [game, 1])) as Record<GameSlug, number>,
+  // One puzzle of each game of the daily challenge; the others are a tap away in the setup.
+  rounds: Object.fromEntries(GAME_SLUGS.map((game) => [game, inChallenge(game) ? 1 : 0])) as Record<GameSlug, number>,
   order: "grouped",
   timeLimit: 0,
   tries: triesAt("standard"),

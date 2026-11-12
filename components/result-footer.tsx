@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { useDailyResults } from "@/games/results";
-import { GAME_SLUGS, GAME_THEMES, GAME_TITLES, type GameSlug } from "@/games/registry";
+import { CHALLENGE_SLUGS, GAME_THEMES, GAME_TITLES, inChallenge, type GameSlug } from "@/games/registry";
 import { useDayNumber, useSecondsUntilTomorrow } from "@/lib/clock";
 import { useLocale, useSiteT } from "@/lib/i18n";
+import { useShellT } from "@/lib/shell-messages";
 import { ShareButton } from "./share-button";
 
 const clock = (seconds: number) =>
@@ -23,10 +24,11 @@ type ActionsProps = {
 
 /**
  * What every finished daily puzzle ends with: a share button, the countdown,
- * and the way on to the next of today's puzzles.
+ * unlimited practice, and the way on to the next of today's puzzles.
  */
 export function ResultActions({ shareText, game, nextLabel }: ActionsProps) {
   const t = useSiteT();
+  const shell = useShellT();
   const secondsLeft = useSecondsUntilTomorrow();
 
   return (
@@ -37,6 +39,9 @@ export function ResultActions({ shareText, game, nextLabel }: ActionsProps) {
           <span>{nextLabel ?? t("nextIn")}</span>
           <time>{clock(secondsLeft)}</time>
         </p>
+        <Link href={`/play/${game}/practice`} className="key key-secondary key-sm">
+          {shell("practicePlay")}
+        </Link>
       </div>
       <NextUp current={game} />
     </>
@@ -54,10 +59,11 @@ function NextUp({ current }: { current: GameSlug }) {
   const today = useDayNumber();
   const results = useDailyResults();
 
-  const done = new Set(results.filter((result) => result.day === today).map((result) => result.game));
-  const total = GAME_SLUGS.length;
-  const at = GAME_SLUGS.indexOf(current);
-  const next = [...GAME_SLUGS.slice(at + 1), ...GAME_SLUGS.slice(0, at)].find((game) => !done.has(game));
+  const done = new Set(results.filter((result) => result.day === today && inChallenge(result.game)).map((result) => result.game));
+  const total = CHALLENGE_SLUGS.length;
+  // A game outside the daily challenge leads to its first puzzle not yet played.
+  const at = CHALLENGE_SLUGS.indexOf(current);
+  const next = [...CHALLENGE_SLUGS.slice(at + 1), ...CHALLENGE_SLUGS.slice(0, Math.max(at, 0))].find((game) => !done.has(game));
   const progress = t("dayProgress", { n: done.size, total });
 
   return (
@@ -65,7 +71,7 @@ function NextUp({ current }: { current: GameSlug }) {
       <div className="next-up-head">
         <span className="eyebrow">{progress}</span>
         <ol className="next-up-trail" aria-hidden="true">
-          {GAME_SLUGS.map((game) => (
+          {CHALLENGE_SLUGS.map((game) => (
             <li
               key={game}
               title={GAME_TITLES[game]}

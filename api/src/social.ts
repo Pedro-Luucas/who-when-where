@@ -13,7 +13,7 @@ import {
   type PublicRow,
 } from "./people.ts";
 import { LIMITS } from "./rate-limit.ts";
-import { GAMES, Invalid, isGame, readChoice, readLine, readResults, readUsername } from "./validate.ts";
+import { CHALLENGE_GAMES, Invalid, inChallengeSql, isGame, readChoice, readLine, readResults, readUsername } from "./validate.ts";
 
 // Scores, leaderboards, profiles and friends.
 
@@ -55,7 +55,7 @@ export function registerPublicSocial(app: Hono<Env>, { db, viewer }: Deps): void
     if (game !== "all") {
       where.push("r.game = ?");
       params.push(game);
-    }
+    } else where.push(inChallengeSql("r")); // "All games" is the daily challenge: playing more games is not more points.
     if (scope === "friends") {
       if (!me) throw new Failure(401, "unauthenticated");
       const ids = [me.id, ...friendIds(db, me.id)];
@@ -72,7 +72,7 @@ export function registerPublicSocial(app: Hono<Env>, { db, viewer }: Deps): void
       .prepare(
         `SELECT t.points, t.puzzles, ${PUBLIC_COLUMNS}
            FROM (${totals}) t JOIN users u ON u.id = t.user_id
-          ORDER BY t.points DESC, t.last ASC LIMIT ${LEADERBOARD_SIZE}`,
+          ORDER BY t.points DESC, t.last ASC, u.username ASC LIMIT ${LEADERBOARD_SIZE}`,
       )
       .all(...params) as (PublicRow & { points: number; puzzles: number })[];
 
@@ -131,8 +131,14 @@ export function registerPublicSocial(app: Hono<Env>, { db, viewer }: Deps): void
         points: days.reduce((sum, entry) => sum + entry.points, 0),
         puzzles: days.reduce((sum, entry) => sum + entry.puzzles, 0),
         days: days.length,
-        /** Days on which every game was finished. */
-        fullDays: days.filter((entry) => entry.puzzles >= GAMES.length).length,
+        /** Days on which every puzzle of the daily challenge was finished. */
+        fullDays: (
+          db
+            .prepare(
+              `SELECT COUNT(*) AS n FROM (SELECT day FROM results WHERE user_id = ? AND ${inChallengeSql()} GROUP BY day HAVING COUNT(*) >= ?)`,
+            )
+            .get(row.id, CHALLENGE_GAMES.length) as { n: number }
+        ).n,
         ...streaks(
           days.map((entry) => entry.day),
           now,
@@ -209,7 +215,7 @@ export function registerSocial(account: Hono<Env>, { db, limit, body }: Deps): v
       const scores = db
         .prepare(
           `SELECT user_id, SUM(points) AS points, COUNT(*) AS puzzles FROM results
-            WHERE day = ? AND user_id IN (${placeholders(accepted.length)}) GROUP BY user_id`,
+            WHERE day = ? AND ${inChallengeSql()} AND user_id IN (${placeholders(accepted.length)}) GROUP BY user_id`,
         )
         .all(day, ...accepted.map((row) => row.id)) as { user_id: string; points: number; puzzles: number }[];
       for (const score of scores) today.set(score.user_id, { points: score.points, puzzles: score.puzzles });

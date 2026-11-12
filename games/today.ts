@@ -4,7 +4,7 @@ import { useCallback, useSyncExternalStore } from "react";
 import { useDayNumber } from "@/lib/clock";
 import { readStore, subscribeToStore, usePersistent } from "@/lib/storage";
 import { movesOf } from "./platform/store";
-import { GAMES, type GameSlug } from "./registry";
+import { GAMES, inChallenge, type GameSlug } from "./registry";
 import { useDailyResults } from "./results";
 
 // How each game stands today, for the catalogue, the dailies strip and the
@@ -24,7 +24,7 @@ function startedOn(day: number): string {
     .join(",");
 }
 
-/** Today's puzzle number, and how the player stands in each game today. Browser only. */
+/** Today's puzzle number, how the player stands in each game today, and how many of the daily challenge are done. Browser only. */
 export function useToday(): { day: number; of: (slug: GameSlug) => Today; done: number } {
   const day = useDayNumber();
   const results = useDailyResults();
@@ -40,7 +40,7 @@ export function useToday(): { day: number; of: (slug: GameSlug) => Today; done: 
     if (result) return { state: "done", points: result.points, detail: result.detail };
     return { state: going.has(slug) ? "started" : "todo" };
   };
-  return { day, of, done: finished.size };
+  return { day, of, done: [...finished.keys()].filter(inChallenge).length };
 }
 
 const NO_FAVOURITES: string[] = [];

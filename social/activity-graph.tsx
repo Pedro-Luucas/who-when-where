@@ -1,6 +1,6 @@
 "use client";
 
-import { GAME_SLUGS } from "@/games/registry";
+import { CHALLENGE_SLUGS } from "@/games/registry";
 import { dateOfDay } from "@/lib/daily";
 import { formatNumber, numberLocale } from "@/lib/i18n";
 import { useSocialT } from "./messages";
@@ -66,12 +66,12 @@ export function ActivityGraph({ activity, today }: Props) {
                   if (day < 1) return <i key={row} data-level="before" title={date} />;
                   const entry = byDay.get(day);
                   // Four shades: the last one is a day with every puzzle finished.
-                  const level = Math.ceil((Math.min(entry?.puzzles ?? 0, GAME_SLUGS.length) / GAME_SLUGS.length) * 4);
+                  const level = Math.ceil((Math.min(entry?.puzzles ?? 0, CHALLENGE_SLUGS.length) / CHALLENGE_SLUGS.length) * 4);
                   const title = entry
                     ? t("activityDay", {
                         date,
                         puzzles: entry.puzzles,
-                        total: GAME_SLUGS.length,
+                        total: CHALLENGE_SLUGS.length,
                         points: formatNumber(entry.points, locale),
                       })
                     : t("activityNone", { date });

@@ -1,4 +1,5 @@
 import { dailyIndex } from "@/lib/daily";
+import type { ImageCreditData } from "@/components/image-credit";
 import type { Localized } from "@/lib/i18n";
 import data from "./data/people.json";
 
@@ -21,7 +22,8 @@ export type Person = {
   description: Localized;
   extract: { en: string; pt: string | null };
   wiki: { en: string; pt: string | null };
-  image: { src: string; width: number; height: number } | null;
+  /** The portrait, with who made it and under which licence. */
+  image: { src: string; width: number; height: number; credit?: ImageCreditData } | null;
   birth: LifeEvent;
   death: LifeEvent;
 };

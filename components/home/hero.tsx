@@ -6,7 +6,7 @@ import { DoneRing } from "@/components/catalogue/dailies";
 import { Icon } from "@/components/shell/nav-items";
 import { ButtonLink } from "@/components/ui/button";
 import { Chip } from "@/components/ui/chip";
-import { GAMES } from "@/games/registry";
+import { CHALLENGE_GAMES } from "@/games/registry";
 import { activityOf, useDailyResults } from "@/games/results";
 import { useToday } from "@/games/today";
 import { formatNumber, useLocale } from "@/lib/i18n";
@@ -33,7 +33,7 @@ export function HomeHero() {
   );
   const { level } = levelOf(results.reduce((sum, result) => sum + result.points, 0));
   const pointsToday = results.filter((result) => result.day === day).reduce((sum, result) => sum + result.points, 0);
-  const next = GAMES.find((game) => of(game.slug).state !== "done");
+  const next = CHALLENGE_GAMES.find((game) => of(game.slug).state !== "done");
 
   return (
     <section className="home-hero" aria-labelledby="home-heading">
@@ -91,7 +91,7 @@ export function HomeHero() {
         <div className="today-card-body">
           <DoneRing size={72} />
           <ul>
-            {GAMES.map((game) => {
+            {CHALLENGE_GAMES.map((game) => {
               const state = of(game.slug).state;
               return (
                 <li key={game.slug} data-state={state} style={{ "--fam": `var(--color-family-${game.family})` } as React.CSSProperties}>
@@ -108,7 +108,7 @@ export function HomeHero() {
           {t("allDailies")}
           <Icon name="chevron" size={15} />
         </Link>
-        <span className="sr-only">{t("doneOf", { n: done, total: GAMES.length })}</span>
+        <span className="sr-only">{t("doneOf", { n: done, total: CHALLENGE_GAMES.length })}</span>
       </aside>
     </section>
   );

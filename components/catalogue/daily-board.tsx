@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useAccount } from "@/account/state";
 import { Icon } from "@/components/shell/nav-items";
 import { ButtonLink } from "@/components/ui/button";
-import { GAMES } from "@/games/registry";
+import { CHALLENGE_GAMES } from "@/games/registry";
 import { useDailyResults } from "@/games/results";
 import { useToday } from "@/games/today";
 import { formatNumber, numberLocale, useLocale } from "@/lib/i18n";
@@ -21,7 +21,7 @@ export function DailyBoard() {
     .filter((result) => result.day === day)
     .reduce((sum, result) => sum + result.points, 0);
   // The first of today's puzzles still waiting.
-  const next = GAMES.find((game) => of(game.slug).state !== "done");
+  const next = CHALLENGE_GAMES.find((game) => of(game.slug).state !== "done");
 
   return (
     <section className="daily-board" aria-labelledby="daily-board-heading">
@@ -46,7 +46,7 @@ export function DailyBoard() {
             <h2 className="eyebrow">{t("dailyProgress")}</h2>
             <DoneRing size={112} />
             <p className="daily-points">{t("pointsToday", { n: formatNumber(points, locale) })}</p>
-            {done === GAMES.length ? (
+            {done === CHALLENGE_GAMES.length ? (
               <p className="hint">{t("dailyAllDone")}</p>
             ) : (
               next && (

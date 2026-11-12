@@ -1,0 +1,38 @@
+export const MESSAGES = {
+  en: {
+    kicker: "Today's ten pairs",
+    lead: "Two famous people at a time. Were they ever alive at the same time — could they have met?",
+    eyebrow: "Did their lives overlap?",
+    prompt: "Could *{a}* have met *{b}*?",
+    yes: "Yes, they overlapped",
+    no: "No, never",
+    met: "Both were alive for {n} years.",
+    metOne: "Both were alive for just a year.",
+    missed: "They missed each other by {n} years.",
+    lives: "Their lifetimes",
+    answer: "{n} of {total} pairs right",
+    help1: "Ten pairs of famous people, the same for everyone today.",
+    help2: "For each pair, say whether their lifetimes overlapped — whether they were ever alive at the same time.",
+    help3: "The pairs are close calls: lives that overlapped by a few decades, or missed by a few.",
+    help4: "After each answer you see both lifetimes on one timeline. Every right answer is worth 100 points.",
+  },
+  pt: {
+    kicker: "As dez duplas de hoje",
+    lead: "Duas pessoas famosas por vez. Elas chegaram a viver na mesma época — poderiam ter se conhecido?",
+    eyebrow: "As vidas se cruzaram?",
+    prompt: "*{a}* poderia ter conhecido *{b}*?",
+    yes: "Sim, se cruzaram",
+    no: "Não, nunca",
+    met: "Os dois viveram ao mesmo tempo por {n} anos.",
+    metOne: "Os dois viveram ao mesmo tempo por apenas um ano.",
+    missed: "Eles se desencontraram por {n} anos.",
+    lives: "As vidas deles",
+    answer: "{n} de {total} duplas certas",
+    help1: "Dez duplas de pessoas famosas, as mesmas para todo mundo hoje.",
+    help2: "Para cada dupla, diga se as vidas se cruzaram — se os dois chegaram a estar vivos ao mesmo tempo.",
+    help3: "As duplas são difíceis: vidas que se cruzaram por poucas décadas, ou se desencontraram por pouco.",
+    help4: "Depois de cada resposta, as duas vidas aparecem numa mesma linha do tempo. Cada acerto vale 100 pontos.",
+  },
+};
+
+export type MessageKey = keyof (typeof MESSAGES)["en"];

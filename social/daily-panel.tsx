@@ -7,7 +7,7 @@ import { useAccount } from "@/account/state";
 import { ShareButton } from "@/components/share-button";
 import { gradeOf } from "@/expedition/run";
 import { activityOf, useDailyResults, type DailyResult } from "@/games/results";
-import { GAME_SLUGS, GAME_TITLES, type GameSlug } from "@/games/registry";
+import { CHALLENGE_SLUGS, GAME_TITLES, inChallenge, type GameSlug } from "@/games/registry";
 import { useDayNumber } from "@/lib/clock";
 import { formatNumber, type Locale } from "@/lib/i18n";
 import { MAX_POINTS } from "@/lib/points";
@@ -43,11 +43,11 @@ function dayShareText(
   url: string,
 ): string {
   const points = [...todays.values()].reduce((sum, result) => sum + result.points, 0);
-  const trail = GAME_SLUGS.map((game) => {
+  const trail = CHALLENGE_SLUGS.map((game) => {
     const result = todays.get(game);
     return result ? SQUARES[gradeOf(result.points)] : UNPLAYED;
   }).join("");
-  const total = `${formatNumber(points, locale)}/${formatNumber(GAME_SLUGS.length * MAX_POINTS, locale)}`;
+  const total = `${formatNumber(points, locale)}/${formatNumber(CHALLENGE_SLUGS.length * MAX_POINTS, locale)}`;
   return [
     `Who When Where #${day} · ${total}`,
     streak > 1 ? `${trail} 🔥${streak}` : trail,
@@ -68,10 +68,12 @@ function Panel() {
     activity.map((entry) => entry.day),
     today,
   );
-  const todays = new Map(results.filter((result) => result.day === today).map((result) => [result.game, result]));
+  const todays = new Map(
+    results.filter((result) => result.day === today && inChallenge(result.game)).map((result) => [result.game, result]),
+  );
   const done = todays.size;
   const points = [...todays.values()].reduce((sum, result) => sum + result.points, 0);
-  const complete = done === GAME_SLUGS.length;
+  const complete = done === CHALLENGE_SLUGS.length;
   const { level, into, step, rank } = levelOf(results.reduce((sum, result) => sum + result.points, 0));
 
   return (
@@ -83,22 +85,22 @@ function Panel() {
           </h2>
           <p className="daily-title">
             {complete
-              ? t("dailyComplete", { n: GAME_SLUGS.length })
+              ? t("dailyComplete", { n: CHALLENGE_SLUGS.length })
               : done
-                ? t("dailyProgress", { n: GAME_SLUGS.length - done })
-                : t("dailyStart", { n: GAME_SLUGS.length })}
+                ? t("dailyProgress", { n: CHALLENGE_SLUGS.length - done })
+                : t("dailyStart", { n: CHALLENGE_SLUGS.length })}
           </p>
         </div>
         <dl className="daily-stats">
           <div>
             <dd>
-              {done}/{GAME_SLUGS.length}
+              {done}/{CHALLENGE_SLUGS.length}
             </dd>
             <dt>{t("statToday")}</dt>
           </div>
           <div>
             <dd>{formatNumber(points, locale)}</dd>
-            <dt>{t("statPointsOf", { max: formatNumber(GAME_SLUGS.length * MAX_POINTS, locale) })}</dt>
+            <dt>{t("statPointsOf", { max: formatNumber(CHALLENGE_SLUGS.length * MAX_POINTS, locale) })}</dt>
           </div>
           <div data-lit={streak > 0 ? "" : undefined}>
             <dd>{streak}</dd>
@@ -112,7 +114,7 @@ function Panel() {
       </header>
 
       <ul className="daily-games">
-        {GAME_SLUGS.map((game) => {
+        {CHALLENGE_SLUGS.map((game) => {
           const result = todays.get(game);
           return (
             <li key={game}>

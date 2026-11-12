@@ -30,7 +30,14 @@
     "image": {
       "src": "/sites/5f1235927fce.jpg",
       "width": 500,
-      "height": 333
+      "height": 333,
+      "credit": {
+        "file": "Al Deir Petra.JPG",
+        "author": "Azurfrog",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Al_Deir_Petra.JPG"
+      }
     }
   },
   {
@@ -64,7 +71,14 @@
     "image": {
       "src": "/sites/f976fc62b87c.jpg",
       "width": 500,
-      "height": 333
+      "height": 333,
+      "credit": {
+        "file": "Machu Picchu, 2023 (012).jpg",
+        "author": "Draceane",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Machu_Picchu%2C_2023_(012).jpg"
+      }
     }
   },
   {
@@ -98,7 +112,14 @@
     "image": {
       "src": "/sites/936a2c73584f.jpg",
       "width": 500,
-      "height": 339
+      "height": 339,
+      "credit": {
+        "file": "Angkor Wat.jpg",
+        "author": "Bjørn Christian Tørrissen",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Angkor_Wat.jpg"
+      }
     }
   },
   {
@@ -132,7 +153,14 @@
     "image": {
       "src": "/sites/19040eb72980.jpg",
       "width": 500,
-      "height": 376
+      "height": 376,
+      "credit": {
+        "file": "Walls of Troy (2).jpg",
+        "author": "CherryX",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Walls_of_Troy_(2).jpg"
+      }
     }
   },
   {
@@ -166,7 +194,14 @@
     "image": {
       "src": "/sites/65b072e169e5.jpg",
       "width": 500,
-      "height": 308
+      "height": 308,
+      "credit": {
+        "file": "Aerial image of Pompeii and Mount Vesuvius (view from the southeast).jpg",
+        "author": "Carsten Steger",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Aerial_image_of_Pompeii_and_Mount_Vesuvius_(view_from_the_southeast).jpg"
+      }
     }
   },
   {
@@ -200,7 +235,14 @@
     "image": {
       "src": "/sites/fa8c49267d61.jpg",
       "width": 500,
-      "height": 333
+      "height": 333,
+      "credit": {
+        "file": "Conical Tower - Great Enclosure III (33736918448).jpg",
+        "author": "Andrew Moore from Johannesburg, South Africa",
+        "licence": "CC BY-SA 2.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Conical_Tower_-_Great_Enclosure_III_(33736918448).jpg"
+      }
     }
   },
   {
@@ -234,7 +276,14 @@
     "image": {
       "src": "/sites/1e885f4b668b.jpg",
       "width": 500,
-      "height": 376
+      "height": 376,
+      "credit": {
+        "file": "Mohenjodaro - view of the stupa mound.JPG",
+        "author": "Saqib Qayyum",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Mohenjodaro_-_view_of_the_stupa_mound.JPG"
+      }
     }
   },
   {
@@ -268,7 +317,14 @@
     "image": {
       "src": "/sites/a7d325f9d288.jpg",
       "width": 500,
-      "height": 332
+      "height": 332,
+      "credit": {
+        "file": "2018-09-21 Iran, Persepolis, Tachara (from the southeast).jpg",
+        "author": "Laurens R. Krol",
+        "licence": "CC BY 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:2018-09-21_Iran%2C_Persepolis%2C_Tachara_(from_the_southeast).jpg"
+      }
     }
   },
   {
@@ -302,7 +358,14 @@
     "image": {
       "src": "/sites/c7a022478e38.jpg",
       "width": 500,
-      "height": 376
+      "height": 376,
+      "credit": {
+        "file": "Ishtar Gate.jpg",
+        "author": "David Stanley",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Ishtar_Gate.jpg"
+      }
     }
   },
   {
@@ -336,7 +399,14 @@
     "image": {
       "src": "/sites/65e0b28c2645.png",
       "width": 500,
-      "height": 585
+      "height": 585,
+      "credit": {
+        "file": "Montage ville de Carthage.png",
+        "author": "ELEL09 , montage",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Montage_ville_de_Carthage.png"
+      }
     }
   },
   {
@@ -370,7 +440,14 @@
     "image": {
       "src": "/sites/6b5e14e9ab4e.jpg",
       "width": 500,
-      "height": 333
+      "height": 333,
+      "credit": {
+        "file": "Tikal 3.jpg",
+        "author": "Mundo Maya",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Tikal_3.jpg"
+      }
     }
   },
   {
@@ -404,7 +481,14 @@
     "image": {
       "src": "/sites/b88a5ce5745a.jpg",
       "width": 500,
-      "height": 267
+      "height": 267,
+      "credit": {
+        "file": "Chichen Itza 3.jpg",
+        "author": "Daniel Schwen",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Chichen_Itza_3.jpg"
+      }
     }
   },
   {
@@ -438,7 +522,14 @@
     "image": {
       "src": "/sites/41d44681cf21.jpg",
       "width": 500,
-      "height": 332
+      "height": 332,
+      "credit": {
+        "file": "ZA77 Teotihuacán edo de mex Herberto de la rosa.jpg",
+        "author": "Hdlrosa",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:ZA77_Teotihuac%C3%A1n_edo_de_mex_Herberto_de_la_rosa.jpg"
+      }
     }
   },
   {
@@ -472,7 +563,14 @@
     "image": {
       "src": "/sites/a427d8dca85f.png",
       "width": 500,
-      "height": 236
+      "height": 236,
+      "credit": {
+        "file": "Crete integrated map-en.svg",
+        "author": "Eric Gaba ( Sting )",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Crete_integrated_map-en.svg"
+      }
     }
   },
   {
@@ -506,7 +604,14 @@
     "image": {
       "src": "/sites/12287dce8b88.jpg",
       "width": 500,
-      "height": 338
+      "height": 338,
+      "credit": {
+        "file": "Palmyra 03.jpg",
+        "author": "Bernard Gagnon",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Palmyra_03.jpg"
+      }
     }
   },
   {
@@ -540,7 +645,14 @@
     "image": {
       "src": "/sites/42aad57bc604.jpg",
       "width": 500,
-      "height": 344
+      "height": 344,
+      "credit": {
+        "file": "Donkeys, Timbuktu.jpg",
+        "author": "Flickr user: Emilio Labrador Santiago de Chile",
+        "licence": "CC BY 2.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Donkeys%2C_Timbuktu.jpg"
+      }
     }
   },
   {
@@ -574,7 +686,14 @@
     "image": {
       "src": "/sites/b93ffd31132f.jpg",
       "width": 500,
-      "height": 333
+      "height": 333,
+      "credit": {
+        "file": "Monks Mound - Summer 2024.jpg",
+        "author": "Skubasteve834",
+        "licence": "CC BY 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Monks_Mound_-_Summer_2024.jpg"
+      }
     }
   },
   {
@@ -608,7 +727,14 @@
     "image": {
       "src": "/sites/c6e9d9370384.jpg",
       "width": 500,
-      "height": 332
+      "height": 332,
+      "credit": {
+        "file": "Göbekli Tepe, Urfa.jpg",
+        "author": "Teomancimit",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:G%C3%B6bekli_Tepe%2C_Urfa.jpg"
+      }
     }
   },
   {
@@ -642,7 +768,14 @@
     "image": {
       "src": "/sites/80f6f46b2e0a.jpg",
       "width": 500,
-      "height": 230
+      "height": 230,
+      "credit": {
+        "file": "Çatalhöyük, 7400 BC, Konya, Turkey - UNESCO World Heritage Site, 08.jpg",
+        "author": "Murat Özsoy 1958",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%C3%87atalh%C3%B6y%C3%BCk%2C_7400_BC%2C_Konya%2C_Turkey_-_UNESCO_World_Heritage_Site%2C_08.jpg"
+      }
     }
   },
   {
@@ -676,7 +809,14 @@
     "image": {
       "src": "/sites/d95195620ace.jpg",
       "width": 500,
-      "height": 565
+      "height": 565,
+      "credit": {
+        "file": "Urimki inscription.jpg",
+        "author": "Steve Harris",
+        "licence": "CC BY-SA 2.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Urimki_inscription.jpg"
+      }
     }
   },
   {
@@ -710,7 +850,14 @@
     "image": {
       "src": "/sites/c7b34542891a.jpg",
       "width": 500,
-      "height": 342
+      "height": 342,
+      "credit": {
+        "file": "Nineveh - Mashki Gate.jpg",
+        "author": "Omar Siddeeq Yousif",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Nineveh_-_Mashki_Gate.jpg"
+      }
     }
   },
   {
@@ -744,7 +891,14 @@
     "image": {
       "src": "/sites/5f8c7e1347df.jpg",
       "width": 500,
-      "height": 338
+      "height": 338,
+      "credit": {
+        "file": "Lion Gate, Hattusa 13 (cropped).jpg",
+        "author": "Carole Raddato from FRANKFURT, Germany",
+        "licence": "CC BY-SA 2.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Lion_Gate%2C_Hattusa_13_(cropped).jpg"
+      }
     }
   },
   {
@@ -778,7 +932,14 @@
     "image": {
       "src": "/sites/c918ebca1198.jpg",
       "width": 500,
-      "height": 333
+      "height": 333,
+      "credit": {
+        "file": "Path upto the Lion Gate, Mycenae (28693130016).jpg",
+        "author": "Andy Hay from UK",
+        "licence": "CC BY 2.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Path_upto_the_Lion_Gate%2C_Mycenae_(28693130016).jpg"
+      }
     }
   },
   {
@@ -812,7 +973,14 @@
     "image": {
       "src": "/sites/ef9cd349dea8.jpg",
       "width": 500,
-      "height": 388
+      "height": 388,
+      "credit": {
+        "file": "Ephesus Celsus Library Façade.jpg",
+        "author": "Benh LIEU SONG",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Ephesus_Celsus_Library_Fa%C3%A7ade.jpg"
+      }
     }
   },
   {
@@ -846,7 +1014,14 @@
     "image": {
       "src": "/sites/c45685a29dd3.jpg",
       "width": 500,
-      "height": 333
+      "height": 333,
+      "credit": {
+        "file": "Leptis Magna (29) (8288918733).jpg",
+        "author": "joepyrek from Richmond, Va, USA",
+        "licence": "CC BY-SA 2.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Leptis_Magna_(29)_(8288918733).jpg"
+      }
     }
   },
   {
@@ -880,7 +1055,14 @@
     "image": {
       "src": "/sites/ecf90a8ca467.jpg",
       "width": 500,
-      "height": 250
+      "height": 250,
+      "credit": {
+        "file": "Wide angle of Galigopuram of Virupaksha Temple, Hampi (04) (cropped).jpg",
+        "author": "iMahesh",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Wide_angle_of_Galigopuram_of_Virupaksha_Temple%2C_Hampi_(04)_(cropped).jpg"
+      }
     }
   },
   {
@@ -914,7 +1096,14 @@
     "image": {
       "src": "/sites/6a0010e13cba.jpg",
       "width": 500,
-      "height": 327
+      "height": 327,
+      "credit": {
+        "file": "Bagan, Burma.jpg",
+        "author": "Corto Maltese 1999",
+        "licence": "CC BY 2.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Bagan%2C_Burma.jpg"
+      }
     }
   },
   {
@@ -948,7 +1137,14 @@
     "image": {
       "src": "/sites/75a62a97e637.jpg",
       "width": 500,
-      "height": 333
+      "height": 333,
+      "credit": {
+        "file": "Pradaksina.jpg",
+        "author": "Heri nugroho",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Pradaksina.jpg"
+      }
     }
   },
   {
@@ -982,7 +1178,14 @@
     "image": {
       "src": "/sites/36337317f5fe.jpg",
       "width": 500,
-      "height": 376
+      "height": 376,
+      "credit": {
+        "file": "Ayutthaya World Heritage sign.jpg",
+        "author": "Christophe95",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Ayutthaya_World_Heritage_sign.jpg"
+      }
     }
   },
   {
@@ -1016,7 +1219,14 @@
     "image": {
       "src": "/sites/6786da7d430d.jpg",
       "width": 500,
-      "height": 333
+      "height": 333,
+      "credit": {
+        "file": "Yuan Shangdu.jpg",
+        "author": "Flaumfeder",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Yuan_Shangdu.jpg"
+      }
     }
   },
   {
@@ -1050,7 +1260,14 @@
     "image": {
       "src": "/sites/9489af9d5214.jpg",
       "width": 500,
-      "height": 280
+      "height": 280,
+      "credit": {
+        "file": "Erdene Zuu Monastery 05.jpg",
+        "author": "Bernard Gagnon",
+        "licence": "CC0",
+        "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Erdene_Zuu_Monastery_05.jpg"
+      }
     }
   },
   {
@@ -1084,7 +1301,14 @@
     "image": {
       "src": "/sites/1d836b30787e.jpg",
       "width": 500,
-      "height": 333
+      "height": 333,
+      "credit": {
+        "file": "Turkmenistan Merv city.jpg",
+        "author": "Kalpak Travel",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Turkmenistan_Merv_city.jpg"
+      }
     }
   },
   {
@@ -1118,7 +1342,14 @@
     "image": {
       "src": "/sites/cc75eceae8c8.jpg",
       "width": 500,
-      "height": 400
+      "height": 400,
+      "credit": {
+        "file": "PUERTA DEL SOL TIWANAKU.jpg",
+        "author": "CLAUDIOLD",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:PUERTA_DEL_SOL_TIWANAKU.jpg"
+      }
     }
   },
   {
@@ -1152,7 +1383,14 @@
     "image": {
       "src": "/sites/de5a8dc6c856.jpg",
       "width": 500,
-      "height": 335
+      "height": 335,
+      "credit": {
+        "file": "Chan chan view1.jpg",
+        "author": "Håkan Svensson",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:Chan_chan_view1.jpg"
+      }
     }
   },
   {
@@ -1186,7 +1424,14 @@
     "image": {
       "src": "/sites/c3e4f23270e4.jpg",
       "width": 500,
-      "height": 274
+      "height": 274,
+      "credit": {
+        "file": "Mayor Pyramid and circular enclosure. Caral, Peru.jpg",
+        "author": "Jon Gudorf Photography",
+        "licence": "CC BY-SA 2.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Mayor_Pyramid_and_circular_enclosure._Caral%2C_Peru.jpg"
+      }
     }
   },
   {
@@ -1220,7 +1465,14 @@
     "image": {
       "src": "/sites/f911b8678db0.jpg",
       "width": 500,
-      "height": 333
+      "height": 333,
+      "credit": {
+        "file": "Copan sculpture.jpg",
+        "author": "Adalberto Hernandez Vega from Copan Ruinas, Honduras",
+        "licence": "CC BY 2.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Copan_sculpture.jpg"
+      }
     }
   },
   {
@@ -1254,7 +1506,14 @@
     "image": {
       "src": "/sites/b608b0488743.jpg",
       "width": 500,
-      "height": 995
+      "height": 995,
+      "credit": {
+        "file": "Palenque Collage.jpg",
+        "author": "Ricraider",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Palenque_Collage.jpg"
+      }
     }
   },
   {
@@ -1288,7 +1547,14 @@
     "image": {
       "src": "/sites/e609e06d2d69.jpg",
       "width": 500,
-      "height": 285
+      "height": 285,
+      "credit": {
+        "file": "Cliff Palace-Colorado-Mesa Verde NP.jpg",
+        "author": "Tobi 87",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Cliff_Palace-Colorado-Mesa_Verde_NP.jpg"
+      }
     }
   },
   {
@@ -1322,7 +1588,14 @@
     "image": {
       "src": "/sites/8ac8aca88259.jpg",
       "width": 500,
-      "height": 376
+      "height": 376,
+      "credit": {
+        "file": "Authentic Viking recreation.jpg",
+        "author": "Dylan Kereluk from White Rock, Canada",
+        "licence": "CC BY 2.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Authentic_Viking_recreation.jpg"
+      }
     }
   },
   {
@@ -1356,7 +1629,14 @@
     "image": {
       "src": "/sites/ce0a4a5a8a74.jpg",
       "width": 500,
-      "height": 376
+      "height": 376,
+      "credit": {
+        "file": "2018 07 12 Schottland (94).jpg",
+        "author": "Bewahrerderwerte",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:2018_07_12_Schottland_(94).jpg"
+      }
     }
   },
   {
@@ -1390,7 +1670,14 @@
     "image": {
       "src": "/sites/4f26dd64ee61.jpg",
       "width": 500,
-      "height": 376
+      "height": 376,
+      "credit": {
+        "file": "Stonehenge2007 07 30.jpg",
+        "author": "garethwiscombe",
+        "licence": "CC BY 2.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Stonehenge2007_07_30.jpg"
+      }
     }
   },
   {
@@ -1424,7 +1711,14 @@
     "image": {
       "src": "/sites/18eac89f5d9b.jpg",
       "width": 500,
-      "height": 376
+      "height": 376,
+      "credit": {
+        "file": "Irelands history.jpg",
+        "author": "Tjp finn",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Irelands_history.jpg"
+      }
     }
   },
   {
@@ -1458,7 +1752,14 @@
     "image": {
       "src": "/sites/ca529f02fd65.jpg",
       "width": 500,
-      "height": 433
+      "height": 433,
+      "credit": {
+        "file": "Lalibela, san giorgio, esterno 24.jpg",
+        "author": "Sailko",
+        "licence": "CC BY 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Lalibela%2C_san_giorgio%2C_esterno_24.jpg"
+      }
     }
   },
   {
@@ -1492,7 +1793,14 @@
     "image": {
       "src": "/sites/d6bd2ef5ea27.jpg",
       "width": 500,
-      "height": 376
+      "height": 376,
+      "credit": {
+        "file": "Aksum-107529.jpg",
+        "author": "Jim Williams",
+        "licence": "CC BY-SA 3.0 igo",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0/igo/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Aksum-107529.jpg"
+      }
     }
   },
   {
@@ -1526,7 +1834,14 @@
     "image": {
       "src": "/sites/572328f005c7.jpg",
       "width": 500,
-      "height": 239
+      "height": 239,
+      "credit": {
+        "file": "NubianMeroePyramids30sep2005(2).jpg",
+        "author": "Wufei07",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:NubianMeroePyramids30sep2005(2).jpg"
+      }
     }
   },
   {
@@ -1560,7 +1875,14 @@
     "image": {
       "src": "/sites/52005b5c5ac6.jpg",
       "width": 500,
-      "height": 667
+      "height": 667,
+      "credit": {
+        "file": "Great Mosque Kilwa Interior.jpg",
+        "author": "Khalidsalewa",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Great_Mosque_Kilwa_Interior.jpg"
+      }
     }
   },
   {
@@ -1594,7 +1916,14 @@
     "image": {
       "src": "/sites/173fa3cf4e53.jpg",
       "width": 500,
-      "height": 333
+      "height": 333,
+      "credit": {
+        "file": "Sigiriya (141688197).jpeg",
+        "author": "Wrobell",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Sigiriya_(141688197).jpeg"
+      }
     }
   },
   {
@@ -1628,7 +1957,14 @@
     "image": {
       "src": "/sites/5ef3fa29fc2a.jpg",
       "width": 500,
-      "height": 327
+      "height": 327,
+      "credit": {
+        "file": "Nan madol.jpg",
+        "author": "NOAA",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Nan_madol.jpg"
+      }
     }
   },
   {
@@ -1662,7 +1998,14 @@
     "image": {
       "src": "/sites/5f55e00c1bc9.jpg",
       "width": 500,
-      "height": 195
+      "height": 195,
+      "credit": {
+        "file": "Rano-Raraku-Panorama-2013.jpg",
+        "author": "Bjørn Christian Tørrissen",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Rano-Raraku-Panorama-2013.jpg"
+      }
     }
   },
   {
@@ -1696,7 +2039,14 @@
     "image": {
       "src": "/sites/f4a944904b8e.jpg",
       "width": 500,
-      "height": 282
+      "height": 282,
+      "credit": {
+        "file": "Delphi, Greece - panoramio.jpg",
+        "author": "tamara semina",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Delphi%2C_Greece_-_panoramio.jpg"
+      }
     }
   },
   {
@@ -1730,7 +2080,14 @@
     "image": {
       "src": "/sites/75a94d60ebb2.jpg",
       "width": 500,
-      "height": 665
+      "height": 665,
+      "credit": {
+        "file": "Israel-2013-Aerial 21-Masada.jpg",
+        "author": "Godot13",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Israel-2013-Aerial_21-Masada.jpg"
+      }
     }
   },
   {
@@ -1764,7 +2121,14 @@
     "image": {
       "src": "/sites/2e716c70671c.jpg",
       "width": 500,
-      "height": 374
+      "height": 374,
+      "credit": {
+        "file": "Temple of Bacchus, Baalbek, Lebanon (49890013476).jpg",
+        "author": "Lodo from Moscow, Russia",
+        "licence": "CC BY-SA 2.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Temple_of_Bacchus%2C_Baalbek%2C_Lebanon_(49890013476).jpg"
+      }
     }
   },
   {
@@ -1798,7 +2162,14 @@
     "image": {
       "src": "/sites/7060eec488e2.jpg",
       "width": 500,
-      "height": 332
+      "height": 332,
+      "credit": {
+        "file": "51714-Terracota-Army.jpg",
+        "author": "xiquinhosilva",
+        "licence": "CC BY 2.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:51714-Terracota-Army.jpg"
+      }
     }
   },
   {
@@ -1832,7 +2203,14 @@
     "image": {
       "src": "/sites/9c56eef22083.jpg",
       "width": 500,
-      "height": 320
+      "height": 320,
+      "credit": {
+        "file": "Dharmarajika stupa,Taxila.jpg",
+        "author": "Sasha Isachenko",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Dharmarajika_stupa%2CTaxila.jpg"
+      }
     }
   },
   {
@@ -1866,7 +2244,14 @@
     "image": {
       "src": "/sites/f5e20547197f.jpg",
       "width": 500,
-      "height": 376
+      "height": 376,
+      "credit": {
+        "file": "Ramsis, Aswan Governorate, Egypt - panoramio.jpg",
+        "author": "youssef_alam",
+        "licence": "CC BY 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Ramsis%2C_Aswan_Governorate%2C_Egypt_-_panoramio.jpg"
+      }
     }
   },
   {
@@ -1900,7 +2285,14 @@
     "image": {
       "src": "/sites/2475759e613b.jpg",
       "width": 500,
-      "height": 329
+      "height": 329,
+      "credit": {
+        "file": "Small aten temple.jpg",
+        "author": "en:User:Markh",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:Small_aten_temple.jpg"
+      }
     }
   },
   {
@@ -1934,7 +2326,14 @@
     "image": {
       "src": "/sites/d63022d30897.jpg",
       "width": 500,
-      "height": 332
+      "height": 332,
+      "credit": {
+        "file": "Canoas - Vale Verde.JPG",
+        "author": "Diego Rego Monteiro",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Canoas_-_Vale_Verde.JPG"
+      }
     }
   },
   {
@@ -1968,7 +2367,14 @@
     "image": {
       "src": "/sites/58ee833ae610.jpg",
       "width": 500,
-      "height": 335
+      "height": 335,
+      "credit": {
+        "file": "18a-Patrimônio Histórico de São Miguel das Missões-foto fernando gomes.jpg",
+        "author": "Foto Fernando Gomes",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:18a-Patrim%C3%B4nio_Hist%C3%B3rico_de_S%C3%A3o_Miguel_das_Miss%C3%B5es-foto_fernando_gomes.jpg"
+      }
     }
   },
   {
@@ -2002,7 +2408,14 @@
     "image": {
       "src": "/sites/bda684f0d75b.jpg",
       "width": 500,
-      "height": 755
+      "height": 755,
+      "credit": {
+        "file": "CIUDAD PERDIDA 2.jpg",
+        "author": "Giancarlos1234",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:CIUDAD_PERDIDA_2.jpg"
+      }
     }
   },
   {
@@ -2036,7 +2449,14 @@
     "image": {
       "src": "/sites/65f034d4bba5.jpg",
       "width": 500,
-      "height": 380
+      "height": 380,
+      "credit": {
+        "file": "Monte Alban West Side Platform.jpg",
+        "author": "nsaum75 !Dígame¡ ‎",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Monte_Alban_West_Side_Platform.jpg"
+      }
     }
   },
   {
@@ -2070,7 +2490,14 @@
     "image": {
       "src": "/sites/d80ee98124dc.jpg",
       "width": 500,
-      "height": 289
+      "height": 289,
+      "credit": {
+        "file": "Chaco Culture NHP (8023723138).jpg",
+        "author": "Greg Willis from Denver, CO, usa",
+        "licence": "CC BY-SA 2.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Chaco_Culture_NHP_(8023723138).jpg"
+      }
     }
   },
   {
@@ -2164,7 +2591,14 @@
     "image": {
       "src": "/sites/6d7d109e78cb.jpg",
       "width": 500,
-      "height": 327
+      "height": 327,
+      "credit": {
+        "file": "Lascaux painting.jpg",
+        "author": "EU",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Lascaux_painting.jpg"
+      }
     }
   },
   {
@@ -2198,7 +2632,14 @@
     "image": {
       "src": "/sites/2e711cf4ff93.jpg",
       "width": 500,
-      "height": 332
+      "height": 332,
+      "credit": {
+        "file": "Conimbriga (13249222603).jpg",
+        "author": "Carole Raddato from FRANKFURT, Germany",
+        "licence": "CC BY-SA 2.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Conimbriga_(13249222603).jpg"
+      }
     }
   },
   {
@@ -2232,7 +2673,14 @@
     "image": {
       "src": "/sites/3b3519ed5794.jpg",
       "width": 500,
-      "height": 303
+      "height": 303,
+      "credit": {
+        "file": "Ani Harabeleri 2.jpg",
+        "author": "Engin Tavlı",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Ani_Harabeleri_2.jpg"
+      }
     }
   },
   {
@@ -2266,7 +2714,14 @@
     "image": {
       "src": "/sites/371216e6fe81.jpg",
       "width": 500,
-      "height": 333
+      "height": 333,
+      "credit": {
+        "file": "Volubilis Longshot II.jpg",
+        "author": "Subhros",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Volubilis_Longshot_II.jpg"
+      }
     }
   },
   {
@@ -2300,7 +2755,14 @@
     "image": {
       "src": "/sites/6b7f40ccaaa5.jpg",
       "width": 500,
-      "height": 376
+      "height": 376,
+      "credit": {
+        "file": "Derinkuyu Underground City 9910 Nevit.jpg",
+        "author": "Nevit Dilmen",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Derinkuyu_Underground_City_9910_Nevit.jpg"
+      }
     }
   },
   {
@@ -2334,7 +2796,14 @@
     "image": {
       "src": "/sites/f4b32cc1acf6.jpg",
       "width": 500,
-      "height": 376
+      "height": 376,
+      "credit": {
+        "file": "Ancient Akrotiri.jpeg",
+        "author": "Rt44",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Ancient_Akrotiri.jpeg"
+      }
     }
   },
   {
@@ -2368,7 +2837,14 @@
     "image": {
       "src": "/sites/03548a60b712.jpg",
       "width": 500,
-      "height": 376
+      "height": 376,
+      "credit": {
+        "file": "Ajanta (63).jpg",
+        "author": "No machine-readable author provided. Soman assumed (based on copyright claims).",
+        "licence": "CC BY 2.5",
+        "licenceUrl": "https://creativecommons.org/licenses/by/2.5",
+        "source": "https://commons.wikimedia.org/wiki/File:Ajanta_(63).jpg"
+      }
     }
   },
   {
@@ -2402,7 +2878,14 @@
     "image": {
       "src": "/sites/0877309cbb68.jpg",
       "width": 500,
-      "height": 315
+      "height": 315,
+      "credit": {
+        "file": "Tell es-sultan.jpg",
+        "author": "Fullo88 at Italian Wikipedia",
+        "licence": "Public domain",
+        "licenceUrl": null,
+        "source": "https://commons.wikimedia.org/wiki/File:Tell_es-sultan.jpg"
+      }
     }
   }
 ]

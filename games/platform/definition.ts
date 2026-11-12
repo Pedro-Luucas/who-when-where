@@ -32,6 +32,13 @@ export type TriesSetting = {
   legacy?: "digs" | "guesses" | "attempts" | "spare";
 };
 
+/**
+ * A version of a game a player can choose in practice: a region, a measure.
+ * The first is the default, and the one the daily puzzle, expeditions and
+ * parties use.
+ */
+export type Variant = { id: string; name: Localized };
+
 export type GameDefinition<Slug extends string = string> = {
   /** Names the game everywhere: its address (/play/<slug>), its save, its scores. */
   slug: Slug;
@@ -55,6 +62,10 @@ export type GameDefinition<Slug extends string = string> = {
   status: "detail" | "points";
   /** Raise this when the scoring changes, so results already worked out are worked out again. */
   scoring?: number;
+  /** The versions offered in practice (see Variant). Left out: practice deals from the whole roster. */
+  variants?: readonly Variant[];
+  /** Says where the game's facts come from, when a licence asks for it ("Data: World Bank, CC BY 4.0"). */
+  credit?: { text: string; href: string };
   /** How the game takes part in expeditions and parties. */
   expedition: {
     /** The game in a few words, next to its name in the setup. */

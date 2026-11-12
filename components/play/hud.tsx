@@ -34,11 +34,13 @@ type Props = {
 export function Hud({ step, pips, stats = [], onSkip, onGiveUp, over }: Props) {
   const t = useShellT();
   const frame = useGameFrame();
+  // The game's own pages (daily, practice) lead back to the catalogue and explain the rules.
+  const home = !!frame && (frame.daily || !!frame.practice);
 
   return (
     <div className="hud" role="group" aria-label={t("hudLabel")} style={familyStyle(frame?.family)}>
       <div className="hud-side">
-        {frame?.daily && (
+        {home && (
           <Link href="/play" className="hud-key hud-back">
             <Icon name="back" size={16} />
             <span>{t("allGames")}</span>
@@ -48,6 +50,7 @@ export function Hud({ step, pips, stats = [], onSkip, onGiveUp, over }: Props) {
           <span className="hud-game">
             <i aria-hidden="true" />
             {frame.title}
+            {frame.practice && <small className="hud-mode">{t("modePractice")}</small>}
           </span>
         )}
       </div>
@@ -85,17 +88,19 @@ export function Hud({ step, pips, stats = [], onSkip, onGiveUp, over }: Props) {
           </button>
         )}
         {onGiveUp && !over && <GiveUp onGiveUp={onGiveUp} />}
+        {home && (
+          <button
+            type="button"
+            className="hud-key hud-icon"
+            onClick={() => openPanel("help")}
+            aria-label={t("help")}
+            title={t("help")}
+          >
+            <Icon name="help" size={17} />
+          </button>
+        )}
         {frame?.daily && (
           <>
-            <button
-              type="button"
-              className="hud-key hud-icon"
-              onClick={() => openPanel("help")}
-              aria-label={t("help")}
-              title={t("help")}
-            >
-              <Icon name="help" size={17} />
-            </button>
             <button
               type="button"
               className="hud-key hud-icon"

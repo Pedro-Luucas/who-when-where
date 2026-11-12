@@ -159,3 +159,100 @@ export async function downloadImage(folder, id, thumb, { hidden = false } = {}) 
     height: Math.round((thumb.height / thumb.width) * width),
   };
 }
+
+// ── Image credits ───────────────────────────────────────────────────────────
+// Every photo and portrait is a file on Wikimedia Commons (or, rarely, on a
+// Wikipedia), each under its own licence. A credit names the file, its author,
+// its licence and where it lives, so the game can show them on the reveal.
+
+/**
+ * The wiki and file name an upload.wikimedia.org URL points at:
+ * ".../wikipedia/commons/thumb/a/ab/Some_file.jpg/500px-Some_file.jpg"
+ * → { wiki: "commons", file: "Some file.jpg" }.
+ */
+export function imageFileOf(url) {
+  const m = /\/wikipedia\/([a-z-]+)\/(?:thumb\/)?[0-9a-f]\/[0-9a-f]{2}\/([^/?#]+)/.exec(url ?? "");
+  if (!m) return null;
+  return { wiki: m[1], file: decodeURIComponent(m[2]).replace(/_/g, " ") };
+}
+
+const apiOf = (wiki) =>
+  wiki === "commons" ? "https://commons.wikimedia.org/w/api.php" : `https://${wiki}.wikipedia.org/w/api.php`;
+
+const pageOf = (wiki, file) =>
+  `${wiki === "commons" ? "https://commons.wikimedia.org" : `https://${wiki}.wikipedia.org`}/wiki/File:${encodeURIComponent(file.replace(/ /g, "_"))}`;
+
+/** Text of an extmetadata value: tags and entities out, spaces tidied. */
+function plain(html) {
+  if (!html) return "";
+  return String(html)
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#0?39;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function shorten(text, max = 80) {
+  return text.length <= max ? text : `${text.slice(0, max - 1).trimEnd()}…`;
+}
+
+function creditFrom(wiki, file, meta) {
+  const value = (key) => meta?.[key]?.value;
+  // A crop credits the file it was cut from first: "Original.jpg : Name" → "Name".
+  let author = (plain(value("Artist")) || plain(value("Credit")))
+    .replace(/^.*?\.(jpe?g|png|tiff?|gif|svg|webp)\s*:\s*/i, "")
+    .replace(/^derivative work:?\s*/i, "")
+    .replace(/\s*derivative work.*$/i, "")
+    .replace(/\[\s*\d+\s*\]|\(\s*talk\s*\)|\(Life time:[^)]*\)|https?:\/\/\S+|Template:/gi, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (!author || /^unknown\b/i.test(author)) author = "Unknown author";
+  const licence = plain(value("LicenseShortName")) || plain(value("UsageTerms")) || "See source";
+  const licenceUrl = value("LicenseUrl") ? String(value("LicenseUrl")).replace(/^\/\//, "https://") : null;
+  return { file, author: shorten(author), licence, licenceUrl, source: pageOf(wiki, file) };
+}
+
+/**
+ * Credits for image URLs (Wikipedia summary thumbnails), keyed by URL. Asks
+ * each wiki for 50 files at a time; answers are cached like every other call.
+ */
+export async function getImageCredits(urls) {
+  const wanted = new Map();
+  for (const url of urls) {
+    const found = imageFileOf(url);
+    if (found) wanted.set(url, found);
+  }
+  const byWiki = new Map();
+  for (const { wiki, file } of wanted.values()) {
+    if (!byWiki.has(wiki)) byWiki.set(wiki, new Set());
+    byWiki.get(wiki).add(file);
+  }
+  const meta = new Map();
+  for (const [wiki, files] of byWiki) {
+    const list = [...files].sort();
+    for (let i = 0; i < list.length; i += 50) {
+      const titles = list.slice(i, i + 50).map((file) => `File:${file}`);
+      const url =
+        `${apiOf(wiki)}?action=query&format=json&formatversion=2&prop=imageinfo&iiprop=extmetadata` +
+        `&titles=${encodeURIComponent(titles.join("|"))}`;
+      const data = await getJson(url);
+      // Titles come back normalised; map them to the names that were asked for.
+      const asked = new Map((data.query?.normalized ?? []).map((n) => [n.to, n.from]));
+      for (const page of data.query?.pages ?? []) {
+        const title = asked.get(page.title) ?? page.title;
+        if (page.imageinfo?.[0]) meta.set(`${wiki}:${title.replace(/^File:/, "")}`, page.imageinfo[0].extmetadata);
+      }
+    }
+  }
+  const credits = new Map();
+  for (const [url, { wiki, file }] of wanted) {
+    const found = meta.get(`${wiki}:${file}`);
+    if (found) credits.set(url, creditFrom(wiki, file, found));
+  }
+  return credits;
+}
