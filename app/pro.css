@@ -1,0 +1,620 @@
+/* Plans: the Pro sheet, Pro gates and teasers, the pricing page (/pricing).
+   Gold (--pro) marks everything Pro, as on the tier chips. */
+
+/* ───────────────────────── Header pill ───────────────────────── */
+
+.main-nav-pill[data-kind="pro"] svg {
+  color: var(--pro);
+  opacity: 1;
+}
+
+/* A sixth pill would crowd the wordmark: just the crown until there is room. */
+@media (max-width: 1599px) {
+  .main-nav-pill[data-kind="pro"] .main-nav-text {
+    display: none;
+  }
+}
+
+/* ───────────────────────── The Pro sheet ───────────────────────── */
+
+.pro-sheet .modal-body {
+  max-width: 30rem;
+}
+
+.pro-sheet-body {
+  display: grid;
+  gap: 14px;
+}
+
+.pro-sheet-lead {
+  color: var(--fg-2);
+  line-height: 1.5;
+}
+
+.pro-sheet-lead .inline-flex {
+  vertical-align: 1px;
+  margin-right: 4px;
+}
+
+.pro-benefits {
+  display: grid;
+  gap: 8px;
+}
+
+.pro-benefits li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+
+.pro-benefits li[data-lead] {
+  border-color: color-mix(in srgb, var(--pro) 55%, transparent);
+  background: color-mix(in srgb, var(--pro) 8%, var(--surface));
+}
+
+.pro-benefits svg {
+  flex: none;
+  margin-top: 2px;
+  color: var(--pro);
+}
+
+.pro-benefits span {
+  display: grid;
+  gap: 2px;
+}
+
+.pro-benefits small {
+  color: var(--fg-2);
+  font-size: 0.85rem;
+}
+
+.pro-sheet-price {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--fg);
+}
+
+.pro-sheet-actions {
+  display: grid;
+  gap: 8px;
+}
+
+/* ───────────────────────── Gates and teasers ───────────────────────── */
+
+.pro-gate-page {
+  max-width: 40rem;
+  align-content: center;
+  min-height: 60vh;
+}
+
+.pro-teaser {
+  justify-items: center;
+  gap: 12px;
+  padding: clamp(22px, 4vw, 36px);
+  text-align: center;
+  border-color: color-mix(in srgb, var(--pro) 40%, var(--line-strong));
+  background:
+    radial-gradient(120% 80% at 50% 0%, color-mix(in srgb, var(--pro) 10%, transparent), transparent 70%),
+    var(--panel-fill);
+}
+
+.pro-teaser h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 1.1rem + 0.8vw, 1.7rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.pro-teaser p {
+  max-width: 32rem;
+  color: var(--fg-2);
+  line-height: 1.5;
+}
+
+.pro-teaser-icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border: 1px solid color-mix(in srgb, var(--pro) 50%, transparent);
+  border-radius: 50%;
+  color: var(--pro);
+  background: color-mix(in srgb, var(--pro) 10%, transparent);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--pro) 25%, transparent);
+}
+
+.pro-teaser-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.pro-hint {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+}
+
+/* Archive: days only Pro may play, and their games. */
+.archive-day[data-pro] {
+  position: relative;
+}
+
+.archive-day[data-pro]::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--pro);
+  box-shadow: 0 0 6px var(--pro);
+}
+
+.archive-picked button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  min-height: 44px;
+  padding: 6px 10px 6px 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--fam);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 120ms var(--ease-out);
+}
+
+.archive-picked button:hover {
+  border-color: var(--pro);
+  border-left-color: var(--fam);
+}
+
+/* Account: the plan. */
+.plan-section > h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ───────────────────────── /pricing ───────────────────────── */
+
+.pricing {
+  max-width: 76rem;
+}
+
+.pricing > * {
+  min-width: 0;
+}
+
+.pricing-hero {
+  display: grid;
+  gap: 18px 40px;
+  align-items: center;
+  padding: clamp(24px, 4vw, 48px);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(70% 120% at 100% 100%, rgb(30 114 232 / 0.22), transparent 60%),
+    radial-gradient(50% 90% at 0% 0%, color-mix(in srgb, var(--pro) 9%, transparent), transparent 70%),
+    var(--panel-fill);
+  box-shadow: var(--shadow-card);
+}
+
+@media (min-width: 900px) {
+  .pricing-hero {
+    grid-template-columns: 1.1fr 1fr;
+  }
+}
+
+.pricing-hero h1 {
+  margin-top: 8px;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 1.4rem + 3.2vw, 4rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+.pricing-free {
+  color: var(--fg);
+}
+
+.pricing-pro {
+  background: linear-gradient(180deg, #ffe89a, #e5a722);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+:root[data-theme="light"] .pricing-pro {
+  background: linear-gradient(180deg, #b47a06, #7a4f00);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.pricing-hero-side {
+  display: grid;
+  justify-items: start;
+  gap: 14px;
+}
+
+.pricing-hero-side > p {
+  color: var(--fg-2);
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.pricing-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 12px;
+}
+
+.pricing-guest {
+  font-size: 0.9rem;
+  color: var(--fg-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.pricing-guest:hover {
+  color: var(--fg);
+}
+
+.pricing-toc {
+  position: sticky;
+  top: 64px;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 20px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: blur(16px);
+}
+
+.pricing-toc a {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.pricing-toc a:hover {
+  color: var(--fg);
+}
+
+.pricing-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 18px;
+  border: 1px solid color-mix(in srgb, var(--pro) 45%, transparent);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--pro) 12%, transparent), transparent 80%), var(--surface);
+  color: var(--fg);
+  line-height: 1.5;
+}
+
+.pricing-banner svg {
+  flex: none;
+  margin-top: 2px;
+  color: var(--pro);
+}
+
+.pricing-plans {
+  display: grid;
+  gap: 16px;
+  scroll-margin-top: 130px;
+}
+
+@media (min-width: 900px) {
+  .pricing-plans {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.plan-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-xl);
+  background: var(--panel-fill);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.plan-card[data-plan="yearly"] {
+  border-color: color-mix(in srgb, var(--pro) 70%, transparent);
+  box-shadow:
+    var(--shadow-card),
+    0 0 0 1px color-mix(in srgb, var(--pro) 30%, transparent),
+    0 0 40px -12px color-mix(in srgb, var(--pro) 45%, transparent);
+}
+
+.plan-head,
+.plan-price,
+.plan-cta {
+  padding: 18px 20px 0;
+}
+
+.plan-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+}
+
+.plan-head h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.plan-badge {
+  margin-left: auto;
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--on-primary);
+  background: var(--primary-fill);
+}
+
+.plan-for {
+  flex-basis: 100%;
+  color: var(--fg-2);
+  font-size: 0.92rem;
+}
+
+.plan-for .eyebrow {
+  margin-right: 6px;
+  color: var(--accent);
+}
+
+.plan-price {
+  display: grid;
+  justify-items: start;
+  align-content: end;
+  gap: 6px;
+  min-height: 118px;
+  margin-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.plan-price strong {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 1.8rem + 1.4vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+}
+
+.plan-card[data-plan="yearly"] .plan-price strong {
+  color: var(--pro);
+}
+
+.plan-price span,
+.plan-note {
+  color: var(--fg-2);
+  font-size: 0.92rem;
+}
+
+.plan-note {
+  font-family: var(--font-mono);
+  color: var(--fg);
+}
+
+.plan-cta {
+  padding-bottom: 18px;
+}
+
+.plan-get {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 20px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+}
+
+.plan-get::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.plan-lines {
+  display: grid;
+  padding: 10px 12px 16px;
+}
+
+.plan-lines li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 9px 8px;
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.plan-lines li:nth-child(odd) {
+  background: var(--surface);
+}
+
+.plan-mark {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  color: var(--danger);
+  background: var(--danger-soft);
+}
+
+.plan-lines li[data-yes] .plan-mark,
+.plan-mark[data-yes] {
+  color: var(--on-play);
+  background: var(--play);
+}
+
+.pricing-section {
+  /* A grid item: without this the wide table stretches the page on phones. */
+  min-width: 0;
+  scroll-margin-top: 130px;
+}
+
+@media (max-width: 639px) {
+  .pricing-toc {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+.pricing-unlocks {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+}
+
+.pricing-unlocks li {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--panel-fill);
+}
+
+.pricing-unlocks small {
+  color: var(--fg-2);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.pricing-unlock-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  margin-bottom: 4px;
+  border: 1px solid color-mix(in srgb, var(--pro) 45%, transparent);
+  border-radius: var(--radius-md);
+  color: var(--pro);
+  background: color-mix(in srgb, var(--pro) 9%, transparent);
+}
+
+.pricing-table-wrap {
+  /* Holds the table's visually hidden labels, which would otherwise widen the page. */
+  position: relative;
+  overflow-x: auto;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-xl);
+  background: var(--panel-fill);
+}
+
+.pricing-table {
+  width: 100%;
+  min-width: 40rem;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.pricing-table th,
+.pricing-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.pricing-table thead th {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+  white-space: nowrap;
+}
+
+.pricing-table tbody th {
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.pricing-table td {
+  color: var(--fg-2);
+}
+
+.pricing-table [data-pro] {
+  background: color-mix(in srgb, var(--pro) 6%, transparent);
+  color: var(--fg);
+}
+
+.pricing-table tbody tr:last-child > * {
+  border-bottom: none;
+}
+
+.pricing-faq {
+  display: grid;
+  gap: 8px;
+}
+
+.pricing-faq details {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--panel-fill);
+}
+
+.pricing-faq summary {
+  padding: 14px 18px;
+  min-height: 44px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pricing-faq details[open] summary {
+  border-bottom: 1px solid var(--line);
+}
+
+.pricing-faq p {
+  padding: 14px 18px;
+  color: var(--fg-2);
+  line-height: 1.55;
+}

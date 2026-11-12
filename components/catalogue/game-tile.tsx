@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { useEntitlements } from "@/account/entitlements";
 import { GameArt } from "@/components/game-art";
+import { ProChip } from "@/components/pro/pro-chip";
 import { Icon } from "@/components/shell/nav-items";
 import { Chip } from "@/components/ui/chip";
 import { FAMILIES } from "@/games/families";
@@ -46,6 +48,8 @@ type TileProps = {
 export function GameTile({ game, index, today, onSelect, selected, favourite }: TileProps) {
   const t = useShellT();
   const locale = useLocale();
+  const { has } = useEntitlements();
+  const pro = game.tier === "pro";
   const body = (
     <>
       <GameArt slug={game.slug} family={game.family} caption={game.theme[locale]} className="tile-art" />
@@ -55,6 +59,7 @@ export function GameTile({ game, index, today, onSelect, selected, favourite }: 
       <span className="tile-title">{game.title}</span>
       <span className="tile-blurb">{game.blurb[locale]}</span>
       <span className="tile-foot">
+        {pro && <ProChip locked={!has("games.pro")} />}
         <TodayChip today={today} />
         {today.state === "done" && <span className="tile-done">{t("doneToday")}</span>}
       </span>

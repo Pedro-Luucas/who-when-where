@@ -116,6 +116,8 @@ The site can be installed as an app (`app/manifest.ts`). The theme, sound, vibra
 
 **Push notifications.** Off unless the API has a VAPID key pair. Make one with `node scripts/vapid-keys.ts` (in `api/`) and add the three lines it prints to `/etc/who-when-where/api.env` (`VAPID_SUBJECT` should be a real `mailto:` address), then restart the API. The site's service worker (`public/sw.js`) only shows notifications; players turn them on per device in `/inbox` or `/account`.
 
+**Plans (Free / Pro).** Everything is free until a switch is turned on; there is no payment integration. The plan table (features, limits, display prices) and the site's switch live in `shared/plans.ts`: build with `NEXT_PUBLIC_PRO_GATING=preview` to show Pro chips, the Pricing pill and plan cards without locking anything, or `=on` for the soft gates (Pro games, the practice allowance, the archive window, locked expedition options). The API has its own switch, `PRO_GATING=on` in `/etc/who-when-where/api.env`, for what it enforces itself (402 `upgrade_required`, `POST /practice/start`, party seats 8/16; 12 for everyone while off). The API keeps a copy of the plan table in `api/src/plans.ts` (the tests check they match). Give an account Pro by hand with `node scripts/grant-pro.ts <username|email> [days|forever|off]` (in `api/`, with `DATABASE_PATH` set). `/pricing` compares the plans; `/account` shows the player's plan.
+
 **Deploying the API.** On a fresh Ubuntu server with Node 24+, as root:
 
 ```bash

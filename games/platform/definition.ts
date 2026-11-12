@@ -53,6 +53,13 @@ export type GameDefinition<Slug extends string = string> = {
   family: FamilyId;
   engine: Engine;
   /**
+   * "pro": a Pro game (AUDIT_AND_PLAN §7.2). It shows a Pro chip, and its pages
+   * are locked to accounts without Pro — but only while the plans switch in
+   * shared/plans.ts is on. Left out: free. The dailies (games/daily-set.ts) are
+   * always free.
+   */
+  tier?: "pro";
+  /**
    * Where the daily puzzles are kept: `{ days: { [day]: record } }` under `key`
    * in lib/storage. A record's moves are the list in `progressField` (the longer
    * list is the newer save); `lists` names any other lists a record must have.

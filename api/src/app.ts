@@ -14,6 +14,7 @@ import { notify, registerInbox } from "./notify.ts";
 import { registerParties } from "./parties.ts";
 import { BusyError, hashPassword, verifyDecoy, verifyPassword } from "./passwords.ts";
 import { pairOf } from "./people.ts";
+import { entitlementsOf, startPractice } from "./plans.ts";
 import { createPusher, type Pusher } from "./push.ts";
 import { LIMITS, RateLimiter, type Limit } from "./rate-limit.ts";
 import {
@@ -43,6 +44,7 @@ import {
   readPassword,
   readSaves,
   readUsername,
+  isGame,
 } from "./validate.ts";
 
 /** Most puzzles one account may keep: decades of daily play across many games. */
@@ -112,7 +114,11 @@ export function createApp(
     return (token && readSession(db, token)?.user) || null;
   }
 
-  const deps: Deps = { db, limit, body, viewer };
+  const gating = config.proGating === true;
+  const deps: Deps = { db, limit, body, viewer, gating };
+
+  /** What the API says about the signed-in account: who it is, and what its plan allows. */
+  const me = (row: UserRow) => ({ user: toUser(row), entitlements: entitlementsOf(db, row, gating) });
 
   /** Re-checks the password before a sensitive change. */
   async function confirmPassword(user: UserRow, value: unknown, field = "password"): Promise<void> {
@@ -125,7 +131,7 @@ export function createApp(
   app.onError((error, c) => {
     if (error instanceof Failure) {
       if (error.retryAfter) c.header("Retry-After", String(error.retryAfter));
-      return c.json({ error: error.code }, error.status);
+      return c.json({ error: error.code, ...(error.feature ? { feature: error.feature } : {}) }, error.status);
     }
     if (error instanceof Invalid) return c.json({ error: "invalid", field: error.field }, 400);
     if (error instanceof BusyError) return c.json({ error: "busy" }, 503);
@@ -192,6 +198,8 @@ export function createApp(
       profile_visibility: "public",
       hide_presence: 0,
       country: null,
+      plan: "free",
+      plan_expires_at: null,
     };
     try {
       db.prepare(
@@ -216,7 +224,7 @@ export function createApp(
     }
     welcomeInvited(row.id, input.invitedBy);
     startSession(c, row.id);
-    return c.json({ user: toUser(row) }, 201);
+    return c.json(me(row), 201);
   });
 
   /**
@@ -253,7 +261,7 @@ export function createApp(
     if (!(await verifyPassword(password, row.password_hash))) throw new Failure(401, "invalid_credentials");
 
     startSession(c, row.id);
-    return c.json({ user: toUser(row) });
+    return c.json(me(row));
   });
 
   app.post("/auth/logout", (c) => {
@@ -291,7 +299,19 @@ export function createApp(
     await next();
   });
 
-  account.get("/me", (c) => c.json({ user: toUser(c.get("user")) }));
+  account.get("/me", (c) => c.json(me(c.get("user"))));
+
+  /**
+   * A practice puzzle starts: counts it against the day's allowance. With
+   * gating on, a free account past it gets 402 upgrade_required.
+   */
+  account.post("/practice/start", async (c) => {
+    const user = c.get("user");
+    limit(`practice:${user.id}`, LIMITS.practicePerUser);
+    const game = (await body(c)).game;
+    if (!isGame(game)) throw new Invalid("game");
+    return c.json(startPractice(db, user, game, gating));
+  });
 
   account.patch("/me", async (c) => {
     const user = c.get("user");

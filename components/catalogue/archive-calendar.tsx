@@ -2,6 +2,10 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { archiveWindow, useEntitlements } from "@/account/entitlements";
+import { useProT } from "@/components/pro/messages";
+import { ProChip } from "@/components/pro/pro-chip";
+import { openProSheet } from "@/components/pro/pro-sheet";
 import { Chip } from "@/components/ui/chip";
 import { ARCHIVE_DAYS } from "@/games/daily-set";
 import { CHALLENGE_GAMES } from "@/games/registry";
@@ -40,6 +44,10 @@ export function ArchiveCalendar() {
   const { day: today, days, streak } = useDailyRecord();
   const results = useDailyResults();
   const [picked, setPicked] = useState<number | null>(null);
+  const pro = useProT();
+  // With the plans switch on, days further back than the plan allows are Pro (shared/plans.ts).
+  const allowed = archiveWindow(useEntitlements());
+  const isPro = (day: number) => allowed !== null && day < today && today - day > allowed;
 
   const total = CHALLENGE_GAMES.length;
   const oldest = Math.max(1, today - ARCHIVE_DAYS);
@@ -104,8 +112,9 @@ export function ArchiveCalendar() {
               className="archive-day"
               data-state={state}
               data-today={day === today ? "" : undefined}
+              data-pro={isPro(day) ? "" : undefined}
               aria-pressed={day === shown}
-              aria-label={`${longDate.format(date)}: ${what}`}
+              aria-label={`${longDate.format(date)}: ${what}${isPro(day) ? ` · ${pro("pro")}` : ""}`}
               onClick={() => setPicked(day)}
             >
               {content}
@@ -133,6 +142,16 @@ export function ArchiveCalendar() {
           {CHALLENGE_GAMES.map((game) => {
             const points = pickedResults.get(game.slug);
             const href = shown === today ? `/play/${game.slug}` : `/play/${game.slug}?day=${shown}`;
+            if (points === undefined && isPro(shown)) {
+              return (
+                <li key={game.slug} style={{ "--fam": `var(--color-family-${game.family})` } as React.CSSProperties}>
+                  <button type="button" onClick={() => openProSheet("archive.all")}>
+                    <span className="archive-game">{game.title}</span>
+                    <ProChip locked />
+                  </button>
+                </li>
+              );
+            }
             return (
               <li key={game.slug} style={{ "--fam": `var(--color-family-${game.family})` } as React.CSSProperties}>
                 <Link href={href}>

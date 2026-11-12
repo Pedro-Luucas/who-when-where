@@ -36,6 +36,8 @@ export const LIMITS = {
   pushPerUser: { max: 30, windowMs: 60 * MINUTE },
   /** Scores sent to challenges and the Weekly Special per account. */
   entriesPerUser: { max: 60, windowMs: MINUTE },
+  /** Practice puzzles started per account. */
+  practicePerUser: { max: 60, windowMs: MINUTE },
 } satisfies Record<string, Limit>;
 
 export class RateLimiter {

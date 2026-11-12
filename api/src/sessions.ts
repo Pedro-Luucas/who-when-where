@@ -42,6 +42,9 @@ export type UserRow = {
   profile_visibility: ProfileVisibility;
   hide_presence: number;
   country: string | null;
+  /** "free" or "pro" (plans.ts); Pro lasts until plan_expires_at, or for good when that is null. */
+  plan: string;
+  plan_expires_at: number | null;
 };
 
 export const toUser = (row: UserRow): User => ({
@@ -82,7 +85,8 @@ export function readSession(
   const row = db
     .prepare(
       `SELECT u.id, u.email, u.password_hash, u.display_name, u.locale, u.created_at,
-              u.username, u.avatar, u.last_seen, u.profile_visibility, u.hide_presence, u.country, s.expires_at
+              u.username, u.avatar, u.last_seen, u.profile_visibility, u.hide_presence, u.country,
+              u.plan, u.plan_expires_at, s.expires_at
          FROM sessions s JOIN users u ON u.id = s.user_id
         WHERE s.token_hash = ? AND s.expires_at > ?`,
     )

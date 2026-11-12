@@ -8,16 +8,30 @@ export class ApiError extends Error {
   status: number;
   /** For code "invalid": the field that was refused. */
   field?: string;
+  /** For code "upgrade_required" (402): the plan feature that was missing (shared/plans.ts). */
+  feature?: string;
 
-  constructor(code: string, status: number, field?: string) {
+  constructor(code: string, status: number, field?: string, feature?: string) {
     super(code);
     this.code = code;
     this.status = status;
     this.field = field;
+    this.feature = feature;
   }
 }
 
-export async function api<T = void>(method: string, path: string, body?: unknown): Promise<T> {
+/**
+ * Called when the API answers 402 upgrade_required, whichever call it was:
+ * the Pro sheet listens (components/pro/pro-sheet.tsx), so the client and the
+ * server cannot disagree on what is gated without the player hearing of it.
+ */
+export const upgradeListeners = new Set<(feature: string | undefined) => void>();
+
+/**
+ * Calls the API. A 402 opens the Pro sheet unless `quiet` (a call made in the
+ * middle of a puzzle: upsells never interrupt play).
+ */
+export async function api<T = void>(method: string, path: string, body?: unknown, quiet = false): Promise<T> {
   let response: Response;
   try {
     response = await fetch(`/api${path}`, {
@@ -39,8 +53,9 @@ export async function api<T = void>(method: string, path: string, body?: unknown
     throw new ApiError("unavailable", response.status);
   }
   if (!response.ok) {
-    const { error, field } = data as { error?: string; field?: string };
-    throw new ApiError(error ?? "unavailable", response.status, field);
+    const { error, field, feature } = data as { error?: string; field?: string; feature?: string };
+    if (response.status === 402 && !quiet) upgradeListeners.forEach((listener) => listener(feature));
+    throw new ApiError(error ?? "unavailable", response.status, field, feature);
   }
   return data as T;
 }

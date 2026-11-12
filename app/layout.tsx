@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Chakra_Petch, JetBrains_Mono } from "next/font/google";
+import { ProSheetHost } from "@/components/pro/pro-sheet";
 import { ThemeSync } from "@/components/settings-button";
 import { BottomNav } from "@/components/shell/bottom-nav";
 import { Toasts } from "@/components/toasts";
@@ -17,6 +18,7 @@ import "./play.css";
 import "./engines.css";
 import "./lightbox.css";
 import "./connect.css";
+import "./pro.css";
 
 // Night Atlas type (see app/tokens.css): Chakra Petch for the interface,
 // Bricolage Grotesque for headings, JetBrains Mono for labels and numbers.
@@ -71,6 +73,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <ThemeSync />
         <Toasts />
         <Celebrations />
+        <ProSheetHost />
       </body>
     </html>
   );

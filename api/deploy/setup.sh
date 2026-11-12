@@ -48,6 +48,9 @@ TRUST_PROXY=1
 # VAPID_PUBLIC_KEY=
 # VAPID_PRIVATE_KEY=
 # VAPID_SUBJECT=mailto:you@example.com
+# Plans: refuse what an account's plan lacks (402, practice allowance, party seats).
+# Off until Pro launches; see shared/plans.ts and README.
+# PRO_GATING=on
 EOF
   chown root:"$APP_USER" "$ENV_FILE"
   chmod 0640 "$ENV_FILE"

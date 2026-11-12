@@ -33,6 +33,7 @@ export const INBOX: NavItem = { href: "/inbox", label: "navInbox", icon: "bell",
 export const LEAGUE: NavItem = { href: "/league", label: "navLeague", icon: "medal", match: (path) => path === "/league" };
 export const WEEKLY: NavItem = { href: "/weekly", label: "navWeekly", icon: "sparkle", match: (path) => path === "/weekly" };
 export const PARTY: NavItem = { href: "/party", label: "navParty", icon: "party", match: (path) => path === "/party" };
+export const PRICING: NavItem = { href: "/pricing", label: "navPricing", icon: "crown", match: (path) => path === "/pricing" };
 
 /** The header's pills, in order. */
 export const HEADER_NAV = [PLAY, DAILY, LEADERBOARD, COMMUNITY, PARTY];
@@ -67,7 +68,10 @@ export type IconName =
   | "medal"
   | "sparkle"
   | "swords"
-  | "share";
+  | "share"
+  | "lock"
+  | "crown"
+  | "check";
 
 const PATHS: Record<IconName, React.ReactNode> = {
   home: <path d="M3.5 10.5L12 3.8l8.5 6.7V20a.8.8 0 0 1-.8.8H15v-6h-6v6H4.3a.8.8 0 0 1-.8-.8z" />,
@@ -163,6 +167,14 @@ const PATHS: Record<IconName, React.ReactNode> = {
   ),
   sparkle: <path d="M12 3.5l1.8 5.2 5.2 1.8-5.2 1.8L12 17.5l-1.8-5.2L5 10.5l5.2-1.8zM18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z" />,
   swords: <path d="M4 4l9.5 9.5M4 4v3.2M4 4h3.2M20 4l-9.5 9.5M20 4v3.2M20 4h-3.2M8.5 15.5l-3 3M15.5 15.5l3 3M6.8 13.2l4 4M17.2 13.2l-4 4" />,
+  lock: (
+    <>
+      <rect x="5" y="10.5" width="14" height="10" rx="2" />
+      <path d="M8.2 10.5V8a3.8 3.8 0 0 1 7.6 0v2.5M12 14.5v2.5" />
+    </>
+  ),
+  crown: <path d="M4 8.5l4.2 3.6L12 5.5l3.8 6.6L20 8.5l-1.6 9.5H5.6zM5.6 20.5h12.8" />,
+  check: <path d="M5 12.5l4.5 4.5L19 7.5" />,
   share: (
     <>
       <circle cx="17.5" cy="5.5" r="2.3" />

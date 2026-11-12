@@ -1,6 +1,10 @@
 "use client";
 
+import { useEntitlements } from "@/account/entitlements";
 import { Segmented, Stepper } from "@/components/controls";
+import { useProT } from "@/components/pro/messages";
+import { ProChip } from "@/components/pro/pro-chip";
+import { openProSheet } from "@/components/pro/pro-sheet";
 import { GAMES } from "@/games/registry";
 import { useSocialT } from "@/social/messages";
 import {
@@ -34,6 +38,12 @@ export function SettingsForm({ value, onChange, disabled, party }: Props) {
   const { locale, t } = useSocialT();
   const total = stageCount(value);
   const difficulty = difficultyOf(value);
+  const pro = useProT();
+  const { has } = useEntitlements();
+  // With the plans switch on: Pro games and the tries per game are Pro (shared/plans.ts).
+  // A run that already has them (a challenge link) keeps them; they just cannot be added.
+  const proGames = has("games.pro") || (party === true && has("party.unlockGames"));
+  const allSettings = has("expedition.allSettings");
 
   return (
     <div className="setup" aria-disabled={disabled || undefined}>
@@ -42,25 +52,36 @@ export function SettingsForm({ value, onChange, disabled, party }: Props) {
           {t("setupGames")} <small>{t("puzzleCount", { n: total })}</small>
         </legend>
         <ul className="setup-games">
-          {GAMES.map(({ slug: game, title, expedition }) => (
-            <li key={game} data-off={value.rounds[game] === 0 ? "" : undefined}>
-              <span>
-                <b>{title}</b>
-                <small>{expedition.about[locale]}</small>
-              </span>
-              <Stepper
-                label={title}
-                value={value.rounds[game]}
-                min={
-                  // The last game left keeps at least one puzzle.
-                  total - value.rounds[game] === 0 ? 1 : 0
-                }
-                max={MAX_ROUNDS}
-                disabled={disabled}
-                onChange={(rounds) => onChange({ ...value, rounds: { ...value.rounds, [game]: rounds } })}
-              />
-            </li>
-          ))}
+          {GAMES.map(({ slug: game, title, expedition, tier }) => {
+            const locked = tier === "pro" && !proGames;
+            return (
+              <li key={game} data-off={value.rounds[game] === 0 ? "" : undefined}>
+                <span>
+                  <b>
+                    {title} {tier === "pro" && <ProChip locked={locked} className="align-middle" />}
+                  </b>
+                  <small>{expedition.about[locale]}</small>
+                </span>
+                {locked && !disabled ? (
+                  <button type="button" className="key key-pro key-sm" onClick={() => openProSheet("games.pro")}>
+                    {pro("pro")}
+                  </button>
+                ) : (
+                  <Stepper
+                    label={title}
+                    value={value.rounds[game]}
+                    min={
+                      // The last game left keeps at least one puzzle.
+                      total - value.rounds[game] === 0 ? 1 : 0
+                    }
+                    max={locked ? value.rounds[game] : MAX_ROUNDS}
+                    disabled={disabled}
+                    onChange={(rounds) => onChange({ ...value, rounds: { ...value.rounds, [game]: rounds } })}
+                  />
+                )}
+              </li>
+            );
+          })}
         </ul>
       </fieldset>
 
@@ -103,6 +124,11 @@ export function SettingsForm({ value, onChange, disabled, party }: Props) {
           disabled={disabled}
           onChange={(name) => name !== "custom" && onChange(withDifficulty(value, name))}
         />
+        {!allSettings && !disabled && (
+          <p className="hint pro-hint">
+            <ProChip locked /> {pro("expeditionTries")}
+          </p>
+        )}
         <ul className="setup-tries">
           {TRIES_GAMES.map(({ slug, tries }) => (
             <li key={slug}>
@@ -112,7 +138,7 @@ export function SettingsForm({ value, onChange, disabled, party }: Props) {
                 value={value.tries[slug] ?? tries.presets.standard}
                 min={tries.min}
                 max={tries.max}
-                disabled={disabled}
+                disabled={disabled || !allSettings}
                 onChange={(count) => onChange({ ...value, tries: { ...value.tries, [slug]: count } })}
               />
             </li>

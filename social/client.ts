@@ -125,6 +125,8 @@ export type PartyInfo = {
   startedAt: number;
   /** Playing "together": the last puzzle the host stopped waiting on. */
   released: number;
+  /** How many players the room holds, from its host's plan (an API from before plans leaves it out: 12). */
+  seats?: number;
 };
 
 export type PartyMember = {

@@ -227,6 +227,53 @@ const MIGRATIONS: string[] = [
   ) STRICT, WITHOUT ROWID;
   CREATE INDEX weekly_results_points ON weekly_results(week, points);
   `,
+
+  // Plans (AUDIT_AND_PLAN §7.3): Free or Pro, per-feature grants, daily
+  // allowances. Nothing takes payments yet: `subscriptions` and
+  // `payment_events` wait for a billing adapter.
+  `
+  ALTER TABLE users ADD COLUMN plan TEXT NOT NULL DEFAULT 'free';  -- 'free' | 'pro'
+  ALTER TABLE users ADD COLUMN plan_expires_at INTEGER;            -- null: no end (or Free)
+
+  CREATE TABLE subscriptions (
+    id                INTEGER PRIMARY KEY,
+    user_id           TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    provider          TEXT NOT NULL,      -- e.g. 'stripe', 'mercadopago'
+    provider_customer TEXT,
+    provider_sub      TEXT UNIQUE,
+    status            TEXT NOT NULL,
+    period_end        INTEGER,
+    created_at        INTEGER NOT NULL,
+    updated_at        INTEGER NOT NULL
+  ) STRICT;
+  CREATE INDEX subscriptions_user ON subscriptions(user_id);
+
+  -- Webhooks seen, so a provider's retries are handled once.
+  CREATE TABLE payment_events (
+    provider    TEXT NOT NULL,
+    event_id    TEXT NOT NULL,
+    received_at INTEGER NOT NULL,
+    PRIMARY KEY (provider, event_id)
+  ) STRICT, WITHOUT ROWID;
+
+  -- One feature for one account: comps, referrals, promotions.
+  CREATE TABLE entitlement_grants (
+    user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    feature    TEXT NOT NULL,
+    expires_at INTEGER,                   -- null: no end
+    reason     TEXT NOT NULL DEFAULT '',
+    PRIMARY KEY (user_id, feature)
+  ) STRICT, WITHOUT ROWID;
+
+  -- Daily allowances: how many of a kind an account used on a UTC day.
+  CREATE TABLE usage (
+    user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    day     INTEGER NOT NULL,
+    kind    TEXT NOT NULL,                -- 'practice'
+    count   INTEGER NOT NULL,
+    PRIMARY KEY (user_id, day, kind)
+  ) STRICT, WITHOUT ROWID;
+  `,
 ];
 
 export function openDatabase(path: string): DatabaseSync {

@@ -19,6 +19,12 @@ export type Config = {
   clientIpHeader?: string;
   /** Web Push keys (VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT); push is off without them. */
   vapid?: Vapid | null;
+  /**
+   * Enforce the plans (PRO_GATING=on): 402 upgrade_required for features an
+   * account lacks, the practice allowance, party seats by the host's plan.
+   * Off by default: everything stays free. See plans.ts and shared/plans.ts.
+   */
+  proGating?: boolean;
 };
 
 export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
@@ -38,5 +44,6 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
             subject: env.VAPID_SUBJECT?.trim() || "mailto:admin@example.com",
           }
         : null,
+    proGating: env.PRO_GATING === "on" || env.PRO_GATING === "1",
   };
 }

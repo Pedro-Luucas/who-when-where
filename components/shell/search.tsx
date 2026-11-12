@@ -30,6 +30,7 @@ const PAGES: { href: string; label: ShellKey; icon: IconName }[] = [
   { href: "/expedition", label: "expedition", icon: "compass" },
   { href: "/logbook", label: "logbook", icon: "book" },
   { href: "/account", label: "account", icon: "user" },
+  { href: "/pricing", label: "navPricing", icon: "crown" },
 ];
 
 type Hit = { href: string; title: string; note: string; game?: (typeof GAMES)[number]; icon?: IconName };

@@ -10,6 +10,7 @@ export const definition = defineGame({
   },
   description: "Get from one country to another by land, naming neighbours one by one, in as few steps as you can.",
   family: "shapes",
+  tier: "pro",
   engine: "name",
   save: { key: "border-chain:v1", progressField: "moves", lists: ["ids"] },
   status: "points",

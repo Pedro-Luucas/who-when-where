@@ -10,6 +10,7 @@ export const definition = defineGame({
   },
   description: "Four moments in history: three happened in the same year. Spot the odd one out.",
   family: "when",
+  tier: "pro",
   engine: "pick",
   save: { key: "same-year:v1", progressField: "moves", lists: ["ids"] },
   status: "detail",

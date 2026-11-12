@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/site-footer";
+import { ProGameGate } from "@/components/pro/game-gate";
 import { SiteHeader } from "@/components/site-header";
 import { PracticeScreen } from "@/games/platform/practice";
 import { GAMES, gameBySlug, isGameSlug } from "@/games/registry";
@@ -23,7 +24,9 @@ export default async function Page({ params }: PageProps<"/play/[slug]/practice"
   return (
     <>
       <SiteHeader />
-      <PracticeScreen game={slug} />
+      <ProGameGate game={slug}>
+        <PracticeScreen game={slug} />
+      </ProGameGate>
       <SiteFooter />
     </>
   );

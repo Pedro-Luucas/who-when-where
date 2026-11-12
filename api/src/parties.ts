@@ -4,6 +4,7 @@ import type { Hono } from "hono";
 import { listMessages, partyChannel, postMessage, readAfter } from "./chat.ts";
 import { Failure, isUniqueViolation, transaction, type Deps, type Env } from "./http.ts";
 import { PUBLIC_COLUMNS, areFriends, requireUsername, toPublic, type PublicRow } from "./people.ts";
+import { seatsFor, seatsSql } from "./plans.ts";
 import type { Pusher } from "./push.ts";
 import { LIMITS } from "./rate-limit.ts";
 import {
@@ -25,7 +26,10 @@ import {
 // from the run's seed and plays them, so the server never needs the answers.
 // Pages poll the room every couple of seconds.
 
-export const MAX_MEMBERS = 12;
+/**
+ * A room's seats come from its host's plan (plans.ts seatsFor): 12 for
+ * everyone while gating is off; 8 on Free and 16 on Pro with PRO_GATING=on.
+ */
 /** A member whose page stopped polling this long ago is away. */
 const AWAY_MS = 15_000;
 /** Rooms nobody has looked at for this long are closed. */
@@ -74,7 +78,15 @@ export function deleteStaleParties(db: DatabaseSync, now = Date.now()): void {
   for (const { id } of stale) deleteParty(db, id);
 }
 
-export function registerParties(account: Hono<Env>, { db, limit, body }: Deps, pusher: Pusher): void {
+export function registerParties(account: Hono<Env>, { db, limit, body, gating }: Deps, pusher: Pusher): void {
+  /** How many players the room may hold, from its current host's plan. */
+  function seatsOf(party: PartyRow): number {
+    const host = db.prepare("SELECT plan, plan_expires_at FROM users WHERE id = ?").get(party.host_id) as
+      | { plan: string; plan_expires_at: number | null }
+      | undefined;
+    return host ? seatsFor(host, gating) : seatsFor({ plan: "free", plan_expires_at: null }, gating);
+  }
+
   function partyByCode(code: string): PartyRow {
     const party = db.prepare("SELECT * FROM parties WHERE code = ?").get(code.toUpperCase()) as PartyRow | undefined;
     if (!party) throw new Failure(404, "no_such_party");
@@ -144,6 +156,7 @@ export function registerParties(account: Hono<Env>, { db, limit, body }: Deps, p
         seed: party.seed,
         startedAt: party.started_at,
         released: party.released,
+        seats: seatsOf(party),
       },
       members: members.map((member) => ({
         user: toPublic(member, now),
@@ -198,7 +211,7 @@ export function registerParties(account: Hono<Env>, { db, limit, body }: Deps, p
         `p.visibility = 'public'
          AND NOT EXISTS (SELECT 1 FROM party_members m WHERE m.party_id = p.id AND m.user_id = ?)
          AND EXISTS (SELECT 1 FROM party_members m WHERE m.party_id = p.id AND m.last_seen > ?)
-         AND (SELECT COUNT(*) FROM party_members m WHERE m.party_id = p.id) < ${MAX_MEMBERS}`,
+         AND (SELECT COUNT(*) FROM party_members m WHERE m.party_id = p.id) < ${seatsSql("p", gating)}`,
         user.id,
         Date.now() - LISTED_MS,
       ),
@@ -259,7 +272,7 @@ export function registerParties(account: Hono<Env>, { db, limit, body }: Deps, p
       if (db.prepare("SELECT 1 FROM party_bans WHERE party_id = ? AND user_id = ?").get(party.id, user.id)) {
         throw new Failure(403, "banned");
       }
-      if (memberCount(party.id) >= MAX_MEMBERS) throw new Failure(409, "party_full");
+      if (memberCount(party.id) >= seatsOf(party)) throw new Failure(409, "party_full");
       db.prepare("INSERT INTO party_members (party_id, user_id, joined_at, last_seen) VALUES (?, ?, ?, ?)").run(
         party.id,
         user.id,

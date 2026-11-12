@@ -2,9 +2,13 @@
 
 import Link from "next/link";
 import { Suspense, use, useState } from "react";
+import { useEntitlements } from "@/account/entitlements";
 import { GameArt } from "@/components/game-art";
+import { useProT } from "@/components/pro/messages";
+import { ProChip } from "@/components/pro/pro-chip";
+import { openProSheet } from "@/components/pro/pro-sheet";
 import { Icon } from "@/components/shell/nav-items";
-import { ButtonLink } from "@/components/ui/button";
+import { Button, ButtonLink } from "@/components/ui/button";
 import { Chip } from "@/components/ui/chip";
 import { Skeleton } from "@/components/ui/skeleton";
 import { FAMILIES } from "@/games/families";
@@ -16,6 +20,7 @@ import { useFavourites, useToday } from "@/games/today";
 import { formatNumber, translator, useLocale } from "@/lib/i18n";
 import { MAX_POINTS } from "@/lib/points";
 import { useShellT } from "@/lib/shell-messages";
+import { GATING } from "@/shared/plans";
 import { TodayChip, plateOf } from "./game-tile";
 
 type Game = GameDefinition<GameSlug>;
@@ -35,6 +40,10 @@ export function SetupPanel({ game, index, headingId }: { game: Game; index: numb
   const favourite = favourites.has(game.slug);
   const [copied, setCopied] = useState(false);
   const tries = game.expedition.tries;
+  const pro = useProT();
+  const { has } = useEntitlements();
+  // A Pro game, for a player whose plan lacks it (only ever while gating is on).
+  const locked = game.tier === "pro" && !has("games.pro");
 
   async function copyLink() {
     try {
@@ -54,7 +63,9 @@ export function SetupPanel({ game, index, headingId }: { game: Game; index: numb
         <p className="tile-meta">
           <b>{FAMILIES[game.family].name[locale]}</b> {plateOf(index)} · {t(`engine_${game.engine}`)}
         </p>
-        <h2 id={headingId}>{game.title}</h2>
+        <h2 id={headingId}>
+          {game.title} {game.tier === "pro" && <ProChip locked={locked} className="align-middle" />}
+        </h2>
         <p className="setup-blurb">{game.blurb[locale]}</p>
       </div>
 
@@ -79,10 +90,17 @@ export function SetupPanel({ game, index, headingId }: { game: Game; index: numb
                 {t("modeDaily")}
                 {day > 0 && <small>{t("puzzleOfDay", { n: day })}</small>}
               </span>
-              <Link href={`/play/${game.slug}/practice`} className="setup-mode">
-                {t("modePractice")}
-                <small>{t("modePracticeShort")}</small>
-              </Link>
+              {locked ? (
+                <button type="button" className="setup-mode" onClick={() => openProSheet("games.pro")}>
+                  {t("modePractice")}
+                  <small>{pro("locked")}</small>
+                </button>
+              ) : (
+                <Link href={`/play/${game.slug}/practice`} className="setup-mode">
+                  {t("modePractice")}
+                  <small>{t("modePracticeShort")}</small>
+                </Link>
+              )}
               <Link href="/expedition" className="setup-mode">
                 {t("modeCustom")}
                 <small>{t("modeCustomNote")}</small>
@@ -104,7 +122,7 @@ export function SetupPanel({ game, index, headingId }: { game: Game; index: numb
         </dl>
       </section>
 
-      <Record slug={game.slug} />
+      <Record slug={game.slug} pro={game.tier === "pro"} />
 
       <footer className="setup-foot">
         <div className="setup-foot-row">
@@ -117,9 +135,15 @@ export function SetupPanel({ game, index, headingId }: { game: Game; index: numb
             <span aria-live="polite">{t(copied ? "linkCopied" : "copyLink")}</span>
           </button>
         </div>
-        <ButtonLink href={`/play/${game.slug}`} variant="play" size="lg" wide icon={<Icon name="play" size={18} />}>
-          {t(today.state === "done" ? "seeResult" : today.state === "started" ? "continue" : "play")}
-        </ButtonLink>
+        {locked ? (
+          <Button variant="pro" size="lg" wide icon={<Icon name="lock" size={18} />} onClick={() => openProSheet("games.pro")}>
+            {pro("sheetTitle")}
+          </Button>
+        ) : (
+          <ButtonLink href={`/play/${game.slug}`} variant="play" size="lg" wide icon={<Icon name="play" size={18} />}>
+            {t(today.state === "done" ? "seeResult" : today.state === "started" ? "continue" : "play")}
+          </ButtonLink>
+        )}
       </footer>
     </div>
   );
@@ -140,7 +164,7 @@ function HowToPlay({ slug }: { slug: GameSlug }) {
 }
 
 /** The player's finished daily puzzles in this game. */
-function Record({ slug }: { slug: GameSlug }) {
+function Record({ slug, pro }: { slug: GameSlug; pro: boolean }) {
   const t = useShellT();
   const locale = useLocale();
   const results = useDailyResults().filter((result) => result.game === slug);
@@ -174,7 +198,7 @@ function Record({ slug }: { slug: GameSlug }) {
         <p className="hint">{t("recordNone")}</p>
       )}
       <p className="setup-chips">
-        <Chip tone="success">{t("tierFree")}</Chip>
+        {pro && GATING !== "off" ? <ProChip /> : <Chip tone="success">{t("tierFree")}</Chip>}
         <Chip tone="accent">{t("tierDaily")}</Chip>
       </p>
     </section>

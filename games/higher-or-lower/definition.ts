@@ -10,6 +10,7 @@ export const definition = defineGame({
   },
   description: "Two countries: which has the higher population, area, income or life expectancy? Twenty rounds, three lives.",
   family: "numbers",
+  tier: "pro",
   engine: "pick",
   save: { key: "higher-or-lower:v1", progressField: "moves", lists: ["ids"] },
   status: "detail",

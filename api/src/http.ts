@@ -10,14 +10,17 @@ export type Env = { Variables: { user: UserRow; token: string } };
 
 /** An error the client is expected to handle; `code` is part of the API. */
 export class Failure extends Error {
-  status: 400 | 401 | 403 | 404 | 409 | 413 | 429;
+  status: 400 | 401 | 402 | 403 | 404 | 409 | 413 | 429;
   code: string;
   retryAfter?: number;
-  constructor(status: Failure["status"], code: string, retryAfter?: number) {
+  /** For 402 upgrade_required: the plan feature that was missing (plans.ts). */
+  feature?: string;
+  constructor(status: Failure["status"], code: string, retryAfter?: number, feature?: string) {
     super(code);
     this.status = status;
     this.code = code;
     this.retryAfter = retryAfter;
+    this.feature = feature;
   }
 }
 
@@ -29,6 +32,8 @@ export type Deps = {
   body(c: Context): Promise<Record<string, unknown>>;
   /** The signed-in account, when the request carries a valid session. */
   viewer(c: Context): UserRow | null;
+  /** Plans are enforced (PRO_GATING=on): see plans.ts. */
+  gating: boolean;
 };
 
 export const isUniqueViolation = (error: unknown) =>

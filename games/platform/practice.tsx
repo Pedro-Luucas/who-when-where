@@ -2,13 +2,19 @@
 
 import { Suspense, use, useState } from "react";
 import { browser } from "react-dom";
+import { useEntitlements } from "@/account/entitlements";
+import { usePracticeAllowance } from "@/account/practice-allowance";
 import { GameSkeleton } from "@/components/daily";
 import { GamePanels } from "@/components/game-panels";
+import { ProTeaser } from "@/components/pro/gate";
+import { useProT } from "@/components/pro/messages";
 import { Icon } from "@/components/shell/nav-items";
 import { Button, ButtonLink } from "@/components/ui/button";
+import { Chip } from "@/components/ui/chip";
 import { translator, useLocale } from "@/lib/i18n";
 import { useShellT } from "@/lib/shell-messages";
 import { usePersistent } from "@/lib/storage";
+import { LIMITS } from "@/shared/plans";
 import { loadBoard } from "../loaders";
 import { gameBySlug, type GameSlug } from "../registry";
 import { GameFrameProvider } from "./frame";
@@ -16,8 +22,10 @@ import { useGameSave } from "./store";
 
 // Practice: as many puzzles as the player likes, dealt at random from the
 // whole roster (or from one variant of it: a region, a measure). Nothing here
-// counts towards the daily challenge, streaks or leaderboards — it is the
-// natural place for a free allowance later (AUDIT_AND_PLAN §5, §7.5).
+// counts towards the daily challenge, streaks or leaderboards. With the plans
+// switch on (shared/plans.ts) it has a daily allowance outside Pro: a puzzle
+// counts at its first move, and once the day's are used the next one is not
+// dealt (account/practice-allowance.ts, AUDIT_AND_PLAN §7.5).
 //
 // The puzzle in play is kept on the device, so a reload carries on with it.
 
@@ -71,6 +79,8 @@ function Practice({ game }: { game: GameSlug }) {
   const [stored, setStored] = usePersistent<PracticeState | null>(`practice:${game}:v1`, NONE, isPracticeState);
   // Until the first move, the puzzle on screen is dealt from a seed of this visit.
   const [fresh] = useState(() => ({ seed: newSeed(), variant: "", moves: [], count: (stored?.count ?? 0) + 1 }));
+  const allowance = usePracticeAllowance(game);
+  const pro = useProT();
 
   const variants = definition.variants ?? [];
   const state = stored ?? fresh;
@@ -83,6 +93,7 @@ function Practice({ game }: { game: GameSlug }) {
 
   function moves(next: unknown[]) {
     if (!next.length) return;
+    if (!state.moves.length) allowance.take(); // the puzzle starts: it counts
     setStored({ ...state, variant, moves: [...state.moves, ...next] });
   }
 
@@ -92,6 +103,8 @@ function Practice({ game }: { game: GameSlug }) {
   }
 
   if (puzzle === undefined) return <GameSkeleton />;
+  // The day's allowance is used: the result of the last one stays, the next is not dealt.
+  if (allowance.locked && !state.moves.length) return <PracticeLimit limit={allowance.limit ?? 0} />;
   const { Board } = board;
   const label = shell("practiceNo", { n: state.count });
 
@@ -127,6 +140,7 @@ function Practice({ game }: { game: GameSlug }) {
         label={label}
       >
         <div className="summary-actions practice-actions">
+          {allowance.remaining !== null && <Chip tone="pro">{pro("practiceLeft", { n: allowance.remaining })}</Chip>}
           <Button variant="play" onClick={() => deal()} icon={<Icon name="shuffle" size={17} />} autoFocus={over}>
             {shell("practiceNext")}
           </Button>
@@ -144,5 +158,29 @@ function Practice({ game }: { game: GameSlug }) {
         tiles={[]}
       />
     </GameFrameProvider>
+  );
+}
+
+/** In place of a practice puzzle once the day's allowance is used: the way to Pro, and back to the dailies. */
+function PracticeLimit({ limit }: { limit: number }) {
+  const t = useProT();
+  const { plan } = useEntitlements();
+  return (
+    <main className="shell-page pro-gate-page">
+      <ProTeaser
+        feature="practice.unlimited"
+        title={t("practiceTitle")}
+        body={
+          plan === "guest"
+            ? t("practiceBodyGuest", { n: limit, free: LIMITS.free.practicePerDay ?? 0 })
+            : t("practiceBody", { n: limit })
+        }
+        actions={
+          <ButtonLink href="/daily" variant="secondary" icon={<Icon name="calendar" size={17} />}>
+            {t("backToDailies")}
+          </ButtonLink>
+        }
+      />
+    </main>
   );
 }

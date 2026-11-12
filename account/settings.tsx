@@ -4,6 +4,7 @@ import { LocaleToggle } from "@/components/locale-toggle";
 import { SocialSettings } from "@/social/account-social";
 import { Avatar, AVATAR_COUNT } from "@/social/avatar";
 import { ActionForm, Field, UsernameField } from "./form";
+import { PlanSection } from "./plan-section";
 import { useAccountT } from "./messages";
 import { changePassword, deleteAccount, signOut, updateAccount, type Account } from "./state";
 
@@ -51,6 +52,8 @@ export function Settings({ account }: { account: Account }) {
       </section>
 
       <SocialSettings account={account} />
+
+      <PlanSection />
 
       <section className="account-section">
         <h2>{t("language")}</h2>

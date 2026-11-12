@@ -4,6 +4,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useEffectEvent, useRef, useState } from "react";
 import { ApiError } from "@/account/api";
+import { useEntitlements } from "@/account/entitlements";
+import { useProT } from "@/components/pro/messages";
+import { ProChip } from "@/components/pro/pro-chip";
+import { LIMITS } from "@/shared/plans";
 import { Segmented } from "@/components/controls";
 import { isRunOver, newRun, type Run, type StageResult } from "@/expedition/run";
 import { Runner } from "@/expedition/runner";
@@ -458,9 +462,10 @@ function Lobby({ state, me, title, act, onLeave, offline, problem, chat }: Lobby
         <section className="panel" aria-labelledby="party-members">
           <header className="panel-head">
             <h2 id="party-members">
-              {t("players")} <small>{members.length}/12</small>
+              {t("players")} <small>{members.length}/{party.seats ?? 12}</small>
             </h2>
           </header>
+          {isHost && <ProSeatsHint />}
           <Standings
             members={party.run > 0 ? members : members.map((member) => ({ ...member, results: [] }))}
             stages={stages}
@@ -591,5 +596,17 @@ function RoomDrawer({ messages, me, onSend, children }: DrawerProps) {
         {unread > 0 && <i className="badge">{unread}</i>}
       </button>
     </aside>
+  );
+}
+
+/** For a host without Pro, while plans are shown: what a Pro host's room gets. */
+function ProSeatsHint() {
+  const t = useProT();
+  const { showPro, owns } = useEntitlements();
+  if (!showPro || owns("party.host16")) return null;
+  return (
+    <p className="hint pro-hint">
+      <ProChip /> {t("partySeats", { n: LIMITS.pro.partySeats })}
+    </p>
   );
 }

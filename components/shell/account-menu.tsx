@@ -67,6 +67,7 @@ export function AccountMenu() {
     { href: "/league", label: t("navLeague"), icon: "medal" },
     { href: "/weekly", label: t("navWeekly"), icon: "sparkle" },
     { href: "/leaderboard", label: t("navLeaderboard"), icon: "trophy" },
+    { href: "/pricing", label: t("navPricing"), icon: "crown" },
   ];
 
   return (

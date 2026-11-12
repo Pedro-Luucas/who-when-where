@@ -3,6 +3,7 @@
 import { useSyncExternalStore } from "react";
 import { getLocale, setLocale, type Locale } from "@/lib/i18n";
 import { readStore, subscribeToStore, writeStore } from "@/lib/storage";
+import type { Feature, Limits } from "@/shared/plans";
 import { forgetResults, pushResults } from "@/social/results";
 import { ApiError, api } from "./api";
 import { forgetGames, pushGames, syncGames } from "./sync";
@@ -30,10 +31,26 @@ export type Account = {
   country?: string | null;
 };
 
+/**
+ * What the account's plan allows, as the API tells it (GET /me). An API from
+ * before plans sends none: the account is then taken to be on Free.
+ */
+export type ServerEntitlements = {
+  plan: "free" | "pro";
+  planExpiresAt: number | null;
+  features: Feature[];
+  limits: Limits;
+  usageToday: { practice: number };
+  /** The API refuses what the plan does not include (its PRO_GATING switch). */
+  gating: boolean;
+};
+
 export type AccountState =
   | { status: "loading" }
   | { status: "guest" }
-  | { status: "user"; account: Account };
+  | { status: "user"; account: Account; entitlements: ServerEntitlements | null };
+
+type SignedIn = { user: Account; entitlements?: ServerEntitlements };
 
 // A hint that survives reloads and reaches other tabs. Visitors who never
 // signed in cost the server nothing: we only ask who they are if it is set.
@@ -78,8 +95,8 @@ async function restore(): Promise<void> {
   if (restoring) return;
   restoring = true;
   try {
-    const { user } = await api<{ user: Account }>("GET", "/me");
-    enter(user);
+    const { user, entitlements } = await api<SignedIn>("GET", "/me");
+    enter(user, entitlements);
   } catch (error) {
     endIfSignedOut(error);
     setState(GUEST);
@@ -88,11 +105,11 @@ async function restore(): Promise<void> {
   }
 }
 
-function enter(account: Account): void {
+function enter(account: Account, entitlements?: ServerEntitlements): void {
   // The account's language wins on this device. Set it before the state, or
   // onStoreChange would read the difference as the player picking a language.
   if (getLocale() !== account.locale) setLocale(account.locale);
-  setState({ status: "user", account });
+  setState({ status: "user", account, entitlements: entitlements ?? null });
   writeStore(SIGNED_IN_KEY, true);
   syncGames(account.id)
     .then(() => pushResults(account.id))
@@ -125,7 +142,7 @@ function onStoreChange(): void {
 
   const locale = getLocale();
   if (locale !== state.account.locale) {
-    setState({ status: "user", account: { ...state.account, locale } });
+    setState({ ...state, account: { ...state.account, locale } });
     api("PATCH", "/me", { locale }).catch(endIfSignedOut);
   }
 
@@ -146,7 +163,7 @@ export const INVITED_BY_KEY = "account:invited-by";
 
 export async function signUp(email: string, password: string, username: string): Promise<void> {
   const invitedBy = readStore<string | null>(INVITED_BY_KEY, null);
-  const { user } = await api<{ user: Account }>("POST", "/auth/signup", {
+  const { user, entitlements } = await api<SignedIn>("POST", "/auth/signup", {
     email,
     password,
     username,
@@ -154,12 +171,12 @@ export async function signUp(email: string, password: string, username: string):
     ...(invitedBy ? { invitedBy } : {}),
   });
   writeStore(INVITED_BY_KEY, null);
-  enter(user);
+  enter(user, entitlements);
 }
 
 export async function signIn(email: string, password: string): Promise<void> {
-  const { user } = await api<{ user: Account }>("POST", "/auth/login", { email, password });
-  enter(user);
+  const { user, entitlements } = await api<SignedIn>("POST", "/auth/login", { email, password });
+  enter(user, entitlements);
 }
 
 /** Signs out and clears this device; the games stay in the account. */
@@ -184,7 +201,18 @@ export async function updateAccount(changes: {
   country?: string | null;
 }): Promise<void> {
   const { user } = await api<{ user: Account }>("PATCH", "/me", changes);
-  if (state.status === "user") setState({ status: "user", account: user });
+  if (state.status === "user") setState({ ...state, account: user });
+}
+
+/** Asks the server again what the account's plan allows (after a purchase, a grant, a 402). */
+export async function refreshEntitlements(): Promise<void> {
+  if (state.status !== "user") return;
+  try {
+    const { user, entitlements } = await api<SignedIn>("GET", "/me");
+    if (state.status === "user") setState({ ...state, account: user, entitlements: entitlements ?? null });
+  } catch (error) {
+    endIfSignedOut(error);
+  }
 }
 
 /** Also signs the account out on every other device. */

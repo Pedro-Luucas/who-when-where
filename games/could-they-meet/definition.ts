@@ -10,6 +10,7 @@ export const definition = defineGame({
   },
   description: "Two famous people: were they ever alive at the same time? Ten pairs, yes or no.",
   family: "who",
+  tier: "pro",
   engine: "pick",
   save: { key: "could-they-meet:v1", progressField: "moves", lists: ["ids"] },
   status: "detail",
