@@ -423,6 +423,64 @@
     flex-basis: 0;
   }
 }
+
+/* ───────────────────────── Dig Site's strip of digs ─────────────────────────
+   Five cells across a phone: a heat name longer than a cell ("CONGELANDO",
+   Portuguese for freezing) ran into the next one. Long names now break over
+   two lines inside their own cell. */
+.progress-label {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+@media (max-width: 47.99rem) {
+  .progress-label {
+    letter-spacing: 0;
+  }
+}
+
+/* ───────────────────────── Catalogue tiles and daily cards ───────────────────────── */
+
+.tile-art,
+.daily-card-art {
+  overflow: hidden;
+}
+
+.tile-art svg,
+.daily-card-art svg {
+  transition: transform 420ms var(--ease-out);
+}
+
+.tile-hit:hover .tile-art svg,
+.daily-card-hit:hover .daily-card-art svg {
+  transform: scale(1.045);
+}
+
+.tile-hit:hover,
+.daily-card-hit:hover {
+  box-shadow:
+    var(--shadow-card),
+    0 12px 32px -8px color-mix(in oklab, var(--fam) 35%, transparent);
+}
+
+.tile-hit:active,
+.daily-card-hit:active {
+  transform: translateY(0) scale(0.985);
+  transition-duration: 90ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile-art svg,
+  .daily-card-art svg {
+    transition: none;
+  }
+
+  .tile-hit:hover .tile-art svg,
+  .daily-card-hit:hover .daily-card-art svg {
+    transform: none;
+  }
+}
 }
 
 /* connect.css is written outside the cascade layers, so this override is too.
