@@ -1912,7 +1912,7 @@ button {
   overscroll-behavior: contain;
 }
 
-.picker-list button {
+.picker-list [role="option"] {
   display: block;
   width: 100%;
   min-height: 44px;
@@ -1923,20 +1923,20 @@ button {
   text-align: left;
 }
 
-.picker-list li:last-child button {
+.picker-list li:last-child {
   border-bottom: 0;
 }
 
-.picker-list button:hover:not(:disabled) {
+.picker-list [role="option"]:hover:not([aria-disabled]) {
   background: var(--paper-2);
 }
 
-.picker-list button[aria-pressed="true"] {
+.picker-list [role="option"][aria-selected="true"] {
   background: var(--primary-solid);
   color: var(--on-primary);
 }
 
-.picker-list button:disabled {
+.picker-list [role="option"][aria-disabled] {
   color: var(--ink-3);
   text-decoration: line-through;
   cursor: default;

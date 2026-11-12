@@ -1,12 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { GuessCombobox } from "@/components/ui/guess-combobox";
 import type { Locale, Localized } from "@/lib/i18n";
 
 // The Name engine's input: type a few letters, pick from the matches — any
 // list of things with names in both languages (people, countries, cities).
 // Typing down to one match is as good as tapping it; the arrow keys move the
-// choice; Enter only submits a choice the player made or typed out in full.
+// choice; Enter only submits a choice the player made or typed out in full
+// (components/ui/guess-combobox.tsx).
 
 export type Nameable = {
   id: string;
@@ -72,89 +73,24 @@ type Props = {
   disabled?: boolean;
 };
 
-const SHOWN = 8;
-
-/** Names one item of `pool`. */
+/** Names one item of `pool`: the game's GuessCombobox, fed by searchNames. */
 export function NamePicker({ pool, locale, taken, onSubmit, labels, children, disabled }: Props) {
-  const [query, setQuery] = useState("");
-  const [choice, setChoice] = useState<string | null>(null);
-
-  const found = useMemo(() => searchNames(query, pool, locale), [query, pool, locale]);
-  // The names already given are taken out before the list is cut, so they never crowd out valid matches.
-  const open = found.filter((item) => !taken.has(item.id));
-  const matches = [...open, ...found.filter((item) => taken.has(item.id))].slice(0, SHOWN);
-  const chosen = choice && open.some((item) => item.id === choice) ? choice : null;
-  const picked = chosen ?? open[0]?.id ?? null;
-  const typed = fold(query);
-  const sure =
-    chosen !== null ||
-    open.length === 1 ||
-    (open[0] !== undefined && typed !== "" && fold(open[0].name[locale]) === typed);
-
-  function submit() {
-    if (!picked || !sure || disabled) return;
-    onSubmit(picked);
-    setQuery("");
-    setChoice(null);
-  }
-
-  function move(step: number) {
-    if (!open.length) return;
-    const at = chosen ? open.findIndex((item) => item.id === chosen) : step > 0 ? -1 : 0;
-    setChoice(open[(at + step + open.length) % open.length].id);
-  }
-
   return (
-    <form
-      className="picker"
-      onSubmit={(event) => {
-        event.preventDefault();
-        submit();
-      }}
+    <GuessCombobox
+      search={(query) =>
+        searchNames(query, pool, locale).map((item) => ({
+          id: item.id,
+          label: item.name[locale],
+          note: item.note,
+          taken: taken.has(item.id),
+        }))
+      }
+      exact={(query) => exactName(query, pool)?.id}
+      onSubmit={onSubmit}
+      labels={labels}
+      disabled={disabled}
     >
-      <input
-        className="picker-input"
-        type="search"
-        value={query}
-        disabled={disabled}
-        onChange={(event) => {
-          setQuery(event.target.value);
-          setChoice(null);
-        }}
-        onKeyDown={(event) => {
-          if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
-          event.preventDefault();
-          move(event.key === "ArrowDown" ? 1 : -1);
-        }}
-        placeholder={labels.placeholder}
-        aria-label={labels.search}
-        autoComplete="off"
-        spellCheck={false}
-      />
-      {query.trim() !== "" && (
-        <ul className="picker-list">
-          {matches.map((item) => (
-            <li key={item.id}>
-              <button
-                type="button"
-                disabled={taken.has(item.id)}
-                aria-pressed={picked === item.id}
-                onClick={() => setChoice(item.id)}
-              >
-                {item.name[locale]}
-                {item.note && <small className="picker-note">{item.note}</small>}
-              </button>
-            </li>
-          ))}
-          {matches.length === 0 && <li className="picker-empty">{labels.noMatch}</li>}
-        </ul>
-      )}
-      <div className="picker-actions">
-        {children ?? <span />}
-        <button type="submit" className="button" disabled={!picked || !sure || disabled}>
-          {labels.submit}
-        </button>
-      </div>
-    </form>
+      {children}
+    </GuessCombobox>
   );
 }

@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import { Hud, type Pip } from "@/components/play/hud";
 import { Plaque } from "@/components/play/plaque";
 import { ResultCard, type ReviewRow } from "@/components/play/result-card";
+import { GuessCombobox, type GuessOption } from "@/components/ui/guess-combobox";
 import { ReadMore } from "@/components/result-footer";
 import { WorldMap, useMapLabels, type MapMarker, type MapRoute } from "@/components/world-map";
 import { formatYear } from "@/lib/i18n";
@@ -58,8 +58,6 @@ export function WayfarerBoard({
   const { locale, t } = useGameT();
   const shell = useShellT();
   const mapLabels = useMapLabels();
-  const [query, setQuery] = useState("");
-  const [choice, setChoice] = useState<string | null>(null);
 
   const used = guesses.length;
   const solved = isSolved(journey.id, guesses);
@@ -68,8 +66,6 @@ export function WayfarerBoard({
   function submit(guess: Guess) {
     if (over) return;
     onGuess(guess);
-    setQuery("");
-    setChoice(null);
   }
 
   // How much of the route is on the map, and how much of that is new since
@@ -105,14 +101,26 @@ export function WayfarerBoard({
   // Where the line stops for now.
   if (!over) markers.push({ ...visible[visible.length - 1], kind: "answer" });
 
-  const options = JOURNEYS.map((entry) => ({ id: entry.id, label: entry.name[locale] })).sort(
-    (a, b) => a.label.localeCompare(b.label, locale),
-  );
-  const matches = options.filter((option) => fold(option.label).includes(fold(query.trim())));
+  // The logbook: every journey, A to Z; the ones already tried are struck through.
   const tried = new Set(guesses);
-  // Typing down to a single journey is as good as tapping it.
-  const open = matches.filter((option) => !tried.has(option.id));
-  const picked = choice ?? (query.trim() && open.length === 1 ? open[0].id : null);
+  const options: GuessOption[] = JOURNEYS.map((entry) => ({
+    id: entry.id,
+    label: entry.name[locale],
+    taken: tried.has(entry.id),
+  })).sort((a, b) => a.label.localeCompare(b.label, locale));
+  // Names that start with the text first, then names with a word that does, then the rest.
+  const searchLogbook = (query: string) => {
+    const text = fold(query.trim());
+    const rank = (label: string) => {
+      const name = fold(label);
+      return name.startsWith(text) ? 0 : name.includes(` ${text}`) ? 1 : name.includes(text) ? 2 : -1;
+    };
+    return options
+      .map((option) => ({ option, at: rank(option.label) }))
+      .filter((entry) => entry.at >= 0)
+      .sort((a, b) => a.at - b.at)
+      .map((entry) => entry.option);
+  };
 
   const years =
     journey.start === journey.end
@@ -227,50 +235,24 @@ export function WayfarerBoard({
           <>
             <Plaque eyebrow={shell("plaqueJourney")} text={t("question")} as="h1" />
             {map}
-            <form
-              className="picker"
-              onSubmit={(event) => {
-                event.preventDefault();
-                if (picked) submit(picked);
+            <GuessCombobox
+              search={searchLogbook}
+              browse={() => options}
+              exact={(query) => options.find((option) => fold(option.label) === fold(query.trim()))?.id}
+              onSubmit={submit}
+              labels={{
+                placeholder: t("searchPlaceholder"),
+                search: t("searchLabel"),
+                submit: t("guess"),
+                noMatch: t("noMatch"),
               }}
+              max={12}
+              actionsClassName="action-bar"
             >
-              <input
-                className="picker-input"
-                type="search"
-                value={query}
-                onChange={(event) => {
-                  setQuery(event.target.value);
-                  setChoice(null);
-                }}
-                placeholder={t("searchPlaceholder")}
-                aria-label={t("searchLabel")}
-                autoComplete="off"
-                spellCheck={false}
-              />
-              <ul className="picker-list">
-                {matches.map((option) => (
-                  <li key={option.id}>
-                    <button
-                      type="button"
-                      disabled={tried.has(option.id)}
-                      aria-pressed={picked === option.id}
-                      onClick={() => setChoice(option.id)}
-                    >
-                      {option.label}
-                    </button>
-                  </li>
-                ))}
-                {matches.length === 0 && <li className="picker-empty">{t("noMatch")}</li>}
-              </ul>
-              <div className="picker-actions action-bar">
-                <button type="button" className="button button-quiet" onClick={() => submit(null)}>
-                  {t("skip")}
-                </button>
-                <button type="submit" className="button" disabled={!picked}>
-                  {t("guess")}
-                </button>
-              </div>
-            </form>
+              <button type="button" className="button button-quiet" onClick={() => submit(null)}>
+                {t("skip")}
+              </button>
+            </GuessCombobox>
             <Tries guesses={guesses} journey={journey} />
           </>
         )}
