@@ -14,7 +14,10 @@ import { getLeaderboard, type Period, type Scope } from "./client";
 import { socialError, useSocialT } from "./messages";
 import { useRemote } from "./remote";
 import { SocialTabs } from "./tabs";
+import { ButtonLink } from "@/components/ui/button";
+import { EmptyState } from "@/components/ui/empty-state";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useShellT } from "@/lib/shell-messages";
 
 const EVERY_MS = 30_000;
 const PERIODS: Period[] = ["day", "week", "all"];
@@ -31,6 +34,7 @@ export function Leaderboard() {
 function Board() {
   const { locale, t } = useSocialT();
   const { t: tc } = useConnectT();
+  const shell = useShellT();
   const day = useDayNumber();
   const account = useAccount();
   const me = account.status === "user" ? account.account : null;
@@ -127,13 +131,25 @@ function Board() {
         ))}
         {rows?.length === 0 && (
           <li className="board-empty">
-            {shownScope === "country" ? (
-              <>
-                <Flag code={country} /> {tc("boardEmptyCountry")}
-              </>
-            ) : (
-              t(shownScope === "friends" ? "boardEmptyFriends" : "boardEmpty")
-            )}
+            <EmptyState
+              icon={<Icon name="trophy" size={26} />}
+              title={
+                shownScope === "country" ? (
+                  <>
+                    <Flag code={country} /> {tc("boardEmptyCountry")}
+                  </>
+                ) : (
+                  t(shownScope === "friends" ? "boardEmptyFriends" : "boardEmpty")
+                )
+              }
+              action={
+                <ButtonLink href="/daily" variant="play" icon={<Icon name="play" size={17} />}>
+                  {shell("recapPlay")}
+                </ButtonLink>
+              }
+            >
+              {t("boardEmptyLead")}
+            </EmptyState>
           </li>
         )}
         {/* Loading: rows in the board's own shape, so nothing jumps when it arrives. */}

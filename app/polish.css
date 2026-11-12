@@ -310,4 +310,67 @@
     animation: none !important;
   }
 }
+
+/* ───────────────────────── Pricing: the in-page nav ─────────────────────────
+   On phones the nav scrolls sideways without wrapping; its links shrank to fit
+   instead and their words ran over each other ("WHAT PRPLANSCOMPARE"). */
+.pricing-toc > * {
+  flex: none;
+}
+
+/* ───────────────────────── Loading: each game in its own shape ───────────────────────── */
+
+.skeleton-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.skeleton-cards > .skeleton-block {
+  height: 92px;
+}
+
+.skeleton-list {
+  display: grid;
+  gap: 10px;
+}
+
+.skeleton-list > .skeleton-block {
+  height: 62px;
+}
+
+.skeleton-photo {
+  height: clamp(220px, 42svh, 420px);
+}
+
+.skeleton-cards > .skeleton-block:nth-child(2),
+.skeleton-list > .skeleton-block:nth-child(2) {
+  animation-delay: 120ms;
+}
+
+.skeleton-cards > .skeleton-block:nth-child(3),
+.skeleton-list > .skeleton-block:nth-child(3) {
+  animation-delay: 240ms;
+}
+
+.skeleton-cards > .skeleton-block:nth-child(4),
+.skeleton-list > .skeleton-block:nth-child(4) {
+  animation-delay: 360ms;
+}
+
+.skeleton-list > .skeleton-block:nth-child(5) {
+  animation-delay: 480ms;
+}
+}
+
+/* connect.css is written outside the cascade layers, so this override is too.
+   On a phone the five league tiers share 390px: in mono capitals "Platinum"
+   broke in the middle of the word. The narrower interface face keeps every
+   name on one line at the same 12px. */
+@media (max-width: 47.99rem) {
+  .tier-ladder li {
+    font-family: var(--font-sans);
+    overflow-wrap: normal;
+    word-break: keep-all;
+  }
 }
