@@ -361,6 +361,68 @@
 .skeleton-list > .skeleton-block:nth-child(5) {
   animation-delay: 480ms;
 }
+
+/* ───────────────────────── Result card: layout and arrival ───────────────────────── */
+
+/* The answer-by-answer review spans both rows; a long one (Border Chain's
+   twelve moves, Type the Countries' continents) stretched the first row and
+   pushed Share, Practice and Up next far down the page. Row one now fits the
+   score; the review's extra length goes to row two. */
+@media (min-width: 48rem) {
+  .result-card-grid {
+    grid-template-rows: auto 1fr;
+  }
+}
+
+/* Scrolled into view on finishing: clear of the sticky header and HUD. */
+.result-card {
+  scroll-margin-top: 150px;
+}
+
+@media (max-width: 47.99rem) {
+  .result-card {
+    scroll-margin-top: 72px;
+  }
+}
+
+/* The verdict lands: the headline rises, the stats and review follow. */
+.result-card-head h2 {
+  animation: rise 0.42s var(--ease-out) both;
+}
+
+.result-card-head .result-card-answer {
+  animation: rise 0.42s var(--ease-out) 80ms both;
+}
+
+.result-review li {
+  animation: rise 0.36s var(--ease-out) both;
+}
+
+.result-review li:nth-child(2) { animation-delay: 60ms; }
+.result-review li:nth-child(3) { animation-delay: 120ms; }
+.result-review li:nth-child(4) { animation-delay: 180ms; }
+.result-review li:nth-child(5) { animation-delay: 240ms; }
+.result-review li:nth-child(n + 6) { animation-delay: 300ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .result-card-head h2,
+  .result-card-head .result-card-answer,
+  .result-review li {
+    animation: none;
+  }
+}
+
+/* ───────────────────────── Phones: the map gives way to a growing plaque ─────────────────────────
+   The map fills the screen between the prompt and the action bar, but its
+   flex basis was its own drawn height: when a verdict line grew the plaque
+   ("That's Egypt · 2 tries left"), the screen overflowed and the sticky
+   action bar covered the bottom of the map and its zoom keys. From a zero
+   basis it takes what is left, and gives some back when the plaque grows. */
+@media (max-width: 47.99rem) {
+  main.game:not([data-summary]) > .stage > .map-frame {
+    flex-basis: 0;
+  }
+}
 }
 
 /* connect.css is written outside the cascade layers, so this override is too.

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ProgressRing } from "@/components/ui/progress-ring";
 import { familyStyle, useGameFrame } from "@/games/platform/frame";
 import { cuePuzzle } from "@/lib/fx";
@@ -93,6 +93,19 @@ export function ResultCard({ label, headline, answer, points, stats, review, chi
   const share = Math.round((points / MAX_POINTS) * 100);
   const practice = !!frame?.practice;
 
+  // A puzzle the player just finished (not one reopened) brings its result
+  // into view: long boards (Timeline, Year Snap) ended with the page scrolled
+  // far past the verdict.
+  const card = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const el = card.current;
+    if (!el || !navigator.userActivation?.isActive) return;
+    const top = el.getBoundingClientRect().top;
+    if (top >= 0 && top < window.innerHeight * 0.5) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollIntoView({ block: "start", behavior: reduce ? "auto" : "smooth" });
+  }, []);
+
   // A practice puzzle just finished gets its fanfare here (a daily one gets it
   // from the logbook's watcher, which sees the save). Only when the player's
   // own move ended it: a finished puzzle reopened stays quiet.
@@ -102,7 +115,7 @@ export function ResultCard({ label, headline, answer, points, stats, review, chi
   }, [practice, points]);
 
   return (
-    <section className="result-card" aria-labelledby="result-headline" style={familyStyle(frame?.family)}>
+    <section ref={card} className="result-card" aria-labelledby="result-headline" style={familyStyle(frame?.family)}>
       <header className="result-card-head">
         <p className="eyebrow">
           {frame?.title && <b>{frame.title}</b>} {label}
