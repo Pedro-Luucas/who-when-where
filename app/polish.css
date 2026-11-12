@@ -515,6 +515,61 @@
     animation: none;
   }
 }
+
+/* The keyboard tip under the rules (computers only). */
+.help-keys {
+  margin: 4px 0 14px;
+  color: var(--fg-2);
+  font-size: 0.9rem;
+}
+
+.help-keys kbd {
+  display: inline-grid;
+  place-items: center;
+  min-width: 24px;
+  height: 24px;
+  margin: 0 4px;
+  padding: 0 6px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: 0 2px 0 var(--key-side);
+}
+
+/* HUD pips: a try that resolves pops in its colour; the one being played breathes. */
+.hud-pips li:is([data-state="hit"], [data-state="near"], [data-state="miss"]) {
+  animation: pip-pop 360ms var(--ease-spring);
+}
+
+.hud-pips li[data-state="current"] {
+  animation: pip-breathe 1.8s ease-in-out infinite;
+}
+
+@keyframes pip-pop {
+  0% {
+    transform: scaleX(0.4) scaleY(1.6);
+  }
+  60% {
+    transform: scaleX(1.15) scaleY(0.9);
+  }
+}
+
+@keyframes pip-breathe {
+  50% {
+    box-shadow: 0 0 2px var(--accent);
+    opacity: 0.75;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hud-pips li {
+    animation: none !important;
+  }
+}
 }
 
 /* connect.css is written outside the cascade layers, so this override is too.
