@@ -1,0 +1,218 @@
+/* year-snap (phase 15): a historical photo to date on the year dial. */
+
+@layer components {
+  /* ── The photo being dated ── */
+
+  .game[data-game="year-snap"] .snap-photo {
+    position: relative;
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    animation: rise 0.35s both;
+  }
+
+  .game[data-game="year-snap"] .snap-photo-button {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    min-height: 180px;
+    padding: 0;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-lg);
+    background: var(--sunken);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    cursor: zoom-in;
+  }
+
+  .game[data-game="year-snap"] .snap-photo-button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .game[data-game="year-snap"] .snap-photo-button img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: clamp(220px, 46svh, 560px);
+    object-fit: contain;
+  }
+
+  .game[data-game="year-snap"] .snap-zoom {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-pill);
+    background: var(--glass);
+    color: var(--fg);
+  }
+
+  .game[data-game="year-snap"] .snap-preload {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .game[data-game="year-snap"] .snap-photo figcaption {
+    display: grid;
+    gap: 4px;
+    animation: fade 0.4s both;
+  }
+
+  .game[data-game="year-snap"] .snap-caption {
+    font-size: 1rem;
+    line-height: 1.35;
+    color: var(--fg);
+    text-wrap: pretty;
+  }
+
+  .game[data-game="year-snap"] .image-credit {
+    font-size: 0.78rem;
+    color: var(--fg-3);
+    overflow-wrap: anywhere;
+  }
+
+  /* ── The year set and the real one ── */
+
+  .game[data-game="year-snap"] .snap-timeline {
+    padding-block: 70px;
+  }
+
+  .game[data-game="year-snap"] .snap-timeline .timeline-flag strong {
+    font-size: clamp(1.4rem, 5vw, 2rem);
+  }
+
+  .game[data-game="year-snap"] .snap-timeline[data-exact] .timeline-flag-answer strong {
+    font-size: clamp(2.2rem, 9vw, 3.2rem);
+  }
+
+  /* ── The five photos, once the puzzle is over ── */
+
+  .game[data-game="year-snap"] .snap-strip {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+  }
+
+  .game[data-game="year-snap"] .snap-strip ol {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .game[data-game="year-snap"] .snap-strip li {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--tone, var(--line-strong));
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    overflow: hidden;
+  }
+
+  .game[data-game="year-snap"] .snap-strip li[data-verdict="hit"] {
+    --tone: var(--play);
+  }
+
+  .game[data-game="year-snap"] .snap-strip li[data-verdict="near"] {
+    --tone: var(--streak);
+  }
+
+  .game[data-game="year-snap"] .snap-strip li[data-verdict="miss"] {
+    --tone: var(--danger);
+  }
+
+  .game[data-game="year-snap"] .snap-thumb {
+    display: block;
+    width: 100%;
+    min-height: 44px;
+    padding: 0;
+    border: 0;
+    background: var(--sunken);
+    cursor: zoom-in;
+  }
+
+  .game[data-game="year-snap"] .snap-thumb:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+  }
+
+  .game[data-game="year-snap"] .snap-thumb img {
+    display: block;
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+
+  .game[data-game="year-snap"] .snap-strip-text {
+    display: grid;
+    align-content: start;
+    gap: 6px;
+    padding: 10px 12px 12px;
+  }
+
+  .game[data-game="year-snap"] .snap-strip-year {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 10px;
+  }
+
+  .game[data-game="year-snap"] .snap-strip-year strong {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--answer);
+  }
+
+  .game[data-game="year-snap"] .snap-strip-year small {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--fg-2);
+  }
+
+  .game[data-game="year-snap"] .snap-strip-caption {
+    font-size: 0.9rem;
+    line-height: 1.35;
+    color: var(--fg);
+  }
+
+  /* Phones, upright: the photo takes what the prompt and the dial leave. */
+  @media (max-width: 47.99rem) {
+    .game[data-game="year-snap"]:not([data-summary]) > .stage > .snap-photo {
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+
+    .game[data-game="year-snap"] .snap-photo-button img {
+      max-height: max(200px, 38svh);
+    }
+
+    .game[data-game="year-snap"] .snap-timeline {
+      padding-block: 58px;
+    }
+
+    .game[data-game="year-snap"] .snap-strip ol {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .game[data-game="year-snap"] .snap-thumb img {
+      height: 120px;
+    }
+  }
+}

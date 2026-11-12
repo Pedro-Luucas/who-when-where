@@ -36,6 +36,8 @@ export type PinRound = {
   answerRegions?: MapRegion[];
   /** What the map frames while the round is played; the whole world when left out. */
   view?: LatLon[];
+  /** Shown between the prompt and the map while the round is played and on its reveal (a photo). */
+  media?: React.ReactNode;
 };
 
 /** How a try (or the choice about to be locked in) shows: on the map, and in a few words. */
@@ -279,6 +281,8 @@ export function PinBoard<Move>({
             ) : undefined
           }
         />
+
+        {round.media}
 
         <WorldMap
           markers={markers}

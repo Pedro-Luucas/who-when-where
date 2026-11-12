@@ -14,6 +14,14 @@ import { definition as typeTheCountries } from "./type-the-countries/definition"
 import { definition as flagPeek } from "./flag-peek/definition";
 import { definition as higherOrLower } from "./higher-or-lower/definition";
 import { definition as borderChain } from "./border-chain/definition";
+import { definition as timeline } from "./timeline/definition";
+import { definition as yearSnap } from "./year-snap/definition";
+import { definition as landmarkLens } from "./landmark-lens/definition";
+import { definition as trueSize } from "./true-size/definition";
+import { definition as riversAndRanges } from "./rivers-and-ranges/definition";
+import { definition as lifeTracks } from "./life-tracks/definition";
+import { definition as quickplay } from "./quickplay/definition";
+import { definition as gauntlet } from "./gauntlet/definition";
 import { DAILY_SET } from "./daily-set";
 import type { GameDefinition } from "./platform/definition";
 import { definition as wayfarer } from "./wayfarer/definition";
@@ -50,6 +58,15 @@ const DEFINITIONS = [
   flagPeek,
   higherOrLower,
   borderChain,
+  // Wave 2 (AUDIT_AND_PLAN §5, phase 15).
+  timeline,
+  yearSnap,
+  landmarkLens,
+  trueSize,
+  riversAndRanges,
+  lifeTracks,
+  quickplay,
+  gauntlet,
 ] as const;
 
 export type GameSlug = (typeof DEFINITIONS)[number]["slug"];

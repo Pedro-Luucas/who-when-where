@@ -1,0 +1,196 @@
+/* Quickplay and Gauntlet (phase 15): one question at a time, each from another
+   game, on the Pick board. The plaque takes the colour of the family the
+   question's game belongs to, read from the round's scene marker
+   (.qp-scene[data-family]); the options switch layout with the kind of question. */
+
+@layer components {
+/* ── The source game's colour on the plaque ── */
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .stage:has(.qp-scene[data-family="who"]) { --qp-fam: var(--color-family-who); }
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .stage:has(.qp-scene[data-family="when"]) { --qp-fam: var(--color-family-when); }
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .stage:has(.qp-scene[data-family="where"]) { --qp-fam: var(--color-family-where); }
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .stage:has(.qp-scene[data-family="shapes"]) { --qp-fam: var(--color-family-shapes); }
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .stage:has(.qp-scene[data-family="flags"]) { --qp-fam: var(--color-family-flags); }
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .stage:has(.qp-scene[data-family="words"]) { --qp-fam: var(--color-family-words); }
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .stage:has(.qp-scene[data-family="numbers"]) { --qp-fam: var(--color-family-numbers); }
+
+/* The plaque sets its own --fam inline (the game's family): the question's wins. */
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .stage .plaque {
+  --fam: var(--qp-fam, var(--color-family-words)) !important;
+}
+
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .stage .plaque-eyebrow {
+  color: var(--qp-fam, var(--accent));
+}
+
+/* ── What is on the table ── */
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .qp-scene {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  animation: rise 0.35s both;
+}
+
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .qp-scene[hidden] {
+  display: none;
+}
+
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .qp-scene > :is(.people-pair, .lifelines) {
+  width: 100%;
+}
+
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .qp-flag {
+  width: min(100%, 280px);
+  box-shadow:
+    0 0 0 1px var(--line-strong),
+    var(--shadow-raised);
+}
+
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .qp-flag-small {
+  width: min(50%, 150px);
+}
+
+/* ── The options, by kind ── */
+
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .pick-option {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Two choices (which first, which more): two big cards side by side. */
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"])
+  .stage:has(.qp-scene:is([data-type="earlier"], [data-type="bornFirst"], [data-type="bigger"]))
+  .pick-option {
+  min-height: 120px;
+  padding: 16px 14px;
+}
+
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .stage:has(.qp-scene[data-type="bigger"]) .pick-label {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+/* Yes or no: two words. */
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .stage:has(.qp-scene[data-type="met"]) .pick-option {
+  min-height: 72px;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+/* Four moments: one per line, they are long. */
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .stage:has(.qp-scene[data-type="sameYear"]) .pick-options {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .stage:has(.qp-scene[data-type="sameYear"]) .pick-option {
+  flex-direction: row;
+  justify-content: space-between;
+  min-height: 56px;
+  padding-left: 28px;
+  text-align: left;
+}
+
+/* Flags as options: a little smaller than the engine's, so four fit a phone. */
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"])
+  .stage:has(.qp-scene:is([data-type="capitalOf"], [data-type="border"]))
+  .pick-media
+  .flag {
+  width: 72px;
+  height: 54px;
+}
+
+/* ── After the result: by game ── */
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .qp-by-game {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .qp-by-game ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 170px), 1fr));
+  gap: 6px;
+}
+
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .qp-by-game li { --qp-fam: var(--color-family-words); }
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .qp-by-game li[data-family="who"] { --qp-fam: var(--color-family-who); }
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .qp-by-game li[data-family="when"] { --qp-fam: var(--color-family-when); }
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .qp-by-game li[data-family="where"] { --qp-fam: var(--color-family-where); }
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .qp-by-game li[data-family="shapes"] { --qp-fam: var(--color-family-shapes); }
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .qp-by-game li[data-family="flags"] { --qp-fam: var(--color-family-flags); }
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .qp-by-game li[data-family="numbers"] { --qp-fam: var(--color-family-numbers); }
+
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .qp-by-game li > :is(a, span) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 44px;
+  padding: 6px 10px 6px 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--qp-fam);
+  border-radius: var(--radius-md);
+  background: var(--sunken);
+  color: var(--fg);
+  font-size: 0.88rem;
+  text-decoration: none;
+}
+
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .qp-by-game li > a:hover {
+  border-color: var(--qp-fam);
+  background: var(--surface-2);
+}
+
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .qp-by-game-name {
+  min-width: 0;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .qp-by-game-score {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--fg-2);
+}
+
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .qp-by-game-score[data-tone="hit"] {
+  color: var(--answer);
+}
+
+:is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .qp-by-game-score[data-tone="miss"] {
+  color: var(--danger);
+}
+
+@media (max-width: 520px) {
+  :is(.game[data-game="quickplay"], .game[data-game="gauntlet"])
+    .stage:has(.qp-scene:is([data-type="earlier"], [data-type="bornFirst"], [data-type="bigger"]))
+    .pick-option {
+    min-height: 96px;
+    padding: 14px 10px;
+  }
+
+  :is(.game[data-game="quickplay"], .game[data-game="gauntlet"])
+    .stage:has(.qp-scene:is([data-type="capitalOf"], [data-type="border"]))
+    .pick-media
+    .flag {
+    width: 60px;
+    height: 45px;
+  }
+
+  :is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .qp-flag {
+    width: min(100%, 220px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :is(.game[data-game="quickplay"], .game[data-game="gauntlet"]) .qp-scene {
+    animation: none;
+  }
+}
+}

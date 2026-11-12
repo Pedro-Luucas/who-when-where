@@ -352,6 +352,161 @@ const SCENES: Record<string, React.ReactNode> = {
       <circle cx="254" cy="98" r="8" fill="none" stroke={ink} strokeWidth="3" />
     </>
   ),
+
+  // ── Wave 2 (phase 15) ──
+  // A line of cards with a gap, and the new card dropping into it.
+  timeline: (
+    <>
+      <path d="M24 132h272" stroke={fam} strokeOpacity=".5" strokeWidth="3" strokeLinecap="round" />
+      {[40, 104, 216].map((x) => (
+        <g key={x}>
+          <rect x={x} y="104" width="56" height="56" rx="6" fill="var(--art-card)" stroke={fam} strokeOpacity=".6" />
+          <rect x={x + 10} y="116" width="36" height="6" rx="3" fill={fam} fillOpacity=".5" />
+          <rect x={x + 10} y="128" width="24" height="6" rx="3" fill={dim} />
+        </g>
+      ))}
+      <rect x="166" y="112" width="44" height="40" rx="6" fill="none" stroke={fam} strokeWidth="2" strokeDasharray="5 5" />
+      <rect x="160" y="30" width="56" height="56" rx="6" fill={fam} fillOpacity=".9" transform="rotate(-8 188 58)" />
+      <path d="M188 92v14" stroke={ink} strokeWidth="3" strokeLinecap="round" />
+      <path d="M181 100l7 8 7-8" fill="none" stroke={ink} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+    </>
+  ),
+  // An old photo above a year dial.
+  "year-snap": (
+    <>
+      <rect x="92" y="22" width="136" height="100" rx="4" fill="var(--art-card)" stroke={fam} strokeWidth="2" transform="rotate(-4 160 72)" />
+      <rect x="104" y="34" width="112" height="70" fill={fam} fillOpacity=".35" transform="rotate(-4 160 72)" />
+      <path d="M108 100l26-30 18 18 14-12 34 26z" fill={fam} fillOpacity=".8" transform="rotate(-4 160 72)" />
+      <circle cx="186" cy="56" r="8" fill={ink} fillOpacity=".7" transform="rotate(-4 160 72)" />
+      <rect x="40" y="146" width="240" height="34" rx="6" fill="var(--art-card)" stroke={fam} strokeOpacity=".5" />
+      {Array.from({ length: 23 }, (_, i) => (
+        <path key={i} d={`M${50 + i * 10} 180v${i % 5 === 0 ? -14 : -7}`} stroke={dim} strokeWidth="2" />
+      ))}
+      <path d="M160 140v44" stroke={fam} strokeWidth="3" strokeLinecap="round" />
+      <text x="160" y="138" textAnchor="middle" className="game-art-text">
+        1936
+      </text>
+    </>
+  ),
+  // A landmark in a viewfinder, and a pin on the map below.
+  "landmark-lens": (
+    <>
+      <Land />
+      <path d="M70 40h-20v20M250 40h20v20M70 160h-20v-20M250 160h20v-20" fill="none" stroke={fam} strokeWidth="3" strokeLinecap="round" />
+      <path d="M160 46l-10 92h20z" fill={fam} fillOpacity=".9" />
+      <path d="M136 138h48l-6-10h-36z" fill={fam} fillOpacity=".7" />
+      <path d="M152 92h16M148 112h24" stroke={ink} strokeWidth="3" strokeOpacity=".7" />
+      <path d="M226 132s-14-13-14-24a14 14 0 0 1 28 0c0 11-14 24-14 24z" fill={ink} />
+      <circle cx="226" cy="108" r="5" fill={fam} />
+    </>
+  ),
+  // Two shapes, one big on the usual map, both at their true size.
+  "true-size": (
+    <>
+      <path d="M40 40l60-8 30 22-6 40-40 18-36-14-12-30z" fill="none" stroke={fam} strokeWidth="2" strokeDasharray="6 5" />
+      <path d="M58 60l34-4 16 12-4 22-22 10-20-8-6-16z" fill={fam} fillOpacity=".5" />
+      <path d="M190 70l40-14 40 16 14 40-20 40-44 10-34-24-8-38z" fill={fam} fillOpacity=".9" />
+      <path d="M150 100h24M168 92l8 8-8 8" fill="none" stroke={ink} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+      <text x="84" y="150" textAnchor="middle" className="game-art-text">
+        ×1
+      </text>
+      <text x="236" y="186" textAnchor="middle" className="game-art-text">
+        ×2.4
+      </text>
+    </>
+  ),
+  // A river winding down from a range of peaks.
+  "rivers-and-ranges": (
+    <>
+      <Land />
+      <path d="M30 96l30-46 22 28 26-44 28 40 20-26 30 48z" fill={fam} fillOpacity=".55" stroke={fam} strokeLinejoin="round" />
+      <path d="M60 50l-7 10h14zM108 34l-8 12h16z" fill={ink} fillOpacity=".8" />
+      <path
+        d="M140 90c20 16 4 34 30 44s40-8 58 6 14 34 60 36"
+        fill="none"
+        stroke={fam}
+        strokeWidth="5"
+        strokeLinecap="round"
+      />
+      <path d="M140 90c20 16 4 34 30 44s40-8 58 6 14 34 60 36" fill="none" stroke={ink} strokeWidth="1.5" strokeOpacity=".6" strokeDasharray="2 8" />
+    </>
+  ),
+  // A life drawn as a route: born, lived, died.
+  "life-tracks": (
+    <>
+      <Land />
+      <path d="M50 140C80 100 110 130 140 90s70-30 90 0 30 40 52 24" fill="none" stroke={fam} strokeWidth="3" strokeDasharray="1 8" strokeLinecap="round" />
+      {[
+        [50, 140, "1"],
+        [140, 90, "2"],
+        [230, 90, "3"],
+        [282, 114, "4"],
+      ].map(([x, y, n]) => (
+        <g key={n}>
+          <circle cx={x} cy={y} r="11" fill={n === "1" ? fam : "var(--art-card)"} stroke={fam} strokeWidth="2.5" />
+          <text x={x} y={Number(y) + 4} textAnchor="middle" className="game-art-text">
+            {n}
+          </text>
+        </g>
+      ))}
+      <circle cx="86" cy="52" r="16" fill={fam} fillOpacity=".85" />
+      <path d="M62 92c3-16 12-24 24-24s21 8 24 24z" fill={fam} fillOpacity=".85" />
+      <text x="86" y="58" textAnchor="middle" className="game-art-text">
+        ?
+      </text>
+    </>
+  ),
+  // Four tiles from four different games.
+  quickplay: (
+    <>
+      {[
+        [56, 30, "var(--color-family-who)"],
+        [164, 30, "var(--color-family-when)"],
+        [56, 110, "var(--color-family-where)"],
+        [164, 110, "var(--color-family-flags)"],
+      ].map(([x, y, colour]) => (
+        <rect key={`${x}-${y}`} x={x} y={y} width="100" height="64" rx="8" fill="var(--art-card)" stroke={String(colour)} strokeWidth="2.5" />
+      ))}
+      <circle cx="106" cy="56" r="12" fill="var(--color-family-who)" />
+      <path d="M86 84c2-10 10-14 20-14s18 4 20 14z" fill="var(--color-family-who)" />
+      <text x="214" y="70" textAnchor="middle" className="game-art-text">
+        1969
+      </text>
+      <path d="M106 158s-12-11-12-20a12 12 0 0 1 24 0c0 9-12 20-12 20z" fill="var(--color-family-where)" />
+      <rect x="186" y="124" width="56" height="36" fill="var(--color-family-flags)" fillOpacity=".85" />
+      <rect x="186" y="136" width="56" height="12" fill={ink} fillOpacity=".7" />
+    </>
+  ),
+  // A stair of questions climbing up, and three hearts.
+  gauntlet: (
+    <>
+      {[0, 1, 2, 3, 4].map((i) => (
+        <rect
+          key={i}
+          x={40 + i * 48}
+          y={150 - i * 26}
+          width="44"
+          height={26 + i * 26}
+          rx="4"
+          fill={fam}
+          fillOpacity={0.25 + i * 0.16}
+          stroke={fam}
+          strokeOpacity=".7"
+        />
+      ))}
+      <path d="M256 30l6 12 13 2-10 9 3 13-12-7-12 7 3-13-10-9 13-2z" fill={ink} />
+      {[44, 72, 100].map((x, i) => (
+        <path
+          key={x}
+          d={`M${x} 52c-6-8-18-4-16 6 2 7 16 16 16 16s14-9 16-16c2-10-10-14-16-6z`}
+          fill={i < 2 ? fam : "none"}
+          stroke={fam}
+          strokeWidth="2"
+          transform="translate(0 -14)"
+        />
+      ))}
+    </>
+  ),
 };
 
 type Props = {

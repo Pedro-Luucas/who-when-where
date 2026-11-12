@@ -35,6 +35,8 @@ type Props = {
   prompt: string;
   /** What is shown of the answer so far: the clues, the picture. */
   subject: React.ReactNode;
+  /** Something wide on the stage, above the guessing and under the result (a map). */
+  media?: React.ReactNode;
   /** The answer's name, once it is over. */
   answerName: string;
   read: (id: string) => GuessReading;
@@ -59,6 +61,7 @@ export function LadderBoard({
   eyebrow,
   prompt,
   subject,
+  media,
   answerName,
   read,
   points,
@@ -138,10 +141,12 @@ export function LadderBoard({
             >
               {children}
             </ResultCard>
+            {media}
             {after}
           </div>
         ) : (
           <>
+            {media}
             <Plaque
               eyebrow={eyebrow}
               text={prompt}

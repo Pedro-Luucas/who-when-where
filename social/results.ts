@@ -39,11 +39,19 @@ export async function pushResults(userId: string): Promise<void> {
 
   // The daily challenge's games first: every version of the accounts API keeps their scores.
   await send(pending.filter((result) => inChallenge(result.game)));
-  try {
-    await send(pending.filter((result) => !inChallenge(result.game)));
-  } catch {
-    // An accounts API from before the newer games refuses their scores. They are
-    // not marked as sent, so they go up with a later sync, once it knows them.
+  // Then every other game on its own: an accounts API from before a game refuses
+  // its scores, and that must not hold back the games it does know.
+  const others = new Map<string, DailyResult[]>();
+  for (const result of pending) {
+    if (inChallenge(result.game)) continue;
+    others.set(result.game, [...(others.get(result.game) ?? []), result]);
+  }
+  for (const results of others.values()) {
+    try {
+      await send(results);
+    } catch {
+      // Not marked as sent, so they go up with a later sync, once the API knows the game.
+    }
   }
 }
 

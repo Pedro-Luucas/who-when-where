@@ -446,7 +446,7 @@ test("deleting an account removes its traces", async () => {
   assert.equal((await bob.call("GET", "/friends")).body.friends.length, 0);
 });
 
-/** Wave 1 of the engine games: none of their puzzles in a party from before them. */
+/** The engine games (waves 1 and 2): none of their puzzles in a party from before them. */
 const NEWER_GAMES_OFF = Object.fromEntries(
   [
     "lifelines",
@@ -461,11 +461,19 @@ const NEWER_GAMES_OFF = Object.fromEntries(
     "flag-peek",
     "higher-or-lower",
     "border-chain",
+    "timeline",
+    "year-snap",
+    "landmark-lens",
+    "true-size",
+    "rivers-and-ranges",
+    "life-tracks",
+    "quickplay",
+    "gauntlet",
   ].map((game) => [game, 0]),
 );
 
 /** Their usual tries, for the ones that let a host set them. */
-const NEWER_TRIES = { lifelines: 3, "clue-ladder": 6, "click-the-country": 3, "flag-peek": 6 };
+const NEWER_TRIES = { lifelines: 3, "clue-ladder": 6, "click-the-country": 3, "flag-peek": 6, timeline: 3, "life-tracks": 5 };
 
 test("the newer games keep scores; party settings from before them are made whole", async () => {
   const { player } = world();
@@ -578,4 +586,33 @@ test("engine games keep scores on their own boards; the dailies add up the daily
   const party = (await ada.call("POST", "/parties", { settings })).body.party;
   assert.equal(party.settings.rounds["border-chain"], 2);
   assert.equal(party.settings.tries["flag-peek"], 4);
+});
+
+test("the wave 2 games keep scores on their own boards, and parties can deal them", async () => {
+  const { browser, player } = world();
+  const ada = await player("ada");
+  const today = utcDay();
+  const wave = ["timeline", "year-snap", "landmark-lens", "true-size", "rivers-and-ranges", "life-tracks", "quickplay", "gauntlet"];
+
+  const put = await ada.call("PUT", "/results", {
+    results: wave.map((game, i) => ({ game, day: today, points: 500 + i * 10, detail: "x" })),
+  });
+  assert.equal(put.status, 204);
+  const guest = browser();
+  for (const [i, game] of wave.entries()) {
+    assert.equal((await guest("GET", `/leaderboard?day=${today}&game=${game}`)).body.rows[0].points, 500 + i * 10, game);
+  }
+  // None of them is a daily: the all-games board stays empty.
+  assert.equal((await guest("GET", `/leaderboard?day=${today}`)).body.rows.length, 0);
+
+  const settings = { ...SETTINGS, rounds: { ...SETTINGS.rounds, timeline: 2, gauntlet: 1 }, tries: { timeline: 5, "life-tracks": 3 } };
+  const party = (await ada.call("POST", "/parties", { settings })).body.party;
+  assert.equal(party.settings.rounds.timeline, 2);
+  assert.equal(party.settings.rounds.gauntlet, 1);
+  assert.equal(party.settings.tries.timeline, 5);
+  assert.equal(party.settings.tries["life-tracks"], 3);
+  assert.equal(
+    (await ada.call("POST", "/parties", { settings: { ...settings, tries: { timeline: 6 } } })).body.field,
+    "settings.tries",
+  );
 });

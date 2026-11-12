@@ -1,0 +1,3622 @@
+[
+ {
+  "id": "boulevard-du-temple",
+  "year": 1838,
+  "caption": {
+   "en": "A Paris boulevard by Louis Daguerre: the man having his boots polished, bottom left, is the first person ever photographed",
+   "pt": "Um bulevar de Paris por Louis Daguerre: o homem engraxando as botas, embaixo à esquerda, é a primeira pessoa já fotografada"
+  },
+  "place": {
+   "lat": 48.866,
+   "lon": 2.366
+  },
+  "image": {
+   "src": "/snaps/05b40ac35593.jpg",
+   "width": 640,
+   "height": 460,
+   "credit": {
+    "file": "Boulevard du Temple by Daguerre.jpg",
+    "author": "Louis Daguerre",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Boulevard_du_Temple_by_Daguerre.jpg"
+   }
+  }
+ },
+ {
+  "id": "cornelius-self-portrait",
+  "year": 1839,
+  "caption": {
+   "en": "Robert Cornelius's self-portrait, one of the first photographs of a person",
+   "pt": "Autorretrato de Robert Cornelius, uma das primeiras fotos de uma pessoa"
+  },
+  "place": {
+   "lat": 39.95,
+   "lon": -75.16
+  },
+  "image": {
+   "src": "/snaps/a7bc693aac83.jpg",
+   "width": 549,
+   "height": 720,
+   "credit": {
+    "file": "RobertCornelius.jpg",
+    "author": "Robert Cornelius",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:RobertCornelius.jpg"
+   }
+  }
+ },
+ {
+  "id": "neuhauser-strasse",
+  "year": 1839,
+  "caption": {
+   "en": "Neuhauser Straße in Munich, by Franz von Kobell and Carl August von Steinheil, among the first photos taken in Germany",
+   "pt": "A Neuhauser Straße, em Munique, por Franz von Kobell e Carl August von Steinheil, entre as primeiras fotos tiradas na Alemanha"
+  },
+  "place": {
+   "lat": 48.139,
+   "lon": 11.57
+  },
+  "image": {
+   "src": "/snaps/ef53af3473c5.jpg",
+   "width": 640,
+   "height": 477,
+   "credit": {
+    "file": "Kobell und Steinheil - Neuhauser Straße - München - 1839.jpg",
+    "author": "Franz von Kobell , Carl August von Steinheil",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Kobell_und_Steinheil_-_Neuhauser_Stra%C3%9Fe_-_M%C3%BCnchen_-_1839.jpg"
+   }
+  }
+ },
+ {
+  "id": "draper-moon",
+  "year": 1840,
+  "caption": {
+   "en": "The Moon by John William Draper, the oldest surviving photograph of it",
+   "pt": "A Lua por John William Draper, a foto mais antiga dela que se conservou"
+  },
+  "image": {
+   "src": "/snaps/b9de1dee326a.jpg",
+   "width": 556,
+   "height": 720,
+   "credit": {
+    "file": "John W Draper-The first Moon Photograph 1840.jpg",
+    "author": "John William Draper",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:John_W_Draper-The_first_Moon_Photograph_1840.jpg"
+   }
+  }
+ },
+ {
+  "id": "drowned-man",
+  "year": 1840,
+  "caption": {
+   "en": "Hippolyte Bayard's \"Self-Portrait as a Drowned Man\", the first staged photograph",
+   "pt": "O \"Autorretrato como afogado\" de Hippolyte Bayard, a primeira foto encenada"
+  },
+  "image": {
+   "src": "/snaps/c1f693ed2a0f.jpg",
+   "width": 640,
+   "height": 602,
+   "credit": {
+    "file": "Hippolyte Bayard - Drownedman 1840.jpg",
+    "author": "Hippolyte Bayard",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Hippolyte_Bayard_-_Drownedman_1840.jpg"
+   }
+  }
+ },
+ {
+  "id": "john-quincy-adams",
+  "year": 1843,
+  "caption": {
+   "en": "John Quincy Adams, the earliest photograph of a president of the United States",
+   "pt": "John Quincy Adams, a foto mais antiga de um presidente dos Estados Unidos"
+  },
+  "image": {
+   "src": "/snaps/b3f7c3d7a6c9.jpg",
+   "width": 639,
+   "height": 720,
+   "credit": {
+    "file": "John Quincy Adams - copy of 1843 Philip Haas Daguerreotype-1.jpg",
+    "author": "Southworth & Hawes",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:John_Quincy_Adams_-_copy_of_1843_Philip_Haas_Daguerreotype-1.jpg"
+   }
+  }
+ },
+ {
+  "id": "open-door",
+  "year": 1844,
+  "caption": {
+   "en": "\"The Open Door\", by William Henry Fox Talbot, from the first book illustrated with photographs",
+   "pt": "\"A porta aberta\", de William Henry Fox Talbot, do primeiro livro ilustrado com fotos"
+  },
+  "image": {
+   "src": "/snaps/3aeaaff83a39.jpg",
+   "width": 640,
+   "height": 479,
+   "credit": {
+    "file": "The Open Door MET DP148629.jpg",
+    "author": "William Henry Fox Talbot",
+    "licence": "CC0",
+    "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:The_Open_Door_MET_DP148629.jpg"
+   }
+  }
+ },
+ {
+  "id": "daguerreotypist",
+  "year": 1845,
+  "caption": {
+   "en": "Portrait of a daguerreotypist, with the tools of his trade",
+   "pt": "Retrato de um daguerreotipista, com as ferramentas do ofício"
+  },
+  "image": {
+   "src": "/snaps/5e501e345764.jpg",
+   "width": 614,
+   "height": 720,
+   "credit": {
+    "file": "Portrait of a Daguerreotypist, 1845 (with Frame).jpg",
+    "author": "Unknown author",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Portrait_of_a_Daguerreotypist%2C_1845_(with_Frame).jpg"
+   }
+  }
+ },
+ {
+  "id": "barricade-saint-maur",
+  "year": 1848,
+  "caption": {
+   "en": "A barricade on rue Saint-Maur, Paris, after the June Days uprising: one of the first news photographs",
+   "pt": "Uma barricada na rua Saint-Maur, em Paris, depois da revolta das Jornadas de Junho: uma das primeiras fotos jornalísticas"
+  },
+  "place": {
+   "lat": 48.866,
+   "lon": 2.379
+  },
+  "image": {
+   "src": "/snaps/23bbdd077177.jpg",
+   "width": 594,
+   "height": 720,
+   "credit": {
+    "file": "The Barricade in rue Saint-Maur-Popincourt after the attack by General Lamoricière's troops, Monday 26 June 1848.jpg",
+    "author": "Charles François Thibault",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:The_Barricade_in_rue_Saint-Maur-Popincourt_after_the_attack_by_General_Lamorici%C3%A8re's_troops%2C_Monday_26_June_1848.jpg"
+   }
+  }
+ },
+ {
+  "id": "chartist-meeting",
+  "year": 1848,
+  "caption": {
+   "en": "The great Chartist meeting on Kennington Common, London: one of the first photos of a crowd",
+   "pt": "O grande comício cartista em Kennington Common, Londres: uma das primeiras fotos de uma multidão"
+  },
+  "place": {
+   "lat": 51.483,
+   "lon": -0.111
+  },
+  "image": {
+   "src": "/snaps/f3557ac1af50.jpg",
+   "width": 640,
+   "height": 455,
+   "credit": {
+    "file": "Chartist meeting on Kennington Common by William Edward Kilburn 1848 - restoration1.jpg",
+    "author": "William Edward Kilburn (1818 - 1891) Details on Google Art Project",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Chartist_meeting_on_Kennington_Common_by_William_Edward_Kilburn_1848_-_restoration1.jpg"
+   }
+  }
+ },
+ {
+  "id": "chopin",
+  "year": 1849,
+  "caption": {
+   "en": "The composer Frédéric Chopin, in a daguerreotype by Louis-Auguste Bisson",
+   "pt": "O compositor Frédéric Chopin, num daguerreótipo de Louis-Auguste Bisson"
+  },
+  "image": {
+   "src": "/snaps/4316468ea1aa.jpg",
+   "width": 510,
+   "height": 720,
+   "credit": {
+    "file": "Frederic Chopin photo.jpeg",
+    "author": "Louis-Auguste Bisson",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Frederic_Chopin_photo.jpeg"
+   }
+  }
+ },
+ {
+  "id": "crystal-palace-sydenham",
+  "year": 1854,
+  "caption": {
+   "en": "The Crystal Palace rebuilt at Sydenham, by Philip Henry Delamotte",
+   "pt": "O Palácio de Cristal reconstruído em Sydenham, por Philip Henry Delamotte"
+  },
+  "place": {
+   "lat": 51.422,
+   "lon": -0.075
+  },
+  "image": {
+   "src": "/snaps/7184b9c63686.jpg",
+   "width": 640,
+   "height": 487,
+   "credit": {
+    "file": "Crystal Palace General view from Water Temple.jpg",
+    "author": "Philip Henry Delamotte (1821–1889)",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Crystal_Palace_General_view_from_Water_Temple.jpg"
+   }
+  }
+ },
+ {
+  "id": "fenton-van",
+  "year": 1855,
+  "caption": {
+   "en": "Roger Fenton's darkroom wagon in the Crimea, with his assistant Marcus Sparling",
+   "pt": "A carroça-laboratório de Roger Fenton na Crimeia, com o assistente Marcus Sparling"
+  },
+  "place": {
+   "lat": 44.6,
+   "lon": 33.55
+  },
+  "image": {
+   "src": "/snaps/59a1fb1988d5.jpg",
+   "width": 640,
+   "height": 674,
+   "credit": {
+    "file": "Roger Fenton's waggon.jpg",
+    "author": "Roger Fenton (1819–1869)",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Roger_Fenton's_waggon.jpg"
+   }
+  }
+ },
+ {
+  "id": "valley-of-the-shadow",
+  "year": 1855,
+  "caption": {
+   "en": "\"The Valley of the Shadow of Death\": cannonballs on a road in the Crimean War, by Roger Fenton",
+   "pt": "\"O Vale da Sombra da Morte\": balas de canhão numa estrada da Guerra da Crimeia, por Roger Fenton"
+  },
+  "place": {
+   "lat": 44.56,
+   "lon": 33.62
+  },
+  "image": {
+   "src": "/snaps/e7ea004d66f0.jpg",
+   "width": 640,
+   "height": 490,
+   "credit": {
+    "file": "Valley of the shadow of death.jpg",
+    "author": "Roger Fenton",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Valley_of_the_shadow_of_death.jpg"
+   }
+  }
+ },
+ {
+  "id": "brig-upon-the-water",
+  "year": 1856,
+  "caption": {
+   "en": "\"Brig upon the Water\", a seascape by Gustave Le Gray",
+   "pt": "\"Brigue sobre a água\", marinha de Gustave Le Gray"
+  },
+  "image": {
+   "src": "/snaps/c7b5b4e7dde2.jpg",
+   "width": 640,
+   "height": 503,
+   "credit": {
+    "file": "Gustave Le Gray - Brig upon the Water - Google Art Project.jpg",
+    "author": "Gustave Le Gray",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Gustave_Le_Gray_-_Brig_upon_the_Water_-_Google_Art_Project.jpg"
+   }
+  }
+ },
+ {
+  "id": "crimean-heroes",
+  "year": 1856,
+  "caption": {
+   "en": "Joseph Numa, John Potter and James Deal of the Coldstream Guards, back from the Crimean War",
+   "pt": "Joseph Numa, John Potter e James Deal, da Guarda Coldstream, de volta da Guerra da Crimeia"
+  },
+  "image": {
+   "src": "/snaps/6a5ad28f374f.jpg",
+   "width": 548,
+   "height": 720,
+   "credit": {
+    "file": "Hughes & Mullins after Cundall & Howlett - Heroes of the Crimean War - Joseph Numa, John Potter, and James Deal of the Coldstream Guards.jpg",
+    "author": "Adam Cuerden",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Hughes_%26_Mullins_after_Cundall_%26_Howlett_-_Heroes_of_the_Crimean_War_-_Joseph_Numa%2C_John_Potter%2C_and_James_Deal_of_the_Coldstream_Guards.jpg"
+   }
+  }
+ },
+ {
+  "id": "great-eastern-chains",
+  "year": 1857,
+  "caption": {
+   "en": "The engineer Isambard Kingdom Brunel before the launching chains of his ship, the Great Eastern, by Robert Howlett",
+   "pt": "O engenheiro Isambard Kingdom Brunel diante das correntes de lançamento do seu navio, o Great Eastern, por Robert Howlett"
+  },
+  "place": {
+   "lat": 51.49,
+   "lon": -0.012
+  },
+  "image": {
+   "src": "/snaps/cd2ef082c68a.jpg",
+   "width": 551,
+   "height": 720,
+   "credit": {
+    "file": "Robert Howlett (Isambard Kingdom Brunel Standing Before the Launching Chains of the Great Eastern), The Metropolitan Museum of Art - restoration1.jpg",
+    "author": "Robert Howlett",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Robert_Howlett_(Isambard_Kingdom_Brunel_Standing_Before_the_Launching_Chains_of_the_Great_Eastern)%2C_The_Metropolitan_Museum_of_Art_-_restoration1.jpg"
+   }
+  }
+ },
+ {
+  "id": "old-pont-saint-michel",
+  "year": 1857,
+  "caption": {
+   "en": "The old Saint-Michel bridge in Paris, shortly before it was pulled down, by Auguste-Hippolyte Collard",
+   "pt": "A antiga ponte Saint-Michel, em Paris, pouco antes de ser demolida, por Auguste-Hippolyte Collard"
+  },
+  "place": {
+   "lat": 48.853,
+   "lon": 2.344
+  },
+  "image": {
+   "src": "/snaps/a13c2b7c8996.jpg",
+   "width": 640,
+   "height": 366,
+   "credit": {
+    "file": "Auguste-Hippolyte Collard, Ancien pont Saint-Michel, 1857 edit.jpg",
+    "author": "Auguste Hippolyte Collard",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Auguste-Hippolyte_Collard%2C_Ancien_pont_Saint-Michel%2C_1857_edit.jpg"
+   }
+  }
+ },
+ {
+  "id": "beggar-maid",
+  "year": 1858,
+  "caption": {
+   "en": "Alice Liddell, the girl who inspired \"Alice in Wonderland\", posing as \"The Beggar Maid\" for Lewis Carroll",
+   "pt": "Alice Liddell, a menina que inspirou \"Alice no País das Maravilhas\", posando como \"A mendiga\" para Lewis Carroll"
+  },
+  "image": {
+   "src": "/snaps/2ae17d5567a2.jpg",
+   "width": 495,
+   "height": 720,
+   "credit": {
+    "file": "Lewis Carroll (British, Daresbury, Cheshire 1832–1898 Guildford).jpg",
+    "author": "Lewis Carroll",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Lewis_Carroll_(British%2C_Daresbury%2C_Cheshire_1832%E2%80%931898_Guildford).jpg"
+   }
+  }
+ },
+ {
+  "id": "pavillon-mollien",
+  "year": 1859,
+  "caption": {
+   "en": "The Pavillon Mollien of the Louvre, by Gustave Le Gray",
+   "pt": "O Pavilhão Mollien do Louvre, por Gustave Le Gray"
+  },
+  "place": {
+   "lat": 48.861,
+   "lon": 2.335
+  },
+  "image": {
+   "src": "/snaps/f833bc15a7a1.jpg",
+   "width": 640,
+   "height": 497,
+   "credit": {
+    "file": "Gustave Le Gray, Pavillon Mollien, 1859.jpg",
+    "author": "Gustave Le Gray",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Gustave_Le_Gray%2C_Pavillon_Mollien%2C_1859.jpg"
+   }
+  }
+ },
+ {
+  "id": "boston-from-a-balloon",
+  "year": 1860,
+  "caption": {
+   "en": "Boston seen from a balloon by James Wallace Black, the oldest surviving aerial photograph",
+   "pt": "Boston vista de um balão por James Wallace Black, a foto aérea mais antiga que se conservou"
+  },
+  "place": {
+   "lat": 42.358,
+   "lon": -71.06
+  },
+  "image": {
+   "src": "/snaps/950478e6c736.jpg",
+   "width": 640,
+   "height": 649,
+   "credit": {
+    "file": "Boston, as the Eagle and the Wild Goose See It.jpg",
+    "author": "James Wallace Black",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Boston%2C_as_the_Eagle_and_the_Wild_Goose_See_It.jpg"
+   }
+  }
+ },
+ {
+  "id": "tartan-ribbon",
+  "year": 1861,
+  "caption": {
+   "en": "A tartan ribbon: the first colour photograph, made for James Clerk Maxwell",
+   "pt": "Uma fita xadrez: a primeira foto colorida, feita para James Clerk Maxwell"
+  },
+  "image": {
+   "src": "/snaps/3a5c80f1e185.jpg",
+   "width": 640,
+   "height": 523,
+   "credit": {
+    "file": "Tartan Ribbon.jpg",
+    "author": "James Clerk Maxwell",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Tartan_Ribbon.jpg"
+   }
+  }
+ },
+ {
+  "id": "lincoln-at-antietam",
+  "year": 1862,
+  "caption": {
+   "en": "President Abraham Lincoln at Antietam with Allan Pinkerton and General John McClernand, by Alexander Gardner",
+   "pt": "O presidente Abraham Lincoln em Antietam com Allan Pinkerton e o general John McClernand, por Alexander Gardner"
+  },
+  "place": {
+   "lat": 39.47,
+   "lon": -77.74
+  },
+  "image": {
+   "src": "/snaps/723ff5ba3335.jpg",
+   "width": 515,
+   "height": 720,
+   "credit": {
+    "file": "PinkertonLincolnMcClernand.jpg",
+    "author": "Alexander Gardner",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:PinkertonLincolnMcClernand.jpg"
+   }
+  }
+ },
+ {
+  "id": "quaker-guns",
+  "year": 1862,
+  "caption": {
+   "en": "\"Quaker guns\" — logs dressed up as cannons — in a Confederate fort at Centreville, Virginia",
+   "pt": "\"Canhões quakers\" — troncos disfarçados de canhões — num forte confederado em Centreville, Virgínia"
+  },
+  "place": {
+   "lat": 38.84,
+   "lon": -77.43
+  },
+  "image": {
+   "src": "/snaps/47b734d14fb8.jpg",
+   "width": 640,
+   "height": 569,
+   "credit": {
+    "file": "Centreville, VA, Quaker Guns in the fort on the heights.jpg",
+    "author": "George N. Barnard / Possibly James F. Gibson / Adam Cuerden",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Centreville%2C_VA%2C_Quaker_Guns_in_the_fort_on_the_heights.jpg"
+   }
+  }
+ },
+ {
+  "id": "livingstone",
+  "year": 1864,
+  "caption": {
+   "en": "The explorer David Livingstone, by Thomas Annan",
+   "pt": "O explorador David Livingstone, por Thomas Annan"
+  },
+  "image": {
+   "src": "/snaps/ff244da448ce.jpg",
+   "width": 589,
+   "height": 720,
+   "credit": {
+    "file": "David Livingstone by Thomas Annan.jpg",
+    "author": "Thomas Annan / Adam Cuerden",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:David_Livingstone_by_Thomas_Annan.jpg"
+   }
+  }
+ },
+ {
+  "id": "sarah-bernhardt",
+  "year": 1864,
+  "caption": {
+   "en": "The actress Sarah Bernhardt, by Nadar",
+   "pt": "A atriz Sarah Bernhardt, por Nadar"
+  },
+  "image": {
+   "src": "/snaps/bcdacc8cf2e8.jpg",
+   "width": 543,
+   "height": 720,
+   "credit": {
+    "file": "Sarah Bernhardt, par Nadar, 1864.jpg",
+    "author": "Nadar",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Sarah_Bernhardt%2C_par_Nadar%2C_1864.jpg"
+   }
+  }
+ },
+ {
+  "id": "gaucho",
+  "year": 1868,
+  "caption": {
+   "en": "A gaucho of the Argentine pampas, by Eugenio Courret",
+   "pt": "Um gaúcho dos pampas argentinos, por Eugenio Courret"
+  },
+  "image": {
+   "src": "/snaps/ca09f5de7eee.jpg",
+   "width": 383,
+   "height": 720,
+   "credit": {
+    "file": "Gaucho1868b.jpg",
+    "author": "Eugenio Courret",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Gaucho1868b.jpg"
+   }
+  }
+ },
+ {
+  "id": "golden-spike",
+  "year": 1869,
+  "caption": {
+   "en": "\"East and West Shaking Hands\": the last rail of the first transcontinental railroad, at Promontory Summit, Utah",
+   "pt": "\"Leste e Oeste se cumprimentam\": o último trilho da primeira ferrovia transcontinental, em Promontory Summit, Utah"
+  },
+  "place": {
+   "lat": 41.618,
+   "lon": -112.551
+  },
+  "image": {
+   "src": "/snaps/183dfc534ddc.jpg",
+   "width": 640,
+   "height": 487,
+   "credit": {
+    "file": "East and West Shaking hands at the laying of last rail Union Pacific Railroad - Restoration.jpg",
+    "author": "Andrew J. Russell / Adam Cuerden",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:East_and_West_Shaking_hands_at_the_laying_of_last_rail_Union_Pacific_Railroad_-_Restoration.jpg"
+   }
+  }
+ },
+ {
+  "id": "suez-canal-opening",
+  "year": 1869,
+  "caption": {
+   "en": "The opening of the Suez Canal at Port Said",
+   "pt": "A inauguração do Canal de Suez em Port Said"
+  },
+  "place": {
+   "lat": 31.26,
+   "lon": 32.3
+  },
+  "image": {
+   "src": "/snaps/a8f8f2ed685b.jpg",
+   "width": 640,
+   "height": 515,
+   "credit": {
+    "file": "Opening of the Suez Canal, Port Said, 1869.jpg",
+    "author": "Unknown author",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Opening_of_the_Suez_Canal%2C_Port_Said%2C_1869.jpg"
+   }
+  }
+ },
+ {
+  "id": "sojourner-truth",
+  "year": 1870,
+  "caption": {
+   "en": "The abolitionist and women's rights campaigner Sojourner Truth",
+   "pt": "A abolicionista e defensora dos direitos das mulheres Sojourner Truth"
+  },
+  "image": {
+   "src": "/snaps/1962c5668e20.jpg",
+   "width": 519,
+   "height": 720,
+   "credit": {
+    "file": "Sojourner Truth, 1870 (cropped, restored).jpg",
+    "author": "Randall Studio",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Sojourner_Truth%2C_1870_(cropped%2C_restored).jpg"
+   }
+  }
+ },
+ {
+  "id": "commune-barricade",
+  "year": 1871,
+  "caption": {
+   "en": "A barricade of the Paris Commune on rue Royale, looking towards the Madeleine",
+   "pt": "Uma barricada da Comuna de Paris na rua Royale, com a Madeleine ao fundo"
+  },
+  "place": {
+   "lat": 48.868,
+   "lon": 2.323
+  },
+  "image": {
+   "src": "/snaps/d4417fd495c8.jpg",
+   "width": 640,
+   "height": 439,
+   "credit": {
+    "file": "Barricade rue Royale Commune Paris 1871.jpg",
+    "author": "Unknown author",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Barricade_rue_Royale_Commune_Paris_1871.jpg"
+   }
+  }
+ },
+ {
+  "id": "old-faithful",
+  "year": 1872,
+  "caption": {
+   "en": "Old Faithful erupting, by William Henry Jackson, the year Yellowstone became the first national park",
+   "pt": "O gêiser Old Faithful em erupção, por William Henry Jackson, no ano em que Yellowstone virou o primeiro parque nacional"
+  },
+  "place": {
+   "lat": 44.46,
+   "lon": -110.83
+  },
+  "image": {
+   "src": "/snaps/302b747b2eed.jpg",
+   "width": 558,
+   "height": 720,
+   "credit": {
+    "file": "Old Faithful in eruption, Yellowstone - NARA - 516797.jpg",
+    "author": "William Henry Jackson",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Old_Faithful_in_eruption%2C_Yellowstone_-_NARA_-_516797.jpg"
+   }
+  }
+ },
+ {
+  "id": "rimbaud",
+  "year": 1872,
+  "caption": {
+   "en": "The poet Arthur Rimbaud at seventeen, by Étienne Carjat",
+   "pt": "O poeta Arthur Rimbaud aos dezessete anos, por Étienne Carjat"
+  },
+  "image": {
+   "src": "/snaps/9d74d03a8c74.jpg",
+   "width": 446,
+   "height": 600,
+   "credit": {
+    "file": "Carjat Arthur Rimbaud 1872.jpg",
+    "author": "Étienne Carjat",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Carjat_Arthur_Rimbaud_1872.jpg"
+   }
+  }
+ },
+ {
+  "id": "galli-marie-carmen",
+  "year": 1875,
+  "caption": {
+   "en": "Célestine Galli-Marié as Carmen, the role she created in Bizet's opera, by the Atelier Nadar",
+   "pt": "Célestine Galli-Marié como Carmen, papel que criou na ópera de Bizet, pelo Ateliê Nadar"
+  },
+  "image": {
+   "src": "/snaps/8dae0de9987d.jpg",
+   "width": 527,
+   "height": 720,
+   "credit": {
+    "file": "Atelier Nadar - Galli-Marié in Bizet's Carmen.jpg",
+    "author": "Adam Cuerden",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Atelier_Nadar_-_Galli-Mari%C3%A9_in_Bizet's_Carmen.jpg"
+   }
+  }
+ },
+ {
+  "id": "victor-hugo",
+  "year": 1876,
+  "caption": {
+   "en": "The writer Victor Hugo, by Étienne Carjat",
+   "pt": "O escritor Victor Hugo, por Étienne Carjat"
+  },
+  "image": {
+   "src": "/snaps/bcf1db8c6587.jpg",
+   "width": 585,
+   "height": 720,
+   "credit": {
+    "file": "Victor Hugo by Étienne Carjat 1876 - full.jpg",
+    "author": "Étienne Carjat",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Victor_Hugo_by_%C3%89tienne_Carjat_1876_-_full.jpg"
+   }
+  }
+ },
+ {
+  "id": "brooklyn-bridge-towers",
+  "year": 1878,
+  "caption": {
+   "en": "The Brooklyn Bridge under construction: the towers and the first cables",
+   "pt": "A Ponte do Brooklyn em construção: as torres e os primeiros cabos"
+  },
+  "place": {
+   "lat": 40.706,
+   "lon": -73.997
+  },
+  "image": {
+   "src": "/snaps/ebbc20aafe9f.jpg",
+   "width": 640,
+   "height": 353,
+   "credit": {
+    "file": "Brooklyn Bridge Under Construction 1878.jpg",
+    "author": "Unknown author",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Brooklyn_Bridge_Under_Construction_1878.jpg"
+   }
+  }
+ },
+ {
+  "id": "liberty-head",
+  "year": 1878,
+  "caption": {
+   "en": "The head of the Statue of Liberty on show in Paris",
+   "pt": "A cabeça da Estátua da Liberdade exposta em Paris"
+  },
+  "place": {
+   "lat": 48.86,
+   "lon": 2.29
+  },
+  "image": {
+   "src": "/snaps/ba640269708d.jpg",
+   "width": 578,
+   "height": 720,
+   "credit": {
+    "file": "Head Statue of Liberty, Paris 1878.png",
+    "author": "Albert Fernique",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Head_Statue_of_Liberty%2C_Paris_1878.png"
+   }
+  }
+ },
+ {
+  "id": "oscar-wilde",
+  "year": 1882,
+  "caption": {
+   "en": "The writer Oscar Wilde on his lecture tour of America, by Napoleon Sarony",
+   "pt": "O escritor Oscar Wilde na sua turnê de palestras pela América, por Napoleon Sarony"
+  },
+  "image": {
+   "src": "/snaps/a69a7c0ca8f9.jpg",
+   "width": 434,
+   "height": 720,
+   "credit": {
+    "file": "Oscar Wilde by Napoleon Sarony. Three-quarter-length photograph, seated.jpg",
+    "author": "Napoleon Sarony / Adam Cuerden",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Oscar_Wilde_by_Napoleon_Sarony._Three-quarter-length_photograph%2C_seated.jpg"
+   }
+  }
+ },
+ {
+  "id": "george-roper-wreck",
+  "year": 1883,
+  "caption": {
+   "en": "The wreck of the George Roper at Point Lonsdale, by Fred Kruger",
+   "pt": "O naufrágio do George Roper em Point Lonsdale, por Fred Kruger"
+  },
+  "place": {
+   "lat": -38.29,
+   "lon": 144.61
+  },
+  "image": {
+   "src": "/snaps/878902989944.jpg",
+   "width": 640,
+   "height": 431,
+   "credit": {
+    "file": "Wreck of the ship George Roper, Point Lonsdale (1883) by Fred Kruger.jpg",
+    "author": "Fred Kruger / Adam Cuerden",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Wreck_of_the_ship_George_Roper%2C_Point_Lonsdale_(1883)_by_Fred_Kruger.jpg"
+   }
+  }
+ },
+ {
+  "id": "liberty-workshop",
+  "year": 1883,
+  "caption": {
+   "en": "Workers hammering the copper sheets of the Statue of Liberty in a Paris workshop",
+   "pt": "Operários martelando as chapas de cobre da Estátua da Liberdade numa oficina de Paris"
+  },
+  "place": {
+   "lat": 48.878,
+   "lon": 2.311
+  },
+  "image": {
+   "src": "/snaps/b3bbef3eae8c.jpg",
+   "width": 640,
+   "height": 448,
+   "credit": {
+    "file": "Men in a workshop hammering sheets of copper for the constr....jpg",
+    "author": "New York Public Library",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Men_in_a_workshop_hammering_sheets_of_copper_for_the_constr....jpg"
+   }
+  }
+ },
+ {
+  "id": "frances-cleveland",
+  "year": 1886,
+  "caption": {
+   "en": "Frances Cleveland, the youngest first lady of the United States, the year she married",
+   "pt": "Frances Cleveland, a primeira-dama mais jovem dos Estados Unidos, no ano em que se casou"
+  },
+  "image": {
+   "src": "/snaps/ed3bbed51785.jpg",
+   "width": 544,
+   "height": 720,
+   "credit": {
+    "file": "Frances Folsom Cleveland, by Charles Milton Bell.jpg",
+    "author": "Charles Milton Bell / Adam Cuerden",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Frances_Folsom_Cleveland%2C_by_Charles_Milton_Bell.jpg"
+   }
+  }
+ },
+ {
+  "id": "last-joke-bellagio",
+  "year": 1887,
+  "caption": {
+   "en": "\"The Last Joke, Bellagio\": children at a fountain, by Alfred Stieglitz",
+   "pt": "\"A última piada, Bellagio\": crianças numa fonte, por Alfred Stieglitz"
+  },
+  "place": {
+   "lat": 45.98,
+   "lon": 9.26
+  },
+  "image": {
+   "src": "/snaps/cc28141c2ccb.jpg",
+   "width": 640,
+   "height": 505,
+   "credit": {
+    "file": "Alfred Stieglitz - The Last Joke Bellagio, 1887.jpg",
+    "author": "Alfred Stieglitz",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Alfred_Stieglitz_-_The_Last_Joke_Bellagio%2C_1887.jpg"
+   }
+  }
+ },
+ {
+  "id": "walt-whitman",
+  "year": 1887,
+  "caption": {
+   "en": "The poet Walt Whitman, by George C. Cox",
+   "pt": "O poeta Walt Whitman, por George C. Cox"
+  },
+  "image": {
+   "src": "/snaps/9f635ee618d3.jpg",
+   "width": 581,
+   "height": 720,
+   "credit": {
+    "file": "Walt Whitman - George Collins Cox.jpg",
+    "author": "George Collins Cox / Adam Cuerden",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Walt_Whitman_-_George_Collins_Cox.jpg"
+   }
+  }
+ },
+ {
+  "id": "bandits-roost",
+  "year": 1888,
+  "caption": {
+   "en": "\"Bandit's Roost\", an alley off Mulberry Street in New York, by Jacob Riis",
+   "pt": "\"Bandit's Roost\", um beco da Mulberry Street em Nova York, por Jacob Riis"
+  },
+  "place": {
+   "lat": 40.716,
+   "lon": -73.998
+  },
+  "image": {
+   "src": "/snaps/4b5a64828ee7.jpg",
+   "width": 580,
+   "height": 720,
+   "credit": {
+    "file": "Bandits Roost, 59 and a half Mulberry Street.jpg",
+    "author": "Jacob Riis / Adam Cuerden",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Bandits_Roost%2C_59_and_a_half_Mulberry_Street.jpg"
+   }
+  }
+ },
+ {
+  "id": "eiffel-construction",
+  "year": 1888,
+  "caption": {
+   "en": "The Eiffel Tower under construction, by Louis-Émile Durandelle",
+   "pt": "A Torre Eiffel em construção, por Louis-Émile Durandelle"
+  },
+  "place": {
+   "lat": 48.858,
+   "lon": 2.294
+  },
+  "image": {
+   "src": "/snaps/165ae8767178.jpg",
+   "width": 566,
+   "height": 720,
+   "credit": {
+    "file": "Louis-Emile Durandelle, The Eiffel Tower - State of the Construction, 1888.jpg",
+    "author": "Louis-Emile Durandelle",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Louis-Emile_Durandelle%2C_The_Eiffel_Tower_-_State_of_the_Construction%2C_1888.jpg"
+   }
+  }
+ },
+ {
+  "id": "uppsala-cathedral",
+  "year": 1889,
+  "caption": {
+   "en": "Uppsala Cathedral under repair, by Emma Schenson, one of the first women photographers in Sweden",
+   "pt": "A Catedral de Uppsala em obras, por Emma Schenson, uma das primeiras fotógrafas da Suécia"
+  },
+  "place": {
+   "lat": 59.858,
+   "lon": 17.633
+  },
+  "image": {
+   "src": "/snaps/f7885a9af8c3.jpg",
+   "width": 544,
+   "height": 720,
+   "credit": {
+    "file": "Schenson Uppsala domkyrka 1889 - Restoration.jpg",
+    "author": "Adam Cuerden",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Schenson_Uppsala_domkyrka_1889_-_Restoration.jpg"
+   }
+  }
+ },
+ {
+  "id": "buffalo-soldiers",
+  "year": 1890,
+  "caption": {
+   "en": "Buffalo Soldiers of the 25th Infantry, some in buffalo robes, at Fort Keogh, Montana",
+   "pt": "\"Buffalo Soldiers\" da 25.ª Infantaria, alguns com mantos de bisão, no Forte Keogh, Montana"
+  },
+  "place": {
+   "lat": 46.38,
+   "lon": -105.88
+  },
+  "image": {
+   "src": "/snaps/591e0ff25a3e.jpg",
+   "width": 640,
+   "height": 330,
+   "credit": {
+    "file": "Buffalo soldiers1.jpg",
+    "author": "Chr. Barthelmess",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Buffalo_soldiers1.jpg"
+   }
+  }
+ },
+ {
+  "id": "winter-fifth-avenue",
+  "year": 1892,
+  "caption": {
+   "en": "\"Winter, Fifth Avenue\": a horse-drawn coach in a snowstorm, by Alfred Stieglitz",
+   "pt": "\"Inverno, Quinta Avenida\": uma carruagem numa nevasca, por Alfred Stieglitz"
+  },
+  "place": {
+   "lat": 40.742,
+   "lon": -73.99
+  },
+  "image": {
+   "src": "/snaps/a4e9e3f39e28.jpg",
+   "width": 501,
+   "height": 720,
+   "credit": {
+    "file": "Alfred Stieglitz Winter Fifth Avenue 1892.jpg",
+    "author": "Unknown author",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Alfred_Stieglitz_Winter_Fifth_Avenue_1892.jpg"
+   }
+  }
+ },
+ {
+  "id": "coburg-royals",
+  "year": 1894,
+  "caption": {
+   "en": "Queen Victoria surrounded by her family at a royal wedding in Coburg",
+   "pt": "A rainha Vitória cercada pela família num casamento real em Coburgo"
+  },
+  "place": {
+   "lat": 50.26,
+   "lon": 10.96
+  },
+  "image": {
+   "src": "/snaps/805a417343b6.jpg",
+   "width": 640,
+   "height": 679,
+   "credit": {
+    "file": "Queen Victoria surrounded by her family - Coburg, 1894 (1 of 2).jpg",
+    "author": "Eduard Uhlenhuth",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Queen_Victoria_surrounded_by_her_family_-_Coburg%2C_1894_(1_of_2).jpg"
+   }
+  }
+ },
+ {
+  "id": "first-x-ray",
+  "year": 1895,
+  "caption": {
+   "en": "The first X-ray of a person: the hand of Wilhelm Röntgen's wife, Anna Bertha, with her ring",
+   "pt": "A primeira radiografia de uma pessoa: a mão da mulher de Wilhelm Röntgen, Anna Bertha, com a aliança"
+  },
+  "place": {
+   "lat": 49.79,
+   "lon": 9.94
+  },
+  "image": {
+   "src": "/snaps/15631005f8b6.jpg",
+   "width": 501,
+   "height": 720,
+   "credit": {
+    "file": "First medical X-ray by Wilhelm Röntgen of his wife Anna Bertha Ludwig's hand - 18951222.jpg",
+    "author": "Wilhelm Röntgen",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:First_medical_X-ray_by_Wilhelm_R%C3%B6ntgen_of_his_wife_Anna_Bertha_Ludwig's_hand_-_18951222.jpg"
+   }
+  }
+ },
+ {
+  "id": "lilienthal-glider",
+  "year": 1895,
+  "caption": {
+   "en": "The aviation pioneer Otto Lilienthal in one of his gliders",
+   "pt": "O pioneiro da aviação Otto Lilienthal num dos seus planadores"
+  },
+  "place": {
+   "lat": 52.43,
+   "lon": 13.33
+  },
+  "image": {
+   "src": "/snaps/805c7d947b87.jpg",
+   "width": 640,
+   "height": 525,
+   "credit": {
+    "file": "Otto Lilienthal gliding experiment LCCN2002722087.tif",
+    "author": "Miscellaneous Items in High Demand, PPOC, Library of Congress",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Otto_Lilienthal_gliding_experiment_LCCN2002722087.tif"
+   }
+  }
+ },
+ {
+  "id": "montparnasse-derailment",
+  "year": 1895,
+  "caption": {
+   "en": "A train that overran the buffers at the Gare Montparnasse and fell into the street, Paris",
+   "pt": "Um trem que passou do fim da linha na estação Montparnasse e caiu na rua, em Paris"
+  },
+  "place": {
+   "lat": 48.842,
+   "lon": 2.32
+  },
+  "image": {
+   "src": "/snaps/b174334e92ea.jpg",
+   "width": 600,
+   "height": 720,
+   "credit": {
+    "file": "Train wreck at Montparnasse 1895.jpg",
+    "author": "Photo credited to the firm Levy & fils by this site . (It is credited to a phot…",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Train_wreck_at_Montparnasse_1895.jpg"
+   }
+  }
+ },
+ {
+  "id": "olympic-marathon",
+  "year": 1896,
+  "caption": {
+   "en": "Runners in the marathon of the first modern Olympic Games, in Athens",
+   "pt": "Corredores na maratona dos primeiros Jogos Olímpicos modernos, em Atenas"
+  },
+  "place": {
+   "lat": 37.968,
+   "lon": 23.741
+  },
+  "image": {
+   "src": "/snaps/e2ea08abd593.jpg",
+   "width": 640,
+   "height": 445,
+   "credit": {
+    "file": "1896 Olympic marathon.jpg",
+    "author": "Burton Holmes , published 1901, book title The Burton Holmes Lectures (Volume 3…",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:1896_Olympic_marathon.jpg"
+   }
+  }
+ },
+ {
+  "id": "tolstoy",
+  "year": 1897,
+  "caption": {
+   "en": "The writer Leo Tolstoy",
+   "pt": "O escritor Liev Tolstói"
+  },
+  "image": {
+   "src": "/snaps/2fb087dbae34.jpg",
+   "width": 594,
+   "height": 720,
+   "credit": {
+    "file": "Leo Tolstoy 1897, black and white, 37767u.jpg",
+    "author": "F. W. Taylor",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Leo_Tolstoy_1897%2C_black_and_white%2C_37767u.jpg"
+   }
+  }
+ },
+ {
+  "id": "chilkoot-pass",
+  "year": 1898,
+  "caption": {
+   "en": "Gold seekers hauling their gear up the Chilkoot Pass in the Klondike Gold Rush",
+   "pt": "Garimpeiros levando a carga pelo Passo Chilkoot na Corrida do Ouro de Klondike"
+  },
+  "place": {
+   "lat": 59.696,
+   "lon": -135.246
+  },
+  "image": {
+   "src": "/snaps/fa60e16ae90f.jpg",
+   "width": 640,
+   "height": 461,
+   "credit": {
+    "file": "Scales and summit of Chilkoot Pass, 1898 (MOHAI 7249).jpg",
+    "author": "Eric A. Hegg",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Scales_and_summit_of_Chilkoot_Pass%2C_1898_(MOHAI_7249).jpg"
+   }
+  }
+ },
+ {
+  "id": "tesla-colorado",
+  "year": 1899,
+  "caption": {
+   "en": "Nikola Tesla in his Colorado Springs laboratory under giant sparks (a double exposure)",
+   "pt": "Nikola Tesla no seu laboratório de Colorado Springs, sob faíscas gigantes (uma dupla exposição)"
+  },
+  "place": {
+   "lat": 38.83,
+   "lon": -104.82
+  },
+  "image": {
+   "src": "/snaps/0dc99ecd9fb8.jpg",
+   "width": 640,
+   "height": 483,
+   "credit": {
+    "file": "Nikola Tesla, with his equipment Wellcome M0014782 - restoration2.jpg",
+    "author": "Gallery: Wellcome Collection gallery (2018-03-31): Photographer: Dickenson V. A…",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Nikola_Tesla%2C_with_his_equipment_Wellcome_M0014782_-_restoration2.jpg"
+   }
+  }
+ },
+ {
+  "id": "airship-eiffel",
+  "year": 1901,
+  "caption": {
+   "en": "Santos-Dumont's airship No. 6 rounding the Eiffel Tower, the flight that won him the Deutsch prize",
+   "pt": "O dirigível Nº 6 de Santos-Dumont contornando a Torre Eiffel, o voo que lhe deu o prêmio Deutsch"
+  },
+  "place": {
+   "lat": 48.858,
+   "lon": 2.294
+  },
+  "image": {
+   "src": "/snaps/c8d41987ddc4.jpg",
+   "width": 549,
+   "height": 720,
+   "credit": {
+    "file": "Contorno da Torre Eiffel com o Dirigível Nº6 - 1-13651-0000-0000, Acervo do Museu Paulista da USP.jpg",
+    "author": "José Rosael/Hélio Nobre/Museu Paulista da USP",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Contorno_da_Torre_Eiffel_com_o_Dirig%C3%ADvel_N%C2%BA6_-_1-13651-0000-0000%2C_Acervo_do_Museu_Paulista_da_USP.jpg"
+   }
+  }
+ },
+ {
+  "id": "lightning-eiffel",
+  "year": 1902,
+  "caption": {
+   "en": "Lightning striking the Eiffel Tower",
+   "pt": "Um raio atingindo a Torre Eiffel"
+  },
+  "place": {
+   "lat": 48.858,
+   "lon": 2.294
+  },
+  "image": {
+   "src": "/snaps/36908bd9b6ee.jpg",
+   "width": 475,
+   "height": 720,
+   "credit": {
+    "file": "Lightning striking the Eiffel Tower - NOAA.jpg",
+    "author": "Gabriel Loppé",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Lightning_striking_the_Eiffel_Tower_-_NOAA.jpg"
+   }
+  }
+ },
+ {
+  "id": "first-flight",
+  "year": 1903,
+  "caption": {
+   "en": "The first powered flight: Orville Wright at the controls, Wilbur running alongside, at Kitty Hawk",
+   "pt": "O primeiro voo motorizado: Orville Wright nos controles e Wilbur correndo ao lado, em Kitty Hawk"
+  },
+  "place": {
+   "lat": 36.019,
+   "lon": -75.669
+  },
+  "image": {
+   "src": "/snaps/3ec488882f7d.jpg",
+   "width": 640,
+   "height": 415,
+   "credit": {
+    "file": "First flight2.jpg",
+    "author": "John T. Daniels",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:First_flight2.jpg"
+   }
+  }
+ },
+ {
+  "id": "flatiron",
+  "year": 1904,
+  "caption": {
+   "en": "The Flatiron Building at dusk, by Edward Steichen",
+   "pt": "O Flatiron Building ao anoitecer, por Edward Steichen"
+  },
+  "place": {
+   "lat": 40.741,
+   "lon": -73.99
+  },
+  "image": {
+   "src": "/snaps/31d6f6fa6d5e.jpg",
+   "width": 568,
+   "height": 720,
+   "credit": {
+    "file": "Steichen flatiron.jpg",
+    "author": "Edward Steichen",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Steichen_flatiron.jpg"
+   }
+  }
+ },
+ {
+  "id": "fourteen-bis-donkey",
+  "year": 1906,
+  "caption": {
+   "en": "Santos-Dumont's 14-bis tested hanging from a cable, pulled along by a donkey",
+   "pt": "O 14-bis de Santos-Dumont testado pendurado num cabo, puxado por um burro"
+  },
+  "place": {
+   "lat": 48.86,
+   "lon": 2.25
+  },
+  "image": {
+   "src": "/snaps/91e421257bec.jpg",
+   "width": 640,
+   "height": 357,
+   "credit": {
+    "file": "Santos-Dumont 14-bis cable test with donkey, July 1906.jpg",
+    "author": "Unknown author",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Santos-Dumont_14-bis_cable_test_with_donkey%2C_July_1906.jpg"
+   }
+  }
+ },
+ {
+  "id": "san-francisco-ruins",
+  "year": 1906,
+  "caption": {
+   "en": "San Francisco in ruins after the earthquake and fire, photographed from a kite by George R. Lawrence",
+   "pt": "San Francisco em ruínas depois do terremoto e do incêndio, fotografada de uma pipa por George R. Lawrence"
+  },
+  "place": {
+   "lat": 37.79,
+   "lon": -122.4
+  },
+  "image": {
+   "src": "/snaps/1e35d7a37203.jpg",
+   "width": 640,
+   "height": 251,
+   "credit": {
+    "file": "San Francisco in ruin edit2.jpg",
+    "author": "George R. Lawrence (1869-1938), George R. Lawrence Co.",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:San_Francisco_in_ruin_edit2.jpg"
+   }
+  }
+ },
+ {
+  "id": "steerage",
+  "year": 1907,
+  "caption": {
+   "en": "\"The Steerage\": passengers on the lower decks of a liner, by Alfred Stieglitz",
+   "pt": "\"A terceira classe\": passageiros nos conveses de baixo de um transatlântico, por Alfred Stieglitz"
+  },
+  "image": {
+   "src": "/snaps/7e9c4c29796a.jpg",
+   "width": 574,
+   "height": 720,
+   "credit": {
+    "file": "Alfred Stieglitz - The Steerage - Google Art Project.jpg",
+    "author": "Alfred Stieglitz",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Alfred_Stieglitz_-_The_Steerage_-_Google_Art_Project.jpg"
+   }
+  }
+ },
+ {
+  "id": "mill-girl",
+  "year": 1908,
+  "caption": {
+   "en": "A little spinner in a cotton mill in Newberry, South Carolina, by Lewis Hine",
+   "pt": "Uma pequena fiandeira numa fábrica de algodão em Newberry, Carolina do Sul, por Lewis Hine"
+  },
+  "place": {
+   "lat": 34.27,
+   "lon": -81.62
+  },
+  "image": {
+   "src": "/snaps/054ef9cb4652.jpg",
+   "width": 640,
+   "height": 473,
+   "credit": {
+    "file": "Child laborer.jpg",
+    "author": "Lewis W. Hine for the National Child Labor Committee",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Child_laborer.jpg"
+   }
+  }
+ },
+ {
+  "id": "kirillov-girls",
+  "year": 1909,
+  "caption": {
+   "en": "Peasant girls in front of a wooden house, in colour, by Sergei Prokudin-Gorsky",
+   "pt": "Moças camponesas diante de uma casa de madeira, em cores, por Serguei Prokudin-Gorski"
+  },
+  "place": {
+   "lat": 59.86,
+   "lon": 38.38
+  },
+  "image": {
+   "src": "/snaps/094973352679.jpg",
+   "width": 640,
+   "height": 554,
+   "credit": {
+    "file": "Russian peasant girls in front of a traditional wooden house in Kirillov.jpg",
+    "author": "Sergei Prokudin-Gorskii",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Russian_peasant_girls_in_front_of_a_traditional_wooden_house_in_Kirillov.jpg"
+   }
+  }
+ },
+ {
+  "id": "manhattan-bridge",
+  "year": 1909,
+  "caption": {
+   "en": "The Manhattan Bridge under construction",
+   "pt": "A Ponte de Manhattan em construção"
+  },
+  "place": {
+   "lat": 40.707,
+   "lon": -73.991
+  },
+  "image": {
+   "src": "/snaps/45264e651cfa.jpg",
+   "width": 640,
+   "height": 385,
+   "credit": {
+    "file": "Manhattan Bridge Construction 1909.jpg",
+    "author": "Irving Underhill",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Manhattan_Bridge_Construction_1909.jpg"
+   }
+  }
+ },
+ {
+  "id": "brouhot-car",
+  "year": 1910,
+  "caption": {
+   "en": "A Brouhot motor car in Paris",
+   "pt": "Um automóvel Brouhot em Paris"
+  },
+  "place": {
+   "lat": 48.86,
+   "lon": 2.34
+  },
+  "image": {
+   "src": "/snaps/18b844daca38.jpg",
+   "width": 640,
+   "height": 400,
+   "credit": {
+    "file": "A Brouhot car in Paris, 1910.jpg",
+    "author": "Alexandre Louis",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:A_Brouhot_car_in_Paris%2C_1910.jpg"
+   }
+  }
+ },
+ {
+  "id": "emir-of-bukhara",
+  "year": 1911,
+  "caption": {
+   "en": "Alim Khan, the Emir of Bukhara, in colour, by Sergei Prokudin-Gorsky",
+   "pt": "Alim Khan, o emir de Bukhara, em cores, por Serguei Prokudin-Gorski"
+  },
+  "place": {
+   "lat": 39.77,
+   "lon": 64.42
+  },
+  "image": {
+   "src": "/snaps/026f0838eb15.jpg",
+   "width": 640,
+   "height": 553,
+   "credit": {
+    "file": "Prokudin-Gorskii-19-v2.png",
+    "author": "Sergei Prokudin-Gorskii",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Prokudin-Gorskii-19-v2.png"
+   }
+  }
+ },
+ {
+  "id": "titanic-departs",
+  "year": 1912,
+  "caption": {
+   "en": "The Titanic leaving Southampton on her maiden voyage",
+   "pt": "O Titanic deixando Southampton na viagem inaugural"
+  },
+  "place": {
+   "lat": 50.9,
+   "lon": -1.41
+  },
+  "image": {
+   "src": "/snaps/942ffa778de8.jpg",
+   "width": 640,
+   "height": 471,
+   "credit": {
+    "file": "RMS Titanic 3.jpg",
+    "author": "Francis Godolphin Osbourne Stuart",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:RMS_Titanic_3.jpg"
+   }
+  }
+ },
+ {
+  "id": "ford-assembly-line",
+  "year": 1913,
+  "caption": {
+   "en": "The moving assembly line at Ford's Highland Park plant",
+   "pt": "A linha de montagem móvel na fábrica da Ford em Highland Park"
+  },
+  "place": {
+   "lat": 42.41,
+   "lon": -83.1
+  },
+  "image": {
+   "src": "/snaps/c9b51dbdc33f.jpg",
+   "width": 640,
+   "height": 462,
+   "credit": {
+    "file": "Ford assembly line - 1913.jpg",
+    "author": "Unknown author",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Ford_assembly_line_-_1913.jpg"
+   }
+  }
+ },
+ {
+  "id": "pankhurst-arrest",
+  "year": 1914,
+  "caption": {
+   "en": "The suffragette leader Emmeline Pankhurst arrested outside Buckingham Palace",
+   "pt": "A líder sufragista Emmeline Pankhurst presa diante do Palácio de Buckingham"
+  },
+  "place": {
+   "lat": 51.501,
+   "lon": -0.142
+  },
+  "image": {
+   "src": "/snaps/1fba5d4d4e47.jpg",
+   "width": 532,
+   "height": 720,
+   "credit": {
+    "file": "Mrs Emmeline Pankhurst, Leader of the Women's Suffragette movement, is arrested outside Buckingham Palace while trying to present a petition to King George V in May 1914. Q81486.jpg",
+    "author": "Unknown author",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Mrs_Emmeline_Pankhurst%2C_Leader_of_the_Women's_Suffragette_movement%2C_is_arrested_outside_Buckingham_Palace_while_trying_to_present_a_petition_to_King_George_V_in_May_1914._Q81486.jpg"
+   }
+  }
+ },
+ {
+  "id": "endurance-in-ice",
+  "year": 1915,
+  "caption": {
+   "en": "Shackleton's ship Endurance trapped in the pack ice of the Weddell Sea, by Frank Hurley",
+   "pt": "O navio Endurance, de Shackleton, preso no gelo do mar de Weddell, por Frank Hurley"
+  },
+  "place": {
+   "lat": -69,
+   "lon": -51
+  },
+  "image": {
+   "src": "/snaps/d0d1e1817621.jpg",
+   "width": 640,
+   "height": 479,
+   "credit": {
+    "file": "Endurance trapped in pack ice.jpg",
+    "author": "Frank Hurley",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Endurance_trapped_in_pack_ice.jpg"
+   }
+  }
+ },
+ {
+  "id": "wall-street-strand",
+  "year": 1915,
+  "caption": {
+   "en": "\"Wall Street\": passers-by dwarfed by a bank's windows, by Paul Strand",
+   "pt": "\"Wall Street\": transeuntes diminuídos pelas janelas de um banco, por Paul Strand"
+  },
+  "place": {
+   "lat": 40.706,
+   "lon": -74.009
+  },
+  "image": {
+   "src": "/snaps/0c32a03d710a.jpg",
+   "width": 640,
+   "height": 504,
+   "credit": {
+    "file": "Wall Street by Paul Strand, 1915.jpg",
+    "author": "Paul Strand",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Wall_Street_by_Paul_Strand%2C_1915.jpg"
+   }
+  }
+ },
+ {
+  "id": "somme-trench",
+  "year": 1916,
+  "caption": {
+   "en": "British soldiers in a trench during the Battle of the Somme, one keeping watch",
+   "pt": "Soldados britânicos numa trincheira durante a Batalha do Somme, um deles de vigia"
+  },
+  "place": {
+   "lat": 50.01,
+   "lon": 2.7
+  },
+  "image": {
+   "src": "/snaps/9e9812345575.jpg",
+   "width": 640,
+   "height": 489,
+   "credit": {
+    "file": "Cheshire Regiment trench Somme 1916.jpg",
+    "author": "John Warwick Brooke",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Cheshire_Regiment_trench_Somme_1916.jpg"
+   }
+  }
+ },
+ {
+  "id": "petrograd-july-days",
+  "year": 1917,
+  "caption": {
+   "en": "Demonstrators scattering under gunfire on Nevsky Prospect, Petrograd, in the July Days",
+   "pt": "Manifestantes fugindo dos tiros na Avenida Nevski, em Petrogrado, nas Jornadas de Julho"
+  },
+  "place": {
+   "lat": 59.934,
+   "lon": 30.33
+  },
+  "image": {
+   "src": "/snaps/b15ba17f6ac9.jpg",
+   "width": 640,
+   "height": 416,
+   "credit": {
+    "file": "19170704 Riot on Nevsky prosp Petrograd.jpg",
+    "author": "Viktor Bulla",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:19170704_Riot_on_Nevsky_prosp_Petrograd.jpg"
+   }
+  }
+ },
+ {
+  "id": "armistice-london",
+  "year": 1918,
+  "caption": {
+   "en": "Crowds celebrating the armistice that ended the First World War, in London",
+   "pt": "Multidão comemorando o armistício que encerrou a Primeira Guerra Mundial, em Londres"
+  },
+  "place": {
+   "lat": 51.507,
+   "lon": -0.128
+  },
+  "image": {
+   "src": "/snaps/1ef7269855f3.jpg",
+   "width": 640,
+   "height": 464,
+   "credit": {
+    "file": "Armistice Day in London, 11 November 1918 Q47852.jpg",
+    "author": "American official photographer",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Armistice_Day_in_London%2C_11_November_1918_Q47852.jpg"
+   }
+  }
+ },
+ {
+  "id": "power-house-mechanic",
+  "year": 1920,
+  "caption": {
+   "en": "\"Power House Mechanic Working on Steam Pump\", by Lewis Hine",
+   "pt": "\"Mecânico da casa de força trabalhando numa bomba a vapor\", por Lewis Hine"
+  },
+  "image": {
+   "src": "/snaps/1c29860b05de.jpg",
+   "width": 517,
+   "height": 720,
+   "credit": {
+    "file": "Lewis Hine Power house mechanic working on steam pump.jpg",
+    "author": "Lewis Hine",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Lewis_Hine_Power_house_mechanic_working_on_steam_pump.jpg"
+   }
+  }
+ },
+ {
+  "id": "eclipse-saint-lazare",
+  "year": 1921,
+  "caption": {
+   "en": "Parisians watching an eclipse of the Sun outside the Gare Saint-Lazare",
+   "pt": "Parisienses observando um eclipse do Sol diante da estação Saint-Lazare"
+  },
+  "place": {
+   "lat": 48.876,
+   "lon": 2.325
+  },
+  "image": {
+   "src": "/snaps/f2454e846ecd.jpg",
+   "width": 640,
+   "height": 463,
+   "credit": {
+    "file": "Agence Rol, L’éclipse, gare Saint-Lazare, 1921.jpg",
+    "author": "Agence Rol",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Agence_Rol%2C_L%E2%80%99%C3%A9clipse%2C_gare_Saint-Lazare%2C_1921.jpg"
+   }
+  }
+ },
+ {
+  "id": "einstein-1921",
+  "year": 1921,
+  "caption": {
+   "en": "The physicist Albert Einstein, by Ferdinand Schmutzer, the year he won the Nobel Prize",
+   "pt": "O físico Albert Einstein, por Ferdinand Schmutzer, no ano em que ganhou o Nobel"
+  },
+  "image": {
+   "src": "/snaps/95c045a63b02.jpg",
+   "width": 548,
+   "height": 720,
+   "credit": {
+    "file": "Albert Einstein 1921 by F Schmutzer.jpg",
+    "author": "Ferdinand Schmutzer",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Albert_Einstein_1921_by_F_Schmutzer.jpg"
+   }
+  }
+ },
+ {
+  "id": "tutankhamun-antechamber",
+  "year": 1922,
+  "caption": {
+   "en": "The antechamber of Tutankhamun's tomb, just opened, by Harry Burton",
+   "pt": "A antecâmara do túmulo de Tutancâmon, recém-aberta, por Harry Burton"
+  },
+  "place": {
+   "lat": 25.74,
+   "lon": 32.6
+  },
+  "image": {
+   "src": "/snaps/de869e3169d1.jpg",
+   "width": 640,
+   "height": 474,
+   "credit": {
+    "file": "Tutankhamun tomb photographs 2 020.jpg",
+    "author": "Harry Burton (1879-1940)",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Tutankhamun_tomb_photographs_2_020.jpg"
+   }
+  }
+ },
+ {
+  "id": "bea-kyle",
+  "year": 1924,
+  "caption": {
+   "en": "The high diver Beatrice Kyle by a fire engine, between acts of a charity circus at Fort Myer, Virginia",
+   "pt": "A saltadora Beatrice Kyle junto a um carro de bombeiros, num intervalo de um circo beneficente em Fort Myer, Virgínia"
+  },
+  "place": {
+   "lat": 38.88,
+   "lon": -77.08
+  },
+  "image": {
+   "src": "/snaps/835ebf77405d.jpg",
+   "width": 632,
+   "height": 720,
+   "credit": {
+    "file": "Bea Kyle Standing Fire Engine and Pickle 1924, edited.jpg",
+    "author": "Herbert A. French",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Bea_Kyle_Standing_Fire_Engine_and_Pickle_1924%2C_edited.jpg"
+   }
+  }
+ },
+ {
+  "id": "bertha-lutz",
+  "year": 1925,
+  "caption": {
+   "en": "The scientist and feminist Bertha Lutz",
+   "pt": "A cientista e feminista Bertha Lutz"
+  },
+  "image": {
+   "src": "/snaps/a3f81038b3aa.jpg",
+   "width": 585,
+   "height": 720,
+   "credit": {
+    "file": "Bertha Lutz 1925.jpg",
+    "author": "Adam Cuerden",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Bertha_Lutz_1925.jpg"
+   }
+  }
+ },
+ {
+  "id": "monolith-half-dome",
+  "year": 1927,
+  "caption": {
+   "en": "\"Monolith, the Face of Half Dome\", in Yosemite, by Ansel Adams",
+   "pt": "\"Monólito, a face do Half Dome\", em Yosemite, por Ansel Adams"
+  },
+  "place": {
+   "lat": 37.746,
+   "lon": -119.533
+  },
+  "image": {
+   "src": "/snaps/d51a4227bd88.jpg",
+   "width": 556,
+   "height": 720,
+   "credit": {
+    "file": "Ansel-adams-monolith-the-face-of-half-dome - edit1.jpg",
+    "author": "Ansel Adams",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Ansel-adams-monolith-the-face-of-half-dome_-_edit1.jpg"
+   }
+  }
+ },
+ {
+  "id": "spirit-of-st-louis",
+  "year": 1927,
+  "caption": {
+   "en": "Charles Lindbergh with the Spirit of St. Louis, the plane of the first solo non-stop flight across the Atlantic",
+   "pt": "Charles Lindbergh com o Spirit of St. Louis, o avião do primeiro voo solo sem escalas sobre o Atlântico"
+  },
+  "image": {
+   "src": "/snaps/72f77bbd2419.jpg",
+   "width": 640,
+   "height": 496,
+   "credit": {
+    "file": "Charles Lindbergh and airplane \"Spirit of St. Louis\" LCCN2016888581.jpg",
+    "author": "Harris & Ewing, photographer",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Charles_Lindbergh_and_airplane_%22Spirit_of_St._Louis%22_LCCN2016888581.jpg"
+   }
+  }
+ },
+ {
+  "id": "inupiat-family",
+  "year": 1929,
+  "caption": {
+   "en": "An Iñupiat family from Noatak, Alaska, by Edward S. Curtis",
+   "pt": "Uma família inupiat de Noatak, Alasca, por Edward S. Curtis"
+  },
+  "place": {
+   "lat": 67.57,
+   "lon": -162.97
+  },
+  "image": {
+   "src": "/snaps/29a27e8aa95c.jpg",
+   "width": 640,
+   "height": 490,
+   "credit": {
+    "file": "Inupiat Family from Noatak, Alaska, 1929, Edward S. Curtis (restored).jpg",
+    "author": "Edward S. Curtis",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Inupiat_Family_from_Noatak%2C_Alaska%2C_1929%2C_Edward_S._Curtis_(restored).jpg"
+   }
+  }
+ },
+ {
+  "id": "icarus-empire-state",
+  "year": 1930,
+  "caption": {
+   "en": "\"Icarus\": a worker high on the frame of the Empire State Building, by Lewis Hine",
+   "pt": "\"Ícaro\": um operário no alto da estrutura do Empire State Building, por Lewis Hine"
+  },
+  "place": {
+   "lat": 40.748,
+   "lon": -73.986
+  },
+  "image": {
+   "src": "/snaps/2bed808ff99d.jpg",
+   "width": 640,
+   "height": 502,
+   "credit": {
+    "file": "Icarus, Empire State Building MET DP106525.jpg",
+    "author": "Lewis Hine",
+    "licence": "CC0",
+    "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Icarus%2C_Empire_State_Building_MET_DP106525.jpg"
+   }
+  }
+ },
+ {
+  "id": "lunch-atop-a-skyscraper",
+  "year": 1932,
+  "caption": {
+   "en": "\"Lunch atop a Skyscraper\": ironworkers eating on a girder above Manhattan, on the RCA Building",
+   "pt": "\"Almoço no topo de um arranha-céu\": operários comendo numa viga sobre Manhattan, no RCA Building"
+  },
+  "place": {
+   "lat": 40.759,
+   "lon": -73.979
+  },
+  "image": {
+   "src": "/snaps/5ac25cf60f24.jpg",
+   "width": 640,
+   "height": 503,
+   "credit": {
+    "file": "Lunch atop a Skyscraper - Charles Clyde Ebbets.jpg",
+    "author": "Charles Clyde Ebbets",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Lunch_atop_a_Skyscraper_-_Charles_Clyde_Ebbets.jpg"
+   }
+  }
+ },
+ {
+  "id": "champs-elysees-night",
+  "year": 1935,
+  "caption": {
+   "en": "Cars on the Champs-Élysées at night, with a lit-up car showroom behind",
+   "pt": "Carros na Champs-Élysées à noite, com uma loja de automóveis iluminada ao fundo"
+  },
+  "place": {
+   "lat": 48.87,
+   "lon": 2.307
+  },
+  "image": {
+   "src": "/snaps/6321b415c2e2.jpg",
+   "width": 640,
+   "height": 469,
+   "credit": {
+    "file": "Auto's op de Champs-Elysées, met op de achtergrond de verlichte showroom van Cit, Bestanddeelnr 191-0378.jpg",
+    "author": "Willem van de Poll",
+    "licence": "CC0",
+    "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Auto's_op_de_Champs-Elys%C3%A9es%2C_met_op_de_achtergrond_de_verlichte_showroom_van_Cit%2C_Bestanddeelnr_191-0378.jpg"
+   }
+  }
+ },
+ {
+  "id": "soba-deliveryman",
+  "year": 1935,
+  "caption": {
+   "en": "A soba noodle deliveryman cycling through Tokyo with a tower of bowls",
+   "pt": "Um entregador de soba pedalando por Tóquio com uma torre de tigelas"
+  },
+  "place": {
+   "lat": 35.68,
+   "lon": 139.76
+  },
+  "image": {
+   "src": "/snaps/308d80230058.jpg",
+   "width": 525,
+   "height": 720,
+   "credit": {
+    "file": "Soba-Noodles-Deliveryman-Tokyo-1935.png",
+    "author": "Mainichi Shimbun",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Soba-Noodles-Deliveryman-Tokyo-1935.png"
+   }
+  }
+ },
+ {
+  "id": "bessie-smith",
+  "year": 1936,
+  "caption": {
+   "en": "The blues singer Bessie Smith, by Carl Van Vechten",
+   "pt": "A cantora de blues Bessie Smith, por Carl Van Vechten"
+  },
+  "image": {
+   "src": "/snaps/86b38a6a93a7.jpg",
+   "width": 563,
+   "height": 720,
+   "credit": {
+    "file": "Bessie Smith (1936) by Carl Van Vechten.jpg",
+    "author": "Carl Van Vechten , restored by Adam Cuerden",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Bessie_Smith_(1936)_by_Carl_Van_Vechten.jpg"
+   }
+  }
+ },
+ {
+  "id": "dust-storm-farmer",
+  "year": 1936,
+  "caption": {
+   "en": "A farmer and his sons walking in a dust storm in the Dust Bowl, by Arthur Rothstein",
+   "pt": "Um fazendeiro e os filhos caminhando numa tempestade de poeira no Dust Bowl, por Arthur Rothstein"
+  },
+  "place": {
+   "lat": 36.75,
+   "lon": -102.5
+  },
+  "image": {
+   "src": "/snaps/12a53824ac00.jpg",
+   "width": 640,
+   "height": 625,
+   "credit": {
+    "file": "Farmer walking in dust storm Cimarron County Oklahoma2.jpg",
+    "author": "Arthur Rothstein",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Farmer_walking_in_dust_storm_Cimarron_County_Oklahoma2.jpg"
+   }
+  }
+ },
+ {
+  "id": "migrant-mother",
+  "year": 1936,
+  "caption": {
+   "en": "\"Migrant Mother\": Florence Owens Thompson and her children, by Dorothea Lange",
+   "pt": "\"Mãe migrante\": Florence Owens Thompson e os filhos, por Dorothea Lange"
+  },
+  "place": {
+   "lat": 35.04,
+   "lon": -120.48
+  },
+  "image": {
+   "src": "/snaps/1bd7cfe37b78.jpg",
+   "width": 554,
+   "height": 720,
+   "credit": {
+    "file": "Lange-MigrantMother02.jpg",
+    "author": "Dorothea Lange",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Lange-MigrantMother02.jpg"
+   }
+  }
+ },
+ {
+  "id": "owens-and-long",
+  "year": 1936,
+  "caption": {
+   "en": "Jesse Owens and Luz Long, rivals and friends, at the Berlin Olympics",
+   "pt": "Jesse Owens e Luz Long, rivais e amigos, nas Olimpíadas de Berlim"
+  },
+  "place": {
+   "lat": 52.515,
+   "lon": 13.239
+  },
+  "image": {
+   "src": "/snaps/13f5b454b0fe.jpg",
+   "width": 600,
+   "height": 720,
+   "credit": {
+    "file": "Luz Long and Jesse Owens.png",
+    "author": "Unknown author",
+    "licence": "CC0",
+    "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Luz_Long_and_Jesse_Owens.png"
+   }
+  }
+ },
+ {
+  "id": "hindenburg",
+  "year": 1937,
+  "caption": {
+   "en": "The airship Hindenburg bursting into flames at Lakehurst, New Jersey",
+   "pt": "O dirigível Hindenburg pegando fogo em Lakehurst, Nova Jersey"
+  },
+  "place": {
+   "lat": 40.03,
+   "lon": -74.35
+  },
+  "image": {
+   "src": "/snaps/2be1881b449e.jpg",
+   "width": 640,
+   "height": 695,
+   "credit": {
+    "file": "Hindenburg disaster, 1937.jpg",
+    "author": "Murray Becker / Associated Press",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Hindenburg_disaster%2C_1937.jpg"
+   }
+  }
+ },
+ {
+  "id": "colored-water-cooler",
+  "year": 1939,
+  "caption": {
+   "en": "A man drinking at a segregated water cooler in Oklahoma City, by Russell Lee",
+   "pt": "Um homem bebendo num bebedouro segregado em Oklahoma City, por Russell Lee"
+  },
+  "place": {
+   "lat": 35.47,
+   "lon": -97.52
+  },
+  "image": {
+   "src": "/snaps/4bee0403a2fd.jpg",
+   "width": 640,
+   "height": 431,
+   "credit": {
+    "file": "Negro drinking at \"Colored\" water cooler in streetcar terminal, Oklahoma City, Oklahoma by Russell Lee.jpg",
+    "author": "Russell Lee / Adam Cuerden",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Negro_drinking_at_%22Colored%22_water_cooler_in_streetcar_terminal%2C_Oklahoma_City%2C_Oklahoma_by_Russell_Lee.jpg"
+   }
+  }
+ },
+ {
+  "id": "st-pauls-survives",
+  "year": 1940,
+  "caption": {
+   "en": "\"St Paul's Survives\": the cathedral's dome in the smoke of the Blitz",
+   "pt": "\"St Paul's sobrevive\": a cúpula da catedral na fumaça da Blitz"
+  },
+  "place": {
+   "lat": 51.514,
+   "lon": -0.098
+  },
+  "image": {
+   "src": "/snaps/b1ec25fc1d8e.jpg",
+   "width": 587,
+   "height": 720,
+   "credit": {
+    "file": "St Paul's Survives.jpg",
+    "author": "Herbert Mason",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:St_Paul's_Survives.jpg"
+   }
+  }
+ },
+ {
+  "id": "wait-for-me-daddy",
+  "year": 1940,
+  "caption": {
+   "en": "\"Wait for Me, Daddy\": a boy runs after his father as soldiers march off to war, New Westminster",
+   "pt": "\"Espere por mim, papai\": um menino corre atrás do pai enquanto soldados partem para a guerra, New Westminster"
+  },
+  "place": {
+   "lat": 49.2,
+   "lon": -122.91
+  },
+  "image": {
+   "src": "/snaps/a06a6058c1cf.jpg",
+   "width": 560,
+   "height": 720,
+   "credit": {
+    "file": "British Columbia Regiment 1940.jpg",
+    "author": "Claude Dettloff",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:British_Columbia_Regiment_1940.jpg"
+   }
+  }
+ },
+ {
+  "id": "tehran-conference",
+  "year": 1943,
+  "caption": {
+   "en": "Stalin, Roosevelt and Churchill at the Tehran Conference",
+   "pt": "Stálin, Roosevelt e Churchill na Conferência de Teerã"
+  },
+  "place": {
+   "lat": 35.69,
+   "lon": 51.42
+  },
+  "image": {
+   "src": "/snaps/d14a3a9f4fe9.jpg",
+   "width": 640,
+   "height": 517,
+   "credit": {
+    "file": "Joseph Stalin, Franklin D Roosevelt and Winston Churchill, in Teheran, 1943, edit.jpg",
+    "author": "Dennis Charles Oulds",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Joseph_Stalin%2C_Franklin_D_Roosevelt_and_Winston_Churchill%2C_in_Teheran%2C_1943%2C_edit.jpg"
+   }
+  }
+ },
+ {
+  "id": "vultee-riveter",
+  "year": 1943,
+  "caption": {
+   "en": "A real-life \"Rosie the Riveter\" drilling on a dive bomber at the Vultee plant in Nashville",
+   "pt": "Uma \"Rosie the Riveter\" de verdade trabalhando com a furadeira num bombardeiro na fábrica da Vultee em Nashville"
+  },
+  "place": {
+   "lat": 36.12,
+   "lon": -86.68
+  },
+  "image": {
+   "src": "/snaps/279bed9ae8a3.jpg",
+   "width": 640,
+   "height": 511,
+   "credit": {
+    "file": "Rosie the Riveter (Vultee).jpg",
+    "author": "Alfred T. Palmer",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Rosie_the_Riveter_(Vultee).jpg"
+   }
+  }
+ },
+ {
+  "id": "into-the-jaws",
+  "year": 1944,
+  "caption": {
+   "en": "\"Into the Jaws of Death\": American troops wading ashore at Omaha Beach on D-Day",
+   "pt": "\"Nas mandíbulas da morte\": soldados americanos desembarcando na praia de Omaha no Dia D"
+  },
+  "place": {
+   "lat": 49.37,
+   "lon": -0.87
+  },
+  "image": {
+   "src": "/snaps/874738b32035.jpg",
+   "width": 640,
+   "height": 515,
+   "credit": {
+    "file": "Into the Jaws of Death 23-0455M edit.jpg",
+    "author": "Chief Photographer's Mate (CPHoM) Robert F. Sargent",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Into_the_Jaws_of_Death_23-0455M_edit.jpg"
+   }
+  }
+ },
+ {
+  "id": "iwo-jima-flag",
+  "year": 1945,
+  "caption": {
+   "en": "\"Raising the Flag on Iwo Jima\", by Joe Rosenthal",
+   "pt": "\"Hasteando a bandeira em Iwo Jima\", por Joe Rosenthal"
+  },
+  "place": {
+   "lat": 24.75,
+   "lon": 141.29
+  },
+  "image": {
+   "src": "/snaps/f1fb633443b2.jpg",
+   "width": 640,
+   "height": 485,
+   "credit": {
+    "file": "Raising the Flag on Iwo Jima, larger.jpeg",
+    "author": "Joe Rosenthal",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Raising_the_Flag_on_Iwo_Jima%2C_larger.jpeg"
+   }
+  }
+ },
+ {
+  "id": "kissing-the-war-goodbye",
+  "year": 1945,
+  "caption": {
+   "en": "A sailor kisses a woman in Times Square on V-J Day, by Victor Jorgensen",
+   "pt": "Um marinheiro beija uma mulher na Times Square no Dia da Vitória sobre o Japão, por Victor Jorgensen"
+  },
+  "place": {
+   "lat": 40.758,
+   "lon": -73.985
+  },
+  "image": {
+   "src": "/snaps/c1f8dd0c608e.jpg",
+   "width": 640,
+   "height": 659,
+   "credit": {
+    "file": "Kissing the War Goodbye.jpg",
+    "author": "Victor Jorgensen",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Kissing_the_War_Goodbye.jpg"
+   }
+  }
+ },
+ {
+  "id": "first-photo-from-space",
+  "year": 1946,
+  "caption": {
+   "en": "The first photo from space, taken from a V-2 rocket over New Mexico",
+   "pt": "A primeira foto do espaço, tirada de um foguete V-2 sobre o Novo México"
+  },
+  "place": {
+   "lat": 32.9,
+   "lon": -106.4
+  },
+  "image": {
+   "src": "/snaps/fc8d31db32e9.jpg",
+   "width": 640,
+   "height": 506,
+   "credit": {
+    "file": "First photo from space.jpg",
+    "author": "U.S. Army",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:First_photo_from_space.jpg"
+   }
+  }
+ },
+ {
+  "id": "armstrong-in-colour",
+  "year": 1947,
+  "caption": {
+   "en": "The jazz trumpeter Louis Armstrong, in colour, by William P. Gottlieb",
+   "pt": "O trompetista de jazz Louis Armstrong, em cores, por William P. Gottlieb"
+  },
+  "image": {
+   "src": "/snaps/2aea693bd988.jpg",
+   "width": 640,
+   "height": 473,
+   "credit": {
+    "file": "Louis Armstrong in Color (restored).jpg",
+    "author": "Harry Warnecke / Gus Schoenbaechler",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Louis_Armstrong_in_Color_(restored).jpg"
+   }
+  }
+ },
+ {
+  "id": "dali-atomicus",
+  "year": 1948,
+  "caption": {
+   "en": "\"Dalí Atomicus\": Salvador Dalí in mid-air with flying cats and a splash of water, by Philippe Halsman",
+   "pt": "\"Dalí Atomicus\": Salvador Dalí no ar com gatos voando e um jato de água, por Philippe Halsman"
+  },
+  "image": {
+   "src": "/snaps/6709c3bc5e4c.jpg",
+   "width": 640,
+   "height": 513,
+   "credit": {
+    "file": "Salvador Dali A (Dali Atomicus) 09633u.jpg",
+    "author": "Philippe Halsman",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Salvador_Dali_A_(Dali_Atomicus)_09633u.jpg"
+   }
+  }
+ },
+ {
+  "id": "taedong-bridge",
+  "year": 1950,
+  "caption": {
+   "en": "Refugees crossing a wrecked bridge over the Taedong River in the Korean War, by Max Desfor",
+   "pt": "Refugiados atravessando uma ponte destruída sobre o rio Taedong na Guerra da Coreia, por Max Desfor"
+  },
+  "place": {
+   "lat": 39.02,
+   "lon": 125.75
+  },
+  "image": {
+   "src": "/snaps/10b90875b156.jpg",
+   "width": 586,
+   "height": 720,
+   "credit": {
+    "file": "Max Desfor - Flight of Refugees Across Wrecked Bridge in Korea.jpg",
+    "author": "Max Desfor",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Max_Desfor_-_Flight_of_Refugees_Across_Wrecked_Bridge_in_Korea.jpg"
+   }
+  }
+ },
+ {
+  "id": "einstein-tongue",
+  "year": 1951,
+  "caption": {
+   "en": "Albert Einstein sticking out his tongue on his birthday, by Arthur Sasse",
+   "pt": "Albert Einstein mostrando a língua no aniversário, por Arthur Sasse"
+  },
+  "place": {
+   "lat": 40.35,
+   "lon": -74.66
+  },
+  "image": {
+   "src": "/snaps/07b13e12ae2e.jpg",
+   "width": 564,
+   "height": 720,
+   "credit": {
+    "file": "Albert Einstein sticks his tongue.jpg",
+    "author": "International News Service",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Albert_Einstein_sticks_his_tongue.jpg"
+   }
+  }
+ },
+ {
+  "id": "pit-river-rescue",
+  "year": 1953,
+  "caption": {
+   "en": "A truck driver rescued from his cab hanging off the Pit River Bridge, California",
+   "pt": "Um caminhoneiro resgatado da cabine pendurada na ponte do rio Pit, Califórnia"
+  },
+  "place": {
+   "lat": 40.75,
+   "lon": -122.31
+  },
+  "image": {
+   "src": "/snaps/e5a10b0051cc.jpg",
+   "width": 612,
+   "height": 720,
+   "credit": {
+    "file": "Rescue on Pit River Bridge (sharpened).jpg",
+    "author": "Virginia Schau",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Rescue_on_Pit_River_Bridge_(sharpened).jpg"
+   }
+  }
+ },
+ {
+  "id": "seven-year-itch",
+  "year": 1954,
+  "caption": {
+   "en": "Marilyn Monroe's famous pose over a subway grate, for the film \"The Seven Year Itch\"",
+   "pt": "A famosa pose de Marilyn Monroe sobre a grade do metrô, para o filme \"O pecado mora ao lado\""
+  },
+  "image": {
+   "src": "/snaps/3b9ca1af2541.jpg",
+   "width": 536,
+   "height": 720,
+   "credit": {
+    "file": "Marilyn Monroe photo pose Seven Year Itch, edit.jpg",
+    "author": "Sam Shaw",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Marilyn_Monroe_photo_pose_Seven_Year_Itch%2C_edit.jpg"
+   }
+  }
+ },
+ {
+  "id": "althea-gibson",
+  "year": 1956,
+  "caption": {
+   "en": "The tennis champion Althea Gibson",
+   "pt": "A campeã de tênis Althea Gibson"
+  },
+  "image": {
+   "src": "/snaps/463d19c9d9e6.jpg",
+   "width": 523,
+   "height": 720,
+   "credit": {
+    "file": "Althea Gibson in 1956 by Fred Palumbo (NYWTS).jpg",
+    "author": "Adam Cuerden",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Althea_Gibson_in_1956_by_Fred_Palumbo_(NYWTS).jpg"
+   }
+  }
+ },
+ {
+  "id": "rosa-parks",
+  "year": 1956,
+  "caption": {
+   "en": "Rosa Parks being fingerprinted after her arrest during the Montgomery bus boycott",
+   "pt": "Rosa Parks tendo as digitais colhidas depois de presa, durante o boicote aos ônibus de Montgomery"
+  },
+  "place": {
+   "lat": 32.377,
+   "lon": -86.3
+  },
+  "image": {
+   "src": "/snaps/05617d6440bb.jpg",
+   "width": 640,
+   "height": 507,
+   "credit": {
+    "file": "Rosa Parks being fingerprinted by Deputy Sheriff D.H. Lackey after being arrested on February 22, 1956, during the Montgomery bus boycott.jpg",
+    "author": "Gene Herrick for the Associated Press; restored by Adam Cuerden",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Rosa_Parks_being_fingerprinted_by_Deputy_Sheriff_D.H._Lackey_after_being_arrested_on_February_22%2C_1956%2C_during_the_Montgomery_bus_boycott.jpg"
+   }
+  }
+ },
+ {
+  "id": "faith-and-confidence",
+  "year": 1957,
+  "caption": {
+   "en": "\"Faith and Confidence\": a police officer talks to a two-year-old at a Chinese New Year parade in Washington, D.C.",
+   "pt": "\"Fé e confiança\": um policial conversa com um menino de dois anos num desfile do Ano-Novo Chinês em Washington"
+  },
+  "image": {
+   "src": "/snaps/b570d72c96f3.jpg",
+   "width": 572,
+   "height": 720,
+   "credit": {
+    "file": "Faith and Confidence.jpg",
+    "author": "William C. Beall",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Faith_and_Confidence.jpg"
+   }
+  }
+ },
+ {
+  "id": "milk-drop-coronet",
+  "year": 1957,
+  "caption": {
+   "en": "\"Milk Drop Coronet\": a splash of milk frozen by Harold Edgerton's stroboscope",
+   "pt": "\"Coroa de gota de leite\": um respingo de leite congelado pelo estroboscópio de Harold Edgerton"
+  },
+  "image": {
+   "src": "/snaps/3d2cad0f409f.jpg",
+   "width": 569,
+   "height": 720,
+   "credit": {
+    "file": "Milk Drop Coronet, 1957.jpg",
+    "author": "Harold Edgerton",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Milk_Drop_Coronet%2C_1957.jpg"
+   }
+  }
+ },
+ {
+  "id": "brasilia-construction",
+  "year": 1959,
+  "caption": {
+   "en": "Brasília under construction, the year before it became the capital",
+   "pt": "Brasília em construção, um ano antes de virar a capital"
+  },
+  "place": {
+   "lat": -15.8,
+   "lon": -47.86
+  },
+  "image": {
+   "src": "/snaps/66319d92a4f9.jpg",
+   "width": 640,
+   "height": 639,
+   "credit": {
+    "file": "Construção de Brasília 1959-37.jpg",
+    "author": "Arquivo Nacional",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Constru%C3%A7%C3%A3o_de_Bras%C3%ADlia_1959-37.jpg"
+   }
+  }
+ },
+ {
+  "id": "segni-adenauer",
+  "year": 1959,
+  "caption": {
+   "en": "The Italian prime minister Antonio Segni and the German chancellor Konrad Adenauer, by Giuseppe Moro",
+   "pt": "O primeiro-ministro italiano Antonio Segni e o chanceler alemão Konrad Adenauer, por Giuseppe Moro"
+  },
+  "image": {
+   "src": "/snaps/bb20fb48f14e.jpg",
+   "width": 640,
+   "height": 640,
+   "credit": {
+    "file": "Antonio Segni and Konrad Adenauer by Giuseppe Moro, August 1959.jpg",
+    "author": "Giuseppe Moro",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Antonio_Segni_and_Konrad_Adenauer_by_Giuseppe_Moro%2C_August_1959.jpg"
+   }
+  }
+ },
+ {
+  "id": "guerrillero-heroico",
+  "year": 1960,
+  "caption": {
+   "en": "\"Guerrillero Heroico\": Che Guevara, by Alberto Korda",
+   "pt": "\"Guerrillero Heroico\": Che Guevara, por Alberto Korda"
+  },
+  "place": {
+   "lat": 23.13,
+   "lon": -82.38
+  },
+  "image": {
+   "src": "/snaps/0011de6432ce.jpg",
+   "width": 622,
+   "height": 720,
+   "credit": {
+    "file": "Che Guevara - Guerrillero Heroico by Alberto Korda.jpg",
+    "author": "Alberto Korda, restored by Adam Cuerden",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Che_Guevara_-_Guerrillero_Heroico_by_Alberto_Korda.jpg"
+   }
+  }
+ },
+ {
+  "id": "kittinger-jump",
+  "year": 1960,
+  "caption": {
+   "en": "Joseph Kittinger jumping from a balloon gondola 31 km up, a record that stood for half a century",
+   "pt": "Joseph Kittinger saltando da gôndola de um balão a 31 km de altura, recorde que durou meio século"
+  },
+  "place": {
+   "lat": 32.9,
+   "lon": -106.1
+  },
+  "image": {
+   "src": "/snaps/657c611fbe47.jpg",
+   "width": 567,
+   "height": 720,
+   "credit": {
+    "file": "Kittinger-jump.jpg",
+    "author": "U.S. Air Force/Volkmar Wentzel",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Kittinger-jump.jpg"
+   }
+  }
+ },
+ {
+  "id": "ruby-bridges",
+  "year": 1960,
+  "caption": {
+   "en": "US Marshals escorting six-year-old Ruby Bridges to her newly desegregated school in New Orleans",
+   "pt": "Agentes federais escoltando Ruby Bridges, de seis anos, à escola recém-dessegregada em Nova Orleans"
+  },
+  "place": {
+   "lat": 29.96,
+   "lon": -90.03
+  },
+  "image": {
+   "src": "/snaps/834754fa4b0f.jpg",
+   "width": 640,
+   "height": 426,
+   "credit": {
+    "file": "US Marshals with Young Ruby Bridges on School Steps.jpg",
+    "author": "Uncredited DOJ photographer, restored by Adam Cuerden (a relatively minor resto…",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:US_Marshals_with_Young_Ruby_Bridges_on_School_Steps.jpg"
+   }
+  }
+ },
+ {
+  "id": "march-on-washington",
+  "year": 1963,
+  "caption": {
+   "en": "Martin Luther King Jr. in the crowd of the March on Washington",
+   "pt": "Martin Luther King Jr. na multidão da Marcha sobre Washington"
+  },
+  "place": {
+   "lat": 38.889,
+   "lon": -77.035
+  },
+  "image": {
+   "src": "/snaps/5955e77523df.jpg",
+   "width": 640,
+   "height": 507,
+   "credit": {
+    "file": "Civil Rights March on Washington, D.C. (Dr. Martin Luther King, Jr. and Mathew Ahmann in a crowd.) - NARA - 542015 - Restoration.jpg",
+    "author": "Rowland Scherman / Adam Cuerden",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Civil_Rights_March_on_Washington%2C_D.C._(Dr._Martin_Luther_King%2C_Jr._and_Mathew_Ahmann_in_a_crowd.)_-_NARA_-_542015_-_Restoration.jpg"
+   }
+  }
+ },
+ {
+  "id": "malcolm-x",
+  "year": 1964,
+  "caption": {
+   "en": "Malcolm X at a press conference",
+   "pt": "Malcolm X numa entrevista coletiva"
+  },
+  "image": {
+   "src": "/snaps/b3225cf57999.jpg",
+   "width": 523,
+   "height": 720,
+   "credit": {
+    "file": "Malcolm X NYWTS 2a.jpg",
+    "author": "Ed Ford, World Telegram staff photographer",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Malcolm_X_NYWTS_2a.jpg"
+   }
+  }
+ },
+ {
+  "id": "katherine-johnson",
+  "year": 1966,
+  "caption": {
+   "en": "The mathematician Katherine Johnson at her desk at NASA",
+   "pt": "A matemática Katherine Johnson na sua mesa na NASA"
+  },
+  "place": {
+   "lat": 37.09,
+   "lon": -76.38
+  },
+  "image": {
+   "src": "/snaps/e2f0f6e25145.jpg",
+   "width": 571,
+   "height": 720,
+   "credit": {
+    "file": "Katherine Johnson at NASA, in 1966.jpg",
+    "author": "Adam Cuerden",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Katherine_Johnson_at_NASA%2C_in_1966.jpg"
+   }
+  }
+ },
+ {
+  "id": "western-wall-paratroopers",
+  "year": 1967,
+  "caption": {
+   "en": "Israeli paratroopers at the Western Wall in the Six-Day War, by David Rubinger",
+   "pt": "Paraquedistas israelenses no Muro das Lamentações na Guerra dos Seis Dias, por David Rubinger"
+  },
+  "place": {
+   "lat": 31.777,
+   "lon": 35.234
+  },
+  "image": {
+   "src": "/snaps/8c73bce25ab5.jpg",
+   "width": 480,
+   "height": 720,
+   "credit": {
+    "file": "צנחנים בכותל המערבי.jpg",
+    "author": "David Rubinger",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:%D7%A6%D7%A0%D7%97%D7%A0%D7%99%D7%9D_%D7%91%D7%9B%D7%95%D7%AA%D7%9C_%D7%94%D7%9E%D7%A2%D7%A8%D7%91%D7%99.jpg"
+   }
+  }
+ },
+ {
+  "id": "artists-against-censorship",
+  "year": 1968,
+  "caption": {
+   "en": "The actresses Tônia Carrero, Eva Wilma, Odete Lara, Norma Bengell and Cacilda Becker protesting against censorship under the military dictatorship in Brazil",
+   "pt": "As atrizes Tônia Carrero, Eva Wilma, Odete Lara, Norma Bengell e Cacilda Becker protestando contra a censura da ditadura militar no Brasil"
+  },
+  "place": {
+   "lat": -22.906,
+   "lon": -43.176
+  },
+  "image": {
+   "src": "/snaps/ab4646e06dd0.jpg",
+   "width": 640,
+   "height": 483,
+   "credit": {
+    "file": "Artistas protestam contra a Ditadura Militar - Tônia Carreiro, Eva Wilma, Odete Lara, Norma Bengell e Cacilda Becker - Restoration.jpg",
+    "author": "Adam Cuerden",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Artistas_protestam_contra_a_Ditadura_Militar_-_T%C3%B4nia_Carreiro%2C_Eva_Wilma%2C_Odete_Lara%2C_Norma_Bengell_e_Cacilda_Becker_-_Restoration.jpg"
+   }
+  }
+ },
+ {
+  "id": "earthrise",
+  "year": 1968,
+  "caption": {
+   "en": "\"Earthrise\": the Earth rising over the Moon, taken by Bill Anders from Apollo 8 in orbit around the Moon",
+   "pt": "\"Nascer da Terra\": a Terra surgindo sobre a Lua, foto de Bill Anders da Apollo 8 em órbita da Lua"
+  },
+  "image": {
+   "src": "/snaps/a216f0ef5ca7.jpg",
+   "width": 640,
+   "height": 641,
+   "credit": {
+    "file": "NASA Earthrise AS08-14-2383 Apollo 8 1968-12-24.jpg",
+    "author": "NASA/Bill Anders",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:NASA_Earthrise_AS08-14-2383_Apollo_8_1968-12-24.jpg"
+   }
+  }
+ },
+ {
+  "id": "aldrin-on-the-moon",
+  "year": 1969,
+  "caption": {
+   "en": "Buzz Aldrin on the Moon during Apollo 11, photographed by Neil Armstrong",
+   "pt": "Buzz Aldrin na Lua durante a Apollo 11, fotografado por Neil Armstrong"
+  },
+  "image": {
+   "src": "/snaps/5fcda021698e.jpg",
+   "width": 640,
+   "height": 640,
+   "credit": {
+    "file": "Aldrin Apollo 11.jpg",
+    "author": "Neil A. Armstrong",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Aldrin_Apollo_11.jpg"
+   }
+  }
+ },
+ {
+  "id": "elvis-meets-nixon",
+  "year": 1970,
+  "caption": {
+   "en": "Elvis Presley and his friends Sonny West and Jerry Schilling meeting President Richard Nixon at the White House",
+   "pt": "Elvis Presley e os amigos Sonny West e Jerry Schilling com o presidente Richard Nixon na Casa Branca"
+  },
+  "place": {
+   "lat": 38.897,
+   "lon": -77.037
+  },
+  "image": {
+   "src": "/snaps/0db7feb7852a.jpg",
+   "width": 640,
+   "height": 417,
+   "credit": {
+    "file": "Elvis Presley, Delbert Sonny West, and Jerry Schilling meeting Richard Nixon.jpg",
+    "author": "Ollie Atkins, chief White House photographer at the time. See ARC",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Elvis_Presley%2C_Delbert_Sonny_West%2C_and_Jerry_Schilling_meeting_Richard_Nixon.jpg"
+   }
+  }
+ },
+ {
+  "id": "apollo-15-rover",
+  "year": 1971,
+  "caption": {
+   "en": "James Irwin with the flag, the lunar rover and the lander of the Apollo 15 mission",
+   "pt": "Na missão Apollo 15, James Irwin com a bandeira, o jipe lunar e o módulo lunar"
+  },
+  "image": {
+   "src": "/snaps/342087793818.jpg",
+   "width": 640,
+   "height": 640,
+   "credit": {
+    "file": "Apollo 15 flag, rover, LM, Irwin.jpg",
+    "author": "Astronaut David R. Scott, Apollo 15 commander.",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Apollo_15_flag%2C_rover%2C_LM%2C_Irwin.jpg"
+   }
+  }
+ },
+ {
+  "id": "blue-marble",
+  "year": 1972,
+  "caption": {
+   "en": "\"The Blue Marble\": the whole Earth, seen from Apollo 17 on its way to the Moon",
+   "pt": "\"A bolinha azul\": a Terra inteira, vista da Apollo 17 a caminho da Lua"
+  },
+  "image": {
+   "src": "/snaps/85ccaffe4735.jpg",
+   "width": 640,
+   "height": 640,
+   "credit": {
+    "file": "The Blue Marble, AS17-148-22727.jpg",
+    "author": "Harrison Schmitt / Apollo 17",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:The_Blue_Marble%2C_AS17-148-22727.jpg"
+   }
+  }
+ },
+ {
+  "id": "kathmandu-hashish-shop",
+  "year": 1973,
+  "caption": {
+   "en": "A legal hashish shop in Kathmandu, a stop on the hippie trail",
+   "pt": "Uma loja legal de haxixe em Katmandu, parada da trilha hippie"
+  },
+  "place": {
+   "lat": 27.704,
+   "lon": 85.307
+  },
+  "image": {
+   "src": "/snaps/c6b45064943f.jpg",
+   "width": 487,
+   "height": 720,
+   "credit": {
+    "file": "Legal hashish shop in Kathmandu, Nepal in 1973.jpg",
+    "author": "Roger McLassus.",
+    "licence": "CC BY-SA 3.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:Legal_hashish_shop_in_Kathmandu%2C_Nepal_in_1973.jpg"
+   }
+  }
+ },
+ {
+  "id": "leonov",
+  "year": 1974,
+  "caption": {
+   "en": "The cosmonaut Alexei Leonov, the first person to walk in space",
+   "pt": "O cosmonauta Alexei Leonov, a primeira pessoa a caminhar no espaço"
+  },
+  "image": {
+   "src": "/snaps/aba2a2f13624.jpg",
+   "width": 576,
+   "height": 720,
+   "credit": {
+    "file": "Alexei Leonov.jpg",
+    "author": "This image or video was catalogued by Lyndon B. Johnson Space Center of the Uni…",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Alexei_Leonov.jpg"
+   }
+  }
+ },
+ {
+  "id": "apollo-soyuz-crews",
+  "year": 1975,
+  "caption": {
+   "en": "The American and Soviet crews of Apollo–Soyuz, the first joint space mission",
+   "pt": "As tripulações americana e soviética da Apollo–Soyuz, a primeira missão espacial conjunta"
+  },
+  "image": {
+   "src": "/snaps/7c8f89a4aabf.jpg",
+   "width": 640,
+   "height": 512,
+   "credit": {
+    "file": "Portrait of ASTP crews - restoration.jpg",
+    "author": "Adam Cuerden",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Portrait_of_ASTP_crews_-_restoration.jpg"
+   }
+  }
+ },
+ {
+  "id": "shuttle-enterprise",
+  "year": 1976,
+  "caption": {
+   "en": "The first space shuttle, Enterprise, rolled out with the cast of \"Star Trek\"",
+   "pt": "O primeiro ônibus espacial, o Enterprise, apresentado com o elenco de \"Jornada nas Estrelas\""
+  },
+  "place": {
+   "lat": 34.63,
+   "lon": -118.08
+  },
+  "image": {
+   "src": "/snaps/60e90dd4e851.jpg",
+   "width": 640,
+   "height": 480,
+   "credit": {
+    "file": "The Shuttle Enterprise - GPN-2000-001363.jpg",
+    "author": "NASA",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:The_Shuttle_Enterprise_-_GPN-2000-001363.jpg"
+   }
+  }
+ },
+ {
+  "id": "godot-avignon",
+  "year": 1978,
+  "caption": {
+   "en": "\"Waiting for Godot\" on stage at the Avignon Festival",
+   "pt": "\"Esperando Godot\" no palco do Festival de Avignon"
+  },
+  "place": {
+   "lat": 43.95,
+   "lon": 4.807
+  },
+  "image": {
+   "src": "/snaps/4f920baf3ce8.jpg",
+   "width": 640,
+   "height": 467,
+   "credit": {
+    "file": "En attendant Godot, Festival d'Avignon, 1978 f22.jpg",
+    "author": "Fernand Michaud",
+    "licence": "CC0",
+    "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:En_attendant_Godot%2C_Festival_d'Avignon%2C_1978_f22.jpg"
+   }
+  }
+ },
+ {
+  "id": "mary-jackson",
+  "year": 1979,
+  "caption": {
+   "en": "The NASA engineer Mary Jackson",
+   "pt": "A engenheira da NASA Mary Jackson"
+  },
+  "image": {
+   "src": "/snaps/432150085c72.jpg",
+   "width": 615,
+   "height": 720,
+   "credit": {
+    "file": "Mary Jackson 1979 Portrait (LRC-1979-B701 P-07085).jpg",
+    "author": "Adam Cuerden",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Mary_Jackson_1979_Portrait_(LRC-1979-B701_P-07085).jpg"
+   }
+  }
+ },
+ {
+  "id": "boat-people",
+  "year": 1980,
+  "caption": {
+   "en": "A young Vietnamese refugee, one of the \"boat people\", in a camp in Malaysia",
+   "pt": "Um jovem refugiado vietnamita, um dos \"boat people\", num campo na Malásia"
+  },
+  "image": {
+   "src": "/snaps/06b575d4bbc3.jpg",
+   "width": 536,
+   "height": 720,
+   "credit": {
+    "file": "Vietnamkrieg Bootsflüchtling 1980.jpg",
+    "author": "Benjamin Gimmel, BenHur",
+    "licence": "CC BY-SA 3.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:Vietnamkrieg_Bootsfl%C3%BCchtling_1980.jpg"
+   }
+  }
+ },
+ {
+  "id": "mount-st-helens",
+  "year": 1980,
+  "caption": {
+   "en": "The eruption of Mount St. Helens",
+   "pt": "A erupção do monte Santa Helena"
+  },
+  "place": {
+   "lat": 46.2,
+   "lon": -122.19
+  },
+  "image": {
+   "src": "/snaps/717685a5713c.jpg",
+   "width": 479,
+   "height": 720,
+   "credit": {
+    "file": "MSH80 eruption mount st helens 05-18-80-dramatic-edit.jpg",
+    "author": "Austin Post",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:MSH80_eruption_mount_st_helens_05-18-80-dramatic-edit.jpg"
+   }
+  }
+ },
+ {
+  "id": "first-shuttle-launch",
+  "year": 1981,
+  "caption": {
+   "en": "The first launch of a space shuttle: Columbia lifts off",
+   "pt": "O primeiro lançamento de um ônibus espacial: o Columbia decola"
+  },
+  "place": {
+   "lat": 28.608,
+   "lon": -80.604
+  },
+  "image": {
+   "src": "/snaps/954fed36e96d.jpg",
+   "width": 640,
+   "height": 640,
+   "credit": {
+    "file": "Space Shuttle Columbia launching.jpg",
+    "author": "NASA",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Space_Shuttle_Columbia_launching.jpg"
+   }
+  }
+ },
+ {
+  "id": "gainsbourg",
+  "year": 1981,
+  "caption": {
+   "en": "The singer Serge Gainsbourg, by Claude Truong-Ngoc",
+   "pt": "O cantor Serge Gainsbourg, por Claude Truong-Ngoc"
+  },
+  "image": {
+   "src": "/snaps/abbd52cba818.jpg",
+   "width": 640,
+   "height": 417,
+   "credit": {
+    "file": "Serge Gainsbourg par Claude Truong-Ngoc 1981.jpg",
+    "author": "Claude TRUONG-NGOC",
+    "licence": "CC BY-SA 3.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Serge_Gainsbourg_par_Claude_Truong-Ngoc_1981.jpg"
+   }
+  }
+ },
+ {
+  "id": "vietnam-memorial-veteran",
+  "year": 1982,
+  "caption": {
+   "en": "Joseph Ambrose, a First World War veteran, holding his son's flag at the dedication of the Vietnam Veterans Memorial",
+   "pt": "Joseph Ambrose, veterano da Primeira Guerra Mundial, com a bandeira do filho na inauguração do Memorial dos Veteranos do Vietnã"
+  },
+  "place": {
+   "lat": 38.891,
+   "lon": -77.048
+  },
+  "image": {
+   "src": "/snaps/30f46db30dac.jpg",
+   "width": 479,
+   "height": 720,
+   "credit": {
+    "file": "World War I veteran Joseph Ambrose, 86, at the dedication day parade for the Vietnam Veterans Memorial in 1982.jpg",
+    "author": "Department of Defense. Defense Audiovisual Agency; Scene Camera Operator: Micke…",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:World_War_I_veteran_Joseph_Ambrose%2C_86%2C_at_the_dedication_day_parade_for_the_Vietnam_Veterans_Memorial_in_1982.jpg"
+   }
+  }
+ },
+ {
+  "id": "jobs-macintosh",
+  "year": 1984,
+  "caption": {
+   "en": "Steve Jobs with the first Macintosh computer, by Bernard Gotfryd",
+   "pt": "Steve Jobs com o primeiro computador Macintosh, por Bernard Gotfryd"
+  },
+  "image": {
+   "src": "/snaps/cea02936639b.jpg",
+   "width": 489,
+   "height": 720,
+   "credit": {
+    "file": "Steve Jobs and Macintosh computer, January 1984, by Bernard Gotfryd - edited.jpg",
+    "author": "Photo: Bernard Gotfryd - Edited from tif by Cart",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Steve_Jobs_and_Macintosh_computer%2C_January_1984%2C_by_Bernard_Gotfryd_-_edited.jpg"
+   }
+  }
+ },
+ {
+  "id": "mccandless-spacewalk",
+  "year": 1984,
+  "caption": {
+   "en": "Bruce McCandless floating free in space on the first untethered spacewalk",
+   "pt": "Bruce McCandless flutuando livre no espaço na primeira caminhada espacial sem cabo"
+  },
+  "image": {
+   "src": "/snaps/5ff67247947f.jpg",
+   "width": 640,
+   "height": 640,
+   "credit": {
+    "file": "Bruce McCandless II during EVA in 1984.jpg",
+    "author": "NASA",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Bruce_McCandless_II_during_EVA_in_1984.jpg"
+   }
+  }
+ },
+ {
+  "id": "geneva-summit",
+  "year": 1985,
+  "caption": {
+   "en": "Ronald Reagan and Mikhail Gorbachev at their first summit, in Geneva",
+   "pt": "Ronald Reagan e Mikhail Gorbachev na primeira reunião de cúpula, em Genebra"
+  },
+  "place": {
+   "lat": 46.2,
+   "lon": 6.15
+  },
+  "image": {
+   "src": "/snaps/be7634ef1b92.jpg",
+   "width": 640,
+   "height": 424,
+   "credit": {
+    "file": "President Ronald Reagan and Soviet General Secretary Gorbachev at The First Summit in Geneva Switzerland - DPLA - b534f3d00bb05c3cc293789b180d2116.jpg",
+    "author": "President (1981-1989 : Reagan). White House Photographic Office. 1981-1989",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:President_Ronald_Reagan_and_Soviet_General_Secretary_Gorbachev_at_The_First_Summit_in_Geneva_Switzerland_-_DPLA_-_b534f3d00bb05c3cc293789b180d2116.jpg"
+   }
+  }
+ },
+ {
+  "id": "berlin-wall-opening",
+  "year": 1989,
+  "caption": {
+   "en": "Crowds at a new opening in the Berlin Wall at Potsdamer Platz, days after it fell",
+   "pt": "Multidão numa nova abertura do Muro de Berlim na Potsdamer Platz, dias depois da queda"
+  },
+  "place": {
+   "lat": 52.509,
+   "lon": 13.376
+  },
+  "image": {
+   "src": "/snaps/cfb2fb2e28b4.jpg",
+   "width": 640,
+   "height": 427,
+   "credit": {
+    "file": "A crowd of West German citizens gathers at the newly created opening in the Berlin Wall at Potsdamer Platz.jpg",
+    "author": "Series: Combined Military Service Digital Photographic Files, 1982 - 2007 Recor…",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:A_crowd_of_West_German_citizens_gathers_at_the_newly_created_opening_in_the_Berlin_Wall_at_Potsdamer_Platz.jpg"
+   }
+  }
+ },
+ {
+  "id": "desert-storm-oil-fires",
+  "year": 1991,
+  "caption": {
+   "en": "Oil wells set on fire in Kuwait at the end of the Gulf War",
+   "pt": "Poços de petróleo incendiados no Kuwait no fim da Guerra do Golfo"
+  },
+  "place": {
+   "lat": 29,
+   "lon": 47.9
+  },
+  "image": {
+   "src": "/snaps/da3d94b5673a.jpg",
+   "width": 640,
+   "height": 428,
+   "credit": {
+    "file": "Operation Desert Storm 22.jpg",
+    "author": "Tech. Sgt. David McLeod",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Operation_Desert_Storm_22.jpg"
+   }
+  }
+ },
+ {
+  "id": "mae-jemison",
+  "year": 1992,
+  "caption": {
+   "en": "The astronaut Mae Jemison aboard the space shuttle Endeavour",
+   "pt": "A astronauta Mae Jemison a bordo do ônibus espacial Endeavour"
+  },
+  "image": {
+   "src": "/snaps/043dda6328aa.jpg",
+   "width": 576,
+   "height": 720,
+   "credit": {
+    "file": "Mae Carol Jemison.jpg",
+    "author": "NASA",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Mae_Carol_Jemison.jpg"
+   }
+  }
+ },
+ {
+  "id": "hubble-repair",
+  "year": 1993,
+  "caption": {
+   "en": "Astronauts repairing the Hubble Space Telescope from the space shuttle Endeavour",
+   "pt": "Astronautas consertando o Telescópio Espacial Hubble a partir do ônibus espacial Endeavour"
+  },
+  "image": {
+   "src": "/snaps/35b61ffaabfa.jpg",
+   "width": 482,
+   "height": 720,
+   "credit": {
+    "file": "Repair-Hubble-2-shuttle.jpg",
+    "author": "NASA",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Repair-Hubble-2-shuttle.jpg"
+   }
+  }
+ },
+ {
+  "id": "oslo-accords-handshake",
+  "year": 1993,
+  "caption": {
+   "en": "Yitzhak Rabin and Yasser Arafat shake hands, with Bill Clinton, at the signing of the Oslo Accords",
+   "pt": "Yitzhak Rabin e Yasser Arafat apertam as mãos, com Bill Clinton, na assinatura dos Acordos de Oslo"
+  },
+  "place": {
+   "lat": 38.897,
+   "lon": -77.037
+  },
+  "image": {
+   "src": "/snaps/e843d282cf50.jpg",
+   "width": 640,
+   "height": 427,
+   "credit": {
+    "file": "Bill Clinton, Yitzhak Rabin, Yasser Arafat at the White House 1993-09-13.jpg",
+    "author": "Vince Musi / The White House",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Bill_Clinton%2C_Yitzhak_Rabin%2C_Yasser_Arafat_at_the_White_House_1993-09-13.jpg"
+   }
+  }
+ },
+ {
+  "id": "atlantis-docked-to-mir",
+  "year": 1995,
+  "caption": {
+   "en": "The space shuttle Atlantis docked to the Mir space station",
+   "pt": "O ônibus espacial Atlantis acoplado à estação espacial Mir"
+  },
+  "image": {
+   "src": "/snaps/644243cbbd02.jpg",
+   "width": 640,
+   "height": 512,
+   "credit": {
+    "file": "Atlantis docked to MIR - GPN-2000-001315.jpg",
+    "author": "NASA",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Atlantis_docked_to_MIR_-_GPN-2000-001315.jpg"
+   }
+  }
+ },
+ {
+  "id": "pillars-of-creation",
+  "year": 1995,
+  "caption": {
+   "en": "One of the \"Pillars of Creation\" in the Eagle Nebula, from the Hubble Space Telescope",
+   "pt": "Um dos \"Pilares da Criação\" na Nebulosa da Águia, do Telescópio Espacial Hubble"
+  },
+  "image": {
+   "src": "/snaps/b6a503833882.jpg",
+   "width": 640,
+   "height": 625,
+   "credit": {
+    "file": "Eagle.column1.arp.750pix.jpg",
+    "author": "Jeff Hester and Paul Scowen (Arizona State University), Hubble Space Telescope,…",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Eagle.column1.arp.750pix.jpg"
+   }
+  }
+ },
+ {
+  "id": "atlantis-rollout",
+  "year": 1996,
+  "caption": {
+   "en": "The space shuttle Atlantis rolling out to its launch pad",
+   "pt": "O ônibus espacial Atlantis a caminho da plataforma de lançamento"
+  },
+  "place": {
+   "lat": 28.6,
+   "lon": -80.6
+  },
+  "image": {
+   "src": "/snaps/c0feb4560e44.jpg",
+   "width": 640,
+   "height": 714,
+   "credit": {
+    "file": "STS-79 rollout.jpg",
+    "author": "NASA/KSC",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:STS-79_rollout.jpg"
+   }
+  }
+ },
+ {
+  "id": "sojourner",
+  "year": 1997,
+  "caption": {
+   "en": "The rover Sojourner on Mars, the first wheeled vehicle on another planet",
+   "pt": "O jipe Sojourner em Marte, o primeiro veículo com rodas em outro planeta"
+  },
+  "image": {
+   "src": "/snaps/dcfda41094cf.jpg",
+   "width": 640,
+   "height": 587,
+   "credit": {
+    "file": "Sojourner on Mars PIA01122.jpg",
+    "author": "NASA",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Sojourner_on_Mars_PIA01122.jpg"
+   }
+  }
+ },
+ {
+  "id": "zarya-module",
+  "year": 1998,
+  "caption": {
+   "en": "Zarya, the first module of the International Space Station, seen from the space shuttle Endeavour",
+   "pt": "O Zarya, primeiro módulo da Estação Espacial Internacional, visto do ônibus espacial Endeavour"
+  },
+  "image": {
+   "src": "/snaps/f3337c9b30d3.jpg",
+   "width": 640,
+   "height": 709,
+   "credit": {
+    "file": "Zarya from STS-88.jpg",
+    "author": "Unknown author",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Zarya_from_STS-88.jpg"
+   }
+  }
+ },
+ {
+  "id": "elk-bath",
+  "year": 2000,
+  "caption": {
+   "en": "\"Elk Bath\": elk sheltering in a river from a forest fire in Montana, by John McColgan",
+   "pt": "\"Banho de alces\": alces se abrigando num rio de um incêndio florestal em Montana, por John McColgan"
+  },
+  "place": {
+   "lat": 45.7,
+   "lon": -114
+  },
+  "image": {
+   "src": "/snaps/369f290fda59.jpg",
+   "width": 640,
+   "height": 395,
+   "credit": {
+    "file": "Deerfire high res.jpg",
+    "author": "John McColgan, Bureau of Land Management, Alaska Fire Service. – Alaskan Type I…",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Deerfire_high_res.jpg"
+   }
+  }
+ },
+ {
+  "id": "concorde-final-flights",
+  "year": 2003,
+  "caption": {
+   "en": "Concorde on one of its final flights, the year it was retired",
+   "pt": "O Concorde num dos últimos voos, no ano em que foi aposentado"
+  },
+  "image": {
+   "src": "/snaps/b05ec242e246.jpg",
+   "width": 640,
+   "height": 423,
+   "credit": {
+    "file": "Concorde The Final YYZ-JFK-LHR Flight (4385501371).jpg",
+    "author": "Can Pac Swire from Toronto, Canada",
+    "licence": "CC BY-SA 2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Concorde_The_Final_YYZ-JFK-LHR_Flight_(4385501371).jpg"
+   }
+  }
+ },
+ {
+  "id": "metallica",
+  "year": 2004,
+  "caption": {
+   "en": "James Hetfield on stage with Metallica",
+   "pt": "James Hetfield no palco com o Metallica"
+  },
+  "image": {
+   "src": "/snaps/37d924299fef.jpg",
+   "width": 640,
+   "height": 426,
+   "credit": {
+    "file": "James Hetfield with Metallica -- 7 October 2004.jpg",
+    "author": "DallasFletcher",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:James_Hetfield_with_Metallica_--_7_October_2004.jpg"
+   }
+  }
+ },
+ {
+  "id": "soyuz-launch",
+  "year": 2004,
+  "caption": {
+   "en": "A Soyuz rocket lifting off from Baikonur with a crew for the International Space Station",
+   "pt": "Um foguete Soyuz decolando de Baikonur com uma tripulação para a Estação Espacial Internacional"
+  },
+  "place": {
+   "lat": 45.92,
+   "lon": 63.34
+  },
+  "image": {
+   "src": "/snaps/9a7d3c5dd589.jpg",
+   "width": 463,
+   "height": 720,
+   "credit": {
+    "file": "Soyuz TMA-5 launch.jpg",
+    "author": "Bill Ingalls",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Soyuz_TMA-5_launch.jpg"
+   }
+  }
+ },
+ {
+  "id": "katrina-flooding",
+  "year": 2005,
+  "caption": {
+   "en": "New Orleans flooded after Hurricane Katrina",
+   "pt": "Nova Orleans inundada depois do furacão Katrina"
+  },
+  "place": {
+   "lat": 29.95,
+   "lon": -90.07
+  },
+  "image": {
+   "src": "/snaps/6a5f8a44166f.jpg",
+   "width": 548,
+   "height": 720,
+   "credit": {
+    "file": "KatrinaNewOrleansFlooded edit2.jpg",
+    "author": "AP Photo/U.S. Coast Guard, Petty Officer 2nd Class Kyle Niemi",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:KatrinaNewOrleansFlooded_edit2.jpg"
+   }
+  }
+ },
+ {
+  "id": "space-station",
+  "year": 2005,
+  "caption": {
+   "en": "The International Space Station, seen from the departing space shuttle Discovery",
+   "pt": "A Estação Espacial Internacional vista do ônibus espacial Discovery, ao partir"
+  },
+  "image": {
+   "src": "/snaps/c04775267a8d.jpg",
+   "width": 640,
+   "height": 432,
+   "credit": {
+    "file": "ISS Aug2005.jpg",
+    "author": "NASA",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:ISS_Aug2005.jpg"
+   }
+  }
+ },
+ {
+  "id": "iphone-keynote",
+  "year": 2007,
+  "caption": {
+   "en": "Steve Jobs presenting the first iPhone",
+   "pt": "Steve Jobs apresentando o primeiro iPhone"
+  },
+  "place": {
+   "lat": 37.784,
+   "lon": -122.401
+  },
+  "image": {
+   "src": "/snaps/87fa5ac9e603.jpg",
+   "width": 640,
+   "height": 429,
+   "credit": {
+    "file": "Steve Jobs presents iPhone.jpg",
+    "author": "Blake Patterson",
+    "licence": "CC BY 2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Steve_Jobs_presents_iPhone.jpg"
+   }
+  }
+ },
+ {
+  "id": "obama-inauguration",
+  "year": 2009,
+  "caption": {
+   "en": "The crowd on the National Mall for Barack Obama's inauguration",
+   "pt": "A multidão no National Mall para a posse de Barack Obama"
+  },
+  "place": {
+   "lat": 38.889,
+   "lon": -77.023
+  },
+  "image": {
+   "src": "/snaps/32bf0e4afbd3.jpg",
+   "width": 640,
+   "height": 427,
+   "credit": {
+    "file": "Crowd at National Mall for Obama inauguration 1-20-09 hires 090120-F-6184M-007a.jpg",
+    "author": "Senior Master Sgt. Thomas Meneguin, USAF",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Crowd_at_National_Mall_for_Obama_inauguration_1-20-09_hires_090120-F-6184M-007a.jpg"
+   }
+  }
+ }
+]

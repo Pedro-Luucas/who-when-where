@@ -19,6 +19,14 @@ import "./engines.css";
 import "./lightbox.css";
 import "./connect.css";
 import "./pro.css";
+// Wave 2 games (phase 15): one sheet per game.
+import "./wave2/timeline.css";
+import "./wave2/year-snap.css";
+import "./wave2/landmark-lens.css";
+import "./wave2/true-size.css";
+import "./wave2/rivers-and-ranges.css";
+import "./wave2/life-tracks.css";
+import "./wave2/quickplay.css";
 // The phone UI, last so it wins: everything in it sits behind a phone breakpoint.
 import "./mobile.css";
 

@@ -145,6 +145,14 @@ export const GAMES = [
   "flag-peek",
   "higher-or-lower",
   "border-chain",
+  "timeline",
+  "year-snap",
+  "landmark-lens",
+  "true-size",
+  "rivers-and-ranges",
+  "life-tracks",
+  "quickplay",
+  "gauntlet",
 ] as const;
 export type Game = (typeof GAMES)[number];
 
@@ -206,6 +214,8 @@ const TRIES: Partial<Record<Game, { min: number; max: number; fallback: number; 
   "clue-ladder": { min: 3, max: 6, fallback: 6 },
   "click-the-country": { min: 1, max: 3, fallback: 3 },
   "flag-peek": { min: 3, max: 6, fallback: 6 },
+  timeline: { min: 1, max: 5, fallback: 3 },
+  "life-tracks": { min: 3, max: 6, fallback: 5 },
 };
 type OlderTries = "digs" | "guesses" | "attempts" | "spare";
 

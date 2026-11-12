@@ -38,6 +38,14 @@ export const SCREENS: Record<GameSlug, ComponentType> = {
   "flag-peek": dynamic(() => import("./flag-peek/board").then(screen), { loading }),
   "higher-or-lower": dynamic(() => import("./higher-or-lower/board").then(screen), { loading }),
   "border-chain": dynamic(() => import("./border-chain/board").then(screen), { loading }),
+  timeline: dynamic(() => import("./timeline/board").then(screen), { loading }),
+  "year-snap": dynamic(() => import("./year-snap/board").then(screen), { loading }),
+  "landmark-lens": dynamic(() => import("./landmark-lens/board").then(screen), { loading }),
+  "true-size": dynamic(() => import("./true-size/board").then(screen), { loading }),
+  "rivers-and-ranges": dynamic(() => import("./rivers-and-ranges/board").then(screen), { loading }),
+  "life-tracks": dynamic(() => import("./life-tracks/board").then(screen), { loading }),
+  quickplay: dynamic(() => import("./quickplay/board").then(screen), { loading }),
+  gauntlet: dynamic(() => import("./gauntlet/board").then(screen), { loading }),
 };
 
 const BOARDS: Record<GameSlug, () => Promise<{ default: GameBoard }>> = {
@@ -59,6 +67,14 @@ const BOARDS: Record<GameSlug, () => Promise<{ default: GameBoard }>> = {
   "flag-peek": () => import("./flag-peek/board"),
   "higher-or-lower": () => import("./higher-or-lower/board"),
   "border-chain": () => import("./border-chain/board"),
+  timeline: () => import("./timeline/board"),
+  "year-snap": () => import("./year-snap/board"),
+  "landmark-lens": () => import("./landmark-lens/board"),
+  "true-size": () => import("./true-size/board"),
+  "rivers-and-ranges": () => import("./rivers-and-ranges/board"),
+  "life-tracks": () => import("./life-tracks/board"),
+  quickplay: () => import("./quickplay/board"),
+  gauntlet: () => import("./gauntlet/board"),
 };
 
 const DATA: Record<GameSlug, () => Promise<{ default: GameData }>> = {
@@ -80,6 +96,14 @@ const DATA: Record<GameSlug, () => Promise<{ default: GameData }>> = {
   "flag-peek": () => import("./flag-peek/data"),
   "higher-or-lower": () => import("./higher-or-lower/data"),
   "border-chain": () => import("./border-chain/data"),
+  timeline: () => import("./timeline/data"),
+  "year-snap": () => import("./year-snap/data"),
+  "landmark-lens": () => import("./landmark-lens/data"),
+  "true-size": () => import("./true-size/data"),
+  "rivers-and-ranges": () => import("./rivers-and-ranges/data"),
+  "life-tracks": () => import("./life-tracks/data"),
+  quickplay: () => import("./quickplay/data"),
+  gauntlet: () => import("./gauntlet/data"),
 };
 
 // One request per module, however many ask. A failed one is forgotten, so the next ask tries again.

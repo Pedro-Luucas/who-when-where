@@ -1,0 +1,128 @@
+/* rivers-and-ranges (phase 15): the hints after a miss, the countries named
+   as chips, the three features in the dossier, and the answer between them. */
+
+@layer components {
+  /* The hints a miss earns: the continent, then the first letter. */
+  .game[data-game="rivers-and-ranges"] .rr-hints {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .game[data-game="rivers-and-ranges"] .rr-hints li {
+    padding: 4px 10px;
+    border: 1px solid color-mix(in oklab, var(--heat-3) 50%, transparent);
+    border-radius: var(--radius-pill);
+    background: color-mix(in oklab, var(--heat-3) 12%, transparent);
+    font-size: 0.85rem;
+    color: var(--fg);
+    animation: rise 0.3s both;
+  }
+
+  /* Every country named for the feature on screen, in order, with its verdict. */
+  .game[data-game="rivers-and-ranges"] .rr-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .game[data-game="rivers-and-ranges"] .rr-chips li {
+    --chip: var(--answer);
+    padding: 3px 10px;
+    border: 1px solid color-mix(in oklab, var(--chip) 50%, transparent);
+    border-radius: var(--radius-pill);
+    background: color-mix(in oklab, var(--chip) 14%, transparent);
+    font-size: 0.82rem;
+    animation: rise 0.3s both;
+  }
+
+  .game[data-game="rivers-and-ranges"] .rr-chips li[data-state="near"] {
+    --chip: var(--heat-3);
+  }
+
+  .game[data-game="rivers-and-ranges"] .rr-chips li[data-state="miss"] {
+    --chip: var(--danger);
+    text-decoration: line-through;
+    text-decoration-color: color-mix(in oklab, var(--danger) 70%, transparent);
+  }
+
+  /* The three features of the puzzle, in the dossier. */
+  .game[data-game="rivers-and-ranges"] .rr-legs {
+    display: grid;
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .game[data-game="rivers-and-ranges"] .rr-legs li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0 10px;
+    align-items: baseline;
+    padding: 7px 11px;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--line-strong);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+  }
+
+  .game[data-game="rivers-and-ranges"] .rr-legs li span {
+    grid-column: 1 / -1;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--fg-3);
+  }
+
+  .game[data-game="rivers-and-ranges"] .rr-legs li b {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .game[data-game="rivers-and-ranges"] .rr-legs li small {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--fg-2);
+  }
+
+  .game[data-game="rivers-and-ranges"] .rr-legs li[data-state="current"] {
+    border-left-color: var(--accent);
+  }
+
+  .game[data-game="rivers-and-ranges"] .rr-legs li[data-state="hit"] {
+    border-left-color: var(--answer);
+  }
+
+  .game[data-game="rivers-and-ranges"] .rr-legs li[data-state="near"] {
+    border-left-color: var(--heat-3);
+  }
+
+  .game[data-game="rivers-and-ranges"] .rr-legs li[data-state="miss"],
+  .game[data-game="rivers-and-ranges"] .rr-legs li[data-state="skip"] {
+    border-left-color: var(--danger);
+  }
+
+  .game[data-game="rivers-and-ranges"] .rr-legs li[data-state="todo"] {
+    opacity: 0.6;
+  }
+
+  /* The answer between two features. */
+  .game[data-game="rivers-and-ranges"] .rr-reveal .button {
+    min-height: 44px;
+  }
+
+  .game[data-game="rivers-and-ranges"] .rr-missed {
+    color: var(--fg-3);
+    font-size: 0.88rem;
+  }
+
+  @media (max-width: 520px) {
+    .game[data-game="rivers-and-ranges"] .rr-reveal {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .game[data-game="rivers-and-ranges"] .rr-reveal .button {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,283 @@
+/* true-size (phase 15): two countries as the web map draws them, then at true scale. */
+
+@layer components {
+  .game[data-game="true-size"] {
+    --ts-base: var(--land);
+    --ts-base-edge: var(--land-edge);
+    --ts-over: var(--color-family-shapes);
+  }
+
+  /* Two options or three bands, always in one row. */
+  .game[data-game="true-size"] .pick-options {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+  }
+
+  .game[data-game="true-size"] .pick-options[data-layout="binary"] .pick-option {
+    min-height: 64px;
+    padding: 12px 10px;
+    font-size: clamp(0.95rem, 0.8rem + 0.9vw, 1.2rem);
+    overflow-wrap: anywhere;
+  }
+
+  .game[data-game="true-size"] .ts-scene {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    min-width: 0;
+    animation: rise 0.35s both;
+  }
+
+  .game[data-game="true-size"] .ts-tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-3);
+  }
+
+  .game[data-game="true-size"] .ts-frame {
+    position: relative;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--sea);
+    overflow: hidden;
+  }
+
+  .game[data-game="true-size"] .ts-frame svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    animation: fade 0.4s both;
+  }
+
+  /* Until the world map is in: a well the size of the drawing. */
+  .game[data-game="true-size"] .ts-frame[data-loading] {
+    background: linear-gradient(90deg, var(--sunken) 30%, var(--surface-2) 50%, var(--sunken) 70%) 0 0 / 200% 100%;
+    animation: shimmer 1.6s linear infinite;
+  }
+
+  .game[data-game="true-size"] .ts-frame[data-view="mercator"] {
+    display: block;
+    width: 100%;
+    aspect-ratio: 300 / 220;
+  }
+
+  /* "Which is bigger": the options are the two shapes, side by side at one scale. */
+  .game[data-game="true-size"] .pick-option:has(.pick-media) {
+    justify-content: flex-start;
+    padding: 10px 10px 12px;
+  }
+
+  .game[data-game="true-size"] .pick-option .pick-media {
+    display: block;
+    width: 100%;
+  }
+
+  .game[data-game="true-size"] .pick-option .ts-frame {
+    border-color: var(--line);
+  }
+
+  .game[data-game="true-size"] .pick-option .ts-frame path {
+    fill: var(--ts-base);
+    stroke: var(--ts-base-edge);
+    stroke-width: 0.8;
+    stroke-linejoin: round;
+    transition:
+      fill 0.6s ease-out,
+      stroke 0.6s ease-out;
+  }
+
+  .game[data-game="true-size"] .pick-option:hover:not(:disabled) .ts-frame path {
+    fill: color-mix(in srgb, var(--accent) 28%, var(--ts-base));
+  }
+
+  .game[data-game="true-size"] .pick-option[data-state="right"] .ts-frame path {
+    fill: color-mix(in srgb, var(--answer) 30%, var(--ts-base));
+    stroke: var(--answer);
+  }
+
+  .game[data-game="true-size"] .pick-option[data-state="wrong"] .ts-frame path {
+    fill: color-mix(in srgb, var(--danger) 26%, var(--ts-base));
+    stroke: var(--danger);
+  }
+
+  .game[data-game="true-size"] [data-view="true"] .ts-frame {
+    aspect-ratio: 600 / 380;
+  }
+
+  .game[data-game="true-size"] [data-view="true"][data-compact] .ts-frame {
+    aspect-ratio: 300 / 200;
+  }
+
+  /* ── As the web map draws them ── */
+
+  .game[data-game="true-size"] .ts-panels {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .game[data-game="true-size"] .ts-panel {
+    display: grid;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .game[data-game="true-size"] .ts-panel path {
+    fill: var(--ts-base);
+    stroke: var(--ts-base-edge);
+    stroke-width: 0.8;
+    stroke-linejoin: round;
+    transition:
+      fill 0.6s ease-out,
+      stroke 0.6s ease-out;
+  }
+
+  .game[data-game="true-size"] .ts-panel[data-big] path {
+    fill: color-mix(in srgb, var(--answer) 30%, var(--ts-base));
+    stroke: var(--answer);
+  }
+
+  .game[data-game="true-size"] .ts-panel[data-big] .ts-frame {
+    border-color: color-mix(in srgb, var(--answer) 45%, transparent);
+  }
+
+  .game[data-game="true-size"] .ts-name {
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+
+  /* ── At true scale ── */
+
+  .game[data-game="true-size"] .ts-base {
+    fill: var(--ts-base);
+    stroke: var(--ts-base-edge);
+    stroke-width: 1;
+    stroke-linejoin: round;
+  }
+
+  .game[data-game="true-size"] .ts-over,
+  .game[data-game="true-size"] .ts-over path {
+    fill: color-mix(in srgb, var(--ts-over) 42%, transparent);
+    stroke: var(--ts-over);
+    stroke-width: 1.4;
+    stroke-linejoin: round;
+  }
+
+  /* Grabbed anywhere in its box: a thin coast or a scatter of islands is hard to hit. */
+  .game[data-game="true-size"] g.ts-over {
+    cursor: grab;
+    touch-action: none;
+    outline: none;
+    pointer-events: bounding-box;
+  }
+
+  .game[data-game="true-size"] g.ts-over:active {
+    cursor: grabbing;
+  }
+
+  .game[data-game="true-size"] g.ts-over:focus-visible path {
+    stroke: var(--accent);
+    stroke-width: 3;
+    fill: color-mix(in srgb, var(--ts-over) 55%, transparent);
+  }
+
+  .game[data-game="true-size"] .ts-legend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 16px;
+    font-size: 0.9rem;
+    color: var(--fg-2);
+  }
+
+  .game[data-game="true-size"] .ts-key {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px 7px;
+    min-width: 0;
+  }
+
+  .game[data-game="true-size"] .ts-key b {
+    color: var(--fg);
+  }
+
+  .game[data-game="true-size"] .ts-key span {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+  }
+
+  .game[data-game="true-size"] .ts-key i {
+    flex: none;
+    width: 12px;
+    height: 12px;
+    border-radius: var(--radius-xs);
+    background: var(--ts-base);
+    box-shadow: inset 0 0 0 1px var(--ts-base-edge);
+  }
+
+  .game[data-game="true-size"] .ts-key[data-role="over"] i {
+    background: color-mix(in srgb, var(--ts-over) 42%, transparent);
+    box-shadow: inset 0 0 0 1.5px var(--ts-over);
+  }
+
+  .game[data-game="true-size"] .ts-times {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    line-height: 1;
+    color: var(--ts-over);
+  }
+
+  .game[data-game="true-size"] .ts-reset {
+    margin-left: auto;
+    min-height: 44px;
+    padding: 0 14px;
+    font-size: 0.85rem;
+  }
+
+  .game[data-game="true-size"] .ts-note {
+    font-size: 0.8rem;
+    color: var(--fg-3);
+  }
+
+  /* ── The six pairs, after the result ── */
+
+  .game[data-game="true-size"] .ts-gallery {
+    display: grid;
+    gap: 10px;
+  }
+
+  .game[data-game="true-size"] .ts-gallery ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .game[data-game="true-size"] [data-compact] .ts-legend {
+    gap: 4px 10px;
+    font-size: 0.8rem;
+  }
+
+  .game[data-game="true-size"] [data-compact] .ts-times {
+    font-size: 1.05rem;
+  }
+
+  @media (max-width: 520px) {
+    .game[data-game="true-size"] .ts-panels {
+      gap: 6px;
+    }
+
+    .game[data-game="true-size"] .ts-name {
+      font-size: 0.9rem;
+    }
+  }
+}
