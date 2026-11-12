@@ -188,4 +188,126 @@
     animation: none;
   }
 }
+
+/* ───────────────────────── Share card ───────────────────────── */
+
+.share-card-key {
+  justify-self: start;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.share-card-dialog {
+  width: min(680px, calc(100vw - 32px));
+}
+
+.share-card-preview {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1200 / 630;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--bg-deep);
+}
+
+.share-card-preview[data-state="loading"] {
+  background:
+    linear-gradient(100deg, transparent 30%, rgb(79 171 246 / 0.1) 50%, transparent 70%) 0 0 / 200% 100%,
+    var(--bg-deep);
+  animation: shimmer 1.2s linear infinite;
+}
+
+.share-card-preview img {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  transform: scale(0.98);
+  transition:
+    opacity 260ms var(--ease-out),
+    transform 360ms var(--ease-spring);
+}
+
+.share-card-preview[data-state="ready"] img {
+  opacity: 1;
+  transform: none;
+}
+
+.share-card-note {
+  grid-area: 1 / 1;
+  padding: 16px;
+  color: var(--fg-2);
+  text-align: center;
+}
+
+.share-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.share-card-actions .key {
+  gap: 8px;
+}
+
+/* ───────────────────────── Toasts on a phone's game screen ─────────────────────────
+   An achievement or level notice dropped over the HUD and hid the way back
+   and the menu; on a game screen it now lands just under the HUD. */
+@media (max-width: 47.99rem) {
+  body:has(main.game .hud-phone) .toasts {
+    top: calc(64px + env(safe-area-inset-top));
+  }
+}
+
+/* ───────────────────────── Leaderboard: loading, arrival, medals ───────────────────────── */
+
+.board > li.board-loading {
+  min-height: 58px;
+  padding-left: 4px;
+  animation: fade 0.4s both;
+}
+
+.board > li[data-rank],
+.board > li:nth-child(-n + 12):not(.board-loading, .board-empty, .form-error) {
+  animation: rise 0.36s var(--ease-out) both;
+}
+
+.board > li:nth-child(2) { animation-delay: 40ms; }
+.board > li:nth-child(3) { animation-delay: 80ms; }
+.board > li:nth-child(4) { animation-delay: 120ms; }
+.board > li:nth-child(5) { animation-delay: 160ms; }
+.board > li:nth-child(6) { animation-delay: 200ms; }
+.board > li:nth-child(7) { animation-delay: 240ms; }
+.board > li:nth-child(8) { animation-delay: 280ms; }
+.board > li:nth-child(n + 9) { animation-delay: 320ms; }
+
+.board > li[data-rank="2"] .board-rank {
+  font-size: 1.45rem;
+  color: #c9d6e6;
+  text-shadow: 0 0 12px rgb(201 214 230 / 0.35);
+}
+
+.board > li[data-rank="3"] .board-rank {
+  font-size: 1.35rem;
+  color: #e3a36b;
+  text-shadow: 0 0 12px rgb(227 163 107 / 0.35);
+}
+
+:root[data-theme="light"] .board > li[data-rank="2"] .board-rank {
+  color: #5a6d86;
+}
+
+:root[data-theme="light"] .board > li[data-rank="3"] .board-rank {
+  color: #9a5a22;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .board > li {
+    animation: none !important;
+  }
+}
 }

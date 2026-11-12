@@ -14,6 +14,7 @@ import { getLeaderboard, type Period, type Scope } from "./client";
 import { socialError, useSocialT } from "./messages";
 import { useRemote } from "./remote";
 import { SocialTabs } from "./tabs";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const EVERY_MS = 30_000;
 const PERIODS: Period[] = ["day", "week", "all"];
@@ -135,7 +136,17 @@ function Board() {
             )}
           </li>
         )}
-        {!rows && !board.error && <li className="board-empty">…</li>}
+        {/* Loading: rows in the board's own shape, so nothing jumps when it arrives. */}
+        {!rows &&
+          !board.error &&
+          Array.from({ length: 6 }, (_, i) => (
+            <li key={`loading-${i}`} className="board-loading" aria-hidden="true" style={{ animationDelay: `${i * 70}ms` }}>
+              <Skeleton shape="circle" className="size-7" />
+              <Skeleton shape="circle" className="size-9" />
+              <Skeleton shape="text" className={i % 2 ? "w-2/5" : "w-1/2"} />
+              <Skeleton shape="text" className="ml-auto w-14" />
+            </li>
+          ))}
         {board.error && !rows && <li className="form-error">{t(socialError(board.error))}</li>}
       </ol>
 
