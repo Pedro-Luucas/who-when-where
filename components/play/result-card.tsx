@@ -3,10 +3,12 @@
 import { useEffect, useState } from "react";
 import { ProgressRing } from "@/components/ui/progress-ring";
 import { familyStyle, useGameFrame } from "@/games/platform/frame";
+import { cuePuzzle } from "@/lib/fx";
 import { useFocusWhenLost } from "@/lib/focus";
 import { formatNumber, useLocale } from "@/lib/i18n";
 import { MAX_POINTS } from "@/lib/points";
 import { useShellT } from "@/lib/shell-messages";
+import { ShareCardButton } from "./share-card";
 
 // The end of every puzzle, in every game, in the same order: the verdict and
 // the answer; the points as a ring and a count-up "x of 1,000", with a few
@@ -89,6 +91,15 @@ export function ResultCard({ label, headline, answer, points, stats, review, chi
   const heading = useFocusWhenLost<HTMLHeadingElement>();
   const max = formatNumber(MAX_POINTS, locale);
   const share = Math.round((points / MAX_POINTS) * 100);
+  const practice = !!frame?.practice;
+
+  // A practice puzzle just finished gets its fanfare here (a daily one gets it
+  // from the logbook's watcher, which sees the save). Only when the player's
+  // own move ended it: a finished puzzle reopened stays quiet.
+  useEffect(() => {
+    if (!practice || !navigator.userActivation?.isActive) return;
+    cuePuzzle(points, false);
+  }, [practice, points]);
 
   return (
     <section className="result-card" aria-labelledby="result-headline" style={familyStyle(frame?.family)}>
@@ -105,7 +116,7 @@ export function ResultCard({ label, headline, answer, points, stats, review, chi
       <div className="result-card-grid">
         <div className="result-score">
           <div className="result-score-top">
-            <ProgressRing value={points / MAX_POINTS} size={84} stroke={9} color={ringColour(points)} />
+            <ProgressRing value={shown / MAX_POINTS} size={84} stroke={9} color={ringColour(points)} />
             <p className="result-points">
               <strong aria-hidden="true">{formatNumber(shown, locale)}</strong>
               <span className="sr-only">{formatNumber(points, locale)} </span>
@@ -113,7 +124,7 @@ export function ResultCard({ label, headline, answer, points, stats, review, chi
             </p>
           </div>
           <span className="result-bar" aria-hidden="true">
-            <i style={{ width: `${share}%`, background: ringColour(points) }} />
+            <i style={{ width: `${(shown / MAX_POINTS) * 100}%`, background: ringColour(points) }} />
           </span>
           <p className="result-share">{t("ofBest", { p: share, max })}</p>
           <dl className="result-stats">
@@ -124,6 +135,9 @@ export function ResultCard({ label, headline, answer, points, stats, review, chi
               </div>
             ))}
           </dl>
+          {frame?.slug && (
+            <ShareCardButton slug={frame.slug} points={points} verdicts={review.map((row) => row.verdict)} label={label} />
+          )}
         </div>
 
         {children && <div className="result-actions">{children}</div>}

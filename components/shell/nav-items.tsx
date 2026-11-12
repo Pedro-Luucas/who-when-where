@@ -76,6 +76,7 @@ export type IconName =
   | "sound"
   | "muted"
   | "keyboard"
+  | "download"
   | "plus";
 
 const PATHS: Record<IconName, React.ReactNode> = {
@@ -188,6 +189,7 @@ const PATHS: Record<IconName, React.ReactNode> = {
     </>
   ),
   sound: <path d="M4.5 9.5v5h3.2l4.3 3.6V5.9L7.7 9.5zM15.5 9a4.2 4.2 0 0 1 0 6M17.8 6.4a7.8 7.8 0 0 1 0 11.2" />,
+  download: <path d="M12 4.5v10.5M7.5 10.5L12 15l4.5-4.5M5 19.5h14" />,
   muted: <path d="M4.5 9.5v5h3.2l4.3 3.6V5.9L7.7 9.5zM15.5 9.5l5 5M20.5 9.5l-5 5" />,
   keyboard: (
     <>
