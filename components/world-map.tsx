@@ -122,6 +122,51 @@ const DOUBLE_TAP_SLOP = 36;
 const TOUCH_ECHO_MS = 800;
 /** How long (ms) the view must rest before the detailed land is drawn for it. */
 const DETAIL_DELAY_MS = 110;
+/**
+ * A finger hides the spot under it. While a touch drags a pin, the point is
+ * drawn this far above the contact so the tip stays in view. A mouse or a
+ * pen is precise and is not shifted. The scored place is the tip.
+ */
+const FINGER_LIFT = 44;
+/** The zoom keys, three of them, plus the air around a pin that must stay clear. */
+const ZOOM_KEYS = { width: 72, height: 168 };
+
+type ZoomKeysPlace = "right" | "left" | "top";
+
+/** True when `point` would sit under the zoom keys parked in `place`. */
+function underZoomKeys(point: Point, frame: Size, place: ZoomKeysPlace): boolean {
+  if (point[0] < 0 || point[1] < 0 || point[0] > frame.width || point[1] > frame.height) return false;
+  switch (place) {
+    case "right":
+      return point[0] >= frame.width - ZOOM_KEYS.width && point[1] >= frame.height - ZOOM_KEYS.height;
+    case "left":
+      return point[0] <= ZOOM_KEYS.width && point[1] >= frame.height - ZOOM_KEYS.height;
+    case "top":
+      return point[0] >= frame.width - ZOOM_KEYS.width && point[1] <= ZOOM_KEYS.height;
+    default: {
+      const never: never = place;
+      return never;
+    }
+  }
+}
+
+/** The thumb-side corner, unless a pin is already there: then the other bottom corner, then the top. */
+function zoomKeysPlace(points: Point[], frame: Size): ZoomKeysPlace {
+  const busy = (place: ZoomKeysPlace) => points.some((point) => underZoomKeys(point, frame, place));
+  if (!busy("right")) return "right";
+  if (!busy("left")) return "left";
+  if (!busy("top")) return "top";
+  return "right";
+}
+
+/**
+ * A round being played. The same selector is in `.map-frame`'s touch-action
+ * rules. A result (`data-summary`), the logbook and the home page are not:
+ * an up-and-down drag there still scrolls the page.
+ */
+function liveGameMap(node: Element | null): boolean {
+  return !!node?.closest("main.game:not([data-summary])");
+}
 
 /** The map's own interface strings, in the player's language. */
 export function useMapLabels(): Labels {
@@ -265,6 +310,13 @@ type Gesture = {
   /** The fingers' distance apart when the pinch began. */
   spread: number;
   touch: boolean;
+  /** A finger, which covers the point. A pen or a mouse does not. */
+  finger: boolean;
+  /**
+   * Not a live game. At the home view an up-and-down drag is left to the
+   * page, which can still scroll a result, the logbook or the home page.
+   */
+  scrolls: boolean;
   /** No tap: the fingers moved, or there were two. */
   moved: boolean;
   /** A tap on a selectable marker selects it. */
@@ -347,6 +399,25 @@ export function WorldMap({
     };
   }, []);
 
+  // touch-action: none (CSS) is what stops a phone scrolling the page out from
+  // under a game map. This is the same stop for a browser that only listens
+  // to the touch event: without it, the first move is cancelled and a pinch
+  // or a pin never lands. Buttons are left alone so their click still fires.
+  useEffect(() => {
+    const frame = frameRef.current;
+    if (!frame) return;
+    const keep = (event: TouchEvent) => {
+      if (!liveGameMap(frame)) return;
+      const target = event.target;
+      // The map's own svg only. The "whole world" key draws a little globe,
+      // and cancelling that touch would swallow its click.
+      if (!(target instanceof Element) || !target.closest(".map-frame > svg")) return;
+      if (event.cancelable) event.preventDefault();
+    };
+    frame.addEventListener("touchmove", keep, { passive: false });
+    return () => frame.removeEventListener("touchmove", keep);
+  }, []);
+
   const projection = useMemo(() => (size ? frameProjection(size) : null), [size]);
 
   const base = useMemo(() => {
@@ -385,8 +456,8 @@ export function WorldMap({
     });
   }, [projection, world, regionKey]);
 
-  // Pan and zoom: the mouse wheel and mouse drags are d3-zoom's; touch is
-  // handled below (handlePointer…), so that it can share the page's scrolling.
+  // Pan and zoom: the mouse wheel and mouse drags are d3-zoom's. Touch is
+  // handled below. On a live game it never shares the finger with the page.
   const ready = !!base;
   useLayoutEffect(() => {
     const svg = svgRef.current;
@@ -598,6 +669,17 @@ export function WorldMap({
     return { lon: location[0], lat: location[1] };
   }
 
+  /**
+   * Where a dragged pin is drawn. A finger covers the contact, so the tip
+   * sits above it — and that tip is the place that gets picked. Near the top
+   * edge, or off the globe, the contact itself is used so the drag still lands.
+   */
+  function dragPoint(at: Point, finger: boolean): Point {
+    if (!finger || !size) return at;
+    const lifted: Point = [at[0], Math.max(16, at[1] - FINGER_LIFT)];
+    return locate(lifted[0], lifted[1]) ? lifted : at;
+  }
+
   /** Picks the place under a point of the frame (screen pixels), if it is on the globe. */
   function pickAt(screenX: number, screenY: number) {
     if (!onPick) return;
@@ -613,9 +695,10 @@ export function WorldMap({
     pickAt(event.clientX - box.left, event.clientY - box.top);
   }
 
-  // ── Touch: one finger pans (or, at the home view, leaves an up-and-down
-  // drag to scroll the page: CSS touch-action), two pinch, a tap picks after
-  // a short wait for a second one, and a double tap zooms in where it lands.
+  // ── Touch: one finger pans, two pinch around the midpoint, a tap picks
+  // after a short wait for a second one, and a double tap zooms in on that
+  // point. On a live game this includes an up-and-down drag at the home zoom
+  // (the page must not take it). Elsewhere, that drag still scrolls the page.
 
   const pointOf = (event: React.PointerEvent<SVGSVGElement>): Point => {
     const box = event.currentTarget.getBoundingClientRect();
@@ -649,7 +732,13 @@ export function WorldMap({
     if (gesture) {
       // Only a second finger joins a gesture under way, to pinch.
       if (!touch || !gesture.touch || gesture.mode === "drag" || gesture.pointers.size >= 2) return;
-      // A second finger: pinch.
+      // A second finger: pinch. Capture it too, or a phone drops the gesture
+      // when that finger slides off the element that first saw it.
+      try {
+        svg.setPointerCapture?.(event.pointerId);
+      } catch {
+        // No active pointer (a synthetic event). The gesture still counts.
+      }
       gesture.pointers.set(event.pointerId, at);
       const [a, b] = [...gesture.pointers.values()];
       Object.assign(gesture, {
@@ -663,7 +752,11 @@ export function WorldMap({
     }
 
     select(svg).interrupt();
-    svg.setPointerCapture?.(event.pointerId);
+    try {
+      svg.setPointerCapture?.(event.pointerId);
+    } catch {
+      // Capture can throw when the pointer id is not active. Keep the gesture.
+    }
     const selectable = target.closest("[data-select]");
     gestureRef.current = {
       mode: draggable ? "drag" : "tap",
@@ -674,6 +767,8 @@ export function WorldMap({
       anchor: at,
       spread: 1,
       touch,
+      finger: event.pointerType === "touch",
+      scrolls: !liveGameMap(svg),
       moved: false,
       select: selectable ? markers[Number(selectable.getAttribute("data-select"))]?.onSelect : undefined,
     };
@@ -690,13 +785,14 @@ export function WorldMap({
     if (gesture.mode === "drag") {
       if (!gesture.moved && Math.hypot(dx, dy) < 4) return;
       gesture.moved = true;
-      setDragAt(at);
+      setDragAt(dragPoint(at, gesture.finger));
     } else if (gesture.mode === "tap") {
       if (Math.hypot(dx, dy) < TAP_SLOP) return;
       gesture.moved = true;
-      // At the home view an up-and-down drag is the page's (it scrolls, and
-      // the browser cancels the pointer); only a sideways one pans the map.
-      if (!zoomed && Math.abs(dy) > Math.abs(dx)) return;
+      // Not a live game, and still at the home view: an up-and-down drag is
+      // the page's. touch-action: pan-y lets it scroll, and the browser then
+      // cancels the pointer. A live game never takes this branch.
+      if (gesture.scrolls && !zoomed && Math.abs(dy) > Math.abs(dx)) return;
       gesture.mode = "pan";
       gesture.anchor = gesture.start;
       handlePointerMove(event);
@@ -738,7 +834,8 @@ export function WorldMap({
 
     if (gesture.mode === "drag") {
       if (gesture.moved) {
-        pickAt(at[0], at[1]);
+        const tip = dragPoint(at, gesture.finger);
+        pickAt(tip[0], tip[1]);
         setDragAt(null);
         suppressClickRef.current = performance.now() + 400;
         return;
@@ -835,8 +932,8 @@ export function WorldMap({
     }
   }
 
-  // Zoomed in, every drag on the map is the map's; at the home view, the page
-  // keeps its up-and-down scrolling (see .map-frame's touch-action).
+  // On a live game every drag is the map's. Elsewhere, at the home view, the
+  // page keeps its up-and-down scrolling (see .map-frame's touch-action).
   const zoomed = view.k > home.k * 1.02;
   const canZoomIn = view.k < maxZoom * 0.999;
   const canZoomOut = view.k > 1.001;
@@ -954,6 +1051,13 @@ export function WorldMap({
 
   const drawn = showDetail ? detail : null;
   const shift = drawn ? detailShift(drawn, view) : null;
+  const keysPlace =
+    size === null
+      ? "right"
+      : zoomKeysPlace(
+          dots.flatMap(({ point }) => (point ? [point] : [])),
+          size,
+        );
 
   return (
     <div
@@ -1115,7 +1219,10 @@ export function WorldMap({
 
       {children && <div className="map-readout">{children}</div>}
 
-      <div className="map-controls">
+      {/* In the tab order on purpose: a map that is only looked at has no
+          keyboard zoom, and these are that path. +/-/0 still work when the
+          map itself can be focused. They leave the corner a pin is in. */}
+      <div className="map-controls" data-place={keysPlace === "right" ? undefined : keysPlace}>
         <button
           type="button"
           onClick={() => canZoomIn && zoomBy(ZOOM_STEP)}

@@ -643,8 +643,8 @@ button {
   padding: 0;
   background: var(--sea);
   overflow: hidden;
-  /* At the home view an up-and-down drag scrolls the page, so the map never
-     traps it; sideways drags, pinches and taps are the map's (world-map.tsx).
+  /* Outside a live game (home, logbook, a result) an up-and-down drag scrolls
+     the page. Sideways drags, pinches and taps are the map's (world-map.tsx).
      Zoomed in, every gesture on the map is the map's. */
   touch-action: pan-y;
   user-select: none;
@@ -653,6 +653,17 @@ button {
 }
 
 .map-frame[data-zoomed] {
+  touch-action: none;
+}
+
+/* A round being played: the map is the board. The page must not cancel the
+   pointer to scroll, or pan, pinch and the pin never land. touch-action is
+   not inherited; some phones only honour it on the element under the finger,
+   so the svg and its shapes carry it too. Keep the selector in step with
+   liveGameMap() in world-map.tsx. Scrolling still works outside the map. */
+main.game:not([data-summary]) .map-frame,
+main.game:not([data-summary]) .map-frame > svg,
+main.game:not([data-summary]) .map-frame > svg * {
   touch-action: none;
 }
 
@@ -859,6 +870,9 @@ button {
   place-items: center;
   width: 44px;
   height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
   font-family: var(--font-mono);
   font-size: 1.35rem;
   line-height: 1;
@@ -868,7 +882,14 @@ button {
   border-top: 1px solid var(--rule);
 }
 
-.map-controls button:hover:not([aria-disabled]) {
+@media (hover: hover) {
+  .map-controls button:hover:not([aria-disabled]) {
+    background: var(--surface-3);
+    color: var(--accent);
+  }
+}
+
+.map-controls button:active:not([aria-disabled]) {
   background: var(--surface-3);
   color: var(--accent);
 }
@@ -888,6 +909,44 @@ button {
     right: 10px;
     bottom: 10px;
   }
+}
+
+/* Phones: the keys sit on the thumb side, clear of the action bar that
+   overlaps the map by a few pixels, and of the home indicator when the map
+   itself reaches the screen edge (a phone on its side). */
+@media (max-width: 47.99rem) {
+  main.game:not([data-summary]) .map-controls {
+    right: max(8px, env(safe-area-inset-right));
+    bottom: 16px;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 31.25rem) {
+  main.game:not([data-summary]) .map-controls {
+    right: max(8px, env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
+  }
+}
+
+/* A pin in that corner: park the keys somewhere it is not. The long selectors
+   beat the phone rules above and mobile.css, which also set right/bottom —
+   otherwise both edges would be set and the keys would stretch. */
+.map-controls[data-place="left"],
+main.game:not([data-summary]) .map-controls[data-place="left"],
+main.game:not([data-summary]):has(> .stage > .map-frame) .map-controls[data-place="left"] {
+  right: auto;
+  left: max(8px, env(safe-area-inset-left));
+}
+
+.map-controls[data-place="top"],
+main.game:not([data-summary]) .map-controls[data-place="top"],
+main.game:not([data-summary]):has(> .stage > .map-frame) .map-controls[data-place="top"] {
+  bottom: auto;
+  top: max(12px, env(safe-area-inset-top));
+}
+
+.map-frame:has(.map-controls[data-place="top"]) .map-readout {
+  max-width: calc(100% - 80px);
 }
 
 .map-status {
