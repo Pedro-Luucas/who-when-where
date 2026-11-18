@@ -503,6 +503,16 @@ body:has(.result-dock-practice) main.game[data-summary] {
   }
 }
 
+/* The tab names were 12px with wide tracking. 13px still fits Diários in a
+   fifth of a 360px screen. The side rail stays as it is: it is only 68px wide. */
+@media (max-width: 47.99rem) {
+  .bottom-nav a,
+  .bottom-nav button {
+    font-size: 0.8125rem;
+    letter-spacing: 0;
+  }
+}
+
 /* The atlas list is a column of links. Three pixels of padding put the next
    name under the finger. Each name, and each kind, is a full row. */
 @media (max-width: 47.99rem), (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
