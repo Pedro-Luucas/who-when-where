@@ -308,3 +308,25 @@ body:has(.result-dock-practice) main.game[data-summary] {
     scroll-padding-bottom: var(--keyboard, 0px);
   }
 }
+
+/* "Convidar amigos" was 12px of tracked capitals, easy to miss above the
+   party rules. The year steps were the same size as the tick labels. */
+@media (max-width: 47.99rem), (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  .invite-friends > summary,
+  .run-details > summary {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 0.875rem;
+    letter-spacing: 0.02em;
+    text-transform: none;
+  }
+
+  .dial-step {
+    font-size: 0.875rem;
+  }
+
+  .dial-readout {
+    flex-wrap: wrap;
+  }
+}
