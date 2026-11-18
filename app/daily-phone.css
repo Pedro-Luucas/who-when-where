@@ -486,6 +486,23 @@ body:has(.result-dock-practice) main.game[data-summary] {
   }
 }
 
+/* A chain of countries and a wrong guess were a small line. On a phone the
+   path so far, and the note under a guess, are body text. */
+@media (max-width: 47.99rem), (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  .chain-trail {
+    font-size: 1rem;
+    gap: 8px;
+  }
+
+  .chain-trail li {
+    padding: 8px 12px;
+  }
+
+  main.game .tries-hint {
+    font-size: 0.875rem;
+  }
+}
+
 /* The atlas list is a column of links. Three pixels of padding put the next
    name under the finger. Each name, and each kind, is a full row. */
 @media (max-width: 47.99rem), (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
