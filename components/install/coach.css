@@ -60,6 +60,48 @@
   min-height: 44px;
 }
 
+/* A phone already has a tab bar. The sheet is one row so it does not cover
+   the day's puzzles. The page grows by the same amount, so the last card
+   can scroll clear of it. */
+@media (max-width: 47.99rem) {
+  .install-coach {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px 10px;
+    padding: 10px 12px;
+  }
+
+  .install-coach .eyebrow,
+  .install-coach .hint {
+    display: none;
+  }
+
+  .install-coach h2 {
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+
+  .install-coach-steps {
+    grid-column: 1 / -1;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .install-coach-actions {
+    margin-top: 0;
+    flex-wrap: nowrap;
+  }
+
+  .install-coach-actions .key {
+    flex: 0 0 auto;
+    padding-inline: 12px;
+  }
+
+  body:has(.bottom-nav):has(.install-coach) {
+    padding-bottom: calc(66px + 120px + env(safe-area-inset-bottom));
+  }
+}
+
 @media (min-width: 48rem) {
   .install-coach {
     left: auto;
