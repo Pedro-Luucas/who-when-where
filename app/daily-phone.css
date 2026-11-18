@@ -430,3 +430,13 @@ body:has(.result-dock-practice) main.game[data-summary] {
     bottom: calc(88px + env(safe-area-inset-bottom));
   }
 }
+
+/* The match list opens above the field. With the keyboard up, that list was
+   taller than the space left and ran under the status bar. Keep at least
+   two names, and never more than the room above the field. */
+@media (max-width: 47.99rem), (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  main.game > .stage > .picker > .picker-list,
+  main.game[data-game="wayfarer"] > .stage > .picker > .picker-list {
+    max-height: max(88px, min(38svh, 240px, calc(100svh - var(--keyboard, 0px) - 168px)));
+  }
+}
