@@ -527,3 +527,20 @@ body:has(.result-dock-practice) main.game[data-summary] {
     text-transform: none;
   }
 }
+
+/* League tiers were 10px capitals in five columns, so Diamante broke into
+   letters. Head-to-head rows were shorter than a thumb. */
+@media (max-width: 47.99rem), (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  .tier-ladder li {
+    min-height: 44px;
+    padding: 0.55rem 0.15rem;
+    font-size: 0.8125rem;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .h2h-row {
+    min-height: 44px;
+    grid-template-columns: minmax(0, 1fr) 3.4rem 3.4rem;
+  }
+}
