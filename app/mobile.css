@@ -655,6 +655,47 @@
   .verdict {
     min-height: 0;
   }
+
+  /* The tab bar would sit on the lock key. A game keeps the bottom edge. */
+  body:has(main.game) .bottom-nav {
+    display: none;
+  }
+
+  body:has(main.game) {
+    padding-bottom: 0;
+    padding-left: 0;
+  }
+
+  html:has(main.game) {
+    overflow-x: clip;
+  }
+
+  /* The primary key stays under the thumb, above the home indicator, even
+     when the round is taller than the screen. */
+  main.game:not([data-summary]) > .stage > .action-bar {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 30;
+    margin: 0;
+  }
+
+  main.game:not([data-summary]) .controls.action-bar > .hint {
+    display: none;
+  }
+
+  main.game:not([data-summary]):has(.controls.action-bar, > .stage > .picker) {
+    padding-bottom: calc(84px + env(safe-area-inset-bottom));
+  }
+
+  main.game:not([data-summary]):has(.verdict.action-bar) {
+    padding-bottom: calc(176px + env(safe-area-inset-bottom));
+  }
+
+  main.game:not([data-summary]):has(> .stage > .picker .button ~ .button) {
+    padding-bottom: calc(156px + env(safe-area-inset-bottom));
+  }
 }
 
 /* Upright: the map takes everything between the prompt and the action bar. */
@@ -669,13 +710,13 @@
     border-radius: 0;
   }
 
+  /* The bar is fixed, so it no longer needs to overlap the map's edge. */
   main.game:not([data-summary]) > .stage > .map-frame + :is(.action-bar, .picker) {
-    margin-top: -10px;
+    margin-top: 0;
   }
 
-  /* The last thing on the stage goes to the bottom edge. */
   main.game > .stage > .action-bar:last-child {
-    margin-top: auto;
+    margin-top: 0;
   }
 
   /* The year dial sits just above its key, under the thumb. */
@@ -702,18 +743,18 @@
   }
 
   main.game > .stage > .picker {
-    position: sticky;
+    position: fixed;
+    right: 0;
     bottom: 0;
-    z-index: 20;
+    left: 0;
+    z-index: 30;
     grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas:
       "list list"
       "field keys";
     align-items: center;
     gap: 8px;
-    margin-top: auto;
-    margin-inline: calc(-1 * max(var(--pad), env(safe-area-inset-left)))
-      calc(-1 * max(var(--pad), env(safe-area-inset-right)));
+    margin: 0;
     padding: 10px max(var(--pad), env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom))
       max(var(--pad), env(safe-area-inset-left));
     border-top: 1px solid var(--line-strong);
@@ -805,26 +846,37 @@
   }
 
   main.game > .stage > .action-bar:last-child {
-    margin-top: auto;
+    margin-top: 0;
   }
 
-  main.game:not([data-summary]):has(> .stage > .map-frame) > .hud,
-  main.game:not([data-summary]):has(> .stage > .map-frame) .action-bar {
+  main.game:not([data-summary]):has(> .stage > .map-frame) > .hud {
     margin-right: calc(-1 * var(--pad));
     padding-right: var(--pad);
   }
 
-  .plaque-prompt.question {
+  /* The lock key stays at the bottom of the column beside the map, clear of
+     the notch (the padding) and of the home indicator. The map keeps the right. */
+  main.game:not([data-summary]):has(> .stage > .map-frame) > .stage > :is(.action-bar, .picker) {
+    right: var(--map);
+    margin: 0;
+    padding-left: max(12px, env(safe-area-inset-left));
+  }
+
+  main.game:not([data-summary]) .verdict.action-bar .stamp {
+    width: 48px;
+    height: 48px;
+  }
+
+  main.game:not([data-summary]) .verdict.action-bar .stamp strong {
     font-size: 1.15rem;
   }
 
-  /* There is no room to pin the field under a short screen: the column scrolls. */
-  main.game > .stage > .picker {
-    position: static;
-    margin-top: 0;
-    background: none;
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
+  main.game:not([data-summary]):has(.verdict.action-bar) {
+    padding-bottom: calc(148px + env(safe-area-inset-bottom));
+  }
+
+  .plaque-prompt.question {
+    font-size: 1.15rem;
   }
 
   main.game[data-game="wayfarer"] > .stage > .picker > .picker-list {
@@ -1034,6 +1086,15 @@
 
 .result-dock .key {
   min-height: 52px;
+}
+
+.result-dock-share {
+  min-width: 44px;
+  max-width: 48%;
+  padding-inline: 12px;
+  line-height: 1.15;
+  text-align: center;
+  white-space: normal;
 }
 
 .result-dock-next {

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { createPortal } from "react-dom";
 import { Icon } from "@/components/shell/nav-items";
 import { useDailyResults } from "@/games/results";
@@ -8,6 +9,8 @@ import { CHALLENGE_SLUGS, GAME_THEMES, GAME_TITLES, inChallenge, type GameSlug }
 import { useDayNumber, useSecondsUntilTomorrow } from "@/lib/clock";
 import { useLocale, useSiteT } from "@/lib/i18n";
 import { useIsMobile } from "@/lib/media";
+import { sharePictureFile } from "@/lib/result-share";
+import { copyText } from "@/lib/share";
 import { useShellT } from "@/lib/shell-messages";
 import { ShareButton } from "./share-button";
 
@@ -47,7 +50,7 @@ export function ResultActions({ shareText, game, nextLabel, archive }: ActionsPr
     return (
       <div className="summary-actions">
         {phone ? (
-          <ResultDock share={share} href={`/play/${game}`} label={shell("todaysPuzzle")} />
+          <ResultDock share={share} game={game} href={`/play/${game}`} label={shell("todaysPuzzle")} />
         ) : (
           <ShareButton label={t("share")} text={share} />
         )}
@@ -68,6 +71,7 @@ export function ResultActions({ shareText, game, nextLabel, archive }: ActionsPr
         {phone ? (
           <ResultDock
             share={share}
+            game={game}
             href={next ? `/play/${next}` : "/daily"}
             label={next ? GAME_TITLES[next] : t("dayDoneCta")}
             hint={next ? t("upNext") : undefined}
@@ -98,14 +102,73 @@ function useNextDaily(current: GameSlug): GameSlug | undefined {
 }
 
 /**
+ * The phone's share key: the device sheet (title, text, link, and the result
+ * picture when the browser will take a file), or the clipboard where there
+ * is no sheet. The desktop key stays on the copy path (ShareButton).
+ */
+async function sendResult(title: string, text: string, url: string): Promise<"shared" | "copied" | "cancelled" | "failed"> {
+  if (typeof navigator.share !== "function") return (await copyText(text)) ? "copied" : "failed";
+  const payload: ShareData = { title, text, url };
+  const file = sharePictureFile();
+  // canShare throws in some browsers when asked about files. A no is just text.
+  let withFile = false;
+  try {
+    withFile = !!file && !!navigator.canShare?.({ ...payload, files: [file] });
+  } catch {
+    withFile = false;
+  }
+  try {
+    if (withFile && file) await navigator.share({ ...payload, files: [file] });
+    else await navigator.share(payload);
+    return "shared";
+  } catch (error) {
+    if (error instanceof DOMException && error.name === "AbortError") return "cancelled";
+    if (withFile) {
+      try {
+        await navigator.share(payload);
+        return "shared";
+      } catch (again) {
+        if (again instanceof DOMException && again.name === "AbortError") return "cancelled";
+      }
+    }
+  }
+  // The sheet could not open: copy the same text the desktop key copies.
+  return (await copyText(text)) ? "copied" : "failed";
+}
+
+/**
  * The phone's result dock: Share and the way onwards, pinned to the bottom
  * edge. Rendered on <body>, so no animated ancestor can move it.
  */
-function ResultDock({ share, href, label, hint }: { share: () => string; href: string; label: string; hint?: string }) {
+function ResultDock({
+  share,
+  game,
+  href,
+  label,
+  hint,
+}: {
+  share: () => string;
+  game: GameSlug;
+  href: string;
+  label: string;
+  hint?: string;
+}) {
   const t = useSiteT();
+  const [copied, setCopied] = useState(false);
+
+  async function onShare() {
+    const url = `${window.location.origin}/play/${game}`;
+    const outcome = await sendResult(document.title, share(), url);
+    if (outcome !== "copied") return;
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 2400);
+  }
+
   return createPortal(
     <div className="result-dock" role="group" aria-label={t("backToToday")}>
-      <ShareButton label={t("share")} text={share} className="key key-secondary result-dock-share" />
+      <button type="button" className="key key-secondary result-dock-share" onClick={onShare}>
+        {copied ? t("copied") : t("share")}
+      </button>
       <Link href={href} className="key key-play result-dock-next">
         <span>
           {hint && <small>{hint}</small>}

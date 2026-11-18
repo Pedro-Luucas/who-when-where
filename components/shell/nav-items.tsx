@@ -27,7 +27,8 @@ export const COMMUNITY: NavItem = {
   href: "/community",
   label: "navCommunity",
   icon: "people",
-  match: (path) => path === "/community" || path === "/player" || path.startsWith("/u/") || path === "/inbox",
+  match: (path) =>
+    path === "/community" || path === "/player" || path.startsWith("/u/") || path === "/inbox" || path.startsWith("/club"),
 };
 export const INBOX: NavItem = { href: "/inbox", label: "navInbox", icon: "bell", match: (path) => path === "/inbox" };
 export const LEAGUE: NavItem = { href: "/league", label: "navLeague", icon: "medal", match: (path) => path === "/league" };

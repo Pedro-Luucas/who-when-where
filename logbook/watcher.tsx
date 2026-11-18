@@ -5,7 +5,7 @@ import { readDailyResults, useDailyResults, type DailyResult } from "@/games/res
 import { countMoves } from "@/games/saves";
 import { CHALLENGE_SLUGS, inChallenge } from "@/games/registry";
 import { useDayNumber } from "@/lib/clock";
-import { confetti, cue, cuePuzzle } from "@/lib/fx";
+import { confetti, cue, cuePuzzle, heardVerdict, type Cue } from "@/lib/fx";
 import { readStore, subscribeToStore, writeStore } from "@/lib/storage";
 import { toast } from "@/lib/toasts";
 import { standingsOf } from "./achievements";
@@ -23,6 +23,32 @@ const TOLD_KEY = "logbook:told";
 
 const keyOf = (result: DailyResult) => `${result.game}:${result.day}`;
 const totalOf = (results: DailyResult[]) => results.reduce((sum, result) => sum + result.points, 0);
+
+/** The HUD pips last sounded, so a save from another device does not replay them. */
+let pipsSeen = "";
+
+/**
+ * The verdict of the try just locked, read off the HUD pips, when the plaque
+ * did not already sound it (Wayfarer and First to Last never set a tone).
+ * A move that arrived on its own — a save from another device — is not a tap,
+ * and stays a plain tick.
+ */
+function freshVerdict(): Cue | undefined {
+  const nodes = [...document.querySelectorAll("main.game .hud-pips li")];
+  if (!nodes.length) {
+    pipsSeen = "";
+    return undefined;
+  }
+  const states = nodes.map((pip) => pip.getAttribute("data-state") ?? "");
+  const signature = states.join(",");
+  const changed = signature !== pipsSeen;
+  pipsSeen = signature;
+  if (!changed || heardVerdict()) return undefined;
+  if (navigator.userActivation && !navigator.userActivation.isActive) return undefined;
+  const last = [...states].reverse().find((state) => state && state !== "todo" && state !== "current");
+  if (last === "hit" || last === "near" || last === "miss") return last;
+  return undefined;
+}
 
 export function Celebrations() {
   const { t } = useLogbookT();
@@ -46,8 +72,12 @@ export function Celebrations() {
     if (moves - before.moves !== 1) return;
 
     const finished = results.filter((result) => result.day === today && !before.keys.has(keyOf(result)));
-    if (finished.length !== 1) return cue("move");
+    const verdict = freshVerdict();
+    if (finished.length !== 1) return cue(verdict ?? "move");
     const [result] = finished;
+    // The try that ended the puzzle still gets its own hit or miss; the
+    // fanfare follows it (cue holds a win back a moment when a verdict just played).
+    if (verdict) cue(verdict);
     // The last of the day's dailies gets the lot, whatever it scored: the whole day is done.
     // (The other games' daily puzzles are extras and never finish a day.)
     const dayDone =

@@ -29,9 +29,10 @@ const SCORES: Record<Cue, Note[]> = {
     { hz: 659.25, at: 0, length: 0.1, gain: 0.5 },
     { hz: 783.99, at: 0.08, length: 0.14, gain: 0.45 },
   ],
+  // A short drop, duller than the hit's rise, so the two don't blur together.
   miss: [
-    { hz: 233.08, at: 0, length: 0.16, gain: 0.65 },
-    { hz: 196, at: 0.09, length: 0.22, gain: 0.55 },
+    { hz: 246.94, at: 0, length: 0.1, gain: 0.5 },
+    { hz: 146.83, at: 0.06, length: 0.16, gain: 0.62 },
   ],
   win: [
     { hz: C5, at: 0, length: 0.16 },
@@ -65,13 +66,16 @@ function play(cue: Cue): void {
   try {
     audio ??= new AudioContext();
     // A context made before the player touched the page starts out suspended.
-    if (audio.state === "suspended") void audio.resume();
+    // Resume only from this call, which a tap already started. A rejection
+    // (the gesture has lapsed) must not surface: the notes simply stay quiet.
+    if (audio.state === "suspended") void audio.resume().catch(() => {});
     const start = audio.currentTime + 0.02;
     for (const note of SCORES[cue]) {
       const oscillator = audio.createOscillator();
       const envelope = audio.createGain();
       const peak = VOLUME * (note.gain ?? 1);
-      oscillator.type = "triangle";
+      // A miss and a loss are a dull sine; a hit stays a bright triangle.
+      oscillator.type = cue === "miss" || cue === "lose" ? "sine" : "triangle";
       oscillator.frequency.value = note.hz;
       envelope.gain.setValueAtTime(0, start + note.at);
       envelope.gain.linearRampToValueAtTime(peak, start + note.at + 0.012);
@@ -87,15 +91,18 @@ function play(cue: Cue): void {
 
 // ── Vibration ───────────────────────────────────────────────────────────────
 
+// Short on purpose. A hit is two taps, the second firmer (yes). A near is two
+// equal taps. A miss is one dull pulse (no). A guess stays under a tenth of
+// a second, so a fanfare can still follow.
 const BUZZES: Record<Cue, number | number[]> = {
   move: 12,
-  hit: [10, 30, 16],
-  near: 14,
-  miss: [40, 30, 40],
-  win: [18, 50, 30],
-  great: [18, 40, 18, 40, 60],
-  lose: 70,
-  unlock: [14, 40, 14, 40, 14],
+  hit: [12, 46, 28],
+  near: [14, 34, 14],
+  miss: 52,
+  win: [16, 42, 26],
+  great: [14, 34, 14, 34, 46],
+  lose: [34, 26, 48],
+  unlock: [12, 34, 12, 34, 12],
 };
 
 function buzz(cue: Cue): void {
@@ -232,11 +239,40 @@ export function confetti(amount: 1 | 2 | 3): void {
 /** When a try's verdict last sounded: the plain "move" tick for that same try stays quiet. */
 let verdictAt = 0;
 
+/** A win or a loss waiting out the verdict, so the two are not one noise. */
+let endTimer: ReturnType<typeof setTimeout> | undefined;
+
+function soon(name: Cue, wait: number): void {
+  if (endTimer) clearTimeout(endTimer);
+  endTimer = setTimeout(() => {
+    endTimer = undefined;
+    play(name);
+    buzz(name);
+  }, wait);
+}
+
+/** Whether a hit, near, or miss sounded within `within` ms. */
+export function heardVerdict(within = 600): boolean {
+  return Date.now() - verdictAt < within;
+}
+
 /** A sound and a buzz for something that just happened. */
 export function cue(name: Cue): void {
   const now = Date.now();
-  if (name === "hit" || name === "near" || name === "miss") verdictAt = now;
-  else if (name === "move" && now - verdictAt < 600) return;
+  if (name === "hit" || name === "near" || name === "miss") {
+    if (endTimer) clearTimeout(endTimer);
+    endTimer = undefined;
+    verdictAt = now;
+    play(name);
+    buzz(name);
+    return;
+  }
+  if (name === "move" && now - verdictAt < 600) return;
+  // The last try of a puzzle is a verdict and a fanfare. Let the verdict land first.
+  if ((name === "win" || name === "great" || name === "lose") && now - verdictAt < 500) {
+    soon(name, 380);
+    return;
+  }
   play(name);
   buzz(name);
 }
@@ -247,9 +283,10 @@ export function cue(name: Cue): void {
  */
 export function cueOfTone(tone: string | undefined): Cue | undefined {
   if (!tone) return undefined;
-  if (tone === "on" || tone === "hit" || tone === "success") return "hit";
-  if (tone === "near" || tone === "heat-4" || tone === "heat-5") return "near";
-  if (tone === "off" || tone === "miss" || tone === "danger" || /^heat-[123]$/.test(tone)) return "miss";
+  // Heat runs from a find (0, green) through warm (1–2) to cold (3–5).
+  if (tone === "on" || tone === "hit" || tone === "success" || tone === "heat-0") return "hit";
+  if (tone === "near" || tone === "heat-1" || tone === "heat-2") return "near";
+  if (tone === "off" || tone === "miss" || tone === "danger" || /^heat-[345]$/.test(tone)) return "miss";
   return undefined;
 }
 

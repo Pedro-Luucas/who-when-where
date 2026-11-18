@@ -45,3 +45,36 @@ export function readCard(get: (name: string) => string | null): CardData | null 
   const label = (get("t") ?? "").replace(/[\p{Cc}\p{Cf}]/gu, " ").slice(0, LABEL_MAX);
   return { points, verdicts: verdicts as CardVerdict[], label, locale };
 }
+
+// The picture the result card is offering to send. Drawn when the card
+// appears, so the share tap itself does not wait on a fetch (a wait there
+// can miss the browser's gesture window and the sheet never opens).
+
+type OfferedPicture = { ready: File | null };
+
+let offered: OfferedPicture | null = null;
+
+/** Starts drawing `href` into a PNG the next share can attach. */
+export function offerSharePicture(href: string, name: string): void {
+  const slot: OfferedPicture = { ready: null };
+  offered = slot;
+  void fetch(href)
+    .then((response) => (response.ok ? response.blob() : null))
+    .then((blob) => {
+      if (!blob || offered !== slot) return;
+      slot.ready = new File([blob], name, { type: "image/png" });
+    })
+    .catch(() => {
+      // No picture: the share goes out as text and a link.
+    });
+}
+
+/** The picture, if it has finished drawing. Null until then, and after the card goes. */
+export function sharePictureFile(): File | null {
+  return offered?.ready ?? null;
+}
+
+/** Drops the picture when the result leaves the screen. */
+export function clearSharePicture(): void {
+  offered = null;
+}

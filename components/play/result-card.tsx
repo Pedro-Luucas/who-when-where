@@ -7,6 +7,7 @@ import { cuePuzzle } from "@/lib/fx";
 import { useFocusWhenLost } from "@/lib/focus";
 import { formatNumber, useLocale } from "@/lib/i18n";
 import { MAX_POINTS } from "@/lib/points";
+import { cardQuery, clearSharePicture, offerSharePicture } from "@/lib/result-share";
 import { useShellT } from "@/lib/shell-messages";
 import { ShareCardButton } from "./share-card";
 
@@ -113,6 +114,17 @@ export function ResultCard({ label, headline, answer, points, stats, review, chi
     if (!practice || !navigator.userActivation?.isActive) return;
     cuePuzzle(points, false);
   }, [practice, points]);
+
+  // Draw the share picture while the player reads the score, so "share" can
+  // hand the file over without waiting (see lib/result-share.ts).
+  const cardHref = frame?.slug
+    ? `/play/${frame.slug}/card?${cardQuery({ points, verdicts: review.map((row) => row.verdict), label, locale })}`
+    : null;
+  useEffect(() => {
+    if (!frame?.slug || !cardHref) return;
+    offerSharePicture(cardHref, `who-when-where-${frame.slug}.png`);
+    return () => clearSharePicture();
+  }, [cardHref, frame?.slug]);
 
   return (
     <section ref={card} className="result-card" aria-labelledby="result-headline" style={familyStyle(frame?.family)}>

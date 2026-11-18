@@ -19,7 +19,8 @@ const SOCIAL: NavItem = {
     ["/community", "/leaderboard", "/party", "/player", "/inbox", "/league", "/weekly"].includes(path) ||
     path.startsWith("/u/") ||
     path.startsWith("/c/") ||
-    path.startsWith("/i/"),
+    path.startsWith("/i/") ||
+    path.startsWith("/club"),
 };
 const ME: NavItem = {
   href: "/account",
