@@ -383,3 +383,20 @@ body:has(.result-dock-practice) main.game[data-summary] {
     letter-spacing: 0.02em;
   }
 }
+
+/* A year of squares was 15px, so a finger landed on the wrong day. Ranking
+   rows were short of a thumb. */
+@media (max-width: 47.99rem), (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  .activity {
+    --cell: 20px;
+    --gap: 4px;
+  }
+
+  .board > li {
+    min-height: 56px;
+  }
+
+  .board > li > .player {
+    min-height: 44px;
+  }
+}
