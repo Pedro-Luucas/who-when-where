@@ -455,3 +455,17 @@ body:has(.result-dock-practice) main.game[data-summary] {
     text-transform: none;
   }
 }
+
+/* Two answers side by side leave about 160px for a name. On a phone each
+   choice is its own row, except True Size, which is a picture comparison. */
+@media (max-width: 47.99rem), (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  main.game:not([data-game="true-size"]) .pick-options {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  main.game:not([data-game="true-size"]) .pick-option {
+    align-items: flex-start;
+    min-height: 56px;
+    text-align: left;
+  }
+}
