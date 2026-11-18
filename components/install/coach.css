@@ -1,0 +1,93 @@
+/* Install sheet. Import this from app/layout.tsx — stylesheets in this app are
+   loaded there, not from components. Sits above the phone tab bar
+   (same offset as .page-actions-dock) and the safe area. */
+
+.install-coach {
+  position: fixed;
+  z-index: 46;
+  left: max(12px, env(safe-area-inset-left));
+  right: max(12px, env(safe-area-inset-right));
+  bottom: calc(62px + env(safe-area-inset-bottom) + 8px);
+  display: grid;
+  gap: 8px;
+  max-height: calc(100dvh - 62px - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 24px);
+  overflow: auto;
+  padding: 14px 14px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-xl);
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  backdrop-filter: blur(18px) saturate(1.2);
+  box-shadow: var(--shadow-raised);
+  color: var(--fg);
+  animation: install-coach-rise 320ms var(--ease-out) both;
+}
+
+@keyframes install-coach-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.install-coach h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.15;
+}
+
+.install-coach .hint,
+.install-coach-steps {
+  margin: 0;
+}
+
+.install-coach-steps {
+  color: var(--fg);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.install-coach-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.install-coach-actions .key {
+  flex: 1 1 8rem;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+@media (min-width: 48rem) {
+  .install-coach {
+    left: auto;
+    width: min(26rem, calc(100vw - 32px));
+    bottom: max(16px, env(safe-area-inset-bottom));
+  }
+}
+
+/* Short landscape: the tab bar is a rail on the left, not a row on the bottom. */
+@media (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  .install-coach {
+    left: calc(68px + env(safe-area-inset-left) + 8px);
+    right: max(12px, env(safe-area-inset-right));
+    bottom: max(8px, env(safe-area-inset-bottom));
+    width: auto;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .install-coach {
+    background: var(--surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .install-coach {
+    animation: none;
+  }
+}

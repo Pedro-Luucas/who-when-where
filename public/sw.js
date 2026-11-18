@@ -1,7 +1,9 @@
 // The service worker: it only shows Web Push notifications (challenges,
 // friend requests, party invitations, a streak about to end) and opens the
-// page a tap on one leads to. It caches nothing. Registered by
-// social/push-client.ts when a player turns notifications on.
+// page a tap on one leads to. It caches nothing and does not intercept
+// fetches — Next.js navigations stay on the network.
+// Registered on each visit by components/install/register.tsx, and again by
+// social/push-client.ts (same /sw.js URL) when a player turns notifications on.
 
 self.addEventListener("install", () => self.skipWaiting());
 self.addEventListener("activate", (event) => event.waitUntil(self.clients.claim()));

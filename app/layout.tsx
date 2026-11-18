@@ -7,6 +7,7 @@ import { Toasts } from "@/components/toasts";
 import { LangSync } from "@/components/lang-sync";
 import { LOCALE_SCRIPT } from "@/lib/i18n";
 import { THEME_SCRIPT } from "@/lib/prefs";
+import { InstallCoach } from "@/components/install/coach";
 import { Celebrations } from "@/logbook/watcher";
 import "./globals.css";
 import "./social.css";
@@ -30,6 +31,7 @@ import "./wave2/quickplay.css";
 // The phone UI, last so it wins: everything in it sits behind a phone breakpoint.
 import "./mobile.css";
 import "./polish.css";
+import "../components/install/coach.css";
 
 // Night Atlas type (see app/tokens.css): Chakra Petch for the interface,
 // Bricolage Grotesque for headings, JetBrains Mono for labels and numbers.
@@ -86,6 +88,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <LangSync />
         <ThemeSync />
         <Toasts />
+        <InstallCoach />
         <Celebrations />
         <ProSheetHost />
       </body>
