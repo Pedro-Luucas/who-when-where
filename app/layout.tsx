@@ -32,6 +32,7 @@ import "./wave2/quickplay.css";
 import "./mobile.css";
 import "./polish.css";
 import "../components/install/coach.css";
+import "./daily-phone.css";
 
 // Night Atlas type (see app/tokens.css): Chakra Petch for the interface,
 // Bricolage Grotesque for headings, JetBrains Mono for labels and numbers.

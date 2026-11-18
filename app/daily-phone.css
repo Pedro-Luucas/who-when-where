@@ -1,0 +1,49 @@
+/* Phone fixes for the dailies. Unlayered, and loaded after mobile.css and
+   social.css, so these win over a layered phone rule and over .select select
+   in social.css (that 0.8rem makes iOS zoom the page when the ranking select
+   is focused). */
+
+@media (max-width: 47.99rem), (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  /* Outline: the cut-out is the puzzle. The shared dossier column is 58px,
+     which hides the country inside a thumb. Give it its own row. */
+  main.game[data-game="outline"]:not([data-summary]) > .dossier:has(.plate) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  main.game[data-game="outline"]:not([data-summary]) .silhouette {
+    width: min(100%, 240px);
+    aspect-ratio: 1;
+    justify-self: center;
+  }
+
+  /* Dig Site: the clue is the paragraph, and the photo is part of it. */
+  main.game[data-game="dig-site"]:not([data-summary]) > .dossier:has(.plate) {
+    grid-template-columns: 112px minmax(0, 1fr);
+    align-items: start;
+  }
+
+  main.game[data-game="dig-site"]:not([data-summary]) .dossier-description {
+    display: block;
+    overflow: visible;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+  }
+
+  /* First to Last: a landscape phone is wide enough for the two-column card
+     grid, which makes each card taller than the column. Keep one column. */
+  main.game[data-game="first-to-last"]:not([data-summary]) .events {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  /* The cards are the game; the map is only the reference above them. */
+  main.game[data-game="first-to-last"]:not([data-summary]) > .stage > .map-frame {
+    height: min(26svh, 180px);
+  }
+
+  select,
+  .select select {
+    font-size: 16px;
+  }
+}

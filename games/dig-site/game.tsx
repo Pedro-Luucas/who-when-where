@@ -52,9 +52,18 @@ export function DigSiteBoard({ site, digs, onDig, onDigs, maxDigs = MAX_DIGS, la
   const last = made.at(-1);
   // More photos of the site, fetched only once it is over: they would give it away.
   const photos = useGallery(site.id, over);
+  // During the dig the lightbox is only the clue photo, with no name and no
+  // credit: the extra gallery would give the site away.
   const slides = over
     ? lightboxImages(site, photos, locale, (n) => t("galleryPhotoN", { name: site.name[locale], n }))
-    : [];
+    : [
+        {
+          src: site.image.src,
+          width: site.image.width,
+          height: site.image.height,
+          alt: t("mystery"),
+        },
+      ];
 
   function dig() {
     if (!pin || over) return;
@@ -139,36 +148,25 @@ export function DigSiteBoard({ site, digs, onDig, onDigs, maxDigs = MAX_DIGS, la
 
       <aside className="dossier">
         <div className="plate" data-revealed={over ? "" : undefined}>
-          {over ? (
-            <button
-              type="button"
-              className="plate-button"
-              onClick={() => setViewing(0)}
-              aria-label={t("galleryEnlarge")}
-              aria-haspopup="dialog"
-            >
-              <Image
-                src={site.image.src}
-                alt={site.name[locale]}
-                width={site.image.width}
-                height={site.image.height}
-                sizes="(min-width: 1024px) 280px, 112px"
-                preload
-              />
-              <span className="plate-zoom" aria-hidden="true">
-                <ZoomIcon />
-              </span>
-            </button>
-          ) : (
+          <button
+            type="button"
+            className="plate-button"
+            onClick={() => setViewing(0)}
+            aria-label={t("galleryEnlarge")}
+            aria-haspopup="dialog"
+          >
             <Image
               src={site.image.src}
-              alt={t("mystery")}
+              alt={over ? site.name[locale] : t("mystery")}
               width={site.image.width}
               height={site.image.height}
-              sizes="(min-width: 1024px) 280px, 112px"
+              sizes="(min-width: 1024px) 280px, 160px"
               preload
             />
-          )}
+            <span className="plate-zoom" aria-hidden="true">
+              <ZoomIcon />
+            </span>
+          </button>
         </div>
 
         <div className="dossier-text">
@@ -296,14 +294,14 @@ export function DigSiteBoard({ site, digs, onDig, onDigs, maxDigs = MAX_DIGS, la
         )}
       </section>
 
-      {over && (
+      {viewing !== null && (
         <Lightbox
           images={slides}
           index={viewing}
           onIndexChange={setViewing}
           onClose={() => setViewing(null)}
           labels={{
-            title: t("galleryDialog", { name: site.name[locale] }),
+            title: over ? t("galleryDialog", { name: site.name[locale] }) : t("mystery"),
             close: t("galleryClose"),
             previous: t("galleryPrevious"),
             next: t("galleryNext"),
