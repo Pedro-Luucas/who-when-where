@@ -76,3 +76,58 @@
     right: calc(58vw + max(8px, env(safe-area-inset-right)));
   }
 }
+
+/* Party room during a race: the sheet was a short log under a long
+   standings list, so the message field started off the screen. The list
+   scrolls, and the field stays at the bottom of the sheet. */
+@media (max-width: 47.99rem), (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  dialog.modal.room-sheet {
+    display: flex;
+    flex-direction: column;
+    height: min(88dvh, 680px);
+  }
+
+  dialog.modal.room-sheet .modal-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .room-sheet-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+    gap: 12px;
+  }
+
+  .room-sheet-body .standings {
+    flex: none;
+    max-height: 28svh;
+    overflow: auto;
+  }
+
+  .room-sheet-body .chat {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .room-sheet-body .chat-log {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 96px;
+    max-height: none;
+  }
+
+  .room-sheet-body .chat-form {
+    flex: none;
+  }
+
+  .room-sheet-body .chat-form input,
+  .room-sheet-body .chat-form .button {
+    min-height: 44px;
+  }
+}
