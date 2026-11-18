@@ -141,3 +141,14 @@
     bottom: var(--keyboard, 0px);
   }
 }
+
+/* Practice sits in the result dock, above share and the next puzzle, so a
+   phone does not have to hunt for it in the review. */
+.result-dock-practice {
+  grid-column: 1 / -1;
+  min-height: 44px;
+}
+
+body:has(.result-dock-practice) main.game[data-summary] {
+  padding-bottom: calc(142px + env(safe-area-inset-bottom));
+}

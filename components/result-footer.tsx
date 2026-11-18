@@ -50,7 +50,7 @@ export function ResultActions({ shareText, game, nextLabel, archive }: ActionsPr
     return (
       <div className="summary-actions">
         {phone ? (
-          <ResultDock share={share} game={game} href={`/play/${game}`} label={shell("todaysPuzzle")} />
+          <ResultDock share={share} game={game} href={`/play/${game}`} label={shell("todaysPuzzle")} practice />
         ) : (
           <ShareButton label={t("share")} text={share} />
         )}
@@ -75,6 +75,7 @@ export function ResultActions({ shareText, game, nextLabel, archive }: ActionsPr
             href={next ? `/play/${next}` : "/daily"}
             label={next ? GAME_TITLES[next] : t("dayDoneCta")}
             hint={next ? t("upNext") : undefined}
+            practice
           />
         ) : (
           <ShareButton label={t("share")} text={share} />
@@ -83,9 +84,11 @@ export function ResultActions({ shareText, game, nextLabel, archive }: ActionsPr
           <span>{nextLabel ?? t("nextIn")}</span>
           <time>{clock(secondsLeft)}</time>
         </p>
-        <Link href={`/play/${game}/practice`} className="key key-secondary key-sm">
-          {shell("practicePlay")}
-        </Link>
+        {!phone && (
+          <Link href={`/play/${game}/practice`} className="key key-secondary key-sm">
+            {shell("practicePlay")}
+          </Link>
+        )}
       </div>
       <NextUp current={game} />
     </>
@@ -146,14 +149,17 @@ function ResultDock({
   href,
   label,
   hint,
+  practice,
 }: {
   share: () => string;
   game: GameSlug;
   href: string;
   label: string;
   hint?: string;
+  practice?: boolean;
 }) {
   const t = useSiteT();
+  const shell = useShellT();
   const [copied, setCopied] = useState(false);
 
   async function onShare() {
@@ -166,6 +172,11 @@ function ResultDock({
 
   return createPortal(
     <div className="result-dock" role="group" aria-label={t("backToToday")}>
+      {practice && (
+        <Link href={`/play/${game}/practice`} className="key key-secondary result-dock-practice">
+          {shell("practicePlay")}
+        </Link>
+      )}
       <button type="button" className="key key-secondary result-dock-share" onClick={onShare}>
         {copied ? t("copied") : t("share")}
       </button>
