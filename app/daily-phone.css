@@ -400,3 +400,33 @@ body:has(.result-dock-practice) main.game[data-summary] {
     min-height: 44px;
   }
 }
+
+/* A notice was pinned to the screen edge, on top of the tab bar, the guess
+   key, or the result dock. Sit it above whichever of those is on screen. */
+@media (max-width: 47.99rem) {
+  .toasts {
+    bottom: calc(78px + env(safe-area-inset-bottom));
+  }
+
+  body:has(main.game:not([data-summary])) .toasts,
+  body:has(.page-actions-dock) .toasts {
+    bottom: calc(96px + env(safe-area-inset-bottom));
+  }
+
+  body:has(.result-dock) .toasts {
+    bottom: calc(156px + env(safe-area-inset-bottom));
+  }
+}
+
+@media (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  .toasts {
+    right: max(12px, env(safe-area-inset-right));
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    left: calc(80px + env(safe-area-inset-left));
+  }
+
+  body:has(main.game:not([data-summary])) .toasts,
+  body:has(.page-actions-dock) .toasts {
+    bottom: calc(88px + env(safe-area-inset-bottom));
+  }
+}
