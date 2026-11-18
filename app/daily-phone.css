@@ -274,3 +274,20 @@ body:has(.result-dock-practice) main.game[data-summary] {
     padding-bottom: calc(66px + 78px + env(safe-area-inset-bottom));
   }
 }
+
+/* Sideways the tab bar is a rail on the left, and the screen is short, so
+   the same key has to sit in the left column instead of under a bottom bar. */
+@media (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  .page-actions-dock {
+    position: fixed;
+    right: 0;
+    bottom: env(safe-area-inset-bottom);
+    left: calc(68px + env(safe-area-inset-left));
+    z-index: 30;
+    margin-inline: 0;
+  }
+
+  body:has(.page-actions-dock) {
+    padding-bottom: calc(78px + env(safe-area-inset-bottom));
+  }
+}
