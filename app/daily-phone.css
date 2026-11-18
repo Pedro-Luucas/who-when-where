@@ -477,3 +477,29 @@ body:has(.result-dock-practice) main.game[data-summary] {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* The atlas list is a column of links. Three pixels of padding put the next
+   name under the finger. Each name, and each kind, is a full row. */
+@media (max-width: 47.99rem), (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  .collection summary {
+    min-height: 48px;
+  }
+
+  .collection summary > span:not(.bar) {
+    font-size: 0.875rem;
+  }
+
+  .collection ol {
+    max-height: min(50svh, 360px);
+  }
+
+  .collection ol li {
+    align-items: center;
+    min-height: 44px;
+    padding: 6px 0;
+  }
+
+  .collection ol small {
+    font-size: 0.875rem;
+  }
+}
