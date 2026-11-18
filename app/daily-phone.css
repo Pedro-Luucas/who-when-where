@@ -371,3 +371,15 @@ body:has(.result-dock-practice) main.game[data-summary] {
     height: 44px;
   }
 }
+
+/* After a puzzle the review is the lesson. The labels were 12px of spaced
+   capitals, so "onde" and "quando" were harder to read than the score. */
+@media (max-width: 47.99rem), (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  .review-label,
+  .review-verdict,
+  .review-answers small,
+  .review-answers .review-value {
+    font-size: 0.875rem;
+    letter-spacing: 0.02em;
+  }
+}
