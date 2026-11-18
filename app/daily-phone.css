@@ -476,6 +476,14 @@ body:has(.result-dock-practice) main.game[data-summary] {
   .sheet-grid {
     grid-template-columns: minmax(0, 1fr);
   }
+
+  /* The logo says it becomes W·W·W on a narrow screen. The rule that did
+     that was on a wide breakpoint, so the full name crowded search and
+     the language chip off the edge. */
+  .site-header .wordmark em,
+  .site-header .wordmark i {
+    display: none;
+  }
 }
 
 /* The atlas list is a column of links. Three pixels of padding put the next
