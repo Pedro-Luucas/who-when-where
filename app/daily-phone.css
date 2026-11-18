@@ -256,3 +256,21 @@ body:has(.result-dock-practice) main.game[data-summary] {
     font-size: 0.875rem;
   }
 }
+
+/* The start key of an expedition or a party was sticky inside a long form,
+   so it disappeared while the host was still inviting people. Pin it above
+   the tab bar. */
+@media (max-width: 47.99rem) {
+  .page-actions-dock {
+    position: fixed;
+    right: 0;
+    bottom: calc(62px + env(safe-area-inset-bottom));
+    left: 0;
+    z-index: 30;
+    margin-inline: 0;
+  }
+
+  body:has(.page-actions-dock) {
+    padding-bottom: calc(66px + 78px + env(safe-area-inset-bottom));
+  }
+}
