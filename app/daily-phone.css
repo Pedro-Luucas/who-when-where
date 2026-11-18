@@ -37,6 +37,16 @@
 }
 
 @media (max-width: 47.99rem) {
+  /* Wayfarer: three names was not enough to choose a journey. The list still
+     scrolls, and a short phone keeps the route on screen. */
+  main.game[data-game="wayfarer"] > .stage > .picker > .picker-list {
+    max-height: min(38svh, 240px);
+  }
+
+  main.game[data-game="wayfarer"] .tries-hint {
+    font-size: 0.875rem;
+  }
+
   /* The cards are the game; the map is only the reference above them. */
   main.game[data-game="first-to-last"]:not([data-summary]) > .stage > .map-frame {
     height: min(26svh, 180px);
@@ -45,5 +55,11 @@
   select,
   .select select {
     font-size: 16px;
+  }
+}
+
+@media (max-width: 47.99rem) and (max-height: 43.75rem) {
+  main.game[data-game="wayfarer"] > .stage > .picker > .picker-list {
+    max-height: min(28svh, 160px);
   }
 }

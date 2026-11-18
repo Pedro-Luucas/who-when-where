@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/site-footer";
 import { ProGameGate } from "@/components/pro/game-gate";
@@ -19,7 +20,17 @@ export async function generateMetadata({ params }: PageProps<"/play/[slug]">): P
   return game ? { title: game.title, description: game.description } : {};
 }
 
-export default async function Page({ params }: PageProps<"/play/[slug]">) {
+export default function Page({ params }: PageProps<"/play/[slug]">) {
+  return (
+    <Suspense fallback={<main className="game" aria-busy="true" />}>
+      <Played params={params} />
+    </Suspense>
+  );
+}
+
+// The slug is URL data. Awaiting it in the page itself blocks instant navigation
+// (cacheComponents). The shell waits inside Suspense; the static frame can paint first.
+async function Played({ params }: { params: PageProps<"/play/[slug]">["params"] }) {
   const { slug } = await params;
   if (!isGameSlug(slug)) notFound();
   return (
