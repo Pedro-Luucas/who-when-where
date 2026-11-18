@@ -469,3 +469,11 @@ body:has(.result-dock-practice) main.game[data-summary] {
     text-align: left;
   }
 }
+
+/* The Me sheet put two places in a row. On a narrow phone "Classificação"
+   and "Expedição" had no room next to the icon. One place per row. */
+@media (max-width: 47.99rem) {
+  .sheet-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
