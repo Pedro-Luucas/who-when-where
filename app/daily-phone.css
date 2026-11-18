@@ -291,3 +291,20 @@ body:has(.result-dock-practice) main.game[data-summary] {
     padding-bottom: calc(78px + env(safe-area-inset-bottom));
   }
 }
+
+/* The community thread and the party sheet pin the composer to the bottom.
+   On iOS the keyboard covers that edge; Chrome already resized the page and
+   `--keyboard` stays 0. The log grows by the same amount so the last line
+   can scroll clear of the field. */
+@media (max-width: 47.99rem), (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  .community-page[data-pane="chat"] .chat-form,
+  .room-sheet-body .chat-form {
+    transform: translateY(calc(-1 * var(--keyboard, 0px)));
+  }
+
+  .community-page[data-pane="chat"] .chat-log,
+  .room-sheet-body .chat-log {
+    padding-bottom: var(--keyboard, 0px);
+    scroll-padding-bottom: var(--keyboard, 0px);
+  }
+}
