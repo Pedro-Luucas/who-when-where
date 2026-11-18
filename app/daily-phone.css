@@ -330,3 +330,44 @@ body:has(.result-dock-practice) main.game[data-summary] {
     flex-wrap: wrap;
   }
 }
+
+/* The catalogue's game sheet reused the desktop sidebar: a tall inner
+   scroller, so Play sat below the sheet. The sheet itself scrolls, and
+   Play stays on the bottom edge. */
+@media (max-width: 47.99rem), (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  dialog.modal.setup-sheet {
+    display: flex;
+    flex-direction: column;
+    height: min(92dvh, 760px);
+  }
+
+  dialog.modal.setup-sheet .modal-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+    overflow: auto;
+  }
+
+  .setup-sheet .setup-panel {
+    position: static;
+    top: auto;
+    max-height: none;
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .setup-sheet .setup-foot {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+  }
+
+  .tile-star {
+    width: 44px;
+    height: 44px;
+  }
+}
