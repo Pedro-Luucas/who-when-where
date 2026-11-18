@@ -177,3 +177,45 @@ body:has(.result-dock-practice) main.game[data-summary] {
     display: none;
   }
 }
+
+/* Wayfarer and Outline clues were three squeezed columns. On a phone each
+   clue gets its own row, and the place under a First to Last card is readable. */
+@media (max-width: 47.99rem), (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  .clues {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .clues li {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 12px;
+    border-top: 1px solid var(--rule);
+    border-left: 0;
+  }
+
+  .clues li:first-child {
+    border-top: 0;
+  }
+
+  .clues span {
+    font-size: 0.875rem;
+    letter-spacing: 0.04em;
+  }
+
+  .clues b {
+    font-size: 1rem;
+    text-align: right;
+  }
+
+  .event-text small {
+    font-size: 0.875rem;
+  }
+
+  .event-letter {
+    width: 36px;
+    height: 36px;
+    font-size: 0.875rem;
+  }
+}
