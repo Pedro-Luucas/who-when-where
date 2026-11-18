@@ -131,3 +131,13 @@
     min-height: 44px;
   }
 }
+
+/* A soft keyboard on iOS covers a fixed bar. `--keyboard` is the covered
+   strip (components/shell/keyboard-inset.tsx). Chrome resizes the page
+   instead, and the variable stays 0, so this does not lift the bar twice. */
+@media (max-width: 47.99rem), (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  main.game:not([data-summary]) > .stage > .action-bar,
+  main.game > .stage > .picker {
+    bottom: var(--keyboard, 0px);
+  }
+}

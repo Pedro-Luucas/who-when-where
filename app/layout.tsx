@@ -8,6 +8,7 @@ import { LangSync } from "@/components/lang-sync";
 import { LOCALE_SCRIPT } from "@/lib/i18n";
 import { THEME_SCRIPT } from "@/lib/prefs";
 import { InstallCoach } from "@/components/install/coach";
+import { KeyboardInset } from "@/components/shell/keyboard-inset";
 import { Celebrations } from "@/logbook/watcher";
 import "./globals.css";
 import "./social.css";
@@ -72,6 +73,10 @@ export const viewport: Viewport = {
   // Draw under the notch and the home indicator; the shell pads itself with
   // env(safe-area-inset-*) (app/mobile.css).
   viewportFit: "cover",
+  // The guess field is fixed to the bottom. Resizing the page with the
+  // keyboard keeps it in view. iOS ignores this and overlays; KeyboardInset
+  // lifts the bar there.
+  interactiveWidget: "resizes-content",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -90,6 +95,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <ThemeSync />
         <Toasts />
         <InstallCoach />
+        <KeyboardInset />
         <Celebrations />
         <ProSheetHost />
       </body>
