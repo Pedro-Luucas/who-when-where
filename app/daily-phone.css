@@ -63,3 +63,16 @@
     max-height: min(28svh, 160px);
   }
 }
+
+/* A phone on its side pins the map to the right. The run bar is a sibling of
+   the game, so it used to stretch across that map: the stage, the score and
+   the party button sat on top of the world. Keep them in the left column. */
+@media (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  body:has(main.game:not([data-summary]) > .stage > .map-frame) .run-bar {
+    margin-right: 58vw;
+  }
+
+  body:has(main.game:not([data-summary]) > .stage > .map-frame) .room-key {
+    right: calc(58vw + max(8px, env(safe-area-inset-right)));
+  }
+}
