@@ -440,3 +440,18 @@ body:has(.result-dock-practice) main.game[data-summary] {
     max-height: max(88px, min(38svh, 240px, calc(100svh - var(--keyboard, 0px) - 168px)));
   }
 }
+
+/* The day's cards are the front door. The family name and "Jogar" were
+   12px of tracked capitals on a card a thumb is already holding. */
+@media (max-width: 47.99rem), (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  .daily-card-go,
+  .tile-meta,
+  .tile-meta b {
+    font-size: 0.875rem;
+    letter-spacing: 0.02em;
+  }
+
+  .daily-card-go {
+    text-transform: none;
+  }
+}
