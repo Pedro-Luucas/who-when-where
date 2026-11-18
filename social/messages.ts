@@ -179,6 +179,8 @@ export const SOCIAL_MESSAGES = {
     expeditionLead:
       "A game of your own making: puzzles from every game, one after the other. Each is worth up to 1,000 points.",
     setupGames: "Games",
+    setupAllGames: "All games",
+    setupChosen: "Chosen only",
     setupOrder: "Order",
     order_grouped: "Game by game",
     order_alternate: "Taking turns",
@@ -473,6 +475,8 @@ export const SOCIAL_MESSAGES = {
     expeditionLead:
       "Um jogo montado do seu jeito: desafios de todos os jogos, um em seguida do outro. Cada um vale até 1.000 pontos.",
     setupGames: "Jogos",
+    setupAllGames: "Todos os jogos",
+    setupChosen: "Só os escolhidos",
     setupOrder: "Ordem",
     order_grouped: "Jogo a jogo",
     order_alternate: "Revezando",

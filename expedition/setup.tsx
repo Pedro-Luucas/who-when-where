@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useEntitlements } from "@/account/entitlements";
 import { Segmented, Stepper } from "@/components/controls";
 import { useProT } from "@/components/pro/messages";
@@ -44,14 +45,23 @@ export function SettingsForm({ value, onChange, disabled, party }: Props) {
   // A run that already has them (a challenge link) keeps them; they just cannot be added.
   const proGames = has("games.pro") || (party === true && has("party.unlockGames"));
   const allSettings = has("expedition.allSettings");
+  // A phone starts with the games that are actually in the run. The rest stay
+  // one tap away; turning one off while the full list is open does not hide it
+  // until the player asks for the short list again.
+  const [everyGame, setEveryGame] = useState(false);
 
   return (
     <div className="setup" aria-disabled={disabled || undefined}>
+      <div className="setup-games-bar">
+        <button type="button" className="setup-more chip" aria-pressed={everyGame} onClick={() => setEveryGame((open) => !open)}>
+          {t(everyGame ? "setupChosen" : "setupAllGames")}
+        </button>
+      </div>
       <fieldset className="setup-group" disabled={disabled}>
         <legend>
           {t("setupGames")} <small>{t("puzzleCount", { n: total })}</small>
         </legend>
-        <ul className="setup-games">
+        <ul className="setup-games" data-all={everyGame ? "" : undefined}>
           {GAMES.map(({ slug: game, title, expedition, tier }) => {
             const locked = tier === "pro" && !proGames;
             return (
