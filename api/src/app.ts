@@ -7,6 +7,7 @@ import { deleteCookie, getCookie, setCookie } from "hono/cookie";
 import { HTTPException } from "hono/http-exception";
 import { registerChallenges, registerPublicChallenges } from "./challenges.ts";
 import { registerChat } from "./chat.ts";
+import { registerCommunity } from "./community.ts";
 import type { Config } from "./config.ts";
 import { Failure, isUniqueViolation, type Deps, type Env } from "./http.ts";
 import { registerLeagues } from "./leagues.ts";
@@ -16,6 +17,7 @@ import { BusyError, hashPassword, verifyDecoy, verifyPassword } from "./password
 import { pairOf } from "./people.ts";
 import { entitlementsOf, startPractice } from "./plans.ts";
 import { createPusher, type Pusher } from "./push.ts";
+import { registerRematch } from "./rematch.ts";
 import { LIMITS, RateLimiter, type Limit } from "./rate-limit.ts";
 import {
   SESSION_COOKIE,
@@ -425,6 +427,8 @@ export function createApp(
   registerParties(account, deps, pusher);
   registerChallenges(account, deps, pusher);
   registerInbox(account, deps, pusher);
+  registerCommunity(account, deps, pusher);
+  registerRematch(account, deps);
   registerLeagues(app, account, deps);
 
   app.route("/", account);

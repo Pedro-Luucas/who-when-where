@@ -109,7 +109,7 @@ export function SocialSettings({ account }: { account: Account }) {
           </code>
           <ShareKey
             text={() => `${t("inviteShareText")}\n${window.location.origin}/i/${account.username}`}
-            label={t("copyInvite")}
+            label={t("sendLink")}
             variant="primary"
           />
         </section>

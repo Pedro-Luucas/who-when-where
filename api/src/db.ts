@@ -274,6 +274,48 @@ const MIGRATIONS: string[] = [
     PRIMARY KEY (user_id, day, kind)
   ) STRICT, WITHOUT ROWID;
   `,
+
+  // Nudges, reactions on a friend's day, and clubs.
+  `
+  -- One nudge per sender, friend and UTC day.
+  CREATE TABLE nudges (
+    from_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    to_id      TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    day        INTEGER NOT NULL,
+    created_at INTEGER NOT NULL,
+    PRIMARY KEY (from_id, to_id, day)
+  ) STRICT, WITHOUT ROWID;
+  CREATE INDEX nudges_to ON nudges(to_id, day);
+
+  -- One reaction per sender, friend, day and game. A later tap replaces it.
+  CREATE TABLE reactions (
+    from_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    to_id      TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    day        INTEGER NOT NULL,
+    game       TEXT NOT NULL,             -- 'all' or a game slug
+    emoji      TEXT NOT NULL,             -- pin | fire | clap | mind
+    created_at INTEGER NOT NULL,
+    PRIMARY KEY (from_id, to_id, day, game)
+  ) STRICT, WITHOUT ROWID;
+  CREATE INDEX reactions_to ON reactions(to_id, day);
+
+  -- A player owns at most one club. The owner is also a member.
+  CREATE TABLE clubs (
+    id         TEXT PRIMARY KEY,
+    slug       TEXT NOT NULL UNIQUE,
+    name       TEXT NOT NULL,
+    owner_id   TEXT NOT NULL UNIQUE REFERENCES users(id) ON DELETE CASCADE,
+    created_at INTEGER NOT NULL
+  ) STRICT;
+
+  CREATE TABLE club_members (
+    club_id    TEXT NOT NULL REFERENCES clubs(id) ON DELETE CASCADE,
+    user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    created_at INTEGER NOT NULL,
+    PRIMARY KEY (club_id, user_id)
+  ) STRICT, WITHOUT ROWID;
+  CREATE INDEX club_members_user ON club_members(user_id);
+  `,
 ];
 
 export function openDatabase(path: string): DatabaseSync {

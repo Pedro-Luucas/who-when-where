@@ -38,6 +38,12 @@ export const LIMITS = {
   entriesPerUser: { max: 60, windowMs: MINUTE },
   /** Practice puzzles started per account. */
   practicePerUser: { max: 60, windowMs: MINUTE },
+  /** Nudges sent per account. */
+  nudgesPerUser: { max: 40, windowMs: 60 * MINUTE },
+  /** Reactions set per account. */
+  reactionsPerUser: { max: 80, windowMs: MINUTE },
+  /** Club creates, invites, leaves and removals per account. */
+  clubsPerUser: { max: 40, windowMs: 60 * MINUTE },
 } satisfies Record<string, Limit>;
 
 export class RateLimiter {

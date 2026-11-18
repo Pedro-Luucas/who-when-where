@@ -163,7 +163,7 @@ function ProfileView({ data, reload }: { data: ProfileData; reload: () => void }
                 </ButtonLink>
               </>
             )}
-            <ShareKey text={profileUrl} label={t("shareProfile")} size="sm" />
+            <ShareKey text={profileUrl} label={t("sendLink")} size="sm" />
           </div>
         </div>
       </Card>

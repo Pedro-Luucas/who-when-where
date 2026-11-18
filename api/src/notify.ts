@@ -20,6 +20,8 @@ export const NOTIFICATION_KINDS = [
   "friend_accepted",
   /** Someone signed up with the player's invitation link. */
   "invite_joined",
+  /** A friend nudged the player to play today. */
+  "nudge",
 ] as const;
 export type NotificationKind = (typeof NOTIFICATION_KINDS)[number];
 
@@ -50,6 +52,7 @@ const PUSH_TEXT: Record<"en" | "pt", Record<NotificationKind, (name: string, poi
     friend_request: (name) => ({ title: "New friend request", body: `${name} wants to be friends.` }),
     friend_accepted: (name) => ({ title: "You have a new friend", body: `${name} accepted your request.` }),
     invite_joined: (name) => ({ title: `${name} joined`, body: "They signed up with your invitation. Say hello!" }),
+    nudge: (name) => ({ title: `${name} nudged you`, body: "Today's puzzles are waiting." }),
   },
   pt: {
     challenge: (name, points) => ({ title: `${name} te desafiou`, body: `Fez ${points} pontos. Consegue superar?` }),
@@ -57,13 +60,27 @@ const PUSH_TEXT: Record<"en" | "pt", Record<NotificationKind, (name: string, poi
     friend_request: (name) => ({ title: "Novo pedido de amizade", body: `${name} quer ser seu amigo.` }),
     friend_accepted: (name) => ({ title: "Você tem um novo amigo", body: `${name} aceitou seu pedido.` }),
     invite_joined: (name) => ({ title: `${name} entrou`, body: "Criou a conta com o seu convite. Diga oi!" }),
+    nudge: (name) => ({ title: `${name} te cutucou`, body: "Os desafios de hoje estão esperando." }),
   },
 };
 
 function urlOf(kind: NotificationKind, ref: string, actor: PublicRow | undefined): string {
-  if (kind === "challenge" || kind === "challenge_played") return `/c/${ref}`;
-  if (kind === "friend_request") return "/inbox";
-  return actor?.username ? `/u/${actor.username}` : "/inbox";
+  switch (kind) {
+    case "challenge":
+    case "challenge_played":
+      return `/c/${ref}`;
+    case "friend_request":
+      return "/inbox";
+    case "nudge":
+      return "/daily";
+    case "friend_accepted":
+    case "invite_joined":
+      return actor?.username ? `/u/${actor.username}` : "/inbox";
+    default: {
+      const never: never = kind;
+      return never;
+    }
+  }
 }
 
 /** Puts something in a player's inbox, and tells their browsers if they agreed to it. */

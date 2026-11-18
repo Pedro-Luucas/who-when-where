@@ -42,6 +42,7 @@ import {
 import { FriendsPanel } from "@/social/friends";
 import type { Member } from "@/social/gate";
 import { socialError, useSocialT } from "@/social/messages";
+import { rematchParty } from "@/social/rematch";
 import { SocialTabs } from "@/social/tabs";
 import { Racers, Standings } from "./standings";
 
@@ -340,6 +341,20 @@ export function Room({ code, me, joinAtOnce }: { code: string; me: Member; joinA
                 {everyoneDone && (
                   <button type="button" className="button" onClick={() => act(() => startParty(code))}>
                     {t("playAgain")}
+                  </button>
+                )}
+                {everyoneDone && (
+                  <button
+                    type="button"
+                    className="button button-quiet"
+                    onClick={() =>
+                      void act(async () => {
+                        const next = await rematchParty(code);
+                        router.push(`/party?code=${next.code}&join=1`);
+                      })
+                    }
+                  >
+                    {t("sameRulesRoom")}
                   </button>
                 )}
                 <button

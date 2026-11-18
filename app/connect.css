@@ -151,6 +151,78 @@
   box-shadow: 0 0 8px var(--accent);
 }
 
+/* A club is a list of people and today's points, not a dashboard. */
+.club-invite {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.club-invite .field {
+  flex: 1 1 12rem;
+  min-width: 0;
+}
+
+.club-page .chip,
+.profile-hero .key {
+  min-height: 44px;
+}
+
+.club-page .board > li {
+  min-width: 0;
+}
+
+.club-page .board > li > .player {
+  min-width: 0;
+}
+
+@media (max-width: 47.99rem) {
+  .club-page {
+    overflow-x: hidden;
+  }
+
+  .club-page .page-head h1 {
+    font-size: 1.7rem;
+  }
+
+  .club-page .page-head > p,
+  .club-page .people-empty,
+  .club-page .player-text small {
+    font-size: 0.875rem;
+  }
+
+  .club-page .board > li {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .club-page .board > li > .chip {
+    flex: 1 1 100%;
+    min-height: 44px;
+  }
+
+  .club-invite {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .club-invite .chip,
+  .club-invite input {
+    min-height: 44px;
+    width: 100%;
+  }
+
+  .profile-hero .key {
+    min-height: 44px;
+  }
+
+  .notice-row {
+    min-height: 44px;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .rise-in {
     animation: rise-in 360ms cubic-bezier(0.2, 0.8, 0.2, 1) both;

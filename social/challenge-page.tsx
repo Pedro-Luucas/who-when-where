@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { ApiError } from "@/account/api";
 import { useAccount } from "@/account/state";
 import { BrowserOnly } from "@/components/controls";
 import { Icon } from "@/components/shell/nav-items";
@@ -175,6 +176,9 @@ type DetailsProps = {
 
 function Details({ challenge, stored, onStart, onRematch, reload, saving, onSubmit, signedIn, member, myId }: DetailsProps) {
   const { locale, t } = useConnectT();
+  const router = useRouter();
+  const [sendingAgain, setSendingAgain] = useState(false);
+  const [againFailed, setAgainFailed] = useState(false);
   const settingsLine = useSettingsLine();
   const sender = challenge.from;
   const isSender = myId === sender.id;
@@ -205,6 +209,35 @@ function Details({ challenge, stored, onStart, onRematch, reload, saving, onSubm
       .filter(Boolean)
       .join("\n");
   };
+
+  async function again() {
+    if (!mine || !member || sendingAgain) return;
+    setSendingAgain(true);
+    setAgainFailed(false);
+    const target = isSender ? challenge.to?.username : challenge.relation === "friends" ? sender.username : undefined;
+    const results = mine.results.map(({ points, detail }) => ({ points, detail }));
+    const send = (to?: string) =>
+      createChallenge({
+        seed: challenge.seed,
+        settings: challenge.settings,
+        results,
+        ...(to ? { to } : {}),
+        replyTo: challenge.id,
+      });
+    try {
+      let sent: Awaited<ReturnType<typeof createChallenge>>;
+      try {
+        sent = await send(target);
+      } catch (error) {
+        if (target && error instanceof ApiError && error.code === "not_friends") sent = await send();
+        else throw error;
+      }
+      router.push(`/c/${sent.id}`);
+    } catch {
+      setAgainFailed(true);
+      setSendingAgain(false);
+    }
+  }
 
   return (
     <>
@@ -288,12 +321,23 @@ function Details({ challenge, stored, onStart, onRematch, reload, saving, onSubm
           )}
           <div className="mt-5 flex flex-wrap gap-3">
             <ShareKey text={shareText} label={t("challengeShare")} variant="primary" />
+            {member && (
+              <Button variant="secondary" disabled={sendingAgain} onClick={() => void again()}>
+                {t("again")}
+              </Button>
+            )}
             {!isSender && member && (
               <Button variant="play" icon={<Icon name="swords" />} onClick={onRematch}>
                 {t("rematch")}
               </Button>
             )}
           </div>
+          {member && <p className="mt-2 text-sm text-fg-3">{t("againLead")}</p>}
+          {againFailed && (
+            <p className="form-error" role="alert">
+              {t("errGeneric")}
+            </p>
+          )}
           {!isSender && member && <p className="mt-2 text-sm text-fg-3">{t("rematchLead", { name: sender.name })}</p>}
           {challenge.relation === "none" && challenge.mine && (
             <div className="mt-4 flex flex-wrap items-center gap-3 rounded-md border border-line bg-sunken/60 p-3">

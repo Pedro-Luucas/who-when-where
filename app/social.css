@@ -1621,4 +1621,343 @@ button.chip-solid:hover:not(:disabled) {
     animation: none;
   }
 }
+
+/* ───────────────────────── Friend roster and clubs ───────────────────────── */
+
+.people li.friend-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+  margin-top: 8px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--surface-2) 55%, transparent);
+}
+
+.people li.friend-row:first-child {
+  border-top: 1px solid var(--line);
+}
+
+.friend-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px 12px;
+  align-items: center;
+  min-width: 0;
+}
+
+.friend-score {
+  display: grid;
+  justify-items: end;
+  min-width: 4.5rem;
+  font-family: var(--font-mono);
+  line-height: 1.15;
+}
+
+.friend-score strong {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.friend-score small {
+  font-size: 0.875rem;
+  color: var(--ink-2);
+}
+
+.reaction-marks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  grid-column: 1 / -1;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--ink-2);
+}
+
+.friend-tools {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.friend-tools .relation {
+  justify-content: flex-start;
+}
+
+.reaction-keys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.reaction-keys .chip {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 10px;
+  font-size: 1.15rem;
+}
+
+.reaction-keys .chip[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.chip-quiet:disabled {
+  opacity: 0.72;
+  color: var(--ink-3);
+}
+
+.community-switch {
+  display: none;
+}
+
+.community-invite {
+  margin-top: 16px;
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--sunken) 70%, transparent);
+}
+
+.community-invite h3 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.community-invite p {
+  margin: 6px 0 12px;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+
+.club-strip {
+  display: grid;
+  gap: 8px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+}
+
+.club-lead {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+
+.club-links {
+  display: grid;
+  gap: 8px;
+}
+
+.club-links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--sunken);
+}
+
+.club-links a b {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.club-links a small {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--ink-2);
+}
+
+.club-create {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.club-create .field {
+  flex: 1 1 12rem;
+  min-width: 0;
+}
+
+.club-create .chip {
+  min-height: 44px;
+}
 } /* @layer components */
+
+/* Phone: one column, friends or a docked thread. PHONE is max-width 47.99rem. */
+@media (max-width: 47.99rem) {
+  .community-page,
+  .club-page {
+    overflow-x: hidden;
+  }
+
+  .community-page .page-head {
+    margin: 8px 0 12px;
+  }
+
+  .community-page .page-head h1 {
+    font-size: 1.6rem;
+  }
+
+  .community-page .page-head > p {
+    margin-top: 6px;
+    font-size: 0.875rem;
+  }
+
+  .community-page .player-text small,
+  .community-page .people-empty,
+  .community-page .club-lead {
+    font-size: 0.875rem;
+  }
+
+  .social-tabs {
+    flex-wrap: wrap;
+    overflow: visible;
+    gap: 6px;
+    border-bottom: 0;
+    margin-bottom: 8px;
+  }
+
+  .social-tabs a {
+    min-height: 44px;
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    border-bottom-width: 1px;
+    font-size: 0.875rem;
+    letter-spacing: 0.04em;
+  }
+
+  .social-tabs a[aria-current="page"] {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  .community-switch {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin: 0 0 12px;
+  }
+
+  .community-switch button {
+    min-width: 0;
+    min-height: 44px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-md);
+    background: var(--sunken);
+    color: var(--fg-2);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .community-switch button[aria-selected="true"] {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--fg);
+  }
+
+  .community-page .chip,
+  .community-page .community-invite .key,
+  .invites .chip {
+    min-height: 44px;
+  }
+
+  .community-page[data-pane="friends"] .panel-chat {
+    display: none;
+  }
+
+  .community-page[data-pane="chat"] .friends-pane {
+    display: none;
+  }
+
+  .community-page[data-pane="chat"] .page-head > p {
+    display: none;
+  }
+
+  /* The thread fills what's left under the header. Only the log scrolls. */
+  body:has(.community-page[data-pane="chat"]) {
+    box-sizing: border-box;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  body:has(.community-page[data-pane="chat"]) .site-footer {
+    display: none;
+  }
+
+  .community-page[data-pane="chat"] {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+    padding-bottom: 8px;
+  }
+
+  .community-page[data-pane="chat"] .community {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .community-page[data-pane="chat"] .panel-chat {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 12px;
+  }
+
+  .community-page[data-pane="chat"] .panel-head {
+    flex: none;
+  }
+
+  .community-page[data-pane="chat"] .chat {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .community-page[data-pane="chat"] .chat-log {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 0;
+  }
+
+  .community-page[data-pane="chat"] .chat-form {
+    flex: none;
+  }
+
+  .community-page[data-pane="chat"] .chat-form input,
+  .community-page[data-pane="chat"] .chat-form .button,
+  .community-page[data-pane="chat"] .segmented button {
+    min-height: 44px;
+  }
+
+  .community-page[data-pane="chat"] .chat-body {
+    font-size: 1rem;
+  }
+}

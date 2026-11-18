@@ -6,16 +6,17 @@ import { useState } from "react";
 import { BrowserOnly } from "@/components/controls";
 import { Avatar } from "./avatar";
 import { RoomChat } from "./chat";
+import { ClubStrip } from "./clubs";
 import { declineInvite, type PublicUser } from "./client";
+import { useConnectT } from "./connect-messages";
 import { FriendsPanel } from "./friends";
 import { Members, type Member } from "./gate";
 import { useSocialT } from "./messages";
 import { refreshPulse, usePulse } from "./pulse";
-import { useConnectT } from "./connect-messages";
 import { ShareKey } from "./share-key";
 import { SocialTabs } from "./tabs";
 
-/** The community page: friends on one side, the chat rooms on the other. */
+/** The community page: friends first, then the chat. */
 export function Community() {
   return (
     <BrowserOnly>
@@ -61,14 +62,22 @@ export function Invitations() {
   );
 }
 
+type Pane = "friends" | "chat";
+
 function Hall({ me }: { me: Member }) {
   const { t } = useSocialT();
   const { t: tc } = useConnectT();
   // The room on screen: everybody's, or the one shared with a friend.
   const [friend, setFriend] = useState<PublicUser | null>(null);
+  const [pane, setPane] = useState<Pane>("friends");
+
+  function openChat(user: PublicUser | null) {
+    setFriend(user);
+    setPane("chat");
+  }
 
   return (
-    <main className="page">
+    <main className="page community-page" data-pane={pane}>
       <SocialTabs current="community" />
       <header className="page-head">
         <h1>{t("community")}</h1>
@@ -77,27 +86,31 @@ function Hall({ me }: { me: Member }) {
 
       <Invitations />
 
+      <div className="community-switch" role="tablist" aria-label={t("community")}>
+        <button type="button" role="tab" aria-selected={pane === "friends"} onClick={() => setPane("friends")}>
+          {t("paneFriends")}
+        </button>
+        <button type="button" role="tab" aria-selected={pane === "chat"} onClick={() => setPane("chat")}>
+          {friend ? friend.name : t("paneChat")}
+        </button>
+      </div>
+
       <div className="community">
-        <section className="panel" aria-labelledby="friends-heading">
+        <section className="panel friends-pane" aria-labelledby="friends-heading">
           <header className="panel-head">
             <h2 id="friends-heading">{t("friends")}</h2>
             <Link href={`/u/${me.username}`} className="panel-link">
               {t("myProfile")} →
             </Link>
           </header>
-          <FriendsPanel
-            onMessage={(user) => {
-              setFriend(user);
-              document.getElementById("chat-heading")?.scrollIntoView({ behavior: "smooth", block: "nearest" });
-            }}
-          />
-          <div className="mt-5 rounded-md border border-dashed border-line-strong bg-sunken/60 p-4">
-            <h3 className="font-bold text-fg">{tc("yourInvite")}</h3>
-            <p className="mb-3 text-sm text-fg-2">{tc("yourInviteLead")}</p>
+          <FriendsPanel roster onMessage={(user) => openChat(user)} />
+          <ClubStrip />
+          <div className="community-invite">
+            <h3>{tc("yourInvite")}</h3>
+            <p>{tc("yourInviteLead")}</p>
             <ShareKey
               text={() => [tc("inviteShareText"), `${window.location.origin}/i/${me.username}`].join("\n")}
-              label={tc("copyInvite")}
-              size="sm"
+              label={tc("sendLink")}
               variant="primary"
             />
           </div>
@@ -107,12 +120,12 @@ function Hall({ me }: { me: Member }) {
           <header className="panel-head">
             <h2 id="chat-heading">{t("chat")}</h2>
             <div className="segmented" role="group" aria-label={t("chat")}>
-              <button type="button" aria-pressed={!friend} onClick={() => setFriend(null)}>
+              <button type="button" aria-pressed={!friend} onClick={() => openChat(null)}>
                 {t("globalChat")}
               </button>
               {friend && (
-                <button type="button" aria-pressed="true">
-                  @{friend.username}
+                <button type="button" aria-pressed="true" onClick={() => setPane("chat")}>
+                  {friend.name}
                 </button>
               )}
             </div>

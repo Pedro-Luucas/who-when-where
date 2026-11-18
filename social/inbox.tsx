@@ -103,6 +103,7 @@ const KIND_ICON: Record<Notice["kind"], IconName> = {
   friend_request: "people",
   friend_accepted: "heart",
   invite_joined: "star",
+  nudge: "bell",
 };
 
 function News({ inbox }: { inbox: InboxRemote }) {

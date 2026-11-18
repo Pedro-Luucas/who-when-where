@@ -211,3 +211,40 @@ export const sendPartyMessage = (code: string, body: string) =>
 export const leaveParty = (code: string) => api("POST", `/parties/${code}/leave`);
 export const inviteToParty = (code: string, userId: string) => api("POST", `/parties/${code}/invite`, { userId });
 export const declineInvite = (code: string) => api("POST", `/parties/${code}/decline`);
+
+// ── Nudges, reactions and clubs ─────────────────────────────────────────────
+
+export const REACTIONS = ["pin", "fire", "clap", "mind"] as const;
+export type ReactionEmoji = (typeof REACTIONS)[number];
+
+export type Reaction = {
+  toId: string;
+  /** "all" for the day's total, or one game. */
+  game: string;
+  emoji: ReactionEmoji;
+  at: number;
+  from: PublicUser;
+};
+
+export const getNudges = (day: number) => api<{ sent: string[] }>("GET", `/nudges?day=${day}`);
+export const sendNudge = (userId: string) => api("POST", "/nudges", { userId });
+
+export const getReactions = (day: number) => api<{ reactions: Reaction[] }>("GET", `/reactions?day=${day}`);
+export const setReaction = (userId: string, emoji: ReactionEmoji, game = "all") =>
+  api<{ emoji: ReactionEmoji; game: string }>("PUT", "/reactions", { userId, emoji, game });
+
+export type ClubRole = "owner" | "member";
+export type ClubScore = { points: number; puzzles: number };
+export type ClubMember = { user: PublicUser; role: ClubRole; today: ClubScore };
+export type Club = { id: string; slug: string; name: string; ownerId: string; members: ClubMember[] };
+export type ClubSummary = { slug: string; name: string; ownerId: string; members: number; role: ClubRole };
+
+export const listClubs = () => api<{ clubs: ClubSummary[] }>("GET", "/clubs");
+export const createClub = (name: string) => api<{ club: Club }>("POST", "/clubs", { name });
+export const getClub = (slug: string, day?: number) =>
+  api<{ club: Club }>("GET", `/clubs/${encodeURIComponent(slug)}${day ? `?day=${day}` : ""}`);
+export const inviteToClub = (slug: string, username: string) =>
+  api<{ club: Club }>("POST", `/clubs/${encodeURIComponent(slug)}/members`, { username });
+export const removeFromClub = (slug: string, userId: string) =>
+  api("DELETE", `/clubs/${encodeURIComponent(slug)}/members/${userId}`);
+export const leaveClub = (slug: string) => api("POST", `/clubs/${encodeURIComponent(slug)}/leave`);

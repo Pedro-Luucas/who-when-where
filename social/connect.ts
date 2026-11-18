@@ -63,7 +63,13 @@ export const listChallenges = () => api<{ challenges: ChallengeSummary[] }>("GET
 
 // ── The inbox ───────────────────────────────────────────────────────────────
 
-export type NotificationKind = "challenge" | "challenge_played" | "friend_request" | "friend_accepted" | "invite_joined";
+export type NotificationKind =
+  | "challenge"
+  | "challenge_played"
+  | "friend_request"
+  | "friend_accepted"
+  | "invite_joined"
+  | "nudge";
 
 export type Notice = {
   id: number;
