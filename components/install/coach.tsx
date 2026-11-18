@@ -104,6 +104,7 @@ function dismissedRecently(): boolean {
 }
 
 function coachKind(): CoachKind {
+  if (typeof window === "undefined") return "hidden";
   if (isStandalone() || sessionInstalled || dismissedRecently()) return "hidden";
   if (deferredPrompt) return "chromium";
   if (isIosSafari()) return "ios";
