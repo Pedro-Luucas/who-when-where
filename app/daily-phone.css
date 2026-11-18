@@ -219,3 +219,40 @@ body:has(.result-dock-practice) main.game[data-summary] {
     font-size: 0.875rem;
   }
 }
+
+/* Dig Site and Who When Where pack each try into a narrow column. On a phone
+   the word and the distance wrap into nothing. One row per try. */
+@media (max-width: 47.99rem), (orientation: landscape) and (max-height: 31.25rem) and (max-width: 63.99rem) {
+  main.game .progress {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  main.game .progress li {
+    grid-template-columns: 2.2em minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0 8px;
+    padding: 8px 12px;
+    border-top: 1px solid var(--rule);
+    border-left: 0;
+  }
+
+  main.game .progress li:first-child {
+    border-top: 0;
+  }
+
+  main.game .progress-label {
+    grid-column: auto;
+    grid-row: auto;
+    flex-direction: row;
+    font-size: 0.875rem;
+    letter-spacing: 0.02em;
+  }
+
+  main.game .progress-numeral {
+    font-size: 1rem;
+  }
+
+  main.game .progress-score {
+    font-size: 0.875rem;
+  }
+}
