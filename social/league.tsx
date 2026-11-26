@@ -17,6 +17,7 @@ import { socialError, useSocialT } from "./messages";
 import { useRemote } from "./remote";
 import { SocialTabs } from "./tabs";
 import { TierShield } from "./tier-badge";
+import { useHubT } from "./hub-messages";
 
 // /league: the weekly league. A group of up to 30 players at the same tier,
 // ranked by every point scored in the week's dailies; the top of the table
@@ -149,6 +150,7 @@ function MemberLeague({ myId, hasUsername }: { myId: string; hasUsername: boolea
         </Card>
       </div>
       <aside className="grid content-start gap-5">
+        {data.group && <Goal group={data.group} myId={myId} />}
         <Card>
           <CardHeader eyebrow={t("tiers")} title={tierName} level={3} />
           <TierLadder current={data.tier} />
@@ -217,5 +219,45 @@ function Table({ group, myId }: { group: NonNullable<League["group"]>; myId: str
       </ol>
       {rows.length === 1 && <p className="mt-4 text-sm text-fg-2">{t("leagueAlone")}</p>}
     </>
+  );
+}
+
+/** What it takes this week: the points to the promotion zone, to safety, or the lead to keep. */
+function Goal({ group, myId }: { group: NonNullable<League["group"]>; myId: string }) {
+  const { t, locale } = useHubT();
+  const rows = group.rows;
+  const index = rows.findIndex((row) => row.user.id === myId);
+  if (index < 0) return null;
+  const mine = rows[index];
+  const relegationStart = rows.length - group.demote;
+  let line: string;
+  let tone: "up" | "down" | "stay";
+  if (group.promote > 0 && index < group.promote) {
+    const chaser = rows[group.promote];
+    tone = "up";
+    line = chaser
+      ? t("goalKeep", { points: formatNumber(Math.max(0, mine.points - chaser.points), locale) })
+      : t("goalKeepAlone");
+  } else if (group.demote > 0 && index >= relegationStart) {
+    const safe = rows[relegationStart - 1];
+    tone = "down";
+    const gap = safe ? safe.points - mine.points + 1 : 0;
+    line = t("goalSafety", { points: formatNumber(Math.max(1, gap), locale), puzzles: Math.max(1, Math.ceil(gap / 700)) });
+  } else if (group.promote > 0) {
+    const target = rows[group.promote - 1];
+    tone = "stay";
+    const gap = target.points - mine.points + 1;
+    line = t("goalPromote", { points: formatNumber(Math.max(1, gap), locale), puzzles: Math.max(1, Math.ceil(gap / 700)) });
+  } else {
+    return null;
+  }
+  return (
+    <Card className="league-goal" data-tone={tone}>
+      <CardHeader eyebrow={t("goalEyebrow")} title={t(tone === "up" ? "goalTitleUp" : tone === "down" ? "goalTitleDown" : "goalTitleStay")} level={3} />
+      <p className="text-fg-2">{line}</p>
+      <ButtonLink href="/daily" variant="play" size="sm" className="mt-3" icon={<Icon name="play" size={15} />}>
+        {t("playToday")}
+      </ButtonLink>
+    </Card>
   );
 }

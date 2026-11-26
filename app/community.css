@@ -1010,3 +1010,16 @@
   border-color: color-mix(in srgb, var(--answer) 50%, transparent);
   color: var(--answer);
 }
+
+/* ── League: this week's goal ── */
+.league-goal {
+  border-left: 3px solid var(--accent);
+}
+
+.league-goal[data-tone="up"] {
+  border-left-color: var(--answer);
+}
+
+.league-goal[data-tone="down"] {
+  border-left-color: var(--danger, #ff466d);
+}
