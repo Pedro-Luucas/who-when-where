@@ -1,31 +1,51 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useRef } from "react";
+import { Icon, type IconName } from "@/components/shell/nav-items";
 import { useConnectT } from "./connect-messages";
 import { useSocialT } from "./messages";
 import { pulseCount, usePulse } from "./pulse";
 
 const TABS = [
-  { id: "community", href: "/community" },
-  { id: "inbox", href: "/inbox" },
-  { id: "league", href: "/league" },
-  { id: "leaderboard", href: "/leaderboard" },
-  { id: "weekly", href: "/weekly" },
-  { id: "party", href: "/party" },
-  { id: "expedition", href: "/expedition" },
-] as const;
+  { id: "community", href: "/community", icon: "people" },
+  { id: "inbox", href: "/inbox", icon: "bell" },
+  { id: "league", href: "/league", icon: "medal" },
+  { id: "leaderboard", href: "/leaderboard", icon: "trophy" },
+  { id: "weekly", href: "/weekly", icon: "sparkle" },
+  { id: "party", href: "/party", icon: "party" },
+  { id: "expedition", href: "/expedition", icon: "compass" },
+] as const satisfies readonly { id: string; href: string; icon: IconName }[];
 
 export type SocialTab = (typeof TABS)[number]["id"];
 
-/** The way between the community's pages, shown at the top of each. */
+/**
+ * The way between the community's pages, shown at the top of each. One row
+ * that scrolls sideways when it does not fit (phones), with the current page
+ * brought into view.
+ */
 export function SocialTabs({ current }: { current?: SocialTab }) {
   const { t } = useSocialT();
   const { t: tc } = useConnectT();
   const waiting = pulseCount(usePulse());
+  const nav = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const row = nav.current;
+    const here = row?.querySelector<HTMLElement>('[aria-current="page"]');
+    if (!row || !here) return;
+    // Centre the current tab in the row without moving the page itself.
+    const left = here.offsetLeft - (row.clientWidth - here.offsetWidth) / 2;
+    row.scrollLeft = Math.max(0, left);
+  }, [current]);
+
   return (
-    <nav className="social-tabs" aria-label={t("community")}>
+    <nav ref={nav} className="social-tabs" aria-label={t("community")}>
       {TABS.map((tab) => (
         <Link key={tab.id} href={tab.href} aria-current={tab.id === current ? "page" : undefined}>
+          <span className="social-tab-icon" aria-hidden="true">
+            <Icon name={tab.icon} />
+          </span>
           {tab.id === "inbox" || tab.id === "league" || tab.id === "weekly" ? tc(tab.id) : t(tab.id)}
           {tab.id === "inbox" && waiting > 0 && <i className="badge">{waiting}</i>}
         </Link>

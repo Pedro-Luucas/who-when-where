@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useState, useSyncExternalStore } from "react";
+import { Suspense, useId, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { translator, useLocale, type Locale } from "@/lib/i18n";
@@ -158,7 +158,10 @@ export function InstallCoach() {
   return (
     <>
       <InstallRegister />
-      <CoachSheet />
+      {/* It reads the address, which only exists at request time: stream it in. */}
+      <Suspense fallback={null}>
+        <CoachSheet />
+      </Suspense>
     </>
   );
 }

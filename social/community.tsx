@@ -10,6 +10,7 @@ import { ClubStrip } from "./clubs";
 import { declineInvite, type PublicUser } from "./client";
 import { useConnectT } from "./connect-messages";
 import { FriendsPanel } from "./friends";
+import { CommunityHub } from "./hub";
 import { Members, type Member } from "./gate";
 import { useSocialT } from "./messages";
 import { refreshPulse, usePulse } from "./pulse";
@@ -85,6 +86,8 @@ function Hall({ me }: { me: Member }) {
       </header>
 
       <Invitations />
+
+      <CommunityHub me={me} />
 
       <div className="community-switch" role="tablist" aria-label={t("community")}>
         <button type="button" role="tab" aria-selected={pane === "friends"} onClick={() => setPane("friends")}>

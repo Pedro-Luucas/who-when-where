@@ -25,6 +25,7 @@ const SETTINGS = {
   pace: "free",
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- response bodies are checked field by field in each test
 type Call = (method: string, path: string, body?: unknown) => Promise<{ status: number; body: any }>;
 
 function world() {

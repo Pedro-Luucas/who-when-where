@@ -1,0 +1,437 @@
+/* ═════════════════════════ Community hub & social polish ═════════════════════════
+   The cards and boards at the top of /community, the podium on the
+   leaderboard, actionable inbox rows, and the social tabs as one row that
+   scrolls sideways on phones. Loaded last, so it wins over older rules. */
+
+/* ── Social tabs ── */
+.social-tabs {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14px, #000 calc(100% - 22px), transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 14px, #000 calc(100% - 22px), transparent 100%);
+  scroll-behavior: smooth;
+}
+
+.social-tabs a {
+  position: relative;
+  flex: none;
+}
+
+.social-tab-icon {
+  display: inline-grid;
+  place-items: center;
+  opacity: 0.7;
+}
+
+.social-tab-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+.social-tabs a[aria-current="page"] .social-tab-icon {
+  color: var(--accent);
+  opacity: 1;
+}
+
+@media (max-width: 47.99rem) {
+  .social-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 6px;
+    padding-block: 8px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .social-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .social-tabs a {
+    min-height: 40px;
+    padding: 0 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+  }
+
+  .social-tabs a[aria-current="page"] {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  .social-tabs a .badge {
+    position: static;
+  }
+}
+
+/* ── The hub ── */
+.hub {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.hub-cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.hub-card {
+  --hub-accent: var(--accent);
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 14px;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--panel-fill);
+  box-shadow: var(--shadow-card);
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
+}
+
+.hub-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--hub-accent);
+  opacity: 0.8;
+}
+
+.hub-card:hover {
+  border-color: color-mix(in srgb, var(--hub-accent) 70%, transparent);
+  transform: translateY(-1px);
+}
+
+.hub-card-icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--hub-accent) 14%, transparent);
+  color: var(--hub-accent);
+}
+
+.hub-card b {
+  display: block;
+  overflow: hidden;
+  color: var(--fg);
+  font-size: 0.95rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hub-card small {
+  display: block;
+  margin-top: 2px;
+  overflow: hidden;
+  color: var(--fg-2);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hub-card-go {
+  margin-left: auto;
+  color: var(--fg-3);
+  flex: none;
+}
+
+.hub-row {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 14px;
+}
+
+.hub-panel {
+  min-width: 0;
+  padding: 16px 18px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--panel-fill);
+  box-shadow: var(--shadow-card);
+}
+
+.hub-panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.hub-panel-head h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--fg);
+}
+
+.hub-panel-head p {
+  margin-top: 2px;
+  color: var(--fg-2);
+  font-size: 0.85rem;
+}
+
+.hub-empty {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-md);
+  color: var(--fg-2);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.hub-empty b {
+  color: var(--fg);
+}
+
+.hub-board {
+  display: grid;
+  gap: 4px;
+}
+
+.hub-board li {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1.4fr) minmax(40px, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 8px;
+  border-radius: var(--radius-md);
+}
+
+.hub-board li[data-me] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+
+.hub-rank {
+  color: var(--fg-3);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-align: center;
+}
+
+.hub-board li[data-rank="1"] .hub-rank {
+  color: var(--color-gold);
+}
+
+.hub-board li[data-rank="2"] .hub-rank {
+  color: #c3d3e0;
+}
+
+.hub-board li[data-rank="3"] .hub-rank {
+  color: #d08a4f;
+}
+
+.hub-who {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.hub-who b {
+  display: block;
+  overflow: hidden;
+  color: var(--fg);
+  font-size: 0.92rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hub-who em {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.hub-who small {
+  display: block;
+  color: var(--fg-3);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+
+.hub-who:hover b {
+  color: var(--accent);
+}
+
+.hub-bar {
+  height: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--line);
+}
+
+.hub-bar i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--color-blue), var(--color-cyan-bright));
+  transition: width 0.6s var(--ease-spring, ease);
+}
+
+.hub-board li[data-rank="1"] .hub-bar i {
+  background: linear-gradient(90deg, #c99a1e, var(--color-gold));
+}
+
+.hub-board strong {
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.hub-live {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--answer);
+  box-shadow: 0 0 10px var(--answer);
+  animation: hub-pulse 2s ease-in-out infinite;
+}
+
+.hub-count {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--answer) 16%, transparent);
+  color: var(--answer);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+@keyframes hub-pulse {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.hub-faces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hub-faces a {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  width: 58px;
+  color: var(--fg-2);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.hub-faces a span {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hub-faces a:hover {
+  color: var(--fg);
+}
+
+@media (max-width: 63.99rem) {
+  .hub-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hub-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .hub {
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .hub-cards {
+    gap: 8px;
+  }
+
+  .hub-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .hub-card-go {
+    position: absolute;
+    top: 12px;
+    right: 10px;
+  }
+
+  .hub-card small {
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .hub-panel {
+    padding: 14px;
+  }
+
+  .hub-board li {
+    grid-template-columns: 22px minmax(0, 1fr) auto;
+    gap: 10px;
+  }
+
+  .hub-bar {
+    display: none;
+  }
+
+  /* "hidden" made the page its own scroll box, so the sticky tabs were
+     offset inside it and covered the title. "clip" cuts the overflow without that. */
+  .community-page,
+  .club-page {
+    overflow-x: clip;
+  }
+
+  .community-page .page-head {
+    margin-top: 14px;
+  }
+
+  /* A docked thread on phones needs the whole height. */
+  .community-page[data-pane="chat"] .hub {
+    display: none;
+  }
+
+  .community-page[data-pane="chat"] {
+    overflow: clip;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hub-live {
+    animation: none;
+  }
+
+  .hub-card:hover {
+    transform: none;
+  }
+}
