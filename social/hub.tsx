@@ -198,3 +198,66 @@ export function OnlineNow() {
     </section>
   );
 }
+
+/** For a visitor at the door of a community page: who is on top today, and what an account adds. */
+export function GuestTeaser() {
+  const { t, locale } = useHubT();
+  const day = useDayNumber();
+  const board = useRemote(day >= 1 ? `hub:guest-day:${day}` : null, () =>
+    getLeaderboard({ day, period: "day", scope: "all", game: "all" }),
+  );
+  const rows = (board.data?.rows ?? []).slice(0, 5);
+  const pitch: { icon: IconName; key: Parameters<typeof t>[0] }[] = [
+    { icon: "people", key: "pitchFriends" },
+    { icon: "medal", key: "pitchLeague" },
+    { icon: "party", key: "pitchParty" },
+    { icon: "swords", key: "pitchChallenge" },
+  ];
+
+  return (
+    <aside className="guest-teaser" aria-label={t("homePitchTitle")}>
+      <section className="hub-panel">
+        <header className="hub-panel-head">
+          <h2>{t("guestTopToday")}</h2>
+        </header>
+        {rows.length === 0 ? (
+          <p className="hub-empty">{t("nobodyPlayed")}</p>
+        ) : (
+          <ol className="hub-board">
+            {rows.map((row) => (
+              <li key={row.user.id} data-rank={row.rank <= 3 ? row.rank : undefined}>
+                <span className="hub-rank">{row.rank}</span>
+                <Link href={`/u/${encodeURIComponent(row.user.username)}`} className="hub-who">
+                  <Avatar name={row.user.name} color={row.user.avatar} />
+                  <span className="min-w-0">
+                    <b>{row.user.name}</b>
+                    <small>@{row.user.username}</small>
+                  </span>
+                </Link>
+                <span className="hub-bar" aria-hidden="true">
+                  <i style={{ width: `${Math.round((row.points / Math.max(1, rows[0]?.points ?? 1)) * 100)}%` }} />
+                </span>
+                <strong>{formatNumber(row.points, locale)}</strong>
+              </li>
+            ))}
+          </ol>
+        )}
+      </section>
+      <section className="hub-panel">
+        <header className="hub-panel-head">
+          <h2>{t("homePitchTitle")}</h2>
+        </header>
+        <ul className="guest-pitch">
+          {pitch.map((item) => (
+            <li key={item.key}>
+              <span aria-hidden="true">
+                <Icon name={item.icon} size={18} />
+              </span>
+              {t(item.key)}
+            </li>
+          ))}
+        </ul>
+      </section>
+    </aside>
+  );
+}

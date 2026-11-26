@@ -3,6 +3,7 @@
 import { ActionForm, UsernameField } from "@/account/form";
 import { SignIn } from "@/account/sign-in";
 import { updateAccount, useAccount, type Account } from "@/account/state";
+import { GuestTeaser } from "./hub";
 import { useSocialT } from "./messages";
 import { SocialTabs, type SocialTab } from "./tabs";
 
@@ -26,18 +27,21 @@ export function Members({ tab, children }: Props) {
   if (state.status === "user" && state.account.username) return children(state.account as Member);
 
   return (
-    <main className="page page-narrow" aria-busy={state.status === "loading"}>
+    <main className={state.status === "guest" ? "page" : "page page-narrow"} aria-busy={state.status === "loading"}>
       <SocialTabs current={tab} />
       {state.status === "loading" && <div className="page-skeleton skeleton-block" />}
       {state.status === "guest" && (
-        <section className="notice">
-          <h1>{t("joinTitle")}</h1>
-          <p>{t("joinLead")}</p>
-          {/* Signing up here keeps the visitor on this page, which opens once they are in. */}
-          <div className="notice-sign-in">
-            <SignIn embedded />
-          </div>
-        </section>
+        <div className="guest-door">
+          <section className="notice">
+            <h1>{t("joinTitle")}</h1>
+            <p>{t("joinLead")}</p>
+            {/* Signing up here keeps the visitor on this page, which opens once they are in. */}
+            <div className="notice-sign-in">
+              <SignIn embedded />
+            </div>
+          </section>
+          <GuestTeaser />
+        </div>
       )}
       {state.status === "user" && (
         <section className="notice">

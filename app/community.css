@@ -937,3 +937,51 @@
   text-transform: none;
   letter-spacing: 0;
 }
+
+/* ── The door to a community page, for visitors ── */
+.guest-door {
+  display: grid;
+  margin-top: 22px;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 18px;
+}
+
+.guest-door > .notice {
+  margin: 0;
+}
+
+.guest-teaser {
+  display: grid;
+  gap: 14px;
+}
+
+.guest-pitch {
+  display: grid;
+  gap: 10px;
+}
+
+.guest-pitch li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--fg);
+  font-size: 0.92rem;
+}
+
+.guest-pitch li span {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+@media (max-width: 63.99rem) {
+  .guest-door {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
