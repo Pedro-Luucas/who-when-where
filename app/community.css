@@ -1179,3 +1179,23 @@
   font-family: var(--font-mono);
   font-size: 0.7rem;
 }
+
+/* ── Header: the inbox bell ── */
+.inbox-bell {
+  position: relative;
+  justify-content: center;
+  width: 40px;
+  padding: 0;
+}
+
+.inbox-bell .badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+}
+
+@media (max-width: 47.99rem) {
+  .inbox-bell {
+    display: none;
+  }
+}

@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { AccountMenu } from "./shell/account-menu";
+import { InboxBell } from "./shell/inbox-bell";
 import { LanguageChip } from "./shell/language-chip";
 import { Logo } from "./shell/logo";
 import { MainNav } from "./shell/main-nav";
@@ -17,6 +18,7 @@ export function SiteHeader() {
       <MainNav />
       <div className="site-actions">
         <SearchButton />
+        <InboxBell />
         <LanguageChip />
         {/* The menu follows the address; an unknown game's address is only known on request. */}
         <Suspense fallback={<span className="account-button" aria-hidden="true" />}>
