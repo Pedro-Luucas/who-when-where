@@ -1199,3 +1199,23 @@
     display: none;
   }
 }
+
+/* ── Tablets (48–64rem): the header pills only appear from 64rem and the
+   bottom bar used to hide from 48rem, leaving no way around at all. Keep the
+   bottom bar until the pills take over. ── */
+@media (min-width: 48rem) and (max-width: 63.99rem) and (min-height: 31.26rem) {
+  .bottom-nav {
+    display: grid;
+    left: 50%;
+    right: auto;
+    width: min(100%, 560px);
+    border: 1px solid var(--line-strong);
+    border-bottom: 0;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    transform: translateX(-50%);
+  }
+
+  body:has(.bottom-nav) {
+    padding-bottom: calc(66px + env(safe-area-inset-bottom));
+  }
+}
