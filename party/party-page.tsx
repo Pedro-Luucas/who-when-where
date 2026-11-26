@@ -8,6 +8,7 @@ import { useSettingsLine } from "@/expedition/setup";
 import { SETTINGS_KEY } from "@/expedition/solo";
 import { readStore } from "@/lib/storage";
 import { Player } from "@/social/avatar";
+import { useHubT } from "@/social/hub-messages";
 import { createParty, listParties, type PartySummary, type Visibility } from "@/social/client";
 import { Invitations } from "@/social/community";
 import { Members, type Member } from "@/social/gate";
@@ -169,8 +170,24 @@ function Parties({ me }: { me: Member }) {
             {!parties.data && !parties.error && <li className="people-empty">…</li>}
             {parties.error && !parties.data && <li className="form-error">{t(socialError(parties.error))}</li>}
           </ul>
+          <PartyHowTo />
         </section>
       </div>
     </main>
+  );
+}
+
+/** Three steps, so a first-time host knows what they are opening. */
+function PartyHowTo() {
+  const { t } = useHubT();
+  return (
+    <div className="party-how">
+      <h3 className="eyebrow">{t("partyHow")}</h3>
+      <ol>
+        <li>{t("partyStep1")}</li>
+        <li>{t("partyStep2")}</li>
+        <li>{t("partyStep3")}</li>
+      </ol>
+    </div>
   );
 }
