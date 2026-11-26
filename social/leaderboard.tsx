@@ -8,7 +8,8 @@ import { GAME_SLUGS, GAME_TITLES, type GameSlug } from "@/games/registry";
 import { useDayNumber } from "@/lib/clock";
 import { formatNumber } from "@/lib/i18n";
 import { Icon } from "@/components/shell/nav-items";
-import { Flag, Player } from "./avatar";
+import { Avatar, Flag, Player } from "./avatar";
+import { useHubT } from "./hub-messages";
 import { useConnectT } from "./connect-messages";
 import { getLeaderboard, type Period, type Scope } from "./client";
 import { socialError, useSocialT } from "./messages";
@@ -53,6 +54,10 @@ function Board() {
   const rows = board.data?.rows;
   const mine = board.data?.me;
   const listed = !!me && !!rows?.some((row) => row.user.id === me.id);
+  const { t: th } = useHubT();
+  // The first three stand on a podium once there are three to show; the list goes on from fourth.
+  const podium = rows && rows.length >= 3 && rows[2].rank === 3 ? rows.slice(0, 3) : null;
+  const listedRows = podium ? rows?.slice(3) : rows;
 
   return (
     <main className="page page-narrow">
@@ -121,8 +126,43 @@ function Board() {
         </label>
       </div>
 
-      <ol className="board" aria-busy={!rows}>
-        {rows?.map((row) => (
+      {mine && (
+        <p className="board-mine">
+          <span className="eyebrow">{th("yourPlace")}</span>
+          <b>{th("yourPlaceLead", { rank: mine.rank, points: formatNumber(mine.points, locale) })}</b>
+        </p>
+      )}
+
+      {podium && (
+        <ol className="podium" aria-label={th("podium")}>
+          {[podium[1], podium[0], podium[2]].map((row) => (
+            <li key={row.user.id} data-rank={row.rank} data-me={row.user.id === me?.id ? "" : undefined}>
+              <Link href={`/u/${encodeURIComponent(row.user.username)}`} className="podium-who">
+                <span className="podium-avatar">
+                  <Avatar name={row.user.name} color={row.user.avatar} size={row.rank === 1 ? "large" : undefined} />
+                  {row.rank === 1 && (
+                    <span className="podium-crown" aria-hidden="true">
+                      <Icon name="crown" size={18} />
+                    </span>
+                  )}
+                </span>
+                <b>
+                  {row.user.name} <Flag code={row.user.country} />
+                </b>
+                <small>{t("puzzleCount", { n: row.puzzles })}</small>
+                <strong>{formatNumber(row.points, locale)}</strong>
+              </Link>
+              <span className="podium-step" aria-hidden="true">
+                {row.rank}
+              </span>
+              <span className="sr-only">#{row.rank}</span>
+            </li>
+          ))}
+        </ol>
+      )}
+
+      <ol className="board" aria-busy={!rows} start={podium ? 4 : undefined}>
+        {listedRows?.map((row) => (
           <li key={row.user.id} data-rank={row.rank <= 3 ? row.rank : undefined} data-me={row.user.id === me?.id ? "" : undefined}>
             <span className="board-rank">{row.rank}</span>
             <Player user={row.user} note={t("puzzleCount", { n: row.puzzles })} />

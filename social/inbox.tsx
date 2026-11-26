@@ -15,11 +15,12 @@ import { formatNumber } from "@/lib/i18n";
 import { useMinute } from "@/lib/weeks";
 import { Avatar, Player } from "./avatar";
 import { RoomChat } from "./chat";
-import { getFriends, type PublicUser } from "./client";
+import { acceptFriend, getFriends, removeFriend, type PublicUser } from "./client";
 import { Invitations } from "./community";
 import { getInbox, listChallenges, markInboxRead, type Notice } from "./connect";
 import { agoKey, isMissingFeature, useConnectT, type ConnectKey } from "./connect-messages";
 import { Members, type Member } from "./gate";
+import { useHubT } from "./hub-messages";
 import { socialError, useSocialT } from "./messages";
 import { PushCard } from "./push-card";
 import { refreshPulse, usePulse } from "./pulse";
@@ -109,7 +110,28 @@ const KIND_ICON: Record<Notice["kind"], IconName> = {
 function News({ inbox }: { inbox: InboxRemote }) {
   const { locale, t } = useConnectT();
   const { t: ts } = useSocialT();
+  const { t: th } = useHubT();
   const now = useMinute();
+  const day = useDayNumber();
+  // Requests still waiting get their answer right here, not one page away.
+  const friends = useRemote(day >= 1 ? `friends:${day}` : null, () => getFriends(day), 30_000);
+  const waiting = new Set((friends.data?.incoming ?? []).map((user) => user.id));
+  const [busy, setBusy] = useState<string | null>(null);
+  const [answered, setAnswered] = useState<Record<string, "accepted" | "declined">>({});
+
+  async function answer(user: PublicUser, accept: boolean) {
+    setBusy(user.id);
+    try {
+      await (accept ? acceptFriend(user.id) : removeFriend(user.id));
+      setAnswered((previous) => ({ ...previous, [user.id]: accept ? "accepted" : "declined" }));
+      friends.reload();
+      refreshPulse();
+    } catch {
+      // The row stays as it was; the community page shows the same request.
+    } finally {
+      setBusy(null);
+    }
+  }
 
   if (inbox.error && !inbox.data) {
     return isMissingFeature(inbox.error) ? (
@@ -148,8 +170,10 @@ function News({ inbox }: { inbox: InboxRemote }) {
               ? `/u/${notice.user.username}`
               : "/community";
         const ago = agoKey(notice.at, now);
+        const asking = notice.kind === "friend_request" && notice.user && waiting.has(notice.user.id) ? notice.user : null;
+        const outcome = notice.user ? answered[notice.user.id] : undefined;
         return (
-          <li key={notice.id}>
+          <li key={notice.id} className="notice-item">
             <Link
               href={href}
               className="notice-row flex items-center gap-3 rounded-md border border-line-strong bg-surface/70 p-3 transition-colors hover:border-accent/70"
@@ -176,6 +200,22 @@ function News({ inbox }: { inbox: InboxRemote }) {
                 <Icon name={KIND_ICON[notice.kind]} />
               </span>
             </Link>
+            {asking && !outcome && (
+              <span className="notice-actions" role="group" aria-label={t(`n_${notice.kind}` as ConnectKey, { name, points: "" })}>
+                <Button size="sm" variant="primary" loading={busy === asking.id} onClick={() => void answer(asking, true)}>
+                  {ts("accept")}
+                </Button>
+                <Button size="sm" variant="ghost" disabled={busy === asking.id} onClick={() => void answer(asking, false)}>
+                  {ts("decline")}
+                </Button>
+              </span>
+            )}
+            {outcome && (
+              <span className="notice-actions notice-outcome" role="status">
+                <Icon name={outcome === "accepted" ? "check" : "close"} size={15} />
+                {th(outcome === "accepted" ? "reqAccepted" : "reqDeclined")}
+              </span>
+            )}
           </li>
         );
       })}

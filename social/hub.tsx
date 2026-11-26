@@ -96,7 +96,7 @@ function HubCards({ meId }: { meId: string }) {
   );
 }
 
-function FriendsToday({ me }: { me: Member }) {
+export function FriendsToday({ me }: { me: Pick<Member, "id"> }) {
   const { t, locale } = useHubT();
   const day = useDayNumber();
   const board = useRemote(
@@ -165,7 +165,7 @@ function FriendsToday({ me }: { me: Member }) {
   );
 }
 
-function OnlineNow() {
+export function OnlineNow() {
   const { t } = useHubT();
   const day = useDayNumber();
   const friends = useRemote(day >= 1 ? `friends:${day}` : null, () => getFriends(day), EVERY_MS);

@@ -34,9 +34,11 @@ export function SocialTabs({ current }: { current?: SocialTab }) {
     const row = nav.current;
     const here = row?.querySelector<HTMLElement>('[aria-current="page"]');
     if (!row || !here) return;
-    // Centre the current tab in the row without moving the page itself.
-    const left = here.offsetLeft - (row.clientWidth - here.offsetWidth) / 2;
-    row.scrollLeft = Math.max(0, left);
+    // Only when it is cut off: bring it in with a little room, without moving the page itself.
+    const start = here.offsetLeft - row.offsetLeft;
+    const end = start + here.offsetWidth;
+    if (start < row.scrollLeft) row.scrollLeft = Math.max(0, start - 24);
+    else if (end > row.scrollLeft + row.clientWidth) row.scrollLeft = end - row.clientWidth + 24;
   }, [current]);
 
   return (

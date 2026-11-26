@@ -1,4 +1,5 @@
 import { DailiesStrip } from "@/components/catalogue/dailies";
+import { HomeCommunity } from "@/components/home/community";
 import { HomeHero } from "@/components/home/hero";
 import { GamesGrid, WaysToPlay } from "@/components/home/ways";
 import { SiteFooter } from "@/components/site-footer";
@@ -15,6 +16,7 @@ export default function Home() {
       <main className="shell-page home">
         <HomeHero />
         <DailiesStrip />
+        <HomeCommunity />
         <WaysToPlay />
         <GamesGrid />
       </main>
