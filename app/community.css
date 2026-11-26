@@ -695,3 +695,139 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* ── Profile: you against them ── */
+.h2h {
+  --me: var(--color-cyan);
+  --them: var(--color-pink);
+}
+
+.h2h-score {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  text-align: center;
+}
+
+.h2h-score span {
+  display: grid;
+  gap: 2px;
+  padding: 10px 6px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+}
+
+.h2h-score b {
+  color: var(--fg);
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.h2h-score small {
+  color: var(--fg-2);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.h2h-score [data-side="me"] b {
+  color: var(--me);
+}
+
+.h2h-score [data-side="them"] b {
+  color: var(--them);
+}
+
+.h2h-split {
+  display: flex;
+  gap: 3px;
+  height: 8px;
+  margin-top: 12px;
+}
+
+.h2h-split i {
+  border-radius: 999px;
+  background: var(--fg-3);
+}
+
+.h2h-split [data-side="me"] {
+  background: var(--me);
+}
+
+.h2h-split [data-side="them"] {
+  background: var(--them);
+}
+
+.h2h-days {
+  margin-top: 8px;
+  color: var(--fg-2);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+.h2h-games {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.h2h-games li {
+  display: grid;
+  grid-template-columns: minmax(110px, 0.6fr) minmax(0, 2fr);
+  align-items: center;
+  gap: 14px;
+}
+
+.h2h-game {
+  color: var(--fg);
+  font-size: 0.9rem;
+}
+
+.h2h-bars {
+  display: grid;
+  gap: 4px;
+}
+
+.h2h-bars > span {
+  position: relative;
+  display: block;
+  height: 20px;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--line);
+}
+
+.h2h-bars i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: inherit;
+  background: color-mix(in srgb, var(--me) 55%, transparent);
+}
+
+.h2h-bars [data-side="them"] i {
+  background: color-mix(in srgb, var(--them) 50%, transparent);
+}
+
+.h2h-bars [data-ahead] i {
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.35);
+}
+
+.h2h-bars b {
+  position: relative;
+  padding-left: 8px;
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 20px;
+  white-space: nowrap;
+}
+
+@media (max-width: 47.99rem) {
+  .h2h-games li {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
+}

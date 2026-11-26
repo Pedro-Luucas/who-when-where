@@ -19,6 +19,7 @@ import { Avatar, Flag } from "./avatar";
 import { getProfile, type Profile as ProfileData } from "./client";
 import { tierKey, useConnectT } from "./connect-messages";
 import { RelationButton } from "./friends";
+import { HeadToHead } from "./head-to-head";
 import { socialError, useSocialT } from "./messages";
 import { useRemote } from "./remote";
 import { ShareKey } from "./share-key";
@@ -86,12 +87,12 @@ function Profile({ name }: { name?: string }) {
       )}
       {username && !data && !profile.error && <div className="page-skeleton skeleton-block" aria-busy="true" />}
 
-      {data && <ProfileView data={data} reload={profile.reload} />}
+      {data && <ProfileView data={data} reload={profile.reload} viewer={own} />}
     </main>
   );
 }
 
-function ProfileView({ data, reload }: { data: ProfileData; reload: () => void }) {
+function ProfileView({ data, reload, viewer }: { data: ProfileData; reload: () => void; viewer: string | null }) {
   const { locale, t: ts } = useSocialT();
   const { t } = useConnectT();
   const today = useDayNumber();
@@ -182,6 +183,8 @@ function ProfileView({ data, reload }: { data: ProfileData; reload: () => void }
             <StatTile label={ts("statLongest")} value={data.stats.longest} tone="streak" />
             <StatTile label={ts("statFullDays")} value={data.stats.fullDays} tone="success" />
           </dl>
+
+          {!self && viewer && <HeadToHead them={data} mine={viewer} />}
 
           <Card className="mb-5">
             <CardHeader eyebrow={t("highlights")} title={t("favouriteGames")} level={2} />
