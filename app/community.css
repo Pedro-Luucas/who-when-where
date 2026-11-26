@@ -1140,3 +1140,41 @@
     height: 34px;
   }
 }
+
+/* ── Own profile: friends ── */
+.my-friends {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
+  gap: 10px;
+}
+
+.my-friends a {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 12px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  text-align: center;
+  transition: border-color 0.2s;
+}
+
+.my-friends a:hover {
+  border-color: var(--line-strong);
+}
+
+.my-friends b {
+  max-width: 100%;
+  margin-top: 4px;
+  overflow: hidden;
+  color: var(--fg);
+  font-size: 0.9rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.my-friends small {
+  color: var(--fg-3);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}

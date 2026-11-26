@@ -20,6 +20,7 @@ import { getProfile, type Profile as ProfileData } from "./client";
 import { tierKey, useConnectT } from "./connect-messages";
 import { RelationButton } from "./friends";
 import { HeadToHead } from "./head-to-head";
+import { MyFriends } from "./my-friends";
 import { socialError, useSocialT } from "./messages";
 import { useRemote } from "./remote";
 import { ShareKey } from "./share-key";
@@ -185,6 +186,7 @@ function ProfileView({ data, reload, viewer }: { data: ProfileData; reload: () =
           </dl>
 
           {!self && viewer && <HeadToHead them={data} mine={viewer} />}
+          {self && <MyFriends />}
 
           <Card className="mb-5">
             <CardHeader eyebrow={t("highlights")} title={t("favouriteGames")} level={2} />
