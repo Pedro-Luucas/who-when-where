@@ -15,6 +15,7 @@ import { tierKey, useConnectT } from "./connect-messages";
 import type { Member } from "./gate";
 import { useHubT, type HubKey } from "./hub-messages";
 import { useRemote } from "./remote";
+import { ShareKey } from "./share-key";
 import { TierShield } from "./tier-badge";
 
 // The top of /community: where the player stands this week (league, Weekly
@@ -171,8 +172,9 @@ function HubCards({ meId, league, weekly }: { meId: string; league?: League; wee
   );
 }
 
-export function FriendsToday({ me }: { me: Pick<Member, "id"> }) {
+export function FriendsToday({ me }: { me: Pick<Member, "id"> & { username?: string | null } }) {
   const { t, locale } = useHubT();
+  const { t: tc } = useConnectT();
   const day = useDayNumber();
   const board = useRemote(
     day >= 1 ? `hub:friends-day:${day}:${me.id}` : null,
@@ -198,9 +200,19 @@ export function FriendsToday({ me }: { me: Pick<Member, "id"> }) {
         </Link>
       </header>
       {noFriends ? (
-        <p className="hub-empty">
-          <b>{t("noFriendsYet")}</b> {t("noFriendsLead")}
-        </p>
+        <div className="hub-empty">
+          <p>
+            <b>{t("noFriendsYet")}</b> {t("noFriendsLead")}
+          </p>
+          {"username" in me && me.username && (
+            <ShareKey
+              text={() => [tc("inviteShareText"), `${window.location.origin}/i/${me.username}`].join("\n")}
+              label={tc("sendLink")}
+              variant="primary"
+              size="sm"
+            />
+          )}
+        </div>
       ) : !board.data ? (
         <div className="skeleton-block h-32" aria-busy="true" />
       ) : top.length === 0 ? (
