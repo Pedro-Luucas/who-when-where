@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { ApiError } from "@/account/api";
 import { numberLocale } from "@/lib/i18n";
 import { Avatar } from "./avatar";
 import { getMessages, sendMessage, type ChatMessage, type Room } from "./client";
 import { socialError, useSocialT } from "./messages";
 import { refreshPulse } from "./pulse";
+import { useHubT } from "./hub-messages";
 
 const MESSAGE_MAX = 500;
 /** How often an open room asks for new messages. */
@@ -41,7 +43,17 @@ export function ChatLog({ messages, me, onSend, empty, loading }: LogProps) {
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<unknown>(null);
   const list = useRef<HTMLOListElement>(null);
+  const { t: th } = useHubT();
   const time = new Intl.DateTimeFormat(numberLocale(locale), { hour: "2-digit", minute: "2-digit" });
+  const date = new Intl.DateTimeFormat(numberLocale(locale), { weekday: "long", day: "numeric", month: "long" });
+  const dayOf = (at: number) => new Date(at).toDateString();
+  const today = dayOf(Date.now());
+  const yesterday = dayOf(Date.now() - 86_400_000);
+  const dayLabel = (at: number) => {
+    const day = dayOf(at);
+    return day === today ? th("chatToday") : day === yesterday ? th("chatYesterday") : date.format(at);
+  };
+  const starters = [th("starter1"), th("starter2"), th("starter3")];
 
   // Keep the newest line in view, unless the reader has scrolled up to read.
   const newest = messages.at(-1)?.id;
@@ -81,21 +93,49 @@ export function ChatLog({ messages, me, onSend, empty, loading }: LogProps) {
       >
         {messages.map((message, i) => {
           // Lines in a row from one player share one heading.
-          const follows = i > 0 && messages[i - 1].user.id === message.user.id && message.at - messages[i - 1].at < 300_000;
+          const newDay = i === 0 || dayOf(messages[i - 1].at) !== dayOf(message.at);
+          const follows =
+            !newDay && i > 0 && messages[i - 1].user.id === message.user.id && message.at - messages[i - 1].at < 300_000;
           return (
-            <li key={message.id} data-own={message.user.id === me ? "" : undefined} data-follows={follows ? "" : undefined}>
-              {!follows && (
-                <p className="chat-who">
-                  <Avatar name={message.user.name} color={message.user.avatar} size="small" />
-                  <b>{message.user.name}</b>
-                  <time>{time.format(message.at)}</time>
-                </p>
+            <Fragment key={message.id}>
+              {newDay && (
+                <li className="chat-day" role="separator">
+                  <span>{dayLabel(message.at)}</span>
+                </li>
               )}
-              <p className="chat-body">{message.body}</p>
-            </li>
+              <li data-own={message.user.id === me ? "" : undefined} data-follows={follows ? "" : undefined}>
+                {!follows && (
+                  <p className="chat-who">
+                    <Link href={`/u/${encodeURIComponent(message.user.username)}`} className="chat-who-link">
+                      <Avatar name={message.user.name} color={message.user.avatar} size="small" />
+                      <b>{message.user.name}</b>
+                    </Link>
+                    <time dateTime={new Date(message.at).toISOString()}>{time.format(message.at)}</time>
+                  </p>
+                )}
+                <p className="chat-body">{message.body}</p>
+              </li>
+            </Fragment>
           );
         })}
-        {messages.length === 0 && <li className="chat-empty">{loading ? "…" : empty}</li>}
+        {messages.length === 0 && (
+          <li className="chat-empty">
+            {loading ? (
+              "…"
+            ) : (
+              <>
+                <span>{empty}</span>
+                <span className="chat-starters" role="group" aria-label={th("starters")}>
+                  {starters.map((line) => (
+                    <button key={line} type="button" className="chip" onClick={() => setDraft(line)}>
+                      {line}
+                    </button>
+                  ))}
+                </span>
+              </>
+            )}
+          </li>
+        )}
       </ol>
       {error !== null && (
         <p className="form-error" role="alert">
