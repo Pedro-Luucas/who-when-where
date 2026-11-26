@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { Icon, type IconName } from "@/components/shell/nav-items";
 import { ButtonLink } from "@/components/ui/button";
 import { useDayNumber } from "@/lib/clock";
 import { formatNumber } from "@/lib/i18n";
 import { timeLeft, useMinute, weekOfDay } from "@/lib/weeks";
 import { Avatar } from "./avatar";
-import { getFriends, getLeaderboard, listParties } from "./client";
+import { addFriend, getFriends, getLeaderboard, listParties } from "./client";
 import { getLeague, getWeeklyBoard } from "./connect";
 import { tierKey, useConnectT } from "./connect-messages";
 import type { Member } from "./gate";
@@ -29,7 +30,10 @@ export function CommunityHub({ me }: { me: Member }) {
       <HubCards meId={me.id} />
       <div className="hub-row">
         <FriendsToday me={me} />
-        <OnlineNow />
+        <div className="hub-side">
+          <OnlineNow />
+          <Suggested me={me} />
+        </div>
       </div>
     </section>
   );
@@ -259,5 +263,76 @@ export function GuestTeaser() {
         </ul>
       </section>
     </aside>
+  );
+}
+
+/**
+ * Players worth adding: this week's most active, minus the viewer, their
+ * friends and anyone a request is already waiting on. The first nudge into
+ * the social side for someone with no friends yet.
+ */
+function Suggested({ me }: { me: Pick<Member, "id"> }) {
+  const { t } = useHubT();
+  const day = useDayNumber();
+  const week = useRemote(day >= 1 ? `hub:suggest:${day}` : null, () =>
+    getLeaderboard({ day, period: "week", scope: "all", game: "all" }),
+  );
+  const friends = useRemote(day >= 1 ? `friends:${day}` : null, () => getFriends(day), EVERY_MS);
+  const [asked, setAsked] = useState<Record<string, "sent" | "busy" | "failed">>({});
+  if (!week.data || !friends.data) return null;
+
+  const known = new Set([
+    me.id,
+    ...friends.data.friends.map((entry) => entry.user.id),
+    ...friends.data.incoming.map((user) => user.id),
+    ...friends.data.outgoing.map((user) => user.id),
+  ]);
+  const picks = week.data.rows.filter((row) => !known.has(row.user.id) || asked[row.user.id]).slice(0, 4);
+  if (picks.length === 0) return null;
+
+  async function add(id: string, username: string) {
+    setAsked((previous) => ({ ...previous, [id]: "busy" }));
+    try {
+      await addFriend(username);
+      setAsked((previous) => ({ ...previous, [id]: "sent" }));
+    } catch {
+      setAsked((previous) => ({ ...previous, [id]: "failed" }));
+    }
+  }
+
+  return (
+    <section className="hub-panel hub-suggest" aria-labelledby="hub-suggest">
+      <header className="hub-panel-head">
+        <div>
+          <h2 id="hub-suggest">{t("suggestTitle")}</h2>
+          <p>{t("suggestLead")}</p>
+        </div>
+      </header>
+      <ul className="hub-suggest-list">
+        {picks.map((row) => {
+          const state = asked[row.user.id];
+          return (
+            <li key={row.user.id}>
+              <Link href={`/u/${encodeURIComponent(row.user.username)}`} className="hub-who">
+                <Avatar name={row.user.name} color={row.user.avatar} online={row.user.online} />
+                <span className="min-w-0">
+                  <b>{row.user.name}</b>
+                  <small>@{row.user.username}</small>
+                </span>
+              </Link>
+              <button
+                type="button"
+                className="chip"
+                data-state={state}
+                disabled={state === "busy" || state === "sent"}
+                onClick={() => void add(row.user.id, row.user.username)}
+              >
+                {state === "sent" ? t("suggestSent") : state === "failed" ? t("suggestRetry") : `+ ${t("suggestAdd")}`}
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
   );
 }

@@ -985,3 +985,28 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+.hub-side {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  min-width: 0;
+}
+
+.hub-suggest-list {
+  display: grid;
+  gap: 8px;
+}
+
+.hub-suggest-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+}
+
+.hub-suggest-list .chip[data-state="sent"] {
+  border-color: color-mix(in srgb, var(--answer) 50%, transparent);
+  color: var(--answer);
+}
