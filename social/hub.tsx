@@ -6,13 +6,14 @@ import { Icon, type IconName } from "@/components/shell/nav-items";
 import { ButtonLink } from "@/components/ui/button";
 import { useDayNumber } from "@/lib/clock";
 import { formatNumber } from "@/lib/i18n";
+import { usePersistent } from "@/lib/storage";
 import { timeLeft, useMinute, weekOfDay } from "@/lib/weeks";
 import { Avatar } from "./avatar";
 import { addFriend, getFriends, getLeaderboard, listParties } from "./client";
-import { getLeague, getWeeklyBoard } from "./connect";
+import { getLeague, getWeeklyBoard, type League, type WeeklyBoard } from "./connect";
 import { tierKey, useConnectT } from "./connect-messages";
 import type { Member } from "./gate";
-import { useHubT } from "./hub-messages";
+import { useHubT, type HubKey } from "./hub-messages";
 import { useRemote } from "./remote";
 import { TierShield } from "./tier-badge";
 
@@ -25,9 +26,20 @@ const EVERY_MS = 60_000;
 
 export function CommunityHub({ me }: { me: Member }) {
   const { t } = useHubT();
+  const day = useDayNumber();
+  const week = day >= 1 ? weekOfDay(day) : 0;
+  const league = useRemote("hub:league", getLeague, EVERY_MS);
+  const weekly = useRemote(week ? `hub:weekly:${week}` : null, () => getWeeklyBoard(week), EVERY_MS);
+  const friends = useRemote(day >= 1 ? `friends:${day}` : null, () => getFriends(day), EVERY_MS);
   return (
     <section className="hub" aria-label={t("hubEyebrow")}>
-      <HubCards meId={me.id} />
+      <GettingStarted
+        me={me}
+        hasFriend={friends.data ? friends.data.friends.length > 0 : null}
+        inLeague={league.data ? !!league.data.group : league.error ? true : null}
+        playedWeekly={weekly.data ? !!weekly.data.me : weekly.error ? true : null}
+      />
+      <HubCards meId={me.id} league={league.data} weekly={weekly.data} />
       <div className="hub-row">
         <FriendsToday me={me} />
         <div className="hub-side">
@@ -35,6 +47,69 @@ export function CommunityHub({ me }: { me: Member }) {
           <Suggested me={me} />
         </div>
       </div>
+    </section>
+  );
+}
+
+const DISMISSED_KEY = "community:getting-started-dismissed";
+
+/**
+ * A short checklist for someone new to the social side: a first friend, a
+ * league, a flag, the Weekly Special. Gone once all are done, or dismissed.
+ * A step whose answer is still loading (null) is left out of the count.
+ */
+function GettingStarted({
+  me,
+  hasFriend,
+  inLeague,
+  playedWeekly,
+}: {
+  me: Member;
+  hasFriend: boolean | null;
+  inLeague: boolean | null;
+  playedWeekly: boolean | null;
+}) {
+  const { t } = useHubT();
+  const [dismissed, setDismissed] = usePersistent(DISMISSED_KEY, false);
+  if (dismissed || hasFriend === null || inLeague === null || playedWeekly === null) return null;
+  const steps: { done: boolean; title: HubKey; href: string }[] = [
+    { done: hasFriend, title: "startFriend", href: "#friends-heading" },
+    { done: inLeague, title: "startLeague", href: "/daily" },
+    { done: !!me.country, title: "startFlag", href: "/account" },
+    { done: playedWeekly, title: "startWeekly", href: "/weekly" },
+  ];
+  const done = steps.filter((step) => step.done).length;
+  if (done === steps.length) return null;
+
+  return (
+    <section className="hub-start" aria-labelledby="hub-start">
+      <header>
+        <div>
+          <h2 id="hub-start">{t("startTitle")}</h2>
+          <p>{t("startLead", { done, total: steps.length })}</p>
+        </div>
+        <button type="button" className="link-button" onClick={() => setDismissed(true)}>
+          {t("startHide")}
+        </button>
+      </header>
+      <span className="hub-start-meter" aria-hidden="true">
+        <i style={{ width: `${(done / steps.length) * 100}%` }} />
+      </span>
+      <ol>
+        {steps.map((step) => (
+          <li key={step.title} data-done={step.done ? "" : undefined}>
+            <span className="hub-start-tick" aria-hidden="true">
+              {step.done ? <Icon name="check" size={14} /> : null}
+            </span>
+            {step.done ? (
+              <s>{t(step.title)}</s>
+            ) : (
+              <Link href={step.href}>{t(step.title)}</Link>
+            )}
+            <span className="sr-only">{step.done ? ` (${t("startDone")})` : ""}</span>
+          </li>
+        ))}
+      </ol>
     </section>
   );
 }
@@ -58,26 +133,22 @@ function HubCard({ href, icon, title, line, accent }: { href: string; icon: Reac
 
 const glyph = (name: IconName) => <Icon name={name} size={20} />;
 
-function HubCards({ meId }: { meId: string }) {
+function HubCards({ meId, league, weekly }: { meId: string; league?: League; weekly?: WeeklyBoard }) {
   const { t, locale } = useHubT();
   const { t: tc } = useConnectT();
   const now = useMinute();
-  const day = useDayNumber();
-  const week = day >= 1 ? weekOfDay(day) : 0;
-  const league = useRemote("hub:league", getLeague, EVERY_MS);
-  const weekly = useRemote(week ? `hub:weekly:${week}` : null, () => getWeeklyBoard(week), EVERY_MS);
   const parties = useRemote("hub:parties", listParties, EVERY_MS);
 
-  const tier = league.data?.tier ?? 0;
-  const group = league.data?.group;
+  const tier = league?.tier ?? 0;
+  const group = league?.group;
   const myRow = group?.rows.find((row) => row.user.id === meId);
   const leagueLine = myRow
     ? t("cardLeagueRank", { rank: myRow.rank, size: group?.rows.length ?? 0, tier: tc(tierKey(tier)) })
     : t("cardLeagueIdle", { tier: tc(tierKey(tier)) });
 
-  const left = weekly.data && now ? timeLeft(weekly.data.endsAt, now) : "";
-  const weeklyLine = weekly.data?.me
-    ? t("cardWeeklyMine", { rank: weekly.data.me.rank, points: formatNumber(weekly.data.me.points, locale), left })
+  const left = weekly && now ? timeLeft(weekly.endsAt, now) : "";
+  const weeklyLine = weekly?.me
+    ? t("cardWeeklyMine", { rank: weekly.me.rank, points: formatNumber(weekly.me.points, locale), left })
     : left
       ? t("cardWeeklyIdle", { left })
       : tc("weeklyBoard");

@@ -1023,3 +1023,120 @@
 .league-goal[data-tone="down"] {
   border-left-color: var(--danger, #ff466d);
 }
+
+/* ── Community: getting started ── */
+.hub-start {
+  padding: 16px 18px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(120% 160% at 0% 0%, rgb(62 240 138 / 0.1), transparent 55%),
+    var(--panel-fill);
+  box-shadow: var(--shadow-card);
+}
+
+.hub-start header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.hub-start h2 {
+  color: var(--fg);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.hub-start header p {
+  margin-top: 2px;
+  color: var(--fg-2);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.hub-start-meter {
+  display: block;
+  height: 6px;
+  margin: 12px 0;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--line);
+}
+
+.hub-start-meter i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #1fae5e, var(--answer));
+}
+
+.hub-start ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 18px;
+}
+
+.hub-start li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  font-size: 0.92rem;
+}
+
+.hub-start li a {
+  color: var(--fg);
+  text-decoration: underline;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 3px;
+}
+
+.hub-start li a:hover {
+  color: var(--accent);
+  text-decoration-color: currentColor;
+}
+
+.hub-start li s {
+  color: var(--fg-3);
+}
+
+.hub-start-tick {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+}
+
+.hub-start li[data-done] .hub-start-tick {
+  border-color: var(--answer);
+  background: color-mix(in srgb, var(--answer) 18%, transparent);
+  color: var(--answer);
+}
+
+@media (max-width: 47.99rem) {
+  .hub-start {
+    padding: 14px;
+  }
+
+  .hub-start ol {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.hub-panel-head .panel-link,
+.home-community-head .panel-link {
+  flex: none;
+  white-space: nowrap;
+}
+
+@media (max-width: 47.99rem) {
+  .hub-card-icon {
+    width: 34px;
+    height: 34px;
+  }
+}
