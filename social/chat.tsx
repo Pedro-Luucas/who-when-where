@@ -47,8 +47,10 @@ export function ChatLog({ messages, me, onSend, empty, loading }: LogProps) {
   const time = new Intl.DateTimeFormat(numberLocale(locale), { hour: "2-digit", minute: "2-digit" });
   const date = new Intl.DateTimeFormat(numberLocale(locale), { weekday: "long", day: "numeric", month: "long" });
   const dayOf = (at: number) => new Date(at).toDateString();
-  const today = dayOf(Date.now());
-  const yesterday = dayOf(Date.now() - 86_400_000);
+  // "Today" as of when the chat opened: a render must not read the clock.
+  const [now] = useState(() => Date.now());
+  const today = dayOf(now);
+  const yesterday = dayOf(now - 86_400_000);
   const dayLabel = (at: number) => {
     const day = dayOf(at);
     return day === today ? th("chatToday") : day === yesterday ? th("chatYesterday") : date.format(at);

@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint && node scripts/check-giveaways.mjs",
+    "lint": "eslint && node scripts/check-giveaways.mjs && node scripts/check-same-year.mjs",
     "api:dev": "npm --prefix api run dev",
     "api:test": "npm --prefix api test",
     "api:deploy": "bash api/deploy/deploy.sh",
@@ -21,7 +21,8 @@
     "data:flags": "node scripts/build-flags.mjs",
     "data:credits": "node scripts/fetch-image-credits.mjs",
     "images": "node scripts/build-images.mjs",
-    "check:text": "node scripts/check-giveaways.mjs"
+    "check:text": "node scripts/check-giveaways.mjs",
+    "check:same-year": "node scripts/check-same-year.mjs"
   },
   "dependencies": {
     "d3-geo": "^3.1.2",

@@ -6,6 +6,7 @@ import type { Locale } from "@/lib/i18n";
 import { NOTABLES, notableById, type Notable } from "@/lib/notables";
 import { EVENTS, eventById, type HistoryEvent } from "../first-to-last/events";
 import { PLAYABLE as BORN_HERE_PLAYABLE } from "../born-here/data";
+import { MOMENTS, momentById as sameYearMoment, type Moment } from "../same-year/moments";
 import type { GameSlug } from "../registry";
 
 // The question bank Quickplay and Gauntlet share: one question at a time,
@@ -53,16 +54,8 @@ export const KIND_GAME: Record<Kind, GameSlug> = {
 
 export type Measure = "population" | "area";
 
-/** A moment for the odd-one-out: an event, or a famous person's birth or death. */
-export type Moment = {
-  /** "e:bastille", "b:ada-lovelace", "d:ada-lovelace". */
-  id: string;
-  year: number;
-  event?: HistoryEvent;
-  person?: Notable;
-  /** Born or died, for a person's moment. */
-  what?: "born" | "died";
-};
+/** A moment for the odd-one-out: an event (Same Year's own list: never a birth or a death). */
+export type { Moment };
 
 type Base = {
   id: string;
@@ -190,29 +183,11 @@ export const capitalsOf = (countryId: string): City[] => CAPITALS.get(countryId)
 
 // ── Moments for the odd one out (Same Year) ─────────────────────────────────
 
-const MOMENTS: Moment[] = [
-  ...EVENTS.filter((event) => !event.circa).map((event) => ({ id: `e:${event.id}`, year: event.year, event })),
-  ...NOTABLES.filter((person) => person.fame >= 40).flatMap((person) => [
-    { id: `b:${person.id}`, year: person.born.year, person, what: "born" as const },
-    { id: `d:${person.id}`, year: person.died.year, person, what: "died" as const },
-  ]),
-];
+/** An old id may name a birth or a death ("b:…", "d:…"): those are gone, and the question with them. */
+const momentById = sameYearMoment;
 
-function momentById(id: string): Moment | undefined {
-  const [tag, rest] = [id.slice(0, 2), id.slice(2)];
-  if (tag === "e:") {
-    const event = eventById(rest);
-    return event && { id, year: event.year, event };
-  }
-  const person = tag === "b:" || tag === "d:" ? notableById(rest) : undefined;
-  if (!person) return undefined;
-  return tag === "b:"
-    ? { id, year: person.born.year, person, what: "born" }
-    : { id, year: person.died.year, person, what: "died" };
-}
-
-const subjectOf = (moment: Moment) => (moment.person ? `p:${moment.person.id}` : `e:${moment.event!.id}`);
-const momentFame = (moment: Moment) => moment.person?.fame ?? 120;
+/** Events are known by their id, so an event asked about elsewhere in a run isn't asked again. */
+const subjectOf = (moment: Moment) => moment.id;
 
 const MOMENTS_BY_YEAR = new Map<number, Moment[]>();
 for (const moment of MOMENTS) MOMENTS_BY_YEAR.set(moment.year, [...(MOMENTS_BY_YEAR.get(moment.year) ?? []), moment]);
@@ -581,9 +556,8 @@ const continent: Generator = (d, random, used) => {
 };
 
 const sameYear: Generator = (d, random, used) => {
-  const fame = minFame(d);
   const odd = band(d, [12, 40], [2, 6]);
-  const fresh = (moment: Moment) => !used.has(subjectOf(moment)) && momentFame(moment) >= Math.min(fame, 100);
+  const fresh = (moment: Moment) => !used.has(subjectOf(moment));
   const years = shuffle([...MOMENTS_BY_YEAR.keys()], random);
   for (const year of years.slice(0, TRIES * 2)) {
     const same: Moment[] = [];
@@ -640,8 +614,7 @@ export function makeQuestion(kind: Kind, d: number, random: () => number, used: 
 
 // ── Words for the results ───────────────────────────────────────────────────
 
-const momentName = (moment: Moment, locale: Locale) =>
-  moment.event ? moment.event.name[locale] : (moment.person?.name[locale] ?? moment.id);
+const momentName = (moment: Moment, locale: Locale) => moment.name[locale];
 
 /** A choice in words, as the review lists it (without the board's templates). */
 export function choiceText(question: Question, id: string, locale: Locale): string {

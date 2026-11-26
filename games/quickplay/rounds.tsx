@@ -35,10 +35,7 @@ function formatValue(value: number, measure: Measure, locale: Locale, t: T): str
 const eventYear = (event: HistoryEvent, locale: Locale, t: T) =>
   `${event.circa ? `${t("circa")} ` : ""}${formatYear(event.year, locale)}`;
 
-const momentLabel = (moment: Moment, locale: Locale, t: T) =>
-  moment.event
-    ? moment.event.name[locale]
-    : t(moment.what === "born" ? "momentBorn" : "momentDied", { name: moment.person!.name[locale] });
+const momentLabel = (moment: Moment, locale: Locale) => moment.name[locale];
 
 /** A list of names, cut short past `max`: "A, B, C and 4 more". */
 function listOf(names: string[], t: T, max = 6): string {
@@ -272,7 +269,7 @@ function partsOf(
         scene: scene(),
         options: ordered(question.choices, (moment) => ({
           id: moment.id,
-          label: momentLabel(moment, locale, t),
+          label: momentLabel(moment, locale),
           fact: formatYear(moment.year, locale),
         })),
         reveal: t("sameYearReveal", { year: formatYear(year, locale), odd: formatYear(odd.year, locale) }),
